@@ -10,8 +10,7 @@ namespace Cheveux.DAL
         //private static string connString = 
 
         #region ParamSelect()
-        internal static DataTable ParamSelect(string commandName, CommandType cmdType,
-            SqlParameter[] pars)
+        internal static DataTable ParamSelect(string commandName, CommandType cmdType, SqlParameter[] pars)
         {
             DataTable table = new DataTable();
             using (SqlConnection con = new SqlConnection(connString))
@@ -42,6 +41,7 @@ namespace Cheveux.DAL
             return table;
         }
         #endregion ParamSelect()
+
         #region NonQuery()
         public static bool NonQuery(string commandName, CommandType cmdType,
             SqlParameter[] pars)
@@ -72,6 +72,7 @@ namespace Cheveux.DAL
             return result > 0;
         }
         #endregion NonQuery()
+
         #region Select()
         public static DataTable Select(string commandName, CommandType cmdType)
         {
