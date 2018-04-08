@@ -7,6 +7,7 @@
     <title>Profile</title>
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
 </head>
+<%--  --%>
 <body>
     <form id="form1" runat="server">
         <!--Tabs-->
@@ -43,6 +44,6 @@
     </form>
 
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
-        <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
