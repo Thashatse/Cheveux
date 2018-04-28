@@ -40,7 +40,6 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="Accounts.aspx">Login / Sign Up</a></li>
-                        <a href="Accounts.aspx" onclick="signOut();">Sign out</a>
                     </ul>
                     <form class="navbar-form navbar-right">
                         <div class="form-group">
@@ -204,6 +203,7 @@
                 <br />
             </div>
 
+            <!--Contact Us-->
             <div class="row">
                 <div class="col-xs-12 col-md-12">
 
@@ -213,6 +213,13 @@
                         <h2>Contact Us</h2>
                         <!--Jambotron (COntact US) Content Here-->
                     </div>
+                </div>
+            </div>
+
+            <!--Sign Out Button-->
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <a href="Accounts.aspx" onclick="signOut();">Sign out</a>
                 </div>
             </div>
         </div>
