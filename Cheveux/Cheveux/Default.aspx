@@ -3,10 +3,16 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <title>Chveux</title>
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!--Google Authentecation code-->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com">
 </head>
+
 <body>
     <form id="form1" runat="server">
         <!--Nav Bar-->
@@ -33,7 +39,8 @@
                         <li><a href="#ContactUs">Contact Us</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Login / Sign Up</a></li>
+                        <li><a href="Accounts.aspx">Login / Sign Up</a></li>
+                        <a href="Accounts.aspx" onclick="signOut();">Sign out</a>
                     </ul>
                     <form class="navbar-form navbar-right">
                         <div class="form-group">
@@ -212,5 +219,14 @@
     </form>
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
+        <!--Google Authentecation sign out code-->
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
 </body>
 </html>
