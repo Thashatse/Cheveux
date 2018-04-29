@@ -14,7 +14,8 @@
     <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com">
 </head>
 <body>
-    <form id="form1" runat="server">
+    <!--form for login in-->
+    <form id="Login" runat="server">
         <div>
             <div class="container container-table">
                 <!--jumbotron-->
@@ -28,14 +29,44 @@
                             <!--line break-->
                             <br />
                             <!--sign in buton-->
-                            <div class="g-signin2" data-onsuccess="onSignIn" onclick="btnTest_Click" runat="server"></div>
+                            <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
                         </div>
                         <div class="col-xs-12 col-md-12 text-center">
-                            <!--Test Profile data-->
-                            <img id="TestProfileImage"/>
-                            <p id="demo"></p>
                             <!--Sign out button-->
                             <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <asp:Button runat="server" ID="btnAuthenticate" Style="display: none;" OnClick="btnAuthenticate_Click" />
+
+        <!--Test Profile data-->
+        <asp:Label ID="ph2" runat="server" Visible="false"></asp:Label>
+
+    </form>
+    <!--form for regestering a user-->
+    <form id="Register" runat="server" visible="false">
+        <div>
+            <div class="container container-table">
+                <div class="jumbotron">
+                    <!--Logo-->
+                    <img src="/IMG_0715.png" alt="logo" width="100" height="100" />
+                    <h1>Register</h1>
+                    <asp:Label ID="almostThere" runat="server" Text="Label"></asp:Label>
+                    <div class="row vertical-center-row">
+                        <div class="col-xs-12 col-md-12">
+                            <!--Get a username from the user-->
+                            <asp:Label ID="Label3" runat="server" Text="User Name:"></asp:Label>
+                            <asp:TextBox ID="userName" runat="server" placeholder="Placecholder"></asp:TextBox>
+                            <!--line break-->
+                            <br /><br />
+                            <!--Get a contact number from the user-->
+                            <asp:Label ID="Label4" runat="server" Text="Contact Number:"></asp:Label>
+                            <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
+                            <!--Submition Button-->
+                            <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click"/>
                         </div>
                     </div>
                 </div>
@@ -46,19 +77,11 @@
     <script> 
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            document.getElementById("demo").innerHTML =
-                'ID: ' + profile.getId() + "<br />" +
-                'Email: ' + profile.getEmail() + "<br />" +
-                'Given Name: ' + profile.getGivenName() + "<br />" +
-                'Family Name: ' + profile.getFamilyName() + "<br />" +
-                "Image URL: " + profile.getImageUrl();
-            document.getElementById("TestProfileImage").src = profile.getImageUrl();
+            document.cookie = "reg="+profile.getId() + "|" + profile.getEmail() + "|" + profile.getGivenName() + "|" +
+                profile.getFamilyName() + "|" + profile.getImageUrl();
+            document.getElementById("btnAuthenticate").click();
             //Show the sign out button
             document.getElementById("SO").hidden = false;
-
-            // The ID token you need to pass to your backend:
-            var id_token = googleUser.getAuthResponse().id_token;
-            console.log("ID Token: " + id_token);
         }
     </script>
 
