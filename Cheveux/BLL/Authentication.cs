@@ -24,7 +24,7 @@ namespace BLL
             string imageurl = regArray[4];
 
             //check if the user exists
-            bool exists = false;
+            bool exists = true;
 
             //return results
             if (exists == true)
