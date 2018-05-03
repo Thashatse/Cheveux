@@ -66,7 +66,7 @@ namespace Cheveux
                 cookie["ID"] = reg.Split('|')[0];
                 // Add it to the current web response.
                 Response.Cookies.Add(cookie);
-                Response.Redirect("Default.aspx?" + reg.Split('|')[4]);
+                Response.Redirect("Default.aspx?"+"WB="+reg.Split('|')[2]);
             }
         }
 

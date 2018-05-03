@@ -8,6 +8,9 @@
     <title>Chveux</title>
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
 
+    <!--CSS-->
+    <link rel=“stylesheet” type=“text/css” href=“/CSS/Cheveux.css”>
+
     <!--Google Authentecation code-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com">
@@ -57,6 +60,15 @@
             <!--jumbotron page heading-->
             <div class="jumbotron">
                 <!--Jambotron Content Here-->
+                <!--Welcome back-->
+                <asp:Label ID="Welcome" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
+
+                <!--Line Break-->
+                <div class="container">
+                    <br />
+                    <br />
+                </div>
+
                 <div class="btn btn-outline-dark">Make A Booking </div>
             </div>
 

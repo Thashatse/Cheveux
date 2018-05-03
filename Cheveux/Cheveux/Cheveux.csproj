@@ -132,6 +132,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CSS\Cheveux.css" />
+    <Content Include="CSS\StyleSheet1.css" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -160,6 +162,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="App.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -228,6 +231,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{838bbd1d-7c4e-4194-90eb-3101a9217d32}</Project>
       <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeLibrary\TypeLibrary.csproj">
+      <Project>{b65a0531-da7e-40a6-9633-1c4bc942c215}</Project>
+      <Name>TypeLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

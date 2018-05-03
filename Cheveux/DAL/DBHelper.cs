@@ -1,12 +1,17 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace AviaCo.DAL
+namespace DAL
 {
     internal class DBHelper
     {
-        private static string connString = ConfigurationManager.ConnectionStrings["AviaCoCon"].ConnectionString;
+        private static string connString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
 
         #region ParamSelect()
         internal static DataTable ParamSelect(string commandName, CommandType cmdType,

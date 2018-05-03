@@ -11,7 +11,11 @@ namespace Cheveux
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            String name = Request.QueryString["WB"];
+            if(name != null)
+            {
+                Welcome.Text = "Welcom Back To Cheveux " + name;
+            }
         }
     }
 }
