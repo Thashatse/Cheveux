@@ -20,7 +20,7 @@ namespace DAL
                 new SqlParameter("@ID", id)
             };
 
-            using (DataTable table = DBHelper.ParamSelect("SP_CheckForUser",
+            using (DataTable table = DBHelper.ParamSelect("SP_CheckForUser2",
             CommandType.StoredProcedure, pars))
             {
                 if (table.Rows.Count == 1)
