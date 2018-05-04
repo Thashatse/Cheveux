@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IDBAccess.cs" />
-    <Compile Include="Interfaces\IDBHandler.cs" />
     <Compile Include="Models\ACCESSORY.cs" />
     <Compile Include="Models\BOOKING.cs" />
     <Compile Include="Models\BRAND.cs" />

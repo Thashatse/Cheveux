@@ -17,7 +17,7 @@ namespace DAL
             SP_CheckForUser TF = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@ID", id),
+                new SqlParameter("@ID", id)
             };
 
             using (DataTable table = DBHelper.ParamSelect("SP_CheckForUser",
