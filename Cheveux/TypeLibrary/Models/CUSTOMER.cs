@@ -16,5 +16,6 @@ namespace TypeLibrary.Models
         public string ContactNo { get; set; }
         public string Password { get; set; }
         public string Active { get; set; }
+        public string CustomerImage { get; set; }
     }
 }

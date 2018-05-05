@@ -22,5 +22,10 @@ namespace BLL
         {
             return db.CheckForUser(id);
         }
+
+        public SP_AddCustomer BLL_AddCustomer(CUSTOMER Cust)
+        {
+            return db.AddCustomer(Cust);
+        }
     }
 }

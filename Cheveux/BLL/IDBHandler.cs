@@ -11,5 +11,6 @@ namespace BLL
     public interface IDBHandler
     {
         SP_CheckForUser BLL_CheckForUser(string id);
+        SP_AddCustomer BLL_AddCustomer(CUSTOMER Cust);
     }
 }

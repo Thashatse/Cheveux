@@ -11,5 +11,6 @@ namespace DAL
     public interface IDBAccess
     {
         SP_CheckForUser CheckForUser(string id);
+        SP_AddCustomer AddCustomer(CUSTOMER Cust);
     }
 }
