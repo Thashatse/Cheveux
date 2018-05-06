@@ -1,16 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="Cheveux.Profile" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Profile</title>
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-</head>
-<%--  --%>
-<body>
-    <form id="form1" runat="server">
-        <!--Tabs-->
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Cheveux.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="Cheveux.Profile2" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
+    Profile - Cheveux
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <!--Tabs-->
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -41,9 +36,4 @@
                 </div>
             </div>
         </div>
-    </form>
-
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
-    <script src="/Scripts/bootstrap.min.js"></script>
-</body>
-</html>
+</asp:Content>

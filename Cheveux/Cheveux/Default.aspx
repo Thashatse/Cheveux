@@ -1,62 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Cheveux.Home" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Cheveux.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Cheveux.Default2" %>
+<asp:Content ID="Content3" ContentPlaceHolderID="PageTitle" runat="server">
+    Chveux
+</asp:Content>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head runat="server">
-    <title>Chveux</title>
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-
-    <!--CSS-->
-    <link rel=“stylesheet” type=“text/css” href=“/CSS/Cheveux.css”>
-
-    <!--Google Authentecation code-->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com">
-</head>
-
-<body>
-    <form id="form1" runat="server">
-        <!--Nav Bar-->
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">
-                        <img src="/IMG_0715.png" alt="logo" width="75" height="75" /></a>
-                </div>
-
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#Service">Service</a></li>
-                        <li><a href="#Products">Products</a></li>
-                        <li><a href="#Hairstylist">Hairstylist</a></li>
-                        <li><a href="#ContactUs">Contact Us</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="Accounts.aspx">Login / Sign Up</a></li>
-                    </ul>
-                    <form class="navbar-form navbar-right">
-                        <div class="form-group">
-                            <input type="text" placeholder="Search">
-                            <button type="submit" class="btn btn-default">Search</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
-
-        <div class="container">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container">
             <!--jumbotron page heading-->
             <div class="jumbotron">
                 <!--Jambotron Content Here-->
@@ -227,25 +177,5 @@
                     </div>
                 </div>
             </div>
-
-            <!--Sign Out Button-->
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <a href="Accounts.aspx" onclick="signOut();">Sign out</a>
-                </div>
-            </div>
         </div>
-    </form>
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
-    <script src="/Scripts/bootstrap.min.js"></script>
-        <!--Google Authentecation sign out code-->
-    <script>
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-        }
-    </script>
-</body>
-</html>
+</asp:Content>

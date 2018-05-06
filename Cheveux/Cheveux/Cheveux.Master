@@ -1,0 +1,71 @@
+﻿<!-- master page to create consistent look nd feel cross all pages-->
+
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Cheveux.Master.cs" Inherits="Cheveux.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>
+        <!-- Place holder for page title-->
+        <asp:ContentPlaceHolder ID="PageTitle" runat="server">
+        </asp:ContentPlaceHolder>
+    </title>
+    <!-- Bootstrap-->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--CSS-->
+    <link rel="“stylesheet”" type="“text/css”" href="“/CSS/Cheveux.css”">
+    <!--Header Placeholder-->
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!--Nav Bar-->
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="/IMG_0715.png" alt="logo" width="75" height="75" /></a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#Service">Service</a></li>
+                        <li><a href="#Products">Products</a></li>
+                        <li><a href="#Hairstylist">Hairstylist</a></li>
+                        <li><a href="#ContactUs">Contact Us</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="Accounts.aspx">Login / Sign Up</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search">
+                            <button type="submit" class="btn btn-default">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!--Place older for Content-->
+        <div class="container-fluid">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <!--Bootstrap-->
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
