@@ -10,7 +10,7 @@ namespace BLL
 {
     public interface IDBHandler
     {
-        SP_CheckForUser BLL_CheckForUser(string id);
-        SP_AddCustomer BLL_AddCustomer(CUSTOMER Cust);
+        SP_CheckForUserType BLL_CheckForUserType(string id);
+        SP_AddUserGoogleAuth BLL_AddUser(User user);
     }
 }

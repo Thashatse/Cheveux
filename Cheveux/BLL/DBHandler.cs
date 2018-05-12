@@ -18,14 +18,14 @@ namespace BLL
             db = new DBAccess();
         }
 
-        public SP_CheckForUser BLL_CheckForUser(string id)
+        public SP_CheckForUserType BLL_CheckForUserType(string id)
         {
-            return db.CheckForUser(id);
+            return db.CheckForUserType(id);
         }
 
-        public SP_AddCustomer BLL_AddCustomer(CUSTOMER Cust)
+        public SP_AddUserGoogleAuth BLL_AddUser(User user)
         {
-            return db.AddCustomer(Cust);
+            return db.AddUser(user);
         }
     }
 }

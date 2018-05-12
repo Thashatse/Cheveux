@@ -1,0 +1,13 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE SP_CheckForUser 
+	@ID nchar(30)
+AS
+BEGIN
+	SELECT UserType
+	From [CHEVEUX].[dbo].[User]
+	Where UserID = @ID
+END
+GO

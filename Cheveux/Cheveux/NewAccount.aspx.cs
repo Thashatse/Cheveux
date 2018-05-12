@@ -21,7 +21,7 @@ namespace Cheveux
             if (cookie == null)
             {
                 //open error page
-                Response.Redirect("Error.aspx");
+                Response.Redirect("Error.aspx?Error='A Error in when authenticating with google'");
             }
             string reg = "error";
             if (reg != null)
@@ -34,7 +34,7 @@ namespace Cheveux
         protected void Page_Load(object sender, EventArgs e)
         {
             string reg = getRegCookie();
-            almostThere.Text = reg.Split('|')[2] + " We Are Almost There, Just One More Step To Complet Your Registration";
+            almostThere.Text = reg.Split('|')[2] + " We Are Almost There, Just One More Step To Complete Your Registration";
             userName.Attributes.Add("placeholder", (reg.Split('|')[1]).Split('@')[0]);
             Register.Visible = true;
         }
@@ -52,22 +52,29 @@ namespace Cheveux
                 {
                     Response.Redirect("Error.aspx");
                 }
-                //create a new customer object
+                //create a new user object
                 reg = getRegCookie();
-                CUSTOMER Cust = new CUSTOMER();
+                User User = new User();
                 string[] regArray = reg.Split('|');
-                Cust.CustomerID = regArray[0];
-                Cust.Email = regArray[1];
-                Cust.FirstName = regArray[2];
-                Cust.LastName = regArray[3];
-                Cust.CustomerImage = regArray[4];
-                Cust.UserName = userName.Text;
-                Cust.ContactNo = contactNumber.Text;
+                User.UserID = regArray[0];
+                User.Email = regArray[1];
+                User.FirstName = regArray[2];
+                User.LastName = regArray[3];
+                User.CustomerImage = regArray[4];
+                User.UserName = userName.Text;
+                User.ContactNo = contactNumber.Text;
 
                 /*
                  * use the bll.NewUser to creat a new user
                  */
-                bool result = auth.NewUser(Cust);
+                bool result = false;
+                try {
+                result = auth.NewUser(User);
+                        }
+                catch (ApplicationException err)
+                {
+                    Response.Redirect("Error.aspx?Error='" + err + "'");
+                }
 
                 if (result == true)
                 {
@@ -75,6 +82,7 @@ namespace Cheveux
                     HttpCookie cookie = new HttpCookie("CheveuxUserID");
                     // Set the user id in it.
                     cookie["ID"] = reg.Split('|')[0];
+                    cookie["UT"] = "C";
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
                     //tell the user the registration was a success on the home page
@@ -83,7 +91,7 @@ namespace Cheveux
                 else if (result == false)
                 {
                     //open error page
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
                 }
             } else
             {
