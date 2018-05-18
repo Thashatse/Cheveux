@@ -1,6 +1,4 @@
-﻿<!-- master page to create consistent look nd feel cross all pages-->
-
-<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Cheveux.Master.cs" Inherits="Cheveux.Site1" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CheveuxStylist.Master.cs" Inherits="Cheveux.Site2" %>
 
 <!DOCTYPE html>
 
@@ -40,21 +38,16 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#Service">Service</a></li>
-                        <li><a href="#Products">Products</a></li>
-                        <li><a href="#Hairstylist">Hairstylist</a></li>
-                        <li><a href="#ContactUs">Contact Us</a></li>
+                        <li><a href="<!--Agenda Page-->>Agender</a></li>
+                        <li><a href=<!--Calendar-->>Calendar</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <!--Login Button-->
-                        <li><a href="Accounts.aspx" id="LogedOut">Login / Sign Up</a></li>
                         <!--Account Button-->
                         <li class="dropdown" id="logedin">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                 aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Account Details</a></li>
-                                <li><a href="#">Upcoming Service(s)</a></li>
-                                <li><a href="#">Past Service(s)</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">Log Out</a></li>
                             </ul>
@@ -75,27 +68,8 @@
             </asp:ContentPlaceHolder>
         </div>
     </form>
-    <!--Bootstrap-->
+        <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
-
-    +   
-    <script>
-        /*
-         * Display eather accounts option or the login/sing up buton in the nav bar 
-         * based on it the user is signed in or not
-         */
-        window.onload = function () {
-            var myCookie = getCookie("CheveuxUserID");
-            if (myCookie == null) {
-                // display sign in buton
-
-            }
-            else {
-                // display sign in acount
-
-            }
-        }
-    </script>
 </body>
 </html>
