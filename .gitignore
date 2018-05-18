@@ -240,3 +240,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+Cheveux/TypeLibrary/Models/User.cs
