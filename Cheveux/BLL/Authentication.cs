@@ -29,38 +29,20 @@ namespace BLL
             string imageurl = regArray[4];
 
             //check if the user exists
-            char exists = 'E';
-            SP_CheckForUserType result;
-            try
-            {
-                result = handler.BLL_CheckForUserType(id);
-            }
-            catch (ApplicationException e)
-            {
-                throw new ApplicationException(e.ToString()
-                    +". We are unable to Log you in at this time try again later.");
-            }
+            int exists = -1;
+            SP_CheckForUser result = handler.BLL_CheckForUser(id);
+            exists = Convert.ToInt16(result.Exists.ToString());
 
-            //handel the null that will be returned if the user dose not exist
-            try
+            //return results
+            if (exists == 1)
             {
-                exists = result.userType;
+                returnVal = "RegUser";
             }
-            catch (System.NullReferenceException)
-            {
-                exists = 'F';
-            }
-
-            //return results to the calling Page
-            if (exists == 'C' || exists == 'E')
-            {
-                returnVal = exists.ToString();
-            }
-            else if (exists == 'F')
+            else if (exists == 0)
             {
                 returnVal = "unRegUser";
             }
-            if (exists == 'E')
+            if (exists == -1)
             {
                 returnVal = "Error";
             }
@@ -68,26 +50,14 @@ namespace BLL
             return returnVal;
         }
 
-        public bool NewUser(User user)
+        public bool NewUser(CUSTOMER cust)
         {
             //return false if customer creation a failure
             bool succes = true;
 
             //creat new User
-            try
-            {
-                try
-                {
-                    handler.BLL_AddUser(user);
-                }
-                catch (ApplicationException e)
-                {
-                    throw new ApplicationException(e.ToString() 
-                        +". We are unable to create a new accounmt at this time try again later.");
-                }
-            }
-            catch
-            {
+            try { handler.BLL_AddCustomer(cust); }
+            catch{
                 succes = false;
             }
 

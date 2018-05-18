@@ -7,10 +7,9 @@
     <title>Error - Cheveux</title>
 </head>
 <body>
-    <form id="ErrorForm" runat="server">
+    <form id="Error" runat="server">
         <div>
-            <asp:Label ID="ErrorHeader" runat="server"></asp:Label><br />
-            <asp:Label ID="Error1" runat="server"></asp:Label>
+            <h1>An Error Occurred</h1>
             <br /><br />
             <a href="Default.aspx">Return Home</a>
         </div>

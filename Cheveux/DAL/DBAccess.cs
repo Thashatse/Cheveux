@@ -12,75 +12,61 @@ namespace DAL
 {
     public class DBAccess : IDBAccess
     {
-        public SP_CheckForUserType CheckForUserType(string id)
+        public SP_CheckForUser CheckForUser(string id)
         {
-            SP_CheckForUserType TF = null;
+            SP_CheckForUser TF = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@ID", id)
             };
 
-            try
+            using (DataTable table = DBHelper.ParamSelect("SP_CheckForUser",
+            CommandType.StoredProcedure, pars))
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_CheckForUserType",
-                CommandType.StoredProcedure, pars))
+                if (table.Rows.Count == 1)
                 {
-                    if (table.Rows.Count == 1)
+                    DataRow row = table.Rows[0];
+                    TF = new SP_CheckForUser
                     {
-                        DataRow row = table.Rows[0];
-                        TF = new SP_CheckForUserType
-                        {
-                            userType = Convert.ToChar(row[0])
-                        };
+                        Exists = Convert.ToInt16(row["Exists"])
+                    };
 
-                    }
-                    return TF;
                 }
+                return TF;
             }
-            catch (ApplicationException e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
+
         }
 
-        public SP_AddUserGoogleAuth AddUser(User User)
+        public SP_AddCustomer AddCustomer(CUSTOMER Cust)
         {
-            SP_AddUserGoogleAuth TF = null;
+            SP_AddCustomer TF = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@ID", User.UserID),
-            new SqlParameter("@FN", User.FirstName),
-            new SqlParameter("@LN", User.LastName),
-            new SqlParameter("@UN", User.UserName),
-            new SqlParameter("@EM", User.Email),
-            new SqlParameter("@CN", User.ContactNo),
-            new SqlParameter("@UI", User.CustomerImage)
-            };
+                new SqlParameter("@ID", Cust.CustomerID),
+            new SqlParameter("@FN", Cust.FirstName),
+            new SqlParameter("@LN", Cust.LastName),
+            new SqlParameter("@UN", Cust.UserName),
+            new SqlParameter("@EM", Cust.Email),
+            new SqlParameter("@CN", Cust.ContactNo),
+            new SqlParameter("@CI", Cust.CustomerImage)
+        };
 
-            try
+            using (DataTable table = DBHelper.ParamSelect("SP_AddCustomer",
+            CommandType.StoredProcedure, pars))
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_AddUserGoogleAuth",
-                CommandType.StoredProcedure, pars))
+                if (table.Rows.Count == 1)
                 {
-                    if (table.Rows.Count == 1)
+                    DataRow row = table.Rows[0];
+                    TF = new SP_AddCustomer
                     {
-                        DataRow row = table.Rows[0];
-                        TF = new SP_AddUserGoogleAuth
-                        {
-                            Result = Convert.ToInt16(row[0])
-                        };
+                        Result = Convert.ToInt16(row[0])
+                    };
 
-                    }
-                    return TF;
                 }
-            }
-            catch (ApplicationException e)
-            {
-                throw new ApplicationException(e.ToString());
+                return TF;
             }
 
         }
     }
 }
-
    

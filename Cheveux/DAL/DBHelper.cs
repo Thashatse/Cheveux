@@ -39,7 +39,7 @@ namespace DAL
                     }
                     catch
                     {
-                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database");
+                        throw;
                     }
                 }
             }
@@ -69,7 +69,7 @@ namespace DAL
                     }
                     catch
                     {
-                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database");
+                        throw;
                     }
                 }
             }
@@ -101,7 +101,7 @@ namespace DAL
                     }
                     catch
                     {
-                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database");
+                        throw;
                     }
                 }
             }
