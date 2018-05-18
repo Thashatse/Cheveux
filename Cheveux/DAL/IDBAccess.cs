@@ -10,7 +10,7 @@ namespace DAL
 {
     public interface IDBAccess
     {
-        SP_CheckForUser CheckForUser(string id);
-        SP_AddCustomer AddCustomer(CUSTOMER Cust);
+        SP_CheckForUserType CheckForUserType(string id);
+        SP_AddUserGoogleAuth AddUser(USER User);
     }
 }
