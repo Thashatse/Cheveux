@@ -1,0 +1,3 @@
+SELECT COUNT(*) as 'Exists'
+	From CUSTOMER
+	Where CustomerID = '100155997350724101850'
