@@ -200,6 +200,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Search.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +267,13 @@
     </Compile>
     <Compile Include="MasterPages\CheveuxStylist.Master.designer.cs">
       <DependentUpon>CheveuxStylist.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

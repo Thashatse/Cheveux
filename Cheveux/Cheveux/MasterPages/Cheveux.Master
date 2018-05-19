@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="Default.aspx">
                         <img src="/IMG_0715.png" alt="logo" width="75" height="75" /></a>
                 </div>
 
@@ -61,8 +61,9 @@
                         </li>
                     </ul>
                     <div class="form-group">
-                        <input type="text" placeholder="Search">
-                        <button type="submit" class="btn btn-default">Search</button>
+                        <!--Search Button & Text Box-->
+                        <input id="serchTerm" type="text" placeholder="Search">
+                        <a class="btn btn-default" href="javascript:search()">Search</a>
                     </div>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -79,12 +80,11 @@
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
 
-    +   
     <script>
         /*
          * Display eather accounts option or the login/sing up buton in the nav bar 
          * based on it the user is signed in or not
-         */
+         
         window.onload = function () {
             var myCookie = getCookie("CheveuxUserID");
             if (myCookie == null) {
@@ -95,6 +95,14 @@
                 // display sign in acount
 
             }
+        }
+        */
+        </script>
+
+    <!-- Search Function-->
+    <script>
+        function search() {
+                window.location.href = "Search.aspx?ST=" + document.getElementById('serchTerm').value; 
         }
     </script>
 </body>

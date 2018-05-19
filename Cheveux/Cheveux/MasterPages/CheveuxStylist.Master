@@ -37,9 +37,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#Service">Service</a></li>
-                        <li><a href="<!--Agenda Page-->>Agender</a></li>
-                        <li><a href=<!--Calendar-->>Calendar</a></li>
+                        <li><a href="#"><!--Agenda Page-->Agender</a></li>
+                        <li><a href="#"><!--Calendar-->Calendar</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <!--Account Button-->
@@ -54,8 +53,9 @@
                         </li>
                     </ul>
                     <div class="form-group">
-                        <input type="text" placeholder="Search">
-                        <button type="submit" class="btn btn-default">Search</button>
+                        <!--Search Button & Text Box-->
+                        <input id="serchTerm" type="text" placeholder="Search">
+                        <a class="btn btn-default" href="javascript:search()">Search</a>
                     </div>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -71,5 +71,11 @@
         <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
+    <!-- Search Function-->
+    <script>
+        function search() {
+            window.location.href = "Search.aspx?ST="+document.getElementById('serchTerm').value;
+        }
+    </script>
 </body>
 </html>

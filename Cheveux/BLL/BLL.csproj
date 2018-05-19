@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Authentication.cs" />
     <Compile Include="DBHandler.cs" />
+    <Compile Include="Functions.cs" />
     <Compile Include="IDBHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -12,5 +12,6 @@ namespace DAL
     {
         SP_CheckForUserType CheckForUserType(string id);
         SP_AddUserGoogleAuth AddUser(USER User);
+        List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm);
     }
 }

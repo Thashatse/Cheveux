@@ -27,5 +27,10 @@ namespace BLL
         {
             return db.AddUser(user);
         }
+
+        public List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm)
+        {
+            return db.UniversalSearch(searchTerm);
+        }
     }
 }

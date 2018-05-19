@@ -41,7 +41,6 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
-
         }
 
         public SP_AddUserGoogleAuth AddUser(USER User)
@@ -61,24 +60,60 @@ namespace DAL
             {
                 using (DataTable table = DBHelper.ParamSelect("SP_AddUserGoogleAuth",
             CommandType.StoredProcedure, pars))
-            {
-                if (table.Rows.Count == 1)
                 {
-                    DataRow row = table.Rows[0];
-                    TF = new SP_AddUserGoogleAuth
+                    if (table.Rows.Count == 1)
                     {
-                        Result = Convert.ToInt16(row[0])
-                    };
+                        DataRow row = table.Rows[0];
+                        TF = new SP_AddUserGoogleAuth
+                        {
+                            Result = Convert.ToInt16(row[0])
+                        };
 
+                    }
+                    return TF;
                 }
-                return TF;
-            }
             }
             catch (ApplicationException e)
             {
                 throw new ApplicationException(e.ToString());
             }
         }
+
+    public List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm)
+    {
+        List<SP_ProductSearchByTerm> SearchResults = new List<SP_ProductSearchByTerm>();
+        SqlParameter[] pars = new SqlParameter[]
+        {
+                new SqlParameter("@searchTerm", searchTerm)
+        };
+
+        try
+        {
+            using (DataTable table = DBHelper.ParamSelect("SP_ProductSearchByTerm",
+        CommandType.StoredProcedure, pars))
+            {
+                if (table.Rows.Count > 0)
+                {
+                    foreach (DataRow row in table.Rows)
+                    {
+                        SP_ProductSearchByTerm result = new SP_ProductSearchByTerm
+                        {
+                            Name = row["Name"].ToString(),
+                            ProductDescription = row["ProductDescription"].ToString(),
+                            Price = row["Price"].ToString(),
+                            ProductType = row["ProductType(T/A/S)"].ToString()[0],
+                            ProductID = row["ProductID"].ToString()
+                        };
+                        SearchResults.Add(result);
+                    }
+                }
+                return SearchResults;
+            }
+        }
+        catch (ApplicationException e)
+        {
+            throw new ApplicationException(e.ToString());
+        }
     }
-}
+}}
    
