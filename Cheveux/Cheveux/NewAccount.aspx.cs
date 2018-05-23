@@ -86,6 +86,12 @@ namespace Cheveux
                     cookie["UT"] = "C";
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
+                    //go back to the previous page or the home page by default
+                    String PreviousPage = Request.QueryString["PreviousPage"];
+                    if (PreviousPage != null)
+                    {
+                        Response.Redirect(PreviousPage);
+                    }
                     //tell the user the registration was a success on the home page
                     Response.Redirect("Default.aspx?" + "NU=" + reg.Split('|')[2]);
                 }

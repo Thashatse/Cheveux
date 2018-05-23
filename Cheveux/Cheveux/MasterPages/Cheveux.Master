@@ -39,7 +39,8 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#Service">Service</a></li>
+                        <li><a href="Bookings.aspx">Bookings</a></li>
+                        <li><a href="#Service">Service</a></li>
                         <li><a href="#Products">Products</a></li>
                         <li><a href="#Hairstylist">Hairstylist</a></li>
                         <li><a href="#ContactUs">Contact Us</a></li>
@@ -48,17 +49,7 @@
                         <!--Login Button-->
                         <li><a href="Accounts.aspx" id="LogedOut">Login / Sign Up</a></li>
                         <!--Account Button-->
-                        <li class="dropdown" id="logedin">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Account Details</a></li>
-                                <li><a href="#">Upcoming Service(s)</a></li>
-                                <li><a href="#">Past Service(s)</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Log Out</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="Profile.aspx?Active=AccountDetails">Account Details</a></li>
                     </ul>
                     <div class="form-group">
                         <!--Search Button & Text Box-->

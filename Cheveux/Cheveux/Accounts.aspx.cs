@@ -63,7 +63,12 @@ namespace Cheveux
              */
             if (result == "unRegUser")
             {
-                //Open the new account page
+                //Open the new account page, and send the page to redirect to as a querstring
+                String PreviousPage = Request.QueryString["PreviousPage"];
+                if (PreviousPage != null)
+                {
+                    Response.Redirect("NewAccount.aspx?"+PreviousPage);
+                }
                 Response.Redirect("NewAccount.aspx");
             }
             //if the user exists create a session cookie and return them to the previous or home page
@@ -79,6 +84,12 @@ namespace Cheveux
                 cookie["UT"] = result.ToString();
                 // Add it to the current web response.
                 Response.Cookies.Add(cookie);
+                //go back to the previous page or the home page by default
+                String PreviousPage = Request.QueryString["PreviousPage"];
+                if(PreviousPage != null)
+                {
+                    Response.Redirect(PreviousPage);
+                }
                 Response.Redirect("Default.aspx?"+"WB="+reg.Split('|')[2]);
             }else if (result == "Error")
             {

@@ -18,8 +18,6 @@
                     <br />
                     <br />
                 </div>
-
-                <div class="btn btn-outline-dark">Make A Booking </div>
             </div>
 
             <!--Service selector-->
