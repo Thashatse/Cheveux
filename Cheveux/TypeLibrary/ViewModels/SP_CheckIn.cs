@@ -8,5 +8,9 @@ namespace TypeLibrary.ViewModels
 {
     public class SP_CheckIn
     {
+        public int checkIn { get; set; }
+
     }
+
+   
 }
