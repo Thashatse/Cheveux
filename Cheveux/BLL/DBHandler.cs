@@ -32,5 +32,10 @@ namespace BLL
         {
             return db.UniversalSearch(searchTerm);
         }
+
+        public USER GetUserDetails(string ID)
+        {
+            return db.GetUserDetails(ID);
+        }
     }
 }

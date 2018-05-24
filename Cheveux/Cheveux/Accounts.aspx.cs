@@ -67,7 +67,7 @@ namespace Cheveux
                 String PreviousPage = Request.QueryString["PreviousPage"];
                 if (PreviousPage != null)
                 {
-                    Response.Redirect("NewAccount.aspx?"+PreviousPage);
+                    Response.Redirect("NewAccount.aspx?PreviousPage=" + PreviousPage);
                 }
                 Response.Redirect("NewAccount.aspx");
             }

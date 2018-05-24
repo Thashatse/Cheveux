@@ -17,6 +17,6 @@ namespace TypeLibrary.Models
         public string Password { get; set; }
         public char UserType { get; set; }
         public char Active { get; set; }
-        public string CustomerImage { get; set; }
+        public string UserImage { get; set; }
     }
 }

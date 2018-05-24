@@ -60,7 +60,7 @@ namespace Cheveux
                 User.Email = regArray[1];
                 User.FirstName = regArray[2];
                 User.LastName = regArray[3];
-                User.CustomerImage = regArray[4];
+                User.UserImage = regArray[4];
                 User.UserName = userName.Text;
                 User.ContactNo = contactNumber.Text;
 

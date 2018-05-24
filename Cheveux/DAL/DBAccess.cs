@@ -54,7 +54,7 @@ namespace DAL
             new SqlParameter("@UN", User.UserName),
             new SqlParameter("@EM", User.Email),
             new SqlParameter("@CN", User.ContactNo),
-            new SqlParameter("@UI", User.CustomerImage)
+            new SqlParameter("@UI", User.UserImage)
             };
             try
             {
@@ -79,7 +79,7 @@ namespace DAL
             }
         }
 
-    public List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm)
+        public List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm)
     {
         List<SP_ProductSearchByTerm> SearchResults = new List<SP_ProductSearchByTerm>();
         SqlParameter[] pars = new SqlParameter[]
@@ -115,5 +115,43 @@ namespace DAL
             throw new ApplicationException(e.ToString());
         }
     }
-}}
+
+        public USER GetUserDetails(string ID)
+        {
+            USER TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ID", ID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetUserDetails",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new USER
+                        {
+                            FirstName = row["FirstName"].ToString(),
+                            LastName = row["LastName"].ToString(),
+                            UserName = row["UserName"].ToString(),
+                            Email = row["Email"].ToString(),
+                            ContactNo = row["ContactNo"].ToString(),
+                            UserType = Convert.ToChar(row["UserType"]),
+                            UserImage = row["UserImage"].ToString()
+                        };
+
+                    }
+                    return TF;
+                }
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+    }
+}
    

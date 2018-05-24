@@ -13,5 +13,6 @@ namespace BLL
         SP_CheckForUserType BLL_CheckForUserType(string id);
         SP_AddUserGoogleAuth BLL_AddUser(USER user);
         List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm);
+        USER GetUserDetails(string ID);
     }
 }

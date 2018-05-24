@@ -46,10 +46,15 @@
                         <li><a href="#ContactUs">Contact Us</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <!--Login Button-->
-                        <li><a href="Accounts.aspx" id="LogedOut">Login / Sign Up</a></li>
-                        <!--Account Button-->
-                        <li><a href="Profile.aspx?Active=AccountDetails">Account Details</a></li>
+                        <asp:PlaceHolder runat="server" id="LogedOut">
+                            <!--Login Button-->
+                            <li><a href="Accounts.aspx">Login / Sign Up</a></li>
+                        </asp:PlaceHolder>
+                        <asp:PlaceHolder runat="server" ID="LogedIn">
+                            <!--Account Button-->
+                            <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
+                            <li><a href="#">Log Out</a></li>
+                        </asp:PlaceHolder>
                     </ul>
                     <div class="form-group">
                         <!--Search Button & Text Box-->
@@ -70,30 +75,10 @@
     <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
-
-    <script>
-        /*
-         * Display eather accounts option or the login/sing up buton in the nav bar 
-         * based on it the user is signed in or not
-         
-        window.onload = function () {
-            var myCookie = getCookie("CheveuxUserID");
-            if (myCookie == null) {
-                // display sign in buton
-
-            }
-            else {
-                // display sign in acount
-
-            }
-        }
-        */
-        </script>
-
     <!-- Search Function-->
     <script>
         function search() {
-                window.location.href = "Search.aspx?ST=" + document.getElementById('serchTerm').value; 
+            window.location.href = "Search.aspx?ST=" + document.getElementById('serchTerm').value;
         }
     </script>
 </body>
