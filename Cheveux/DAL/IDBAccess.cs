@@ -14,5 +14,6 @@ namespace DAL
         SP_AddUserGoogleAuth AddUser(USER User);
         List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
+        SP_GetCurrentVATate GetVATRate();
     }
 }

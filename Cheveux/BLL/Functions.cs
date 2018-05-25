@@ -8,6 +8,33 @@ namespace BLL
 {
     public class Functions
     {
+        DBHandler Handler = new DBHandler(); 
+        
+        public Tuple<double, double> getVat(double VATIncluded)
+        {
+            /*
+            * Given an VAT included price, 
+            * this class will return the vat and orriganal price
+            * Returns -1 when error Occurs
+            */
+            double VATExcluded = -1;
+            double VAT = -1;
+            double VATRate = -1;
+            try
+            {
+                VATRate = (Handler.GetVATRate().VATRate/100)+1;
+            }catch (ApplicationException Err)
+            {
+                logAnError(Err.ToString());
+            }
+            if (VATRate > 0)
+            {
+                VATExcluded = VATIncluded/VATRate;
+                VAT = VATExcluded - VATIncluded;
+            }
+            return Tuple.Create(VATExcluded, (VAT*-1));
+        }
+
         public string GetFullProductTypeText(char ProductType)
         {
            /*
@@ -31,5 +58,29 @@ namespace BLL
                 return "error";
             }
         }
+
+        /*
+        public void logAnError(string Err)
+        {
+            /*
+            * Logs Error Details in a text File
+            /
+            System.IO.File.WriteAllText(
+                AppDomain.CurrentDomain.BaseDirectory + @"\" + "CheveuxErrorLog.txt", Err);
+            using (System.IO.StreamWriter file =
+            new System.IO.StreamWriter(@"CheveuxErrorLog.txt", true))
+            {
+                file.WriteLine();
+                file.WriteLine("TimeStamp: "+DateTime.Now);
+                file.WriteLine("Machine Name: " + Environment.MachineName);
+                file.WriteLine("OS Version: " + Environment.OSVersion);
+                file.WriteLine("Curent User: " + Environment.UserName);
+                file.WriteLine("User Domain: " + Environment.UserDomainName);
+                file.WriteLine("Curent Directory: " + Environment.CurrentDirectory);
+                file.WriteLine("Error: ");
+                file.WriteLine(Err);
+            }
+        }
+*/
     }
 }

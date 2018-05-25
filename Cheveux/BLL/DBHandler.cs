@@ -37,5 +37,10 @@ namespace BLL
         {
             return db.GetUserDetails(ID);
         }
+
+        public SP_GetCurrentVATate GetVATRate()
+        {
+            return db.GetVATRate();
+        }
     }
 }

@@ -43,5 +43,6 @@ namespace Cheveux
                 }
                 LogedOut.Visible = false;
             }
+        }
     }
 }

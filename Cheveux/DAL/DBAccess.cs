@@ -152,6 +152,36 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public SP_GetCurrentVATate GetVATRate()
+        {
+            SP_GetCurrentVATate VATRate = null;
+            //try
+            //{
+                using (DataTable table = DBHelper.Select("SP_GetCurrentVATRate2",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        VATRate = new SP_GetCurrentVATate
+                        {
+                            VATRate = Convert.ToChar(row[0])
+                        };
+
+                    }
+                    return VATRate;
+                }
+            //}
+            //catch (ApplicationException e)
+            //{
+             //   throw new ApplicationException(e.ToString());
+            //}
+            //catch (Exception e)
+            //{
+            //    throw new ApplicationException(e.ToString());
+            //}
+        }
     }
 }
    
