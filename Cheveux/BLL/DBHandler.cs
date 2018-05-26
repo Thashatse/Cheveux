@@ -42,5 +42,10 @@ namespace BLL
         {
             return db.GetVATRate();
         }
+
+        public List<SP_GetCustomerUpcomingBookings> getCustomerUpcomingBookings(string CustomerID)
+        {
+            return db.getCustomerUpcomingBookings(CustomerID);
+        }
     }
 }

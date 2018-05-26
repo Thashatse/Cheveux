@@ -182,6 +182,46 @@ namespace DAL
             //    throw new ApplicationException(e.ToString());
             //}
         }
+
+        public List<SP_GetCustomerUpcomingBookings> getCustomerUpcomingBookings(string CustomerID)
+        {
+            List<SP_GetCustomerUpcomingBookings> customerBookings = new List<SP_GetCustomerUpcomingBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustID", CustomerID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookings",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetCustomerUpcomingBookings booking = new SP_GetCustomerUpcomingBookings
+                            {
+                                serviceName = row["Name"].ToString(),
+                                serviceDescripion = row["ProductDescription"].ToString(),
+                                servicePrice = row["Price"].ToString(),
+                                stylistFirstName = row["FirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                bookingID = row["BookingID"].ToString()
+
+                            };
+                            customerBookings.Add(booking);
+                        }
+                    }
+                    return customerBookings;
+                }
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }
    

@@ -109,6 +109,9 @@ namespace Cheveux
                         newHeaderCell.Text = "Product Type";
                         newHeaderCell.Width = 200;
                         SearchResults.Rows[0].Cells.Add(newHeaderCell);
+                        newHeaderCell = new TableHeaderCell();
+                        newHeaderCell.Width = 150;
+                        SearchResults.Rows[0].Cells.Add(newHeaderCell);
 
                         //create a loop to display each result
                         //creat a counter to keep track of the current row
@@ -131,6 +134,12 @@ namespace Cheveux
                             SearchResults.Rows[rowCount].Cells.Add(newCell);
                             newCell = new TableCell();
                             newCell.Text = function.GetFullProductTypeText(result.ProductType);
+                            SearchResults.Rows[rowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text =
+                                "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
+                                "&PreviousPage=Search.aspx'>View Product</a></button>";
                             SearchResults.Rows[rowCount].Cells.Add(newCell);
                             rowCount++;
                         }

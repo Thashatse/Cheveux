@@ -59,12 +59,11 @@ namespace BLL
             }
         }
 
-        /*
         public void logAnError(string Err)
         {
             /*
             * Logs Error Details in a text File
-            /
+            */
             System.IO.File.WriteAllText(
                 AppDomain.CurrentDomain.BaseDirectory + @"\" + "CheveuxErrorLog.txt", Err);
             using (System.IO.StreamWriter file =
@@ -81,6 +80,5 @@ namespace BLL
                 file.WriteLine(Err);
             }
         }
-*/
     }
 }
