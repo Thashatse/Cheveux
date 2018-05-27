@@ -53,7 +53,7 @@
                         <asp:PlaceHolder runat="server" ID="LogedIn">
                             <!--Account Button-->
                             <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
-                            <li><a href="#">Log Out</a></li>
+                            <li><a href="Accounts.aspx?action=Logout">Log Out</a></li>
                         </asp:PlaceHolder>
                     </ul>
                     <div class="form-group">

@@ -64,10 +64,8 @@ namespace BLL
             /*
             * Logs Error Details in a text File
             */
-            System.IO.File.WriteAllText(
-                AppDomain.CurrentDomain.BaseDirectory + @"\" + "CheveuxErrorLog.txt", Err);
             using (System.IO.StreamWriter file =
-            new System.IO.StreamWriter(@"CheveuxErrorLog.txt", true))
+            new System.IO.StreamWriter(@""+ AppDomain.CurrentDomain.BaseDirectory + "CheveuxErrorLog.txt", true))
             {
                 file.WriteLine();
                 file.WriteLine("TimeStamp: "+DateTime.Now);
