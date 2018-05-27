@@ -15,6 +15,7 @@ namespace BLL
         List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
-        List<SP_GetCustomerUpcomingBookings> getCustomerUpcomingBookings(string CustomerID);
+        List<SP_GetCustomerUpcomingBooking> getCustomerUpcomingBookings(string CustomerID);
+        SP_GetCustomerUpcomingBooking getCustomerUpcomingBookingDetails(string BookingID);
     }
 }

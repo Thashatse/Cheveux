@@ -66,7 +66,7 @@ namespace Cheveux
                  */
                 if (result == "unRegUser")
                 {
-                    //Open the new account page, and send the page to redirect to as a querstring
+                    //Open the new account page, and set the page to redirect to as a querstring
                     String PreviousPage = Request.QueryString["PreviousPage"];
                     if (PreviousPage != null)
                     {

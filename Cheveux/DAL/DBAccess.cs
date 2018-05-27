@@ -156,8 +156,8 @@ namespace DAL
         public SP_GetCurrentVATate GetVATRate()
         {
             SP_GetCurrentVATate VATRate = null;
-            //try
-            //{
+            try
+            {
                 using (DataTable table = DBHelper.Select("SP_GetCurrentVATRate2",
             CommandType.StoredProcedure))
                 {
@@ -172,20 +172,18 @@ namespace DAL
                     }
                     return VATRate;
                 }
-            //}
-            //catch (ApplicationException e)
-            //{
-             //   throw new ApplicationException(e.ToString());
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new ApplicationException(e.ToString());
-            //}
+
+
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.ToString());
+            } 
         }
 
-        public List<SP_GetCustomerUpcomingBookings> getCustomerUpcomingBookings(string CustomerID)
+        public List<SP_GetCustomerUpcomingBooking> getCustomerUpcomingBookings(string CustomerID)
         {
-            List<SP_GetCustomerUpcomingBookings> customerBookings = new List<SP_GetCustomerUpcomingBookings>();
+            List<SP_GetCustomerUpcomingBooking> customerBookings = new List<SP_GetCustomerUpcomingBooking>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@CustID", CustomerID)
@@ -200,7 +198,7 @@ namespace DAL
                     {
                         foreach (DataRow row in table.Rows)
                         {
-                            SP_GetCustomerUpcomingBookings booking = new SP_GetCustomerUpcomingBookings
+                            SP_GetCustomerUpcomingBooking booking = new SP_GetCustomerUpcomingBooking
                             {
                                 serviceName = row["Name"].ToString(),
                                 serviceDescripion = row["ProductDescription"].ToString(),
@@ -215,6 +213,45 @@ namespace DAL
                         }
                     }
                     return customerBookings;
+                }
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public SP_GetCustomerUpcomingBooking getCustomerUpcomingBookingDetails(string BookingID)
+        {
+            List<SP_GetCustomerUpcomingBooking> customerBookings = new List<SP_GetCustomerUpcomingBooking>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            SP_GetCustomerUpcomingBooking booking = null;
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookingDetails",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        booking = new SP_GetCustomerUpcomingBooking
+                            {
+                                serviceName = row["Name"].ToString(),
+                                serviceDescripion = row["ProductDescription"].ToString(),
+                                servicePrice = row["Price"].ToString(),
+                                stylistFirstName = row["FirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                bookingID = row["BookingID"].ToString()
+
+                            };
+                        }
+                    
+                    return booking;
                 }
             }
             catch (ApplicationException e)

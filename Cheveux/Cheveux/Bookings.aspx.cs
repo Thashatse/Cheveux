@@ -15,7 +15,7 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
-        List<SP_GetCustomerUpcomingBookings> upcomingBookingsList = null;
+        List<SP_GetCustomerUpcomingBooking> upcomingBookingsList = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -93,7 +93,7 @@ namespace Cheveux
                 //create a loop to display each result
                 //creat a counter to keep track of the current row
                 int rowCount = 1;
-                foreach (SP_GetCustomerUpcomingBookings bookings in upcomingBookingsList)
+                foreach (SP_GetCustomerUpcomingBooking bookings in upcomingBookingsList)
                 {
                     // create a new row in the results table and set the height
                     newRow = new TableRow();
@@ -147,7 +147,7 @@ namespace Cheveux
                 {
                     function.logAnError(Err.ToString());
                     pastBookingsLable.Text =
-                        "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
+                        "<h2> An Error Occurred Communicating With The Data Base, Try Again Later. </h2>";
                 }
                 //check if there are past bookings
                 if (-1 > 0)
