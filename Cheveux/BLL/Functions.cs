@@ -59,6 +59,26 @@ namespace BLL
             }
         }
 
+        public string GetFullArrivedStatus(char ArrivedStatus)
+        {
+            /*
+             * Given abbreviated char that database returns for Arrived, 
+             * this class will return the full text of that Arrival status
+             */
+            if (ArrivedStatus == 'Y')
+            {
+                return "Yes";
+            }
+            else if (ArrivedStatus == 'N')
+            {
+                return "No";
+            }
+            else
+            {
+                return "error";
+            }
+        }
+
         public void logAnError(string Err)
         {
             /*

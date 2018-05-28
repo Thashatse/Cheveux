@@ -107,7 +107,7 @@ namespace Cheveux
             //get the details from the db
             try
             {
-                SP_GetCustomerUpcomingBooking BookingDetails =
+                SP_GetCustomerBooking BookingDetails =
                     handler.getCustomerUpcomingBookingDetails(BookingID);
 
                 //display a heading
@@ -213,7 +213,7 @@ namespace Cheveux
             //display the booking edit form
             try
             {
-                SP_GetCustomerUpcomingBooking BookingDetails =
+                SP_GetCustomerBooking BookingDetails =
                     handler.getCustomerUpcomingBookingDetails(BookingID);
 
                 //display a heading
@@ -318,7 +318,7 @@ namespace Cheveux
             //display the booking edit form
             try
             {
-                SP_GetCustomerUpcomingBooking BookingDetails =
+                SP_GetCustomerBooking BookingDetails =
                         handler.getCustomerUpcomingBookingDetails(BookingID);
 
                 //display a heading

@@ -63,7 +63,7 @@
     <Compile Include="ViewModels\SP_CheckForUserType.cs" />
     <Compile Include="ViewModels\SP_CheckIn.cs" />
     <Compile Include="ViewModels\SP_GetCurrentVATate.cs" />
-    <Compile Include="ViewModels\SP_GetCustomerUpcomingBooking.cs" />
+    <Compile Include="ViewModels\SP_GetCustomerBooking.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
   </ItemGroup>
   <ItemGroup />

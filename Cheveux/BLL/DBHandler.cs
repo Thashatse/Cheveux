@@ -43,12 +43,12 @@ namespace BLL
             return db.GetVATRate();
         }
 
-        public List<SP_GetCustomerUpcomingBooking> getCustomerUpcomingBookings(string CustomerID)
+        public List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID)
         {
             return db.getCustomerUpcomingBookings(CustomerID);
         }
 
-        public SP_GetCustomerUpcomingBooking getCustomerUpcomingBookingDetails(string BookingID)
+        public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
             return db.getCustomerUpcomingBookingDetails(BookingID);
         }
@@ -56,6 +56,11 @@ namespace BLL
         public bool deleteBooking(string BookingID)
         {
             return db.deleteBooking(BookingID);
+        }
+
+        public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
+        {
+            return db.getCustomerPastBookings(CustomerID);
         }
     }
 }

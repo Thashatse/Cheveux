@@ -181,9 +181,9 @@ namespace DAL
             } 
         }
 
-        public List<SP_GetCustomerUpcomingBooking> getCustomerUpcomingBookings(string CustomerID)
+        public List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID)
         {
-            List<SP_GetCustomerUpcomingBooking> customerBookings = new List<SP_GetCustomerUpcomingBooking>();
+            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@CustID", CustomerID)
@@ -198,7 +198,7 @@ namespace DAL
                     {
                         foreach (DataRow row in table.Rows)
                         {
-                            SP_GetCustomerUpcomingBooking booking = new SP_GetCustomerUpcomingBooking
+                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
                             {
                                 serviceName = row["Name"].ToString(),
                                 serviceDescripion = row["ProductDescription"].ToString(),
@@ -221,15 +221,15 @@ namespace DAL
             }
         }
 
-        public SP_GetCustomerUpcomingBooking getCustomerUpcomingBookingDetails(string BookingID)
+        public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
-            List<SP_GetCustomerUpcomingBooking> customerBookings = new List<SP_GetCustomerUpcomingBooking>();
+            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@BookingID", BookingID)
             };
 
-            SP_GetCustomerUpcomingBooking booking = null;
+            SP_GetCustomerBooking booking = null;
             try
             {
                 using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookingDetails",
@@ -238,7 +238,7 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        booking = new SP_GetCustomerUpcomingBooking
+                        booking = new SP_GetCustomerBooking
                             {
                                 serviceName = row["Name"].ToString(),
                                 serviceDescripion = row["ProductDescription"].ToString(),
@@ -268,6 +268,46 @@ namespace DAL
             };
 
             return DBHelper.NonQuery("SP_DeleteBooking", CommandType.StoredProcedure, pars);
+        }
+
+        public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
+        {
+            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustID", CustomerID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerPastBooking",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
+                            {
+                                serviceName = row["Name"].ToString(),
+                                serviceDescripion = row["ProductDescription"].ToString(),
+                                servicePrice = row["Price"].ToString(),
+                                stylistFirstName = row["FirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                bookingID = row["BookingID"].ToString(),
+                                arrived = row["Arrived"].ToString()[0]
+                            };
+                            customerBookings.Add(booking);
+                        }
+                    }
+                    return customerBookings;
+                }
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
     }
 }
