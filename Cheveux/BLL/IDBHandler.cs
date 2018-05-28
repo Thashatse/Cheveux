@@ -17,5 +17,6 @@ namespace BLL
         SP_GetCurrentVATate GetVATRate();
         List<SP_GetCustomerUpcomingBooking> getCustomerUpcomingBookings(string CustomerID);
         SP_GetCustomerUpcomingBooking getCustomerUpcomingBookingDetails(string BookingID);
+        bool deleteBooking(string BookingID);
     }
 }

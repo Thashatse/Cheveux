@@ -259,6 +259,16 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public bool deleteBooking(string BookingID)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID),
+            };
+
+            return DBHelper.NonQuery("SP_DeleteBooking", CommandType.StoredProcedure, pars);
+        }
     }
 }
    

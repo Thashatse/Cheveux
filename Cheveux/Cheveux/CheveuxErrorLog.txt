@@ -1,203 +1,42 @@
 
-TimeStamp: 2018/05/27 12:27:29
+TimeStamp: 2018/05/28 13:11:28
 Machine Name: TEFO-NTSAKO-HAS
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: thash
 User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
-   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
-   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 51
+System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
+   at DAL.DBAccess.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 270
+   at BLL.DBHandler.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 58
+   at Cheveux.ViewBooking.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 350
+ an error occured deleting a booking from the database
 
-TimeStamp: 2018/05/27 12:28:34
+TimeStamp: 2018/05/28 13:13:10
 Machine Name: TEFO-NTSAKO-HAS
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: thash
 User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
-   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
-   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 51
+System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
+   at DAL.DBAccess.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 270
+   at BLL.DBHandler.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 58
+   at Cheveux.ViewBooking.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 350
+ an error occured deleting a booking from the database
 
-TimeStamp: 2018/05/27 12:46:46
+TimeStamp: 2018/05/28 13:16:27
 Machine Name: TEFO-NTSAKO-HAS
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: thash
 User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
-   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
-   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 55
-
-TimeStamp: 2018/05/27 12:48:50
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
-   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
-   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 55
-
-TimeStamp: 2018/05/27 12:49:26
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
-   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
-   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 55
-
-TimeStamp: 2018/05/27 12:49:57
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
-   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
-   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
-   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
-   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 55
-
-TimeStamp: 2018/05/27 15:00:55
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-An Error Occurred Retrieving Booking ID from Query String on Bookings Details Page
-
-TimeStamp: 2018/05/27 16:38:45
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 235
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 259
-   at BLL.DBHandler.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 53
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 91
-
-TimeStamp: 2018/05/27 16:38:49
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 235
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 259
-   at BLL.DBHandler.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 53
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 91
-
-TimeStamp: 2018/05/27 16:38:53
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 235
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 259
-   at BLL.DBHandler.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 53
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 91
-
-TimeStamp: 2018/05/27 16:40:05
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 235
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 259
-   at BLL.DBHandler.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 53
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 91
-
-TimeStamp: 2018/05/27 16:40:06
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 235
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 259
-   at BLL.DBHandler.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 53
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 91
-
-TimeStamp: 2018/05/27 16:40:07
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 235
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 259
-   at BLL.DBHandler.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 53
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 91
-
-TimeStamp: 2018/05/27 16:40:23
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 235
-   at DAL.DBAccess.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 259
-   at BLL.DBHandler.getCustomerUpcomingBookingDetails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 53
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 91
+System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
+   at DAL.DBAccess.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 270
+   at BLL.DBHandler.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 58
+   at Cheveux.ViewBooking.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 350
+ an error occured deleting a booking from the database

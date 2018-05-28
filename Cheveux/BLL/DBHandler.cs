@@ -52,5 +52,10 @@ namespace BLL
         {
             return db.getCustomerUpcomingBookingDetails(BookingID);
         }
+
+        public bool deleteBooking(string BookingID)
+        {
+            return db.deleteBooking(BookingID);
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace Cheveux
                     "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
             //check if there are upcoming bookings
-            if (upcomingBookings.Rows.Count > -1)
+            if (upcomingBookings.Rows.Count > 0)
             {
                 //if there are bookings desplay them
                 //create a new row in the uppcoming bookings table and set the height

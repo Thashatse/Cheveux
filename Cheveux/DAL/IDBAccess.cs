@@ -16,6 +16,7 @@ namespace DAL
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
         List<SP_GetCustomerUpcomingBooking> getCustomerUpcomingBookings(string CustomerID);
-            SP_GetCustomerUpcomingBooking getCustomerUpcomingBookingDetails(string BookingID);
+        SP_GetCustomerUpcomingBooking getCustomerUpcomingBookingDetails(string BookingID);
+        bool deleteBooking(string BookingID);
     }
 }

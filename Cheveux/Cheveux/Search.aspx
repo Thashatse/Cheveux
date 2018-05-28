@@ -4,6 +4,11 @@
     Cheveux - Search
 </asp:content>
 <asp:content id="Content2" contentplaceholderid="head" runat="server">
+    <script>
+        function searchOnSearchPage() {
+            window.location.href = "Search.aspx?ST=" + document.getElementById('serchTermOnSearchPage').value;
+        }
+    </script>
 </asp:content>
 <asp:content id="Content3" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -16,15 +21,9 @@
 
   <div class="form-group">
                         <!--Search Button & Text Box-->
-                        <input id="serchTerm" type="text" placeholder="Search">
-                        <a class="btn btn-default" href="javascript:search()">Search</a>
+                        <input id="serchTermOnSearchPage" type="text" placeholder="Search">
+                        <a class="btn btn-default" href="javascript:searchOnSearchPage()">Search</a>
                     </div>
-        <!-- Search Function-->
-<script>
-    function search() {
-        window.location.href = "Search.aspx?ST=" + document.getElementById('serchTerm').value;
-    }
-    </script>
 </div>
         <!--Search Results-->
         <div class="row">
