@@ -14,5 +14,7 @@ namespace DAL
         SP_AddUserGoogleAuth AddUser(USER User);
         List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
+        List<SP_GetEmpNames> GetEmpNames();
+        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID);
     }
 }

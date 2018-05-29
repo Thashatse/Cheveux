@@ -37,5 +37,13 @@ namespace BLL
         {
             return db.GetUserDetails(ID);
         }
+        public List<SP_GetEmpNames> BLL_GetEmpNames()
+        {
+            return db.GetEmpNames();
+        }
+        public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID)
+        {
+            return db.GetEmpAgenda(employeeID);
+        }
     }
 }

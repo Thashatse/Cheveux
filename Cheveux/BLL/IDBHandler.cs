@@ -14,5 +14,7 @@ namespace BLL
         SP_AddUserGoogleAuth BLL_AddUser(USER user);
         List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
+        List<SP_GetEmpNames> BLL_GetEmpNames();
+        List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID);
     }
 }
