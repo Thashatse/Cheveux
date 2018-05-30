@@ -37,6 +37,31 @@ namespace BLL
         {
             return db.GetUserDetails(ID);
         }
+
+        public SP_GetCurrentVATate GetVATRate()
+        {
+            return db.GetVATRate();
+        }
+
+        public List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID)
+        {
+            return db.getCustomerUpcomingBookings(CustomerID);
+        }
+
+        public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
+        {
+            return db.getCustomerUpcomingBookingDetails(BookingID);
+        }
+
+        public bool deleteBooking(string BookingID)
+        {
+            return db.deleteBooking(BookingID);
+        }
+
+        public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
+        {
+            return db.getCustomerPastBookings(CustomerID);
+        }
         public List<SP_GetEmpNames> BLL_GetEmpNames()
         {
             return db.GetEmpNames();

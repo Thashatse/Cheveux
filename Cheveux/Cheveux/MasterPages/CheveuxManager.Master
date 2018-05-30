@@ -13,6 +13,12 @@
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
     <link rel="“stylesheet”" type="“text/css”" href="“/CSS/Cheveux.css”">
+        <!-- Search Function-->
+    <script>
+        function search() {
+            window.location.href = "Search.aspx?ST="+document.getElementById('serchTerm').value;
+        }
+    </script>
     <!--Header Placeholder-->
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -51,7 +57,7 @@
                         <asp:PlaceHolder runat="server" ID="LogedIn">
                             <!--Account Button-->
                             <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
-                            <li><a href="#">Log Out</a></li>
+                            <li><a href="Accounts.aspx?action=Logout">Log Out</a></li>
                         </asp:PlaceHolder>
                     </ul>
                     <div class="form-group">
@@ -73,11 +79,5 @@
         <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
-    <!-- Search Function-->
-    <script>
-        function search() {
-            window.location.href = "Search.aspx?ST="+document.getElementById('serchTerm').value;
-        }
-    </script>
 </body>
 </html>

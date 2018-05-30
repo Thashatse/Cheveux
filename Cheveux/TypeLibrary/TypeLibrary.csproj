@@ -62,6 +62,8 @@
     <Compile Include="ViewModels\SP_AddUserGoogleAuth.cs" />
     <Compile Include="ViewModels\SP_CheckForUserType.cs" />
     <Compile Include="ViewModels\SP_CheckIn.cs" />
+    <Compile Include="ViewModels\SP_GetCurrentVATate.cs" />
+    <Compile Include="ViewModels\SP_GetCustomerBooking.cs" />
     <Compile Include="ViewModels\SP_GetEmpAgenda.cs" />
     <Compile Include="ViewModels\SP_GetEmpNames.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
