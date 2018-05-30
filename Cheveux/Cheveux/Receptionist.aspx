@@ -38,7 +38,7 @@
                     <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True" OnSelectedIndexChanged="drpEmpNames_SelectedIndexChanged">
                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                     </asp:DropDownList>  
-                        
+                       
                 </div>
             </div>
         </div>
@@ -51,6 +51,8 @@
         <div id="Agenda">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
+                    <!--Used datagrid to test if dropdown works properly
+                        Will be changed before end of thursday-->
                     <asp:GridView ID="grdAgenda" runat="server" CssClass="table table-hover"
                         AllowPaging="True" PageSize="3" OnPageIndexChanging="grdAgenda_PageIndexChanging1">
                         <Columns>
