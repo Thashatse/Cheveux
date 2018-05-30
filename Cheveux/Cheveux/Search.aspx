@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="Cheveux.Search" %>
 
 <asp:content id="Content1" contentplaceholderid="PageTitle" runat="server">
-    Cheveux - Search
+    Search - Cheveux
 </asp:content>
 <asp:content id="Content2" contentplaceholderid="head" runat="server">
     <script>
@@ -28,8 +28,12 @@
         <!--Search Results-->
         <div class="row">
                 <div class="col-xs-12 col-md-12">
-                    <asp:Label runat="server" ID="ResultsLable"></asp:Label>
-                        <asp:Table id="SearchResults" runat="server"></asp:Table>
+                    <asp:Label runat="server" ID="ProductResultsLable"></asp:Label>
+                        <asp:Table id="ProductSearchResults" runat="server"></asp:Table>
+                    <!--New Line-->
+    <br /><br />
+                    <asp:Label runat="server" ID="StylistResultsLable"></asp:Label>
+                    <asp:Table id="StylistSearchResults" runat="server"></asp:Table>
                     </div>
             </div>
     </div>

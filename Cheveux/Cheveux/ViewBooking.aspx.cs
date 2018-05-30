@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.Models;
 using TypeLibrary.ViewModels;
+using System.Data;
 
 namespace Cheveux
 {
@@ -40,8 +41,18 @@ namespace Cheveux
                     string action = Request.QueryString["Action"];
                     if (action == null)
                     {
-                        //get the bookingID from the querystring
-                        getBookingDeatails(BookingID);
+                        //check if its a past booking
+                        string bookingType = Request.QueryString["BookingType"];
+                        if (bookingType == "Past")
+                        {
+                            //get past booking details
+                            getBookingDeatails(BookingID, true);
+                        }
+                        else if (bookingType == null)
+                        {
+                            //get upcoming booking details
+                            getBookingDeatails(BookingID, false);
+                        }
                         //create a back button
                         //Set the page to redirect to the previous page in the querstring
                         if (PreviousPageAdress != null)
@@ -76,13 +87,13 @@ namespace Cheveux
                         {
                             BackButton.Text =
                             "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = " + PreviousPageAdress + ">Done</a></button>";
+                            "<a href = '" + PreviousPageAdress + "'>Done</a></button>";
                         }
                         else
                         {
                             BackButton.Text =
                             "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = Bookings.aspx>Done</a></button>";
+                            "<a href = 'Bookings.aspx'>Done</a></button>";
                         }
                     }
                 }
@@ -101,18 +112,35 @@ namespace Cheveux
             }
         }
 
-        public void getBookingDeatails(string BookingID)
+        public void getBookingDeatails(string BookingID, bool pastBooking)
         {
             //display the booking
             //get the details from the db
             try
             {
-                SP_GetCustomerBooking BookingDetails =
-                    handler.getCustomerUpcomingBookingDetails(BookingID);
+                SP_GetCustomerBooking BookingDetails = null;
+                List<SP_getInvoiceDL> invoicDetailLines = null; 
+                //check if this is a past or upcoming booking and display the details acordingly
+                if (pastBooking == false)
+                {
+                    BookingDetails =
+                        handler.getCustomerUpcomingBookingDetails(BookingID);
+                }else if (pastBooking == true)
+                {
+                    //get booking deatils
+                    BookingDetails = handler.getCustomerPastBookingDetails(BookingID);
+                    //get the invoice 
+                    invoicDetailLines = handler.getInvoiceDL(BookingID);
+                    //get the review
+
+                }
 
                 //display a heading
                 BookingLable.Text = "<h2> " + BookingDetails.serviceName.ToString() + " with " +
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
+
+                //create a variablew to track the row count
+                int rowCount = 0;
 
                 //create a new row in the table and set the height
                 TableRow newRow = new TableRow();
@@ -122,21 +150,28 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Service Name:";
                 newCell.Width = 300;
-                BookingTable.Rows[0].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.serviceName.ToString();
                 newCell.Width = 700;
-                BookingTable.Rows[0].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                //increment row count 
+                rowCount++;
 
                 newRow = new TableRow();
+                newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Service Description:";
-                BookingTable.Rows[1].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.serviceDescripion.ToString();
-                BookingTable.Rows[1].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                //increment row count 
+                rowCount++;
 
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -144,10 +179,13 @@ namespace Cheveux
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Price:";
-                BookingTable.Rows[2].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.servicePrice.ToString();
-                BookingTable.Rows[2].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                //increment row count 
+                rowCount++;
 
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -155,10 +193,13 @@ namespace Cheveux
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Stylist:";
-                BookingTable.Rows[3].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.stylistFirstName.ToString();
-                BookingTable.Rows[3].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                //increment row count 
+                rowCount++;
 
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -166,10 +207,13 @@ namespace Cheveux
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Time:";
-                BookingTable.Rows[4].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.bookingStartTime.ToString("HH:mm");
-                BookingTable.Rows[4].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                //increment row count 
+                rowCount++;
 
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -177,28 +221,175 @@ namespace Cheveux
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Date:";
-                BookingTable.Rows[5].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.bookingDate.ToString("dd-MM-yyyy");
-                BookingTable.Rows[5].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                //increment row count 
+                rowCount++;
+
+                //only display arrived stataus for past bookings
+                if (pastBooking == true)
+                {
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Arrived:";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = function.GetFullArrivedStatus(BookingDetails.arrived.ToString()[0]);
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+
+                    //diplay invoice
+                    //get invoice details
+                    List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
+
+                    //diaplay a heading
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Invoice:";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+
+                    //calculate total price
+                    double total = 0.0;
+
+                    foreach (SP_getInvoiceDL item in invoice)
+                    {
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        BookingTable.Rows.Add(newRow);
+                        //fill in the item
+                        newCell = new TableCell();
+                        newCell.Text = item.Qty.ToString() +" "+item.itemName.ToString() + " @ R" + item.price.ToString();
+                        newRow.Cells.Add(newCell);
+                        //fill in the Qty, unit price & TotalPrice
+                        newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "R" + Math.Round((item.Qty * item.price), 2).ToString();
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment final price
+                        total = item.Qty * item.price;
+
+                        //increment row count 
+                        rowCount++;
+
+                    }
+
+                    // get vat info
+                    Tuple<double, double> vatInfo = function.getVat(total);
+
+                    //display total including and Excluding VAT
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Text = "Total Ecluding VAT: ";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    //fill in total Ecluding VAT
+                    newCell = new TableCell();
+                    newCell.HorizontalAlign = HorizontalAlign.Right;
+                    newCell.Text = "R " + Math.Round(vatInfo.Item1, 2).ToString();
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+
+                    //get the vat rate
+                    double VATRate = -1;
+                    try
+                    {
+                        VATRate = handler.GetVATRate().VATRate;
+                    }
+                    catch (ApplicationException Err)
+                    {
+                        function.logAnError(Err.ToString());
+                    }
+
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    //fill in total VAT due
+                    newCell = new TableCell();
+                    newCell.Text = "VAT @"+ VATRate + "%";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.HorizontalAlign = HorizontalAlign.Right;
+                    newCell.Text = "R " + Math.Round(vatInfo.Item2, 2).ToString();
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+
+                    //display the total due
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    //fill in total
+                    newCell = new TableCell();
+                    newCell.Text = "Total Due: ";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+					newCell = new TableCell();
+                    newCell.HorizontalAlign = HorizontalAlign.Right;
+                    newCell.Text = "R " + total.ToString();
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+
+                    //display review
+                    //diaplay a heading
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+					
+					//increment row count 
+                    rowCount++;
+                }
 
                 newRow = new TableRow();
                 newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
-                BookingTable.Rows[6].Cells.Add(newCell);
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
+
+                //check for reivious page
                 if (PreviousPageAdress == null)
                 { PreviousPageAdress = "Bookings.aspx"; }
-                newCell.Text = "<a href = 'ViewBooking.aspx?Action=Cancel&BookingID=" +
-                BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=" + PreviousPageAdress + "'>Cancel Booking   </a>   " +
 
-                "<button type = 'button' class='btn btn-default'>" +
-                "<a href = 'ViewBooking.aspx?Action=Edit&BookingID=" +
-                BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=" + PreviousPageAdress + "'>Edit Booking</a></button>";
-                BookingTable.Rows[6].Cells.Add(newCell);
+                //display the buttons bassed on if this is a past booking or not
+                if (pastBooking == true)
+                {
+                        newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '#'> Review Stylist</a></button>";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                }
+                else
+                {
+                    newCell.Text = "<a href = 'ViewBooking.aspx?Action=Cancel&BookingID=" +
+                    BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
+                    "&PreviousPage=" + PreviousPageAdress + "'>Cancel Booking   </a>   " +
+
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = 'ViewBooking.aspx?Action=Edit&BookingID=" +
+                    BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
+                    "&PreviousPage=" + PreviousPageAdress + "'>Edit Booking</a></button>";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                }
             }
             catch (ApplicationException Err)
             {
@@ -235,6 +426,7 @@ namespace Cheveux
                 BookingTable.Rows[0].Cells.Add(newCell);
 
                 newRow = new TableRow();
+                newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
@@ -262,8 +454,22 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Stylist:";
                 BookingTable.Rows[3].Cells.Add(newCell);
+
+                //creat a drop down list of stylists
+                //get hairstylist info
+                List<SP_GetEmpNames> Stylist = handler.BLL_GetEmpNames();
+                //bind the data to a list
+                DropDownList dropDownStylists = new DropDownList();
+                dropDownStylists.ID = "Stylist";
+                foreach (SP_GetEmpNames emps in Stylist)
+                {
+                    dropDownStylists.Items.Add(new ListItem(emps.Name.ToString(), emps.EmployeeID.ToString()));
+                    dropDownStylists.DataBind();
+                }
+                dropDownStylists.Items.FindByValue(BookingDetails.stylistEmployeeID.ToString()).Selected = true;
+
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.stylistFirstName.ToString();
+                newCell.Controls.Add(dropDownStylists);
                 BookingTable.Rows[3].Cells.Add(newCell);
 
                 newRow = new TableRow();
@@ -352,7 +558,7 @@ namespace Cheveux
                 //Let teh user know it was a success or not
                 if (success == true)
                 {
-                    BookingLable.Text = "<div class='jumbotron'> <h1> The Booking was succefuly Canceled, </h1> " +
+                    BookingLable.Text = "<div class='jumbotron'> <h1> The Booking was succefuly Canceled </h1> " +
                    "</div> ";
                 }
                 else

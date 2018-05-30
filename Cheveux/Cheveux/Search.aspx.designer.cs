@@ -22,21 +22,39 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label JumbotronSearchBox;
         
         /// <summary>
-        /// ResultsLable control.
+        /// ProductResultsLable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ResultsLable;
+        protected global::System.Web.UI.WebControls.Label ProductResultsLable;
         
         /// <summary>
-        /// SearchResults control.
+        /// ProductSearchResults control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table SearchResults;
+        protected global::System.Web.UI.WebControls.Table ProductSearchResults;
+        
+        /// <summary>
+        /// StylistResultsLable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label StylistResultsLable;
+        
+        /// <summary>
+        /// StylistSearchResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table StylistSearchResults;
     }
 }

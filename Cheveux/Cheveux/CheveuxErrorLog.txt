@@ -1,42 +1,17 @@
 
-TimeStamp: 2018/05/28 13:11:28
+TimeStamp: 2018/05/30 15:56:15
 Machine Name: TEFO-NTSAKO-HAS
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: thash
 User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
-   at DAL.DBAccess.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 270
-   at BLL.DBHandler.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 58
-   at Cheveux.ViewBooking.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 350
- an error occured deleting a booking from the database
-
-TimeStamp: 2018/05/28 13:13:10
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
-   at DAL.DBAccess.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 270
-   at BLL.DBHandler.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 58
-   at Cheveux.ViewBooking.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 350
- an error occured deleting a booking from the database
-
-TimeStamp: 2018/05/28 13:16:27
-Machine Name: TEFO-NTSAKO-HAS
-OS Version: Microsoft Windows NT 10.0.17134.0
-Curent User: thash
-User Domain: TEFO-NTSAKO-HAS
-Curent Directory: C:\Program Files (x86)\IIS Express
-Error: 
-System.ApplicationException: An Error Occouerd When Comunicating With The Database
-   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
-   at DAL.DBAccess.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 270
-   at BLL.DBHandler.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 58
-   at Cheveux.ViewBooking.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 350
- an error occured deleting a booking from the database
+System.ApplicationException: System.ArgumentException: The SqlParameter is already contained by another SqlParameterCollection.
+   at System.Data.SqlClient.SqlParameterCollection.Validate(Int32 index, Object value)
+   at System.Data.SqlClient.SqlParameterCollection.AddRange(Array values)
+   at System.Data.SqlClient.SqlParameterCollection.AddRange(SqlParameter[] values)
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 27
+   at DAL.DBAccess.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at DAL.DBAccess.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 135
+   at BLL.DBHandler.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 33
+   at Cheveux.Search.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Search.aspx.cs:line 86
