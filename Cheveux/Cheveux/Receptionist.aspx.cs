@@ -23,13 +23,7 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*Button btn = new Button();
-            btn.Text = "Check-In";
-            btn.CssClass = "btn btn-outline-dark";
-            btn.Click += new EventHandler(btn_Click);*/
-
             theDate.InnerHtml = test;
-
 
             list = handler.BLL_GetEmpNames();
             if (!Page.IsPostBack)
@@ -76,12 +70,21 @@ namespace Cheveux
             {
                 agenda = handler.BLL_GetEmpAgenda(id);
 
+                //create row for the table 
                 TableRow row = new TableRow();
-                row.Height = 50;
+                row.Height = 50; 
                 
+                //add row to the table
                 AgendaTable.Rows.Add(row);
                 
-
+                /* 
+                 * create the cells for the row
+                 * and their names
+                 * the cells being created are for the first row of the table
+                 * and their names are the column names
+                 * Each cell is added to the table row
+                 * .Rows[0] => refers to the first row of the table
+                 * */
                 TableCell startTime = new TableCell();
                 startTime.Text = "Start Time";
                 startTime.Width = 300;
@@ -112,6 +115,7 @@ namespace Cheveux
                 arrived.Width = 300;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
+                //integer that will be appended in the foreach loop to access the new row for every iteration of the foreach
                 int i = 1;
                 foreach(SP_GetEmpAgenda a in agenda)
                 {
