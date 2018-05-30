@@ -40,3 +40,12 @@ System.ApplicationException: An Error Occouerd When Comunicating With The Databa
    at BLL.DBHandler.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 58
    at Cheveux.ViewBooking.deleteBooking(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 350
  an error occured deleting a booking from the database
+
+TimeStamp: 2018/05/29 15:18:01
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+An Error Occurred Retrieving Booking ID from Query String on Bookings Details Page

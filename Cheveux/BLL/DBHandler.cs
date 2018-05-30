@@ -62,5 +62,15 @@ namespace BLL
         {
             return db.getCustomerPastBookings(CustomerID);
         }
+
+        public SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID)
+        {
+            return db.getCustomerPastBookingDetails(BookingID);
+        }
+
+        public List<SP_getInvoiceDL> getInvoiceDL(string BookingID)
+        {
+            return db.getInvoiceDL(BookingID);
+        }
     }
 }

@@ -223,13 +223,12 @@ namespace DAL
 
         public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
-            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
+            SP_GetCustomerBooking booking = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@BookingID", BookingID)
             };
 
-            SP_GetCustomerBooking booking = null;
             try
             {
                 using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookingDetails",
@@ -302,6 +301,78 @@ namespace DAL
                         }
                     }
                     return customerBookings;
+                }
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID)
+        {
+            SP_GetCustomerBooking booking = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerPastBookingDetail",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        booking = new SP_GetCustomerBooking
+                        {
+                            serviceName = row["Name"].ToString(),
+                            serviceDescripion = row["ProductDescription"].ToString(),
+                            servicePrice = row["Price"].ToString(),
+                            stylistFirstName = row["FirstName"].ToString(),
+                            bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                            bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            bookingID = row["BookingID"].ToString(),
+                            arrived = row["Arrived"].ToString()[0]
+                        };
+                    }
+                    return booking;
+                }
+            }
+            catch (ApplicationException e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_getInvoiceDL> getInvoiceDL(string BookingID)
+        {
+            List<SP_getInvoiceDL> InvoiceDetailIne = new List<SP_getInvoiceDL>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_getInvoiceDL",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_getInvoiceDL booking = new SP_getInvoiceDL
+                            {
+                                itemName = row["Name"].ToString(),
+                                Qty = Convert.ToInt32(row["Qty"].ToString()),
+                                price = Convert.ToDouble(row["Price"].ToString())
+                            };
+                            InvoiceDetailIne.Add(booking);
+                        }
+                    }
+                    return InvoiceDetailIne;
                 }
             }
             catch (ApplicationException e)
