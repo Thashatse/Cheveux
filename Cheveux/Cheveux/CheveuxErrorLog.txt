@@ -49,3 +49,71 @@ User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
 An Error Occurred Retrieving Booking ID from Query String on Bookings Details Page
+
+TimeStamp: 2018/05/30 11:32:46
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.TypeInitializationException: The type initializer for 'DAL.DBHelper' threw an exception. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at DAL.DBHelper..cctor() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 14
+   --- End of inner exception stack trace ---
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars)
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 56
+
+TimeStamp: 2018/05/30 11:35:53
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.TypeInitializationException: The type initializer for 'DAL.DBHelper' threw an exception. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at DAL.DBHelper..cctor() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 14
+   --- End of inner exception stack trace ---
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars)
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 56
+
+TimeStamp: 2018/05/30 11:39:04
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 56
+
+TimeStamp: 2018/05/30 11:42:06
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 56

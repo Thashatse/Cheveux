@@ -37,7 +37,7 @@ namespace DAL
                     return TF;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -73,7 +73,7 @@ namespace DAL
                     return TF;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -110,11 +110,11 @@ namespace DAL
                 return SearchResults;
             }
         }
-        catch (ApplicationException e)
-        {
-            throw new ApplicationException(e.ToString());
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
-    }
 
         public USER GetUserDetails(string ID)
         {
@@ -147,7 +147,7 @@ namespace DAL
                     return TF;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -175,10 +175,10 @@ namespace DAL
 
 
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
-            } 
+            }
         }
 
         public List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID)
@@ -215,7 +215,7 @@ namespace DAL
                     return customerBookings;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -253,7 +253,7 @@ namespace DAL
                     return booking;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -261,12 +261,19 @@ namespace DAL
 
         public bool deleteBooking(string BookingID)
         {
-            SqlParameter[] pars = new SqlParameter[]
+            try
             {
+                SqlParameter[] pars = new SqlParameter[]
+                {
                 new SqlParameter("@BookingID", BookingID),
-            };
+                };
 
-            return DBHelper.NonQuery("SP_DeleteBooking", CommandType.StoredProcedure, pars);
+                return DBHelper.NonQuery("SP_DeleteBooking", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
 
         public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
@@ -303,7 +310,7 @@ namespace DAL
                     return customerBookings;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -340,7 +347,7 @@ namespace DAL
                     return booking;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -375,11 +382,12 @@ namespace DAL
                     return InvoiceDetailIne;
                 }
             }
-            catch (ApplicationException e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
@@ -398,6 +406,7 @@ namespace DAL
                 }
                 return list;
         }
+
         public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID)
         {
             SP_GetEmpAgenda emp = null;
@@ -428,9 +437,9 @@ namespace DAL
                 }
                 return agenda;
             }
-            catch(ApplicationException err)
+            catch (Exception e)
             {
-                throw new ApplicationException(err.ToString());
+                throw new ApplicationException(e.ToString());
             }
         }
     }
