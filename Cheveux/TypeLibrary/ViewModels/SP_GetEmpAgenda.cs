@@ -13,7 +13,7 @@ namespace TypeLibrary.ViewModels
         public string CustomerFName { get; set; }
         public string EmpFName { get; set; }
         public string ServiceName { get; set; }
-        public char Arrived { get; set; }
-
+        //public Nullable<char> Arrived { get; set; }
+        public string Arrived { get; set; }
     }
 }

@@ -312,19 +312,28 @@ namespace DAL
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
-                using (DataTable table = DBHelper.Select("SP_GetEmpNames", CommandType.StoredProcedure))
+                
+                try
                 {
-                    if (table.Rows.Count > 0)
+                    using (DataTable table = DBHelper.Select("SP_GetEmpNames", CommandType.StoredProcedure))
                     {
-                        foreach (DataRow row in table.Rows)
+                        if (table.Rows.Count > 0)
                         {
-                            SP_GetEmpNames emp = new SP_GetEmpNames();
-                            emp.EmployeeID = row["EmployeeID"].ToString();
-                            emp.Name = row["Name"].ToString();
-                            list.Add(emp);
+                            foreach (DataRow row in table.Rows)
+                            {
+                                SP_GetEmpNames emp = new SP_GetEmpNames();
+                                emp.EmployeeID = row["EmployeeID"].ToString();
+                                emp.Name = row["Name"].ToString();
+                                list.Add(emp);
+                            }
                         }
                     }
                 }
+                catch(Exception err)
+                {
+                    throw new Exception(err.ToString());
+                }
+                
                 return list;
         }
         public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID)
@@ -344,13 +353,15 @@ namespace DAL
                     {
                         foreach (DataRow row in table.Rows)
                         {
-                            emp = new SP_GetEmpAgenda();
-                            emp.StartTime = TimeSpan.Parse((row["StartTime"]).ToString());
-                            emp.EndTime = TimeSpan.Parse((row["EndTime"]).ToString());
-                            emp.CustomerFName = Convert.ToString(row["CustomerFName"]);
-                            emp.EmpFName = Convert.ToString(row["EmpFName"]);
-                            emp.ServiceName = Convert.ToString(row["ServiceName"]);
-                            emp.Arrived = Convert.ToChar(row["Arrived"]);
+                            emp = new SP_GetEmpAgenda
+                            {
+                                StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
+                                EndTime = TimeSpan.Parse((row["EndTime"]).ToString()),
+                                CustomerFName = Convert.ToString(row["CustomerFName"]),
+                                EmpFName = Convert.ToString(row["EmpFName"]),
+                                ServiceName = Convert.ToString(row["ServiceName"]),
+                                Arrived = Convert.ToString(row["Arrived"])
+                            };
                             agenda.Add(emp);
                         }
                     }

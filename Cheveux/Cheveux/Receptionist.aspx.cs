@@ -17,17 +17,22 @@ namespace Cheveux
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        String test = DateTime.Now.ToString("dd.MM.yyy");
+        String test = DateTime.Now.ToString("dddd d MMMM");
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            /*Button btn = new Button();
+            btn.Text = "Check-In";
+            btn.CssClass = "btn btn-outline-dark";
+            btn.Click += new EventHandler(btn_Click);*/
+
             theDate.InnerHtml = test;
 
 
             list = handler.BLL_GetEmpNames();
-            if (!IsPostBack)
+            if (!Page.IsPostBack)
             {
 
                 foreach(SP_GetEmpNames emps in list)
@@ -40,48 +45,125 @@ namespace Cheveux
                 }
 
             }
+            
 
         }
 
         protected void drpEmpNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            agenda = handler.BLL_GetEmpAgenda(drpEmpNames.SelectedValue);
-            try
-            {
-                if (drpEmpNames.SelectedValue != "-1")
+            
+                try
                 {
-                    grdAgenda.DataSource = agenda;
-                    grdAgenda.DataBind();
-
+                    if (drpEmpNames.SelectedValue != "-1")
+                    {
+                        getAgenda(drpEmpNames.SelectedValue);
+                    }
                 }
-            }
-            catch(ApplicationException Err)
-            {
-               throw new Exception(Err.ToString());
-            }
+                catch (ApplicationException Err)
+                {
+                    function.logAnError(Err.ToString());
+                    lblAgendaErr.Text = "<h3>An error occurred during communication with the database.<br />Please try again later.</h3>";
+                }
+            
+            
             
         }
+        public void getAgenda(string id)
+        {
+            Button btn;
 
-        protected void grdAgenda_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-        }
-        protected void CheckIn(Object sender, EventArgs e)
-        {
-        }
-
-        protected void grdAgenda_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        protected void grdAgenda_PageIndexChanging1(object sender, GridViewPageEventArgs e)
-        {
-            grdAgenda.PageIndex = e.NewPageIndex;
-            grdAgenda.DataBind();
-            agenda = handler.BLL_GetEmpAgenda(drpEmpNames.SelectedValue);
-            if (drpEmpNames.SelectedValue != "-1")
+            try
             {
-                grdAgenda.DataSource = agenda;
-                grdAgenda.DataBind(); 
+                agenda = handler.BLL_GetEmpAgenda(id);
+
+                TableRow row = new TableRow();
+                row.Height = 50;
+                
+                AgendaTable.Rows.Add(row);
+                
+
+                TableCell startTime = new TableCell();
+                startTime.Text = "Start Time";
+                startTime.Width = 300;
+                AgendaTable.Rows[0].Cells.Add(startTime);
+
+                TableCell endTime = new TableCell();
+                endTime.Text = "End Time";
+                endTime.Width = 300;
+                AgendaTable.Rows[0].Cells.Add(endTime);
+
+                TableCell cust = new TableCell();
+                cust.Text = "Customer Name";
+                cust.Width = 300;
+                AgendaTable.Rows[0].Cells.Add(cust);
+
+                TableCell emp = new TableCell();
+                emp.Text = "Employee Name";
+                emp.Width = 300;
+                AgendaTable.Rows[0].Cells.Add(emp);
+
+                TableCell service = new TableCell();
+                service.Text = "Service";
+                service.Width = 300;
+                AgendaTable.Rows[0].Cells.Add(service);
+
+                TableCell arrived = new TableCell();
+                arrived.Text = "Arrived";
+                arrived.Width = 300;
+                AgendaTable.Rows[0].Cells.Add(arrived);
+
+                int i = 1;
+                foreach(SP_GetEmpAgenda a in agenda)
+                {
+                    
+                    TableRow r = new TableRow();
+                    AgendaTable.Rows.Add(r);
+
+                    
+                    TableCell start = new TableCell();
+                    start.Text = a.StartTime.ToString();
+                    AgendaTable.Rows[i].Cells.Add(start);
+
+                    TableCell end = new TableCell();
+                    end.Text = a.EndTime.ToString();
+                    AgendaTable.Rows[i].Cells.Add(end);
+
+                    TableCell c = new TableCell();
+                    c.Text = a.CustomerFName.ToString();
+                    AgendaTable.Rows[i].Cells.Add(c);
+
+                    TableCell e = new TableCell();
+                    e.Text = a.EmpFName.ToString();
+                    AgendaTable.Rows[i].Cells.Add(e);
+
+                    TableCell s = new TableCell();
+                    s.Text = a.ServiceName.ToString();
+                    AgendaTable.Rows[i].Cells.Add(s);
+
+                    TableCell present = new TableCell();
+                    present.Text = a.Arrived.ToString();
+                    AgendaTable.Rows[i].Cells.Add(present);
+
+                    
+                    TableCell buttonCell = new TableCell();
+                    buttonCell.Width = 200;
+                    buttonCell.Height = 50;
+                    btn = new Button();
+                    btn.Text = "Check-In";
+                    btn.CssClass = "btn btn-outline-dark";
+
+                    buttonCell.Controls.Add(btn);
+                    AgendaTable.Rows[i].Cells.Add(buttonCell);
+
+                    i++;
+
+                 
+                }
+            }
+            catch(ApplicationException E)
+            {
+                function.logAnError(E.ToString());
+                lblAgendaErr.Text = "<h3> An error occurred during communication with the database.<br />Please try again later.</h3>";
             }
         }
     }

@@ -19,11 +19,8 @@
             <!--Line Break-->
                 <div class="container">
                     <br />
-                    <br />
                 </div>
         </div>
-
-
         <div id="viewAgenda">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
@@ -38,7 +35,7 @@
                     <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True" OnSelectedIndexChanged="drpEmpNames_SelectedIndexChanged">
                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                     </asp:DropDownList>  
-                       
+                    <asp:label ID="lblAgendaErr" runat="server" text=" " Visible="False"></asp:label>
                 </div>
             </div>
         </div>
@@ -51,15 +48,9 @@
         <div id="Agenda">
             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                    <!--Used datagrid to test if dropdown works properly
-                        Will be changed before end of thursday-->
-                    <asp:GridView ID="grdAgenda" runat="server" CssClass="table table-hover"
-                        AllowPaging="True" PageSize="3" OnPageIndexChanging="grdAgenda_PageIndexChanging1">
-                        <Columns>
-                            <asp:ButtonField runat="server" ButtonType="Button" ControlStyle-CssClass="btn btn-outline-dark" Text="Check-In"/>
-                        </Columns>
-                    </asp:GridView>
+                    <asp:table runat="server" ID="AgendaTable"></asp:table>
                 </div>
+                    <asp:label ID="lblnoAppts" runat="server" text=" " Visible="False"></asp:label>
             </div>
         </div>
 
