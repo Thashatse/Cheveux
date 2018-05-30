@@ -29,7 +29,7 @@ namespace BLL
             string imageurl = regArray[4];
 
             //check if the user exists
-            char exists = 'E';
+            string exists = "Err";
             SP_CheckForUserType result;
             try
             {
@@ -43,23 +43,23 @@ namespace BLL
             //handel the null that will be returned if the user dose not exist
             try
             {
-                exists = result.userType;
+                exists = result.userType.ToString();
             }
             catch (System.NullReferenceException)
             {
-                exists = 'F';
+                exists = 'F'.ToString();
             }
 
             //return results to the calling Page
-            if (exists == 'C' || exists == 'E')
+            if (exists == 'C'.ToString() || exists == 'E'.ToString())
             {
                 returnVal = exists.ToString();
             }
-            else if (exists == 'F')
+            else if (exists == 'F'.ToString())
             {
                 returnVal = "unRegUser";
             }
-            if (exists == 'E')
+            if (exists == "Err")
             {
                 returnVal = "Error";
             }

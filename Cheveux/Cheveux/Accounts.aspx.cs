@@ -12,6 +12,7 @@ namespace Cheveux
     {
         Authentication auth = new Authentication();
         Functions function = new Functions();
+        IDBHandler handler = new DBHandler();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,6 +35,7 @@ namespace Cheveux
         {
             //check if the user has requested a logout or login
             String action = Request.QueryString["action"];
+            //login
             if (action != "Logout")
             {
                 //log in
@@ -94,13 +96,46 @@ namespace Cheveux
                     {
                         Response.Redirect(PreviousPage);
                     }
-                    Response.Redirect("Default.aspx?" + "WB=" + reg.Split('|')[2]);
+                    //send the user to the correct page based on their usertype
+                    if (result == "C")
+                    {
+                        Response.Redirect("Default.aspx?" + "WB=" + reg.Split('|')[2]);
+                    }else if (result == "E")
+                    {
+                        string EmpType = handler.getEmployeeType(reg.Split('|')[0]).Type.ToString().Replace(" ", string.Empty);
+                        if(EmpType == "R")
+                        {
+                            //Receptionist
+                            Response.Redirect("Receptionist.aspx");
+                        }
+                        else if (EmpType == "M")
+                        {
+                            //Manager
+                            Response.Redirect("Default.aspx");
+                        }
+                        else if (EmpType == "S")
+                        {
+                            //stylist
+                                Response.Redirect("Default.aspx");
+                        }
+                        else
+                        {
+                            function.logAnError("Unknown user type found during login - User details (from Google Server):" +
+                                reg.ToString());
+                            Response.Redirect("Default.aspx");
+                        }
+                    }
+                    else
+                    {
+                        Response.Redirect("Default.aspx?" + "WB=" + reg.Split('|')[2]);
+                    }
                 }
                 else if (result == "Error")
                 {
                     Response.Redirect("Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
                 }
             }
+            //logout
             else
             {
                 //log out

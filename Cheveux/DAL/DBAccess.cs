@@ -54,7 +54,7 @@ namespace DAL
             new SqlParameter("@UN", User.UserName),
             new SqlParameter("@EM", User.Email),
             new SqlParameter("@CN", User.ContactNo),
-            new SqlParameter("@UI", User.UserImage)
+            new SqlParameter("@UI", User.UserImage.ToString())
             };
             try
             {
@@ -391,6 +391,8 @@ namespace DAL
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
+            try
+            {
                 using (DataTable table = DBHelper.Select("SP_GetEmpNames", CommandType.StoredProcedure))
                 {
                     if (table.Rows.Count > 0)
@@ -404,7 +406,12 @@ namespace DAL
                         }
                     }
                 }
-                return list;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
         }
 
         public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID)
@@ -436,6 +443,36 @@ namespace DAL
                     }
                 }
                 return agenda;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public EMPLOYEE getEmployeeType(string EmployeeID)
+        {
+            EMPLOYEE Emp = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmpID", EmployeeID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetEmployeeType",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        Emp = new EMPLOYEE
+                        {
+                            Type = row["Type"].ToString(),
+                        };
+                    }
+                    return Emp;
+                }
             }
             catch (Exception e)
             {

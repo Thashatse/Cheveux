@@ -62,10 +62,12 @@ namespace BLL
         {
             return db.getCustomerPastBookings(CustomerID);
         }
+
         public List<SP_GetEmpNames> BLL_GetEmpNames()
         {
             return db.GetEmpNames();
         }
+
         public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID)
         {
             return db.GetEmpAgenda(employeeID);
@@ -79,6 +81,11 @@ namespace BLL
         public List<SP_getInvoiceDL> getInvoiceDL(string BookingID)
         {
             return db.getInvoiceDL(BookingID);
+        }
+
+        public EMPLOYEE getEmployeeType(string EmployeeID)
+        {
+            return db.getEmployeeType(EmployeeID);
         }
     }
 }

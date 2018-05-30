@@ -23,5 +23,6 @@ namespace DAL
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
+        EMPLOYEE getEmployeeType(string EmployeeID);
     }
 }

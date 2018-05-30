@@ -23,5 +23,6 @@ namespace BLL
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         List<SP_GetEmpNames> BLL_GetEmpNames();
         List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID);
+        EMPLOYEE getEmployeeType(string EmployeeID);
     }
 }

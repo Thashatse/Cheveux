@@ -117,3 +117,13 @@ System.ApplicationException: System.ApplicationException: System.ApplicationExce
    at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
    at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
    at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 56
+
+TimeStamp: 2018/05/30 12:29:28
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Unknowen user type found during login 
+ User deatils (from Google Server): 112413834414360855751|receptionistcheveux@gmail.com|Receptionist|Cheveux|https://lh4.googleusercontent.com/-3PrjKQq46zI/AAAAAAAAAAI/AAAAAAAAAAA/AIcfdXCUKJtBzbinxMZja9-DT8xz3TzlVQ/s96-c/photo.jpg
