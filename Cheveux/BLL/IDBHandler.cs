@@ -21,5 +21,7 @@ namespace BLL
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
+        List<SP_GetEmpNames> BLL_GetEmpNames();
+        List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID);
     }
 }

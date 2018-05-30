@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Cheveux.Default2" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitle" runat="server">
-    Chveux
+    Cheveux
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 

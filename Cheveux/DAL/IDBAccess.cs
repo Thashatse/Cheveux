@@ -19,6 +19,8 @@ namespace DAL
         SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID);
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
+        List<SP_GetEmpNames> GetEmpNames();
+        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
     }
