@@ -106,17 +106,20 @@ namespace Cheveux
                         if(EmpType == "R")
                         {
                             //Receptionist
+                            cookie["UT"] = "R";
                             Response.Redirect("Receptionist.aspx");
                         }
                         else if (EmpType == "M")
                         {
                             //Manager
+                            cookie["UT"] = "M";
                             Response.Redirect("Default.aspx");
                         }
                         else if (EmpType == "S")
                         {
                             //stylist
-                                Response.Redirect("Default.aspx");
+                            cookie["UT"] = "S";
+                            Response.Redirect("Default.aspx");
                         }
                         else
                         {

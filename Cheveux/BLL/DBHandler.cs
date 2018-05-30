@@ -28,7 +28,7 @@ namespace BLL
             return db.AddUser(user);
         }
 
-        public List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm)
+        public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
         {
             return db.UniversalSearch(searchTerm);
         }
@@ -86,6 +86,11 @@ namespace BLL
         public EMPLOYEE getEmployeeType(string EmployeeID)
         {
             return db.getEmployeeType(EmployeeID);
+        }
+
+        public bool updateBooking(BOOKING bookingUpdate)
+        {
+            return db.updateBooking(bookingUpdate);
         }
     }
 }

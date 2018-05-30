@@ -426,6 +426,7 @@ namespace Cheveux
                 BookingTable.Rows[0].Cells.Add(newCell);
 
                 newRow = new TableRow();
+                newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
@@ -453,8 +454,22 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Stylist:";
                 BookingTable.Rows[3].Cells.Add(newCell);
+
+                //creat a drop down list of stylists
+                //get hairstylist info
+                List<SP_GetEmpNames> Stylist = handler.BLL_GetEmpNames();
+                //bind the data to a list
+                DropDownList dropDownStylists = new DropDownList();
+                dropDownStylists.ID = "Stylist";
+                foreach (SP_GetEmpNames emps in Stylist)
+                {
+                    dropDownStylists.Items.Add(new ListItem(emps.Name.ToString(), emps.EmployeeID.ToString()));
+                    dropDownStylists.DataBind();
+                }
+                dropDownStylists.Items.FindByValue(BookingDetails.stylistEmployeeID.ToString()).Selected = true;
+
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.stylistFirstName.ToString();
+                newCell.Controls.Add(dropDownStylists);
                 BookingTable.Rows[3].Cells.Add(newCell);
 
                 newRow = new TableRow();

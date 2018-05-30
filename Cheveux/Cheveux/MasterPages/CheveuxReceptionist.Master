@@ -36,14 +36,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="Receptionist.aspx">
                         <img src="/IMG_0715.png" alt="logo" width="75" height="75" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li ><a href="#"><!--Agenda Page-->Agender</a></li>
+                        <li ><a href="Receptionist.aspx"><!--Agenda Page-->Agender</a></li>
                         <li><a href="#"><!--Calendar-->Calendar</a></li>
                         <li><a href="#"><!--Manage Stock-->Manage Stock</a></li>
                     </ul>

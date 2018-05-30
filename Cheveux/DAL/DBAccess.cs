@@ -79,10 +79,11 @@ namespace DAL
             }
         }
 
-        public List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm)
+        public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
     {
-        List<SP_ProductSearchByTerm> SearchResults = new List<SP_ProductSearchByTerm>();
-        SqlParameter[] pars = new SqlParameter[]
+        List<SP_ProductSearchByTerm> ProductSearchResults = new List<SP_ProductSearchByTerm>();
+            List<SP_SearchStylistsBySearchTerm> StylistSearchResults = new List<SP_SearchStylistsBySearchTerm>();
+            SqlParameter[] pars = new SqlParameter[]
         {
                 new SqlParameter("@searchTerm", searchTerm)
         };
@@ -104,12 +105,36 @@ namespace DAL
                             ProductType = row["ProductType(T/A/S)"].ToString()[0],
                             ProductID = row["ProductID"].ToString()
                         };
-                        SearchResults.Add(result);
+                            ProductSearchResults.Add(result);
+                    }
+                } 
+            }
+
+            pars = new SqlParameter[]
+            {
+                new SqlParameter("@searchTerm", searchTerm)
+            };
+
+                using (DataTable table = DBHelper.ParamSelect("SP_SearchStylistsBySearchTerm",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_SearchStylistsBySearchTerm result = new SP_SearchStylistsBySearchTerm
+                            {
+                                StylistID = row["UserID"].ToString(),
+                                StylistFName = row["FirstName"].ToString(),
+                                StylistLName = row["LastName"].ToString(),
+                                StylistImage = row["UserImage"].ToString()
+                            };
+                            StylistSearchResults.Add(result);
+                        }
                     }
                 }
-                return SearchResults;
+                return Tuple.Create(ProductSearchResults, StylistSearchResults);
             }
-        }
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
@@ -242,7 +267,8 @@ namespace DAL
                                 serviceName = row["Name"].ToString(),
                                 serviceDescripion = row["ProductDescription"].ToString(),
                                 servicePrice = row["Price"].ToString(),
-                                stylistFirstName = row["FirstName"].ToString(),
+                                stylistEmployeeID = row["UserID"].ToString(),
+                            stylistFirstName = row["FirstName"].ToString(),
                                 bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                                 bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                                 bookingID = row["BookingID"].ToString()
@@ -473,6 +499,27 @@ namespace DAL
                     }
                     return Emp;
                 }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateBooking(BOOKING bookingUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
+                new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
+                new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
+                new SqlParameter("@ServiceID", bookingUpdate.StylistID.ToString()),
+                new SqlParameter("@Date", bookingUpdate.Date)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateBooking", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {

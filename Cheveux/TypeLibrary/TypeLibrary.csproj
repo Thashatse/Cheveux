@@ -68,6 +68,7 @@
     <Compile Include="ViewModels\SP_GetEmpAgenda.cs" />
     <Compile Include="ViewModels\SP_GetEmpNames.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
+    <Compile Include="ViewModels\SP_SearchStylistsBySearchTerm.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,7 @@ namespace BLL
     {
         SP_CheckForUserType BLL_CheckForUserType(string id);
         SP_AddUserGoogleAuth BLL_AddUser(USER user);
-        List<SP_ProductSearchByTerm> UniversalSearch(string searchTerm);
+        Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
@@ -24,5 +24,6 @@ namespace BLL
         List<SP_GetEmpNames> BLL_GetEmpNames();
         List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID);
         EMPLOYEE getEmployeeType(string EmployeeID);
+        bool updateBooking(BOOKING bookingUpdate);
     }
 }
