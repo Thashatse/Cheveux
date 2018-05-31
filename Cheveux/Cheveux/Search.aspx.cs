@@ -68,12 +68,6 @@ namespace Cheveux
         //display the search results from the search term in the query string on statup
         protected void Page_Load(object sender, EventArgs e)
         {
-            ProductResultsLable.Visible = false;
-            StylistResultsLable.Visible = false;
-            //creat a counter to keep track of the current row and result count
-            int productCount = 0;
-            int serviceCount = 0;
-            int stylistRowCount = 0;
             //get the search term form the querystring
             String searchTerm = Request.QueryString["ST"];
             //check if the search term is empty
@@ -84,6 +78,10 @@ namespace Cheveux
             }
             else
             {
+                //creat a counter to keep track of the current row and result count
+                int productCount = 0;
+                int serviceCount = 0;
+                int stylistRowCount = 0;
                 try
                 {
                     //run the search function of the BLL to get the results and diplay them 
@@ -95,7 +93,7 @@ namespace Cheveux
                         TableHeaderCell newHeaderCell = new TableHeaderCell();
 
                         //create a loop to display each result
-                        
+
                         foreach (SP_ProductSearchByTerm result in results.Item1)
                         {
                             //check if it is a service or product
@@ -105,7 +103,7 @@ namespace Cheveux
                                 //Service
                                 serviceCount++;
                                 //check if it the first service and create a table header if it  is
-                                if(serviceCount == 1)
+                                if (serviceCount == 1)
                                 {
                                     createServiceTableHeader();
                                 }
@@ -169,18 +167,19 @@ namespace Cheveux
                             {
                                 //Error
                                 function.logAnError("Unknown Product Type found in search results");
-                            } 
+                            }
                         }
+                    }
                         
                         //check if the are Stylist Results or not
                         if (results.Item2.Count != 0)
                         {
-                           //create a new row in the results table and set the height
-                            newRow = new TableRow();
+                        //create a new row in the results table and set the height
+                        TableRow newRow = new TableRow();
                             newRow.Height = 50;
                             StylistSearchResults.Rows.Add(newRow);
-                            //create a header row and set cell withs
-                            newHeaderCell = new TableHeaderCell();
+                        //create a header row and set cell withs
+                        TableHeaderCell newHeaderCell = new TableHeaderCell();
                             newHeaderCell.Width = 400;
                             StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
                             newHeaderCell = new TableHeaderCell();
@@ -216,54 +215,49 @@ namespace Cheveux
                                 StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                             }
                         }
-
-                        //set the headings based on the search results
-                        //products heading
-                        if (productCount > 0)
-                        {
-                            //set the product search results heading
-                            ProductResultsLable.Visible = true;
-                            ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
-                        }
-                        else
-                        {
-                            //let the user know there are no Product Search results
-                            ProductResultsLable.Visible = true;
-                            ProductResultsLable.Text = "<h2> No Product Search Results For '" + searchTerm + "' </h2>";
-                        }
-                        //service heading
-                        if (productCount > 0)
-                        {
-                            //set the product search results heading
-                            serviceResultsLable.Visible = true;
-                            serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
-                        }
-                        else
-                        {
-                            //let the user know there are no Product Search results
-                            serviceResultsLable.Visible = true;
-                            serviceResultsLable.Text = "<h2> No Service Search Results For '" + searchTerm + "' </h2>";
-                        }
-                        //Stylist Heading
-                        if(stylistRowCount > 0)
-                        {
-                            //set the stylist search results heading
-                            StylistResultsLable.Visible = true;
-                            StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
-                        }
-                        else
-                        {
-                            //let the user know there are no Stylist Search results
-                            StylistResultsLable.Visible = true;
-                            StylistResultsLable.Text = "<h2> No Stylist Search Results For '" + searchTerm + "' </h2>";
-                        }
-                    }
+                 
                 }
                 catch (ApplicationException Err)
                 {
                     function.logAnError(Err.ToString());
                     Response.Redirect("Error.aspx?Error=An Error Occurred Getting Search Results From The Server, Try Again Later");
                 }
+
+                //set the headings based on the search results
+                //products heading
+                if (productCount != 0)
+                {
+                    //set the product search results heading
+                    ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
+                }
+                else
+                {
+                    //let the user know there are no Product Search results
+                    ProductResultsLable.Text = "<h2> No Product Search Results For '" + searchTerm + "' </h2>";
+                }
+                //service heading
+                if (productCount != 0)
+                {
+                    //set the product search results heading
+                    serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
+                }
+                else
+                {
+                    //let the user know there are no Product Search results
+                    serviceResultsLable.Text = "<h2> No Service Search Results For '" + searchTerm + "' </h2>";
+                }
+                //Stylist Heading
+                if (stylistRowCount != 0)
+                {
+                    //set the stylist search results heading
+                    StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
+                }
+                else
+                {
+                    //let the user know there are no Stylist Search results
+                    StylistResultsLable.Text = "<h2> No Stylist Search Results For '" + searchTerm + "' </h2>";
+                }
+
             }
         }
 
