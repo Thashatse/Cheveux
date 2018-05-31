@@ -15,3 +15,33 @@ System.ApplicationException: System.ArgumentException: The SqlParameter is alrea
    at DAL.DBAccess.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 135
    at BLL.DBHandler.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 33
    at Cheveux.Search.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Search.aspx.cs:line 86
+
+TimeStamp: 2018/05/31 14:36:47
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
+
+TimeStamp: 2018/05/31 14:59:29
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 93
+   at DAL.DBAccess.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 140
+   at BLL.DBHandler.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 33
+   at Cheveux.Search.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Search.aspx.cs:line 86

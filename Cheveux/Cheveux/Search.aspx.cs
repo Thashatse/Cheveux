@@ -70,6 +70,10 @@ namespace Cheveux
         {
             ProductResultsLable.Visible = false;
             StylistResultsLable.Visible = false;
+            //creat a counter to keep track of the current row and result count
+            int productCount = 0;
+            int serviceCount = 0;
+            int stylistRowCount = 0;
             //get the search term form the querystring
             String searchTerm = Request.QueryString["ST"];
             //check if the search term is empty
@@ -87,136 +91,234 @@ namespace Cheveux
                     //check if there are product result or not
                     if (results.Item1.Count != 0)
                     {
-                        //set the product search results heading
-                        ProductResultsLable.Visible = true;
-                        ProductResultsLable.Text = "<h2> Product Search Results For '" + searchTerm + "' </h2>";
-                        //create a new row in the results table and set the height
                         TableRow newRow = new TableRow();
-                        newRow.Height = 50;
-                        ProductSearchResults.Rows.Add(newRow);
-                        //create a header row and set cell withs
                         TableHeaderCell newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = "Product Name";
-                        newHeaderCell.Width = 600;
-                        ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = "Product Description";
-                        newHeaderCell.Width = 600;
-                        ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = "Price";
-                        newHeaderCell.Width = 100;
-                        ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = "Product Type";
-                        newHeaderCell.Width = 200;
-                        ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Width = 150;
-                        ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
 
                         //create a loop to display each result
-                        //creat a counter to keep track of the current row
-                        int rowCount = 1;
-                        foreach(SP_ProductSearchByTerm result in results.Item1)
+                        
+                        foreach (SP_ProductSearchByTerm result in results.Item1)
                         {
-                            // create a new row in the results table and set the height
-                            newRow = new TableRow();
-                            newRow.Height = 50;
-                            ProductSearchResults.Rows.Add(newRow);
-                            //fill the row with the data from the product results object
-                            TableCell newCell = new TableCell();
-                            newCell.Text = result.Name.ToString();
-                            ProductSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text = result.ProductDescription.ToString();
-                            ProductSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text = result.Price;
-                            ProductSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text = function.GetFullProductTypeText(result.ProductType);
-                            ProductSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text =
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
-                                "&PreviousPage=Search.aspx?ST=" + searchTerm + "''>View Product</a></button>";
-                            ProductSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            rowCount++;
+                            //check if it is a service or product
+                            //service (Applecation / Service)
+                            if (result.ProductType == 'S' || result.ProductType == 'A')
+                            {
+                                //Service
+                                serviceCount++;
+                                //check if it the first service and create a table header if it  is
+                                if(serviceCount == 1)
+                                {
+                                    createServiceTableHeader();
+                                }
+                                // create a new row in the results table and set the height
+                                newRow = new TableRow();
+                                newRow.Height = 50;
+                                serviceSearchResults.Rows.Add(newRow);
+                                //fill the row with the data from the product results object
+                                TableCell newCell = new TableCell();
+                                newCell.Text = result.Name.ToString();
+                                serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text = result.ProductDescription.ToString();
+                                serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text = result.Price;
+                                serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text = function.GetFullProductTypeText(result.ProductType);
+                                serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text =
+                                    "<button type = 'button' class='btn btn-default'>" +
+                                    "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
+                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "''>View Product</a></button>";
+                                serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
+                            }
+                            //products (Treatments)
+                            else if (result.ProductType == 'T')
+                            {
+                                //Products
+                                productCount++;
+                                //check if it the first product and create a table header if it  is
+                                if (productCount == 1)
+                                {
+                                    createProductTableHeader();
+                                }
+                                // create a new row in the results table and set the height
+                                newRow = new TableRow();
+                                newRow.Height = 50;
+                                ProductSearchResults.Rows.Add(newRow);
+                                //fill the row with the data from the product results object
+                                TableCell newCell = new TableCell();
+                                newCell.Text = result.Name.ToString();
+                                ProductSearchResults.Rows[productCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text = result.ProductDescription.ToString();
+                                ProductSearchResults.Rows[productCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text = result.Price;
+                                ProductSearchResults.Rows[productCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text =
+                                    "<button type = 'button' class='btn btn-default'>" +
+                                    "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
+                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "''>View Product</a></button>";
+                                ProductSearchResults.Rows[productCount].Cells.Add(newCell);
+                            }
+                            //error
+                            else
+                            {
+                                //Error
+                                function.logAnError("Unknown Product Type found in search results");
+                            } 
                         }
-                    }
-                    else
-                    {
-                        //let the user know there are no Product Search results
-                        ProductResultsLable.Visible = true;
-                        ProductResultsLable.Text = "<h2> No Product Search Results For '" + searchTerm + "' </h2>";
-                    }
-
-
-                    //check if the are Stylist Results or not
-                    if (results.Item2.Count != 0)
-                    {
-                        //set the stylist search results heading
-                        StylistResultsLable.Visible = true;
-                        StylistResultsLable.Text = "<h2> Stylist Search Results For '" + searchTerm + "' </h2>";
-                        //create a new row in the results table and set the height
-                        TableRow newRow = new TableRow();
-                        newRow.Height = 50;
-                        StylistSearchResults.Rows.Add(newRow);
-                        //create a header row and set cell withs
-                        TableHeaderCell newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Width = 400;
-                        StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = "Stylist Name";
-                        newHeaderCell.Width = 450;
-                        StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Width = 150;
-                        StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
-
-                        //create a loop to display each result
-                        //creat a counter to keep track of the current row
-                        int rowCount = 1;
-                        foreach (SP_SearchStylistsBySearchTerm result in results.Item2)
+                        
+                        //check if the are Stylist Results or not
+                        if (results.Item2.Count != 0)
                         {
-                            // create a new row in the results table and set the height
+                           //create a new row in the results table and set the height
                             newRow = new TableRow();
                             newRow.Height = 50;
                             StylistSearchResults.Rows.Add(newRow);
-                            //fill the row with the data from the results object
-                            TableCell newCell = new TableCell();
-                            newCell.Text = "<img src=" + result.StylistImage 
-                                + " alt='" + result.StylistFName + " " + result.StylistLName +
-                                " Profile Image' width='75' height='75'/>";
-                            StylistSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text = result.StylistFName + " "+result.StylistLName;
-                            StylistSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text =
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = 'ViewStylist.aspx?StylistID=" + result.StylistID.ToString().Replace(" ", string.Empty) +
-                                "&PreviousPage=Search.aspx?ST="+searchTerm+"'>View Stylist Profile</a></button>";
-                            StylistSearchResults.Rows[rowCount].Cells.Add(newCell);
-                            rowCount++;
+                            //create a header row and set cell withs
+                            newHeaderCell = new TableHeaderCell();
+                            newHeaderCell.Width = 400;
+                            StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
+                            newHeaderCell = new TableHeaderCell();
+                            newHeaderCell.Text = "Stylist Name";
+                            newHeaderCell.Width = 450;
+                            StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
+                            newHeaderCell = new TableHeaderCell();
+                            newHeaderCell.Width = 150;
+                            StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
+
+                            //create a loop to display each result
+                            foreach (SP_SearchStylistsBySearchTerm result in results.Item2)
+                            {
+                                stylistRowCount++;
+                                // create a new row in the results table and set the height
+                                newRow = new TableRow();
+                                newRow.Height = 50;
+                                StylistSearchResults.Rows.Add(newRow);
+                                //fill the row with the data from the results object
+                                TableCell newCell = new TableCell();
+                                newCell.Text = "<img src=" + result.StylistImage
+                                    + " alt='" + result.StylistFName + " " + result.StylistLName +
+                                    " Profile Image' width='75' height='75'/>";
+                                StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text = result.StylistFName + " " + result.StylistLName;
+                                StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
+                                newCell = new TableCell();
+                                newCell.Text =
+                                    "<button type = 'button' class='btn btn-default'>" +
+                                    "<a href = 'ViewStylist.aspx?StylistID=" + result.StylistID.ToString().Replace(" ", string.Empty) +
+                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "'>View Stylist Profile</a></button>";
+                                StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
+                            }
+                        }
+
+                        //set the headings based on the search results
+                        //products heading
+                        if (productCount > 0)
+                        {
+                            //set the product search results heading
+                            ProductResultsLable.Visible = true;
+                            ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
+                        }
+                        else
+                        {
+                            //let the user know there are no Product Search results
+                            ProductResultsLable.Visible = true;
+                            ProductResultsLable.Text = "<h2> No Product Search Results For '" + searchTerm + "' </h2>";
+                        }
+                        //service heading
+                        if (productCount > 0)
+                        {
+                            //set the product search results heading
+                            serviceResultsLable.Visible = true;
+                            serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
+                        }
+                        else
+                        {
+                            //let the user know there are no Product Search results
+                            serviceResultsLable.Visible = true;
+                            serviceResultsLable.Text = "<h2> No Service Search Results For '" + searchTerm + "' </h2>";
+                        }
+                        //Stylist Heading
+                        if(stylistRowCount > 0)
+                        {
+                            //set the stylist search results heading
+                            StylistResultsLable.Visible = true;
+                            StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
+                        }
+                        else
+                        {
+                            //let the user know there are no Stylist Search results
+                            StylistResultsLable.Visible = true;
+                            StylistResultsLable.Text = "<h2> No Stylist Search Results For '" + searchTerm + "' </h2>";
                         }
                     }
-                    else
-                    {
-                        //let the user know there are no Stylist Search results
-                        StylistResultsLable.Visible = true;
-                        StylistResultsLable.Visible = true;
-                        StylistResultsLable.Text = "<h2> No Stylist Search Results For '" + searchTerm + "' </h2>";
-                    }
                 }
-                catch(ApplicationException Err)
+                catch (ApplicationException Err)
                 {
                     function.logAnError(Err.ToString());
                     Response.Redirect("Error.aspx?Error=An Error Occurred Getting Search Results From The Server, Try Again Later");
                 }
             }
+        }
+
+        public void createProductTableHeader()
+        {
+            //Products
+            //create a new row in the results table and set the height
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            ProductSearchResults.Rows.Add(newRow);
+            //create a header row and set cell withs
+            TableHeaderCell newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Product Name";
+            newHeaderCell.Width = 600;
+            ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Product Description";
+            newHeaderCell.Width = 600;
+            ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Price";
+            newHeaderCell.Width = 300;
+            ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Width = 150;
+            ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
+        }
+
+        public void createServiceTableHeader()
+        {
+            //Services
+            //create a new row in the results table and set the height
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            serviceSearchResults.Rows.Add(newRow);
+            //create a header row and set cell withs
+            TableHeaderCell newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Service Name";
+            newHeaderCell.Width = 600;
+            serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Service Description";
+            newHeaderCell.Width = 600;
+            serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Price";
+            newHeaderCell.Width = 100;
+            serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Service Type";
+            newHeaderCell.Width = 200;
+            serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Width = 150;
+            serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
         }
 
         

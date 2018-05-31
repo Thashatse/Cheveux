@@ -28,10 +28,17 @@
         <!--Search Results-->
         <div class="row">
                 <div class="col-xs-12 col-md-12">
-                    <asp:Label runat="server" ID="ProductResultsLable"></asp:Label>
-                        <asp:Table id="ProductSearchResults" runat="server"></asp:Table>
+                    <!--Services-->
+                                        <asp:Label runat="server" ID="serviceResultsLable"></asp:Label>
+                        <asp:Table id="serviceSearchResults" runat="server"></asp:Table>
                     <!--New Line-->
     <br /><br />
+                    <!--Products-->
+                                        <asp:Label runat="server" ID="ProductResultsLable"></asp:Label>
+                        <asp:Table id="ProductSearchResults" runat="server"></asp:Table>
+                                                            <!--New Line-->
+    <br /><br />
+                                        <!--Stylist-->
                     <asp:Label runat="server" ID="StylistResultsLable"></asp:Label>
                     <asp:Table id="StylistSearchResults" runat="server"></asp:Table>
                     </div>
