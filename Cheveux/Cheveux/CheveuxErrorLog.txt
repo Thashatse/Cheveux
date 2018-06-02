@@ -45,3 +45,30 @@ System.ApplicationException: System.ApplicationException: An Error Occouerd When
    at DAL.DBAccess.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 140
    at BLL.DBHandler.UniversalSearch(String searchTerm) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 33
    at Cheveux.Search.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Search.aspx.cs:line 86
+
+TimeStamp: 2018/06/02 11:51:29
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+An empty result was returned from the DB for user id: 100155997350724101850 in the Profile Page
+
+TimeStamp: 2018/06/02 11:56:35
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+An empty result was returned from the DB for user id: 100155997350724101850 in the Profile Page
+
+TimeStamp: 2018/06/02 11:59:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+An empty result was returned from the DB for user id: 100155997350724101850 in the Profile Page

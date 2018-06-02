@@ -128,7 +128,7 @@ namespace Cheveux
                                 newCell.Text =
                                     "<button type = 'button' class='btn btn-default'>" +
                                     "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "''>View Product</a></button>";
+                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "''>View Service</a></button>";
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                             }
                             //products (Treatments)
@@ -261,6 +261,7 @@ namespace Cheveux
             }
         }
 
+        //create the product table header
         public void createProductTableHeader()
         {
             //Products
@@ -286,6 +287,7 @@ namespace Cheveux
             ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
         }
 
+        //create the service table header
         public void createServiceTableHeader()
         {
             //Services
