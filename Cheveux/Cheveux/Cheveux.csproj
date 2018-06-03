@@ -194,6 +194,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="MasterPages\Cheveux.Master" />
     <Content Include="MasterPages\CheveuxStylist.Master" />
+    <Content Include="Stylist.aspx" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -291,6 +292,13 @@
     </Compile>
     <Compile Include="Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stylist.aspx.cs">
+      <DependentUpon>Stylist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stylist.aspx.designer.cs">
+      <DependentUpon>Stylist.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewBooking.aspx.cs">
       <DependentUpon>ViewBooking.aspx</DependentUpon>
