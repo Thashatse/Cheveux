@@ -25,18 +25,18 @@
                             <!--Get a username from the user-->
                             <asp:Label ID="Label3" runat="server" Text="User Name:"></asp:Label>
                             <asp:TextBox ID="userName" runat="server" placeholder="Placecholder"></asp:TextBox>
-                            <asp:Label ID="userNameErrorEmpty" runat="server" Text="  *" ForeColor ="Red" Visible="false"></asp:Label>
+                            <!--userName Validation-->
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsrname" runat="server" ErrorMessage="*Required" ControlToValidate="userName" ForeColor="Red"></asp:RequiredFieldValidator>
                             <!--line break-->
                             <br /><br />
                             <!--Get a contact number from the user-->
                             <asp:Label ID="Label4" runat="server" Text="Contact Number:"></asp:Label>
                             <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
-                            <asp:Label ID="contactNumberErrorEmpty" runat="server" Text="  *" ForeColor ="Red" Visible="false"></asp:Label>
+                            <!--contactNumber Validation-->
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidatorContactNumber" runat="server" ErrorMessage="*Required" ControlToValidate="contactNumber" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ControlToValidate="contactNumber" ErrorMessage="Please enter a valid phone number" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
                             <!--Submition Button-->
                             <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click"/>
-                            <!--line break-->
-                            <br /><br />
-                            <asp:Label ID="RF" runat="server" Text="(*) Requierd Fields" ForeColor ="Red" Visible ="false"></asp:Label>
                         </div>
                     </div>
                 </div>

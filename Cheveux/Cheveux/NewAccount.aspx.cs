@@ -42,9 +42,6 @@ namespace Cheveux
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            //check if the user has entered the nessary information
-            if (userName.Text != "" && contactNumber.Text != "") {
-                
                 //get the user data from the cookie
                 string reg = getRegCookie();
                 //check if there was a error
@@ -100,13 +97,6 @@ namespace Cheveux
                     //open error page
                     Response.Redirect("Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
                 }
-            } else
-            {
-                //let the user know they have to enter data
-                    userNameErrorEmpty.Visible = true;
-                    contactNumberErrorEmpty.Visible = true;
-                RF.Visible = true;
-            }
         }
     }
 }

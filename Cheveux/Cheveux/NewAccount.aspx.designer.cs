@@ -49,13 +49,13 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.TextBox userName;
         
         /// <summary>
-        /// userNameErrorEmpty control.
+        /// RequiredFieldValidatorUsrname control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label userNameErrorEmpty;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorUsrname;
         
         /// <summary>
         /// Label4 control.
@@ -76,13 +76,22 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.TextBox contactNumber;
         
         /// <summary>
-        /// contactNumberErrorEmpty control.
+        /// RequiredFieldValidatorContactNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label contactNumberErrorEmpty;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorContactNumber;
+        
+        /// <summary>
+        /// RegularExpressionValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator;
         
         /// <summary>
         /// btnSubmit control.
@@ -92,14 +101,5 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
-        /// <summary>
-        /// RF control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label RF;
     }
 }

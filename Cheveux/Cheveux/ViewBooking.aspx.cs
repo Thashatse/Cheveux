@@ -17,6 +17,7 @@ namespace Cheveux
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
         string PreviousPageAdress = "";
+        string BookingID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,7 +32,7 @@ namespace Cheveux
             {
                 //if the user is loged in diplay bookings details
                 //checked for the booking ID
-                string BookingID = Request.QueryString["BookingID"];
+                BookingID = Request.QueryString["BookingID"];
                 if (BookingID != null)
                 {
                     LogedIn.Visible = true;
@@ -411,49 +412,16 @@ namespace Cheveux
                 BookingLable.Text = "<h2> " + BookingDetails.serviceName.ToString() + " with " +
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
 
-                //create a new row in the table and set the height
-                TableRow newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                TableCell newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Name:";
-                newCell.Width = 300;
-                BookingTable.Rows[0].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = BookingDetails.serviceName.ToString();
-                newCell.Width = 700;
-                BookingTable.Rows[0].Cells.Add(newCell);
+                //show and fill the Table
+                Edit.Visible = true;
 
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Description:";
-                BookingTable.Rows[1].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = BookingDetails.serviceDescripion.ToString();
-                BookingTable.Rows[1].Cells.Add(newCell);
+                editBookingTable.Rows[0].Cells[0].Text = "Service Name:";
 
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Price:";
-                BookingTable.Rows[2].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = BookingDetails.servicePrice.ToString();
-                BookingTable.Rows[2].Cells.Add(newCell);
+                editBookingTable.Rows[1].Cells[0].Text = "Service Description:";
 
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Stylist:";
-                BookingTable.Rows[3].Cells.Add(newCell);
+                editBookingTable.Rows[2].Cells[0].Text = "Price:";
+
+                editBookingTable.Rows[3].Cells[0].Text = "Stylist:";
 
                 //creat a drop down list of stylists
                 //get hairstylist info
@@ -468,47 +436,9 @@ namespace Cheveux
                 }
                 dropDownStylists.Items.FindByValue(BookingDetails.stylistEmployeeID.ToString()).Selected = true;
 
-                newCell = new TableCell();
-                newCell.Controls.Add(dropDownStylists);
-                BookingTable.Rows[3].Cells.Add(newCell);
+                editBookingTable.Rows[4].Cells[0].Text = "Time:";
 
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Time:";
-                BookingTable.Rows[4].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = BookingDetails.bookingStartTime.ToString("HH:mm");
-                BookingTable.Rows[4].Cells.Add(newCell);
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Date:";
-                BookingTable.Rows[5].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = BookingDetails.bookingDate.ToString("dd-MM-yyyy");
-                BookingTable.Rows[5].Cells.Add(newCell);
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                BookingTable.Rows[6].Cells.Add(newCell);
-                newCell = new TableCell();
-                if (PreviousPageAdress == null)
-                { PreviousPageAdress = "Bookings.aspx"; }
-                newCell.Text = "<a href='javascript:goBack()'>Cancel   </a>" +
-
-                "<button type = 'button' class='btn btn-default'>" +
-                "<a href = 'ViewBooking.aspx?Action=Edit&BookingID=" +
-                BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=" + PreviousPageAdress + "'>Save</a></button>";
-                BookingTable.Rows[6].Cells.Add(newCell);
+                editBookingTable.Rows[5].Cells[0].Text = "Date:";
             }
             catch (ApplicationException Err)
             {
@@ -574,6 +504,61 @@ namespace Cheveux
                 BookingLable.Text =
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
+        }
+
+        protected void Save_Click(object sender, EventArgs e)
+        {
+            confirm.Visible = true;
+            LogedIn.Visible = false;
+            LogedOut.Visible = false;
+            confirmHeaderPlaceHolder.Text = "";
+            confirmPlaceHolder.Text = "";
+        }
+
+        //show edit
+        public void showEdit(object sender, EventArgs e)
+        {
+            confirm.Visible = false;
+            Edit.Visible = true;
+            LogedIn.Visible = true;
+        }
+
+        public void commitEdit(object sender, EventArgs e)
+        {
+            LogedIn.Visible = false;
+            LogedOut.Visible = false;
+            BOOKING updatedBooking = new BOOKING();
+            //fill the booking variable 
+
+
+            bool check = false;
+            try
+            {
+                //edit booking
+            }
+            catch (ApplicationException Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred editing booking id: " + BookingID);
+            }
+            if (check == true)
+            {
+                confirmHeaderPlaceHolder.Text = "<h1> Your Booking Been Updated </h1>";
+                confirmPlaceHolder.Text = "";
+            }
+            else if (check == false)
+            {
+                confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your Booking </h1>";
+                confirmPlaceHolder.Text = "Please try again later";
+            }
+            yes.Visible = false;
+            no.Visible = false;
+            OK.Visible = true;
+        }
+
+        protected void OK_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Bookings.aspx");
         }
     }
 }

@@ -22,6 +22,39 @@
             <div class="row">
                 <div class="col-xs-12 col-md-12">
                     <asp:Table ID="BookingTable" runat="server"></asp:Table>
+                    <div class="container" runat="server" id="Edit" visible="false">
+                        <asp:Table ID="editBookingTable" runat="server">
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell></asp:TableCell>
+                                <asp:TableCell><a href = 'javascript:history.back()'>Cancel   </a>
+                                    <asp:Button ID="Save" runat="server" Text="Save" class="btn btn-default" OnClick="Save_Click"/></asp:TableCell>
+                            </asp:TableRow>
+                        </asp:Table>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -37,6 +70,21 @@
                 <p>Please log-in</p>
                 <button type="button" class="btn btn-default"><a href="Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOutButton">Login / Sign Up</a></button>
             </div>
+        </div>
+    </div>
+
+    <div class="container" runat="server" id="confirm" visible="false">
+        <div class="jumbotron">
+
+            <asp:Label ID="confirmHeaderPlaceHolder" runat="server"></asp:Label>
+            <asp:Label ID="confirmPlaceHolder" runat="server"></asp:Label>
+            <!--Line Break-->
+            <br />
+            <br />
+            <!-- Edit -->
+            <asp:Button ID="no" runat="server" Text="No" class="btn btn-default" OnClick="showEdit" />
+            <asp:Button ID="yes" runat="server" Text="Yes" class="btn btn-default" OnClick="commitEdit" />
+            <asp:Button ID="OK" runat="server" Text="OK" class="btn btn-default" OnClick="OK_Click" Visible="false" />
         </div>
     </div>
 </asp:Content>

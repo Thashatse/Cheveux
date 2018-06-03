@@ -86,6 +86,7 @@ namespace Cheveux
                 }
                 else if (action == "Edit")
                 {
+                    Edit.Visible = true;
                     editUserDetails();
                 }
                 else if (action == "Delete")
@@ -265,7 +266,142 @@ namespace Cheveux
         //display the edit user view
         public void editUserDetails()
         {
+            //get the profile details
+            try
+            {
+                userDetails = handler.GetUserDetails(cookie["ID"].ToString());
+            }
+            catch (ApplicationException Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred retrieving your user details for user id: " + cookie["ID"].ToString());
+                Response.Redirect("Error.aspx?Error='An error occurred retrieving your user details'");
+            }
 
+            //dipslay the use profile details
+            if (userDetails != null)
+            {
+                //diplay the user details
+                //image
+                profileImage.ImageUrl = userDetails.UserImage.ToString();
+                //username
+                profileLable.Text = userDetails.UserName.ToString().ToUpper();
+                //details
+                //track row count
+                int rowCount = 0;
+                //First name
+                editProfileTable.Rows[rowCount].Cells[0].Text = "Frist Name:";
+                editProfileTable.Rows[rowCount].Cells[1].Text = userDetails.FirstName.ToString();
+                //increment rowcount
+                rowCount++;
+
+                //Last name
+                editProfileTable.Rows[rowCount].Cells[0].Text = "Last Name:";
+                editProfileTable.Rows[rowCount].Cells[1].Text = userDetails.LastName.ToString();
+                //increment rowcount
+                rowCount++;
+
+                //E-mail
+                editProfileTable.Rows[rowCount].Cells[0].Text = "E-mail:";
+                editProfileTable.Rows[rowCount].Cells[1].Text = userDetails.Email.ToString();
+                //increment rowcount
+                rowCount++;
+
+                editProfileTable.Rows[rowCount].Cells[0].Text = "*The Above Details are managed by Google, " +
+                    "<a href ='https://myaccount.google.com/' target='_blank'>Manage Your Google Account</a>";
+                //increment rowcount
+                rowCount++;
+
+                //display user type if employee
+                if (userDetails.UserType.ToString() == "E")
+                {
+                    //UserType
+                    editProfileTable.Rows[rowCount].Cells[0].Text = "Employee Type:";
+                    editProfileTable.Rows[rowCount].Cells[1].Text = function.GetFullEmployeeTypeText
+                        (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0]);
+                    //increment rowcount
+                    rowCount++;
+
+                    editProfileTable.Rows[rowCount].Cells[0].Text = "*Your Employee Type is managed by the salon manager";
+                    //increment rowcount
+                    rowCount++;
+                }
+                else
+                {
+                    rowCount += 2;
+                }
+
+
+                //Username
+                editProfileTable.Rows[rowCount].Cells[0].Text = "Username:";
+                userName.Attributes.Add("placeholder", userDetails.UserName.ToString());
+                //increment rowcount
+                rowCount++;
+
+                //Contact No.
+                editProfileTable.Rows[rowCount].Cells[0].Text = "Contact No.:";
+                contactNumber.Attributes.Add("placeholder", userDetails.ContactNo.ToString());
+                //increment rowcount
+                rowCount++;
+            }
+            else
+            {
+                //if userDetails is empty let the user know an error occoured
+                function.logAnError("An empty result was returned from the DB for user id: " + cookie["ID"].ToString()
+                    + " in the Profile Page");
+                Response.Redirect("Error.aspx?Error='An error occurred retrieving your user details'");
+            }
+        }
+
+        //confirm Edit
+        public void showConfirmEdit(object sender, EventArgs e)
+        {
+            confirm.Visible = true;
+            editProfileTable.Visible = false;
+            JumbotronLogedIn.Visible = false;
+            confirmHeaderPlaceHolder.Text = "<h1>Please Confirm Edit</h1>";
+            confirmPlaceHolder.Text = "Your Username will now be '" + userName.Text +
+                "' and your cellphone number , " + contactNumber.Text +
+                " do you want to continue with the edit";
+        }
+
+        //show edit
+        public void showEdit(object sender, EventArgs e)
+        {
+            confirm.Visible = false ;
+            editProfileTable.Visible = true;
+            JumbotronLogedIn.Visible = true;
+        }
+
+        //commit edit to DB
+        public void commitEdit(object sender, EventArgs e)
+        {
+            editProfileTable.Visible = false;
+            JumbotronLogedIn.Visible = false;
+            USER userUpdate = new USER();
+            userUpdate.UserID = cookie["ID"].ToString();
+            userUpdate.UserName = userName.Text;
+            userUpdate.ContactNo = contactNumber.Text;
+            bool check = false;
+            try
+            {
+                check = handler.updateUser(userUpdate);
+            }catch(ApplicationException Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
+            }
+            if (check == true) {
+                confirmHeaderPlaceHolder.Text = "<h1> Your User Profile Has Been Updated </h1>";
+                confirmPlaceHolder.Text = "";
+            } else if (check == false)
+            {
+                confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your user profile </h1>";
+                confirmPlaceHolder.Text = "Please try again later";
+            }
+            yes.Visible = false;
+            no.Visible = false;
+            OK.Visible = true;
         }
 
         //display the delete user view
@@ -274,5 +410,9 @@ namespace Cheveux
 
         }
 
+        protected void OK_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Profile.aspx");
+        }
     }
 }
