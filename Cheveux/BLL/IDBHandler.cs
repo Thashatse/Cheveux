@@ -26,5 +26,6 @@ namespace BLL
         EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateBooking(BOOKING bookingUpdate);
         bool updateUser(USER userUpdate);
+        bool BLL_CheckIn(string bookingID, string customerID, string stylistID);
     }
 }

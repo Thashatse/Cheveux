@@ -26,5 +26,6 @@ namespace DAL
         EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateBooking(BOOKING bookingUpdate);
         bool updateUser(USER userUpdate);
+        bool CheckIn(string bookingID, string customerID, string stylistID);
     }
 }

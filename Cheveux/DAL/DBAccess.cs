@@ -528,6 +528,24 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public bool CheckIn(string bookingID, string customerID, string stylistID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@BookingID", bookingID ),
+                    new SqlParameter("@CustomerID", customerID),
+                    new SqlParameter("@StylistID", stylistID),
+                };
+
+                return DBHelper.NonQuery("SP_CheckIn", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
 
         public bool updateUser(USER userUpdate)
         {
