@@ -25,6 +25,6 @@ namespace DAL
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateBooking(BOOKING bookingUpdate);
-        bool CheckIn(string bookingID, string customerID, string stylistID);
+        bool CheckIn(string bookingID,string stylistID);
     }
 }

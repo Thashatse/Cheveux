@@ -459,6 +459,7 @@ namespace DAL
                         {
                             emp = new SP_GetEmpAgenda
                             {
+                                BookingID = Convert.ToString(row["BookingID"]),
                                 StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
                                 EndTime = TimeSpan.Parse((row["EndTime"]).ToString()),
                                 CustomerFName = Convert.ToString(row["CustomerFName"]),
@@ -528,14 +529,13 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public bool CheckIn(string bookingID, string customerID, string stylistID)
+        public bool CheckIn(string bookingID, string stylistID)
         {
             try
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@BookingID", bookingID ),
-                    new SqlParameter("@CustomerID", customerID),
                     new SqlParameter("@StylistID", stylistID),
                 };
 
