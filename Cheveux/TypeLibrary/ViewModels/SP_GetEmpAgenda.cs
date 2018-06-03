@@ -8,6 +8,7 @@ namespace TypeLibrary.ViewModels
 {
     public class SP_GetEmpAgenda
     {
+        public string BookingID { get; set; }
         public Nullable<TimeSpan> StartTime { get; set; }
         public Nullable<TimeSpan> EndTime { get; set; }
         public string CustomerFName { get; set; }
