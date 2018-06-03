@@ -20,14 +20,81 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                            <div class="jumbotron">
-                                <asp:Image ID="profileImage" runat="server" />
-                                &nbsp;
-                                <asp:Label ID="profileLable" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
-                            </div>
-                            <asp:Table ID="profileTable" runat="server"></asp:Table>
-                        </div>
+                    <div class="jumbotron">
+                        <asp:Image ID="profileImage" runat="server" />
+                        &nbsp;
+                        <asp:Label ID="profileLable" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
+                    </div>
+                    <asp:Table ID="profileTable" runat="server"></asp:Table>
+                    <div class="container" runat="server" id="Edit" visible="false">
+                        <asp:Table ID="editProfileTable" runat="server">
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell ColumnSpan="2"></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell ColumnSpan="2"></asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell>
+                                    <asp:TextBox ID="userName" runat="server" placeholder="Placecholder"></asp:TextBox>
+                                    <!--userName Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsrname" runat="server" ErrorMessage="*Required" ControlToValidate="userName" ForeColor="Red"></asp:RequiredFieldValidator>
+                                </asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                <asp:TableCell>
+                                    <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
+                                    <!--contactNumber Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorContactNumber" runat="server" ErrorMessage="*Required" ControlToValidate="contactNumber" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ControlToValidate="contactNumber" ErrorMessage="Please enter a valid phone number" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                                </asp:TableCell>
+                            </asp:TableRow>
+                            <asp:TableRow Height="50">
+                                <asp:TableCell>
+                                    <a href = '#'>Delete Profile   </a>
+                                </asp:TableCell>
+                                <asp:TableCell HorizontalAlign="Right">
+                                    <a href = 'Profile.aspx'>Cancel   </a>
+                                    <asp:Button ID="Save" runat="server" Text="Save" class="btn btn-default" OnClick="showConfirmEdit"/>
+                                </asp:TableCell>
+                            </asp:TableRow>
+                        </asp:Table>
+                    </div>
+
+                </div>
             </div>
+        </div>
+    </div>
+    <div class="container" runat="server" id="confirm" visible="false">
+        <div class="jumbotron">
+
+            <asp:Label ID="confirmHeaderPlaceHolder" runat="server"></asp:Label>
+            <asp:Label ID="confirmPlaceHolder" runat="server"></asp:Label>
+            <!--Line Break-->
+            <br />
+            <br />
+            <!-- Edit -->
+            <asp:Button ID="no" runat="server" Text="No" class="btn btn-default" OnClick="showEdit" />
+            <asp:Button ID="yes" runat="server" Text="Yes" class="btn btn-default" OnClick="commitEdit" />
+            <asp:Button ID="OK" runat="server" Text="OK" class="btn btn-default" OnClick="OK_Click" Visible="false" />
         </div>
     </div>
 </asp:Content>

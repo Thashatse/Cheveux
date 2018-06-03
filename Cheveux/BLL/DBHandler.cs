@@ -92,5 +92,10 @@ namespace BLL
         {
             return db.updateBooking(bookingUpdate);
         }
+
+        public bool updateUser(USER userUpdate)
+        {
+            return db.updateUser(userUpdate);
+        }
     }
 }

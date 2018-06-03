@@ -528,6 +528,24 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public bool updateUser(USER userUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@UserID", userUpdate.UserID.ToString()),
+                new SqlParameter("@UserName", userUpdate.UserName.ToString()),
+                new SqlParameter("@ContactNo", userUpdate.ContactNo.ToString()),
+                };
+
+                return DBHelper.NonQuery("SP_EditUser", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }
-   
