@@ -25,5 +25,6 @@ namespace BLL
         List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID);
         EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateBooking(BOOKING bookingUpdate);
+        bool BLL_CheckIn(string bookingID, string customerID, string stylistID);
     }
 }
