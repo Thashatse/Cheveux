@@ -97,7 +97,7 @@ namespace BLL
         {
             return db.updateUser(userUpdate);
         }
-        public bool BLL_CheckIn(string bookingID, string customerID, string stylistID)
+        public bool BLL_CheckIn(BOOKING booking)
         {
             return db.CheckIn(booking);
         }

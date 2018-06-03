@@ -155,7 +155,7 @@ namespace Cheveux
                     btn = new Button();
                     btn.Text = "Check-In";
                     btn.CssClass = "btn btn-outline-dark";
-
+                    btn.Click += (ss, ee) => {/* code to changed arrived 'N' to 'Y'*/ };
                     buttonCell.Controls.Add(btn);
                     AgendaTable.Rows[i].Cells.Add(buttonCell);
 
