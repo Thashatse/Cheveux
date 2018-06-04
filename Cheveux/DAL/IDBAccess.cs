@@ -33,5 +33,7 @@ namespace DAL
         bool UpdateCustVisit(CUST_VISIT visit);
         bool CreateCustVisit(CUST_VISIT cust_visit);
         bool AddBooking(BOOKING addBooking);
+        List<SP_GetServices> BLL_GetAllServices();
+        List<SP_GetStylists> BLL_GetStylistsForService(string serviceID);
     }
 }
