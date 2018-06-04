@@ -70,3 +70,72 @@ System.ApplicationException: System.ApplicationException: An Error Occouerd When
    at DAL.DBAccess.GetAllofBookingDTL(String bookingID, String customerID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 604
    at BLL.DBHandler.BLL_GetAllofBookingDTL(String bookingID, String customerID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 106
    at Cheveux.CustomerVisit.DisplayBookingDetails(String bookingID, String customerID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\CustomerVisit.aspx.cs:line 42
+
+TimeStamp: 2018/06/04 12:11:10
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'BookingID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 460
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Receptionist.getAgenda(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist.aspx.cs:line 68
+
+TimeStamp: 2018/06/04 12:12:19
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'BookingID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 460
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Receptionist.getAgenda(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist.aspx.cs:line 68
+
+TimeStamp: 2018/06/04 12:39:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'BookingID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 460
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Receptionist.getAgenda(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist.aspx.cs:line 68
+
+TimeStamp: 2018/06/04 12:42:09
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'BookingID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 460
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Receptionist.getAgenda(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist.aspx.cs:line 68
+
+TimeStamp: 2018/06/04 12:53:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Unknown user type found during Loading of default.aspx: C

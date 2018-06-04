@@ -436,9 +436,9 @@ namespace Cheveux
                 }
                 dropDownStylists.Items.FindByValue(BookingDetails.stylistEmployeeID.ToString()).Selected = true;
 
-                editBookingTable.Rows[4].Cells[0].Text = "Time:";
+                editBookingTable.Rows[5].Cells[0].Text = "Time:";
 
-                editBookingTable.Rows[5].Cells[0].Text = "Date:";
+                editBookingTable.Rows[4].Cells[0].Text = "Date:";
             }
             catch (ApplicationException Err)
             {
