@@ -101,5 +101,13 @@ namespace BLL
         {
             return db.CheckIn(booking);
         }
+        public List<SP_GetAllofBookingDTL> BLL_GetAllofBookingDTL(string bookingID, string customerID)
+        {
+            return db.GetAllofBookingDTL(bookingID, customerID);
+        }
+        public List<SP_GetBookingServiceDTL> BLL_GetBookingServiceDTL(string bookingID, string customerID)
+        {
+            return db.GetBookingServiceDTL(bookingID, customerID);
+        }
     }
 }
