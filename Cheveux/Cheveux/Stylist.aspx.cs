@@ -119,7 +119,13 @@ namespace Cheveux
                     btn = new Button();
                     btn.Text = "Visit Record";
                     btn.CssClass = "btn btn-outline-dark";
-                    btn.Click += (ss, ee) => { Response.Redirect("~/CustomerVisit.aspx"); };
+                    btn.Click += (ss, ee) => {
+
+                        //Response.Redirect("~/CustomerVisit.aspx");
+
+
+
+                    };
                     buttonCell.Controls.Add(btn);
                     AgendaTable.Rows[i].Cells.Add(buttonCell);
                     i++;

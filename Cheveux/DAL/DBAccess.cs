@@ -693,7 +693,6 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@CustomerID",cust_visit.CustomerID.ToString()),
-                    new SqlParameter("@Date", cust_visit.Date),
                     new SqlParameter("@BookingID", cust_visit.BookingID.ToString()),
                     new SqlParameter("@Description", cust_visit.Description.ToString()),
                 };
