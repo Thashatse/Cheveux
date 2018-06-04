@@ -21,9 +21,14 @@ Customer Visit
         <!--All Details of booking --> 
         <div id="CustomerBookingDTLs">
             <div class="row">
+                <h1 runat="server" id="lblBookingDetailsHeading">Customer Booking Details</h1>
+            </div>
+             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                    <asp:PlaceHolder ID="phBookingDetails" runat="server">
-                        <h1>Customer Booking Details</h1>
+                    <asp:PlaceHolder ID="phBookingDetails" runat="server"> 
+                        <asp:Table ID="allBookingTable" runat="server">
+                        </asp:Table>
+                        <br />    
                     </asp:PlaceHolder>
                 </div>
             </div>
@@ -32,25 +37,34 @@ Customer Visit
         <!--Edit Service Details-->
         <div id="BookingServiceDTLs">
             <div class="row">
+                <h1 runat="server" id="lblServiceHeading">Edit Service</h1>
+            </div>
+            <div class="row">
                 <div class="col-xs-12 col-md-12">
                     <asp:PlaceHolder ID="phServiceDetails" runat="server" Visible="False">
-                        <h1>Edit Service</h1>
+                        <asp:Table ID="serviceDetailsTable" runat="server">
+                        </asp:Table>
+                        <br /> 
                     </asp:PlaceHolder>
                 </div>
             </div>
-        </div>
+       </div>
 
 
         <!--Confirm Visit-->
         <div id="ConfirmVisitRecord">
             <div class="row">
+                <h1 runat="server" id="lblConfirmUpdateHeading">Confirm Update</h1>
+            </div>
+            <div class="row">
                 <div class="col-xs-12 col-md-12">
                     <asp:PlaceHolder ID="phConfirmVisit" runat="server" Visible="False">
-                        <h1>Confirm Update</h1>
+                        <asp:Table ID="confirmVisitTable" runat="server"></asp:Table>
+                        <br /> 
                     </asp:PlaceHolder>
                 </div>
             </div>
-        </div>
+       </div>
 
 
 

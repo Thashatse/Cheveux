@@ -27,7 +27,7 @@ namespace DAL
         bool updateBooking(BOOKING bookingUpdate);
         bool updateUser(USER userUpdate);
         bool CheckIn(BOOKING bookingID);
-        List<SP_GetAllofBookingDTL> GetAllofBookingDTL(string bookingID, string customerID);
-        List<SP_GetBookingServiceDTL> GetBookingServiceDTL(string bookingID, string customerID);
+        SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID);
+        SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID);
     }
 }
