@@ -17,7 +17,7 @@ namespace Cheveux
         List<SP_GetEmpAgenda> agenda = null;
 
         
-        string sample = "118233419479102946333"; //Temporary
+        string sample = "118233419479102946333"; //Temporary..used just for testing to see if code functions properly
 
         protected void Page_Load(object sender, EventArgs e)
 		{
@@ -117,7 +117,7 @@ namespace Cheveux
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
                     btn = new Button();
-                    btn.Text = "Check-in";
+                    btn.Text = "Visit Record";
                     btn.CssClass = "btn btn-outline-dark";
                     btn.Click += (ss, ee) => { Response.Redirect("~/CustomerVisit.aspx"); };
                     buttonCell.Controls.Add(btn);

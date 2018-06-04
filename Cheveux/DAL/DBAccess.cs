@@ -460,6 +460,7 @@ namespace DAL
                             emp = new SP_GetEmpAgenda
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
+                                UserID = Convert.ToString(row["UserID"]),
                                 StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
                                 EndTime = TimeSpan.Parse((row["EndTime"]).ToString()),
                                 CustomerFName = Convert.ToString(row["CustomerFName"]),
@@ -565,9 +566,9 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetAllofBookingDTL> GetAllofBookingDTL(string bookingID, string customerID)
+        public SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID)
         {
-            List<SP_GetAllofBookingDTL> DTList = new List<SP_GetAllofBookingDTL>();
+            SP_GetAllofBookingDTL bookingDTL = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@BookingID", bookingID),
@@ -580,9 +581,8 @@ namespace DAL
                 {
                     if (table.Rows.Count > 0)
                     {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            SP_GetAllofBookingDTL bookingDTL = new SP_GetAllofBookingDTL
+                        DataRow row = table.Rows[0];
+                            bookingDTL = new SP_GetAllofBookingDTL
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
                                 UserID = Convert.ToString(row["UserID"]),
@@ -594,10 +594,10 @@ namespace DAL
                                 StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
                                 EndTime = TimeSpan.Parse((row["EndTime"]).ToString())
                             };
-                            DTList.Add(bookingDTL);
-                        }
+                        
+                        
                     }
-                    return DTList;
+                    return bookingDTL;
                 }
             }
             catch (Exception e)
@@ -605,39 +605,36 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetBookingServiceDTL> GetBookingServiceDTL(string bookingID, string customerID)
+        public SP_GetBookingServiceDTL GetBookingServiceDTL (string bookingID, string customerID)
         {
-            List<SP_GetBookingServiceDTL> DTList = new List<SP_GetBookingServiceDTL>();
+            SP_GetBookingServiceDTL serviceDTL = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@BookingID", bookingID),
-                new SqlParameter("@CustomerID", customerID),
+                    new SqlParameter("@BookingID", bookingID),
+                    new SqlParameter("@CustomerID", customerID),
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServiceDTL",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
+                    using (DataTable table = DBHelper.ParamSelect("SP_GetAllofBookingDTL",
+                CommandType.StoredProcedure, pars))
                     {
-                        foreach (DataRow row in table.Rows)
+                        if (table.Rows.Count > 0)
                         {
-                            SP_GetBookingServiceDTL bookingDTL = new SP_GetBookingServiceDTL
-                            {
-                                BookingID = Convert.ToString(row["BookingID"]),
-                                ServiceName = Convert.ToString(row["ServiceName"]),
-                                ServiceDescription = Convert.ToString(row["ServiceDescription"]),
-                            };
-                            DTList.Add(bookingDTL);
+                            DataRow row = table.Rows[0];
+                                serviceDTL = new SP_GetBookingServiceDTL
+                                {
+                                    BookingID = Convert.ToString(row["BookingID"]),
+                                    ServiceName = Convert.ToString(row["ServiceName"]),
+                                    ServiceDescription = Convert.ToString(row["ServiceDescription"])
+                                };
                         }
+                        return serviceDTL;
                     }
-                    return DTList;
                 }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
+                catch (Exception e)
+                {
+                    throw new ApplicationException(e.ToString());
+                }
         }
 
     }

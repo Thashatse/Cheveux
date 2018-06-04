@@ -112,7 +112,7 @@ namespace Cheveux
                 arrived.Width = 300;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
-                //integer that will be appended in the foreach loop to access the new row for every iteration of the foreach
+                //integer that will be incremented in the foreach loop to access the new row for every iteration of the foreach
                 int i = 1;
                 foreach(SP_GetEmpAgenda a in agenda)
                 {
@@ -153,7 +153,15 @@ namespace Cheveux
                     btn = new Button();
                     btn.Text = "Check-in";
                     btn.CssClass = "btn btn-outline-dark";
-                    btn.Click += (ss, ee) => { /*code here */ };
+                    btn.Click += (ss, ee) => { 
+                        /*
+                         *Check-in code here 
+                         * After clicking the button arrived should change to Y
+                         * and the button text should change to Check-out
+                         * and code should cater for the change as the stored procedure to check out and generate invoice
+                         * needs to be called
+                         */
+                    };
                     buttonCell.Controls.Add(btn);
                     AgendaTable.Rows[i].Cells.Add(buttonCell);
                     i++;
@@ -162,7 +170,7 @@ namespace Cheveux
             catch(ApplicationException E)
             {
                 function.logAnError(E.ToString());
-                lblAgendaErr.Text = "<h3> An error occurred during communication with the database.<br />Please try again later.</h3>";
+                Server.Transfer("~/Error.aspx");
             }
         }
     }
