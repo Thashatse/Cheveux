@@ -32,5 +32,8 @@ namespace BLL
         SP_ViewCustVisit BLL_ViewCustVisit(string customerID, string bookingID);
         bool BLL_UpdateCustVisit(CUST_VISIT visit);
         bool BLL_CreateCustVisit(CUST_VISIT cust_visit);
+        bool BLL_AddBooking(BOOKING addBooking);
+        List<SP_GetServices> BLL_GetAllServices();
+        List<SP_GetStylists> BLL_GetStylistsForService(string serviceID);
     }
 }
