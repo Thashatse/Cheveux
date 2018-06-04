@@ -19,22 +19,38 @@ Customer Visit
                 </div>
 
         <!--All Details of booking --> 
-        <asp:PlaceHolder ID="cBookingDetails" runat="server">
-            <h1>Customer Booking Details</h1>
-        </asp:PlaceHolder>
-
+        <div id="CustomerBookingDTLs">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <asp:PlaceHolder ID="phBookingDetails" runat="server">
+                        <h1>Customer Booking Details</h1>
+                    </asp:PlaceHolder>
+                </div>
+            </div>
+        </div>
 
         <!--Edit Service Details-->
-        <asp:PlaceHolder ID="eServiceDetails" runat="server" Visible="False">
-            <h1>Edit Service</h1>
-        </asp:PlaceHolder>
+        <div id="BookingServiceDTLs">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <asp:PlaceHolder ID="phServiceDetails" runat="server" Visible="False">
+                        <h1>Edit Service</h1>
+                    </asp:PlaceHolder>
+                </div>
+            </div>
+        </div>
 
 
         <!--Confirm Visit-->
-        <asp:PlaceHolder ID="ConfirmVisit" runat="server" Visible="False">
-            <h1>Confirm Update</h1>
-        </asp:PlaceHolder>
-
+        <div id="ConfirmVisitRecord">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <asp:PlaceHolder ID="phConfirmVisit" runat="server" Visible="False">
+                        <h1>Confirm Update</h1>
+                    </asp:PlaceHolder>
+                </div>
+            </div>
+        </div>
 
 
 

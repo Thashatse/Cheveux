@@ -31,30 +31,30 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl theDate;
         
         /// <summary>
-        /// cBookingDetails control.
+        /// phBookingDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder cBookingDetails;
+        protected global::System.Web.UI.WebControls.PlaceHolder phBookingDetails;
         
         /// <summary>
-        /// eServiceDetails control.
+        /// phServiceDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder eServiceDetails;
+        protected global::System.Web.UI.WebControls.PlaceHolder phServiceDetails;
         
         /// <summary>
-        /// ConfirmVisit control.
+        /// phConfirmVisit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder ConfirmVisit;
+        protected global::System.Web.UI.WebControls.PlaceHolder phConfirmVisit;
     }
 }
