@@ -109,5 +109,9 @@ namespace BLL
         {
             return db.GetBookingServiceDTL(bookingID, customerID);
         }
+        public SP_ViewCustVisit BLL_ViewCustVisit(string customerID, string bookingID)
+        {
+            return db.ViewCustVisit(customerID, bookingID);
+        }
     }
 }

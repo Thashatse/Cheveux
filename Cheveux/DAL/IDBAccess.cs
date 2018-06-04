@@ -29,5 +29,6 @@ namespace DAL
         bool CheckIn(BOOKING bookingID);
         SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID);
         SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID);
+        SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
     }
 }

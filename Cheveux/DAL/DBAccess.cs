@@ -637,5 +637,37 @@ namespace DAL
                     throw new ApplicationException(e.ToString());
                 }
         }
+        public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
+        {
+            SP_ViewCustVisit visit = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustomerID", customerID),
+                new SqlParameter("@BookingID", bookingID),
+            };
+             try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ViewCustVisit",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        visit = new SP_ViewCustVisit
+                        {
+                            CustomerID = Convert.ToString(row["CustomerID"]),
+                            Date = Convert.ToDateTime(row["Date"]),
+                            BookingID = Convert.ToString(row["BookingID"]),
+                            Description = Convert.ToString(row["Description"])
+                        };
+                    }
+                    return visit;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }
