@@ -117,5 +117,9 @@ namespace BLL
         {
             return db.UpdateCustVisit(visit);
         }
+        public bool BLL_CreateCustVisit(CUST_VISIT cust_visit)
+        {
+            return db.CreateCustVisit(cust_visit);
+        }
     }
 }
