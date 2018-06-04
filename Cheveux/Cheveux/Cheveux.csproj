@@ -135,6 +135,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="CSS\Cheveux.css" />
     <Content Include="CSS\StyleSheet1.css" />
+    <Content Include="CustomerVisit.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="NewAccount.aspx" />
@@ -221,6 +222,13 @@
     </Compile>
     <Compile Include="Bookings.aspx.designer.cs">
       <DependentUpon>Bookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerVisit.aspx.cs">
+      <DependentUpon>CustomerVisit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomerVisit.aspx.designer.cs">
+      <DependentUpon>CustomerVisit.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPages\CheveuxManager.Master.cs">
       <DependentUpon>CheveuxManager.Master</DependentUpon>

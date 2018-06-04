@@ -37,7 +37,6 @@ namespace Cheveux
                     drpEmpNames.DataBind();
                     drpEmpNames.Items.Insert(0,new ListItem("Select Employee", "-1"));
                 }
-
             }
             
 
@@ -53,14 +52,12 @@ namespace Cheveux
                         getAgenda(drpEmpNames.SelectedValue);
                     }
                 }
-                catch (ApplicationException Err)
+            catch (ApplicationException Err)
                 {
                     function.logAnError(Err.ToString());
                     lblAgendaErr.Text = "<h3>An error occurred during communication with the database.<br />Please try again later.</h3>";
                 }
-            
-            
-            
+
         }
         public void getAgenda(string id)
         {
@@ -69,7 +66,7 @@ namespace Cheveux
             try
             {
                 agenda = handler.BLL_GetEmpAgenda(id);
-
+                
                 //create row for the table 
                 TableRow row = new TableRow();
                 row.Height = 50; 
@@ -120,6 +117,7 @@ namespace Cheveux
                 foreach(SP_GetEmpAgenda a in agenda)
                 {
                     
+
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
 
@@ -153,15 +151,12 @@ namespace Cheveux
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
                     btn = new Button();
-                    btn.Text = "Check-In";
+                    btn.Text = "Check-in";
                     btn.CssClass = "btn btn-outline-dark";
-                    btn.Click += (ss, ee) => {/* code to changed arrived 'N' to 'Y'*/ };
+                    btn.Click += (ss, ee) => { /*code here */ };
                     buttonCell.Controls.Add(btn);
                     AgendaTable.Rows[i].Cells.Add(buttonCell);
-
                     i++;
-
-                 
                 }
             }
             catch(ApplicationException E)

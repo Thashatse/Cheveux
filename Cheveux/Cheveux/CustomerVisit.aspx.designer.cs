@@ -10,16 +10,16 @@
 namespace Cheveux {
     
     
-    public partial class Stylist {
+    public partial class CustomerVisit {
         
         /// <summary>
-        /// Welcome control.
+        /// Visit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Welcome;
+        protected global::System.Web.UI.WebControls.Label Visit;
         
         /// <summary>
         /// theDate control.
@@ -31,12 +31,30 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl theDate;
         
         /// <summary>
-        /// AgendaTable control.
+        /// cBookingDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table AgendaTable;
+        protected global::System.Web.UI.WebControls.PlaceHolder cBookingDetails;
+        
+        /// <summary>
+        /// eServiceDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder eServiceDetails;
+        
+        /// <summary>
+        /// ConfirmVisit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder ConfirmVisit;
     }
 }

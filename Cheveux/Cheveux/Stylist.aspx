@@ -22,7 +22,18 @@
                     <br />
                 </div>
         </div>
+       
 
+        <div id="Agenda">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <asp:table runat="server" ID="AgendaTable"></asp:table>
+                </div>
+            </div>
+        </div>
+
+
+        
 
 
 
