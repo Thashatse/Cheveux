@@ -18,10 +18,11 @@
                     <div class="col-md-12">
                         <div class="jumbotron">
                             <h1>An Error Occurred</h1>
+                            <!--Error details placehoders-->
                             <asp:Label ID="ErrorHeader" runat="server"></asp:Label><br />
                             <asp:Label ID="Error1" runat="server"></asp:Label>
-                            <br />
-                            <br />
+                            <!--Line Break-->
+                            <br /><br />
                             <a href="Default.aspx">Return Home</a>
                         </div>
                     </div>

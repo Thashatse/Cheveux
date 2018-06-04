@@ -36,7 +36,6 @@ namespace Cheveux
                 //if not display generic error page
                 ErrorHeader.Text = "We Are Sorry, An Unknown Error Ocoured";
             }
-
         }
     }
 }

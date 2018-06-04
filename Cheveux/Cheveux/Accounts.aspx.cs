@@ -96,6 +96,7 @@ namespace Cheveux
                     {
                         Response.Redirect(PreviousPage);
                     }
+                    //access control
                     //send the user to the correct page based on their usertype
                     if (result == "C")
                     {
