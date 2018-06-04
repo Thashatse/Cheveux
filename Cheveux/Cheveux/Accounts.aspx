@@ -49,7 +49,7 @@
             function onSignIn(googleUser) {
                 var profile = googleUser.getBasicProfile();
                 document.cookie = "reg=" + profile.getId() + "|" + profile.getEmail() + "|" + profile.getGivenName() + "|" +
-                    profile.getFamilyName() + "|" + profile.getImageUrl();
+                    profile.getFamilyName() + "|" + profile.getImageUrl() + "|END";
                 document.getElementById("btnAuthenticate").click();
                 //Show the sign out button
                 document.getElementById("SO").hidden = false;

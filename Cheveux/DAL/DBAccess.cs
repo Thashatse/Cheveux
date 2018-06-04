@@ -529,6 +529,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public bool CheckIn(BOOKING booking)
         {
             try
@@ -565,6 +566,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public List<SP_GetAllofBookingDTL> GetAllofBookingDTL(string bookingID, string customerID)
         {
             List<SP_GetAllofBookingDTL> DTList = new List<SP_GetAllofBookingDTL>();
@@ -605,6 +607,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public List<SP_GetBookingServiceDTL> GetBookingServiceDTL(string bookingID, string customerID)
         {
             List<SP_GetBookingServiceDTL> DTList = new List<SP_GetBookingServiceDTL>();
@@ -639,6 +642,5 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
     }
 }
