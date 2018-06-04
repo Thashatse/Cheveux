@@ -113,5 +113,9 @@ namespace BLL
         {
             return db.ViewCustVisit(customerID, bookingID);
         }
+        public bool BLL_UpdateCustVisit(CUST_VISIT visit)
+        {
+            return db.UpdateCustVisit(visit);
+        }
     }
 }

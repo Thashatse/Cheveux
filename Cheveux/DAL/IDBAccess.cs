@@ -30,5 +30,6 @@ namespace DAL
         SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID);
         SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID);
         SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
+        bool UpdateCustVisit(CUST_VISIT visit);
     }
 }

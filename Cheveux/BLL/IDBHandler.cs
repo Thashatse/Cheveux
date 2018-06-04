@@ -30,5 +30,6 @@ namespace BLL
         SP_GetAllofBookingDTL BLL_GetAllofBookingDTL(string bookingID, string customerID);
         SP_GetBookingServiceDTL BLL_GetBookingServiceDTL(string bookingID, string customerID);
         SP_ViewCustVisit BLL_ViewCustVisit(string customerID, string bookingID);
+        bool BLL_UpdateCustVisit(CUST_VISIT visit);
     }
 }

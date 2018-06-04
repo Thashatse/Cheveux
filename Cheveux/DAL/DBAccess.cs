@@ -541,7 +541,7 @@ namespace DAL
                     new SqlParameter("@StylistID", booking.StylistID.ToString()),
                 };
 
-                return DBHelper.NonQuery("SP_CheckIn", CommandType.StoredProcedure, pars.ToArray());
+                return DBHelper.NonQuery("SP_CheckIn", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -665,6 +665,23 @@ namespace DAL
                 }
             }
             catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool UpdateCustVisit(CUST_VISIT visit)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@CustomerID", visit.CustomerID.ToString()),
+                    new SqlParameter("@BookingID", visit.BookingID.ToString()),
+                    new SqlParameter("@Description", visit.Description.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateCustVisit", CommandType.StoredProcedure, pars);
+            }
+            catch(Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
