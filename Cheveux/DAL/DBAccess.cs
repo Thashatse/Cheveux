@@ -530,6 +530,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public bool CheckIn(BOOKING booking)
         {
             try
@@ -615,7 +616,7 @@ namespace DAL
             };
             try
             {
-                    using (DataTable table = DBHelper.ParamSelect("SP_GetAllofBookingDTL",
+                    using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServiceDTL",
                 CommandType.StoredProcedure, pars))
                     {
                         if (table.Rows.Count > 0)
@@ -636,6 +637,5 @@ namespace DAL
                     throw new ApplicationException(e.ToString());
                 }
         }
-
     }
 }

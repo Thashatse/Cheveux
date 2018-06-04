@@ -394,7 +394,7 @@ namespace Cheveux
             }
             catch (ApplicationException Err)
             {
-                function.logAnError(Err.ToString() + "\n get booking method in viewbooking form");
+                function.logAnError(Err.ToString() + "\n get getBookingDeatails method in viewbooking form");
                 BookingLable.Text =
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }

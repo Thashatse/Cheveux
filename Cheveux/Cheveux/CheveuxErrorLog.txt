@@ -1,4 +1,34 @@
 
+TimeStamp: 2018/06/04 11:45:51
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'BookingID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 460
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 478
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Receptionist.getAgenda(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist.aspx.cs:line 68
+
+TimeStamp: 2018/06/04 11:45:56
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'BookingID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 460
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 478
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Receptionist.getAgenda(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist.aspx.cs:line 68
+
 TimeStamp: 6/4/2018 7:11:06 AM
 Machine Name: PRIVATE-PC
 OS Version: Microsoft Windows NT 10.0.16299.0

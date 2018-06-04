@@ -1,0 +1,110 @@
+Very mixed up and cnfusing
+
+
+
+
+Y0u spke abt m0de1s and view m0de1s
+M0de1
+
+
+BUSINESS SERVICE
+
+Controller is dependent on Business Service
+
+public ActionResult Index()  
+{ 
+    if (_service.GetUserStatus(this.CurrentUser, this.CurrentMerchant) == UserStatusEnum.Admin) 
+    { 
+        return View(); 
+    } 
+    RedirectToAction("Login"); 
+}
+
+
+
+
+public interface IBusinessServiceBase  
+{ 
+    void Register(IBaseController controller); 
+
+
+} 
+
+
+
+public abstract class BusinessServiceBase : IBusinessServiceBase  
+{ 
+    private IBaseController _controller; 
+
+
+    protected IBaseController Controller { get { return _controller; } } 
+
+    public void Register(IBaseController controller) 
+    { 
+        this._controller = controller; 
+    } 
+}
+
+VALIDATION
+
+//Standard Controller should inherit from our custom abstract BaseController which implements IBaseController:
+
+
+public interface IBaseController  
+
+{         
+    ModelStateDictionary ModelState { get; } 
+} 
+public abstract class BaseController : Controller, IBaseController  
+
+{ 
+}
+
+
+
+
+to process Payment Analyzer requests
+
+public class PaymentAnalyzerController : BaseController  
+{    
+    private IPaymentAnalyzerService _service; 
+    public PaymentAnalyzerController(IPaymentAnalyzerService service) 
+    { 
+        _service = service; 
+        _service.Register(this); 
+    }                
+    [HttpGet] 
+    public ActionResult SubmitRefundToCustomer(string postGuid, string invoiceNumber) 
+    { 
+        return _service.SubmitRefundToCustomer(postGuid, invoiceNumber); 
+    } 
+}
+
+
+
+public class BillingSchemeService : BusinessServiceBase, IBillingSchemeService  
+{        
+    public string SetScheme(BillingSchemeViewModel model) 
+    { 
+        if (String.IsNullOrWhiteSpace(model.BillingScheme.BillingSchemeCode)) 
+        { 
+            Controller.ModelState.AddModelError("BillingSchemeCode", Configuration.CodeMustHaveValue); 
+        }         
+        if (Controller.ModelState.IsValid) 
+        {                
+            model.BillingScheme.Save(); 
+        } 
+        return Controller.ModelState.IsValid ? null : Controller.ModelState.GetErrorMessageList().FirstOrDefault(); 
+    }       
+}
+
+
+
+
+
+
+
+
+
+
+

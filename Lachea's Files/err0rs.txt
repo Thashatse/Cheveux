@@ -1,0 +1,23 @@
+Responding to Validation Errors in the Presentation 
+Tier
+When calling the BLL from the presentation tier we can decide whether to attempt to handle any exceptions that 
+might be raised or let them bubble up to ASP.NET (which will raise the HttpApplication's Error event). 
+
+ProductsBLL productLogic = new ProductsBLL(); 
+
+
+// Update information for ProductID 1 being custmer ID 
+try 
+{
+    // This will fail since we are attempting to use a
+    // UnitPrice value less than 0.
+    productLogic.UpdateProduct(
+        "Scott s Tea", 1, 1, null, ­14m, 10, null, null, false, 1); 
+} 
+catch (ArgumentException ae) 
+{
+    Response.Write("There was a problem: " + ae.Message); 
+}
+
+
+
