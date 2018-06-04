@@ -27,5 +27,7 @@ namespace BLL
         bool updateBooking(BOOKING bookingUpdate);
         bool BLL_CheckIn(BOOKING booking);
         bool updateUser(USER userUpdate);
+        List<SP_GetAllofBookingDTL> BLL_GetAllofBookingDTL(string bookingID, string customerID);
+        List<SP_GetBookingServiceDTL> BLL_GetBookingServiceDTL(string bookingID, string customerID);
     }
 }
