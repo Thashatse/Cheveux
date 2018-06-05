@@ -20,7 +20,7 @@ namespace Cheveux
         String test = DateTime.Now.ToString("dddd d MMMM");
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
-        
+        BOOKING checkIn = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             theDate.InnerHtml = test;
@@ -179,9 +179,33 @@ namespace Cheveux
                          * and code should cater for the change as the stored procedure to check out and generate invoice
                          * needs to be called
                          */
+                        try
+                        {
+                            checkIn = new BOOKING();
 
-                        //Temporary placeholder.. Stored procedure for check-in will go in here
-                        Response.Redirect("Default.aspx");
+                            checkIn.BookingID = a.BookingID.ToString();
+                            checkIn.StylistID = drpEmpNames.SelectedValue.ToString();
+
+                            if (handler.BLL_CheckIn(checkIn))
+                            {
+                                //if BLL_CheckIn successful and arrival status changed show user and refresh the page
+                                Response.Write("<script>alert('Customer arrival status has been updated.');location.reload();</script>");
+                            }
+                            else
+                            {
+                                //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
+                                Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
+                            }
+
+                        }
+                        catch(ApplicationException err)
+                        {
+                            //Error handling
+                            Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
+                            //add error to the error log and then display response tab to say that an error has occured
+                            function.logAnError(err.ToString());
+                        }
+                            
 
                     };
                     //add button to cell 
