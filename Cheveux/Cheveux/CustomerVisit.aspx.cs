@@ -61,7 +61,7 @@ namespace Cheveux
                 bDTL = handler.BLL_GetAllofBookingDTL(bookingID, customerID);
 
                 //create a variablew to track the row count
-                int rowCount = 0;
+                int rCnt = 0;
                 //create a new row in the table and set the height
                 TableRow newRow = new TableRow();
                 newRow.Height = 50;
@@ -73,16 +73,16 @@ namespace Cheveux
                 newCell.Text = "BookingID:";
                 newCell.Width = 300;
                 //add the cell to the tablerow in the table
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 //add a new cell that will display the data from the database
                 newCell = new TableCell();
                 newCell.Text = bDTL.BookingID.ToString();
                 newCell.Width = 700;
                 //add the cell to the row in the table
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
 
                 //increment row count 
-                rowCount++;
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -92,12 +92,12 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "CustomerID:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.CustomerID.ToString();
                 newCell.Width = 700;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -107,12 +107,12 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Customer Name:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.CustomerName.ToString();
                 newCell.Width = 700;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -122,12 +122,12 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Service Name:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.ServiceName.ToString();
                 newCell.Width = 700;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -137,12 +137,12 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Service Description:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.ServiceDescription.ToString();
                 newCell.Width = 700;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -152,12 +152,12 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Price:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.Price.ToString();
                 newCell.Width = 700;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -167,12 +167,12 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Date:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.Date.ToString();
                 newCell.Width = 700;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -182,12 +182,12 @@ namespace Cheveux
                 newCell.Font.Bold = true;
                 newCell.Text = "Start Time - End Time:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.StartTime.ToString() + " - " + bDTL.EndTime.ToString();
                 newCell.Width = 700;
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
 
                 newRow = new TableRow();
@@ -209,13 +209,13 @@ namespace Cheveux
                     lblConfirmUpdateHeading.Visible = true;
                 };
                 newCell.Controls.Add(btnCreateVisit);
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
 
 
                 newCell = new TableCell();
                 newCell.Width = 700;
                 Button btnUpdateVisit = new Button();
-                btnUpdateVisit.Text = "Update";
+                btnUpdateVisit.Text = "Update Visit";
                 btnUpdateVisit.CssClass = "btn btn-outline-dark";
                 btnUpdateVisit.Click += (ss, ee) => {
                     //hide other placeholders headings and make the appropriate placeholder heading visible
@@ -228,8 +228,8 @@ namespace Cheveux
                     lblConfirmUpdateHeading.Visible = false;
                 };
                 newCell.Controls.Add(btnUpdateVisit);
-                allBookingTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
                 //hide other placeholders headings and make the appropriate placeholder heading visible
                 phServiceDetails.Visible = false;
@@ -251,9 +251,6 @@ namespace Cheveux
             try
             {
                 sDTL = handler.BLL_GetBookingServiceDTL(bookingID, customerID);
-
-                visit = new CUST_VISIT();
-
 
                 //create a variablew to track the row count
                 int rowCount = 0;
@@ -330,10 +327,10 @@ namespace Cheveux
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Width = 300;
-                Button btnBack = new Button();
-                btnBack.Text = "Back";
-                btnBack.CssClass = "btn btn-outline-dark";
-                btnBack.Click += (ss, ee) => {
+                Button sbtnBack = new Button();
+                sbtnBack.Text = "Back";
+                sbtnBack.CssClass = "btn btn-outline-dark";
+                sbtnBack.Click += (ss, ee) => {
                     //hide other placeholders headings and make the appropriate placeholder heading visible
                     //will go back to bookings details content
                     phBookingDetails.Visible = true;
@@ -343,18 +340,18 @@ namespace Cheveux
                     lblServiceHeading.Visible = false;
                     lblConfirmUpdateHeading.Visible = false;
                 };
-                newCell.Controls.Add(btnBack);
+                newCell.Controls.Add(sbtnBack);
                 //add cell to the row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
 
                 //create a cell for the update button and add the button control to the cell 
                 newCell = new TableCell();
                 newCell.Width = 700;
-                Button btnUpdate = new Button();
-                btnUpdate.Text = "Update";
-                btnUpdate.CssClass = "btn btn-outline-dark";
-                btnUpdate.Click += (ss, ee) => {
-                    
+                Button sbtnUpdate = new Button();
+                sbtnUpdate.Text = "Update Visit";
+                sbtnUpdate.CssClass = "btn btn-outline-dark";
+                sbtnUpdate.Click += (ss, ee) => {
+
                     /* What this button does:
                      * =====================
                      * 
@@ -366,21 +363,33 @@ namespace Cheveux
                      * code still to be added 
                      * 
                      */
+                    try
+                    {
+                        visit = new CUST_VISIT();
 
-                    visit.Description = Convert.ToString(txtDescription.Text);
-                    if (handler.BLL_UpdateCustVisit(visit))
-                    {
-                        Response.Write("<script>alert('Update Successful.');</script>");
+                        visit.Description = Convert.ToString(txtDescription.Text);
+
+                        if (handler.BLL_UpdateCustVisit(visit))
+                        {
+                            Response.Write("<script>alert('Update Successful.');</script>");
+                        }
+                        else
+                        {
+                            /*
+                             * if the update fails, display failed message
+                             * to alert that the update was not successful
+                             * (user friendly action status response)
+                             */
+                            Response.Write("<script>alert('Unsuccessful. Customer visit record was not updated');</script>");
+                        }
                     }
-                    else
+                    catch (ApplicationException err)
                     {
-                        /*
-                         * if the update fails, display failed message
-                         * to alert that the update was not successful
-                         * (user friendly action status response)
-                         */
-                        Response.Write("<script>alert('Unsuccessful. Customer visit record was not updated');</script>");
+                        Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
+                        //add error to the error log and then display response tab to say that an error has occured
+                        function.logAnError(err.ToString());
                     }
+                    
 
 
                     /*hide other placeholders headings and make the appropriate placeholder heading visible
@@ -393,7 +402,7 @@ namespace Cheveux
                     lblServiceHeading.Visible = false;
                     lblConfirmUpdateHeading.Visible = true;
                 };
-                newCell.Controls.Add(btnUpdate);
+                newCell.Controls.Add(sbtnUpdate);
                 //add the cell to the row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
             }
@@ -417,7 +426,7 @@ namespace Cheveux
                 viewCustomerVisit = handler.BLL_ViewCustVisit(bookingID, customerID);
 
                 //create a variablew to track the row count
-                int rowCount = 0;
+                int count = 0;
                 //create a new row in the table and set the height
                 TableRow newRow = new TableRow();
                 newRow.Height = 50;
@@ -429,16 +438,16 @@ namespace Cheveux
                 newCell.Text = "CustomerID:";
                 newCell.Width = 300;
                 //add the cell to the tablerow in the table
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
                 //add a new cell that will display the data from the database
                 newCell = new TableCell();
                 newCell.Text = viewCustomerVisit.CustomerID.ToString();
                 newCell.Width = 700;
                 //add the cell to the row in the table
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
 
                 //increment row count 
-                rowCount++;
+                count++;
 
 
                 newRow = new TableRow();
@@ -446,14 +455,14 @@ namespace Cheveux
                 confirmVisitTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "Date:";
+                newCell.Text = "Date :";
                 newCell.Width = 300;
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = viewCustomerVisit.Date.ToString();
                 newCell.Width = 700;
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
+                count++;
 
 
                 newRow = new TableRow();
@@ -461,38 +470,38 @@ namespace Cheveux
                 confirmVisitTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "BookingID:";
+                newCell.Text = "BookingID :";
                 newCell.Width = 300;
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = viewCustomerVisit.BookingID.ToString();
                 newCell.Width = 700;
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
+                count++;
 
                 newRow = new TableRow();
                 newRow.Height = 50;
                 confirmVisitTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "Description:";
+                newCell.Text = "Description :";
                 newCell.Width = 300;
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = viewCustomerVisit.Description.ToString();
                 newCell.Width = 700;
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
+                count++;
 
                 newRow = new TableRow();
                 newRow.Height = 250;
                 confirmVisitTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Width = 300;
-                Button btnBack = new Button();
-                btnBack.Text = "Back";
-                btnBack.CssClass = "btn btn-outline-dark";
-                btnBack.Click += (ss, ee) => {
+                Button buttonBack = new Button();
+                buttonBack.Text = "Back";
+                buttonBack.CssClass = "btn btn-outline-dark";
+                buttonBack.Click += (ss, ee) => {
                     //hide other placeholders headings and make the appropriate placeholder heading visible
                     //will take user back to service details 
                     phBookingDetails.Visible = false;
@@ -502,17 +511,17 @@ namespace Cheveux
                     lblServiceHeading.Visible = true;
                     lblConfirmUpdateHeading.Visible = false;
                 };
-                newCell.Controls.Add(btnBack);
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
+                newCell.Controls.Add(buttonBack);
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
                 
 
 
                 newCell = new TableCell();
                 newCell.Width = 300;
-                Button btnNext= new Button();
-                btnNext.Text = "Confirm";
-                btnNext.CssClass = "btn btn-outline-dark";
-                btnNext.Click += (ss, ee) => {
+                Button buttonNext= new Button();
+                buttonNext.Text = "Confirm";
+                buttonNext.CssClass = "btn btn-outline-dark";
+                buttonNext.Click += (ss, ee) => {
                     /*
                      * 
                     phBookingDetails.Visible = false;
@@ -523,8 +532,8 @@ namespace Cheveux
                     lblConfirmUpdateHeading.Visible = false;*/
                     Response.Redirect("~/Stylist.aspx");
                 };
-                newCell.Controls.Add(btnNext);
-                confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
+                newCell.Controls.Add(buttonNext);
+                confirmVisitTable.Rows[count].Cells.Add(newCell);
                 //rowCount++;
 
 

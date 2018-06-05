@@ -154,7 +154,7 @@ namespace Cheveux
                                  */
 
                                 Response.Write("<script>alert('Customer visit record for the visit has been created.You will now be taken to customer visit process.');"
-                                    + "window.location = 'CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
+                                    + "window.location.href = 'CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
                                     + "&customerID=" + cust_visit.CustomerID.ToString()
                                     + "';</script>");
                             }
@@ -171,7 +171,6 @@ namespace Cheveux
                         }
                         catch(ApplicationException err)
                         {
-                            //Response.Write("<script>alert('Error: '" + err.ToString()+ "\")</script>");
                             Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
                             //add error to the error log and then display response tab to say that an error has occured
                             function.logAnError(err.ToString());
@@ -191,7 +190,7 @@ namespace Cheveux
             {
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
                 function.logAnError(E.ToString());
-                Response.Write("<script>alert('An error has occured.Unable to display required data.');</script>");
+                Response.Write("<script>alert('An error has occured.Having trouble connecting to the database. Unable to display required data.');</script>");
                 Server.Transfer("~/Error.aspx");
             }
         }
