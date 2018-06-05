@@ -21,6 +21,7 @@ namespace Cheveux
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
         BOOKING checkIn = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             theDate.InnerHtml = test;
