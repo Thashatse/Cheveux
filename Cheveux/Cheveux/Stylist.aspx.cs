@@ -191,7 +191,7 @@ namespace Cheveux
             {
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
                 function.logAnError(E.ToString());
-                Response.Write("<script>alert('An erro has occured.Unable to display required data.');</script>");
+                Response.Write("<script>alert('An error has occured.Unable to display required data.');</script>");
                 Server.Transfer("~/Error.aspx");
             }
         }

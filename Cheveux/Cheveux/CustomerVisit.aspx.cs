@@ -21,10 +21,9 @@ namespace Cheveux
         //get bookings service details
         SP_GetBookingServiceDTL sDTL = null;
 
-        //temporary...used just for testing to see if code functions properly
+        //bookingID is going to go in here
         string bookingID ;
-
-        //temporary...used just for testing to see if code functions properly
+        //customerID is going to go in here
         string customerID;
 
 
@@ -32,7 +31,9 @@ namespace Cheveux
         {
             theDate.InnerHtml = test;
             
+            //set bookingID param to bookingID variable so it can be used in the methods
             bookingID = Request.QueryString["bookingID"];
+            //set customerID param to customerID variable so it can be used in the methods
             customerID = Request.QueryString["customerID"];
             if (bookingID != null && customerID != null)
             {
@@ -235,8 +236,9 @@ namespace Cheveux
             }
             catch(ApplicationException Err)
             {
+                //log error, display error message,redirect to the stylist page
                 function.logAnError(Err.ToString());
-                Server.Transfer("~/Error.aspx");
+                Response.Write("<script>alert('An error has occured.Unable to display required data.');window.location='Stylist.aspx';</script>");
             }
         }
         
@@ -353,6 +355,8 @@ namespace Cheveux
                      * 
                      */
 
+
+
                     //hide other placeholders headings and make the appropriate placeholder heading visible
                     phBookingDetails.Visible = false;
                     phServiceDetails.Visible = true;
@@ -387,8 +391,9 @@ namespace Cheveux
             }
             catch (ApplicationException Err)
             {
+                //log error, display error message,redirect to the stylist page
                 function.logAnError(Err.ToString());
-                Server.Transfer("~/Error.aspx");
+                Response.Write("<script>alert('An error has occured.');window.location='Stylist.aspx';</script>");
             }
         }
         
@@ -450,8 +455,9 @@ namespace Cheveux
             }
             catch(ApplicationException err)
             {
+                //log error, display error message,redirect to the stylist page
                 function.logAnError(err.ToString());
-                Server.Transfer("~/Error.aspx");
+                Response.Write("<script>alert('An error has occured.');window.location='Stylist.aspx';</script>");
             }
         }
     }
