@@ -24,7 +24,7 @@ namespace Cheveux
         SP_ViewCustVisit viewCustomerVisit = null;
 
         //bookingID is going to go in here
-        string bookingID ;
+        string bookingID;
         //customerID is going to go in here
         string customerID;
 
@@ -307,12 +307,12 @@ namespace Cheveux
                 //create a cell that will be populated by the text box
                 newCell = new TableCell();
                 //newCell.Text = bDTL.ServiceDescription.ToString();
-                //newCell.Width = 700;
-                TextBox txtDescription = new TextBox();
-                txtDescription.ID = "service_description";
-                txtDescription.CssClass = "col-xs-12 col-md-12 form-control input-lg";
+                newCell.Width = 700;
+                TextBox descBox = new TextBox();
+                descBox.ID = "service_description";
+                descBox.CssClass = "form-control";
                 //add control to cell
-                newCell.Controls.Add(txtDescription);
+                newCell.Controls.Add(descBox);
                 //add cell to row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
                 //increment rowCount
@@ -367,7 +367,7 @@ namespace Cheveux
                     {
                         visit = new CUST_VISIT();
 
-                        visit.Description = Convert.ToString(txtDescription.Text);
+                        visit.Description = Convert.ToString(descBox.Text);
 
                         if (handler.BLL_UpdateCustVisit(visit))
                         {

@@ -195,3 +195,17 @@ System.ApplicationException: System.ApplicationException: An Error Occouerd When
    at DAL.DBAccess.GetEmpAgenda(String employeeID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
    at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
    at Cheveux.Stylist.getAgenda(String id) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist.aspx.cs:line 34
+
+TimeStamp: 6/5/2018 10:21:52 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 453
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Stylist.getAgenda(String id) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist.aspx.cs:line 34
