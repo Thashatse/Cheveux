@@ -501,8 +501,6 @@ namespace Cheveux
                     lblBookingDetailsHeading.Visible = false;
                     lblServiceHeading.Visible = true;
                     lblConfirmUpdateHeading.Visible = false;
-
-                    DisplayServiceDetails(bookingID,customerID);
                 };
                 newCell.Controls.Add(btnBack);
                 confirmVisitTable.Rows[rowCount].Cells.Add(newCell);
