@@ -533,7 +533,7 @@ namespace Cheveux
             {
                 //log error, display error message,redirect to the stylist page
                 function.logAnError(err.ToString());
-                Response.Write("<script>alert('An error has occured.');window.location='Stylist.aspx';</script>");
+                Response.Write("<script>alert('An error has occured while communicating with the database.');window.location='Stylist.aspx';</script>");
             }
         }
     }
