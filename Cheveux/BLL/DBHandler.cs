@@ -121,10 +121,11 @@ namespace BLL
         {
             return db.CreateCustVisit(cust_visit);
         }
-         public bool AddBooking(BOOKING addBooking)
+/*public bool AddBooking(BOOKING addBooking)
         {
             return db.AddBooking(addBooking);
         }
+       
         public List<SP_GetStylists> GetHairstylists(string serviceID)
         {
             return db.GetStylistsForService(serviceID);
@@ -133,5 +134,6 @@ namespace BLL
         {
             return db.GetAllServices();
         }
+        */
     }
 }
