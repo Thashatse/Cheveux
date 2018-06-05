@@ -254,17 +254,23 @@ namespace Cheveux
                 TableRow newRow = new TableRow();
                 newRow.Height = 50;
                 serviceDetailsTable.Rows.Add(newRow);
+                //create cell for bookingID and it to the row
                 TableCell newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "BookingID:";
                 newCell.Width = 300;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+                
+                //create a cell that displays the bookingID and add it to the row
                 newCell = new TableCell();
                 newCell.Text = bDTL.BookingID.ToString();
                 newCell.Width = 700;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+                
+                //create a cell for button the user presses to edit the service
                 newCell = new TableCell();
                 newCell.Width = 700;
+                //create the button
                 Button btnEdit = new Button();
                 btnEdit.Text = "Edit Details";
                 btnEdit.CssClass = "btn";
@@ -275,45 +281,58 @@ namespace Cheveux
                      * 
                      */
                 };
+                //add the button control to the cell
                 newCell.Controls.Add(btnEdit);
+                //add the cell to the row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
                 //increment row count 
                 rowCount++;
 
-
+                //create a new row and add it to the table
                 newRow = new TableRow();
                 newRow.Height = 50;
                 serviceDetailsTable.Rows.Add(newRow);
+                
+                //create a cell for the service name and add it to the table
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Service Name:";
                 newCell.Width = 300;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+
+                //create a cell that will display the service name and add it to the row
                 newCell = new TableCell();
                 newCell.Text = bDTL.ServiceName.ToString();
                 newCell.Width = 700;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+                //increment rowCount
                 rowCount++;
 
-
+                //create a new row and add it to the table
                 newRow = new TableRow();
                 newRow.Height = 50;
                 serviceDetailsTable.Rows.Add(newRow);
+
+                //create a cell for the service description and add it to the row
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Service Description";
                 newCell.Width = 300;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+
+                //create a cell that will display the service description and add it to the row
                 newCell = new TableCell();
                 newCell.Text = bDTL.ServiceDescription.ToString();
                 newCell.Width = 700;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
                 rowCount++;
 
-
+                //create a new row and add it to the table
                 newRow = new TableRow();
                 newRow.Height = 250; 
                 serviceDetailsTable.Rows.Add(newRow);
+
+                //create a cell for the back button and add the button control to the cell
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Width = 300;
@@ -331,9 +350,10 @@ namespace Cheveux
                     lblConfirmUpdateHeading.Visible = false;
                 };
                 newCell.Controls.Add(btnBack);
+                //add cell to the row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
 
-
+                //create a cell for the update button and add the button control to the cell 
                 newCell = new TableCell();
                 newCell.Width = 700;
                 Button btnUpdate = new Button();
@@ -366,9 +386,10 @@ namespace Cheveux
                     lblConfirmUpdateHeading.Visible = false;
                 };
                 newCell.Controls.Add(btnUpdate);
+                //add the cell to the row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
 
-
+                //create a cell for the next button and add the button control to the cell 
                 newCell = new TableCell();
                 newCell.Width = 700;
                 Button btnNext = new Button();
@@ -385,7 +406,9 @@ namespace Cheveux
                     lblConfirmUpdateHeading.Visible = true;
                 };
                 newCell.Controls.Add(btnNext);
+                //add cell to the row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+                //increment rowCount
                 rowCount++;
 
             }
@@ -398,7 +421,13 @@ namespace Cheveux
         }
         
         public void DisplayConfirmVisit()
-        {
+        {       
+            /*Method displays the customer visit to the user and the user 
+                  updates the customer visit record and the receptionist can then generate the 
+                  invoice
+            */
+
+
             try
             {
                 TableRow newRow = new TableRow();
