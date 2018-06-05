@@ -80,40 +80,40 @@ namespace DAL
         }
 
         public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
-    {
-        List<SP_ProductSearchByTerm> ProductSearchResults = new List<SP_ProductSearchByTerm>();
+        {
+            List<SP_ProductSearchByTerm> ProductSearchResults = new List<SP_ProductSearchByTerm>();
             List<SP_SearchStylistsBySearchTerm> StylistSearchResults = new List<SP_SearchStylistsBySearchTerm>();
             SqlParameter[] pars = new SqlParameter[]
         {
                 new SqlParameter("@searchTerm", searchTerm)
         };
 
-        try
-        {
-            using (DataTable table = DBHelper.ParamSelect("SP_ProductSearchByTerm",
-        CommandType.StoredProcedure, pars))
+            try
             {
-                if (table.Rows.Count > 0)
+                using (DataTable table = DBHelper.ParamSelect("SP_ProductSearchByTerm",
+            CommandType.StoredProcedure, pars))
                 {
-                    foreach (DataRow row in table.Rows)
+                    if (table.Rows.Count > 0)
                     {
-                        SP_ProductSearchByTerm result = new SP_ProductSearchByTerm
+                        foreach (DataRow row in table.Rows)
                         {
-                            Name = row["Name"].ToString(),
-                            ProductDescription = row["ProductDescription"].ToString(),
-                            Price = row["Price"].ToString(),
-                            ProductType = row["ProductType(T/A/S)"].ToString()[0],
-                            ProductID = row["ProductID"].ToString()
-                        };
+                            SP_ProductSearchByTerm result = new SP_ProductSearchByTerm
+                            {
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = row["Price"].ToString(),
+                                ProductType = row["ProductType(T/A/S)"].ToString()[0],
+                                ProductID = row["ProductID"].ToString()
+                            };
                             ProductSearchResults.Add(result);
+                        }
                     }
-                } 
-            }
+                }
 
-            pars = new SqlParameter[]
-            {
+                pars = new SqlParameter[]
+                {
                 new SqlParameter("@searchTerm", searchTerm)
-            };
+                };
 
                 using (DataTable table = DBHelper.ParamSelect("SP_SearchStylistsBySearchTerm",
             CommandType.StoredProcedure, pars))
@@ -263,19 +263,19 @@ namespace DAL
                     {
                         DataRow row = table.Rows[0];
                         booking = new SP_GetCustomerBooking
-                            {
-                                serviceName = row["Name"].ToString(),
-                                serviceDescripion = row["ProductDescription"].ToString(),
-                                servicePrice = row["Price"].ToString(),
-                                stylistEmployeeID = row["UserID"].ToString(),
+                        {
+                            serviceName = row["Name"].ToString(),
+                            serviceDescripion = row["ProductDescription"].ToString(),
+                            servicePrice = row["Price"].ToString(),
+                            stylistEmployeeID = row["UserID"].ToString(),
                             stylistFirstName = row["FirstName"].ToString(),
-                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
-                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                bookingID = row["BookingID"].ToString()
+                            bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                            bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            bookingID = row["BookingID"].ToString()
 
-                            };
-                        }
-                    
+                        };
+                    }
+
                     return booking;
                 }
             }
@@ -583,20 +583,20 @@ namespace DAL
                     if (table.Rows.Count > 0)
                     {
                         DataRow row = table.Rows[0];
-                            bookingDTL = new SP_GetAllofBookingDTL
-                            {
-                                BookingID = Convert.ToString(row["BookingID"]),
-                                CustomerID = Convert.ToString(row["CustomerID"]),
-                                CustomerName = Convert.ToString(row["CustomerName"]),
-                                ServiceName = Convert.ToString(row["ServiceName"]),
-                                ServiceDescription = Convert.ToString(row["ServiceDescription"]),
-                                Price = Convert.ToString(row["Price"]),
-                                Date = Convert.ToDateTime(row["Date"]),
-                                StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
-                                EndTime = TimeSpan.Parse((row["EndTime"]).ToString())
-                            };
-                        
-                        
+                        bookingDTL = new SP_GetAllofBookingDTL
+                        {
+                            BookingID = Convert.ToString(row["BookingID"]),
+                            CustomerID = Convert.ToString(row["CustomerID"]),
+                            CustomerName = Convert.ToString(row["CustomerName"]),
+                            ServiceName = Convert.ToString(row["ServiceName"]),
+                            ServiceDescription = Convert.ToString(row["ServiceDescription"]),
+                            Price = Convert.ToString(row["Price"]),
+                            Date = Convert.ToDateTime(row["Date"]),
+                            StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
+                            EndTime = TimeSpan.Parse((row["EndTime"]).ToString())
+                        };
+
+
                     }
                     return bookingDTL;
                 }
@@ -606,7 +606,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public SP_GetBookingServiceDTL GetBookingServiceDTL (string bookingID, string customerID)
+        public SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID)
         {
             SP_GetBookingServiceDTL serviceDTL = null;
             SqlParameter[] pars = new SqlParameter[]
@@ -616,26 +616,26 @@ namespace DAL
             };
             try
             {
-                    using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServiceDTL",
-                CommandType.StoredProcedure, pars))
-                    {
-                        if (table.Rows.Count > 0)
-                        {
-                            DataRow row = table.Rows[0];
-                                serviceDTL = new SP_GetBookingServiceDTL
-                                {
-                                    BookingID = Convert.ToString(row["BookingID"]),
-                                    ServiceName = Convert.ToString(row["ServiceName"]),
-                                    ServiceDescription = Convert.ToString(row["ServiceDescription"])
-                                };
-                        }
-                        return serviceDTL;
-                    }
-                }
-                catch (Exception e)
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServiceDTL",
+            CommandType.StoredProcedure, pars))
                 {
-                    throw new ApplicationException(e.ToString());
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        serviceDTL = new SP_GetBookingServiceDTL
+                        {
+                            BookingID = Convert.ToString(row["BookingID"]),
+                            ServiceName = Convert.ToString(row["ServiceName"]),
+                            ServiceDescription = Convert.ToString(row["ServiceDescription"])
+                        };
+                    }
+                    return serviceDTL;
                 }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
         public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
         {
@@ -645,7 +645,7 @@ namespace DAL
                 new SqlParameter("@CustomerID", customerID),
                 new SqlParameter("@BookingID", bookingID),
             };
-             try
+            try
             {
                 using (DataTable table = DBHelper.ParamSelect("SP_ViewCustVisit",
             CommandType.StoredProcedure, pars))
@@ -681,7 +681,7 @@ namespace DAL
                 };
                 return DBHelper.NonQuery("SP_UpdateCustVisit", CommandType.StoredProcedure, pars);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -699,7 +699,7 @@ namespace DAL
 
                 return DBHelper.NonQuery("SP_CreateCustVisit", CommandType.StoredProcedure, pars);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -709,20 +709,21 @@ namespace DAL
             try
             {
                 List<SqlParameter> pars = new List<SqlParameter>();
-                foreach(var prop in addBooking.GetType().GetProperties())
+                foreach (var prop in addBooking.GetType().GetProperties())
                 {
-                    if(prop.GetValue(addBooking)!=null)
+                    if (prop.GetValue(addBooking) != null)
                     {
                         pars.Add(new SqlParameter("@" + prop.Name.ToString(), prop.GetValue(addBooking)));
                     }
                 }
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-        }
+
+            /*
         public List<SP_GetServices> GetAllServices()
         {
             try
@@ -778,6 +779,8 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
+        }
+        */
         }
     }
 }
