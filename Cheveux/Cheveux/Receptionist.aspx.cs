@@ -74,6 +74,8 @@ namespace Cheveux
         public void getAgenda(string id)
         {
             Button btn;
+
+            Button checkOut;
             try
             {
                 agenda = handler.BLL_GetEmpAgenda(id);
@@ -216,6 +218,13 @@ namespace Cheveux
 
                     //increment control variable
                     i++;
+
+
+                    //create cell that will be populated by the button and add to row.. cell index: 6
+                    TableCell checkCell = new TableCell();
+                    checkCell.Width = 200;
+                    checkCell.Height = 50;
+
                 }
             }
             catch(ApplicationException E)
