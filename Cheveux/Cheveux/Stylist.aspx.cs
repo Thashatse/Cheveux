@@ -16,13 +16,14 @@ namespace Cheveux
         String test = DateTime.Now.ToString("dddd d MMMM");
         List<SP_GetEmpAgenda> agenda = null;
         CUST_VISIT cust_visit;
-        
-        string sample = "118233419479102946333"; //Temporary..used just for testing to see if code functions properly
+        HttpCookie cookie = null;
 
+        
         protected void Page_Load(object sender, EventArgs e)
 		{
             theDate.InnerHtml = test;
-            getAgenda(sample);
+            cookie = Request.Cookies["CheveuxUserID"];
+            getAgenda(cookie["ID"].ToString());
         }
 
         public void getAgenda(string id)
