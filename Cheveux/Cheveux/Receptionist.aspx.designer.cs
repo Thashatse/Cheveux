@@ -40,15 +40,6 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.DropDownList drpEmpNames;
         
         /// <summary>
-        /// lblAgendaErr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAgendaErr;
-        
-        /// <summary>
         /// AgendaTable control.
         /// </summary>
         /// <remarks>
@@ -56,14 +47,5 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table AgendaTable;
-        
-        /// <summary>
-        /// lblnoAppts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblnoAppts;
     }
 }

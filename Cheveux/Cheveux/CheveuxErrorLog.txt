@@ -139,3 +139,45 @@ User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
 Unknown user type found during Loading of default.aspx: C
+
+TimeStamp: 6/4/2018 11:15:41 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 453
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Stylist.getAgenda(String id) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist.aspx.cs:line 34
+
+TimeStamp: 6/4/2018 11:17:32 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 453
+   at DAL.DBAccess.GetEmpAgenda(String employeeID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 479
+   at BLL.DBHandler.BLL_GetEmpAgenda(String employeeID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 73
+   at Cheveux.Stylist.getAgenda(String id) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist.aspx.cs:line 34
+
+TimeStamp: 6/5/2018 2:56:28 AM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The Database
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.GetAllofBookingDTL(String bookingID, String customerID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 580
+   at DAL.DBAccess.GetAllofBookingDTL(String bookingID, String customerID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 606
+   at BLL.DBHandler.BLL_GetAllofBookingDTL(String bookingID, String customerID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 106
+   at Cheveux.CustomerVisit.DisplayBookingDetails(String bookingID, String customerID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\CustomerVisit.aspx.cs:line 49

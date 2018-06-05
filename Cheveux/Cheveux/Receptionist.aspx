@@ -32,10 +32,9 @@
             <div id="empDropdown" class="row">
                 <div class="col-xs-12 col-md-12">
                     
-                    <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True" OnSelectedIndexChanged="drpEmpNames_SelectedIndexChanged">
+                    <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True" >
                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                     </asp:DropDownList>  
-                    <asp:label ID="lblAgendaErr" runat="server" text=" " Visible="False"></asp:label>
                 </div>
             </div>
         </div>
@@ -50,7 +49,6 @@
                 <div class="col-xs-12 col-md-12">
                     <asp:table runat="server" ID="AgendaTable"></asp:table>
                 </div>
-                    <asp:label ID="lblnoAppts" runat="server" text=" " Visible="False"></asp:label>
             </div>
         </div>
 

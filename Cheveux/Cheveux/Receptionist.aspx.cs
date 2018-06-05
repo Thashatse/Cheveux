@@ -20,49 +20,59 @@ namespace Cheveux
         String test = DateTime.Now.ToString("dddd d MMMM");
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             theDate.InnerHtml = test;
-
             list = handler.BLL_GetEmpNames();
             if (!Page.IsPostBack)
             {
-
-                foreach(SP_GetEmpNames emps in list)
-                {
-                    drpEmpNames.DataSource = list;
-                    drpEmpNames.DataTextField = "Name";
-                    drpEmpNames.DataValueField = "EmployeeID";
-                    drpEmpNames.DataBind();
-                    drpEmpNames.Items.Insert(0,new ListItem("Select Employee", "-1"));
-                }
-            }
-            
-
-        }
-
-        protected void drpEmpNames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
                 try
                 {
-                    if (drpEmpNames.SelectedValue != "-1")
+                    foreach (SP_GetEmpNames emps in list)
                     {
-                        getAgenda(drpEmpNames.SelectedValue);
+                        //Load employee names into dropdownlist
+                        drpEmpNames.DataSource = list;
+                        //set the coloumn that will be displayed to the user
+                        drpEmpNames.DataTextField = "Name";
+                        //set the coloumn that will be used for the valuefield
+                        drpEmpNames.DataValueField = "EmployeeID";
+                        //bind the data
+                        drpEmpNames.DataBind();
+                        /*set the default (text (dropdownlist index[0]) that will first be displayed to the user.
+                         * in this case the "instruction" to select the employee
+                        */
+                        drpEmpNames.Items.Insert(0, new ListItem("--Select Employee--", "-1"));
                     }
                 }
-            catch (ApplicationException Err)
+                catch (ApplicationException Err)
                 {
+                    Response.Write("<script>alert('Could load data into dropdownlist.Problem communicating with the database.');</script>");
                     function.logAnError(Err.ToString());
-                    lblAgendaErr.Text = "<h3>An error occurred during communication with the database.<br />Please try again later.</h3>";
                 }
 
+            }
+
+            try
+            {
+                /*if the selected valus is not the "select employee" display the employee names
+                 * if the selected value is the "select employee" nothing will be displayed or added to the table
+                 * getAgenda method will not run
+                 */ 
+                if (drpEmpNames.SelectedValue != "-1")
+                {
+                    getAgenda(drpEmpNames.SelectedValue);
+                }
+            }
+            catch (ApplicationException Err)
+            {
+                Response.Write("<script>alert('Could load data into the table.Problem communicating with the database.');</script>");
+                function.logAnError(Err.ToString());
+            }
         }
         public void getAgenda(string id)
         {
             Button btn;
-
             try
             {
                 agenda = handler.BLL_GetEmpAgenda(id);
@@ -117,43 +127,51 @@ namespace Cheveux
                 foreach(SP_GetEmpAgenda a in agenda)
                 {
                     
-
+                    //created cell for the record
                     TableRow r = new TableRow();
+                    //add row to table
                     AgendaTable.Rows.Add(r);
 
-                    
+                    //create start cell and add to row.. cell index: 0
                     TableCell start = new TableCell();
                     start.Text = a.StartTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(start);
 
+                    //create end cell and add to row.. cell index: 1
                     TableCell end = new TableCell();
                     end.Text = a.EndTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(end);
 
+                    //created customer name cell and add to row.. cell index: 2
                     TableCell c = new TableCell();
                     c.Text = a.CustomerFName.ToString();
                     AgendaTable.Rows[i].Cells.Add(c);
 
+                    //create employee name cell and add to row.. cell index: 3
                     TableCell e = new TableCell();
                     e.Text = a.EmpFName.ToString();
                     AgendaTable.Rows[i].Cells.Add(e);
 
+                    //create service name cell and add to row.. cell index: 4
                     TableCell s = new TableCell();
                     s.Text = a.ServiceName.ToString();
                     AgendaTable.Rows[i].Cells.Add(s);
 
+                    //create arrival status cell and add to row.. cell index : 5
                     TableCell present = new TableCell();
                     present.Text = a.Arrived.ToString();
                     AgendaTable.Rows[i].Cells.Add(present);
 
-                    
+                    //create cell that will be populated by the button and add to row.. cell index: 6
                     TableCell buttonCell = new TableCell();
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
+                    
+                    //create button
                     btn = new Button();
                     btn.Text = "Check-in";
                     btn.CssClass = "btn btn-outline-dark";
-                    btn.Click += (ss, ee) => { 
+                    btn.Click += (ss, ee) => {
                         /*
                          *Check-in code here 
                          * After clicking the button arrived should change to Y
@@ -161,16 +179,24 @@ namespace Cheveux
                          * and code should cater for the change as the stored procedure to check out and generate invoice
                          * needs to be called
                          */
+
+                        //Temporary placeholder.. Stored procedure for check-in will go in here
+                        Response.Redirect("Default.aspx");
+
                     };
+                    //add button to cell 
                     buttonCell.Controls.Add(btn);
+                    //add cell to row
                     AgendaTable.Rows[i].Cells.Add(buttonCell);
+
+                    //increment control variable
                     i++;
                 }
             }
             catch(ApplicationException E)
             {
+                Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
                 function.logAnError(E.ToString());
-                Server.Transfer("~/Error.aspx");
             }
         }
     }

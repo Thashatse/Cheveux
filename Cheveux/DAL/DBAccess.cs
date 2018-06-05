@@ -586,7 +586,7 @@ namespace DAL
                             bookingDTL = new SP_GetAllofBookingDTL
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
-                                UserID = Convert.ToString(row["UserID"]),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
                                 CustomerName = Convert.ToString(row["CustomerName"]),
                                 ServiceName = Convert.ToString(row["ServiceName"]),
                                 ServiceDescription = Convert.ToString(row["ServiceDescription"]),

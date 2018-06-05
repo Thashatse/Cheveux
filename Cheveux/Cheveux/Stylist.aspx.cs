@@ -150,9 +150,13 @@ namespace Cheveux
                                  * alert user that customer visit record has been created
                                  * after the user clicks okay on the alert window, the page redirects 
                                  *  to the customer visit process.
+                                 *
                                  */
-                                Response.Write("<script>alert('Customer visit record for the visit has been created.\nYou will now be taken to customer visit process.');"
-                                    + "window.location='CustomerVisit.aspx';</script>");
+
+                                Response.Write("<script>alert('Customer visit record for the visit has been created.You will now be taken to customer visit process.');"
+                                    + "window.location = 'CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
+                                    + "&customerID=" + cust_visit.CustomerID.ToString()
+                                    + "';</script>");
                             }
                             else
                             {

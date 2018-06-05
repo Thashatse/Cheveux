@@ -20,15 +20,31 @@ namespace Cheveux
         
         //get bookings service details
         SP_GetBookingServiceDTL sDTL = null;
-        string bookingID = "1";//temporary...used just for testing to see if code functions properly
-        string customerID = "105242998585655922697";//temporary...used just for testing to see if code functions properly
+
+        //temporary...used just for testing to see if code functions properly
+        string bookingID ;
+
+        //temporary...used just for testing to see if code functions properly
+        string customerID;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             theDate.InnerHtml = test;
-
-            DisplayBookingDetails(bookingID, customerID);
-            DisplayServiceDetails(bookingID,customerID);
-            DisplayConfirmVisit();
+            
+            bookingID = Request.QueryString["bookingID"];
+            customerID = Request.QueryString["customerID"];
+            if (bookingID != null && customerID != null)
+            {
+                DisplayBookingDetails(bookingID, customerID);
+                DisplayServiceDetails(bookingID, customerID);
+                DisplayConfirmVisit();
+            }
+            else
+            {
+                Response.Write("<script>alert('ID's not passed.');window.location='Stylist.aspx';</script>");
+            }
+ 
         }
 
         
@@ -69,11 +85,11 @@ namespace Cheveux
                 allBookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "UserID:";
+                newCell.Text = "CustomerID:";
                 newCell.Width = 300;
                 allBookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = bDTL.UserID.ToString();
+                newCell.Text = bDTL.CustomerID.ToString();
                 newCell.Width = 700;
                 allBookingTable.Rows[rowCount].Cells.Add(newCell);
                 rowCount++;

@@ -9,7 +9,7 @@ namespace TypeLibrary.ViewModels
     public class SP_GetAllofBookingDTL
     {
         public string BookingID { get; set; }
-        public string UserID { get; set; }
+        public string CustomerID { get; set; }
         public string CustomerName { get; set; }
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
