@@ -704,5 +704,80 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public bool AddBooking(BOOKING addBooking)
+        {
+            try
+            {
+                List<SqlParameter> pars = new List<SqlParameter>();
+                foreach(var prop in addBooking.GetType().GetProperties())
+                {
+                    if(prop.GetValue(addBooking)!=null)
+                    {
+                        pars.Add(new SqlParameter("@" + prop.Name.ToString(), prop.GetValue(addBooking)));
+                    }
+                }
+                return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetServices> GetAllServices()
+        {
+            try
+            {
+                List<SP_GetServices> serviceList = new List<SP_GetServices>();
+                using (DataTable table = DBHelper.Select("SP_GetServices", CommandType.StoredProcedure))
+                {
+                    if(table.Rows.Count>0)
+                    {
+                        foreach(DataRow row in table.Rows)
+                        {
+                            SP_GetServices services = new SP_GetServices
+                            {
+                                Name = Convert.ToString(row["Name"])
+                            };
+                            serviceList.Add(services);
+                        }
+                    }
+                }
+                return serviceList;
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetStylists> GetStylistsForService(string serviceID)
+        {
+            try
+            {
+                List<SP_GetStylists> stylistList = new List<SP_GetStylists>();
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ServiceID", serviceID)
+                };
+                using(DataTable table = DBHelper.ParamSelect("SP_GetStylists", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count>0)
+                    {
+                        foreach(DataRow row in table.Rows)
+                        {
+                            SP_GetStylists stylists = new SP_GetStylists
+                            {
+                                FirstName = Convert.ToString(row["FirstName"])
+                            };
+                            stylistList.Add(stylists);
+                        }
+                    }
+                }
+                return stylistList;
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }
