@@ -11,7 +11,7 @@ namespace TypeLibrary.Models
         public string ProductID { get; set; }
         public string Name { get; set; }
         public string ProductDescription { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public decimal Price { get; set; }
         public string ProductType { get; set; }
         public string Active { get; set; }
         public byte[] Product1 { get; set; }

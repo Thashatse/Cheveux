@@ -37,9 +37,9 @@ namespace DAL
                             da.Fill(table);
                         }
                     }
-                    catch
+                    catch(Exception er)
                     {
-                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database");
+                        throw  new ApplicationException("An Error Occouerd When Comunicating With The Database" + er);
                     }
                 }
             }
@@ -67,9 +67,9 @@ namespace DAL
                         }
                         result = cmd.ExecuteNonQuery();
                     }
-                    catch
+                    catch (Exception er)
                     {
-                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database");
+                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database" + er);
                     }
                 }
             }
@@ -99,9 +99,9 @@ namespace DAL
                             da.Fill(table);
                         }
                     }
-                    catch
+                    catch (Exception er)
                     {
-                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database");
+                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database" + er);
                     }
                 }
             }
