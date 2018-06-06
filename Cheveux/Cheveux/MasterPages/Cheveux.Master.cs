@@ -15,6 +15,7 @@ namespace Cheveux
         protected void Page_Load(object sender, EventArgs e)
         {
             DBHandler handler = new DBHandler();
+            Functions function = new Functions();
 
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
             if (UserID == null)

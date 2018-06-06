@@ -59,6 +59,8 @@
                             <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
                             <li><a href="Accounts.aspx?action=Logout">Log Out</a></li>
                         </asp:PlaceHolder>
+                        <!--Help-->
+                        <li><a href="Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a></li>
                     </ul>
                     <div class="form-group">
                         <!--Search Button & Text Box-->

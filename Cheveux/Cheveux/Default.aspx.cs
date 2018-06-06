@@ -12,40 +12,47 @@ namespace Cheveux
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        HttpCookie cookie = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             //access control
+            HttpCookie UserID = Request.Cookies["CheveuxUserID"];
             //send the user to the correct page based on their usertype
-            cookie = Request.Cookies["CheveuxUserID"];
-            if (cookie != null)
+            if (UserID != null)
             {
-                string EmpType = cookie["UT"].ToString();
-                if (EmpType == "R")
+                string userType = UserID["UT"].ToString();
+                if ("R" == userType)
                 {
                     //Receptionist
                     Response.Redirect("Receptionist.aspx");
                 }
-                else if (EmpType == "M")
+                else if (userType == "M")
                 {
                     //Manager
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("Manager.aspx");
                 }
-                else if (EmpType == "S")
+                else if (userType == "S")
                 {
                     //stylist
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("Stylist.aspx");
+                }
+                else if (userType == "C")
+                {
+                    //customer
+                    //allowed access to this page
+                    //Response.Redirect("Default.aspx");
+
                 }
                 else
                 {
+                    Response.Redirect("Default.aspx");
                     function.logAnError("Unknown user type found during Loading of default.aspx: " +
-                        cookie["UT"].ToString());
+                        UserID["UT"].ToString());
                 }
             }
 
-                //welcome back existing users
-                String name = Request.QueryString["WB"];
+            //welcome back existing users
+            String name = Request.QueryString["WB"];
                 if (name != null)
                 {
                     Welcome.Text = "Welcom Back To Cheveux " + name;

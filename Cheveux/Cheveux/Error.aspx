@@ -22,7 +22,13 @@
                             <asp:Label ID="ErrorHeader" runat="server"></asp:Label><br />
                             <asp:Label ID="Error1" runat="server"></asp:Label>
                             <!--Line Break-->
-                            <br /><br />
+                            <br />
+                            <br />
+                            <!--Help-->
+                            <a href="Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a>
+                            <!--Line Break-->
+                            <br />
+                            <br />
                             <a href="Default.aspx">Return Home</a>
                         </div>
                     </div>

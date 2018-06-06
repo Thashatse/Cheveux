@@ -392,7 +392,7 @@ namespace Cheveux
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString() + "\n get getBookingDeatails method in viewbooking form");
                 BookingLable.Text =

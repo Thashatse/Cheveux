@@ -33,6 +33,50 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //access control
+            HttpCookie UserID = Request.Cookies["CheveuxUserID"];
+            //send the user to the correct page based on their usertype
+            if (UserID != null)
+            {
+                string userType = UserID["UT"].ToString();
+                if ("R" == userType)
+                {
+                    //Receptionist
+                    Response.Redirect("Receptionist.aspx");
+                }
+                else if (userType == "M")
+                {
+                    //Manager
+                    //allowed access to this page
+                    //Response.Redirect("Manager.aspx");
+                }
+                else if (userType == "S")
+                {
+                    //stylist
+                    //allowed access to this page
+                    //Response.Redirect("Stylist.aspx");
+                }
+                else if (userType == "C")
+                {
+                    //customer
+                    Response.Redirect("Default.aspx");
+
+                }
+                else
+                {
+                    Response.Redirect("Default.aspx");
+                    function.logAnError("Unknown user type found during Loading of default.aspx: " +
+                        UserID["UT"].ToString());
+                }
+            }
+            else
+            {
+                //ask the user to login first 
+
+                //temp fix redirect to home page
+                Response.Redirect("Default.aspx");
+            }
+
             theDate.InnerHtml = test;
             
             //set bookingID param to bookingID variable so it can be used in the methods
@@ -52,7 +96,6 @@ namespace Cheveux
  
         }
 
-        
         public void DisplayBookingDetails(string bookingID, string customerID)
         {
             try

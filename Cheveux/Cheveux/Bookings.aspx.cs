@@ -19,24 +19,56 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //check if the user is loged in and display past and futcher bokings
+            //access control
             cookie = Request.Cookies["CheveuxUserID"];
-            if (cookie == null)
-            {
-                //if the user is not loged in do not diplay and futer services
-                Tabs.Visible = false;
-            }
+            //send the user to the correct page based on their usertype
             if (cookie != null)
             {
-                //if the user is loged in diplay and futer services
-                JumbotronLogedIn.Visible = true;
-                JumbotronLogedOut.Visible = false;
+                string userType = cookie["UT"].ToString();
+                if ("R" == userType)
+                {
+                    //Receptionist
+                    Response.Redirect("Receptionist.aspx");
+                }
+                else if (userType == "M")
+                {
+                    //Manager
+                    Response.Redirect("Manager.aspx");
+                }
+                else if (userType == "S")
+                {
+                    //stylist
+                    Response.Redirect("Stylist.aspx");
+                }
+                else if (userType == "C")
+                {
+                    //customer
+                    //allowed access to this page
+                    //Response.Redirect("Default.aspx");
 
-                //load the users uppcoming bookings in top the upcoming bookins tab
-                displayUpcomingBookings();
+                    //if the user is loged in diplay and futer services
+                    JumbotronLogedIn.Visible = true;
+                    JumbotronLogedOut.Visible = false;
 
-                //load the users past bookings in top the past bookins tab
-                displayPastBookings();
+                    //load the users uppcoming bookings in top the upcoming bookins tab
+                    displayUpcomingBookings();
+
+                    //load the users past bookings in top the past bookins tab
+                    displayPastBookings();
+                }
+                else
+                {
+                    Response.Redirect("Default.aspx");
+                    function.logAnError("Unknown user type found during Loading of default.aspx: " +
+                        cookie["UT"].ToString());
+                }
+            }
+            else
+            {
+                //ask the user to login first 
+                //check if the user is loged in before displaying past and futcher bokings
+                    //if the user is not loged in do not diplay and futer services
+                    Tabs.Visible = false;
             }
         }
 

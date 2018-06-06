@@ -114,13 +114,13 @@ namespace Cheveux
                         {
                             //Manager
                             cookie["UT"] = "M";
-                            Response.Redirect("Default.aspx");
+                            Response.Redirect("Manager.aspx");
                         }
                         else if (EmpType == "S")
                         {
                             //stylist
                             cookie["UT"] = "S";
-                            Response.Redirect("Default.aspx");
+                            Response.Redirect("Stylist.aspx");
                         }
                         else
                         {
