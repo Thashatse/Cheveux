@@ -236,7 +236,7 @@ namespace Cheveux
                     ProductResultsLable.Text = "<h2> No Product Search Results For '" + searchTerm + "' </h2>";
                 }
                 //service heading
-                if (productCount != 0)
+                if (serviceCount != 0)
                 {
                     //set the product search results heading
                     serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
@@ -316,7 +316,5 @@ namespace Cheveux
             newHeaderCell.Width = 150;
             serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
         }
-
-        
     }
 }

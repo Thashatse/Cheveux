@@ -20,10 +20,9 @@
     <br /><br />
 
   <div class="form-group">
-                        <!--Search Button & Text Box-->
+      <!--Search Button & Text Box-->
                         <input id="serchTermOnSearchPage" type="text" placeholder="Search">
-                        <a class="btn btn-default" href="javascript:searchOnSearchPage()">Search</a>
-                    </div>
+                        <a class="btn btn-default" href="javascript:searchOnSearchPage()">Search</a></div>
 </div>
         <!--Search Results-->
         <div class="row">

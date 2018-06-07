@@ -66,8 +66,13 @@
                     </ul>
                     <div class="form-group">
                         <!--Search Button & Text Box-->
-                        <input id="serchTerm" type="text" placeholder="Search">
-                        <a class="btn btn-default" href="javascript:search()">Search</a>
+                        <asp:TextBox ID="SearchBoxOnMasterPage" runat="server"></asp:TextBox>
+                        <!--Search Validation-->
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorSearchBoxMasterPage"
+                            runat="server" ErrorMessage="*Required" ControlToValidate="SearchBoxOnMasterPage"
+                            ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:Button ID="btnSearchMasterPage" runat="server" Text="Search" class="btn btn-default"
+                            OnClick="btnSearchClickMasterPage" />
                     </div>
                 </div>
                 <!-- /.navbar-collapse -->
