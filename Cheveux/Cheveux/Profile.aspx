@@ -53,18 +53,31 @@
                             <asp:TableRow Height="50">
                                 <asp:TableCell Font-Bold="true"></asp:TableCell>
                                 <asp:TableCell>
+                                    <!--Username-->
                                     <asp:TextBox ID="userName" runat="server" placeholder="Placecholder"></asp:TextBox>
+                                    <!--Help-->
+                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" title="This is used to identify you on the Cheveux platform">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
                                     <!--userName Validation-->
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsrname" runat="server" ErrorMessage="*Required" ControlToValidate="userName" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsrname" target="_blank" runat="server" ErrorMessage="*Required" ControlToValidate="userName" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <!--Help-->
+                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow Height="50">
                                 <asp:TableCell Font-Bold="true"></asp:TableCell>
                                 <asp:TableCell>
+                                    <!--Phone Number-->
                                     <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
+                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" title="10-digit RSA Cellphone number">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
                                     <!--contactNumber Validation-->
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatorContactNumber" runat="server" ErrorMessage="*Required" ControlToValidate="contactNumber" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ControlToValidate="contactNumber" ErrorMessage="Please enter a valid phone number" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ControlToValidate="contactNumber" ErrorMessage="Please enter a valid 10-digit RSA Cellphone number" ForeColor="Red" ValidationExpression="^0[0-9]{9}$"></asp:RegularExpressionValidator>
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow Height="50">

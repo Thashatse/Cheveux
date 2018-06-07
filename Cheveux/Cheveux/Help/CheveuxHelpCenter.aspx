@@ -26,7 +26,7 @@
                         <!--Nav Pills-->
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active"><a href="../Default.aspx">Cheveux Home </a></li>
-                            <li><a href="#1">Help 1 </a></li>
+                            <li><a href="#UserAccounts">User Accounts </a></li>
                             <li><a href="#2">Help 2 </a></li>
                             <li><a href="#3">Help 3 </a></li>
                         </ul>
@@ -39,9 +39,43 @@
                     <div class="col-xs-12 col-md-12">
                         <a name="1"></a>
                         <!--Header-->
-                        <h2>Section 1 </h2>
+                        <h2>User Accounts </h2>
                         <!--Content-->
-                        <p>Content</p>
+                        <!--Login with google-->
+                        <h4>Login with google</h4>
+                            <ul>
+                                <li>Cheveux allows you to sign in with your existing google account.</li>
+                                <li>Google provides us with your name, surname & email address while giving you one less password to remember.</li>
+                                <li>To sign in with Google </li>
+                                <ul>
+                                    <img src="Helpimages/Login-SignUp.png" alt="sign in with Google" />
+                                    <li>1) Select Login/Sign up in the navigation bar</li>
+                                    <img src="Helpimages/GoogleSignin.png" alt="sign in with Google" />
+                                    <li>2) Select the ‘sign in’ button with the Google logo</li>
+                                    <li>3) Follow the steps in the Google pop up box</li>
+                                    <img src="Helpimages/Signedinwithgoogle.png" alt="sign in with Google" />
+                                    <li>You are now signed in. if you are new to Cheveux you will have to complete the registration process entering a username and contact number.</li>
+                                </ul>
+                            </ul>
+                        <!--Usernames-->
+                        <h4>Usernames</h4>
+                            <ul>
+                                <li>A user name is a unique way to identify you on the Cheveux platform</li>
+                            </ul>
+                        <!--Cellphone Numbers-->
+                        <h4>Celphone Numbers</h4>
+                        <ul>
+                            <li>We require your 10-digit South African cell phone number</li>
+                            <li>We Use your contact number to send you conformation and reminders of booking, invoices and promotions.</li>
+                        </ul>
+                        <!--Loggin Out-->
+                        <h4>Logging Out Of Cheveux</h4>
+                        <ul>
+                            <img src="Helpimages/LogOut.png" alt="Logging Out Of Cheveux" />
+                            <li>1) Select 'Log Out' up in the navigation bar</li>
+                            <img src="Helpimages/LogedOut.png" alt="Logged Out Of Cheveux" />
+                            <li>You are now logged out of Cheveux</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -50,7 +84,7 @@
                     <div class="col-xs-12 col-md-12">
                         <a name="2"></a>
                         <!--Header-->
-                        <h2>Section 2 </h2>
+                        <h2>Bookings </h2>
                         <!--Content-->
                         <p>Content</p>
                     </div>

@@ -17,34 +17,36 @@
 <body>
     <!--form for login in-->
     <form id="Login" runat="server">
-        <div>
-            <div class="container container-table">
-                <!--jumbotron-->
-                <div class="jumbotron vertical-center">
-                    <div class="row vertical-center-row">
-                        <div class="col-xs-12 col-md-12 text-center">
-                            <!--Logo-->
-                            <img src="/IMG_0715.png" alt="logo" width="300" height="300" />
-                        </div>
-                        <div class="col-xs-12 col-md-12 text-center">
-                            <!--line break-->
-                            <br />
-                            <!--sign in buton-->
-                            <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
-                        </div>
-                        <div class="col-xs-12 col-md-12 text-center">
-                            <!--Sign out button-->
-                            <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--jumbotron-->
+                        <div class="jumbotron">
+                            <div class="col-xs-12 col-md-12 text-center">
+                                <!--Logo-->
+                                <img src="/IMG_0715.png" alt="logo" width="300" height="300" />
+                                <!--line break-->
+                                <br />
+                                <!--sign in buton-->
+                                <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
+                                <!--Help-->
+                                <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Sign in with your Google account">
+                                    <span class="glyphicon">&#63; Help</span>
+                                </a>
+                                <!--line break-->
+                                <br />
+                                <!--Sign out button-->
+                                <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <asp:Button runat="server" ID="btnAuthenticate" Style="display: none;" OnClick="btnAuthenticate_Click" />
-        </form>
-        
-
-        <!--google get user data function-->
+    </form>
+    <!--google get user data function-->
         <script> 
             function onSignIn(googleUser) {
                 var profile = googleUser.getBasicProfile();

@@ -25,18 +25,27 @@
                             <!--Get a username from the user-->
                             <asp:Label ID="Label3" runat="server" Text="User Name:"></asp:Label>
                             <asp:TextBox ID="userName" runat="server" placeholder="Placecholder"></asp:TextBox>
+                            <!--Help-->
+                            <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
+                                <span class="glyphicon">&#63;</span>
+                            </a>
                             <!--userName Validation-->
                             <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsrname" runat="server" ErrorMessage="*Required" ControlToValidate="userName" ForeColor="Red"></asp:RequiredFieldValidator>
                             <!--line break-->
-                            <br /><br />
+                            <br />
+                            <br />
                             <!--Get a contact number from the user-->
                             <asp:Label ID="Label4" runat="server" Text="Contact Number:"></asp:Label>
                             <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
+                            <!--Help-->
+                            <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number">
+                                <span class="glyphicon">&#63;</span>
+                            </a>
                             <!--contactNumber Validation-->
                             <asp:RequiredFieldValidator ID="RequiredFieldValidatorContactNumber" runat="server" ErrorMessage="*Required" ControlToValidate="contactNumber" ForeColor="Red"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ControlToValidate="contactNumber" ErrorMessage="Please enter a valid phone number" ForeColor="Red" ValidationExpression="^\d+$"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator" runat="server" ControlToValidate="contactNumber" ErrorMessage="Please enter a valid phone number" ForeColor="Red" ValidationExpression="^0[0-9]{9}$"></asp:RegularExpressionValidator>
                             <!--Submition Button-->
-                            <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click"/>
+                            <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" />
                         </div>
                     </div>
                 </div>
