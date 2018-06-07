@@ -32,8 +32,9 @@ namespace DAL
         SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
         bool UpdateCustVisit(CUST_VISIT visit);
         bool CreateCustVisit(CUST_VISIT cust_visit);
-        bool AddBooking(BOOKING addBooking);
         /*
+        bool AddBooking(BOOKING addBooking);
+        
         List<SP_GetServices> GetAllServices();
         List<SP_GetStylists> GetStylistsForService(string serviceID);
         */

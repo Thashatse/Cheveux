@@ -139,6 +139,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Help\CheveuxHelpCenter.aspx" />
+    <Content Include="MakeABooking.aspx" />
     <Content Include="NewAccount.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -237,6 +238,13 @@
     </Compile>
     <Compile Include="Help\CheveuxHelpCenter.aspx.designer.cs">
       <DependentUpon>CheveuxHelpCenter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MakeABooking.aspx.cs">
+      <DependentUpon>MakeABooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MakeABooking.aspx.designer.cs">
+      <DependentUpon>MakeABooking.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPages\CheveuxManager.Master.cs">
       <DependentUpon>CheveuxManager.Master</DependentUpon>

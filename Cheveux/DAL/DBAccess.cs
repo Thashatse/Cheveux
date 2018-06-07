@@ -567,6 +567,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID)
         {
             SP_GetAllofBookingDTL bookingDTL = null;
@@ -606,6 +607,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID)
         {
             SP_GetBookingServiceDTL serviceDTL = null;
@@ -637,6 +639,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
         {
             SP_ViewCustVisit visit = null;
@@ -669,6 +672,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public bool UpdateCustVisit(CUST_VISIT visit)
         {
             try
@@ -686,6 +690,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public bool CreateCustVisit(CUST_VISIT cust_visit)
         {
             try
@@ -704,6 +709,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public bool AddBooking(BOOKING addBooking)
         {
             try
