@@ -142,31 +142,37 @@ namespace Cheveux
                 TableCell startTime = new TableCell();
                 startTime.Text = "Start Time";
                 startTime.Width = 300;
+                startTime.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(startTime);
 
                 TableCell endTime = new TableCell();
                 endTime.Text = "End Time";
                 endTime.Width = 300;
+                endTime.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(endTime);
 
                 TableCell cust = new TableCell();
                 cust.Text = "Customer Name";
                 cust.Width = 300;
+                cust.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(cust);
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee Name";
                 emp.Width = 300;
+                emp.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(emp);
 
                 TableCell service = new TableCell();
                 service.Text = "Service";
                 service.Width = 300;
+                service.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(service);
 
                 TableCell arrived = new TableCell();
                 arrived.Text = "Arrived";
                 arrived.Width = 300;
+                arrived.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
                 //integer that will be incremented in the foreach loop to access the new row for every iteration of the foreach
