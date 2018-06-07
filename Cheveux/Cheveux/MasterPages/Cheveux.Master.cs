@@ -45,5 +45,10 @@ namespace Cheveux
                 LogedOut.Visible = false;
             }
         }
+
+        public void btnSearchClickMasterPage(object sender, EventArgs e)
+        {
+            Response.Redirect("Search.aspx?ST=" + SearchBoxOnMasterPage.Text);
+        }
     }
 }

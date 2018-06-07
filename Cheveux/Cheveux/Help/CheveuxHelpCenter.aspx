@@ -27,7 +27,7 @@
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active"><a href="../Default.aspx">Cheveux Home </a></li>
                             <li><a href="#UserAccounts">User Accounts </a></li>
-                            <li><a href="#2">Help 2 </a></li>
+                            <li><a href="#Bookings">Bookings </a></li>
                             <li><a href="#3">Help 3 </a></li>
                         </ul>
 
@@ -37,7 +37,7 @@
                 <!--Help Section Template -->
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <a name="1"></a>
+                        <a name="UserAccounts"></a>
                         <!--Header-->
                         <h2>User Accounts </h2>
                         <!--Content-->
@@ -72,24 +72,55 @@
                         <h4>Logging Out Of Cheveux</h4>
                         <ul>
                             <img src="Helpimages/LogOut.png" alt="Logging Out Of Cheveux" />
-                            <li>1) Select 'Log Out' up in the navigation bar</li>
+                            <li>1) Select 'Log Out' in the navigation bar</li>
                             <img src="Helpimages/LogedOut.png" alt="Logged Out Of Cheveux" />
                             <li>You are now logged out of Cheveux</li>
                         </ul>
                     </div>
                 </div>
 
-                <!--Help Section Template -->
+                <!--line Break-->
+                <br /><br />
+                <!--New Section-->
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <a name="2"></a>
+                        <a name="Bookings"></a>
                         <!--Header-->
                         <h2>Bookings </h2>
                         <!--Content-->
-                        <p>Content</p>
+                        <!--Upcoming Bookings-->
+                        <h4>View Upcoming Bookins</h4>
+                        <ul>
+                            <li>First <a href="#UserAccounts">Log In</a></li>
+                            <img src="Helpimages/BookingsNavBar.png" alt="View Bookings" />
+                            <li>1) Select 'Bookings'in the navigation bar</li>
+                            <li>2) Your upcoming bookings are displayed by default</li>
+                            <img src="Helpimages/BookingsPageViewBooking.png" alt="View Bookings" />
+                            <li>3) To display booking details select ‘View Booking’</li>
+                            <img src="Helpimages/UpcomingBooking.png" alt="View Bookings" />
+                            <li>4) Booking details will now be displayed</li>
+                        </ul>
+                        <!--Past Bookings-->
+                        <h4>View Past Bookins</h4>
+                        <ul>
+                            <li>First <a href="#UserAccounts">Log In</a></li>
+                            <img src="Helpimages/BookingsNavBar.png" alt="View Past Bookings" />
+                            <li>1) Select 'Bookings' in the navigation bar</li>
+                            <li>2) Your upcoming bookings are displayed by default</li>
+                            <img src="Helpimages/BookingsPagePastBookings.png" alt="View Past Bookings" />
+                            <li>3) To see past bookings select the ‘Past Bookings’ tab</li>
+                            <li>4) Past bookings will now be displayed</li>
+                            <img src="Helpimages/BookingsPageViewPastBooking.png" alt="View Past Bookings" />
+                            <li>5) To display booking details select ‘View Booking’</li>
+                            <img src="Helpimages/ViewPastBookings.png" alt="View Past Bookings" />
+                            <li>6) The booking details and invoice will now be displayed</li>
+                        </ul>
                     </div>
                 </div>
 
+                    <!--line Break-->
+                <br /><br />
+                <!--New Section-->
                 <!--Help Section Template 3-->
                 <div class="row">
                     <div class="col-xs-12 col-md-12">

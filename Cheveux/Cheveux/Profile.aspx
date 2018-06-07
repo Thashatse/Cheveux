@@ -61,10 +61,6 @@
                                     </a>
                                     <!--userName Validation-->
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsrname" target="_blank" runat="server" ErrorMessage="*Required" ControlToValidate="userName" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    <!--Help-->
-                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
-                                        <span class="glyphicon">&#63;</span>
-                                    </a>
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow Height="50">
