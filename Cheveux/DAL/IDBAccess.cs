@@ -20,7 +20,7 @@ namespace DAL
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
         List<SP_GetEmpNames> GetEmpNames();
-        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID);
+        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         EMPLOYEE getEmployeeType(string EmployeeID);
@@ -37,5 +37,7 @@ namespace DAL
         List<SP_GetServices> GetAllServices();
         List<SP_GetStylists> GetStylistsForService(string serviceID);
         */
+        List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
+
     }
 }

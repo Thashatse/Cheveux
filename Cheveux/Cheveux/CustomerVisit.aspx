@@ -8,7 +8,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
         <div class="jumbotron">
-            <asp:Label ID="Visit" runat="server" Font-Bold="true" Font-Size="X-Large">
+            <asp:Label ID="theVisit" runat="server" Font-Bold="true" Font-Size="X-Large">
                 <h1>Customer Visit</h1>
                 <h2 id="theDate" runat="server"></h2>
             </asp:Label>
@@ -50,6 +50,7 @@
         </div>
 
         <!--Confirm Visit-->
+        <!--
         <div id="ConfirmVisitRecord">
             <div class="row">
                 <h1 runat="server" id="lblConfirmUpdateHeading">Confirm Update</h1>
@@ -63,5 +64,7 @@
                 </div>
             </div>
         </div>
+        -->
+
     </div>
 </asp:Content>

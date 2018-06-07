@@ -440,13 +440,14 @@ namespace DAL
             return list;
         }
 
-        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID)
+        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate)
         {
             SP_GetEmpAgenda emp = null;
             List<SP_GetEmpAgenda> agenda = new List<SP_GetEmpAgenda>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@EmployeeID", employeeID),
+                new SqlParameter("@Date", bookingDate)
             };
             try
             {
@@ -466,7 +467,8 @@ namespace DAL
                                 CustomerFName = Convert.ToString(row["CustomerFName"]),
                                 EmpFName = Convert.ToString(row["EmpFName"]),
                                 ServiceName = Convert.ToString(row["ServiceName"]),
-                                Arrived = Convert.ToString(row["Arrived"])
+                                Arrived = Convert.ToString(row["Arrived"]),
+                                Date = Convert.ToDateTime(row["Date"]),
                             };
                             agenda.Add(emp);
                         }
@@ -693,6 +695,7 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@CustomerID",cust_visit.CustomerID.ToString()),
+                    new SqlParameter("@Date", cust_visit.Date.ToString()),
                     new SqlParameter("@BookingID", cust_visit.BookingID.ToString()),
                     new SqlParameter("@Description", cust_visit.Description.ToString()),
                 };
@@ -781,6 +784,47 @@ namespace DAL
             }
         }
         */
+        }
+        public List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate)
+        {
+            SP_GetMyNextCustomer emp = null;
+            List<SP_GetMyNextCustomer> next = new List<SP_GetMyNextCustomer>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", employeeID),
+                new SqlParameter("@Date", bookingDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetMyNextCustomer",
+                                            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            emp = new SP_GetMyNextCustomer
+                            {
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                UserID = Convert.ToString(row["UserID"]),
+                                StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
+                                EndTime = TimeSpan.Parse((row["EndTime"]).ToString()),
+                                CustomerFName = Convert.ToString(row["CustomerFName"]),
+                                EmpFName = Convert.ToString(row["EmpFName"]),
+                                ServiceName = Convert.ToString(row["ServiceName"]),
+                                Arrived = Convert.ToString(row["Arrived"]),
+                                Date = Convert.ToDateTime(row["Date"]),
+                            };
+                            next.Add(emp);
+                        }
+                    }
+                }
+                return next;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
     }
 }

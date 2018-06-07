@@ -68,9 +68,9 @@ namespace BLL
             return db.GetEmpNames();
         }
 
-        public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID)
+        public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate)
         {
-            return db.GetEmpAgenda(employeeID);
+            return db.GetEmpAgenda(employeeID, bookingDate);
         }
 
         public SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID)
@@ -121,19 +121,23 @@ namespace BLL
         {
             return db.CreateCustVisit(cust_visit);
         }
-/*public bool AddBooking(BOOKING addBooking)
+        /*public bool AddBooking(BOOKING addBooking)
+                {
+                    return db.AddBooking(addBooking);
+                }
+
+                public List<SP_GetStylists> GetHairstylists(string serviceID)
+                {
+                    return db.GetStylistsForService(serviceID);
+                }
+                public List<SP_GetServices> GetServices()
+                {
+                    return db.GetAllServices();
+                }
+                */
+        public List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
-            return db.AddBooking(addBooking);
+            return db.GetMyNextCustomer(employeeID, bookingDate);
         }
-       
-        public List<SP_GetStylists> GetHairstylists(string serviceID)
-        {
-            return db.GetStylistsForService(serviceID);
-        }
-        public List<SP_GetServices> GetServices()
-        {
-            return db.GetAllServices();
-        }
-        */
     }
 }

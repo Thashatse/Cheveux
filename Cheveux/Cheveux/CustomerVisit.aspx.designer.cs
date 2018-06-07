@@ -13,13 +13,13 @@ namespace Cheveux {
     public partial class CustomerVisit {
         
         /// <summary>
-        /// Visit control.
+        /// theVisit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Visit;
+        protected global::System.Web.UI.WebControls.Label theVisit;
         
         /// <summary>
         /// theDate control.

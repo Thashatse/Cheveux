@@ -197,6 +197,7 @@
     <Content Include="MasterPages\Cheveux.Master" />
     <Content Include="MasterPages\CheveuxStylist.Master" />
     <Content Include="Stylist.aspx" />
+    <Content Include="myUpcomingApps.aspx" />
     <Content Include="Web.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -315,6 +316,13 @@
     </Compile>
     <Compile Include="Stylist.aspx.designer.cs">
       <DependentUpon>Stylist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="myUpcomingApps.aspx.cs">
+      <DependentUpon>myUpcomingApps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="myUpcomingApps.aspx.designer.cs">
+      <DependentUpon>myUpcomingApps.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewBooking.aspx.cs">
       <DependentUpon>ViewBooking.aspx</DependentUpon>

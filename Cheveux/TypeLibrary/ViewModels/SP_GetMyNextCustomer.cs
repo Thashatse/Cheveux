@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypeLibrary.ViewModels
 {
-    public class SP_GetEmpAgenda
+    public class SP_GetMyNextCustomer
     {
         public string BookingID { get; set; }
         public string UserID { get; set; }
@@ -15,7 +15,6 @@ namespace TypeLibrary.ViewModels
         public string CustomerFName { get; set; }
         public string EmpFName { get; set; }
         public string ServiceName { get; set; }
-        //public Nullable<char> Arrived { get; set; }
         public string Arrived { get; set; }
         public Nullable<DateTime> Date { get; set; }
     }

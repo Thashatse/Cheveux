@@ -61,3 +61,16 @@ User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
 Unknown user type found during Loading of default.aspx: R
+
+TimeStamp: 6/7/2018 7:08:03 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DAL.DBAccess.UpdateCustVisit(CUST_VISIT visit) in C:\Users\Private\Source\Repos\Iteration-2-Judging\Cheveux\DAL\DBAccess.cs:line 678
+   at DAL.DBAccess.UpdateCustVisit(CUST_VISIT visit) in C:\Users\Private\Source\Repos\Iteration-2-Judging\Cheveux\DAL\DBAccess.cs:line 688
+   at BLL.DBHandler.BLL_UpdateCustVisit(CUST_VISIT visit) in C:\Users\Private\Source\Repos\Iteration-2-Judging\Cheveux\BLL\DBHandler.cs:line 118
+   at Cheveux.CustomerVisit.<>c__DisplayClass11_0.<DisplayServiceDetails>b__1(Object ss, EventArgs ee) in C:\Users\Private\Source\Repos\Iteration-2-Judging\Cheveux\Cheveux\CustomerVisit.aspx.cs:line 397
