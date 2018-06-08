@@ -21,7 +21,7 @@ namespace Cheveux
         //get bookings service details
         SP_GetBookingServiceDTL sDTL = null;
 
-        SP_ViewCustVisit viewCustomerVisit = null;
+        //SP_ViewCustVisit viewCustomerVisit = null;
 
         //bookingID is going to go in here
         string bookingID;
@@ -29,7 +29,6 @@ namespace Cheveux
         string customerID;
 
         CUST_VISIT visit;
-
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,13 +47,13 @@ namespace Cheveux
                 {
                     //Manager
                     //allowed access to this page
-                    //Response.Redirect("Manager.aspx");
+                    Response.Redirect("Manager.aspx");
                 }
                 else if (userType == "S")
                 {
                     //stylist
                     //allowed access to this page
-                    //Response.Redirect("Stylist.aspx");
+                    Response.Redirect("Stylist.aspx");
                 }
                 else if (userType == "C")
                 {
@@ -76,7 +75,7 @@ namespace Cheveux
                 //temp fix redirect to home page
                 Response.Redirect("Default.aspx");
             }
-
+            
             theDate.InnerHtml = test;
             
             //set bookingID param to bookingID variable so it can be used in the methods
@@ -87,7 +86,7 @@ namespace Cheveux
             {
                 DisplayBookingDetails(bookingID, customerID);
                 DisplayServiceDetails(bookingID, customerID);
-                DisplayConfirmVisit(bookingID, customerID);
+                //DisplayConfirmVisit(customerID, bookingID);
             }
             else
             {
@@ -236,24 +235,6 @@ namespace Cheveux
                 newRow = new TableRow();
                 newRow.Height = 250;
                 allBookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Width = 300;
-                Button btnCreateVisit = new Button();
-                btnCreateVisit.Text = "Create Visit";
-                btnCreateVisit.CssClass = "btn btn-outline-dark";
-                btnCreateVisit.Click += (ss, ee) => {
-                    //hide other placeholders headings and make the appropriate placeholder heading visible
-                    phBookingDetails.Visible = false;
-                    phServiceDetails.Visible = false;
-                    phConfirmVisit.Visible = true;
-                    lblBookingDetailsHeading.Visible = false;
-                    lblServiceHeading.Visible = false;
-                    lblConfirmUpdateHeading.Visible = true;
-                };
-                newCell.Controls.Add(btnCreateVisit);
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-
 
                 newCell = new TableCell();
                 newCell.Width = 700;
@@ -265,10 +246,10 @@ namespace Cheveux
                     //takes user to content displaying the service details
                     phBookingDetails.Visible = false;
                     phServiceDetails.Visible = true;
-                    phConfirmVisit.Visible = false;
+                    //phConfirmVisit.Visible = false;
                     lblBookingDetailsHeading.Visible = false;
                     lblServiceHeading.Visible = true;
-                    lblConfirmUpdateHeading.Visible = false;
+                    //lblConfirmUpdateHeading.Visible = false;
                 };
                 newCell.Controls.Add(btnUpdateVisit);
                 allBookingTable.Rows[rCnt].Cells.Add(newCell);
@@ -276,10 +257,10 @@ namespace Cheveux
 
                 //hide other placeholders headings and make the appropriate placeholder heading visible
                 phServiceDetails.Visible = false;
-                phConfirmVisit.Visible = false;
+                //phConfirmVisit.Visible = false;
                 lblBookingDetailsHeading.Visible = true;
                 lblServiceHeading.Visible = false;
-                lblConfirmUpdateHeading.Visible = false;
+                //lblConfirmUpdateHeading.Visible = false;
             }
             catch(ApplicationException Err)
             {
@@ -410,11 +391,14 @@ namespace Cheveux
                     {
                         visit = new CUST_VISIT();
 
+                        visit.CustomerID = Convert.ToString(customerID);
+                        visit.BookingID = Convert.ToString(bookingID);
                         visit.Description = Convert.ToString(descBox.Text);
 
                         if (handler.BLL_UpdateCustVisit(visit))
                         {
                             Response.Write("<script>alert('Update Successful.');</script>");
+                            Response.Redirect("Stylist.aspx");
                         }
                         else
                         {
@@ -437,13 +421,13 @@ namespace Cheveux
 
                     /*hide other placeholders headings and make the appropriate placeholder heading visible
                      *will show user the customer visit content
-                     */
+                     *
                     phBookingDetails.Visible = false;
                     phServiceDetails.Visible = false;
                     phConfirmVisit.Visible = true;
                     lblBookingDetailsHeading.Visible = false;
                     lblServiceHeading.Visible = false;
-                    lblConfirmUpdateHeading.Visible = true;
+                    lblConfirmUpdateHeading.Visible = true;*/
                 };
                 newCell.Controls.Add(sbtnUpdate);
                 //add the cell to the row
@@ -457,136 +441,133 @@ namespace Cheveux
             }
         }
         
-        public void DisplayConfirmVisit(string bookingID,string customerID)
+       /* public void DisplayConfirmVisit(string customerID,string bookingID)
         {
             /*Method displays the customer visit to the user and the user 
                   updates the customer visit record and the receptionist can then generate the 
                   invoice
-            */
             
+
             try
             {
-                viewCustomerVisit = handler.BLL_ViewCustVisit(bookingID, customerID);
+                    viewCustomerVisit = handler.BLL_ViewCustVisit(customerID, bookingID);
 
-                //create a variablew to track the row count
-                int count = 0;
-                //create a new row in the table and set the height
-                TableRow newRow = new TableRow();
-                newRow.Height = 50;
-                //add the row to the table
-                confirmVisitTable.Rows.Add(newRow);
-                //create a new cell in that row and set the width
-                TableCell newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "CustomerID:";
-                newCell.Width = 300;
-                //add the cell to the tablerow in the table
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                //add a new cell that will display the data from the database
-                newCell = new TableCell();
-                newCell.Text = viewCustomerVisit.CustomerID.ToString();
-                newCell.Width = 700;
-                //add the cell to the row in the table
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    //create a variablew to track the row count
+                    int count = 0;
+                    //create a new row in the table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    //add the row to the table
+                    confirmVisitTable.Rows.Add(newRow);
+                    //create a new cell in that row and set the width
+                    TableCell newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "CustomerID:";
+                    newCell.Width = 300;
+                    //add the cell to the tablerow in the table
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    //add a new cell that will display the data from the database
+                    newCell = new TableCell();
+                    newCell.Text = viewCustomerVisit.CustomerID.ToString();
+                    newCell.Width = 700;
+                    //add the cell to the row in the table
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
 
-                //increment row count 
-                count++;
-
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                confirmVisitTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Date :";
-                newCell.Width = 300;
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = viewCustomerVisit.Date.ToString();
-                newCell.Width = 700;
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                count++;
+                    //increment row count 
+                    count++;
 
 
-                newRow = new TableRow();
-                newRow.Height = 50;
-                confirmVisitTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "BookingID :";
-                newCell.Width = 300;
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = viewCustomerVisit.BookingID.ToString();
-                newCell.Width = 700;
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                count++;
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    confirmVisitTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Date :";
+                    newCell.Width = 300;
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = viewCustomerVisit.Date.ToString();
+                    newCell.Width = 700;
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    count++;
 
-                newRow = new TableRow();
-                newRow.Height = 50;
-                confirmVisitTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Description :";
-                newCell.Width = 300;
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = viewCustomerVisit.Description.ToString();
-                newCell.Width = 700;
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                count++;
 
-                newRow = new TableRow();
-                newRow.Height = 250;
-                confirmVisitTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Width = 300;
-                Button buttonBack = new Button();
-                buttonBack.Text = "Back";
-                buttonBack.CssClass = "btn btn-outline-dark";
-                buttonBack.Click += (ss, ee) => {
-                    //hide other placeholders headings and make the appropriate placeholder heading visible
-                    //will take user back to service details 
-                    phBookingDetails.Visible = false;
-                    phServiceDetails.Visible = true;
-                    phConfirmVisit.Visible = false;
-                    lblBookingDetailsHeading.Visible = false;
-                    lblServiceHeading.Visible = true;
-                    lblConfirmUpdateHeading.Visible = false;
-                };
-                newCell.Controls.Add(buttonBack);
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    confirmVisitTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "BookingID :";
+                    newCell.Width = 300;
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = viewCustomerVisit.BookingID.ToString();
+                    newCell.Width = 700;
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    count++;
+
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    confirmVisitTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Description :";
+                    newCell.Width = 300;
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = viewCustomerVisit.Description.ToString();
+                    newCell.Width = 700;
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    count++;
+
+                    newRow = new TableRow();
+                    newRow.Height = 250;
+                    confirmVisitTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Width = 300;
+                    Button buttonBack = new Button();
+                    buttonBack.Text = "Back";
+                    buttonBack.CssClass = "btn btn-outline-dark";
+                    buttonBack.Click += (ss, ee) =>
+                    {
+                        //hide other placeholders headings and make the appropriate placeholder heading visible
+                        //will take user back to service details 
+                        phBookingDetails.Visible = false;
+                        phServiceDetails.Visible = true;
+                        phConfirmVisit.Visible = false;
+                        lblBookingDetailsHeading.Visible = false;
+                        lblServiceHeading.Visible = true;
+                        lblConfirmUpdateHeading.Visible = false;
+                    };
+                    newCell.Controls.Add(buttonBack);
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+
+
+
+                    newCell = new TableCell();
+                    newCell.Width = 300;
+                    Button buttonNext = new Button();
+                    buttonNext.Text = "Confirm";
+                    buttonNext.CssClass = "btn btn-outline-dark";
+                    buttonNext.Click += (ss, ee) =>
+                    {
+                        Response.Redirect("~/Stylist.aspx");
+                    };
+                    newCell.Controls.Add(buttonNext);
+                    confirmVisitTable.Rows[count].Cells.Add(newCell);
+                    //rowCount++;
+
+
                 
-
-
-                newCell = new TableCell();
-                newCell.Width = 300;
-                Button buttonNext= new Button();
-                buttonNext.Text = "Confirm";
-                buttonNext.CssClass = "btn btn-outline-dark";
-                buttonNext.Click += (ss, ee) => {
-                    /*
-                     * 
-                    phBookingDetails.Visible = false;
-                    phServiceDetails.Visible = false;
-                    phConfirmVisit.Visible = false;
-                    lblBookingDetailsHeading.Visible = false;
-                    lblServiceHeading.Visible = false;
-                    lblConfirmUpdateHeading.Visible = false;*/
-                    Response.Redirect("~/Stylist.aspx");
-                };
-                newCell.Controls.Add(buttonNext);
-                confirmVisitTable.Rows[count].Cells.Add(newCell);
-                //rowCount++;
-
-
             }
-            catch(ApplicationException err)
+            catch (ApplicationException err)
             {
                 //log error, display error message,redirect to the stylist page
                 function.logAnError(err.ToString());
                 Response.Write("<script>alert('An error has occured while communicating with the database.');window.location='Stylist.aspx';</script>");
             }
-        }
+        }*/
+                
+        
     }
 }

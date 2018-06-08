@@ -16,5 +16,6 @@ namespace TypeLibrary.Models
         public Nullable<System.DateTime> Date { get; set; }
         public string Available { get; set; }
         public string Arrived { get; set; }
+        public string Comment { get; set; }
     }
 }

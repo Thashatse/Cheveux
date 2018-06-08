@@ -18,6 +18,8 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         String test = DateTime.Now.ToString("dddd d MMMM");
+        String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
+
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
         BOOKING checkIn = null;
@@ -105,7 +107,7 @@ namespace Cheveux
                  */ 
                 if (drpEmpNames.SelectedValue != "-1")
                 {
-                    getAgenda(drpEmpNames.SelectedValue);
+                    getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate));
                 }
             }
             catch (ApplicationException Err)
@@ -114,14 +116,13 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getAgenda(string id)
+        public void getAgenda(string id, DateTime bookingDate)
         {
             Button btn;
 
-            Button checkOut;
             try
             {
-                agenda = handler.BLL_GetEmpAgenda(id);
+                agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
                 
                 //create row for the table 
                 TableRow row = new TableRow();
@@ -141,31 +142,37 @@ namespace Cheveux
                 TableCell startTime = new TableCell();
                 startTime.Text = "Start Time";
                 startTime.Width = 300;
+                startTime.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(startTime);
 
                 TableCell endTime = new TableCell();
                 endTime.Text = "End Time";
                 endTime.Width = 300;
+                endTime.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(endTime);
 
                 TableCell cust = new TableCell();
                 cust.Text = "Customer Name";
                 cust.Width = 300;
+                cust.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(cust);
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee Name";
                 emp.Width = 300;
+                emp.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(emp);
 
                 TableCell service = new TableCell();
                 service.Text = "Service";
                 service.Width = 300;
+                service.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(service);
 
                 TableCell arrived = new TableCell();
                 arrived.Text = "Arrived";
                 arrived.Width = 300;
+                arrived.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
                 //integer that will be incremented in the foreach loop to access the new row for every iteration of the foreach
@@ -212,62 +219,75 @@ namespace Cheveux
                     TableCell buttonCell = new TableCell();
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
-                    
-                    //create button
-                    btn = new Button();
-                    btn.Text = "Check-in";
-                    btn.CssClass = "btn btn-outline-dark";
-                    btn.Click += (ss, ee) => {
-                        /*
-                         *Check-in code here 
-                         * After clicking the button arrived should change to Y
-                         * and the button text should change to Check-out
-                         * and code should cater for the change as the stored procedure to check out and generate invoice
-                         * needs to be called
-                         */
-                        try
-                        {
-                            checkIn = new BOOKING();
-
-                            checkIn.BookingID = a.BookingID.ToString();
-                            checkIn.StylistID = drpEmpNames.SelectedValue.ToString();
-
-                            if (handler.BLL_CheckIn(checkIn))
+                    if (a.Arrived.ToString() == "N")
+                    {
+                        //create button
+                        btn = new Button();
+                        btn.Text = "Check-in";
+                        btn.CssClass = "btn btn-outline-dark";
+                        btn.Click += (ss, ee) => {
+                            /*
+                             *Check-in code here 
+                             * After clicking the button arrived should change to Y
+                             * and the button text should change to Check-out
+                             * and code should cater for the change as the stored procedure to check out and generate invoice
+                             * needs to be called
+                             */
+                            try
                             {
-                                //if BLL_CheckIn successful and arrival status changed show user and refresh the page
-                                Response.Write("<script>alert('Customer arrival status has been updated.');location.reload();</script>");
+                                checkIn = new BOOKING();
+
+                                checkIn.BookingID = a.BookingID.ToString();
+                                checkIn.StylistID = drpEmpNames.SelectedValue.ToString();
+
+                                if (handler.BLL_CheckIn(checkIn))
+                                {
+                                    //if BLL_CheckIn successful and arrival status changed show user and refresh the page
+                                    Response.Write("<script>alert('Customer arrival status has been updated.');location.reload(true);</script>");
+                                }
+                                else
+                                {
+                                    //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
+                                    Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
+                                }
+
                             }
-                            else
+                            catch (ApplicationException err)
                             {
-                                //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
-                                Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
+                                //Error handling
+                                Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
+                                //add error to the error log and then display response tab to say that an error has occured
+                                function.logAnError(err.ToString());
                             }
 
-                        }
-                        catch(ApplicationException err)
-                        {
-                            //Error handling
-                            Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
-                            //add error to the error log and then display response tab to say that an error has occured
-                            function.logAnError(err.ToString());
-                        }
-                            
 
-                    };
-                    //add button to cell 
-                    buttonCell.Controls.Add(btn);
-                    //add cell to row
-                    AgendaTable.Rows[i].Cells.Add(buttonCell);
-
+                        };
+                        //add button to cell 
+                        buttonCell.Controls.Add(btn);
+                        //add cell to row
+                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+                    }
+                    else if(a.Arrived.ToString() == "Y")
+                    {
+                        //create button
+                        btn = new Button();
+                        btn.Text = "Check-out";
+                        btn.CssClass = "btn btn-outline-dark";
+                        btn.Click += (cc, oo) => {
+                            /*
+                             * What button does:
+                             * ================
+                             * When clicked it'll redirect the user to the check-out process
+                             * 
+                             * (Button for lachea's check-out code)
+                             * 
+                             */ 
+                        };
+                        buttonCell.Controls.Add(btn);
+                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+                    }
                     //increment control variable
                     i++;
-
-
-                    //create cell that will be populated by the button and add to row.. cell index: 6
-                    TableCell checkCell = new TableCell();
-                    checkCell.Width = 200;
-                    checkCell.Height = 50;
-
                 }
             }
             catch(ApplicationException E)

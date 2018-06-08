@@ -22,7 +22,7 @@ namespace BLL
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         List<SP_GetEmpNames> BLL_GetEmpNames();
-        List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID);
+        List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate);
         EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateBooking(BOOKING bookingUpdate);
         bool BLL_CheckIn(BOOKING booking);
@@ -32,10 +32,11 @@ namespace BLL
         SP_ViewCustVisit BLL_ViewCustVisit(string customerID, string bookingID);
         bool BLL_UpdateCustVisit(CUST_VISIT visit);
         bool BLL_CreateCustVisit(CUST_VISIT cust_visit);
-        /*
-        bool BLL_AddBooking(BOOKING addBooking);
-        List<SP_GetServices> BLL_GetAllServices();
-        List<SP_GetStylists> BLL_GetStylistsForService(string serviceID);
-        */
+        /*bool BLL_AddBooking(BOOKING addBooking);
+
+       List<SP_GetServices> BLL_GetAllServices();
+       List<SP_GetStylists> BLL_GetStylistsForService(string serviceID);
+       */
+        List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate);
     }
 }

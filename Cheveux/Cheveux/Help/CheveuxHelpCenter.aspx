@@ -25,10 +25,11 @@
 
                         <!--Nav Pills-->
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="../Default.aspx">Cheveux Home </a></li>
-                            <li><a href="#UserAccounts">User Accounts </a></li>
-                            <li><a href="#Bookings">Bookings </a></li>
-                            <li><a href="#3">Help 3 </a></li>
+                            <li class="active"><a href="../Default.aspx">Cheveux Home &nbsp;&nbsp;</a></li>
+                            <li><a href="#UserAccounts">User Accounts &nbsp; &nbsp;</a></li>
+                            <li><a href="#Bookings">Bookings  &nbsp; &nbsp;</a></li>
+                            <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In &nbsp; &nbsp;</a></li>
+                            <li><a href="#StylistCustomerVisit">Stylist Customer Visit &nbsp; &nbsp;</a></li>
                         </ul>
 
                     </div>
@@ -124,13 +125,61 @@
                 <!--Help Section Template 3-->
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <a name="3"></a>
+                        <a name="ReceptionistCheckIn"></a>
                         <!--Header-->
-                        <h2>Section 3 </h2>
+                        <h2>Receptionist Check-in</h2>
                         <!--Content-->
-                        <p>Content</p>
+                        <p>
+                            <ul>
+                            <li>Step 1) Log In</li>
+                            <img src="Helpimages/Login-SignUp.png" alt="Login" />
+                            <li>Step 2)Select dropdown list to select employee's schedule you would like to view </li>
+                            <img src="Helpimages/Dropdown.png" alt="Dropdown" />
+                            <li>Stylists Agenda is displayed</li>
+                            <img src="Helpimages/viewAgenda.png" alt="viewAgenda" />
+                            <li>Step 3)Look which time slot the customer has come in for and select check-in</li>
+                            <img src="Helpimages/CheckIn.png" alt="Check In" />
+                            <li>Button will change to check-out</li>
+                            <img src="Helpimages/CheckOut.png" alt="Check-out" />
+                            <li>When the customer has comleted their appointment check them out to generate invoice using the 
+                                "Check-out" button
+                            </li>
+                        </ul>
+                        </p>
                     </div>
                 </div>
+
+
+                <!--line Break-->
+                <br /><br />
+                <!--New Section-->
+                <!--Help Section Template 4-->
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <a name="StylistCustomerVisit"></a>
+                        <!--Header-->
+                        <h2>Stylist Customer Visit</h2>
+                        <!--Content-->
+                        <p>
+                            <ul>
+                            <li>Step 1) Log In</li>
+                            <img src="Helpimages/Login-SignUp.png" alt="Login" />
+                            <li>Displays customer booking (if the customer has arrived for their booking) </li>
+                            <li>Step 1) Select "Customer Visit Record" to create a visit record</li>
+                            <img src="Helpimages/createVisit.png" alt="Create visit" />
+                            <li>You will be redirected to booking details page</li>
+                            <img src="Helpimages/bookingDetails.png" alt="Check In" /><!--Image to be added-->
+                            <li>Step 2) To update service details click "Update"</li>
+                            <img src="Helpimages/serviceUpdate.png" alt="Check-out" /><!--Image to be added-->
+                            <li>Step 3) Input service description and select "Update visit"</li>
+                            <img src="Helpimages/serviceInput.png" alt="Check-out" /><!--Image to be added-->
+                        </ul>
+                        </p>
+                    </div>
+                </div>
+
+
+
             </div>
         </div>
     </form>
