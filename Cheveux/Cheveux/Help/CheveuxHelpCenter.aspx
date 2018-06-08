@@ -167,12 +167,12 @@
                             <li>Displays customer booking (if the customer has arrived for their booking) </li>
                             <li>Step 1) Select "Customer Visit Record" to create a visit record</li>
                             <img src="Helpimages/createVisit.png" alt="Create visit" />
-                            <li>You will be redirected to booking details page</li>
-                            <img src="Helpimages/bookingDetails.png" alt="Check In" /><!--Image to be added-->
+                            <li>You will be redirected to booking details page which booking details</li>
+                            <img src="Helpimages/customerVisitBookingDetail.png" alt="Booking Detail" />
                             <li>Step 2) To update service details click "Update"</li>
-                            <img src="Helpimages/serviceUpdate.png" alt="Check-out" /><!--Image to be added-->
+                            <img src="Helpimages/serviceDTLs.png" alt="Service details" />
                             <li>Step 3) Input service description and select "Update visit"</li>
-                            <img src="Helpimages/serviceInput.png" alt="Check-out" /><!--Image to be added-->
+                            <img src="Helpimages/serviceInput.png" alt="Service description input" />
                         </ul>
                         </p>
                     </div>
