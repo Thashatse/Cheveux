@@ -209,7 +209,7 @@ namespace Cheveux
                                      */
 
                                     Response.Write("<script>alert('Customer visit record for the visit has been created.You will now be taken to customer visit process.');"
-                                        + "window.location.href = 'CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
+                                        + "window.location = 'CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
                                         + "&customerID=" + cust_visit.CustomerID.ToString()
                                         + "';</script>");
                                 }

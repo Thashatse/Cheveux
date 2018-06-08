@@ -60,7 +60,7 @@ namespace Cheveux
                 catch (ApplicationException Err)
                 {
                     function.logAnError(Err.ToString());
-                    Response.Redirect("Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
+                    Response.Redirect("Error.aspx?Error='A Error in when authenticating with the Cheveux server'");
                 }
                 /*
                  * if the user is unregistered get the info requered and create a new user, 

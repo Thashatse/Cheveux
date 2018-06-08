@@ -115,11 +115,11 @@
                 <br />
             </div>
 
-            <!--Hairstlist selector-->
+            <!--Hairstylist selector-->
             <div class="row">
                 <div class="col-xs-12 col-md-12">
                     <a name="Hairstylist"></a>
-                    <h2>Hairstlist </h2>
+                    <h2>Hairstylist </h2>
                 </div>
 
                 <!--Hairstylist 3-->

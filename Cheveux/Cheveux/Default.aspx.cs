@@ -55,7 +55,7 @@ namespace Cheveux
             String name = Request.QueryString["WB"];
                 if (name != null)
                 {
-                    Welcome.Text = "Welcom Back To Cheveux " + name;
+                    Welcome.Text = "Welcome Back To Cheveux " + name;
                 }
                 else
                 {
@@ -63,8 +63,8 @@ namespace Cheveux
                     name = Request.QueryString["NU"];
                     if (name != null)
                     {
-                        Welcome.Text = "Congradulations " + name
-                        + "  You Are Now Register With Cheveux";
+                        Welcome.Text = "Congratulations " + name
+                        + "  You Are Now Registered With Cheveux";
                     }
                 }
             }
