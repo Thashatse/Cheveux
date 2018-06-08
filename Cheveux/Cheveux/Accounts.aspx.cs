@@ -90,12 +90,18 @@ namespace Cheveux
                     cookie["UT"] = result.ToString();
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
-                    //go back to the previous page or the home page by default
+
+                    /*
+                     * Results in redirect error solution to be found
+                    //get the privious page to redirect to
                     String PreviousPage = Request.QueryString["PreviousPage"];
+                    //go back to the previous page if there is one
                     if (PreviousPage != null)
                     {
-                        Response.Redirect(PreviousPage);
+                        Response.Redirect("Default.aspx?PreviousPagePostLogin=" + PreviousPage);
                     }
+                    */
+
                     //access control
                     //send the user to the correct page based on their usertype
                     if (result == "C")
@@ -120,6 +126,7 @@ namespace Cheveux
                         {
                             //stylist
                             cookie["UT"] = "S";
+                            //go back to the previous page if there is one
                             Response.Redirect("Stylist.aspx");
                         }
                         else

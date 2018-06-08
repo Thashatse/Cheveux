@@ -199,7 +199,9 @@
     <Content Include="MasterPages\CheveuxStylist.Master" />
     <Content Include="Stylist.aspx" />
     <Content Include="myUpcomingApps.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
