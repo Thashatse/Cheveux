@@ -47,7 +47,7 @@ namespace Cheveux
                 {
                     //Manager
                     //allowed access to this page
-                    //Response.Redirect("Manager.aspx");
+                    Response.Redirect("Manager.aspx");
                 }
                 else if (userType == "S")
                 {

@@ -18,8 +18,6 @@ namespace Cheveux
         CUST_VISIT cust_visit;
         HttpCookie cookie = null;
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
-
-        string sample = "118233419479102946333";
         protected void Page_Load(object sender, EventArgs e)
 		{
             //access control
