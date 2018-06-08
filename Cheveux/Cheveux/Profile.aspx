@@ -56,7 +56,8 @@
                                     <!--Username-->
                                     <asp:TextBox ID="userName" runat="server" placeholder="Placecholder"></asp:TextBox>
                                     <!--Help-->
-                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" title="This is used to identify you on the Cheveux platform">
+                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" 
+                                        title="This is used to identify you on the Cheveux platform">
                                         <span class="glyphicon">&#63;</span>
                                     </a>
                                     <!--userName Validation-->
@@ -68,7 +69,9 @@
                                 <asp:TableCell>
                                     <!--Phone Number-->
                                     <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
-                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" title="10-digit RSA Cellphone number">
+                                    <!--Help-->
+                                    <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" 
+                                        title="10-digit RSA Cellphone number">
                                         <span class="glyphicon">&#63;</span>
                                     </a>
                                     <!--contactNumber Validation-->
@@ -82,7 +85,8 @@
                                 </asp:TableCell>
                                 <asp:TableCell HorizontalAlign="Right">
                                     <a href = 'Profile.aspx'>Cancel   </a>
-                                    <asp:Button ID="Save" runat="server" Text="Save" class="btn btn-default" OnClick="showConfirmEdit"/>
+
+                                    <asp:Button ID="btnSave" runat="server" Text="Save" class="btn btn-default" OnClick="ShowConfirmEdit"/>
                                 </asp:TableCell>
                             </asp:TableRow>
                         </asp:Table>

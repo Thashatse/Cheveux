@@ -353,9 +353,10 @@ namespace Cheveux
             }
         }
 
-        //confirm Edit
-        public void showConfirmEdit(object sender, EventArgs e)
+        
+        protected void ShowConfirmEdit(object sender, EventArgs e)
         {
+            //confirm Edit
             confirm.Visible = true;
             editProfileTable.Visible = false;
             JumbotronLogedIn.Visible = false;
