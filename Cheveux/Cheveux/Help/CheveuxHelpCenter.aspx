@@ -28,7 +28,7 @@
                             <li class="active"><a href="../Default.aspx">Cheveux Home </a></li>
                             <li><a href="#UserAccounts">User Accounts </a></li>
                             <li><a href="#Bookings">Bookings </a></li>
-                            <li><a href="#3">Help 3 </a></li>
+                            <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In </a></li>
                         </ul>
 
                     </div>
@@ -124,13 +124,33 @@
                 <!--Help Section Template 3-->
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
-                        <a name="3"></a>
+                        <a name="ReceptionistCheckIn"></a>
                         <!--Header-->
-                        <h2>Section 3 </h2>
+                        <h2>Receptionist Check-in</h2>
                         <!--Content-->
-                        <p>Content</p>
+                        <p>
+                            <ul>
+                            <li>Step 1) Log In</li>
+                            <img src="Helpimages/Login-SignUp.png" alt="Login" />
+                            <li>Step 2)Select dropdown list to select employee's schedule you would like to view </li>
+                            <img src="Helpimages/Dropdown.png" alt="Dropdown" />
+                            <li>Stylists Agenda is displayed</li>
+                            <img src="Helpimages/viewAgenda.png" alt="viewAgenda" />
+                            <li>Step 3)Look which time slot the customer has come in for and select check-in</li>
+                            <img src="Helpimages/CheckIn.png" alt="Check In" />
+                            <li>Button will change to check-out</li>
+                            <img src="Helpimages/CheckOut.png" alt="Check-out" />
+                            <li>When the customer has comleted their appointment check them out to generate invoice using the 
+                                "Check-out" button
+                            </li>
+                        </ul>
+                        </p>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
     </form>
