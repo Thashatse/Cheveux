@@ -252,13 +252,16 @@ namespace Cheveux
                     newCell = new TableCell();
                     newCell.Text = function.GetFullArrivedStatus(bookings.arrived.ToString()[0]);
                     pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = 'ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
-                        "&BookingType=Past" +
-                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
+                    if (bookings.arrived.ToString()[0] != 'N')
+                    {
+                        newCell = new TableCell();
+                        newCell.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                            "<a href = 'ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
+                            "&BookingType=Past" +
+                            "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        pastBookings.Rows[rowCount].Cells.Add(newCell);
+                    }
                     rowCount++;
                 }
             }

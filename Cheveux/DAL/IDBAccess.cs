@@ -20,7 +20,6 @@ namespace DAL
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
         List<SP_GetEmpNames> GetEmpNames();
-        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         EMPLOYEE getEmployeeType(string EmployeeID);
@@ -32,6 +31,8 @@ namespace DAL
         SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
         bool UpdateCustVisit(CUST_VISIT visit);
         bool CreateCustVisit(CUST_VISIT cust_visit);
+        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
+        List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
 /*        bool AddBooking(BOOKING addBooking);
         List<SP_GetServices> GetAllServices();
         List<SP_GetStylists> GetStylistsForService(string serviceID);*/

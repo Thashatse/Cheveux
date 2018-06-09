@@ -100,7 +100,7 @@ namespace Cheveux
             try
             {
 
-                bDTL = handler.BLL_GetAllofBookingDTL(bookingID, customerID);
+                bDTL = handler.BLL_GetAllofBookingDTL(bookingID.Replace(" ", string.Empty), customerID);
 
                 //create a variablew to track the row count
                 int rCnt = 0;
@@ -262,7 +262,7 @@ namespace Cheveux
                 lblServiceHeading.Visible = false;
                 //lblConfirmUpdateHeading.Visible = false;
             }
-            catch(ApplicationException Err)
+            catch(Exception Err)
             {
                 //log error, display error message,redirect to the stylist page
                 function.logAnError(Err.ToString());
