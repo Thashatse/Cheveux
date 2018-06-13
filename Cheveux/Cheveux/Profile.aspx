@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
         <style>
         body{
-            margin-top:150px;
+            margin-top:100px;
         }
     </style>
 </asp:Content>
