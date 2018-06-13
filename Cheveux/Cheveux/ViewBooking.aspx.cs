@@ -375,9 +375,7 @@ namespace Cheveux
                 //display the buttons bassed on if this is a past booking or not
                 if (pastBooking == true)
                 {
-                        newCell.Text = "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = '#'> Review Stylist</a></button>";
-                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                       
                 }
                 else
                 {
