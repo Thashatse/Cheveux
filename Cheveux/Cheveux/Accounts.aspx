@@ -23,8 +23,8 @@
                     <div class="col-md-12">
                         <!--jumbotron-->
                         <div class="jumbotron">
-							<div class="col-xs-4 col-md-4 text-center"></div>
-                            <div class="col-xs-4 col-md-14 text-center">
+							<div class="col-xs-4 col-md-4"></div>
+                            <div class="col-xs-4 col-md-4 text-center">
 							<!--heading-->
 								<h2> Get started with<b> Cheveux</b1></h2>
 								<!--line break-->
@@ -44,7 +44,7 @@
                                 <!--Sign out button-->
                                 <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
                             </div>
-							<div class="col-xs-4 col-md-4 text-center"></div>
+							<div class="col-xs-4 col-md-4"></div>
                         </div>
                     </div>
                 </div>
