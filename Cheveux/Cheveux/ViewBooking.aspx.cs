@@ -47,12 +47,17 @@ namespace Cheveux
                         if (bookingType == "Past")
                         {
                             //get past booking details
-                            getBookingDeatails(BookingID, true);
+                            getBookingDeatails(BookingID, true, false);
+                        }
+                        else if (bookingType == "CheckOut")
+                        {
+                            //get past booking details
+                            getBookingDeatails(BookingID, false, true);
                         }
                         else if (bookingType == null)
                         {
                             //get upcoming booking details
-                            getBookingDeatails(BookingID, false);
+                            getBookingDeatails(BookingID, false, false);
                         }
                         //create a back button
                         //Set the page to redirect to the previous page in the querstring
@@ -113,20 +118,22 @@ namespace Cheveux
             }
         }
 
-        public void getBookingDeatails(string BookingID, bool pastBooking)
+        public void getBookingDeatails(string BookingID, bool pastBooking, bool checkOut)
         {
+
             //display the booking
             //get the details from the db
             try
             {
                 SP_GetCustomerBooking BookingDetails = null;
-                List<SP_getInvoiceDL> invoicDetailLines = null; 
+                List<SP_getInvoiceDL> invoicDetailLines = null;
                 //check if this is a past or upcoming booking and display the details acordingly
-                if (pastBooking == false)
+                if (pastBooking == false && checkOut == false)
                 {
                     BookingDetails =
                         handler.getCustomerUpcomingBookingDetails(BookingID);
-                }else if (pastBooking == true)
+                }
+                else if (pastBooking == true)
                 {
                     //get booking deatils
                     BookingDetails = handler.getCustomerPastBookingDetails(BookingID);
@@ -135,10 +142,25 @@ namespace Cheveux
                     //get the review
 
                 }
+                else if (checkOut == true)
+                {
+                    //get booking deatils
+                    BookingDetails = handler.getBookingDetaisForCheckOut(BookingID);
+                    //create sales record
+                    handler.createSalesRecord(BookingID);
+                }
 
-                //display a heading
-                BookingLable.Text = "<h2> " + BookingDetails.serviceName.ToString() + " with " +
+                if (checkOut == false)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> " + BookingDetails.serviceName.ToString() + " with " +
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                else
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> Booking Summary </h2>";
+                }
 
                 //create a variablew to track the row count
                 int rowCount = 0;
