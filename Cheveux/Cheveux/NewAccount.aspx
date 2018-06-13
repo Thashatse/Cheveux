@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Register - Cheveux</title>
     <!--Bootstrap-->
-    <link href="//SICT-IIS/beauxdebut/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
 
 </head>
@@ -22,7 +22,7 @@
 					<div class="col-xs-2 col-md-2 text-center"></div>
                     <div class="col-xs-8 col-md-8">
 						<!--Logo-->
-						<img src="//SICT-IIS/beauxdebut/IMG_0715.png" alt="logo" width="100" height="100" />
+						<img src="/IMG_0715.png" alt="logo" width="100" height="100" />
 						<h1>Register</h1>
 						<asp:Label ID="almostThere" runat="server" Text="Label"></asp:Label>
 						<!--line break-->
@@ -32,7 +32,7 @@
                             <asp:Label ID="Label3" runat="server" Text="User Name:"></asp:Label>
                             <asp:TextBox ID="userName" runat="server" placeholder="Placecholder"></asp:TextBox>
                             <!--Help-->
-                            <a href="//SICT-IIS/beauxdebut/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
+                            <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
                                 <span class="glyphicon">&#63;</span>
                             </a>
                             <!--userName Validation-->
@@ -44,7 +44,7 @@
                             <asp:Label ID="Label4" runat="server" Text="Contact Number:"></asp:Label>
                             <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
                             <!--Help-->
-                            <a href="//SICT-IIS/beauxdebut/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number">
+                            <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number">
                                 <span class="glyphicon">&#63;</span>
                             </a>
                             <!--contactNumber Validation-->
@@ -65,7 +65,7 @@
         </div>
     </form>
     <!--Bootstrap-->
-    <script src="//SICT-IIS/beauxdebut/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="//SICT-IIS/beauxdebut/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

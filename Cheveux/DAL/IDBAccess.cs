@@ -35,6 +35,8 @@ namespace DAL
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
         bool createSalesRecord(string bookingID);
+        bool createSalesDTLRecord(SALES_DTL detailLine);
+        string getSalePaymentType(String SaleID);
         /*        bool AddBooking(BOOKING addBooking);
                 List<SP_GetServices> GetAllServices();
                 List<SP_GetStylists> GetStylistsForService(string serviceID);*/

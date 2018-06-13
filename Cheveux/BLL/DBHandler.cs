@@ -18,6 +18,16 @@ namespace BLL
             db = new DBAccess();
         }
 
+        public string getSalePaymentType(String SaleID)
+        {
+            return db.getSalePaymentType(SaleID);
+        }
+
+        public bool createSalesDTLRecord(SALES_DTL detailLine)
+        {
+            return db.createSalesDTLRecord(detailLine);
+        }
+
         public SP_CheckForUserType BLL_CheckForUserType(string id)
         {
             return db.CheckForUserType(id);

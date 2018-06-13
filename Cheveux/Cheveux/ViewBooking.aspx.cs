@@ -140,7 +140,7 @@ namespace Cheveux
                     //get the invoice 
                     invoicDetailLines = handler.getInvoiceDL(BookingID);
                     //get the review
-
+                    
                 }
                 else if (checkOut == true)
                 {
@@ -148,6 +148,14 @@ namespace Cheveux
                     BookingDetails = handler.getBookingDetaisForCheckOut(BookingID);
                     //create sales record
                     handler.createSalesRecord(BookingID);
+                    //add booking to invoice
+                    SALES_DTL detailLine = new SALES_DTL();
+                    detailLine.ProductID = BookingDetails.serviceID;
+                    detailLine.SaleID = BookingID;
+                    detailLine.Qty = 1;
+                    handler.createSalesDTLRecord(detailLine);
+                    //get the invoice 
+                    invoicDetailLines = handler.getInvoiceDL(BookingID);
                 }
 
                 if (checkOut == false)
@@ -253,21 +261,8 @@ namespace Cheveux
                 rowCount++;
 
                 //only display arrived stataus for past bookings
-                if (pastBooking == true)
+                if (pastBooking == true || checkOut == true)
                 {
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    BookingTable.Rows.Add(newRow);
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Arrived:";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = function.GetFullArrivedStatus(BookingDetails.arrived.ToString()[0]);
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                    //increment row count 
-                    rowCount++;
 
                     //diplay invoice
                     //get invoice details
@@ -381,6 +376,19 @@ namespace Cheveux
 					
 					//increment row count 
                     rowCount++;
+
+                    //where arrived status used. extra cell in table to be removed
+                    newRow = new TableRow();
+                    BookingTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Text = "";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = "";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
                 }
 
                 newRow = new TableRow();
@@ -398,6 +406,36 @@ namespace Cheveux
                 if (pastBooking == true)
                 {
                        
+                }
+                else if(checkOut == true)
+                {
+                    /* the payment type should be recived and commited ti the database here
+                     * for puropse of presentation this was left out
+                     * 
+                    //get Payment Type
+                    string paymentType = handler.getSalePaymentType(BookingID);
+                    if(paymentType == null || paymentType == "NULL" || paymentType == "")
+                    {
+                        newCell.Text = "Cash <input type='checkbox' name='paymentType' value='Cash'/>          "+
+                            "       Credit <input type='checkbox' id='Credit' name='paymentType' value='Credit'/>   " +
+                            " < a href = '#' > Save Payment Type </ a > ";
+                       BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    }
+                    else
+                    {
+                        newCell.Text = "<a href='#'> Print   </a>" +
+
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = 'ViewBooking.aspx?BookingID=" + BookingID.ToString().Replace(" ", string.Empty) +
+                            "&BookingType=CheckOut" +
+                            "&PreviousPage=" + PreviousPageAdress + "' style='color:White'>Check-out</a></button>";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    }
+                    *
+                    * the remaining part of the if statmnt is for presentaion preposes only
+                    */
+                    newCell.Text = "<a href='#' onClick='window.print()' >Print This Page  </a>";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
                 else
                 {

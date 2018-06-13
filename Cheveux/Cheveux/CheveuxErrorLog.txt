@@ -280,3 +280,72 @@ Error Number:4060,State:1,Class:11
    at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
    at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 40
    at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
+
+TimeStamp: 2018/06/13 19:17:44
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.TypeInitializationException: The type initializer for 'DAL.DBHelper' threw an exception. ---> System.Configuration.ConfigurationErrorsException: The entry 'DB' has already been added. (F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\web.config line 53)
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Web.HttpContext.GetSection(String sectionName)
+   at System.Web.Configuration.HttpConfigurationSystem.GetSection(String sectionName)
+   at System.Web.Configuration.HttpConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String configKey)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.get_ConnectionStrings()
+   at DAL.DBHelper..cctor() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 14
+   --- End of inner exception stack trace ---
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars)
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 63
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 80
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
+
+TimeStamp: 2018/06/13 20:15:48
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: index
+   at System.Web.UI.ControlCollection.get_Item(Int32 index)
+   at System.Web.UI.WebControls.TableRowCollection.get_Item(Int32 index)
+   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 281
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/06/13 20:17:06
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: index
+   at System.Web.UI.ControlCollection.get_Item(Int32 index)
+   at System.Web.UI.WebControls.TableRowCollection.get_Item(Int32 index)
+   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 281
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/06/13 20:50:20
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: index
+   at System.Web.UI.ControlCollection.get_Item(Int32 index)
+   at System.Web.UI.WebControls.TableCellCollection.get_Item(Int32 index)
+   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 413
+ get getBookingDeatails method in viewbooking form

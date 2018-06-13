@@ -9,9 +9,9 @@
         }
     </script>
 
-        <style>
-        body{
-            margin-top:150px;
+    <style>
+        body {
+            margin-top: 150px;
         }
     </style>
 </asp:Content>
@@ -21,85 +21,94 @@
         <!-- Display the Booking for the client -->
         <div class="container" runat="server" id="LogedIn" visible="false">
             <div class="row">
-                <div class="col-md-12">
-                    <!--Bookings Heading-->
-                    <asp:Label runat="server" ID="BookingLable"></asp:Label>
+
+                <div id="printableArea">
+
+                    <div class="col-md-12">
+                        <!--Bookings Heading-->
+                        <asp:Label runat="server" ID="BookingLable"></asp:Label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-12">
-                    <!--Booking Table-->
-                    <asp:Table ID="BookingTable" runat="server"></asp:Table>
-                    <!--Edit Booking Table -->
-                    <div class="container" runat="server" id="Edit" visible="false">
-                        <asp:Table ID="editBookingTable" runat="server">
-                            <asp:TableRow Height="50">
-                                <asp:TableCell Font-Bold="true"></asp:TableCell>
-                                <asp:TableCell>
-                                    <!--Service Name-->
-                                    <asp:DropDownList ID="DDLService" runat="server"></asp:DropDownList>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow Height="50">
-                                <asp:TableCell Font-Bold="true"></asp:TableCell>
-                                <asp:TableCell>
-                                    <!--Service Description-->
-                                    <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow Height="50">
-                                <asp:TableCell Font-Bold="true"></asp:TableCell>
-                                <asp:TableCell>
-                                    <!--Service Price-->
-                                    <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow Height="50">
-                                <asp:TableCell Font-Bold="true"></asp:TableCell>
-                                <asp:TableCell>
-                                    <!--Service Stylist-->
-                                    <asp:DropDownList ID="DDLStylist" runat="server"></asp:DropDownList>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow Height="50">
-                                <asp:TableCell Font-Bold="true"></asp:TableCell>
-                                <asp:TableCell>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <!--Booking Table-->
+                        <asp:Table ID="BookingTable" runat="server"></asp:Table>
+                        <!--Edit Booking Table -->
+                        <div class="container" runat="server" id="Edit" visible="false">
+                            <asp:Table ID="editBookingTable" runat="server">
+                                <asp:TableRow Height="50">
+                                    <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                    <asp:TableCell>
+                                        <!--Service Name-->
+                                        <asp:DropDownList ID="DDLService" runat="server"></asp:DropDownList>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow Height="50">
+                                    <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                    <asp:TableCell>
+                                        <!--Service Description-->
+                                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow Height="50">
+                                    <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                    <asp:TableCell>
+                                        <!--Service Price-->
+                                        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow Height="50">
+                                    <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                    <asp:TableCell>
+                                        <!--Service Stylist-->
+                                        <asp:DropDownList ID="DDLStylist" runat="server"></asp:DropDownList>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow Height="50">
+                                    <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                    <asp:TableCell>
                                     <!--Booking Date-->
 
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow Height="50">
-                                <asp:TableCell Font-Bold="true"></asp:TableCell>
-                                <asp:TableCell>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow Height="50">
+                                    <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                    <asp:TableCell>
                                     <!--Booking Time-->
 
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow Height="50">
-                                <asp:TableCell></asp:TableCell>
-                                <asp:TableCell>
-                                    <!--Cancel Updates-->
-                                    <a href = 'javascript:history.back()'>Cancel   </a>
-                                    <!--Save Updates-->
-                                    <asp:Button ID="Save" runat="server" Text="Save" class="btn btn-default" OnClick="Save_Click"/></asp:TableCell>
-                            </asp:TableRow>
-                        </asp:Table>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow Height="50">
+                                    <asp:TableCell>
+                                        <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True">
+                                            <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                        <!--Cancel Updates-->
+                                        <a href='javascript:history.back()'>Cancel   </a>
+                                        <!--Save Updates-->
+                                        <asp:Button ID="Save" runat="server" Text="Save" class="btn btn-default" OnClick="Save_Click" />
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                            </asp:Table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Display the Booking for the client -->
+                        <asp:Label ID="BackButton" runat="server"></asp:Label>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Display the Booking for the client -->
-                    <asp:Label ID="BackButton" runat="server"></asp:Label>
-                </div>
-            </div>
         </div>
-        <!-- if the user is loged Out -->
-        <div class="container" runat="server" id="LogedOut">
-            <div class="jumbotron">
-                <p>Please log-in</p>
-                <button type="button" class="btn btn-default"><a href="Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOutButton">Login / Sign Up</a></button>
-            </div>
+    </div>
+    <!-- if the user is loged Out -->
+    <div class="container" runat="server" id="LogedOut">
+        <div class="jumbotron">
+            <p>Please log-in</p>
+            <button type="button" class="btn btn-default"><a href="Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOutButton">Login / Sign Up</a></button>
         </div>
     </div>
 

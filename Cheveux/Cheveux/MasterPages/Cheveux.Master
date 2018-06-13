@@ -33,7 +33,7 @@
             </button>
 
             <a class="navbar-brand" href="Default.aspx">
-                 <img src="//SICT-IIS/beauxdebut/IMG_0715.png" alt="logo" width="75" height="75" />
+                 <img src="/IMG_0715.png" alt="logo" width="75" height="75" />
             </a>
 
             <div class="collapse navbar-collapse" id="collapsibleNavbar">

@@ -12,7 +12,6 @@ namespace DAL
 {
     public class DBAccess : IDBAccess
     {
-
         public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -37,12 +36,58 @@ namespace DAL
                                 bookingDate = Convert.ToDateTime(table.Rows[0]["Date"].ToString()),
                                 bookingStartTime = Convert.ToDateTime(table.Rows[0]["StartTime"].ToString()),
                                 bookingID = table.Rows[0]["BookingID"].ToString(),
-                                CustomerID = table.Rows[0]["BookingID"].ToString()
-
+                                CustomerID = table.Rows[0]["BookingID"].ToString(),
+                                serviceID = table.Rows[0]["ServiceID"].ToString()
                             };
                     }
                     return booking;
                 }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public string getSalePaymentType(string saleID)
+        {
+            string paymentType = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SaleID", saleID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        paymentType = Convert.ToString(row["PaymentType"]);
+                    }
+                    return paymentType;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool createSalesDTLRecord(SALES_DTL detailLine)
+        {
+
+            SP_AddUserGoogleAuth TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+            new SqlParameter("@SaleID", detailLine.SaleID),
+            new SqlParameter("@ProductID", detailLine.ProductID),
+            new SqlParameter("@Qty", detailLine.Qty)
+            };
+            try
+            {
+                return DBHelper.NonQuery("SP_CreateSalesDTLRecord", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {

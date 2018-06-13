@@ -12,7 +12,7 @@
     <!-- Bootstrap-->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
-    <link href="//SICT-IIS/beauxdebut/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
         <!-- Search Function-->
     <script>
         function search() {
@@ -31,7 +31,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <a class="navbar-brand" href="Receptionist.aspx">
-                        <img src="//SICT-IIS/beauxdebut/IMG_0715.png" alt="logo" width="75" height="75" />
+                        <img src="/IMG_0715.png" alt="logo" width="75" height="75" />
                     </a>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,8 +91,8 @@
         </div>
     </form>
         <!--Bootstrap-->
-     <script src="//SICT-IIS/beauxdebut/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="//SICT-IIS/beauxdebut/Scripts/bootstrap.min.js"></script>
+     <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
     <!-- Search Function-->
     <script>
         function search() {
