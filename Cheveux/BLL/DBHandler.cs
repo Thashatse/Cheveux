@@ -139,5 +139,15 @@ namespace BLL
         {
             return db.GetMyNextCustomer(employeeID, bookingDate);
         }
+
+        public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
+        {
+            return db.getBookingDetaisForCheckOut(BookingID);
+        }
+
+        public bool createSalesRecord(string bookingID)
+        {
+            return db.createSalesRecord(bookingID);
+        }
     }
 }
