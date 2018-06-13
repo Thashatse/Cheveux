@@ -270,21 +270,12 @@ namespace Cheveux
                     else if(a.Arrived.ToString() == "Y")
                     {
                         //create button
-                        btn = new Button();
-                        btn.Text = "Check-out";
-                        btn.CssClass = "btn btn-outline-dark";
-                        btn.Click += (cc, oo) => {
-                            /*
-                             * What button does:
-                             * ================
-                             * When clicked it'll redirect the user to the check-out process
-                             * 
-                             * (Button for lachea's check-out code)
-                             * 
-                             */ 
-                        };
-                        buttonCell.Controls.Add(btn);
-                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+                        TableCell newCell = new TableCell();
+                        newCell.Text = "<button type = 'button' class='btn btn-success'>" +
+                            "<a href = 'ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "&BookingType=CheckOut" +
+                            "&PreviousPage=Receptionist.aspx' style='color:White'>Check-out</a></button>";
+                        AgendaTable.Rows[i].Cells.Add(newCell);
                     }
                     //increment control variable
                     i++;

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Accounts.aspx.cs" Inherits="Cheveux.Accounts" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="//SICT-IIS/beauxdebut/Accounts.aspx.cs" Inherits="Cheveux.Accounts" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Sign In - Cheveux</title>
     <!--Bootstrap-->
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="//SICT-IIS/beauxdebut/Content/bootstrap.min.css" rel="stylesheet" />
 
     <!--CSS-->
 
@@ -23,15 +23,20 @@
                     <div class="col-md-12">
                         <!--jumbotron-->
                         <div class="jumbotron">
-                            <div class="col-xs-12 col-md-12 text-center">
-                                <!--Logo-->
-                                <img src="/IMG_0715.png" alt="logo" width="300" height="300" />
-                                <!--line break-->
+							<div class="col-xs-4 col-md-4"></div>
+                            <div class="col-xs-4 col-md-4 text-center">
+							<!--heading-->
+								<h2> Get started with<b> Cheveux</b1></h2>
+								<!--line break-->
+                                <br />
+								<!--Logo-->
+                                <img src="//SICT-IIS/beauxdebut/IMG_0715.png" alt="logo" width="300" height="300" />
+								<!--line break-->
                                 <br />
                                 <!--sign in buton-->
-                                <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
-                                <!--Help-->
-                                <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Sign in with your Google account">
+                                <div class="g-signin2" data-onsuccess="onSignIn" runat="server" data-width="150" data-height="50"></div>
+								<!--Help-->
+                                <a href="//SICT-IIS/beauxdebut/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Sign in with your Google account">
                                     <span class="glyphicon">&#63; Help</span>
                                 </a>
                                 <!--line break-->
@@ -39,12 +44,13 @@
                                 <!--Sign out button-->
                                 <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
                             </div>
+							<div class="col-xs-4 col-md-4"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <asp:Button runat="server" ID="btnAuthenticate" Style="display: none;" OnClick="btnAuthenticate_Click" />
+		<asp:Button runat="server" ID="btnAuthenticate" Style="display: none;" OnClick="btnAuthenticate_Click" />
     </form>
     <!--google get user data function-->
         <script> 
@@ -68,7 +74,7 @@
             }
         </script>
         <!--Bootstrap-->
-        <script src="../Scripts/jquery-3.3.1.min.js"></script>
-        <script src="/Scripts/bootstrap.min.js"></script>
+        <script src="//SICT-IIS/beauxdebut/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="//SICT-IIS/beauxdebut/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

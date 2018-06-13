@@ -38,5 +38,8 @@ namespace BLL
        List<SP_GetStylists> BLL_GetStylistsForService(string serviceID);
        */
         List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate);
+
+        SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
+        bool createSalesRecord(string bookingID);
     }
 }

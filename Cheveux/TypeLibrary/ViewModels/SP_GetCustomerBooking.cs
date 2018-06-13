@@ -16,6 +16,7 @@ namespace TypeLibrary.ViewModels
         public DateTime bookingDate { get; set; }
         public DateTime bookingStartTime { get; set; }
         public string bookingID { get; set; }
+        public string CustomerID { get; set; }
         public Char arrived { get; set; }
     }
 }

@@ -4,6 +4,11 @@
     Customer Visit - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+        <style>
+        body{
+            margin-top:150px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
@@ -36,7 +41,7 @@
         <!--Edit Service Details-->
         <div id="BookingServiceDTLs">
             <div class="row">
-                <h1 runat="server" id="lblServiceHeading">Edit Service</h1>
+                <h1 runat="server" id="lblServiceHeading">Edit Customer Visit Record</h1>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-md-12">

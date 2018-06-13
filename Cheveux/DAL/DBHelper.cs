@@ -39,7 +39,7 @@ namespace DAL
                     }
                     catch(Exception er)
                     {
-                        throw;  //new ApplicationException("An Error Occouerd When Comunicating With The Database" + er);
+                        throw new ApplicationException("An Error Occouerd When Comunicating With The Database" + er);
                     }
                 }
             }

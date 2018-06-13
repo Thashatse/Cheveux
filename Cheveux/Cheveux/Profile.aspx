@@ -4,6 +4,11 @@
     Profile - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+        <style>
+        body{
+            margin-top:100px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- if the user is loged Out -->

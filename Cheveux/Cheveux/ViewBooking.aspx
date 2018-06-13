@@ -8,6 +8,12 @@
             window.history.back()
         }
     </script>
+
+        <style>
+        body{
+            margin-top:150px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" runat="server" id="Bookings">

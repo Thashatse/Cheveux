@@ -9,6 +9,11 @@
             window.location.href = "Search.aspx?ST=" + document.getElementById('serchTermOnSearchPage').value;
         }
     </script>
+        <style>
+        body{
+            margin-top:150px;
+        }
+    </style>
 </asp:content>
 <asp:content id="Content3" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <div class="container">

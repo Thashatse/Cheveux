@@ -111,6 +111,7 @@ namespace Cheveux
                 allBookingTable.Rows.Add(newRow);
                 //create a new cell in that row and set the width
                 TableCell newCell = new TableCell();
+                /*
                 newCell.Font.Bold = true;
                 newCell.Text = "BookingID:";
                 newCell.Width = 300;
@@ -126,7 +127,7 @@ namespace Cheveux
                 //increment row count 
                 rCnt++;
 
-
+                
                 newRow = new TableRow();
                 newRow.Height = 50;
                 allBookingTable.Rows.Add(newRow);
@@ -140,7 +141,7 @@ namespace Cheveux
                 newCell.Width = 700;
                 allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 rCnt++;
-
+                */
 
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -324,7 +325,7 @@ namespace Cheveux
                 //create a cell for the service description and add it to the row
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "Service Description:";
+                newCell.Text = "Booking comment:";
                 newCell.Width = 300;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
 
