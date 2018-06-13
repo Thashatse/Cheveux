@@ -26,50 +26,64 @@
 <body>
     <form id="form1" runat="server">
         <!--Nav Bar-->
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+        <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top py-2">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
                     </button>
                     <a class="navbar-brand" href="Receptionist.aspx">
-                        <img src="//SICT-IIS/beauxdebut/IMG_0715.png" alt="logo" width="75" height="75" /></a>
-                </div>
+                        <img src="//SICT-IIS/beauxdebut/IMG_0715.png" alt="logo" width="75" height="75" />
+                    </a>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li ><a href="Receptionist.aspx"><!--Agenda Page-->Agender</a></li>
-                        <li><a href="#"><!--Calendar-->Calendar</a></li>
-                        <li><a href="#"><!--Manage Stock-->Manage Stock</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav mx-auto">
+                        <li ><button type="button" class="btn btn-light" style="margin-right:10px;">
+                            <a href="Receptionist.aspx"><!--Agenda Page-->Agender</a>
+                            </button>
+                        </li>
+
+                        <li><button type="button" class="btn btn-light" style="margin-right:10px;">
+                            <a href="#"><!--Calendar-->Calendar</a>
+                            </button>
+                        </li>
+
+                        <li><button type="button" class="btn btn-light" style="margin-right:10px;">
+                            <a href="#"><!--Manage Stock-->Manage Stock</a>
+                            </button>
+                        </li>
+                        
                         <asp:PlaceHolder runat="server" id="LogedOut">
                             <!--Login Button-->
-                            <li><a href="Accounts.aspx">Login / Sign Up</a></li>
+                            <li><button type="button" class="btn btn-light" style="margin-right:10px;">
+                                <a href="Accounts.aspx">Login / Sign Up</a>
+                                </button>
+                                </li>
                         </asp:PlaceHolder>
-                        <asp:PlaceHolder runat="server" ID="LogedIn">
-                            <!--Account Button-->
-                            <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
-                            <li><a href="Accounts.aspx?action=Logout">Log Out</a></li>
-                        </asp:PlaceHolder>
-                        <!--Help-->
-                        <li><a href="Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a></li>
+
+                            <asp:PlaceHolder runat="server" ID="LogedIn">
+                                <!--Account Button-->
+                                <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
+
+                                <li><button class="btn btn-light" style="margin-right:10px;">
+                                    <a href="Accounts.aspx?action=Logout">Log Out</a>
+                                    </button></li>
+                            </asp:PlaceHolder>
+
+                            <!--Help-->
+                            <li><button type="button" class="btn btn-light" style="margin-right:10px;">
+                                <a href="Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a>
+                            </button></li>
+                            
+                                <div class="form-group" style="float:right !important;">
+                                   <!--Search Button & Text Box-->
+                                    <input id="serchTerm" type="text" placeholder="Search">
+                                    <a class="btn btn-default" href="javascript:search()">Search</a>
+                                </div>
                     </ul>
-                    <div class="form-group">
-                        <!--Search Button & Text Box-->
-                        <input id="serchTerm" type="text" placeholder="Search">
-                        <a class="btn btn-default" href="javascript:search()">Search</a>
-                    </div>
                 </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
         </nav>
+
+
         <!--Place older for Content-->
         <div class="container-fluid">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
