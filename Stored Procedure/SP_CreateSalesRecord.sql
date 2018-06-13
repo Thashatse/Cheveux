@@ -5,22 +5,17 @@ GO
 -- =============================================
 -- Description:	Given a bookingID Creates a sales record
 -- =============================================
-CREATE PROCEDURE SP_CreateSalesRecord 
-	@BookingID nchar(10),
-	@PaymentType nchar(10)
+create PROCEDURE SP_CreateSalesRecord 
+	@BookingID nchar(10)
 AS
 BEGIN
 	begin try
 		begin transaction
-			UPDATE SALE
-			SET SaleID = @BookingID,
-				[Date] = GETDATE(),
-				CustomerID = (select CustomerID
+			INSERt INTO SALE(SaleID, [Date], CustomerID, BookingID) 
+				values(@BookingID, GETDATE(), (select CustomerID
 								from BOOKING
-								where BookingID = @BookingID),
-				PaymentType = @PaymentType,
-				BookingID = @BookingID
-			Where BookingID = @BookingID 
+								where BookingID = @BookingID), @BookingID)
+								commit transaction
 	end try
 	begin catch
 		if @@TRANCOUNT > 0

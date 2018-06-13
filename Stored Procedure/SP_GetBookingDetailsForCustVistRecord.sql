@@ -5,16 +5,14 @@ GO
 -- =============================================
 -- Description:	Gets booking deatials for a booking in progress
 -- =============================================
-CREATE PROCEDURE SP_GetBookingDetailsForCustVistRecord
+create PROCEDURE SP_GetBookingDetailsForCustVistRecord
 	-- Add the parameters for the stored procedure here
-	@bookingID nchar(10),
-	@customerID nchar(30)
+	@bookingID nchar(10)
 AS
 BEGIN
-	Select P.[Name], P.ProductDescription, P.Price,  U.FirstName, B.[Date], TS.StartTime, BookingID      
+	Select P.[Name], P.ProductDescription, P.Price,  U.FirstName, B.[Date], TS.StartTime, BookingID, B.CustomerID      
 	From BOOKING B, TIMESLOT TS, [User] U, PRODUCT P
-	Where BookingID = @bookingID 
-	AND CustomerID = @customerID
+	Where BookingID = @bookingID
 	AND B.SlotNo = TS.SlotNo 
 	AND B.StylistID = U.UserID 
 	AND B.ServiceID = P.ProductID 
