@@ -12,7 +12,7 @@
     <!-- Bootstrap-->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
-    <link rel="“stylesheet”" type="“text/css”" href="“/CSS/Cheveux.css”">
+    <link href="//SICT-IIS/beauxdebut/Content/bootstrap.min.css" rel="stylesheet" />
         <!-- Search Function-->
     <script>
         function search() {
@@ -37,7 +37,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="Receptionist.aspx">
-                        <img src="/IMG_0715.png" alt="logo" width="75" height="75" /></a>
+                        <img src="//SICT-IIS/beauxdebut/IMG_0715.png" alt="logo" width="75" height="75" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -77,8 +77,8 @@
         </div>
     </form>
         <!--Bootstrap-->
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
-    <script src="/Scripts/bootstrap.min.js"></script>
+     <script src="//SICT-IIS/beauxdebut/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="//SICT-IIS/beauxdebut/Scripts/bootstrap.min.js"></script>
     <!-- Search Function-->
     <script>
         function search() {
