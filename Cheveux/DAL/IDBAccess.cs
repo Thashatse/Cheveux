@@ -33,8 +33,10 @@ namespace DAL
         bool CreateCustVisit(CUST_VISIT cust_visit);
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
-/*        bool AddBooking(BOOKING addBooking);
-        List<SP_GetServices> GetAllServices();
-        List<SP_GetStylists> GetStylistsForService(string serviceID);*/
+        SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
+        bool createSalesRecord(string bookingID);
+        /*        bool AddBooking(BOOKING addBooking);
+                List<SP_GetServices> GetAllServices();
+                List<SP_GetStylists> GetStylistsForService(string serviceID);*/
     }
 }

@@ -12,6 +12,44 @@ namespace DAL
 {
     public class DBAccess : IDBAccess
     {
+
+        public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
+        {
+            SP_GetCustomerBooking booking = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@bookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingDetailsForCustVistRecord",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                            booking = new SP_GetCustomerBooking
+                            {
+                                serviceName = table.Rows[0]["Name"].ToString(),
+                                serviceDescripion = table.Rows[0]["ProductDescription"].ToString(),
+                                servicePrice = table.Rows[0]["Price"].ToString(),
+                                stylistFirstName = table.Rows[0]["FirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(table.Rows[0]["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(table.Rows[0]["StartTime"].ToString()),
+                                bookingID = table.Rows[0]["BookingID"].ToString(),
+                                CustomerID = table.Rows[0]["BookingID"].ToString()
+
+                            };
+                    }
+                    return booking;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public SP_CheckForUserType CheckForUserType(string id)
         {
             SP_CheckForUserType TF = null;
@@ -533,6 +571,23 @@ namespace DAL
             }
         }
 
+        public bool createSalesRecord(string bookingID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@BookingID", bookingID)
+                };
+
+                return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public bool CheckIn(BOOKING booking)
         {
             try
@@ -832,5 +887,6 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
     }
 }
