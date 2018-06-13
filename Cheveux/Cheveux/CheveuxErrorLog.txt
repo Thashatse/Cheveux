@@ -157,3 +157,126 @@ Error Number:53,State:0,Class:20
    at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
    at BLL.Authentication.Authenticate(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 40
    at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
+
+TimeStamp: 2018/06/13 12:21:16
+Machine Name: M104-50
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: s215121902
+User Domain: MANDELA
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'MANDELA\s215121902'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+ClientConnectionId:70bb1f3a-631d-4ad7-85cf-268634fa313c
+Error Number:4060,State:1,Class:11
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
+
+TimeStamp: 2018/06/13 12:22:46
+Machine Name: M104-50
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: s215121902
+User Domain: MANDELA
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'MANDELA\s215121902'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+ClientConnectionId:a29557fa-5148-4bee-8663-7f57cd74c793
+Error Number:4060,State:1,Class:11
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
+
+TimeStamp: 2018/06/13 12:23:42
+Machine Name: M104-50
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: s215121902
+User Domain: MANDELA
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'MANDELA\s215121902'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+ClientConnectionId:f71c57b6-e4fd-41df-b97f-3bb93ce9ecf1
+Error Number:4060,State:1,Class:11
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
+
+TimeStamp: 2018/06/13 12:23:42
+Machine Name: M104-50
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: s215121902
+User Domain: MANDELA
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'MANDELA\s215121902'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 25
+ClientConnectionId:f71c57b6-e4fd-41df-b97f-3bb93ce9ecf1
+Error Number:4060,State:1,Class:11
+   at DAL.DBAccess.CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 42
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 23
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 36. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.Authenticate(String reg) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\BLL\Authentication.cs:line 40
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in C:\Users\s215121902\Source\Repos\Cheveux\Cheveux\Cheveux\Accounts.aspx.cs:line 58
