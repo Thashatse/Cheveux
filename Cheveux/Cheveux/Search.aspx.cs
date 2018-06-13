@@ -119,7 +119,7 @@ namespace Cheveux
                                 newCell.Text = result.ProductDescription.ToString();
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = result.Price;
+                                newCell.Text = "R " + result.Price;
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                                 newCell = new TableCell();
                                 newCell.Text = function.GetFullProductTypeText(result.ProductType);
@@ -153,7 +153,7 @@ namespace Cheveux
                                 newCell.Text = result.ProductDescription.ToString();
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = result.Price;
+                                newCell.Text = "R "+result.Price;
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                                 newCell = new TableCell();
                                 newCell.Text =
