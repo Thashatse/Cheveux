@@ -219,7 +219,7 @@ namespace Cheveux
                     TableCell buttonCell = new TableCell();
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
-                    if (a.Arrived.ToString() == "N")
+                    if (a.Arrived.ToString() == "N" || a.Arrived.ToString() == "")
                     {
                         //create button
                         btn = new Button();
