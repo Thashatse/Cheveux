@@ -13,21 +13,63 @@
     </title>
     <!-- Bootstrap-->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <!--Bootstrap font awesome for the icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!--CSS-->
-    <link rel="“stylesheet”" type="“text/css”" href="“/CSS/Cheveux.css”">
+    <link rel="“stylesheet”" type="“text/css”" href="/CSS/Cheveux.css">
         <!-- Search Function-->
     <script>
         function search() {
             window.location.href = "Search.aspx?ST=" + document.getElementById('serchTerm').value;
         }
     </script>
+
+    <style>
+            .scrolltop {
+	            display:none;
+	            width:100%;
+	            margin:0 auto;
+	            position:fixed;
+	            bottom:20px;
+	            right:10px;	
+            }
+            .scroll {
+	            position:absolute;
+	            right:20px;
+	            bottom:20px;
+	            background:#b2b2b2;
+	            background:rgba(178,178,178,0.7);
+	            padding:20px;
+	            text-align: center;
+	            margin: 0 0 0 0;
+	            cursor:pointer;
+	            transition: 0.5s;
+	            		
+            }
+            .scroll:hover {
+	            background:rgba(178,178,178,1.0);
+	            transition: 0.5s;
+	           		
+            }
+            .scroll:hover .fa {
+	            padding-top:-10px;
+            }
+            .scroll .fa {
+	            font-size:30px;
+	            margin-top:-5px;
+	            margin-left:1px;
+	            transition: 0.5s;
+            }
+            
+    </style>
     <!--Header Placeholder-->
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-<nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top py-2">
+
+        <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top py-2">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -89,16 +131,46 @@
             </div>
         </nav>
 
-
+        
 
         <!--Place older for Content-->
-        <div class="container-fluid">
+        <div class="container-fluid theTop">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+        <!--Sticky back-to-top button-->
+        <div class='scrolltop'>
+            <div class='scroll icon'>
+                <i class="fa fa-4x fa-angle-up"></i>
+            </div>
+        </div>
+
     </form>
     <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    
+    <!--jQuery to return user to the top of the page-->    
+    <script>
+
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 50) {
+                        $('.scrolltop:hidden').stop(true, true).fadeIn();
+                    } else {
+                        $('.scrolltop').stop(true, true).fadeOut();
+                    }
+                });
+
+                $(function () {
+                    $(".scroll").click(function () {
+                        $("html,body").animate({ scrollTop: $(".theTop").offset().top }, "1000");
+                        return false
+                    })
+                });
+            });
+        </script>
+
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

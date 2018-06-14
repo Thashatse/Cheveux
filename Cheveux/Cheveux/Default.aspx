@@ -3,7 +3,7 @@
     Cheveux
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <style>
+   <style>
         body{
             margin-top:150px;
         }
@@ -23,6 +23,7 @@
                     <br />
                 </div>
             </div>
+
             <!--Service selector-->
             <div class="row">
                 <div class="col-xs-12 col-md-12">

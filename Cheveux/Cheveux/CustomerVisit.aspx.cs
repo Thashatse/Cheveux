@@ -411,7 +411,7 @@ namespace Cheveux
                             Response.Write("<script>alert('Unsuccessful. Customer visit record was not updated');</script>");
                         }
                     }
-                    catch (ApplicationException err)
+                    catch (Exception err)
                     {
                         Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
                         //add error to the error log and then display response tab to say that an error has occured
@@ -434,7 +434,7 @@ namespace Cheveux
                 //add the cell to the row
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 //log error, display error message,redirect to the stylist page
                 function.logAnError(Err.ToString());

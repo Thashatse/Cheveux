@@ -17,12 +17,12 @@ namespace Cheveux
         String test = DateTime.Now.ToString("dddd d MMMM");
         List<SP_GetEmpAgenda> today = null;
 
-        //HttpCookie cookie = null;
+        HttpCookie cookie = null;
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
 
-        string sample = "118233419479102946333";
+        //string sample = "118233419479102946333";
         protected void Page_Load(object sender, EventArgs e)
-        {/*
+        {
             //access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
             //send the user to the correct page based on their usertype
@@ -43,7 +43,7 @@ namespace Cheveux
                 {
                     //stylist
                     //allowed access to this page
-                    Response.Redirect("Stylist.aspx");
+                    //Response.Redirect("Stylist.aspx");
                 }
                 else if (userType == "C")
                 {
@@ -65,11 +65,11 @@ namespace Cheveux
                 //temp fix redirect to home page
                 Response.Redirect("Default.aspx");
             }
-            */
+            
             theDate.InnerHtml = test;
-            //cookie = Request.Cookies["CheveuxUserID"];
+            cookie = Request.Cookies["CheveuxUserID"];
 
-            getTodaySchedule(/*cookie["ID"].ToString()*/sample, DateTime.Parse(bookingDate));
+            getTodaySchedule(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
         }
         public void getTodaySchedule(string id, DateTime bookingDate)
         {
@@ -172,9 +172,10 @@ namespace Cheveux
             }
             catch (ApplicationException E)
             {
-                Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
+                Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');</script>");
+                Response.Write("<script>window.location='Stylist.aspx';</script>");
                 function.logAnError(E.ToString());
-                Server.Transfer("Error.aspx");
+                //Server.Transfer("Error.aspx");
             }
         }
     }

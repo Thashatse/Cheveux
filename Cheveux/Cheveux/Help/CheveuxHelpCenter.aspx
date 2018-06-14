@@ -9,6 +9,50 @@
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
     <link rel="“stylesheet”" type="“text/css”" href="“/CSS/Cheveux.css”">
+
+    <!--Bootstrap font awesome for the icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+    <style>
+            .scrolltop {
+	            display:none;
+	            width:100%;
+	            margin:0 auto;
+	            position:fixed;
+	            bottom:20px;
+	            right:10px;	
+            }
+            .scroll {
+	            position:absolute;
+	            right:20px;
+	            bottom:20px;
+	            background:#b2b2b2;
+	            background:rgba(178,178,178,0.7);
+	            padding:20px;
+	            text-align: center;
+	            margin: 0 0 0 0;
+	            cursor:pointer;
+	            transition: 0.5s;
+	            		
+            }
+            .scroll:hover {
+	            background:rgba(178,178,178,1.0);
+	            transition: 0.5s;
+	           		
+            }
+            .scroll:hover .fa {
+	            padding-top:-10px;
+            }
+            .scroll .fa {
+	            font-size:30px;
+	            margin-top:-5px;
+	            margin-left:1px;
+	            transition: 0.5s;
+	            	
+            }
+    </style>
+
 </head>
 <body>
     <form id="HelpForm" runat="server">
@@ -17,7 +61,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!--Jumbotron Header-->
-                        <div class="jumbotron">
+                        <div class="jumbotron theTop">
                             <img src="/IMG_0715.png" alt="logo" width="150" height="150" />
                             <h1>Help Center</h1>
                             <p>Welcome to the Cheveux Help Center</p>
@@ -179,12 +223,42 @@
                 </div>
 
 
+                <!--Sticky back-to-top button-->
+                    <div class='scrolltop'>
+                        <div class='scroll icon'>
+                            <i class="fa fa-4x fa-angle-up"></i>
+                        </div>
+                    </div>
+
 
             </div>
         </div>
     </form>
     <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
+
+
+    <!--jQuery to return user to the top of the page-->    
+    <script>
+
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 50) {
+                        $('.scrolltop:hidden').stop(true, true).fadeIn();
+                    } else {
+                        $('.scrolltop').stop(true, true).fadeOut();
+                    }
+                });
+
+                $(function () {
+                    $(".scroll").click(function () {
+                        $("html,body").animate({ scrollTop: $(".theTop").offset().top }, "1000");
+                        return false
+                    })
+                });
+            });
+        </script>
+
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
