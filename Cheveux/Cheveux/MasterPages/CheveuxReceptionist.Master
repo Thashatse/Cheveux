@@ -80,24 +80,24 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav mx-auto">
                         <li ><button type="button" class="btn btn-light" style="margin-right:10px;">
-                            <a href="Receptionist.aspx"><!--Agenda Page-->Agender</a>
+                            <a href="Receptionist.aspx" style="text-decoration:none;"><!--Agenda Page-->Agenda</a>
                             </button>
                         </li>
 
                         <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                            <a href="#"><!--Calendar-->Calendar</a>
+                            <a href="#" style="text-decoration:none;"><!--Calendar-->Calendar</a>
                             </button>
                         </li>
 
                         <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                            <a href="#"><!--Manage Stock-->Manage Stock</a>
+                            <a href="#" style="text-decoration:none;"><!--Manage Stock-->Manage Stock</a>
                             </button>
                         </li>
                         
                         <asp:PlaceHolder runat="server" id="LogedOut">
                             <!--Login Button-->
                             <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                                <a href="Accounts.aspx">Login / Sign Up</a>
+                                <a href="Accounts.aspx" style="text-decoration:none;">Login / Sign Up</a>
                                 </button>
                                 </li>
                         </asp:PlaceHolder>
@@ -107,13 +107,13 @@
                                 <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
 
                                 <li><button class="btn btn-light" style="margin-right:10px;">
-                                    <a href="Accounts.aspx?action=Logout">Log Out</a>
+                                    <a href="Accounts.aspx?action=Logout" style="text-decoration:none;">Log Out</a>
                                     </button></li>
                             </asp:PlaceHolder>
 
                             <!--Help-->
                             <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                                <a href="Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a>
+                                <a href="Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration:none;">Help Center</a>
                             </button></li>
                             
                                 <div class="form-group" style="float:right !important;">

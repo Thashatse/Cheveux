@@ -104,7 +104,7 @@
                             <asp:PlaceHolder runat="server" id="LogedOut">
                                 <!--Login Button-->
                                 <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                                    <a href="Accounts.aspx">Login/Sign Up</a>
+                                    <a href="Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
                                     </button></li>
                             </asp:PlaceHolder>
 
@@ -113,19 +113,19 @@
                                 <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
 
                                 <li><button class="btn btn-light" style="margin-right:10px;">
-                                    <a href="Accounts.aspx?action=Logout">Log Out</a>
+                                    <a href="Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
                                     </button></li>
                             </asp:PlaceHolder>
 
                             <!--Help-->
                             <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                                <a href="Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a>
+                                <a href="Help/CheveuxHelpCenter.aspx" target="_blank"  style="text-decoration: none;">Help Center</a>
                             </button></li>
                             
                             <div class="form-group" style="float:right !important;">
                                <!--Search Button & Text Box-->
                                 <input id="serchTerm" type="text" placeholder="Search">
-                                <a class="btn btn-default" href="javascript:search()">Search</a>
+                                <a class="btn btn-default" href="javascript:search()" style="text-decoration: none;">Search</a>
                             </div>
                 </ul>
             </div>
