@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <!--Tabs-->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li><a href="#Upcoming Service(s)" role="tab" data-toggle="tab">Upcoming Booking(s)</a></li>
+                        <li><a href="#Upcoming Service(s)" role="tab" data-toggle="tab">Upcoming Booking(s)&#09;</a></li>
                         <li><a href="#Past Service(s)" role="tab" data-toggle="tab">Past Booking(s)</a></li>
                     </ul>
 

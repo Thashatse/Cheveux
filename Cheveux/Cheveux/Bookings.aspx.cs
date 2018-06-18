@@ -95,6 +95,18 @@ namespace Cheveux
                 upcomingBookings.Rows.Add(newRow);
                 //create a header row and set cell withs
                 TableHeaderCell newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Date";
+                newHeaderCell.Width = 150;
+                upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Time";
+                newHeaderCell.Width = 50;
+                upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Stylist";
+                newHeaderCell.Width = 100;
+                upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Service Name";
                 newHeaderCell.Width = 200;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
@@ -107,19 +119,7 @@ namespace Cheveux
                 newHeaderCell.Width = 100;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Stylist";
-                newHeaderCell.Width = 100;
-                upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Time";
-                newHeaderCell.Width = 50;
-                upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Date";
-                newHeaderCell.Width = 150;
-                upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Width = 150;
+                newHeaderCell.Width = 300;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
 
                 //create a loop to display each result
@@ -133,28 +133,34 @@ namespace Cheveux
                     upcomingBookings.Rows.Add(newRow);
                     //fill the row with the data from the results object
                     TableCell newCell = new TableCell();
+                    newCell.Text = bookings.bookingDate.ToString("dd-MM-yyyy");
+                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
+                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = bookings.stylistFirstName.ToString();
+                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
                     newCell.Text = bookings.serviceName.ToString();
                     upcomingBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
                     newCell.Text = bookings.serviceDescripion.ToString();
                     upcomingBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = bookings.servicePrice.ToString();
+                    newCell.Text = "R "+bookings.servicePrice.ToString();
                     upcomingBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = bookings.stylistFirstName.ToString();
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.bookingDate.ToString("dd-MM-yyyy");
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
+                    //display cancel, edit and print buttons
                     newCell.Text =
+                        "<a href = 'ViewBooking.aspx?Action=Cancel&BookingID=" +
+                        bookings.bookingID.ToString().Replace(" ", string.Empty) +
+                        "&PreviousPage=Bookings.aspx'>Cancel Booking   </a>   " +
+                        
                         "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = 'ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
-                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        "<a href = 'ViewBooking.aspx?Action=Edit&BookingID=" +
+                        bookings.bookingID.ToString().Replace(" ", string.Empty) +
+                        "&PreviousPage=Bookings.aspx'>Edit Booking</a></button>";
                     upcomingBookings.Rows[rowCount].Cells.Add(newCell);
                     rowCount++;
                 }
@@ -177,7 +183,7 @@ namespace Cheveux
             catch (ApplicationException Err)
             {
                 function.logAnError(Err.ToString()+"\n Getting Past Booking ob Bookings Page");
-                upcomingBookingsLable.Text =
+                pastBookingsLable.Text =
                     "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
             //check if there are past bookings
@@ -190,6 +196,18 @@ namespace Cheveux
                 pastBookings.Rows.Add(newRow);
                 //create a header row and set cell withs
                 TableHeaderCell newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Date";
+                newHeaderCell.Width = 150;
+                pastBookings.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Time";
+                newHeaderCell.Width = 50;
+                pastBookings.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Stylist";
+                newHeaderCell.Width = 100;
+                pastBookings.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Service Name";
                 newHeaderCell.Width = 200;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
@@ -202,23 +220,7 @@ namespace Cheveux
                 newHeaderCell.Width = 100;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Stylist";
-                newHeaderCell.Width = 100;
-                pastBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Time";
-                newHeaderCell.Width = 50;
-                pastBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Date";
-                newHeaderCell.Width = 150;
-                pastBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Arrived";
-                newHeaderCell.Width = 50;
-                pastBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Width = 150;
+                newHeaderCell.Width = 200;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
 
                 //create a loop to display each result
@@ -232,25 +234,22 @@ namespace Cheveux
                     pastBookings.Rows.Add(newRow);
                     //fill the row with the data from the results object
                     TableCell newCell = new TableCell();
+                    newCell.Text = bookings.bookingDate.ToString("dd-MM-yyyy");
+                    pastBookings.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
+                    pastBookings.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = bookings.stylistFirstName.ToString();
+                    pastBookings.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
                     newCell.Text = bookings.serviceName.ToString();
                     pastBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
                     newCell.Text = bookings.serviceDescripion.ToString();
                     pastBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = bookings.servicePrice.ToString();
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.stylistFirstName.ToString();
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.bookingDate.ToString("dd-MM-yyyy");
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = function.GetFullArrivedStatus(bookings.arrived.ToString()[0]);
+                    newCell.Text = "R " + bookings.servicePrice.ToString();
                     pastBookings.Rows[rowCount].Cells.Add(newCell);
                     if (bookings.arrived.ToString()[0] != 'N')
                     {
@@ -259,7 +258,7 @@ namespace Cheveux
                             "<button type = 'button' class='btn btn-default'>" +
                             "<a href = 'ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
                             "&BookingType=Past" +
-                            "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                            "&PreviousPage=Bookings.aspx'>View Invoice</a></button>";
                         pastBookings.Rows[rowCount].Cells.Add(newCell);
                     }
                     rowCount++;

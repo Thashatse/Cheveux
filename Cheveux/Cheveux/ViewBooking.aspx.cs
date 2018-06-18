@@ -93,7 +93,7 @@ namespace Cheveux
                         {
                             BackButton.Text =
                             "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = '" + PreviousPageAdress + "'>Done</a></button>";
+                            "<a href = '" + PreviousPageAdress + ">Done</a></button>";
                         }
                         else
                         {
@@ -405,7 +405,9 @@ namespace Cheveux
                 //display the buttons bassed on if this is a past booking or not
                 if (pastBooking == true)
                 {
-                       
+                    //print booking summary
+                    newCell.Text = "<a href='#' onClick='window.print()' >Print This Page  </a>";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
                 else if(checkOut == true)
                 {
@@ -526,10 +528,10 @@ namespace Cheveux
                "<button type = 'button' class='btn btn-danger'>" +
                 "<a href = ViewBooking.aspx?Action=CancelConfirmed&BookingID=" +
                 BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=" + PreviousPageAdress + "'>Yes</a></button>" +
+                "&PreviousPage=" + PreviousPageAdress + ">Yes</a></button>" +
                "</div> ";
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString() + "\n confirm delete booking method in viewbooking form");
                 BookingLable.Text =
@@ -546,8 +548,7 @@ namespace Cheveux
                 //Let teh user know it was a success or not
                 if (success == true)
                 {
-                    BookingLable.Text = "<div class='jumbotron'> <h1> The Booking was succefuly Canceled </h1> " +
-                   "</div> ";
+                    Response.Redirect(PreviousPageAdress);
                 }
                 else
                 {
