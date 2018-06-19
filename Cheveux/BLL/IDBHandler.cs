@@ -42,5 +42,6 @@ namespace BLL
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
         bool createSalesRecord(string bookingID);
         string getSalePaymentType(String SaleID);
+        bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
     }
 }

@@ -891,6 +891,7 @@ namespace DAL
         }
         */
         }
+
         public List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
             SP_GetMyNextCustomer emp = null;
@@ -933,5 +934,22 @@ namespace DAL
             }
         }
 
+        public bool addPaymentTypeToSalesRecord(string paymentType, string saleID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@PaymentType", paymentType),
+                    new SqlParameter("@SaleD", saleID),
+                };
+
+                return DBHelper.NonQuery("SP_AddPaymentTypeToSalesRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }

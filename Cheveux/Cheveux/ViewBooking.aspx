@@ -21,13 +21,9 @@
         <!-- Display the Booking for the client -->
         <div class="container" runat="server" id="LogedIn" visible="false">
             <div class="row">
-
-                <div id="printableArea">
-
-                    <div class="col-md-12">
-                        <!--Bookings Heading-->
-                        <asp:Label runat="server" ID="BookingLable"></asp:Label>
-                    </div>
+                <div class="col-md-12">
+                    <!--Bookings Heading-->
+                    <asp:Label runat="server" ID="BookingLable"></asp:Label>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
@@ -68,14 +64,12 @@
                                     <asp:TableCell Font-Bold="true"></asp:TableCell>
                                     <asp:TableCell>
                                     <!--Booking Date-->
-
                                     </asp:TableCell>
                                 </asp:TableRow>
                                 <asp:TableRow Height="50">
                                     <asp:TableCell Font-Bold="true"></asp:TableCell>
                                     <asp:TableCell>
                                     <!--Booking Time-->
-
                                     </asp:TableCell>
                                 </asp:TableRow>
                                 <asp:TableRow Height="50">
@@ -94,16 +88,100 @@
                             </asp:Table>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Display the Booking for the client -->
-                        <asp:Label ID="BackButton" runat="server"></asp:Label>
+
+                    <div class="container" runat="server" id="divCheckOut" visible="false">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <!-- Check out -->
+                                <asp:Table ID="tblCheckOut" runat="server">
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true"  Width="300"> Service: </asp:TableCell>
+                                        <asp:TableCell>
+                                        <!--Service Name-->
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true"  Width="700"> Service Description: </asp:TableCell>
+                                        <asp:TableCell>
+                                            <!--Service Description-->
+                                            <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true"> Stylist: </asp:TableCell>
+                                        <asp:TableCell>
+                                            <!--Service Stylist-->
+                                            <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true"> Date: </asp:TableCell>
+                                        <asp:TableCell>
+                                    <!--Booking Date-->
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true"> Time: </asp:TableCell>
+                                        <asp:TableCell>
+                                    <!--Booking Time-->
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true" ColumnSpan="2">
+                                        <!--Invoice Lable--> Invoice: 
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell></asp:TableCell>
+                                        <asp:TableCell>
+                                        <!--Invoice-->
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true">
+                                        <!--Payment Type Lable--> Payment Type: 
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                        <!--Payment Type-->
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell>
+                                            <!--Payment Type-->
+                                            <asp:RadioButtonList ID="PaymentType" runat="server">
+                                                <asp:ListItem Selected="True"> Cash </asp:ListItem>
+                                                <asp:ListItem> Credit </asp:ListItem>
+                                            </asp:RadioButtonList>
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <!--Save Payment Type-->
+                                            <asp:Button ID="btnSavePaymentType" runat="server" Text="Save" OnClick="btnSavePaymentType_Click" />
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell></asp:TableCell>
+                                        <asp:TableCell>
+                                        <!--Print-->
+                                        <a href='#' onClick='window.print()' >Print This Page  </a>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Display the Booking for the client -->
+                            <asp:Label ID="BackButton" runat="server"></asp:Label>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+
     <!-- if the user is loged Out -->
     <div class="container" runat="server" id="LogedOut">
         <div class="jumbotron">

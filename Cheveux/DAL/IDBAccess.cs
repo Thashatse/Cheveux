@@ -36,6 +36,7 @@ namespace DAL
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
         bool createSalesRecord(string bookingID);
         bool createSalesDTLRecord(SALES_DTL detailLine);
+        bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
         string getSalePaymentType(String SaleID);
         /*        bool AddBooking(BOOKING addBooking);
                 List<SP_GetServices> GetAllServices();
