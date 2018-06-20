@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheveuxStylist.Master" AutoEventWireup="true" CodeBehind="myUpcomingApps.aspx.cs" Inherits="Cheveux.todaysSchedule" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
-    myUpcoming Appointments
+    My Upcoming Appointments - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
         <style>

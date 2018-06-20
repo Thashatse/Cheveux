@@ -29,7 +29,8 @@ namespace Cheveux
                 else if (userType == "M")
                 {
                     //Manager
-                    Response.Redirect("Manager.aspx");
+                    //Response.Redirect("Manager.aspx");
+                    Response.Redirect("BusinessSetting.aspx");
                 }
                 else if (userType == "S")
                 {

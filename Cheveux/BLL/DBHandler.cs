@@ -18,6 +18,11 @@ namespace BLL
             db = new DBAccess();
         }
 
+        public BUSINESS getBusinessTable()
+        {
+            return db.getBusinessTable();
+        }
+
         public bool addPaymentTypeToSalesRecord(string paymentType, string saleID)
         {
             return db.addPaymentTypeToSalesRecord(paymentType, saleID);

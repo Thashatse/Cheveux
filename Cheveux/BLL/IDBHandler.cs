@@ -43,5 +43,6 @@ namespace BLL
         bool createSalesRecord(string bookingID);
         string getSalePaymentType(String SaleID);
         bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
+        BUSINESS getBusinessTable();
     }
 }

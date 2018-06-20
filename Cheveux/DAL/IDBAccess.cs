@@ -38,6 +38,7 @@ namespace DAL
         bool createSalesDTLRecord(SALES_DTL detailLine);
         bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
         string getSalePaymentType(String SaleID);
+        BUSINESS getBusinessTable();
         /*        bool AddBooking(BOOKING addBooking);
                 List<SP_GetServices> GetAllServices();
                 List<SP_GetStylists> GetStylistsForService(string serviceID);*/

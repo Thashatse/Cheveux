@@ -120,7 +120,8 @@ namespace Cheveux
                         {
                             //Manager
                             cookie["UT"] = "M";
-                            Response.Redirect("Manager.aspx");
+                           // Response.Redirect("Manager.aspx");
+                            Response.Redirect("BusinessSetting.aspx");
                         }
                         else if (EmpType == "S")
                         {

@@ -224,6 +224,42 @@ namespace DAL
             }
         }
 
+        public BUSINESS getBusinessTable()
+        {
+            BUSINESS businessDetails = null;
+
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_getBusinessTable", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        businessDetails = new BUSINESS
+                        {
+                            BusinessID = row[0].ToString(),
+                            Vat = int.Parse(row[1].ToString()),
+                            VatRegNo = row[2].ToString(),
+                            AddressLine1 = row[3].ToString(),
+                            AddressLine2 = row[4].ToString(),
+                            Phone = row[5].ToString(),
+                            WeekdayStart = DateTime.Parse(row[6].ToString()),
+                            WeekdayEnd = DateTime.Parse(row[7].ToString()),
+                            WeekendStart = DateTime.Parse(row[8].ToString()),
+                            WeekendEnd = DateTime.Parse(row[9].ToString()),
+                            PublicHolEnd = DateTime.Parse(row[10].ToString()),
+                            PublicHolStart = DateTime.Parse(row[9].ToString())
+                        };
+                    }
+                    return businessDetails;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public USER GetUserDetails(string ID)
         {
             USER TF = null;
