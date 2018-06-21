@@ -987,5 +987,128 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public bool updateVatRate(string bussinesID, int vatRate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@VatRat", vatRate),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateVateRate", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateVatRegNo(string bussinesID, string vatRegNo)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@VatRegno", vatRegNo),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateVateRegNo", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateAddress(string bussinesID, string addressLine1, string addressLine2)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@addline1", addressLine1),
+                    new SqlParameter("@addline2", addressLine2),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateAddress", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateWeekdayHours(string bussinesID, DateTime wDStart, DateTime wDEnd)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@start", wDStart.ToString("HH:mm")),
+                    new SqlParameter("@end", wDEnd.ToString("HH:mm")),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateWeekdayHours", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateWeekendHours(string bussinesID, DateTime wEStart, DateTime wEEnd)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@start", wEStart.ToString("HH:mm")),
+                    new SqlParameter("@end", wEEnd.ToString("HH:mm")),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateWeekendHours", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@start", pHStart.ToString("HH:mm")),
+                    new SqlParameter("@end", pHEnd.ToString("HH:mm")),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdatePublicHolidayHours", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updatePhoneNumber(string bussinesID, string PhoneNumber)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@PhoneNumber", PhoneNumber),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdatePhoneNumber", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }

@@ -44,5 +44,12 @@ namespace BLL
         string getSalePaymentType(String SaleID);
         bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
         BUSINESS getBusinessTable();
+        bool updateVatRate(string bussinesID, int vatRate);
+        bool updateVatRegNo(string bussinesID, string vatRegNo);
+        bool updateAddress(string bussinesID, string addresLine1, string addressLine2);
+        bool updateWeekdayHours(string bussinesID, DateTime wDStart, DateTime wDEnd);
+        bool updateWeekendHours(string bussinesID, DateTime wEStart, DateTime wEEnd);
+        bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd);
+        bool updatePhoneNumber(string bussinesID, string PhoneNumber);
     }
 }

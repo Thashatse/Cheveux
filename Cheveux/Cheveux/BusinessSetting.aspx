@@ -33,11 +33,17 @@
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
                                     <asp:TextBox ID="vatRate" runat="server"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="rfvVateRate" runat="server" ErrorMessage="*Required" 
+                                        ControlToValidate="vatRate" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="revVateRate" runat="server" ErrorMessage="Please enter a percentage" 
+                                        ControlToValidate="vatRate" ForeColor="Red" ValidationExpression="(?!^0*$)(?!^0*\.0*$)^\d{1,2}(\.\d{1,2})|(100|100\.0|100\.00)?$"></asp:RegularExpressionValidator>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="btnEnitvatRate" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditvatRate" runat="server" Text="Edit" OnClick="btnEnitvatRate_Click" />
                                 </asp:TableCell>
                             </asp:TableRow>
+
                             <asp:TableRow>
                                 <asp:TableHeaderCell>
                                 <!-- Vat Registration Number -->
@@ -45,9 +51,14 @@
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
                                     <asp:TextBox ID="vatRegNo" runat="server"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="rfvVatRegNo" runat="server" ErrorMessage="*Required" 
+                                        ControlToValidate="vatRegNo" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="revVatRegNo" runat="server" ErrorMessage="Please enter a valid vat registration number" 
+                                        ControlToValidate="vatRegNo" ForeColor="Red" ValidationExpression="[0-9]+"></asp:RegularExpressionValidator>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="btnEnitvatRegNo" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditvatRegNo" runat="server" Text="Edit" OnClick="btnEnitvatRegNo_Click"/>
                                 </asp:TableCell>
                             </asp:TableRow>
 
@@ -57,16 +68,22 @@
                                 Address: 
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
-                                    <asp:TextBox ID="addLineOne" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="addLineOne" runat="server" Width="300px"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="rfvAddressLine1" runat="server" ErrorMessage="*Required" 
+                                        ControlToValidate="addLineOne" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow>
                                 <asp:TableHeaderCell><!-- Address line 2 --></asp:TableHeaderCell>
                                 <asp:TableCell>
-                                    <asp:TextBox ID="addLineTwo" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="addLineTwo" runat="server" Width="300px"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="rfvAddressLine2" runat="server" ErrorMessage="*Required" 
+                                        ControlToValidate="addLineTwo" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="btnEnitadd" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditadd" runat="server" Text="Edit" OnClick="btnEditadd_Click" />
                                 </asp:TableCell>
                             </asp:TableRow>
 
@@ -77,9 +94,14 @@
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
                                     <asp:TextBox ID="phoneNumber" runat="server"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="rfvAddressLine12" runat="server" ErrorMessage="*Required" 
+                                        ControlToValidate="phoneNumber" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="revPhoneNumber" runat="server" ErrorMessage="Please enter a valid RSA phone number" 
+                                        ControlToValidate="phoneNumber" ForeColor="Red" ValidationExpression="^0[0-9]{9}$"></asp:RegularExpressionValidator>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="btnEnitPhoneNum" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditPhoneNum" runat="server" Text="Edit" OnClick="btnEditPhoneNum_Click"/>
                                 </asp:TableCell>
                             </asp:TableRow>
 
@@ -89,14 +111,24 @@
                                 Weekday Hours:
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
-                                    <asp:TextBox ID="wDStart" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="wDStart" runat="server" ValidationGroup="WDH"></asp:TextBox>
                                     - 
-                                <asp:TextBox ID="wDEnd" runat="server"></asp:TextBox>
+                                <asp:TextBox ID="wDEnd" runat="server" ValidationGroup="WDH"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="rfvWDH" runat="server" ErrorMessage="*Start Time Required" 
+                                        ControlToValidate="wDStart" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="revWDH" runat="server" ErrorMessage="Please enter a valid Start Time"
+                                        ControlToValidate="wDStart" ForeColor="Red" ValidationExpression="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*End Time Required" 
+                                        ControlToValidate="wDEnd" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter a valid End Time"
+                                        ControlToValidate="wDEnd" ForeColor="Red" ValidationExpression="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$"></asp:RegularExpressionValidator>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="btnEnitWDHours" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditWDHours" runat="server" Text="Edit" OnClick="btnEditWDHours_Click" />
                                 </asp:TableCell>
                             </asp:TableRow>
+
                             <asp:TableRow>
                                 <asp:TableHeaderCell>
                                 <!-- Weekend Hours -->
@@ -106,23 +138,42 @@
                                     <asp:TextBox ID="wEStart" runat="server"></asp:TextBox>
                                     - 
                                 <asp:TextBox ID="wEEnd" runat="server"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*Start Time Required" 
+                                        ControlToValidate="wEStart" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Please enter a valid Start Time"
+                                        ControlToValidate="wEStart" ForeColor="Red" ValidationExpression="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*End Time Required" 
+                                        ControlToValidate="wEEnd" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Please enter a valid End Time"
+                                        ControlToValidate="wEEnd" ForeColor="Red" ValidationExpression="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$"></asp:RegularExpressionValidator>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="btnEnitWEHours" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditWEHours" runat="server" Text="Edit" OnClick="btnEditWEHours_Click" />
                                 </asp:TableCell>
                             </asp:TableRow>
+
                             <asp:TableRow>
                                 <asp:TableHeaderCell>
                                 <!-- Public Holiday Hours -->
-                                Week Holiday Hours:
+                                Public Holiday Hours:
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
-                                    <asp:TextBox ID="pHStrat" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="pHStart" runat="server"></asp:TextBox>
                                     - 
                                 <asp:TextBox ID="pHEnd" runat="server"></asp:TextBox>
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Start Time Required" 
+                                        ControlToValidate="pHStart" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="Please enter a valid Start Time"
+                                        ControlToValidate="pHStart" ForeColor="Red" ValidationExpression="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="*End Time Required" 
+                                        ControlToValidate="pHEnd" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="Please enter a valid End Time"
+                                        ControlToValidate="pHEnd" ForeColor="Red" ValidationExpression="^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$"></asp:RegularExpressionValidator>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="btnEnitPHHours" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditPHHours" runat="server" Text="Edit" OnClick="btnEditPHHours_Click" />
                                 </asp:TableCell>
                             </asp:TableRow>
 
@@ -135,7 +186,7 @@
                                     <a href='/IMG_0715.png' target="_blank"><img src="/IMG_0715.png" alt="logo" width="300" height="300" /></a>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="Button1" runat="server" Text="Edit" />
+                                    <asp:Button ID="btnEditLogo" runat="server" Text="Edit" OnClick="btnEditLogo_Click" />
                                 </asp:TableCell>
                             </asp:TableRow>
                         </asp:Table>

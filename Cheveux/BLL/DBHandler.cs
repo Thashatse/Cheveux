@@ -169,5 +169,40 @@ namespace BLL
         {
             return db.createSalesRecord(bookingID);
         }
+
+        public bool updateVatRate(string bussinesID, int vatRate)
+        {
+            return db.updateVatRate(bussinesID, vatRate);
+        }
+
+        public bool updateVatRegNo(string bussinesID, string vatRegNo)
+        {
+            return db.updateVatRegNo(bussinesID, vatRegNo);
+        }
+
+        public bool updateAddress(string bussinesID, string addresLine1, string addressLine2)
+        {
+            return db.updateAddress(bussinesID, addresLine1, addressLine2);
+        }
+
+        public bool updateWeekdayHours(string bussinesID, DateTime wDStart, DateTime wDEnd)
+        {
+            return db.updateWeekdayHours(bussinesID, wDStart, wDEnd);
+        }
+
+        public bool updateWeekendHours(string bussinesID, DateTime wEStart, DateTime wEEnd)
+        {
+            return db.updateWeekendHours(bussinesID, wEStart, wEEnd);
+        }
+
+        public bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd)
+        {
+            return db.updatePublicHolidayHours(bussinesID, pHStart, pHEnd);
+        }
+
+        public bool updatePhoneNumber(string bussinesID, string PhoneNumber)
+        {
+            return db.updatePhoneNumber(bussinesID, PhoneNumber);
+        }
     }
 }
