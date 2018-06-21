@@ -135,6 +135,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="CSS\Cheveux.css" />
+    <Content Include="CSS\HelpCenter.css" />
     <Content Include="CSS\StyleSheet1.css" />
     <Content Include="CustomerVisit.aspx" />
     <Content Include="Default.aspx" />

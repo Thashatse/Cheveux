@@ -3,11 +3,6 @@
     Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-        <style>
-        body{
-            margin-top:150px;
-        }
-    </style>
 </asp:Content>
 
 
@@ -16,7 +11,7 @@
         <!--jumbotron page heading-->
         <div class="jumbotron">
             <asp:Label ID="Welcome" runat="server" Font-Bold="true" Font-Size="X-Large">
-                <h1>Welcome</h1>
+                <h1 id="header" runat="server">Welcome</h1>
                 <h2 id="theDate" runat="server"></h2>
             </asp:Label>
             

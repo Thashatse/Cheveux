@@ -4,9 +4,9 @@
     Profile - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-        <style>
+    <style>
         body{
-            margin-top:100px;
+            margin-top: 0px;
         }
     </style>
 </asp:Content>
