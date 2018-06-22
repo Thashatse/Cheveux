@@ -1,20 +1,17 @@
 ﻿body {
-    margin-top:150px;
 }
 
 
 
 
-
-
 /* --- Scroll-To-Top Button --- */
-.scrolltop{
-    display:none;
-    width: 100%;
-    margin: 0 auto;
-    position: fixed;
-    bottom: 20px;
-    right: 10px;
+.scrolltop {
+	display:none;
+	width:100%;
+	margin:0 auto;
+	position:fixed;
+	bottom:20px;
+	right:10px;	
 }
 .scroll {
 	position:absolute;
@@ -42,4 +39,5 @@
 	margin-top:-5px;
 	margin-left:1px;
 	transition: 0.5s;
+	            	
 }

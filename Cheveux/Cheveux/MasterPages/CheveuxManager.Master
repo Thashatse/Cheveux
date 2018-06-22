@@ -12,7 +12,7 @@
     <!-- Bootstrap-->
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
-    <link rel="“stylesheet”" type="“text/css”" href="“/CSS/Cheveux.css”">
+    <link rel="stylesheet" type="text/css" href="/CSS/Cheveux.css">
         <!-- Search Function-->
     <script>
         function search() {
@@ -73,13 +73,45 @@
             <!-- /.container-fluid -->
         </nav>
         <!--Place older for Content-->
-        <div class="container-fluid">
+        <div class="container-fluid theTop">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+
+
+    <!--Sticky back-to-top button-->
+        <div class='scrolltop'>
+            <div class='scroll icon'>
+                <i class="fa fa-4x fa-angle-up"></i>
+            </div>
+        </div>
+
     </form>
         <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
+
+    <!--jQuery to return user to the top of the page-->    
+    <script>
+
+            $(document).ready(function () {
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > 50) {
+                        $('.scrolltop:hidden').stop(true, true).fadeIn();
+                    } else {
+                        $('.scrolltop').stop(true, true).fadeOut();
+                    }
+                });
+
+                $(function () {
+                    $(".scroll").click(function () {
+                        $("html,body").animate({ scrollTop: $(".theTop").offset().top }, "1000");
+                        return false
+                    })
+                });
+            });
+        </script>
+
+
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
