@@ -13,46 +13,6 @@
     <!--Bootstrap font awesome for the icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-
-    <style>
-            .scrolltop {
-	            display:none;
-	            width:100%;
-	            margin:0 auto;
-	            position:fixed;
-	            bottom:20px;
-	            right:10px;	
-            }
-            .scroll {
-	            position:absolute;
-	            right:20px;
-	            bottom:20px;
-	            background:#b2b2b2;
-	            background:rgba(178,178,178,0.7);
-	            padding:20px;
-	            text-align: center;
-	            margin: 0 0 0 0;
-	            cursor:pointer;
-	            transition: 0.5s;
-	            		
-            }
-            .scroll:hover {
-	            background:rgba(178,178,178,1.0);
-	            transition: 0.5s;
-	           		
-            }
-            .scroll:hover .fa {
-	            padding-top:-10px;
-            }
-            .scroll .fa {
-	            font-size:30px;
-	            margin-top:-5px;
-	            margin-left:1px;
-	            transition: 0.5s;
-	            	
-            }
-    </style>
-
 </head>
 <body>
     <form id="HelpForm" runat="server">

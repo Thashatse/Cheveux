@@ -9,6 +9,7 @@
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
 
     <!--CSS-->
+    <link rel="stylesheet" type="text/css" href="/CSS/Accounts.css">
 
     <!--Google Authentecation code-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
