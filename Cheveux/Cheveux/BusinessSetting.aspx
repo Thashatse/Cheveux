@@ -15,11 +15,15 @@
         <!-- if the user is loged In -->
         <div class="container" runat="server" id="LogedIn" visible="false">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-5 col-lg-5">
                     <!--Heading-->
                     <asp:Label runat="server" ID="PageHeading"> <h2>Business Setting</h2> </asp:Label>
-                    <!-- Line Breake --> 
+                    <!-- Line Breake -->
                     <br />
+                </div>
+                <div class="col-md-1 col-lg-1">
+                    <a href="/Help/CheveuxHelpCenter.aspx#BusinessSettings" target="_blank" title="Click the link to get help with business settings">
+                        <span class="glyphicon">&#63; Help</span></a>
                 </div>
             </div>
             <div class="row">

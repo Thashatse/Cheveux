@@ -90,18 +90,7 @@ namespace Cheveux
                     cookie["UT"] = result.ToString();
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
-
-                    /*
-                     * Results in redirect error solution to be found
-                    //get the privious page to redirect to
-                    String PreviousPage = Request.QueryString["PreviousPage"];
-                    //go back to the previous page if there is one
-                    if (PreviousPage != null)
-                    {
-                        Response.Redirect("Default.aspx?PreviousPagePostLogin=" + PreviousPage);
-                    }
-                    */
-
+                    
                     //access control
                     //send the user to the correct page based on their usertype
                     if (result == "C")
@@ -114,13 +103,15 @@ namespace Cheveux
                         {
                             //Receptionist
                             cookie["UT"] = "R";
+                            goToPreviousPage();
                             Response.Redirect("Receptionist.aspx");
                         }
                         else if (EmpType == "M")
                         {
                             //Manager
                             cookie["UT"] = "M";
-                           // Response.Redirect("Manager.aspx");
+                            goToPreviousPage();
+                            // Response.Redirect("Manager.aspx");
                             Response.Redirect("BusinessSetting.aspx");
                         }
                         else if (EmpType == "S")
@@ -128,6 +119,7 @@ namespace Cheveux
                             //stylist
                             cookie["UT"] = "S";
                             //go back to the previous page if there is one
+                            goToPreviousPage();
                             Response.Redirect("Stylist.aspx");
                         }
                         else
@@ -163,6 +155,17 @@ namespace Cheveux
                 Response.Cookies.Add(cookie);
                 //retun the usere to the home page
                 Response.Redirect("Default.aspx");
+            }
+        }
+
+        private void goToPreviousPage()
+        {
+            //get the privious page to redirect to
+            String PreviousPage = Request.QueryString["PreviousPage"];
+            //go back to the previous page if there is one
+            if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
+            {
+                Response.Redirect("Help/CheveuxHelpCenter.aspx#InternalHelp");
             }
         }
     }
