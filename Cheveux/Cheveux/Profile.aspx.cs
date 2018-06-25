@@ -15,6 +15,9 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         USER userDetails = null;
+        SP_ViewEmployee employee = null;
+        SP_ViewStylistSpecialisation specialisation = null;
+        string userType;
         HttpCookie cookie = null;
 
         //set the master page based on the user type
@@ -84,6 +87,11 @@ namespace Cheveux
                     //load user details
                     loadUserDetails();
                 }
+                else if (action == "View")
+                {
+                    //load employee details
+                    loadEmployeeDetails();
+                }
                 else if (action == "Edit")
                 {
                     Edit.Visible = true;
@@ -93,7 +101,183 @@ namespace Cheveux
                 {
                     deleteUser();
                 }
+            } else if (cookie == null)
+            {
+                //if the user is requesting to see a stylis profile
+                string action = Request.QueryString["Action"];
+                if (action == "View")
+                {
+                    //diplay the profile container and hide the login container
+                    JumbotronLogedIn.Visible = true;
+                    JumbotronLogedOut.Visible = false;
+                    //load employee details
+                    loadEmployeeDetails();
+                }
             }    
+        }
+
+        //load employee details into the page
+        public void loadEmployeeDetails()
+        {
+            //check if it is a manager or a a cusomer and display or hide details accordingly
+            if(cookie != null)
+            {
+                userType = cookie["UT"].ToString();
+            }
+            //check which employee was requested and display there details
+            string empID = Request.QueryString["empID"];
+            try
+            {
+                employee = handler.viewEmployee(empID);
+                //check if its a stylist and retrevie the stylist specialisation
+                if (employee.employeeType.Replace(" ", string.Empty) == "S")
+                {
+                    specialisation = handler.viewStylistSpecialisation(empID);
+                }
+
+                //diplay the employee details
+                //image
+                profileImage.ImageUrl = employee.empImage.ToString();
+                //Styslis Name
+                profileLable.Text = (employee.firstName.ToString() + employee.lastName.ToString()).ToUpper();
+                //details
+                //add a new row to the table
+                TableRow newRow = new TableRow();
+                newRow.Height = 50;
+                profileTable.Rows.Add(newRow);
+                //track row count
+                int rowCount = 0;
+                //Specialisation Name
+                TableCell newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "Specialisation:";
+                newCell.Width = 300;
+                profileTable.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Text = specialisation.serviceName;
+                newCell.Width = 700;
+                profileTable.Rows[rowCount].Cells.Add(newCell);
+                //increment rowcount
+                rowCount++;
+
+                //add a new row
+                newRow = new TableRow();
+                newRow.Height = 50;
+                profileTable.Rows.Add(newRow);
+                //Last name
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "Specialisation Description:";
+                newCell.Width = 300;
+                profileTable.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Text = specialisation.serviceDescription;
+                newCell.Width = 700;
+                profileTable.Rows[rowCount].Cells.Add(newCell);
+                //viwes Specialisation link
+                newCell = new TableCell();
+                newCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
+                    "'>View Service</a></button>";
+                newCell.Width = 700;
+                profileTable.Rows[rowCount].Cells.Add(newCell);
+                //increment rowcount
+                rowCount++;
+
+                //the following will onl be displayed to managers & Receptionists
+                if (userType == "M" || userType=="R")
+                {
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Contact Number
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Phone Number:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = employee.phoneNumber;
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Email
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Email:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = employee.email;
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //email link
+                    newCell = new TableCell();
+                    newCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = 'mailto:" + employee.email.ToString() +
+                        "'>Email Employee</a></button>";
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+                }
+
+                //the following will onl be displayed to managers
+                if (userType == "M")
+                {
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Username
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Username:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = employee.userName;
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Email
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "User Type:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = function.GetFullEmployeeTypeText(employee.employeeType.ToString()[0]);
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+                }
+            }
+            catch (Exception Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred retrieving and displayin your emplyee details for employee id: " + empID
+                    + " in loadEmployeeDetails() method on Profilepage");
+                profileLable.Text = "An error occurred retrieving employee details";
+            }
+
+            
         }
 
         //loads the users details into the page

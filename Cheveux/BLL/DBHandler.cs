@@ -18,6 +18,16 @@ namespace BLL
             db = new DBAccess();
         }
 
+        public SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID)
+        {
+            return db.viewStylistSpecialisation(empID);
+        }
+
+        public SP_ViewEmployee viewEmployee(string empID)
+        {
+            return db.viewEmployee(empID);
+        }
+
         public BUSINESS getBusinessTable()
         {
             return db.getBusinessTable();

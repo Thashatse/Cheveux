@@ -51,5 +51,7 @@ namespace BLL
         bool updateWeekendHours(string bussinesID, DateTime wEStart, DateTime wEEnd);
         bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd);
         bool updatePhoneNumber(string bussinesID, string PhoneNumber);
+        SP_ViewEmployee viewEmployee(string empID);
+        SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID);
     }
 }

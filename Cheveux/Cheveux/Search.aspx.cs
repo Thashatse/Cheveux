@@ -210,7 +210,8 @@ namespace Cheveux
                                 newCell = new TableCell();
                                 newCell.Text =
                                     "<button type = 'button' class='btn btn-default'>" +
-                                    "<a href = 'ViewStylist.aspx?StylistID=" + result.StylistID.ToString().Replace(" ", string.Empty) +
+                                    "<a href = 'Profile.aspx?Action=View" +
+                                    "&empID=" + result.StylistID.ToString().Replace(" ", string.Empty) +
                                     "&PreviousPage=Search.aspx?ST=" + searchTerm + "'>View Stylist Profile</a></button>";
                                 StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                             }
@@ -230,21 +231,11 @@ namespace Cheveux
                     //set the product search results heading
                     ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
                 }
-                else
-                {
-                    //let the user know there are no Product Search results
-                    ProductResultsLable.Text = "<h2> No Product Search Results For '" + searchTerm + "' </h2>";
-                }
                 //service heading
                 if (serviceCount != 0)
                 {
                     //set the product search results heading
                     serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
-                }
-                else
-                {
-                    //let the user know there are no Product Search results
-                    serviceResultsLable.Text = "<h2> No Service Search Results For '" + searchTerm + "' </h2>";
                 }
                 //Stylist Heading
                 if (stylistRowCount != 0)
@@ -252,12 +243,6 @@ namespace Cheveux
                     //set the stylist search results heading
                     StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
                 }
-                else
-                {
-                    //let the user know there are no Stylist Search results
-                    StylistResultsLable.Text = "<h2> No Stylist Search Results For '" + searchTerm + "' </h2>";
-                }
-
             }
         }
 

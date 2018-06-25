@@ -74,6 +74,8 @@
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
     <Compile Include="ViewModels\SP_SearchStylistsBySearchTerm.cs" />
     <Compile Include="ViewModels\SP_ViewCustVisit.cs" />
+    <Compile Include="ViewModels\SP_ViewEmployee.cs" />
+    <Compile Include="ViewModels\SP_ViewStylistSpecialisation.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

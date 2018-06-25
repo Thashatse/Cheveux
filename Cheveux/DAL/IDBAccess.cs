@@ -46,6 +46,9 @@ namespace DAL
         bool updateWeekendHours(string bussinesID, DateTime wEStart, DateTime wEEnd);
         bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd);
         bool updatePhoneNumber(string bussinesID, string PhoneNumber);
+        SP_ViewEmployee viewEmployee(string empID);
+        SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID);
+
         /*        bool AddBooking(BOOKING addBooking);
                 List<SP_GetServices> GetAllServices();
                 List<SP_GetStylists> GetStylistsForService(string serviceID);*/

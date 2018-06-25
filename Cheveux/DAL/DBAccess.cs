@@ -1110,5 +1110,76 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public SP_ViewEmployee viewEmployee(string empID)
+        {
+            SP_ViewEmployee viewEmployee = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", empID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ViewEmployee",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        viewEmployee = new SP_ViewEmployee
+                        {
+                            UserID = Convert.ToString(row["UserID"]),
+                            firstName = Convert.ToString(row["FirstName"]),
+                            lastName = Convert.ToString(row["LastName"]),
+                            userName = Convert.ToString(row["UserName"]),
+                            email = Convert.ToString(row["Email"]),
+                            phoneNumber = Convert.ToString(row["ContactNo"]),
+                            employeeType = Convert.ToString(row["Type"]),
+                            empImage = Convert.ToString(row["UserImage"]),
+                        };
+                    }
+                    return viewEmployee;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID)
+        {
+            SP_ViewStylistSpecialisation stylistSpecialisation = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", empID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ViewStylistSpecialisation",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stylistSpecialisation = new SP_ViewStylistSpecialisation
+                        {
+                            EmployeeID = Convert.ToString(row[0]),
+                            serviceID = Convert.ToString(row[1]),
+                            serviceName = Convert.ToString(row[2]),
+                            serviceDescription = Convert.ToString(row[3]),
+                            servicePrice= Convert.ToDecimal(row[4].ToString()),
+                            serviceType = Convert.ToChar(row[5].ToString()[0])//,
+                            //serviceImage = Encoding.ASCII.GetBytes(row[6].ToString())
+                        };
+                    }
+                    return stylistSpecialisation;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }
