@@ -24,18 +24,17 @@ namespace Cheveux
                 if ("R" == userType)
                 {
                     //Receptionist
-                    Response.Redirect("Receptionist.aspx");
+                    Response.Redirect("/Receptionist/Receptionist.aspx");
                 }
                 else if (userType == "M")
                 {
                     //Manager
-                    //Response.Redirect("Manager.aspx");
-                    Response.Redirect("BusinessSetting.aspx");
+                    Response.Redirect("/Manager/Manager.aspx");
                 }
                 else if (userType == "S")
                 {
                     //stylist
-                    Response.Redirect("Stylist.aspx");
+                    Response.Redirect("/Stylist/Stylist.aspx");
                 }
                 else if (userType == "C")
                 {
@@ -46,7 +45,7 @@ namespace Cheveux
                 }
                 else
                 {
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("/Default.aspx");
                     function.logAnError("Unknown user type found during Loading of default.aspx: " +
                         UserID["UT"].ToString());
                 }

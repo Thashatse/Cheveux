@@ -17,7 +17,8 @@
                     <br />
                 </div>
                 <div class="col-md-1 col-lg-1">
-                    <a href="/Help/CheveuxHelpCenter.aspx#BusinessSettings" target="_blank" title="Click the link to get help with business settings">
+                    <a href="../Help/CheveuxHelpCenter.aspx#BusinessSettings" target="_blank"
+                        title="Click the link to get help with business settings">
                         <span class="glyphicon">&#63; Help</span></a>
                 </div>
             </div>
@@ -182,7 +183,7 @@
                                 Logo:
                                 </asp:TableHeaderCell>
                                 <asp:TableCell>
-                                    <a href='/IMG_0715.png' target="_blank"><img src="/IMG_0715.png" alt="logo" width="300" height="300" /></a>
+                                    <a href='../IMG_0715.png' target="_blank"><img src="../IMG_0715.png" alt="logo" width="300" height="300" /></a>
                                 </asp:TableCell>
                                 <asp:TableCell>
                                     <asp:Button ID="btnEditLogo" runat="server" Text="Edit" OnClick="btnEditLogo_Click" />
@@ -196,9 +197,10 @@
         <!-- if the user is loged Out -->
         <div class="container" runat="server" id="LogedOut">
             <div class="jumbotron">
-                <p>Please log-in</p>
+                <h1>Business Settings</h1>
+                <p>Please log-in to view Business Settings</p>
                 <button type="button" class="btn btn-default">
-                    <a href="Accounts.aspx?PreviousPage=BusinessSetting.aspx" id="LogedOutButton">Login</a>
+                    <a href="../Authentication/Accounts.aspx?PreviousPage=BusinessSetting.aspx" id="LogedOutButton">Login</a>
                 </button>
             </div>
         </div>

@@ -216,7 +216,6 @@ namespace Cheveux
                                 StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                             }
                         }
-                 
                 }
                 catch (ApplicationException Err)
                 {
@@ -243,6 +242,12 @@ namespace Cheveux
                     //set the stylist search results heading
                     StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
                 }
+                //no results
+                if(stylistRowCount == 0 && serviceCount == 0 && productCount == 0)
+                {
+                    serviceResultsLable.Text = "<h2> 0 Search Results For '" + searchTerm + "' </h2>";
+                }
+               
             }
         }
 

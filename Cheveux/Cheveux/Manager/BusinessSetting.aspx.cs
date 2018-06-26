@@ -32,9 +32,13 @@ namespace Cheveux
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
 
-            if (cookie == null || cookie["UT"] != "M")
+            if (cookie == null)
             {
                 //if the user is not loged in as a manager do not display Bussines setting
+            }
+            else if (cookie["UT"] != "M")
+            {
+                Response.Redirect("../Default.aspx");
             }
             else if (cookie["UT"] == "M")
             {
@@ -54,47 +58,64 @@ namespace Cheveux
                         //edit vat rate
                         btnEditvatRate.Text = "Save";
                         editVatRate = true;
-                    }else if (edit == "EVRN")
+                        //hide all other edit butons
+                        hideEditBTNs(0);
+                    }
+                    else if (edit == "EVRN")
                     {
                         //edit vat reg num
                         btnEditvatRegNo.Text = "Save";
                         editVatRegNo = true;
+                        //hide all other edit butons
+                        hideEditBTNs(1);
                     }
                     else if (edit == "ADD")
                     {
                         //edit address
                         btnEditadd.Text = "Save";
                         editAddress = true;
+                        //hide all other edit butons
+                        hideEditBTNs(2);
                     }
                     else if (edit == "PN")
                     {
                         //edit phone number
                         btnEditPhoneNum.Text = "Save";
                         editPhoneNumber = true;
+                        //hide all other edit butons
+                        hideEditBTNs(3);
                     }
                     else if (edit == "WDH")
                     {
                         //edit weekday hours
                         btnEditWDHours.Text = "Save";
                         editWeekDayHours = true;
+                        //hide all other edit butons
+                        hideEditBTNs(4);
                     }
                     else if (edit == "WEH")
                     {
                         //edit Weekend hours
                         btnEditWEHours.Text = "Save";
                         editWeekEndHours = true;
+                        //hide all other edit butons
+                        hideEditBTNs(5);
                     }
                     else if (edit == "PHH")
                     {
                         //edit public holiday hours
                         btnEditPHHours.Text = "Save";
                         editPublicHolHours = true;
+                        //hide all other edit butons
+                        hideEditBTNs(6);
                     }
                     else if (edit == "LOGO")
                     {
                         //edit Logo
                         btnEditLogo.Text = "Save";
                         editLogo = true;
+                        //hide all other edit butons
+                        hideEditBTNs(7);
                     }
 
                     //fill the table with the current setings
@@ -105,6 +126,52 @@ namespace Cheveux
                     function.logAnError(Err.ToString() + "\n getting business data from the db Page_Load on bussines settings");
                     Response.Redirect("Error.aspx?Error='An error occurred when communicating with the Cheveux server'");
                 }
+            }
+        }
+
+        public void hideEditBTNs(int index)
+        {
+            //give a row index it hides all edit butons exept the one in the given index
+            if (index != 0)
+            {
+                //hide edit btn for vat rate
+                btnEditvatRate.Visible = false;
+
+            }
+            if (index != 1)
+            {
+                //hide edit btn for vat reg num
+                btnEditvatRegNo.Visible = false;
+            }
+            if (index != 2)
+            {
+                //hide edit btn for address
+                btnEditadd.Visible = false;
+            }
+            if (index != 3)
+            {
+                //hide edit btn for phone number
+                btnEditPhoneNum.Visible = false;
+            }
+            if (index != 4)
+            {
+                //hide edit btn for weekday hours
+                btnEditWDHours.Visible = false;
+            }
+            if (index != 5)
+            {
+                //hide edit btn for Weekend hours
+                btnEditWEHours.Visible = false;
+            }
+            if (index != 6)
+            {
+                //hide edit btn for public holiday hours
+                btnEditPHHours.Visible = false;
+            }
+            if (index != 7)
+            {
+                //hide edit btn for Logo
+                btnEditLogo.Visible = false;
             }
         }
 

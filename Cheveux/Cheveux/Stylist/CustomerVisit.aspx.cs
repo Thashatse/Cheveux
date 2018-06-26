@@ -41,13 +41,13 @@ namespace Cheveux
                 if ("R" == userType)
                 {
                     //Receptionist
-                    Response.Redirect("Receptionist.aspx");
+                    Response.Redirect("../Receptionist/Receptionist.aspx");
                 }
                 else if (userType == "M")
                 {
                     //Manager
                     //allowed access to this page
-                    Response.Redirect("Manager.aspx");
+                    Response.Redirect("../Manager/Manager.aspx");
                 }
                 else if (userType == "S")
                 {
@@ -58,14 +58,14 @@ namespace Cheveux
                 else if (userType == "C")
                 {
                     //customer
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("../Default.aspx");
 
                 }
                 else
                 {
-                    Response.Redirect("Default.aspx");
                     function.logAnError("Unknown user type found during Loading of default.aspx: " +
                         UserID["UT"].ToString());
+                    Response.Redirect("../Default.aspx");
                 }
             }
             else
@@ -73,7 +73,7 @@ namespace Cheveux
                 //ask the user to login first 
 
                 //temp fix redirect to home page
-                Response.Redirect("Default.aspx");
+                Response.Redirect("../Default.aspx");
             }
             
             theDate.InnerHtml = test;
@@ -399,7 +399,7 @@ namespace Cheveux
                         if (handler.BLL_UpdateCustVisit(visit))
                         {
                             Response.Write("<script>alert('Update Successful.');</script>");
-                            Response.Redirect("Stylist.aspx");
+                            Response.Redirect("../Stylist/Stylist.aspx");
                         }
                         else
                         {

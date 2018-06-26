@@ -10,13 +10,13 @@
         </asp:ContentPlaceHolder>
     </title>
     <!-- Bootstrap-->
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="/CSS/Cheveux.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
         <!-- Search Function-->
     <script>
         function search() {
-            window.location.href = "Search.aspx?ST="+document.getElementById('serchTerm').value;
+            window.location.href = "../Search.aspx?ST="+document.getElementById('serchTerm').value;
         }
     </script>
     <!--Header Placeholder-->
@@ -35,32 +35,32 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
-                        <img src="/IMG_0715.png" alt="logo" width="75" height="75" /></a>
+                    <a class="navbar-brand" href="../Manager/Manager.aspx">
+                        <img src="../IMG_0715.png" alt="logo" width="75" height="75" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="#"><!--Reportd-->>Reports</a></li>
-                        <li><a href="#"><!--Manage Products-->>Manage Products</a></li>
-                        <li><a href="#"><!--Manage Services-->>Manage Services</a></li>
-                        <li><a href="#"><!--Manage Services-->>Manage Employees</a></li>
-                        <li><a href="BusinessSetting.aspx"><!--Business Settings-->>Business Settings</a></li>
+                        <li><a href="#"><!--Manage Products-->Manage Products</a></li>
+                        <li><a href="#"><!--Manage Services-->Manage Services</a></li>
+                        <li><a href="#"><!--Manage Services-->Manage Employees</a></li>
+                        <li><a href="../Manager/BusinessSetting.aspx">Business Settings</a></li>
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <asp:PlaceHolder runat="server" id="LogedOut">
                             <!--Login Button-->
-                            <li><a href="Accounts.aspx">Login / Sign Up</a></li>
+                            <li><a href="../Authentication/Accounts.aspx">Login / Sign Up</a></li>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder runat="server" ID="LogedIn">
                             <!--Account Button-->
                             <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
-                            <li><a href="Accounts.aspx?action=Logout">Log Out</a></li>
+                            <li><a href="../Authentication/Accounts.aspx?action=Logout">Log Out</a></li>
                         </asp:PlaceHolder>
                         <!--Help-->
-                        <li><a href="Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a></li>
+                        <li><a href="../Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a></li>
                     </ul>
                     <div class="form-group">
                         <!--Search Button & Text Box-->
@@ -112,6 +112,6 @@
         </script>
 
 
-    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="../Scripts/bootstrap.min.js"></script>
 </body>
 </html>

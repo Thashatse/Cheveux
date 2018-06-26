@@ -16,7 +16,7 @@
             <!-- if the user is loged Out -->
             <div class="container" runat="server" id="JumbotronLogedOut">
                 <p>Please log-in</p>
-                <button type="button" class="btn btn-default"><a href="Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOut">Login / Sign Up</a></button>
+                <button type="button" class="btn btn-default"><a href="../Authentication/Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOut">Login / Sign Up</a></button>
             </div>
         </div>
         <!--Tabs-->

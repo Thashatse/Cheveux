@@ -124,9 +124,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Accounts.aspx" />
+    <Content Include="Authentication\Accounts.aspx" />
     <Content Include="Bookings.aspx" />
-    <Content Include="BusinessSetting.aspx" />
+    <Content Include="Manager\BusinessSetting.aspx" />
     <Content Include="CSS\Accounts CSS.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -137,18 +137,23 @@
     <Content Include="CSS\Cheveux.css" />
     <Content Include="CSS\HelpCenter.css" />
     <Content Include="CSS\StyleSheet1.css" />
-    <Content Include="CustomerVisit.aspx" />
+    <Content Include="Manager\Employee.aspx" />
+    <Content Include="Manager\Manager.aspx" />
+    <Content Include="Manager\Products.aspx" />
+    <Content Include="Manager\Reports.aspx" />
+    <Content Include="Manager\Service.aspx" />
+    <Content Include="Stylist\CustomerVisit.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="Help\CheveuxHelpCenter.aspx" />
     <Content Include="MakeABooking.aspx" />
-    <Content Include="NewAccount.aspx" />
+    <Content Include="Authentication\NewAccount.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Profile.aspx" />
-    <Content Include="Receptionist.aspx" />
+    <Content Include="Receptionist\Receptionist.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -200,8 +205,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="MasterPages\Cheveux.Master" />
     <Content Include="MasterPages\CheveuxStylist.Master" />
-    <Content Include="Stylist.aspx" />
-    <Content Include="myUpcomingApps.aspx" />
+    <Content Include="Stylist\Stylist.aspx" />
+    <Content Include="Stylist\myUpcomingApps.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -217,11 +222,11 @@
     <Content Include="ViewBooking.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accounts.aspx.cs">
+    <Compile Include="Authentication\Accounts.aspx.cs">
       <DependentUpon>Accounts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Accounts.aspx.designer.cs">
+    <Compile Include="Authentication\Accounts.aspx.designer.cs">
       <DependentUpon>Accounts.aspx</DependentUpon>
     </Compile>
     <Compile Include="Bookings.aspx.cs">
@@ -231,18 +236,53 @@
     <Compile Include="Bookings.aspx.designer.cs">
       <DependentUpon>Bookings.aspx</DependentUpon>
     </Compile>
-    <Compile Include="BusinessSetting.aspx.cs">
+    <Compile Include="Manager\BusinessSetting.aspx.cs">
       <DependentUpon>BusinessSetting.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BusinessSetting.aspx.designer.cs">
+    <Compile Include="Manager\BusinessSetting.aspx.designer.cs">
       <DependentUpon>BusinessSetting.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CustomerVisit.aspx.cs">
+    <Compile Include="Manager\Employee.aspx.cs">
+      <DependentUpon>Employee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\Employee.aspx.designer.cs">
+      <DependentUpon>Employee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Manager.aspx.cs">
+      <DependentUpon>Manager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\Manager.aspx.designer.cs">
+      <DependentUpon>Manager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Products.aspx.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\Products.aspx.designer.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Reports.aspx.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\Reports.aspx.designer.cs">
+      <DependentUpon>Reports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\Service.aspx.cs">
+      <DependentUpon>Service.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\Service.aspx.designer.cs">
+      <DependentUpon>Service.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stylist\CustomerVisit.aspx.cs">
       <DependentUpon>CustomerVisit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CustomerVisit.aspx.designer.cs">
+    <Compile Include="Stylist\CustomerVisit.aspx.designer.cs">
       <DependentUpon>CustomerVisit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Help\CheveuxHelpCenter.aspx.cs">
@@ -287,11 +327,11 @@
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
     </Compile>
-    <Compile Include="NewAccount.aspx.cs">
+    <Compile Include="Authentication\NewAccount.aspx.cs">
       <DependentUpon>NewAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NewAccount.aspx.designer.cs">
+    <Compile Include="Authentication\NewAccount.aspx.designer.cs">
       <DependentUpon>NewAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="Profile.aspx.cs">
@@ -316,11 +356,11 @@
     <Compile Include="MasterPages\CheveuxStylist.Master.designer.cs">
       <DependentUpon>CheveuxStylist.Master</DependentUpon>
     </Compile>
-    <Compile Include="Receptionist.aspx.cs">
+    <Compile Include="Receptionist\Receptionist.aspx.cs">
       <DependentUpon>Receptionist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Receptionist.aspx.designer.cs">
+    <Compile Include="Receptionist\Receptionist.aspx.designer.cs">
       <DependentUpon>Receptionist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Search.aspx.cs">
@@ -330,18 +370,18 @@
     <Compile Include="Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Stylist.aspx.cs">
+    <Compile Include="Stylist\Stylist.aspx.cs">
       <DependentUpon>Stylist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Stylist.aspx.designer.cs">
+    <Compile Include="Stylist\Stylist.aspx.designer.cs">
       <DependentUpon>Stylist.aspx</DependentUpon>
     </Compile>
-    <Compile Include="myUpcomingApps.aspx.cs">
+    <Compile Include="Stylist\myUpcomingApps.aspx.cs">
       <DependentUpon>myUpcomingApps.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="myUpcomingApps.aspx.designer.cs">
+    <Compile Include="Stylist\myUpcomingApps.aspx.designer.cs">
       <DependentUpon>myUpcomingApps.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewBooking.aspx.cs">
@@ -368,6 +408,7 @@
       <Name>TypeLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

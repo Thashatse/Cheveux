@@ -35,12 +35,12 @@ namespace Cheveux
                         ("<img src=" + UserDetails.UserImage + "" +
                         " alt='" + UserDetails.UserName.ToString() +
                         " Profile Image' width='35' height='35'/>" +
-                        "   <a href='Profile.aspx'>" + UserDetails.UserName.ToString() + "</a>"));
+                        "   <a href='.//Profile.aspx'>" + UserDetails.UserName.ToString() + "</a>"));
                 }
                 else
                 {
                     profile.Controls.Add(new LiteralControl
-                        ("<a href='Profile.aspx'> User Profile </a>"));
+                        ("<a href='../Profile.aspx'> User Profile </a>"));
                 }
                 LogedOut.Visible = false;
             }

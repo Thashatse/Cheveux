@@ -41,22 +41,22 @@ namespace Cheveux
                     else if (userType == "M")
                     {
                         //Manager
-                        Response.Redirect("Manager.aspx");
+                        Response.Redirect("../Manager/Manager.aspx");
                     }
                     else if (userType == "S")
                     {
                         //stylist
-                        Response.Redirect("Stylist.aspx");
+                        Response.Redirect("../stylist/Stylist.aspx");
                     }
                 else if (userType == "C")
                 {
                     //customer
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("../Default.aspx");
 
                 }
                 else
                 {
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("../Default.aspx");
                     function.logAnError("Unknown user type found during Loading of default.aspx: " +
                         UserID["UT"].ToString());
                 }
@@ -66,7 +66,7 @@ namespace Cheveux
                 //ask the user to login first 
                 
                 //temp fix redirect to home page
-                Response.Redirect("Default.aspx");
+                Response.Redirect("../Default.aspx");
             }
 
             theDate.InnerHtml = test;
@@ -272,7 +272,7 @@ namespace Cheveux
                         //create button
                         TableCell newCell = new TableCell();
                         newCell.Text = "<button type = 'button' class='btn btn-success'>" +
-                            "<a href = 'ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
                             "&BookingType=CheckOut" +
                             "&PreviousPage=Receptionist.aspx' style='color:White'>Check-out</a></button>";
                         AgendaTable.Rows[i].Cells.Add(newCell);

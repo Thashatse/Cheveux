@@ -28,17 +28,17 @@ namespace Cheveux
                 if ("R" == userType)
                 {
                     //Receptionist
-                    Response.Redirect("Receptionist.aspx");
+                    Response.Redirect("../Receptionist/Receptionist.aspx");
                 }
                 else if (userType == "M")
                 {
                     //Manager
-                    Response.Redirect("Manager.aspx");
+                    Response.Redirect("../Manager/Manager.aspx");
                 }
                 else if (userType == "S")
                 {
                     //stylist
-                    Response.Redirect("Stylist.aspx");
+                    Response.Redirect("../Stylist/Stylist.aspx");
                 }
                 else if (userType == "C")
                 {
@@ -58,7 +58,7 @@ namespace Cheveux
                 }
                 else
                 {
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("../Default.aspx");
                     function.logAnError("Unknown user type found during Loading of default.aspx: " +
                         cookie["UT"].ToString());
                 }
@@ -153,12 +153,12 @@ namespace Cheveux
                     newCell = new TableCell();
                     //display cancel, edit and print buttons
                     newCell.Text =
-                        "<a href = 'ViewBooking.aspx?Action=Cancel&BookingID=" +
+                        "<a href = '../ViewBooking.aspx?Action=Cancel&BookingID=" +
                         bookings.bookingID.ToString().Replace(" ", string.Empty) +
                         "&PreviousPage=Bookings.aspx'>Cancel Booking   </a>   " +
                         
                         "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = 'ViewBooking.aspx?Action=Edit&BookingID=" +
+                        "<a href = '../ViewBooking.aspx?Action=Edit&BookingID=" +
                         bookings.bookingID.ToString().Replace(" ", string.Empty) +
                         "&PreviousPage=Bookings.aspx'>Edit Booking</a></button>";
                     upcomingBookings.Rows[rowCount].Cells.Add(newCell);
@@ -256,7 +256,7 @@ namespace Cheveux
                         newCell = new TableCell();
                         newCell.Text =
                             "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = 'ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
                             "&BookingType=Past" +
                             "&PreviousPage=Bookings.aspx'>View Invoice</a></button>";
                         pastBookings.Rows[rowCount].Cells.Add(newCell);

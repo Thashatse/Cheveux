@@ -12,15 +12,15 @@
         </asp:ContentPlaceHolder>
     </title>
     <!-- Bootstrap-->
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <!--Bootstrap font awesome for the icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="/CSS/Cheveux.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
         <!-- Search Function-->
     <script>
         function search() {
-            window.location.href = "Search.aspx?ST=" + document.getElementById('serchTerm').value;
+            window.location.href = "../Search.aspx?ST=" + document.getElementById('serchTerm').value;
         }
     </script>
     <!--Header Placeholder-->
@@ -36,13 +36,13 @@
             </button>
 
             <a class="navbar-brand" href="Default.aspx">
-                 <img src="/IMG_0715.png" alt="logo" width="75" height="75" />
+                 <img src="../IMG_0715.png" alt="logo" width="75" height="75" />
             </a>
 
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav mx-auto">
                         <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                            <a href="Bookings.aspx" style="text-decoration:none;">Bookings</a>
+                            <a href="../Bookings.aspx" style="text-decoration:none;">Bookings</a>
                             </button>
                         </li>
 
@@ -65,7 +65,7 @@
                             <asp:PlaceHolder runat="server" id="LogedOut">
                                 <!--Login Button-->
                                 <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                                    <a href="Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
+                                    <a href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
                                     </button></li>
                             </asp:PlaceHolder>
 
@@ -74,13 +74,13 @@
                                 <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
 
                                 <li><button class="btn btn-light" style="margin-right:10px;">
-                                    <a href="Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
+                                    <a href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
                                     </button></li>
                             </asp:PlaceHolder>
 
                             <!--Help-->
                             <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                                <a href="Help/CheveuxHelpCenter.aspx" target="_blank"  style="text-decoration: none;">Help Center</a>
+                                <a href="../Help/CheveuxHelpCenter.aspx" target="_blank"  style="text-decoration: none;">Help Center</a>
                             </button></li>
                             
                             <div class="form-group" style="float:right !important;">
