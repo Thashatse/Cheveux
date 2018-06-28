@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\SP_GetAllofBookingDTL.cs" />
     <Compile Include="ViewModels\SP_GetBookingServiceDTL.cs" />
+    <Compile Include="ViewModels\SP_GetEmployeeTypes.cs" />
     <Compile Include="ViewModels\SP_getInvoiceDL.cs" />
     <Compile Include="ViewModels\SP_AddUserGoogleAuth.cs" />
     <Compile Include="ViewModels\SP_CheckForUserType.cs" />

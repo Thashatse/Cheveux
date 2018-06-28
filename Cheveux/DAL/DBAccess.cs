@@ -1136,6 +1136,7 @@ namespace DAL
                             phoneNumber = Convert.ToString(row["ContactNo"]),
                             employeeType = Convert.ToString(row["Type"]),
                             empImage = Convert.ToString(row["UserImage"]),
+                            active = Convert.ToChar(row["Active"].ToString()[0])
                         };
                     }
                     return viewEmployee;
@@ -1174,6 +1175,72 @@ namespace DAL
                         };
                     }
                     return stylistSpecialisation;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_ViewEmployee> viewAllEmployees()
+        {
+            SP_ViewEmployee employee = null;
+            List<SP_ViewEmployee> employees = new List<SP_ViewEmployee>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_ViewAllEmployee",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            employee = new SP_ViewEmployee
+                            {
+                                UserID = Convert.ToString(row["UserID"]),
+                                firstName = Convert.ToString(row["FirstName"]),
+                                lastName = Convert.ToString(row["LastName"]),
+                                userName = Convert.ToString(row["UserName"]),
+                                email = Convert.ToString(row["Email"]),
+                                phoneNumber = Convert.ToString(row["ContactNo"]),
+                                employeeType = Convert.ToString(row["Type"]),
+                                empImage = Convert.ToString(row["UserImage"]),
+                                active = Convert.ToChar(row[7].ToString()[0])
+                            };
+                            employees.Add(employee);
+                        }
+                    }
+                    return employees;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_GetEmployeeTypes> getEmpTypes()
+        {
+            SP_GetEmployeeTypes employeeType = null;
+            List<SP_GetEmployeeTypes> employeeTypes = new List<SP_GetEmployeeTypes>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetEmployeeTypes",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            employeeType = new SP_GetEmployeeTypes
+                            {
+                                Type = Convert.ToChar(row[0].ToString()[0])
+                            };
+                            employeeTypes.Add(employeeType);
+                        }
+                    }
+                    return employeeTypes;
                 }
             }
             catch (Exception e)

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheveuxManager.Master" AutoEventWireup="true" CodeBehind="Manager.aspx.cs" Inherits="Cheveux.Manager.Manager" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheveuxManager.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="Cheveux.Manager.Manager" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
     Dashboard - Cheveux
 </asp:Content>

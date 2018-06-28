@@ -141,49 +141,54 @@ namespace Cheveux
                 //Styslis Name
                 profileLable.Text = (employee.firstName.ToString() + employee.lastName.ToString()).ToUpper();
                 //details
-                //add a new row to the table
-                TableRow newRow = new TableRow();
-                newRow.Height = 50;
-                profileTable.Rows.Add(newRow);
+                TableRow newRow;
+                TableCell newCell;
                 //track row count
                 int rowCount = 0;
-                //Specialisation Name
-                TableCell newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Specialisation:";
-                newCell.Width = 300;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = specialisation.serviceName;
-                newCell.Width = 700;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowcount
-                rowCount++;
+                if (specialisation != null)
+                {
+                    //add a new row to the table
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Specialisation Name
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Specialisation:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = specialisation.serviceName;
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
 
-                //add a new row
-                newRow = new TableRow();
-                newRow.Height = 50;
-                profileTable.Rows.Add(newRow);
-                //Last name
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Specialisation Description:";
-                newCell.Width = 300;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = specialisation.serviceDescription;
-                newCell.Width = 700;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                //viwes Specialisation link
-                newCell = new TableCell();
-                newCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
-                    "'>View Service</a></button>";
-                newCell.Width = 700;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowcount
-                rowCount++;
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Last name
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Specialisation Description:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = specialisation.serviceDescription;
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //viwes Specialisation link
+                    newCell = new TableCell();
+                    newCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
+                        "'>View Service</a></button>";
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+                }
 
                 //the following will onl be displayed to managers & Receptionists
                 if (userType == "M" || userType=="R")
@@ -200,6 +205,14 @@ namespace Cheveux
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
                     newCell.Text = employee.phoneNumber;
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //phone link
+                    newCell = new TableCell();
+                    newCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = 'tel:" + employee.phoneNumber.ToString() +
+                        "'>Phone Employee</a></button>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -267,6 +280,32 @@ namespace Cheveux
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
                     rowCount++;
+
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Email
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Active:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = function.GetFullActiveTypeText(employee.active.ToString()[0]);
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //edit link
+                    newCell = new TableCell();
+                    //Edit employee link to be added by sike
+                    newCell.Text =
+                         "<a href = '#?" +
+                                    "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                    "'> Edit Employee </a>";
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
                 }
             }
             catch (Exception Err)
@@ -276,8 +315,6 @@ namespace Cheveux
                     + " in loadEmployeeDetails() method on Profilepage");
                 profileLable.Text = "An error occurred retrieving employee details";
             }
-
-            
         }
 
         //loads the users details into the page
@@ -537,7 +574,6 @@ namespace Cheveux
             }
         }
 
-        
         protected void ShowConfirmEdit(object sender, EventArgs e)
         {
             //confirm Edit

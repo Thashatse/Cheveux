@@ -53,5 +53,7 @@ namespace BLL
         bool updatePhoneNumber(string bussinesID, string PhoneNumber);
         SP_ViewEmployee viewEmployee(string empID);
         SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID);
+        List<SP_ViewEmployee> viewAllEmployees();
+        List<SP_GetEmployeeTypes> getEmpTypes();
     }
 }

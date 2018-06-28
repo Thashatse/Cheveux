@@ -214,5 +214,15 @@ namespace BLL
         {
             return db.updatePhoneNumber(bussinesID, PhoneNumber);
         }
+
+        public List<SP_ViewEmployee> viewAllEmployees()
+        {
+            return db.viewAllEmployees();
+        }
+
+        public List<SP_GetEmployeeTypes> getEmpTypes()
+        {
+            return db.getEmpTypes();
+        }
     }
 }

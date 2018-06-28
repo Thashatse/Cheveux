@@ -13,7 +13,7 @@
         <div class="jumbotron">
             <h1>Profile</h1>
             <p>Please log-in</p>
-            <button type="button" class="btn btn-default"><a href="Accounts.aspx?PreviousPage=Profile.aspx" id="LogedOut">Login / Sign Up</a></button>
+            <button type="button" class="btn btn-default"><a href="Authentication/Accounts.aspx?PreviousPage=Profile.aspx" id="LogedOut">Login / Sign Up</a></button>
         </div>
     </div>
     <!-- if the user is loged in -->

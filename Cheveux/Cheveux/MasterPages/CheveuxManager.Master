@@ -35,17 +35,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../Manager/Manager.aspx">
+                    <a class="navbar-brand" href="../Manager/Dashboard.aspx">
                         <img src="../IMG_0715.png" alt="logo" width="75" height="75" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#"><!--Reportd-->>Reports</a></li>
-                        <li><a href="#"><!--Manage Products-->Manage Products</a></li>
-                        <li><a href="#"><!--Manage Services-->Manage Services</a></li>
-                        <li><a href="#"><!--Manage Services-->Manage Employees</a></li>
+                        <li><a href="../Manager/Reports.aspx"><!--Reportd-->Reports</a></li>
+                        <li><a href="../Manager/Products.aspx"><!--Manage Products-->Manage Products</a></li>
+                        <li><a href="../Manager/Service.aspx"><!--Manage Services-->Manage Services</a></li>
+                        <li><a href="../Manager/Employee.aspx"><!--Manage Services-->Manage Employees</a></li>
                         <li><a href="../Manager/BusinessSetting.aspx">Business Settings</a></li>
 
                     </ul>

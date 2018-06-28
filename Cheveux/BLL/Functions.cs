@@ -81,9 +81,34 @@ namespace BLL
             {
                 return "Manager";
             }
+            else if (ProductType == 'A')
+            {
+                return "Manager";
+            }
             else
             {
                 logAnError("Unknown Employee Type given to GetFullEmployeeTypeText in functions");
+                return "error";
+            }
+        }
+
+        public string GetFullActiveTypeText(char activeType)
+        {
+            /*
+             * Given abbreviated char that database returns for Active, 
+             * this class will return the full text of that Active type
+             */
+            if (activeType == 'T')
+            {
+                return "True";
+            }
+            else if (activeType == 'F')
+            {
+                return "Fasle";
+            }
+            else
+            {
+                logAnError("Unknown Active Type given to GetFullActiveTypeText in functions: "+activeType);
                 return "error";
             }
         }
@@ -125,6 +150,47 @@ namespace BLL
                 file.WriteLine("Curent Directory: " + Environment.CurrentDirectory);
                 file.WriteLine("Error: ");
                 file.WriteLine(Err);
+            }
+        }
+
+        public string goToPreviousPage(string PreviousPage)
+        {
+            //return the page to redirect to if there is one
+            if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
+            {
+                return ("../Help/CheveuxHelpCenter.aspx#InternalHelp");
+            }
+            else if (PreviousPage == "BusinessSetting.aspx")
+            {
+                return ("../Manager/BusinessSetting.aspx");
+            }
+            else if (PreviousPage == "Reports.aspx")
+            {
+                return ("../Manager/Reports.aspx");
+            }
+            else if (PreviousPage == "Manager.aspx")
+            {
+                return ("../Manager/Dashboard.aspx");
+            }
+            else if (PreviousPage == "Employee.aspx")
+            {
+                return ("../Manager/Employee.aspx");
+            }
+            else if (PreviousPage == "Products.aspx")
+            {
+                return ("../Manager/Products.aspx");
+            }
+            else if (PreviousPage == "Service.aspx")
+            {
+                return ("../Manager/Service.aspx");
+            }
+            else if (PreviousPage == "Profile.aspx")
+            {
+                return "Profile.aspx";
+            }
+            else
+            {
+                return null;
             }
         }
     }

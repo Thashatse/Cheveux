@@ -16,5 +16,6 @@ namespace TypeLibrary.ViewModels
         public string phoneNumber { get; set; }
         public string employeeType { get; set; }
         public string empImage { get; set; }
+        public char active { get; set; }
     }
 }

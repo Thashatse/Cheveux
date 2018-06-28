@@ -138,7 +138,7 @@
     <Content Include="CSS\HelpCenter.css" />
     <Content Include="CSS\StyleSheet1.css" />
     <Content Include="Manager\Employee.aspx" />
-    <Content Include="Manager\Manager.aspx" />
+    <Content Include="Manager\Dashboard.aspx" />
     <Content Include="Manager\Products.aspx" />
     <Content Include="Manager\Reports.aspx" />
     <Content Include="Manager\Service.aspx" />
@@ -250,12 +250,12 @@
     <Compile Include="Manager\Employee.aspx.designer.cs">
       <DependentUpon>Employee.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Manager\Manager.aspx.cs">
-      <DependentUpon>Manager.aspx</DependentUpon>
+    <Compile Include="Manager\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Manager\Manager.aspx.designer.cs">
-      <DependentUpon>Manager.aspx</DependentUpon>
+    <Compile Include="Manager\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>
