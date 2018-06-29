@@ -135,7 +135,7 @@
                             <div class="container" runat="server" id="JumbotronLogedOut">
                                 <h3>Please log-in</h3>
                                 <p>You must bee loged in as Receptionist, Stylist or Manager to view this section</p>
-                                <button type="button" class="btn btn-default"><a href="../Accounts.aspx?PreviousPage=Help/CheveuxHelpCenter.aspx#InternalHelp" id="LogedOut">Login</a></button>
+                                <button type="button" class="btn btn-default"><a href="../Authentication/Accounts.aspx?PreviousPage=Help/CheveuxHelpCenter.aspx#InternalHelp" id="LogedOut">Login</a></button>
                             </div>
                         </div>
                     </div>
@@ -149,6 +149,7 @@
                                     <li class="active"><a href="../Default.aspx">Cheveux Home &nbsp;&nbsp;</a></li>
                                     <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In &nbsp; &nbsp;</a></li>
                                     <li><a href="#StylistCustomerVisit">Stylist Customer Visit &nbsp; &nbsp;</a></li>
+                                    <li><a href="#ManageEmployee">Manage Employees &nbsp; &nbsp;</a></li>
                                     <li><a href="#BusinessSettings">Business Setting &nbsp; &nbsp;</a></li>
                                 </ul>
                             </div>
@@ -210,6 +211,79 @@
                                         <img src="Helpimages/serviceDTLs.png" alt="Service details" />
                                         <li>Step 3) Input service description and select "Update visit"</li>
                                         <img src="Helpimages/serviceInput.png" alt="Service description input" />
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!--line Break-->
+                        <br />
+                        <br />
+                        <!--New Section-->
+                        <!--Manage Employees-->
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <a name="ManageEmployee"></a>
+                                <!--Header-->
+                                <h2>Manage Employees</h2>
+                                <!--Content-->
+                                <p>
+                                    <ul>
+                                        <li>To manage employees, you must be logged in as manager.</li>
+                                        <li>Select ‘Manage Employees’ from the navigation bar</li>
+                                        <img src="Helpimages/ViewEmployeesBy.png" alt="Login" />
+                                        <li>On the Employees page, you can view employees by employee type </li>
+                                    </ul>
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>Contact Employee</h3>
+                                    <ul>
+                                        <img src="Helpimages/PhoneEmployee.png" alt="Create visit" />
+                                        <li>On the Manage Employee Page, you can select ‘phone’ to phone that employee.</li>
+                                        <ul>
+                                            <li>This uses an application such a skype on your computer or the built-in phone app on your cellular device to call the number stored in the database.</li>
+                                        </ul>
+                                    </ul>
+                                    <ul>
+                                        <img src="Helpimages/EmailEmployee.png" alt="Create visit" />
+                                        <li>On the Manage Employee Page, you can select ‘email’ to send an email to that employee.</li>
+                                        <ul>
+                                            <li>This uses an application such as outlook on your computer or the built-in email client on your cellular device to email the address stored in the database.</li>
+                                        </ul>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>Add Employee</h3>
+                                    <ul>
+                                        <img src="Helpimages/NewEmployee.png" alt="Create visit" />
+                                        <li>To add an employee profile, select ‘new employee’ on the ‘Manage Employee’ page</li>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>View Employee</h3>
+                                    <ul>
+                                        <img src="Helpimages/ViewEmployee.png" alt="Create visit" />
+                                        <li>To view an employee profile, select ‘view’ on the ‘Manage Employee’ page next to the employee who’s profile you would like to edit</li>
+                                        <img src="Helpimages/EmployeeProfilePage.png" alt="Create visit" />
+                                        <li>This will take you to the employee's profile where you can view their details, contact them or edit there profile.</li>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>Edit Employees </h3>
+                                    <ul>
+                                        <img src="Helpimages/EditEmployee.png" alt="Create visit" />
+                                        <li>To edit an employee profile, select ‘edit’ on the ‘Manage Employee’ page next to the employee you would like to edit</li>
                                     </ul>
                                 </p>
                             </div>

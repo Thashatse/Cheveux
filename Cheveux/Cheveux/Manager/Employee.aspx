@@ -21,10 +21,16 @@
                         <br />
                         <form runat="server">
                             <!-- View By Selector -->
-                        <p>View Employess By: </p> <asp:DropDownList ID="drpEmpTyp" runat="server" AutoPostBack="True">
+                            <p>View Employess By: </p>
+                            <asp:DropDownList ID="drpEmpTyp" runat="server" AutoPostBack="True">
                                 <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                             </asp:DropDownList>
                         </form>
+                        <!-- line Break -->
+                        <br />
+                        <!--Help-->
+                        <a href="../Help/CheveuxHelpCenter.aspx#ManageEmployee" target="_blank" title="How To Manage Employees">
+                            <span class="glyphicon">&#63; Help</span></a>
                     </div>
                 </div>
             </div>
