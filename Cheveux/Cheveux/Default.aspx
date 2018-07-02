@@ -171,6 +171,7 @@
                         <a name="ContactUs"></a>
                         <h2>Contact Us</h2>
                         <!--Jambotron (COntact US) Content Here-->
+                        <asp:Table ID="tblContactUs" runat="server"></asp:Table>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
+using TypeLibrary.Models;
+using TypeLibrary.ViewModels;
 
 namespace Cheveux
 {
@@ -12,6 +14,7 @@ namespace Cheveux
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
+        BUSINESS BusinessDetails = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,20 +48,21 @@ namespace Cheveux
                 }
                 else
                 {
-                    Response.Redirect("/Default.aspx");
                     function.logAnError("Unknown user type found during Loading of default.aspx: " +
                         UserID["UT"].ToString());
                 }
             }
+                
+            //load home page info
 
             //welcome back existing users
             String name = Request.QueryString["WB"];
-                if (name != null)
-                {
-                    Welcome.Text = "Welcome Back To Cheveux " + name;
-                }
-                else
-                {
+            if (name != null)
+            {
+                Welcome.Text = "Welcome Back To Cheveux " + name;
+            }
+            else
+            {
                     //welcome new customers
                     name = Request.QueryString["NU"];
                     if (name != null)
@@ -67,6 +71,41 @@ namespace Cheveux
                         + "  You Are Now Registered With Cheveux";
                     }
                 }
+
+            //load contact us jumbotron
+            try
+            {
+                //get the curent bussines details
+                BusinessDetails = handler.getBusinessTable();
+                //display the contact info
+                //add a table row
+                TableRow newRow = new TableRow();
+                tblContactUs.Rows.Add(newRow);
+
+                //add the phone number
+                TableCell newCell = new TableCell();
+                newCell.Text = "<a href='tel:" + BusinessDetails.Phone.ToString()+"'" +
+                    "class='btn btn-info btn-lg'> <span class='glyphicon'>&#9742;</ span >" +
+                    " Phone </a>";
+                tblContactUs.Rows[0].Cells.Add(newCell);
+
+                //add the address
+                newCell = new TableCell();
+                newCell.Text = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&destination=" +
+                    BusinessDetails.AddressLine1.Replace(' ', '+')+"+"+
+                    BusinessDetails.AddressLine2.Replace(' ', '+')+
+                "' class='btn btn-info btn-lg'>" +
+                "<span class='glyphicon'>&#xe062;</span> Get Directions</a>";
+                tblContactUs.Rows[0].Cells.Add(newCell);
+                
             }
+            catch (Exception err)
+            {
+                function.logAnError("unable to load contact info on default.aspx: " +
+                    err);
+            }
+
+
+        }
     }
-    }
+}
