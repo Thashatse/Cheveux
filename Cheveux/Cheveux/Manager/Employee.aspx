@@ -40,7 +40,7 @@
                     <asp:Label ID="employeeJumbotronLable" runat="server"></asp:Label>
                 </div>
                 <div class="col-md-2">
-                    <!--add employee butoon -->
+                    <!--add employee btn -->
                     <button type='button' class='btn btn-default'> <a href='#'>New Employee </a></button>
                 </div>
             </div>

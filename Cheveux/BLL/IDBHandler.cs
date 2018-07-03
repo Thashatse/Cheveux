@@ -55,5 +55,7 @@ namespace BLL
         SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID);
         List<SP_ViewEmployee> viewAllEmployees();
         List<SP_GetEmployeeTypes> getEmpTypes();
+        List<PRODUCT> getAllProducts();
+        List<SP_GetProductTypes> getProductTypes();
     }
 }

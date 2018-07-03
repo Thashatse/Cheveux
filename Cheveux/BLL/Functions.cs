@@ -59,29 +59,30 @@ namespace BLL
             }
             else
             {
+                logAnError("Unknown Product Type given to GetFullProductTypeText method in functions");
                 return "error";
             }
         }
 
-        public string GetFullEmployeeTypeText(char ProductType)
+        public string GetFullEmployeeTypeText(char empType)
         {
             /*
              * Given abbreviated char that database returns for product type, 
              * this class will return the full text of that product type
              */
-            if (ProductType == 'S')
+            if (empType == 'S')
             {
                 return "Stylist";
             }
-            else if (ProductType == 'R')
+            else if (empType == 'R')
             {
                 return "Receptionist";
             }
-            else if (ProductType == 'M')
+            else if (empType == 'M')
             {
                 return "Manager";
             }
-            else if (ProductType == 'A')
+            else if (empType == 'A')
             {
                 return "Manager";
             }
