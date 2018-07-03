@@ -117,7 +117,8 @@ namespace Cheveux.Manager
 
                             //view & edit
                             newCell = new TableCell();
-                            //Edit product link to be added by Lachea
+                            //Edit service link to be added by Sivu
+                            //view service link to be added by Lachea
                             newCell.Text =
                                 "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = '#?" +

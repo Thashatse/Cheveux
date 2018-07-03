@@ -153,7 +153,7 @@ if ((prod.ProductType == "A" || prod.ProductType == "T") && prod.Active[0] == 'Y
                             //Edit sok link to be added by Sivu
                             string cellText = "";
                             //add the add stock button only for Treatments and application services
-                            
+                            //add stock link to be added by Sivu
                                 cellText +=
                                 "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = '#?" +
@@ -175,6 +175,7 @@ if ((prod.ProductType == "A" || prod.ProductType == "T") && prod.Active[0] == 'Y
                             //view & edit
                             newCell = new TableCell();
                             //Edit product link to be added by Lachea
+                            //view Product link to be added by Lachea
                             newCell.Text =
                                 "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = '#?" +
