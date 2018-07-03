@@ -24,54 +24,76 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <!--Nav Bar-->
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="../Manager/Dashboard.aspx">
-                        <img src="../IMG_0715.png" alt="logo" width="75" height="75" /></a>
-                </div>
+    
+        <!--Nav Bar-->
+        <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top py-2">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="../Manager/Dashboard.aspx">
+                 <img src="../IMG_0715.png" alt="logo" width="75" height="75" />
+            </a>
+
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="../Manager/Reports.aspx"><!--Reportd-->Reports</a></li>
-                        <li><a href="../Manager/Products.aspx"><!--Manage Products-->Manage Products</a></li>
-                        <li><a href="../Manager/Service.aspx"><!--Manage Services-->Manage Services</a></li>
-                        <li><a href="../Manager/Employee.aspx"><!--Manage Services-->Manage Employees</a></li>
-                        <li><a href="../Manager/BusinessSetting.aspx">Business Settings</a></li>
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav mx-auto">
+                        <!--../Manager/Reports.aspx-->
+                        <li><button type="button" class="btn btn-light">
+                            <a href="../Manager/Reports.aspx" style="text-decoration:none;">Reports</a>
+                            </button>
+                        </li>
+                        <li><button type="button" class="btn btn-light">
+                            <a href="../Manager/Products.aspx" style="text-decoration:none;">Manage Products</a>
+                            </button>
+                        </li>
+                        <li><button type="button" class="btn btn-light">
+                            <a href="../Manager/Service.aspx" style="text-decoration:none;">Manage Services</a>
+                            </button>
+                        </li>
+                        <li><button type="button" class="btn btn-light">
+                            <a href="../Manager/Employee.aspx" style="text-decoration:none;">Manage Employees</a>
+                            </button>
+                        </li>
+                        <li><button type="button" class="btn btn-light">
+                            <a href="../Manager/BusinessSetting.aspx" style="text-decoration:none;">Business Settings</a>
+                            </button>
+                        </li>
 
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
                         <asp:PlaceHolder runat="server" id="LogedOut">
-                            <!--Login Button-->
-                            <li><a href="../Authentication/Accounts.aspx">Login / Sign Up</a></li>
-                        </asp:PlaceHolder>
+                                <!--Login Button-->
+                                <li><button type="button" class="btn btn-light">
+                                    <a href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
+                                    </button></li>
+                            </asp:PlaceHolder>
+
                         <asp:PlaceHolder runat="server" ID="LogedIn">
-                            <!--Account Button-->
-                            <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
-                            <li><a href="../Authentication/Accounts.aspx?action=Logout">Log Out</a></li>
+                                <!--Account Button-->
+                                <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
+
+                                <li><button class="btn btn-light">
+                                    <a href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
+                                    </button></li>
                         </asp:PlaceHolder>
-                        <!--Help-->
-                        <li><a href="../Help/CheveuxHelpCenter.aspx" target="_blank">Help Center</a></li>
+
+                            <!--Help-->
+                            <li><button type="button" class="btn btn-light">
+                                <a href="../Help/CheveuxHelpCenter.aspx" target="_blank"  style="text-decoration: none;">Help Center</a>
+                            </button></li>
+                            
+                            <div class="form-group" style="float:right !important;">
+                               <!--Search Button & Text Box-->
+                                <input id="serchTerm" type="text" placeholder="Search">
+                                <a class="btn btn-default" href="javascript:search()" style="text-decoration: none;">Search</a>
+                            </div>
                     </ul>
-                    <div class="form-group">
-                        <!--Search Button & Text Box-->
-                        <input id="serchTerm" type="text" placeholder="Search">
-                        <a class="btn btn-default" href="javascript:search()">Search</a>
-                    </div>
                 </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
         </nav>
+
+
+
+
+
         <!--Place older for Content-->
         <div class="container-fluid theTop">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
