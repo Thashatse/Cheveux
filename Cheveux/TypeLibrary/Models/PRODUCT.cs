@@ -14,6 +14,6 @@ namespace TypeLibrary.Models
         public decimal Price { get; set; }
         public string ProductType { get; set; }
         public string Active { get; set; }
-        public byte[] ProductImage { get; set; }
+        public byte[] Product1 { get; set; }
     }
 }

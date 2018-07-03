@@ -184,7 +184,7 @@ namespace DAL
                             {
                                 Name = row["Name"].ToString(),
                                 ProductDescription = row["ProductDescription"].ToString(),
-                                Price = Math.Round(Convert.ToDecimal(row["Price"]), 2).ToString(),
+                                Price = row["Price"].ToString(),
                                 ProductType = row["ProductType(T/A/S)"].ToString()[0],
                                 ProductID = row["ProductID"].ToString()
                             };
@@ -1241,70 +1241,6 @@ namespace DAL
                         }
                     }
                     return employeeTypes;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public List<PRODUCT> getAllProducts()
-        {
-            PRODUCT product = null;
-            List<PRODUCT> products = new List<PRODUCT>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_GetAllProducts",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            product = new PRODUCT
-                            {
-                                ProductID = row["ProductID"].ToString(),
-                                Name = row["Name"].ToString(),
-                                ProductDescription = row["ProductDescription"].ToString(),
-                                Price = Convert.ToDecimal(row["Price"].ToString()),
-                                ProductType = row["ProductType(T/A/S)"].ToString(),
-                                Active = row["Active"].ToString(),
-                                //ProductImage = row["ProductImage"]
-                            };
-                            products.Add(product);
-                        }
-                    }
-                    return products;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public List<SP_GetProductTypes> getProductTypes()
-        {
-            SP_GetProductTypes productType = null;
-            List<SP_GetProductTypes> productTypes = new List<SP_GetProductTypes>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_GetProductTypes",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            productType = new SP_GetProductTypes
-                            {
-                                type = Convert.ToChar(row[0].ToString()[0])
-                            };
-                            productTypes.Add(productType);
-                        }
-                    }
-                    return productTypes;
                 }
             }
             catch (Exception e)

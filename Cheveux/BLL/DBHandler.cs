@@ -224,15 +224,5 @@ namespace BLL
         {
             return db.getEmpTypes();
         }
-
-        public List<PRODUCT> getAllProducts()
-        {
-            return db.getAllProducts();
-        }
-
-        public List<SP_GetProductTypes> getProductTypes()
-        {
-            return db.getProductTypes();
-        }
     }
 }

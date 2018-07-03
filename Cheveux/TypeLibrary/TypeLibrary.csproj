@@ -70,7 +70,6 @@
     <Compile Include="ViewModels\SP_GetEmpAgenda.cs" />
     <Compile Include="ViewModels\SP_GetEmpNames.cs" />
     <Compile Include="ViewModels\SP_GetMyNextCustomer.cs" />
-    <Compile Include="ViewModels\SP_GetProductTypes.cs" />
     <Compile Include="ViewModels\SP_GetServices.cs" />
     <Compile Include="ViewModels\SP_GetStylists.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
