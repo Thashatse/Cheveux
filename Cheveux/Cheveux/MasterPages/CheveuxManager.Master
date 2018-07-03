@@ -11,6 +11,8 @@
     </title>
     <!-- Bootstrap-->
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <!--Bootstrap font awesome for the icons-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
         <!-- Search Function-->
