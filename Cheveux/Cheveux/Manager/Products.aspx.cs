@@ -15,7 +15,7 @@ namespace Cheveux.Manager
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
-        List<PRODUCT> products = null;
+        Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
         List<SP_GetProductTypes> productTypes = null;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -70,11 +70,11 @@ namespace Cheveux.Manager
            try
             {
                 //load a list of all products
-                products = handler.getAllProducts();
+                products = handler.getAllProductsAndDetails();
                 //track row count & number of products cound
                 int count = 0;
 
-                if (products.Count > 0)
+                if (products.Item1.Count != 0 && products.Item2.Count != 0)
                 {
                     //disply the table headers
                     //create a new row in the table and set the height
@@ -111,14 +111,18 @@ namespace Cheveux.Manager
                     //increment rowcounter
                     count++;
 
-                    foreach (PRODUCT prod in products)
+                    //display accessories
+                    foreach (SP_GetAllAccessories Access in products.Item1)
                     {
                         //if the product maches the selected type
                         //if product matches the tearm
-                        if ((prod.ProductType[0] == productType || productType == 'X') &&
-                            (compareToSearchTerm(prod.Name) == true ||
-                            compareToSearchTerm(prod.ProductDescription) == true) &&
-                            prod.ProductType[0] != 'S')
+                        if ((Access.ProductType[0] == productType || productType == 'X') &&
+                            (compareToSearchTerm(Access.Name) == true ||
+                            compareToSearchTerm(Access.ProductDescription) == true ||
+                            compareToSearchTerm(Access.Brandname) == true ||
+                            compareToSearchTerm(Access.brandType) == true ||
+                            compareToSearchTerm(Access.Colour) == true) &&
+                            Access.ProductType[0] != 'S')
                         {
                             //diplay the product details
                             //add a new row to the table
@@ -133,19 +137,108 @@ namespace Cheveux.Manager
 
                             //Name
                             newCell = new TableCell();
-                            newCell.Text = prod.Name;
+                            newCell.Text = Access.Name;
+                            tblProductTable.Rows[count].Cells.Add(newCell);
+
+                            //Product Type
+                            newCell = new TableCell();
+                            newCell.Text = function.GetFullProductTypeText(Access.ProductType[0]);
+                            tblProductTable.Rows[count].Cells.Add(newCell);
+
+                            if ((Access.ProductType == "A" || Access.ProductType == "T") &&
+                                Access.Active[0] == 'Y')
+                            {
+                                //stock count
+                                newCell = new TableCell();
+                                newCell.Text = Access.Qty.ToString();
+                                tblProductTable.Rows[count].Cells.Add(newCell);
+
+                                //add stock button
+                                newCell = new TableCell();
+                                //Edit sok link to be added by Sivu
+                                string cellText = "";
+                                //add the add stock button only for Treatments and application services
+                                //add stock link to be added by Sivu
+                                cellText +=
+                                "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = '#?" +
+                                        "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                                        "&PreviousPage=../Manager/Products.aspx'>Manage Stock  </a></button>            ";
+
+                                newCell.Text = cellText;
+                                tblProductTable.Rows[count].Cells.Add(newCell);
+                            }
+                            else
+                            {
+                                newCell = new TableCell();
+                                newCell.Text = "Inactive Product";
+                                tblProductTable.Rows[count].Cells.Add(newCell);
+
+                                newCell = new TableCell();
+                                tblProductTable.Rows[count].Cells.Add(newCell);
+                            }
+
+                            //view & edit
+                            newCell = new TableCell();
+                            //Edit product link to be added by Lachea
+                            //view Product link to be added by Lachea
+                            newCell.Text =
+                                "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = '#?" +
+                                        "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                                        "&PreviousPage=../Manager/Products.aspx'>Edit  </a></button>          " +
+
+                                        "<button type = 'button' class='btn btn-default'>" +
+                                        "<a href = '../'ViewProduct.aspx?ProductID="
+                                        + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                                        "&PreviousPage=../Manager/Products.aspx'>View   </a></button>";
+                            tblProductTable.Rows[count].Cells.Add(newCell);
+
+                            //increment counter
+                            count++;
+                        }
+                    }
+
+                    //display treatments
+                    foreach (SP_GetAllTreatments treat in products.Item2)
+                    {
+                        //if the product maches the selected type
+                        //if product matches the tearm
+                        if ((treat.ProductType[0] == productType || productType == 'X') &&
+                            (compareToSearchTerm(treat.Name) == true ||
+                            compareToSearchTerm(treat.ProductDescription) == true ||
+                            compareToSearchTerm(treat.Brandname) == true ||
+                            compareToSearchTerm(treat.TreatmentType) == true ||
+                            compareToSearchTerm(treat.brandType) == true) &&
+                            treat.ProductType[0] != 'S')
+                        {
+                            //diplay the product details
+                            //add a new row to the table
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblProductTable.Rows.Add(newRow);
+
+                            //image
+                            TableCell newCell = new TableCell();
+                            //image display to be added here
+                            tblProductTable.Rows[count].Cells.Add(newCell);
+
+                            //Name
+                            newCell = new TableCell();
+                            newCell.Text = treat.Name;
                             tblProductTable.Rows[count].Cells.Add(newCell);
                             
                             //Product Type
                             newCell = new TableCell();
-                            newCell.Text = function.GetFullProductTypeText(prod.ProductType[0]);
+                            newCell.Text = function.GetFullProductTypeText(treat.ProductType[0]);
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
-if ((prod.ProductType == "A" || prod.ProductType == "T") && prod.Active[0] == 'Y')
+                            if ((treat.ProductType == "A" || treat.ProductType == "T") && 
+                                treat.Active[0] == 'Y')
                             {
                                 //stock count
                                 newCell = new TableCell();
-                                newCell.Text = "Count";
+                                newCell.Text = treat.Qty.ToString();
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
                                 //add stock button
@@ -157,7 +250,7 @@ if ((prod.ProductType == "A" || prod.ProductType == "T") && prod.Active[0] == 'Y
                                 cellText +=
                                 "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = '#?" +
-                                        "ProductID=" + prod.ProductID.ToString().Replace(" ", string.Empty) +
+                                        "ProductID=" + treat.ProductID.ToString().Replace(" ", string.Empty) +
                                         "&PreviousPage=../Manager/Products.aspx'>Manage Stock  </a></button>            ";
                             
                             newCell.Text = cellText;
@@ -179,12 +272,12 @@ if ((prod.ProductType == "A" || prod.ProductType == "T") && prod.Active[0] == 'Y
                             newCell.Text =
                                 "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = '#?" +
-                                        "ProductID=" + prod.ProductID.ToString().Replace(" ", string.Empty) +
+                                        "ProductID=" + treat.ProductID.ToString().Replace(" ", string.Empty) +
                                         "&PreviousPage=../Manager/Products.aspx'>Edit  </a></button>          " +
 
                                         "<button type = 'button' class='btn btn-default'>" +
                                         "<a href = '../'ViewProduct.aspx?ProductID=" 
-                                        + prod.ProductID.ToString().Replace(" ", string.Empty) +
+                                        + treat.ProductID.ToString().Replace(" ", string.Empty) +
                                         "&PreviousPage=../Manager/Products.aspx'>View   </a></button>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
@@ -206,7 +299,8 @@ if ((prod.ProductType == "A" || prod.ProductType == "T") && prod.Active[0] == 'Y
                 if(count-1 == 0)
                 {
                     productJumbotronLable.ForeColor = System.Drawing.Color.Red;
-                }else
+                }
+                else
                 {
                     productJumbotronLable.ForeColor = System.Drawing.Color.Black;
                 }
@@ -214,13 +308,13 @@ if ((prod.ProductType == "A" || prod.ProductType == "T") && prod.Active[0] == 'Y
             catch (Exception Err)
             {
                 function.logAnError(Err.ToString()
-                    + " An error occurred retrieving list of emplyees for employee type: "
-                    + productType + " - " + function.GetFullEmployeeTypeText(productType)
+                    + " An error occurred retrieving list of products for product type: "
+                    + productType + " - " + function.GetFullProductTypeText(productType)
                     +  " with tearm: " + txtProductSearchTerm.Text
-                    + " in loadEmployeeList(char empType) method on Manager/Employee page");
+                    + " in loadProductList(char productType) method on Manager/Product page");
                 productJumbotronLable.Font.Size = 22;
                 productJumbotronLable.Font.Bold = true;
-                productJumbotronLable.Text = "An error occurred retrieving employee details";
+                productJumbotronLable.Text = "An error occurred retrieving Product details";
             }
         }
 

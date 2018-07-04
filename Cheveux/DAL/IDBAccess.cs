@@ -56,5 +56,7 @@ namespace DAL
         /*        bool AddBooking(BOOKING addBooking);
                 List<SP_GetServices> GetAllServices();
                 List<SP_GetStylists> GetStylistsForService(string serviceID);*/
+
+        Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
     }
 }

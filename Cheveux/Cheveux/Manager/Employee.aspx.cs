@@ -109,7 +109,11 @@ namespace Cheveux.Manager
                     foreach (SP_ViewEmployee emp in employees)
                     {
                         //if the employe maches the selected type
-                        if (emp.employeeType[0] == empType || empType == 'A')
+                        if ((emp.employeeType[0] == empType || empType == 'A') &&
+                            (compareToSearchTerm(emp.firstName) == true ||
+                            compareToSearchTerm(emp.firstName) == true ||
+                            compareToSearchTerm(emp.email) == true ||
+                            compareToSearchTerm(emp.phoneNumber) == true))
                         {
                             //diplay the employee details
                             //add a new row to the table
@@ -186,6 +190,25 @@ namespace Cheveux.Manager
                 employeeJumbotronLable.Font.Bold = true;
                 employeeJumbotronLable.Text = "An error occurred retrieving employee details";
             }
+        }
+
+        public bool compareToSearchTerm(string toBeCompared)
+        {
+            bool result = false;
+            if (txtProductSearchTerm.Text != null)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = txtProductSearchTerm.Text.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
         }
     }
 }

@@ -216,12 +216,7 @@ namespace Cheveux
                                 StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                             }
                         }
-                }
-                catch (ApplicationException Err)
-                {
-                    function.logAnError(Err.ToString());
-                    Response.Redirect("Error.aspx?Error=An Error Occurred Getting Search Results From The Server, Try Again Later");
-                }
+                
 
                 //set the headings based on the search results
                 //products heading
@@ -247,7 +242,13 @@ namespace Cheveux
                 {
                     serviceResultsLable.Text = "<h2> 0 Search Results For '" + searchTerm + "' </h2>";
                 }
-               
+                }
+                catch (ApplicationException Err)
+                {
+                    function.logAnError(Err.ToString());
+                    serviceResultsLable.Text = "An Error Occurred Getting Search Results From The Server, Try Again Later";
+                }
+
             }
         }
 

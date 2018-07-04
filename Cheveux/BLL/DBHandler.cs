@@ -63,6 +63,11 @@ namespace BLL
             return db.UniversalSearch(searchTerm);
         }
 
+        public Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails()
+        {
+            return db.getAllProductsAndDetails();
+        }
+
         public USER GetUserDetails(string ID)
         {
             return db.GetUserDetails(ID);

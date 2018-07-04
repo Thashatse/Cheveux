@@ -16,7 +16,6 @@ namespace Cheveux.Manager
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
         List<PRODUCT> products = null;
-        List<SP_GetProductTypes> productTypes = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {

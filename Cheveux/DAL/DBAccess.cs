@@ -166,14 +166,16 @@ namespace DAL
         {
             List<SP_ProductSearchByTerm> ProductSearchResults = new List<SP_ProductSearchByTerm>();
             List<SP_SearchStylistsBySearchTerm> StylistSearchResults = new List<SP_SearchStylistsBySearchTerm>();
+
+            //search treatments
             SqlParameter[] pars = new SqlParameter[]
         {
                 new SqlParameter("@searchTerm", searchTerm)
         };
-
+            
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_ProductSearchByTerm",
+                using (DataTable table = DBHelper.ParamSelect("SP_TreatmentSearchByTerm",
             CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count > 0)
@@ -193,6 +195,85 @@ namespace DAL
                     }
                 }
 
+                //search Acsoris
+                pars = new SqlParameter[]
+                {
+                new SqlParameter("@searchTerm", searchTerm)
+                };
+
+                using (DataTable table = DBHelper.ParamSelect("SP_AccessorySearchByTerm",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_ProductSearchByTerm result = new SP_ProductSearchByTerm
+                            {
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Math.Round(Convert.ToDecimal(row["Price"]), 2).ToString(),
+                                ProductType = row["ProductType(T/A/S)"].ToString()[0],
+                                ProductID = row["ProductID"].ToString()
+                            };
+                            ProductSearchResults.Add(result);
+                        }
+                    }
+                }
+
+                //search Services
+                pars = new SqlParameter[]
+                {
+                new SqlParameter("@searchTerm", searchTerm)
+                };
+
+                using (DataTable table = DBHelper.ParamSelect("SP_ServiceSearchByTerm",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_ProductSearchByTerm result = new SP_ProductSearchByTerm
+                            {
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Math.Round(Convert.ToDecimal(row["Price"]), 2).ToString(),
+                                ProductType = row["ProductType(T/A/S)"].ToString()[0],
+                                ProductID = row["ProductID"].ToString()
+                            };
+                            ProductSearchResults.Add(result);
+                        }
+                    }
+                }
+
+                //search Braid Services
+                pars = new SqlParameter[]
+                {
+                new SqlParameter("@searchTerm", searchTerm)
+                };
+
+                using (DataTable table = DBHelper.ParamSelect("SP_BraidServiceSearchByTerm",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_ProductSearchByTerm result = new SP_ProductSearchByTerm
+                            {
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Math.Round(Convert.ToDecimal(row["Price"]), 2).ToString(),
+                                ProductType = row["ProductType(T/A/S)"].ToString()[0],
+                                ProductID = row["ProductID"].ToString()
+                            };
+                            ProductSearchResults.Add(result);
+                        }
+                    }
+                }
+
+                //search stylists
                 pars = new SqlParameter[]
                 {
                 new SqlParameter("@searchTerm", searchTerm)
@@ -1306,6 +1387,80 @@ namespace DAL
                     }
                     return productTypes;
                 }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails()
+        {
+            SP_GetAllAccessories accessory = null;
+            List<SP_GetAllAccessories> accessories = new List<SP_GetAllAccessories>();
+            SP_GetAllTreatments treatment = null;
+            List<SP_GetAllTreatments> treatments = new List<SP_GetAllTreatments>();
+
+            
+            try
+            {
+                //get accessories
+                using (DataTable table = DBHelper.Select("SP_GetAllAccessories",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            accessory = new SP_GetAllAccessories
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Convert.ToDecimal(row["Price"].ToString()),
+                                ProductType = row["ProductType(T/A/S)"].ToString(),
+                                Active = row["Active"].ToString(),
+                                //ProductImage = row["ProductImage"]
+                                Colour = row["Colour"].ToString(),
+                                Qty = Convert.ToInt32(row["Qty"].ToString()),
+                                BrandID = row["BrandID"].ToString(),
+                                Brandname = row[11].ToString(),
+                                brandType = row["Type(T/A)"].ToString()
+                            };
+                            accessories.Add(accessory);
+                        }
+                    }
+                }
+
+                //get Treatments
+                using (DataTable table = DBHelper.Select("SP_GetAllTreatments",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            treatment = new SP_GetAllTreatments
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Convert.ToDecimal(row["Price"].ToString()),
+                                ProductType = row["ProductType(T/A/S)"].ToString(),
+                                Active = row["Active"].ToString(),
+                                //ProductImage = row["ProductImage"]
+                                TreatmentType = row["TreatmentType"].ToString(),
+                                Qty = Convert.ToInt32(row["Qty"].ToString()),
+                                BrandID = row["BrandID"].ToString(),
+                                Brandname = row[11].ToString(),
+                                brandType = row["Type(T/A)"].ToString()
+                            };
+                            treatments.Add(treatment);
+                        }
+                    }
+                }
+
+                return Tuple.Create(accessories, treatments);
             }
             catch (Exception e)
             {

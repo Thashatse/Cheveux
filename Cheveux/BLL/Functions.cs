@@ -57,6 +57,10 @@ namespace BLL
             {
                 return "Application Service";
             }
+            else if (ProductType == 'X')
+            {
+                return "ALL";
+            }
             else
             {
                 logAnError("Unknown Product Type given to GetFullProductTypeText method in functions");

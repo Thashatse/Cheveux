@@ -25,6 +25,14 @@
                             <asp:DropDownList ID="drpEmpTyp" runat="server" AutoPostBack="True">
                                 <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                             </asp:DropDownList>
+
+                            <!-- line Break -->
+                            <br /><br />
+
+                            <!-- View By search tearm -->
+                            <p>View Employess By Search Term: </p>
+                            <asp:TextBox ID="txtProductSearchTerm" runat="server"></asp:TextBox>
+                            <asp:Button ID="btnProductSearch" runat="server" Text="Search" />
                         </form>
                         <!-- line Break -->
                         <br />
