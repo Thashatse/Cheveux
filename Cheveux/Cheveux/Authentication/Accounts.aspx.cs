@@ -111,7 +111,7 @@ namespace Cheveux
                             //Manager
                             cookie["UT"] = "M";
                             goToPreviousPage();
-                            Response.Redirect("../Manager/Dashboard.aspx");
+                            Response.Redirect("../Manager/Dashboard.aspx?WB=True");
                         }
                         else if (EmpType == "S")
                         {
@@ -174,7 +174,7 @@ namespace Cheveux
             }
             else if (PreviousPage == "Manager.aspx")
             {
-                Response.Redirect("../Manager/Dashboard.aspx");
+                Response.Redirect("../Manager/Dashboard.aspx?WB=True");
             }
             else if (PreviousPage == "Employee.aspx")
             {

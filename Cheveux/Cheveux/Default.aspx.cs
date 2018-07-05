@@ -89,6 +89,13 @@ namespace Cheveux
                     " Phone </a>";
                 tblContactUs.Rows[0].Cells.Add(newCell);
 
+                //add email address
+                newCell = new TableCell();
+                newCell.Text = "<a href='mailto:" + handler.GetUserDetails("112413834414360855751").Email.ToString()+"'"+
+                    "class='btn btn-info btn-lg'> <span class='glyphicon'>&#128231;</ span >" +
+                    " Email </a>";
+                tblContactUs.Rows[0].Cells.Add(newCell);
+
                 //add the address
                 newCell = new TableCell();
                 newCell.Text = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&destination=" +

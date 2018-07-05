@@ -31,6 +31,60 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LogedIn;
         
         /// <summary>
+        /// lJumbotronDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lJumbotronDate;
+        
+        /// <summary>
+        /// Welcome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Welcome;
+        
+        /// <summary>
+        /// alertsContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertsContainer;
+        
+        /// <summary>
+        /// tblAlerts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblAlerts;
+        
+        /// <summary>
+        /// bookingsLable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label bookingsLable;
+        
+        /// <summary>
+        /// bookingsTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table bookingsTable;
+        
+        /// <summary>
         /// LogedOut control.
         /// </summary>
         /// <remarks>
