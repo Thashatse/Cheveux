@@ -126,6 +126,8 @@
   <ItemGroup>
     <Content Include="Authentication\Accounts.aspx" />
     <Content Include="Bookings.aspx" />
+    <Content Include="Images\userImg.png" />
+    <Content Include="Manager\AddEmployee.aspx" />
     <Content Include="Manager\BusinessSetting.aspx" />
     <Content Include="CSS\Accounts CSS.css" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -235,6 +237,13 @@
     </Compile>
     <Compile Include="Bookings.aspx.designer.cs">
       <DependentUpon>Bookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\AddEmployee.aspx.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\AddEmployee.aspx.designer.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\BusinessSetting.aspx.cs">
       <DependentUpon>BusinessSetting.aspx</DependentUpon>

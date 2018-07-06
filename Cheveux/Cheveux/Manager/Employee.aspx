@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-2">
                     <!--add employee btn -->
-                    <button type='button' class='btn btn-default'> <a href='#'>New Employee </a></button>
+                    <button type='button' class='btn btn-default'> <a href='../Manager/AddEmployee.aspx' target="_blank">New Employee </a></button>
                 </div>
             </div>
 
