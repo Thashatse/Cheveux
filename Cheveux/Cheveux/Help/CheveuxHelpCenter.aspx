@@ -12,7 +12,6 @@
 
     <!--Bootstrap font awesome for the icons-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
 </head>
 <body>
     <form id="HelpForm" runat="server">
@@ -149,6 +148,8 @@
                                     <li class="active"><a href="../Default.aspx">Cheveux Home &nbsp;&nbsp;</a></li>
                                     <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In &nbsp; &nbsp;</a></li>
                                     <li><a href="#StylistCustomerVisit">Stylist Customer Visit &nbsp; &nbsp;</a></li>
+                                    <li><a href="#ManageProducts">Manage Products &nbsp; &nbsp;</a></li>
+                                    <li><a href="#ManageServices">Manage Services &nbsp; &nbsp;</a></li>
                                     <li><a href="#ManageEmployee">Manage Employees &nbsp; &nbsp;</a></li>
                                     <li><a href="#BusinessSettings">Business Setting &nbsp; &nbsp;</a></li>
                                 </ul>
@@ -220,6 +221,122 @@
                         <br />
                         <br />
                         <!--New Section-->
+                        <!--Manage Products-->
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <a name="ManageProducts"></a>
+                                <!--Header-->
+                                <h2>Manage Products</h2>
+                                <!--Content-->
+                                <p>
+                                    <ul>
+                                        <li>To manage Products, you must be logged in as manager.</li>
+                                        <li>Select ‘Manage Products’ from the navigation bar</li>
+                                        <a href="../Manager/Products.aspx">Go to Manage Products Page</a>
+                                        <img src="Helpimages/ViewProductsBy.png" alt="View Products By" />
+                                        <li>You can view products by product type  </li>
+                                        <img src="Helpimages/ViewProductsByTerm.png" alt="View Products By Term" />
+                                        <li>And or by a search term</li>
+                                    </ul>
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>View Product Details</h3>
+                                    <ul>
+                                        <img src="Helpimages/ManageProductsViewProduct.png" alt="View Product Details BTN" />
+                                        <li>To view the details of a product select view next to the product</li>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>Add Product</h3>
+                                    <ul>
+                                        <img src="Helpimages/ManageProductsnewProduct.png" alt="Add New Product" />
+                                        <li>To Add a product, select New Product </li>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>Manage Stock</h3>
+                                    <ul>
+                                        <img src="Helpimages/ManageProductsManageStock.png" alt="Manage Stock BTN" />
+                                        <li>To add or remove stock select manage stock next to the product you want to change</li>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>Edit Product</h3>
+                                    <ul>
+                                        <img src="Helpimages/ManageProductsEdit.png" alt="edit product BTN" />
+                                        <li>To edit a product select edit next to the product you wish to edit</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!--line Break-->
+                        <br />
+                        <br />
+                        <!--New Section-->
+                        <!--Manage Services-->
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <a name="ManageServices"></a>
+                                <!--Header-->
+                                <h2>Manage Services</h2>
+                                <!--Content-->
+                                <p>
+                                    <ul>
+                                        <li>To manage services, you must be logged in as manager.</li>
+                                        <li>Select ‘Manage Services’ from the navigation bar</li>
+                                        <a href="../Manager/Service.aspx">Go to Manage Services Page</a>
+                                        <img src="Helpimages/ManageServiceViewBy.png" alt="Login" />
+                                        <li>You can view service by a search term</li>
+                                    </ul>
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>View Service Details</h3>
+                                    <ul>
+                                        <img src="Helpimages/ManageServiceView.png" alt="View Service Details BTN" />
+                                        <li>To view the details of a service, select view button next to the service</li>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+
+                                    <!--Sub Heading-->
+                                    <h3>Add Service</h3>
+                                    <ul>
+                                        <img src="Helpimages/ManageServiceAddService.png" alt="Add New Service" />
+                                        <li>To Add a service, select the ‘New Service’ button</li>
+                                    </ul>
+
+                                    <!--line Break-->
+                                    <br />
+                                   
+                                    <!--Sub Heading-->
+                                    <h3>Edit Service</h3>
+                                    <ul>
+                                        <img src="Helpimages/ManageServiceedit.png" alt="edit Service BTN" />
+                                        <li>To edit a service select edit button next to the service you wish to edit</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!--line Break-->
+                        <br />
+                        <br />
+                        <!--New Section-->
                         <!--Manage Employees-->
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
@@ -231,6 +348,8 @@
                                     <ul>
                                         <li>To manage employees, you must be logged in as manager.</li>
                                         <li>Select ‘Manage Employees’ from the navigation bar</li>
+                                        
+                                    <a href="../Manager/Employee.aspx">Go to Manage Employees Page</a>
                                         <img src="Helpimages/ViewEmployeesBy.png" alt="Login" />
                                         <li>On the Employees page, you can view employees by employee type </li>
                                     </ul>
@@ -307,10 +426,10 @@
                                     To access log in as a manager and select ‘Business Settings’ from the navigation bar.
                                <!--line Break-->
                                     <br />
-                                    <a href="../BusinessSetting.aspx">Go to Business Settings</a>
+                                    <a href="../Manager/BusinessSetting.aspx">Go to Business Settings</a>
                                 </p>
                                 <!--line Break-->
-                                    <br />
+                                <br />
                                 <h3>Changing Business Settings</h3>
                                 <p>
                                     <ul>
