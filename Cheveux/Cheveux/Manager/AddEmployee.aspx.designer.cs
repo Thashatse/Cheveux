@@ -22,13 +22,13 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlForm id_AddEmp;
         
         /// <summary>
-        /// userID control.
+        /// txtUserID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox userID;
+        protected global::System.Web.UI.WebControls.TextBox txtUserID;
         
         /// <summary>
         /// btnGenUserID control.
@@ -40,67 +40,76 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Button btnGenUserID;
         
         /// <summary>
-        /// firstName control.
+        /// txtFirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox firstName;
+        protected global::System.Web.UI.WebControls.TextBox txtFirstName;
         
         /// <summary>
-        /// lastName control.
+        /// txtLastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox lastName;
+        protected global::System.Web.UI.WebControls.TextBox txtLastName;
         
         /// <summary>
-        /// userName control.
+        /// txtUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox userName;
+        protected global::System.Web.UI.WebControls.TextBox txtUserName;
         
         /// <summary>
-        /// email control.
+        /// txtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
-        /// contactNo control.
+        /// txtContactNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox contactNo;
+        protected global::System.Web.UI.WebControls.TextBox txtContactNo;
         
         /// <summary>
-        /// addLine1 control.
+        /// imageUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox addLine1;
+        protected global::System.Web.UI.WebControls.FileUpload imageUpload;
         
         /// <summary>
-        /// addLine2 control.
+        /// txtAddLine1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox addLine2;
+        protected global::System.Web.UI.WebControls.TextBox txtAddLine1;
+        
+        /// <summary>
+        /// txtAddLine2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAddLine2;
         
         /// <summary>
         /// rdoManager control.
@@ -128,6 +137,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton rdoStylist;
+        
+        /// <summary>
+        /// rblEmpType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblEmpType;
         
         /// <summary>
         /// btnSave control.

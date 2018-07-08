@@ -110,7 +110,6 @@
             </div>
         </div>
 
-    </form>
         <!--Bootstrap-->
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
 
@@ -135,7 +134,7 @@
             });
         </script>
 
-    <!-- jQuery to upload user image to browser -->
+    <!-- jQuery to display user image chosen for the upload -->
     <script>
         $(function () {
             $(":file").change(function () {
