@@ -15,9 +15,9 @@
              <form id="id_AddEmp" runat="server">
                  <div class="form-group">
                     
-                    <asp:TextBox ID="userID" runat="server" placeholder="Employee ID"></asp:TextBox>
+                    <asp:TextBox ID="userID" runat="server" placeholder="Employee ID" Width="200px"></asp:TextBox>
                      <!--- Create algorithm to generate UserID must be generated --->
-                     <asp:Button ID="btnGenUserID" runat="server" class="btn btn-default" Text="Generate" />
+                     <asp:Button ID="btnGenUserID" runat="server" class="btn btn-default" Text="Generate" OnClick="btnGenUserID_Click" />
                     <br /><br />
 
                     <asp:TextBox ID="firstName" runat="server" placeholder="First Name"></asp:TextBox>

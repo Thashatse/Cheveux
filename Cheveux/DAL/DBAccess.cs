@@ -1467,5 +1467,30 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public bool AddEmployee(USER user, EMPLOYEE emp)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@EmpID",user.UserID.ToString()),
+                    new SqlParameter("@FirstName", user.FirstName.ToString()),
+                    new SqlParameter("@LastName", user.LastName.ToString()),
+                    new SqlParameter("@UserName", user.UserName.ToString()),
+                    new SqlParameter("@Email", user.Email.ToString()),
+                    new SqlParameter("@ContactNo",user.ContactNo.ToString()),
+                    new SqlParameter("@UserImage",user.UserImage.ToString()),
+                    new SqlParameter("@AddressLine1", emp.AddressLine1.ToString()),
+                    new SqlParameter("@AddressLine2",emp.AddressLine2.ToString()),
+                    new SqlParameter("@EmpType", emp.Type.ToString()),
+                };
+
+                return DBHelper.NonQuery("SP_AddEmployee", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }

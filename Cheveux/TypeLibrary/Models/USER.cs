@@ -18,5 +18,6 @@ namespace TypeLibrary.Models
         public char UserType { get; set; }
         public char Active { get; set; }
         public string UserImage { get; set; }
+        public string AccountType { get; set; }
     }
 }

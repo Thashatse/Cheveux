@@ -58,5 +58,6 @@ namespace DAL
                 List<SP_GetStylists> GetStylistsForService(string serviceID);*/
 
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
+        bool AddEmployee(USER user, EMPLOYEE employee);
     }
 }

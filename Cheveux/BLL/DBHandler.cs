@@ -239,5 +239,9 @@ namespace BLL
         {
             return db.getProductTypes();
         }
+        public bool BLL_AddEmployee(USER user, EMPLOYEE emp)
+        {
+            return db.AddEmployee(user, emp);
+        }
     }
 }

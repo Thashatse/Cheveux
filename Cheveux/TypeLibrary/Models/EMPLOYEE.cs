@@ -18,5 +18,7 @@ namespace TypeLibrary.Models
         public string Type { get; set; }
         public string Active { get; set; }
         public byte[] Employee1 { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
     }
 }
