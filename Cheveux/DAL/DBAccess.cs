@@ -1467,6 +1467,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public bool AddEmployee(USER user, EMPLOYEE emp)
         {
             try
@@ -1491,6 +1492,49 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
+        }
+
+        public List<SP_GetTodaysBookings> getTodaysBookings()
+        {
+            SP_GetTodaysBookings booking = null;
+                List<SP_GetTodaysBookings> bookings = new List<SP_GetTodaysBookings>();
+                try
+                {
+                    using (DataTable table = DBHelper.Select("SP_GetTodaysBookings",
+                CommandType.StoredProcedure))
+                    {
+                        if (table.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in table.Rows)
+                            {
+                                booking = new SP_GetTodaysBookings
+                                {
+                                    BookingID = row[0].ToString(),
+                                    SlotNo = row[1].ToString(),
+                                    StartTime = Convert.ToDateTime(row[2].ToString()),
+                                    EndTime = Convert.ToDateTime(row[3].ToString()),
+                                    CustomerID = row[4].ToString(),
+                                    CustomerFirstName = row[5].ToString(),
+                                    CustomerLastName = row[6].ToString(),
+                                    StylistID = row[7].ToString(),
+                                    ServiceID = row[8].ToString(),
+                                    ServiceName = row[9].ToString(),
+                                    Date = Convert.ToDateTime(row[10].ToString()),
+                                    Available = row[11].ToString(),
+                                    Arrived = row[12].ToString(),
+                                    Comment = row[13].ToString()
+                                };
+                                bookings.Add(booking);
+                            }
+                        }
+                        return bookings;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ApplicationException(e.ToString());
+                }
+            
         }
     }
 }

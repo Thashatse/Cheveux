@@ -75,6 +75,7 @@
     <Compile Include="ViewModels\SP_GetProductTypes.cs" />
     <Compile Include="ViewModels\SP_GetServices.cs" />
     <Compile Include="ViewModels\SP_GetStylists.cs" />
+    <Compile Include="ViewModels\SP_GetTodaysBookings.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
     <Compile Include="ViewModels\SP_SearchStylistsBySearchTerm.cs" />
     <Compile Include="ViewModels\SP_ViewCustVisit.cs" />

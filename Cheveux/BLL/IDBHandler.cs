@@ -59,5 +59,6 @@ namespace BLL
         List<SP_GetProductTypes> getProductTypes();
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         bool BLL_AddEmployee(USER user, EMPLOYEE employee);
+        List<SP_GetTodaysBookings> getTodaysBookings();
     }
 }

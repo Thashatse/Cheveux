@@ -18,6 +18,11 @@ namespace BLL
             db = new DBAccess();
         }
 
+        public List<SP_GetTodaysBookings> getTodaysBookings()
+        {
+            return db.getTodaysBookings();
+        }
+
         public SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID)
         {
             return db.viewStylistSpecialisation(empID);

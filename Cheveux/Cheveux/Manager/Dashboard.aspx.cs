@@ -17,6 +17,8 @@ namespace Cheveux.Manager
         HttpCookie cookie = null;
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
         int alertCount = 0;
+        List<SP_GetTodaysBookings> todaysBookings = null;
+        int bookingCount = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,72 +47,83 @@ namespace Cheveux.Manager
                 //check for any alerts
                 //low stock alert
                 checkForLowStock();
+                //load to days bookings 
+                loadTodaysBookings();
             }  
         }
 
         private void checkForLowStock()
         {
-            //load a list of all products
-            products = handler.getAllProductsAndDetails();
-            //sort the products by stock count
-            products = Tuple.Create(products.Item1.OrderBy(o => o.Qty).ToList(), 
-                products.Item2.OrderBy(o => o.Qty).ToList());;
+            try
+            {
+                //load a list of all products
+                products = handler.getAllProductsAndDetails();
+                //sort the products by stock count
+                products = Tuple.Create(products.Item1.OrderBy(o => o.Qty).ToList(),
+                    products.Item2.OrderBy(o => o.Qty).ToList()); ;
 
-            //check for out of stock products
-            //check out of stock treatments
-            foreach (SP_GetAllTreatments treat in products.Item2)
-            {
-                if (treat.Qty <= 0)
+                //check for out of stock products
+                //check out of stock treatments
+                foreach (SP_GetAllTreatments treat in products.Item2)
                 {
-                    //if the accessory is low and stock add an alert to the alert table
-                    addAlertToTable("&#10071;", "Out Of Stock",
-                        "<a href = '#?ProductID="
-                        + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                        "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                        "The Treatment '" + treat.Name + "' is currently out off stock</a>");
+                    if (treat.Qty <= 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#10071;", "Out Of Stock",
+                            "<a href = '#?ProductID="
+                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Treatment '" + treat.Name + "' is currently out off stock</a>");
+                    }
+                }
+                //check out of stock accessories
+                foreach (SP_GetAllAccessories Access in products.Item1)
+                {
+                    if (Access.Qty <= 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#10071;", "Out Of Stock",
+                            "<a href = '#?ProductID="
+                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Accessory '" + Access.Name + "' is currently out of stock</a>");
+                    }
+                }
+                //check for low stock
+                //check low stock treatments
+                foreach (SP_GetAllTreatments treat in products.Item2)
+                {
+                    if (treat.Qty < 10 && treat.Qty > 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#9888;", "Low Stock",
+                            " <a href = '#?ProductID="
+                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Treatment '" + treat.Name + "' is currently runing low on stock with "
+                            + treat.Qty + " Left in stock </a>");
+                    }
+                }
+                //check low stock accessories
+                foreach (SP_GetAllAccessories Access in products.Item1)
+                {
+                    if (Access.Qty < 10 && Access.Qty > 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#9888;", "Low Stock",
+                            "<a href = '#?ProductID="
+                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Accessory '" + Access.Name + "' is currently runing low on stock with "
+                            + Access.Qty + " Left in stock</a>");
+                    }
                 }
             }
-            //check out of stock accessories
-            foreach (SP_GetAllAccessories Access in products.Item1)
+            catch (Exception Err)
             {
-                if (Access.Qty <= 0)
-                {
-                    //if the accessory is low and stock add an alert to the alert table
-                    addAlertToTable("&#10071;", "Out Of Stock",
-                        "<a href = '#?ProductID="
-                        + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                        "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                        "The Accessory '" + Access.Name + "' is currently out of stock</a>");
-                }
-            }
-            //check for low stock
-            //check low stock treatments
-            foreach (SP_GetAllTreatments treat in products.Item2)
-            {
-                if (treat.Qty < 10 && treat.Qty > 0)
-                {
-                    //if the accessory is low and stock add an alert to the alert table
-                    addAlertToTable("&#9888;", "Low Stock",
-                        " <a href = '#?ProductID="
-                        + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                        "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                        "The Treatment '" + treat.Name + "' is currently runing low on stock with "
-                        + treat.Qty + " Left in stock </a>");
-                }
-            }
-            //check low stock accessories
-            foreach (SP_GetAllAccessories Access in products.Item1)
-            {
-                if (Access.Qty < 10 && Access.Qty > 0)
-                {
-                    //if the accessory is low and stock add an alert to the alert table
-                    addAlertToTable("&#9888;", "Low Stock",
-                        "<a href = '#?ProductID="
-                        + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                        "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                        "The Accessory '" + Access.Name + "' is currently runing low on stock with "
-                        + Access.Qty + " Left in stock</a>");
-                }
+                addAlertToTable("", "Error", "An error occurred loading all alerts");
+                function.logAnError("unable to load alerts on Manager/Dashboard.aspx: " +
+                    Err);
             }
         }
 
@@ -165,5 +178,152 @@ namespace Cheveux.Manager
                 alertCount++;
             }
         }
+
+        private void loadTodaysBookings()
+        {
+            //load todays bookings from the database and diplays them in the bookings table
+            try
+            {
+                //load todays bookings
+                todaysBookings = handler.getTodaysBookings();
+                //check if the are any bookings today
+                if (todaysBookings.Count > 0)
+                {
+                    //set the table headings
+                    //create a new row in the table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblBookings.Rows.Add(newRow);
+                    //create a header row and set cell withs
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Time: ";
+                    newHeaderCell.Width = 100;
+                    tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Customer: ";
+                    newHeaderCell.Width = 200;
+                    tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Description: ";
+                    newHeaderCell.Width = 400;
+                    tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Status: ";
+                    newHeaderCell.Width = 200;
+                    tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    //view booking details
+                    newHeaderCell.Width = 100;
+                    tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
+
+                    //increment rowcounter
+                    bookingCount++;
+
+                    //fill the table with bookings
+                    //upcoming bookings 
+                    foreach(SP_GetTodaysBookings booking in todaysBookings)
+                    {
+                        if (booking.StartTime < DateTime.Now)
+                        {
+                            //create a new row in the table and set the height
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblBookings.Rows.Add(newRow);
+                            //fill the wrow with data
+                            TableCell newCell = new TableCell();
+                            newCell.Text = booking.StartTime.ToString("HH:mm");
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = booking.CustomerFirstName + " " + booking.CustomerLastName;
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = booking.ServiceName + " with " + handler.viewEmployee(booking.StylistID).firstName;
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
+                            {
+                                newCell.Text = "Customer Has Not Arived";
+                            }
+                            else if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "Yes")
+                            {
+                                newCell.Text = "Customer Has Arived";
+                            }
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
+                            "&BookingType=Past" +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>View Details</a></button>";
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+
+                            //increment rowcounter
+                            bookingCount++;
+                        }
+                    }
+
+                    //past bookings 
+                    foreach (SP_GetTodaysBookings booking in todaysBookings)
+                    {
+                        if (booking.StartTime > DateTime.Now)
+                        {
+                            //create a new row in the table and set the height
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblBookings.Rows.Add(newRow);
+                            //fill the wrow with data
+                            TableCell newCell = new TableCell();
+                            newCell.Text = booking.StartTime.ToString("HH:mm");
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = booking.CustomerFirstName + " " + booking.CustomerLastName;
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = booking.ServiceName + " with " + handler.viewEmployee(booking.StylistID).firstName;
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
+                            {
+                                newCell.Text = "Customer Has Not Arived";
+                            }
+                            else if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "Yes")
+                            {
+                                newCell.Text = "Customer Has Arived";
+                            }
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
+                            "&BookingType=Past" +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>View Details</a></button>";
+                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
+
+                            //increment rowcounter
+                            bookingCount++;
+                        }
+                    }
+
+                    //set the bookings count
+                    bookingsLable.Text = bookingCount-1 + " Bookings";
+                }
+                else if (todaysBookings.Count == 0)
+                {
+                    //set the bookings count
+                    bookingsLable.Text = "No bookings today";
+                }
+                else if (todaysBookings.Count < 0)
+                {
+                    //let the user know an error occoured
+                    bookingsLable.Text = "An error occurred loading all bookings";
+                }
+
+            }
+            catch (Exception Err)
+            {
+                bookingsLable.Text = "An error occurred loading all bookings";
+                function.logAnError("unable to load topdays bookings on Manager/Dashboard.aspx: " +
+                    Err);
+            }
+        }
+
     }
 }

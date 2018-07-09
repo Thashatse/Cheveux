@@ -43,12 +43,12 @@
                 <div class="col-md-12">
 
                     <!--Todays Bookings-->
+                    <h1>Todays Bookings </h1>
                     <!-- Bookings Count lable -->
                     <asp:Label ID="bookingsLable" runat="server"></asp:Label>
 
                     <!-- Bookings Table -->
-                    <h1>Todays Bookings </h1>
-                    <asp:Table ID="bookingsTable" runat="server">
+                    <asp:Table ID="tblBookings" runat="server">
                     </asp:Table>
 
                 </div>

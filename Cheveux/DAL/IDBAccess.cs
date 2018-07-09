@@ -59,5 +59,6 @@ namespace DAL
 
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         bool AddEmployee(USER user, EMPLOYEE employee);
+        List<SP_GetTodaysBookings> getTodaysBookings();
     }
 }
