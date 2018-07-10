@@ -7,6 +7,7 @@
 
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <form runat="server">
     <div class="container">
         <!--jumbotron page heading-->
         <div class="jumbotron">
@@ -57,4 +58,5 @@
                 </div>
 
     </div>
+        </form>
 </asp:Content>

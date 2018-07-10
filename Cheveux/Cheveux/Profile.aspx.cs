@@ -89,8 +89,16 @@ namespace Cheveux
                 }
                 else if (action == "View")
                 {
-                    //load employee details
-                    loadEmployeeDetails();
+                    if (Request.QueryString["empID"] != null)
+                    {
+                        //load employee details
+                        loadEmpDetails();
+                    }
+                    else if (Request.QueryString["UserID"] != null)
+                    {
+                        //load user detils
+                        loadUserDetails(Request.QueryString["UserID"]);
+                    }
                 }
                 else if (action == "Edit")
                 {
@@ -110,14 +118,21 @@ namespace Cheveux
                     //diplay the profile container and hide the login container
                     JumbotronLogedIn.Visible = true;
                     JumbotronLogedOut.Visible = false;
-                    //load employee details
-                    loadEmployeeDetails();
+                    if(Request.QueryString["empID"] != null)
+                    {
+                        //load employee details
+                    loadEmpDetails();
+                    } else if (Request.QueryString["UserID"] != null)
+                    {
+                        //load user detils
+                        loadUserDetails(Request.QueryString["UserID"]);
+                    }
                 }
             }    
         }
 
-        //load employee details into the page
-        public void loadEmployeeDetails()
+        //load Employee details into the page
+        public void loadEmpDetails()
         {
             //check if it is a manager or a a cusomer and display or hide details accordingly
             if(cookie != null)
@@ -158,7 +173,8 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = specialisation.serviceName;
+                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
+                        "'>" + specialisation.serviceName + "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -168,22 +184,15 @@ namespace Cheveux
                     newRow = new TableRow();
                     newRow.Height = 50;
                     profileTable.Rows.Add(newRow);
-                    //Last name
+                    //service description
                     newCell = new TableCell();
                     newCell.Font.Bold = true;
                     newCell.Text = "Specialisation Description:";
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = specialisation.serviceDescription;
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //viwes Specialisation link
-                    newCell = new TableCell();
-                    newCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
-                        "'>View Service</a></button>";
+                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
+                        "'>"+specialisation.serviceDescription+ "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -204,15 +213,8 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = employee.phoneNumber;
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //phone link
-                    newCell = new TableCell();
-                    newCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = 'tel:" + employee.phoneNumber.ToString() +
-                        "'>Phone Employee</a></button>";
+                    newCell.Text = "<a href = 'tel:" + employee.phoneNumber.ToString() +
+                        "'>"+employee.phoneNumber+" </ a > ";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -229,15 +231,8 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = employee.email;
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //email link
-                    newCell = new TableCell();
-                    newCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = 'mailto:" + employee.email.ToString() +
-                        "'>Email Employee</a></button>";
+                    newCell.Text = "<a href = 'mailto:" + employee.email.ToString() +
+                        "'>"+employee.email+" </ a >";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -318,22 +313,31 @@ namespace Cheveux
         }
 
         //loads the users details into the page
-        public void loadUserDetails()
+        public void loadUserDetails(string userID = null)
         {
             //get the profile details
             try
             {
-                userDetails = handler.GetUserDetails(cookie["ID"].ToString());
+                if (userID != null)
+                {
+                    userDetails = handler.GetUserDetails(userID);
+                }
+                else
+                {
+                    userDetails = handler.GetUserDetails(cookie["ID"].ToString());
+                }
             }
             catch (ApplicationException Err)
             {
                 function.logAnError(Err.ToString()
                     + " An error occurred retrieving your user details for user id: "+ cookie["ID"].ToString());
-                Response.Redirect("Error.aspx?Error='An error occurred retrieving your user details'");
+                profileLable.Text = "An error occurred retrieving user details";
             }
 
-            //dipslay the use profile details
-            if (userDetails != null)
+            try
+            {
+                //dipslay the use profile details
+                if (userDetails != null)
             {
                 //diplay the user details
                 //image
@@ -347,38 +351,46 @@ namespace Cheveux
                 profileTable.Rows.Add(newRow);
                 //track row count
                 int rowCount = 0;
-                //First name
+                //Name
                 TableCell newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "Frist Name:";
+                newCell.Text = "Name:";
                 newCell.Width = 300;
                 profileTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = userDetails.FirstName.ToString();
+                newCell.Text = userDetails.FirstName.ToString() +" "+userDetails.LastName.ToString();
                 newCell.Width = 700;
                 profileTable.Rows[rowCount].Cells.Add(newCell);
                 //increment rowcount
                 rowCount++;
 
-                //add a new row
-                newRow = new TableRow();
-                newRow.Height = 50;
-                profileTable.Rows.Add(newRow);
-                //Last name
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Last Name:";
-                newCell.Width = 300;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = userDetails.LastName.ToString();
-                newCell.Width = 700;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowcount
-                rowCount++;
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Contact No.
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Contact No.:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    if (userID == null)
+                    {
+                        newCell.Text = userDetails.ContactNo.ToString();
+                    }
+                    else
+                    {
+                        newCell.Text = "<a href = 'tel:" + userDetails.ContactNo.ToString() +
+                            "'>" + userDetails.ContactNo + " </ a > ";
+                    }
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
 
-                //add a new row
-                newRow = new TableRow();
+                    //add a new row
+                    newRow = new TableRow();
                 newRow.Height = 50;
                 profileTable.Rows.Add(newRow);
                 //E-mail
@@ -388,7 +400,15 @@ namespace Cheveux
                 newCell.Width = 300;
                 profileTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = userDetails.Email.ToString();
+                if (userID == null)
+                {
+                    newCell.Text = userDetails.Email.ToString();
+                }
+                else
+                {
+                    newCell.Text = "<a href = 'mailto:" + userDetails.Email.ToString() +
+                        "'>" + userDetails.Email + " </ a >";
+                }
                 newCell.Width = 700;
                 profileTable.Rows[rowCount].Cells.Add(newCell);
                 //increment rowcount
@@ -416,40 +436,25 @@ namespace Cheveux
                     rowCount++;
                 }
 
-                //add a new row
-                newRow = new TableRow();
-                newRow.Height = 50;
-                profileTable.Rows.Add(newRow);
-                //Username
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Username:";
-                newCell.Width = 300;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = userDetails.UserName.ToString();
-                newCell.Width = 700;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowcount
-                rowCount++;
-
-                //add a new row
-                newRow = new TableRow();
-                newRow.Height = 50;
-                profileTable.Rows.Add(newRow);
-                //Contact No.
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Contact No.:";
-                newCell.Width = 300;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = userDetails.ContactNo.ToString();
-                newCell.Width = 700;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowcount
-                rowCount++;
-
+                if (userID == null)
+                {
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Username
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Username:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = userDetails.UserName.ToString();
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+                
                 //add a new row
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -474,13 +479,22 @@ namespace Cheveux
                 profileTable.Rows[rowCount].Cells.Add(newCell);
                 //increment rowcount
                 rowCount++;
+                }
             }
             else
             {
                 //if userDetails is empty let the user know an error occoured
                 function.logAnError("An empty result was returned from the DB for user id: " + cookie["ID"].ToString()
                     +" in the Profile Page");
-                Response.Redirect("Error.aspx?Error='An error occurred retrieving your user details'");
+                    profileLable.Text = "An error occurred retrieving user details";
+                }
+
+            }
+            catch (Exception Err)
+            {
+                function.logAnError("An empty result was returned from the DB for user id: " + cookie["ID"].ToString()
+                    + " in the Profile Page");
+                profileLable.Text = "An error occurred retrieving user details";
             }
         }
 

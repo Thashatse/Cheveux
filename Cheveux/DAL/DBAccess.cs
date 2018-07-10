@@ -669,6 +669,8 @@ namespace DAL
                                 ServiceName = Convert.ToString(row["ServiceName"]),
                                 Arrived = Convert.ToString(row["Arrived"]),
                                 Date = Convert.ToDateTime(row["Date"]),
+                                ProductID = Convert.ToString(row["ProductID"]),
+                                empID = Convert.ToString(row["EmpID"])
                             };
                             agenda.Add(emp);
                         }

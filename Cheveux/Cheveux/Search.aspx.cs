@@ -128,7 +128,7 @@ namespace Cheveux
                                 newCell.Text =
                                     "<button type = 'button' class='btn btn-default'>" +
                                     "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "''>View Service</a></button>";
+                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "'>View Service</a></button>";
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                             }
                             //products (Treatments)

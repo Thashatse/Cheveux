@@ -28,13 +28,12 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
         <!--Nav Bar-->
         <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top py-2">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand" href="Receptionist.aspx">
+                    <a class="navbar-brand" href="../Receptionist/Receptionist.aspx">
                         <img src="../IMG_0715.png" alt="logo" width="75" height="75" />
                     </a>
 
@@ -52,7 +51,7 @@
                         </li>
 
                         <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                            <a href="#" style="text-decoration:none;"><!--Manage Stock-->Manage Stock</a>
+                            <a href="../Manager/Products.aspx" style="text-decoration:none;"><!--Manage Stock-->Manage Stock</a>
                             </button>
                         </li>
                         
@@ -87,7 +86,6 @@
                     </ul>
                 </div>
         </nav>
-
 
         <!--Place older for Content-->
         <div class="container-fluid theTop">

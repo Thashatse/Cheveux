@@ -95,6 +95,8 @@ namespace Cheveux
                     //send the user to the correct page based on their usertype
                     if (result == "C")
                     {
+                        //go back to the previous page if there is one
+                        goToPreviousPage();
                         Response.Redirect("../Default.aspx?" + "WB=" + reg.Split('|')[2]);
                     }else if (result == "E")
                     {
@@ -191,6 +193,10 @@ namespace Cheveux
             else if (PreviousPage == "Profile.aspx")
             {
                 Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "Bookings.aspx")
+            {
+                Response.Redirect("../Bookings.aspx");
             }
         }
     }

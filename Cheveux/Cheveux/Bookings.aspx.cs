@@ -148,7 +148,7 @@ namespace Cheveux
                     newCell.Text = bookings.serviceDescripion.ToString();
                     upcomingBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "R "+bookings.servicePrice.ToString();
+                    newCell.Text = "R "+ Math.Round(Convert.ToDouble(bookings.servicePrice), 2).ToString();
                     upcomingBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
                     //display cancel, edit and print buttons
@@ -249,7 +249,7 @@ namespace Cheveux
                     newCell.Text = bookings.serviceDescripion.ToString();
                     pastBookings.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "R " + bookings.servicePrice.ToString();
+                    newCell.Text = "R " + Math.Round(Convert.ToDouble(bookings.servicePrice), 2).ToString();
                     pastBookings.Rows[rowCount].Cells.Add(newCell);
                     if (bookings.arrived.ToString()[0] != 'N')
                     {

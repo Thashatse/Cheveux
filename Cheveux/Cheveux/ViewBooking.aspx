@@ -90,13 +90,13 @@
                                 <!-- Check out -->
                                 <asp:Table ID="tblCheckOut" runat="server">
                                     <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true"  Width="300"> Service: </asp:TableCell>
+                                        <asp:TableCell Font-Bold="true" Width="300"> Service: </asp:TableCell>
                                         <asp:TableCell>
                                         <!--Service Name-->
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true"  Width="700"> Service Description: </asp:TableCell>
+                                        <asp:TableCell Font-Bold="true" Width="700"> Service Description: </asp:TableCell>
                                         <asp:TableCell>
                                             <!--Service Description-->
                                             <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
@@ -164,7 +164,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <!-- Display the Booking for the client -->
@@ -180,8 +179,9 @@
     <!-- if the user is loged Out -->
     <div class="container" runat="server" id="LogedOut">
         <div class="jumbotron">
-            <p>Please log-in</p>
-            <button type="button" class="btn btn-default"><a href="Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOutButton">Login / Sign Up</a></button>
+            <h2>View Booking Details</h2>
+            <p>Please log-in to view booking details</p>
+            <button type="button" class="btn btn-default"><a href="../Authentication/Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOutButton">Login / Sign Up</a></button>
         </div>
     </div>
 

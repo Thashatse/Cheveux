@@ -60,7 +60,7 @@ namespace Cheveux.Manager
                 products = handler.getAllProductsAndDetails();
                 //sort the products by stock count
                 products = Tuple.Create(products.Item1.OrderBy(o => o.Qty).ToList(),
-                    products.Item2.OrderBy(o => o.Qty).ToList()); ;
+                    products.Item2.OrderBy(o => o.Qty).ToList());
 
                 //check for out of stock products
                 //check out of stock treatments
@@ -201,15 +201,15 @@ namespace Cheveux.Manager
                     tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Customer: ";
-                    newHeaderCell.Width = 200;
+                    newHeaderCell.Width = 250;
                     tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Description: ";
-                    newHeaderCell.Width = 400;
+                    newHeaderCell.Width = 300;
                     tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Status: ";
-                    newHeaderCell.Width = 200;
+                    newHeaderCell.Width = 250;
                     tblBookings.Rows[bookingCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
                     //view booking details
@@ -234,10 +234,13 @@ namespace Cheveux.Manager
                             newCell.Text = booking.StartTime.ToString("HH:mm");
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
-                            newCell.Text = booking.CustomerFirstName + " " + booking.CustomerLastName;
+                            newCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
+                                    "&PreviousPage=Dashboard.aspx'>" + booking.CustomerFirstName + " " + booking.CustomerLastName + "</a>";
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
-                            newCell.Text = booking.ServiceName + " with " + handler.viewEmployee(booking.StylistID).firstName;
+                            newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + booking.ServiceID.ToString().Replace(" ", string.Empty) +
+                                    "&PreviousPage=Dashboard.aspx'>"+ booking.ServiceName + " with " + 
+                                    handler.viewEmployee(booking.StylistID).firstName+"</a>";
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
                             if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
@@ -275,10 +278,13 @@ namespace Cheveux.Manager
                             newCell.Text = booking.StartTime.ToString("HH:mm");
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
-                            newCell.Text = booking.CustomerFirstName + " " + booking.CustomerLastName;
+                            newCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
+                                    "&PreviousPage=Dashboard.aspx'>" + booking.CustomerFirstName + " " + booking.CustomerLastName + "</a>";
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
-                            newCell.Text = booking.ServiceName + " with " + handler.viewEmployee(booking.StylistID).firstName;
+                            newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + booking.ServiceID.ToString().Replace(" ", string.Empty) +
+                                    "&PreviousPage=Dashboard.aspx'>" + booking.ServiceName + " with " +
+                                    handler.viewEmployee(booking.StylistID).firstName + "</a>";
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
                             if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")

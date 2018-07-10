@@ -18,5 +18,7 @@ namespace TypeLibrary.ViewModels
         //public Nullable<char> Arrived { get; set; }
         public string Arrived { get; set; }
         public Nullable<DateTime> Date { get; set; }
+        public string ProductID { get; set; }
+        public string empID { get; set; }
     }
 }

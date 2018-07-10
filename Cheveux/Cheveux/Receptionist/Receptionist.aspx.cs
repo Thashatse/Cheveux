@@ -19,7 +19,6 @@ namespace Cheveux
         IDBHandler handler = new DBHandler();
         String test = DateTime.Now.ToString("dddd d MMMM");
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
-
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
         BOOKING checkIn = null;
@@ -116,6 +115,7 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+
         public void getAgenda(string id, DateTime bookingDate)
         {
             Button btn;
@@ -141,13 +141,13 @@ namespace Cheveux
                  * */
                 TableCell startTime = new TableCell();
                 startTime.Text = "Start Time";
-                startTime.Width = 300;
+                startTime.Width = 200;
                 startTime.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(startTime);
 
                 TableCell endTime = new TableCell();
                 endTime.Text = "End Time";
-                endTime.Width = 300;
+                endTime.Width = 200;
                 endTime.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(endTime);
 
@@ -171,7 +171,7 @@ namespace Cheveux
 
                 TableCell arrived = new TableCell();
                 arrived.Text = "Arrived";
-                arrived.Width = 300;
+                arrived.Width = 100;
                 arrived.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
@@ -197,22 +197,26 @@ namespace Cheveux
 
                     //created customer name cell and add to row.. cell index: 2
                     TableCell c = new TableCell();
-                    c.Text = a.CustomerFName.ToString();
+                    c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
 
                     //create employee name cell and add to row.. cell index: 3
                     TableCell e = new TableCell();
-                    e.Text = a.EmpFName.ToString();
+                    e.Text = "<a href = '../Profile.aspx?Action=View" +
+                                        "&empID=" + a.empID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + a.EmpFName.ToString()+ "</a>";
                     AgendaTable.Rows[i].Cells.Add(e);
 
                     //create service name cell and add to row.. cell index: 4
                     TableCell s = new TableCell();
-                    s.Text = a.ServiceName.ToString();
+                    s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + a.ProductID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + a.ServiceName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(s);
-
+                    
                     //create arrival status cell and add to row.. cell index : 5
                     TableCell present = new TableCell();
-                    present.Text = a.Arrived.ToString();
+                    present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
 
                     //create cell that will be populated by the button and add to row.. cell index: 6

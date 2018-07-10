@@ -18,6 +18,56 @@ namespace Cheveux.Manager
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
         List<SP_GetProductTypes> productTypes = null;
 
+        //set the master page based on the user type
+        protected void Page_PreInit(Object sender, EventArgs e)
+        {
+            //check the cheveux user id cookie for the user
+            HttpCookie cookie = Request.Cookies["CheveuxUserID"];
+            char userType;
+            //check if the cookie is empty or not
+            if (cookie != null)
+            {
+                //store the user Type in a variable and display the appropriate master page for the user
+                userType = cookie["UT"].ToString()[0];
+                //if customer
+                if (userType == 'C')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+                }
+                //if receptionist
+                else if (userType == 'R')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxReceptionist.Master";
+                }
+                //if stylist
+                else if (userType == 'S')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxStylist.Master";
+                }
+                //if Manager
+                else if (userType == 'M')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                }
+                //default
+                else
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                }
+            }
+            //set the default master page if the cookie is empty
+            else
+            {
+                //set the master page
+                this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //check if the user is loged out
@@ -25,13 +75,13 @@ namespace Cheveux.Manager
 
             if (cookie == null)
             {
-                //if the user is not loged in as a manager do not display Products
+                //if the user is not loged in as a manager or receptionist do not display Products
             }
-            else if (cookie["UT"] != "M")
+            else if (cookie["UT"] != "M" && cookie["UT"] != "R")
             {
                 Response.Redirect("../Default.aspx");
             }
-            else if (cookie["UT"] == "M")
+            else if (cookie["UT"] == "M" || cookie["UT"] == "R")
             {
                 //if the user is loged in as a manager display Products
                 LogedIn.Visible = true;
@@ -71,6 +121,9 @@ namespace Cheveux.Manager
             {
                 //load a list of all products
                 products = handler.getAllProductsAndDetails();
+                //sort the products by stock count
+                products = Tuple.Create(products.Item1.OrderBy(o => o.Qty).ToList(),
+                    products.Item2.OrderBy(o => o.Qty).ToList());
                 //track row count & number of products cound
                 int count = 0;
 
@@ -132,7 +185,18 @@ namespace Cheveux.Manager
 
                             //image
                             TableCell newCell = new TableCell();
-                            //image display to be added here
+                            if (Access.Qty <= 0)
+                            {
+                                newCell.Text = "&#10071;";
+                            }
+                            else if (Access.Qty < 10 && Access.Qty > 0)
+                            {
+                                newCell.Text = "&#9888;";
+                            }
+                            else
+                            {
+                                //image display to be added here
+                            }
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
                             //Name
@@ -220,7 +284,18 @@ namespace Cheveux.Manager
 
                             //image
                             TableCell newCell = new TableCell();
-                            //image display to be added here
+                            if (treat.Qty <= 0)
+                            {
+                                newCell.Text = "&#10071;";
+                            }
+                            else if (treat.Qty < 10 && treat.Qty > 0)
+                            {
+                                newCell.Text = "&#9888;";
+                            }
+                            else
+                            {
+                                //image display to be added here
+                            }
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
                             //Name

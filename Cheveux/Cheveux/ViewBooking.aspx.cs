@@ -59,20 +59,6 @@ namespace Cheveux
                             //get upcoming booking details
                             getBookingDeatails(BookingID, false, false);
                         }
-                        //create a back button
-                        //Set the page to redirect to the previous page in the querstring
-                        if (PreviousPageAdress != null)
-                        {
-                            BackButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = " + PreviousPageAdress + ">Return To Previous Page</a></button>";
-                        }
-                        else
-                        {
-                            BackButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = 'Bookings.aspx'>Return To Bookings</a></button>";
-                        }
                     }
                     else if (action == "Edit")
                     {
@@ -188,7 +174,7 @@ namespace Cheveux
                 newCell.Text = "Price:";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.servicePrice.ToString();
+                newCell.Text = "R"+ Math.Round(Convert.ToDouble(BookingDetails.servicePrice), 2).ToString();
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                 //increment row count 
@@ -244,127 +230,131 @@ namespace Cheveux
                     //get invoice details
                     List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
 
-                    //diaplay a heading
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    BookingTable.Rows.Add(newRow);
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Invoice:";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                    //increment row count 
-                    rowCount++;
-
-                    //calculate total price
-                    double total = 0.0;
-
-                    foreach (SP_getInvoiceDL item in invoice)
+                    if (invoicDetailLines.Count != 0)
                     {
+
+                        //diaplay a heading
                         newRow = new TableRow();
                         newRow.Height = 50;
                         BookingTable.Rows.Add(newRow);
-                        //fill in the item
                         newCell = new TableCell();
-                        newCell.Text = item.Qty.ToString() +" "+item.itemName.ToString() + " @ R" + item.price.ToString();
-                        newRow.Cells.Add(newCell);
-                        //fill in the Qty, unit price & TotalPrice
-                        newCell = new TableCell();
-                        newCell.HorizontalAlign = HorizontalAlign.Right;
-                        newCell.Text = "R" + Math.Round((item.Qty * item.price), 2).ToString();
+                        newCell.Font.Bold = true;
+                        newCell.Text = "Invoice:";
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
-                        //increment final price
-                        total = item.Qty * item.price;
 
                         //increment row count 
                         rowCount++;
 
+                        //calculate total price
+                        double total = 0.0;
+
+                        foreach (SP_getInvoiceDL item in invoice)
+                        {
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            BookingTable.Rows.Add(newRow);
+                            //fill in the item
+                            newCell = new TableCell();
+                            newCell.Text = item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + Math.Round(item.price, 2).ToString();
+                            newRow.Cells.Add(newCell);
+                            //fill in the Qty, unit price & TotalPrice
+                            newCell = new TableCell();
+                            newCell.HorizontalAlign = HorizontalAlign.Right;
+                            newCell.Text = "R" + Math.Round((item.Qty * item.price), 2).ToString();
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+                            //increment final price
+                            total = item.Qty * item.price;
+
+                            //increment row count 
+                            rowCount++;
+
+                        }
+
+                        // get vat info
+                        Tuple<double, double> vatInfo = function.getVat(total);
+
+                        //display total including and Excluding VAT
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        BookingTable.Rows.Add(newRow);
+                        newCell = new TableCell();
+                        newCell.Text = "Total Ecluding VAT: ";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        //fill in total Ecluding VAT
+                        newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "R " + Math.Round(vatInfo.Item1, 2).ToString();
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+
+                        //get the vat rate
+                        double VATRate = -1;
+                        try
+                        {
+                            VATRate = handler.GetVATRate().VATRate;
+                        }
+                        catch (ApplicationException Err)
+                        {
+                            function.logAnError(Err.ToString());
+                        }
+
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        BookingTable.Rows.Add(newRow);
+                        //fill in total VAT due
+                        newCell = new TableCell();
+                        newCell.Text = "VAT @" + VATRate + "%";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "R " + Math.Round(vatInfo.Item2, 2).ToString();
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+
+                        //display the total due
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        BookingTable.Rows.Add(newRow);
+                        //fill in total
+                        newCell = new TableCell();
+                        newCell.Text = "Total Due: ";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "R " + total.ToString();
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+
+                        //display review
+                        //diaplay a heading
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        BookingTable.Rows.Add(newRow);
+                        newCell = new TableCell();
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+
+                        //where arrived status used. extra cell in table to be removed
+                        newRow = new TableRow();
+                        BookingTable.Rows.Add(newRow);
+                        newCell = new TableCell();
+                        newCell.Text = "";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
                     }
-
-                    // get vat info
-                    Tuple<double, double> vatInfo = function.getVat(total);
-
-                    //display total including and Excluding VAT
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    BookingTable.Rows.Add(newRow);
-                    newCell = new TableCell();
-                    newCell.Text = "Total Ecluding VAT: ";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    //fill in total Ecluding VAT
-                    newCell = new TableCell();
-                    newCell.HorizontalAlign = HorizontalAlign.Right;
-                    newCell.Text = "R " + Math.Round(vatInfo.Item1, 2).ToString();
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                    //increment row count 
-                    rowCount++;
-
-                    //get the vat rate
-                    double VATRate = -1;
-                    try
-                    {
-                        VATRate = handler.GetVATRate().VATRate;
-                    }
-                    catch (ApplicationException Err)
-                    {
-                        function.logAnError(Err.ToString());
-                    }
-
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    BookingTable.Rows.Add(newRow);
-                    //fill in total VAT due
-                    newCell = new TableCell();
-                    newCell.Text = "VAT @"+ VATRate + "%";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.HorizontalAlign = HorizontalAlign.Right;
-                    newCell.Text = "R " + Math.Round(vatInfo.Item2, 2).ToString();
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                    //increment row count 
-                    rowCount++;
-
-                    //display the total due
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    BookingTable.Rows.Add(newRow);
-                    //fill in total
-                    newCell = new TableCell();
-                    newCell.Text = "Total Due: ";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-					newCell = new TableCell();
-                    newCell.HorizontalAlign = HorizontalAlign.Right;
-                    newCell.Text = "R " + total.ToString();
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                    //increment row count 
-                    rowCount++;
-
-                    //display review
-                    //diaplay a heading
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    BookingTable.Rows.Add(newRow);
-                    newCell = new TableCell();
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-					
-					//increment row count 
-                    rowCount++;
-
-                    //where arrived status used. extra cell in table to be removed
-                    newRow = new TableRow();
-                    BookingTable.Rows.Add(newRow);
-                    newCell = new TableCell();
-                    newCell.Text = "";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                    //increment row count 
-                    rowCount++;
                 }
 
                 newRow = new TableRow();
