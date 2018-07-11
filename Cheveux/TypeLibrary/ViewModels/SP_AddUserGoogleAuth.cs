@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypeLibrary.ViewModels
 {
-        public class SP_AddUserGoogleAuth
+        public class SP_AddUser
         {
             public int Result { get; set; }
         }

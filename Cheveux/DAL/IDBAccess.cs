@@ -11,7 +11,7 @@ namespace DAL
     public interface IDBAccess
     {
         SP_CheckForUserType CheckForUserType(string id);
-        SP_AddUserGoogleAuth AddUser(USER User);
+        SP_AddUser AddUser(USER User);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
@@ -60,5 +60,7 @@ namespace DAL
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         bool AddEmployee(USER user, EMPLOYEE employee);
         List<SP_GetTodaysBookings> getTodaysBookings();
+        USER checkForAccountTypeEmail(string identifier);
+        USER logInEmail(string identifier, string password);
     }
 }

@@ -77,8 +77,6 @@ namespace DAL
 
         public bool createSalesDTLRecord(SALES_DTL detailLine)
         {
-
-            SP_AddUserGoogleAuth TF = null;
             SqlParameter[] pars = new SqlParameter[]
             {
             new SqlParameter("@SaleID", detailLine.SaleID),
@@ -126,9 +124,9 @@ namespace DAL
             }
         }
 
-        public SP_AddUserGoogleAuth AddUser(USER User)
+        public SP_AddUser AddUser(USER User)
         {
-            SP_AddUserGoogleAuth TF = null;
+            SP_AddUser TF = null;
             SqlParameter[] pars = new SqlParameter[]
             {
             new SqlParameter("@ID", User.UserID),
@@ -137,17 +135,19 @@ namespace DAL
             new SqlParameter("@UN", User.UserName),
             new SqlParameter("@EM", User.Email),
             new SqlParameter("@CN", User.ContactNo),
-            new SqlParameter("@UI", User.UserImage.ToString())
+            new SqlParameter("@UI", User.UserImage.ToString()),
+            new SqlParameter("@UI", User.UserImage.ToString()),
+            new SqlParameter("@AT", User.AccountType.ToString())
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_AddUserGoogleAuth",
+                using (DataTable table = DBHelper.ParamSelect("SP_AddUser",
             CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        TF = new SP_AddUserGoogleAuth
+                        TF = new SP_AddUser
                         {
                             Result = Convert.ToInt16(row[0])
                         };
@@ -1537,6 +1537,69 @@ namespace DAL
                     throw new ApplicationException(e.ToString());
                 }
             
+        }
+
+        public USER checkForAccountTypeEmail(string identifier)
+        {
+                USER AT = null;
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@identifier", identifier)
+                };
+
+                try
+                {
+                    using (DataTable table = DBHelper.ParamSelect("SP_CheckForAccountTypeEmail",
+                CommandType.StoredProcedure, pars))
+                    {
+                        if (table.Rows.Count == 1)
+                        {
+                            DataRow row = table.Rows[0];
+                            AT = new USER
+                            {
+                                AccountType = Convert.ToString(row[0])
+                            };
+                        }
+                        return AT;
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new ApplicationException(e.ToString());
+                }
+        }
+
+        public USER logInEmail(string identifier, string password)
+        {
+            USER AT = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@identifier", identifier),
+                new SqlParameter("@password", password)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_LogInEmail",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        AT = new USER
+                        {
+                            UserID = Convert.ToString(row[0]),
+                            UserType = Convert.ToString(row[1])[0],
+                            FirstName = Convert.ToString(row[2])
+                        };
+                    }
+                    return AT;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
     }
 }

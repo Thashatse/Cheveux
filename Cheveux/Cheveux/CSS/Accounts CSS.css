@@ -17,3 +17,11 @@ html, body, .container-table {
     display: table-cell;
     vertical-align: middle;
 }
+
+.g-signin2 {
+    width: 100%;
+}
+
+    .g-signin2 > div {
+        margin: 0 auto;
+    }

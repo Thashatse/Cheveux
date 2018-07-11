@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="/Accounts.aspx.cs" Inherits="Cheveux.Accounts" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="../Authentication/Accounts.aspx.cs" Inherits="Cheveux.Accounts" %>
 
 <!DOCTYPE html>
 
@@ -21,61 +21,117 @@
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-2"></div>
+                    <div class="col-6 text-center">
                         <!--jumbotron-->
                         <div class="jumbotron">
-							<div class="col-xs-4 col-md-4"></div>
-                            <div class="col-xs-4 col-md-4 text-center">
-							<!--heading-->
-								<h2> Get started with<b> Cheveux</b1></h2>
-								<!--line break-->
-                                <br />
-								<!--Logo-->
-                                <img src="../IMG_0715.png" alt="logo" width="300" height="300" />
-								<!--line break-->
-                                <br />
-                                <!--sign in buton-->
-                                <div class="g-signin2" data-onsuccess="onSignIn" runat="server" data-width="150" data-height="50"></div>
-								<!--Help-->
-                                <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Sign in with your Google account">
-                                    <span class="glyphicon">&#63; Help</span>
-                                </a>
+                            <!--heading-->
+                            <h2>Get started with<b> Cheveux</b1></h2>
+                            <!--line break-->
+                            <br />
+                            <!--Logo-->
+                            <img src="../IMG_0715.png" alt="logo" width="300" height="300" />
+                            <!--line break-->
+                            <br />
+                            <br />
+                            <!-- sellect account Type -->
+                            <div class="container" runat="server" id="divAccountType">
+                                <!--sign in with email buton-->
+                                <button type='button' class='btn'>
+                                    <a href="../Authentication/Accounts.aspx?Type=Email">
+                                        <span class='glyphicon'>&#128231;</span> Sign In With Email
+                                    </a>
+                                </button>
                                 <!--line break-->
                                 <br />
-                                <!--Sign out button-->
-                                <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
+                                <br />
+                                <!--sign in with google buton-->
+                                <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
                             </div>
-							<div class="col-xs-4 col-md-4"></div>
+
+                            <!-- email account Type login -->
+                            <div class="container" runat="server" id="divEmailAcount" visible="false">
+                                <!-- Error Lable -->
+                                <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
+                                <!--line break-->
+                                <br />
+
+                                <!-- Enter Email -->
+                                <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username"></asp:TextBox>
+                                <!--line break-->
+                                <br />
+                                <!--Email / User Name Validation-->
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailUsername" runat="server"
+                                    ErrorMessage="*Email or Username is required" ControlToValidate="txtEmailUsername"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
+
+                                <!-- email account Type login enter password -->
+                                <div class="container" runat="server" id="divPassword" visible="false">
+                                    <!-- Enter Password -->
+                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password"></asp:TextBox>
+                                    <!--line break-->
+                                <br />
+                                    <!--Password Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorTxtPassword" runat="server"
+                                        ErrorMessage="*Password is required" ControlToValidate="txtPassword"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                </div>
+
+                                <!-- email account Type login next btn -->
+                                <div class="container" runat="server" id="divNext">
+                                    <!--next Button-->
+                                    <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="displayPassword" Font-Bold="true" Width="150" Height="50" />
+                                </div>
+
+                                <!-- email account Type login sign in button -->
+                                <div class="container" runat="server" id="divSignIn" visible="false">
+                                    <!--Submition Button-->
+                                    <asp:Button ID="btnSignIn" runat="server" Text="Sign In" OnClick="signIn" Font-Bold="true" Width="150" Height="50" />
+                                </div>
+
+                                <!--line break-->
+                                <br />
+                                <!--Sign Up Button -->
+                                <a href="../Authentication/NewAccount.aspx?Type=Email">Create Acount</a>
+
+                            </div>
+                            <!--line break-->
+                            <br />
+                            <!--Help-->
+                            <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Sign in with your Google account">
+                                <span class="glyphicon">&#63; Help</span>
+                            </a>
                         </div>
                     </div>
+                    <div class="col-2"></div>
                 </div>
             </div>
         </div>
-		<asp:Button runat="server" ID="btnAuthenticate" Style="display: none;" OnClick="btnAuthenticate_Click" />
+        <!--Sign out button-->
+        <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
+        <asp:Button runat="server" ID="btnAuthenticate" Style="display: none;" OnClick="btnAuthenticate_Click" />
     </form>
     <!--google get user data function-->
-        <script> 
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                document.cookie = "reg=" + profile.getId() + "|" + profile.getEmail() + "|" + profile.getGivenName() + "|" +
-                    profile.getFamilyName() + "|" + profile.getImageUrl() + "|END";
-                document.getElementById("btnAuthenticate").click();
-                //Show the sign out button
-                document.getElementById("SO").hidden = false;
-            }
-        </script>
+    <script> 
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            document.cookie = "reg=" + profile.getId() + "|" + profile.getEmail() + "|" + profile.getGivenName() + "|" +
+                profile.getFamilyName() + "|" + profile.getImageUrl() + "|Google|END";
+            document.getElementById("btnAuthenticate").click();
+        }
+    </script>
 
-        <!--google sign out function-->
-        <script>
-            function signOut() {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {
-                    console.log('User signed out.');
-                });
-            }
-        </script>
-        <!--Bootstrap-->
-        <script src="../Scripts/jquery-3.3.1.min.js"></script>
+    <!--google sign out function-->
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+    <!--Bootstrap-->
+    <script src="../Scripts/jquery-3.3.1.min.js"></script>
     <script src="../Scripts/bootstrap.min.js"></script>
 </body>
 </html>

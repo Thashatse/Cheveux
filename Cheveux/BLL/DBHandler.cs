@@ -18,6 +18,16 @@ namespace BLL
             db = new DBAccess();
         }
 
+        public USER logInEmail(string identifier, string password)
+        {
+            return db.logInEmail(identifier, password);
+        }
+
+        public USER checkForAccountTypeEmail(string identifier)
+        {
+            return db.checkForAccountTypeEmail(identifier);
+        }
+
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             return db.getTodaysBookings();
@@ -58,7 +68,7 @@ namespace BLL
             return db.CheckForUserType(id);
         }
 
-        public SP_AddUserGoogleAuth BLL_AddUser(USER user)
+        public SP_AddUser BLL_AddUser(USER user)
         {
             return db.AddUser(user);
         }

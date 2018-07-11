@@ -65,7 +65,7 @@
                             <asp:PlaceHolder runat="server" id="LogedOut">
                                 <!--Login Button-->
                                 <li><button type="button" class="btn btn-light" style="margin-right:10px;">
-                                    <a href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
+                                    <a href="../Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
                                     </button></li>
                             </asp:PlaceHolder>
 

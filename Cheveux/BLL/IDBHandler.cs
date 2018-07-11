@@ -11,7 +11,7 @@ namespace BLL
     public interface IDBHandler
     {
         SP_CheckForUserType BLL_CheckForUserType(string id);
-        SP_AddUserGoogleAuth BLL_AddUser(USER user);
+        SP_AddUser BLL_AddUser(USER user);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
@@ -60,5 +60,7 @@ namespace BLL
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         bool BLL_AddEmployee(USER user, EMPLOYEE employee);
         List<SP_GetTodaysBookings> getTodaysBookings();
+        USER checkForAccountTypeEmail(string identifier);
+        USER logInEmail(string identifier, string password);
     }
 }

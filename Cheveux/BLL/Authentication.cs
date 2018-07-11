@@ -15,7 +15,59 @@ namespace BLL
     {
         IDBHandler handler = new DBHandler();
 
-        public string Authenticate(string reg)
+        public bool checkForAccountEmail(string emailOrUsername)
+        {
+            bool exists = false;
+            //check if the account exists and it is a emmail count type
+            try
+            {
+                if (handler.checkForAccountTypeEmail(emailOrUsername) == null)
+                {
+                    //the use accoun dose no exist
+                } else
+                    if (handler.checkForAccountTypeEmail(emailOrUsername).AccountType.Replace(" ", string.Empty) == "Email")
+                {
+                    exists = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString()+
+                    "Error in checkForAccountEmail method of Authentication");
+            }
+            return exists;
+        }
+
+        public string[] AuthenticateEmail(string Email, string password)
+        {
+            //array data 0 = ID, 1 = User Type, 2 = Name
+            string[] cheveuxUserCookieDetails = { "Error", "", "" };
+            //check if the account credentials are correct
+            try
+            {
+                USER loginEmail = handler.logInEmail(Email, password);
+                if (loginEmail == null)
+                {
+                    //the use accoun dose no exist
+                }
+                else if (loginEmail.UserID != null 
+                    && loginEmail.UserType.ToString() != null 
+                    && loginEmail.FirstName != null)
+                {
+                    cheveuxUserCookieDetails[0] = loginEmail.UserID.ToString();
+                    cheveuxUserCookieDetails[1] = loginEmail.UserType.ToString();
+                    cheveuxUserCookieDetails[2] = loginEmail.FirstName.ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString() +
+                    "Error in checkForAccountEmail method of Authentication");
+            }
+            return cheveuxUserCookieDetails;
+        }
+
+        public string AuthenticateGoogle(string reg)
         {
             //create a variable to store the return value
             string returnVal = "error";
@@ -27,6 +79,7 @@ namespace BLL
             string name = regArray[2];
             string surname = regArray[3];
             string imageurl = regArray[4];
+            string accountType = regArray[5];
 
             //check if the user exists
             string exists = "Err";

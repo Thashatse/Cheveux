@@ -60,6 +60,7 @@ namespace Cheveux
                 User.UserImage = regArray[4];
                 User.UserName = userName.Text;
                 User.ContactNo = contactNumber.Text;
+            User.AccountType = regArray[5];
 
                 /*
                  * use the bll.NewUser to creat a new user

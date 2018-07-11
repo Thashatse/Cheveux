@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
 
-namespace Cheveux 
+namespace Cheveux
 {
     public partial class Accounts : System.Web.UI.Page
     {
@@ -16,7 +16,14 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //check if the user has requested to sign in with email
+            string singInType = Request.QueryString["Type"];
+            if (singInType == "Email")
+            {
+                //hide sign in with div and show sign in with email
+                divAccountType.Visible = false;
+                divEmailAcount.Visible = true;
+            }
         }
 
         private string getRegCookie()
@@ -55,9 +62,9 @@ namespace Cheveux
                 string result = "";
                 try
                 {
-                    result = auth.Authenticate(reg);
+                    result = auth.AuthenticateGoogle(reg);
                 }
-                catch (ApplicationException Err)
+                catch (Exception Err)
                 {
                     function.logAnError(Err.ToString());
                     Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux server'");
@@ -72,9 +79,9 @@ namespace Cheveux
                     String PreviousPage = Request.QueryString["PreviousPage"];
                     if (PreviousPage != null)
                     {
-                        Response.Redirect("NewAccount.aspx?PreviousPage=" + PreviousPage);
+                        Response.Redirect("NewAccount.aspx?Type=Google&PreviousPage=" + PreviousPage);
                     }
-                    Response.Redirect("NewAccount.aspx");
+                    Response.Redirect("NewAccount.aspx?Type=Google");
                 }
                 //if the user exists create a session cookie and return them to the previous or home page
                 else if (result == "C" || result == "E")
@@ -90,7 +97,7 @@ namespace Cheveux
                     cookie["UT"] = result.ToString();
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
-                    
+
                     //access control
                     //send the user to the correct page based on their usertype
                     if (result == "C")
@@ -98,10 +105,11 @@ namespace Cheveux
                         //go back to the previous page if there is one
                         goToPreviousPage();
                         Response.Redirect("../Default.aspx?" + "WB=" + reg.Split('|')[2]);
-                    }else if (result == "E")
+                    }
+                    else if (result == "E")
                     {
                         string EmpType = handler.getEmployeeType(reg.Split('|')[0]).Type.ToString().Replace(" ", string.Empty);
-                        if(EmpType == "R")
+                        if (EmpType == "R")
                         {
                             //Receptionist
                             cookie["UT"] = "R";
@@ -167,10 +175,12 @@ namespace Cheveux
             if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
             {
                 Response.Redirect("../Help/CheveuxHelpCenter.aspx#InternalHelp");
-            }else if(PreviousPage == "BusinessSetting.aspx")
+            }
+            else if (PreviousPage == "BusinessSetting.aspx")
             {
                 Response.Redirect("../Manager/BusinessSetting.aspx");
-            }else if(PreviousPage == "Reports.aspx")
+            }
+            else if (PreviousPage == "Reports.aspx")
             {
                 Response.Redirect("../Manager/Reports.aspx");
             }
@@ -197,6 +207,121 @@ namespace Cheveux
             else if (PreviousPage == "Bookings.aspx")
             {
                 Response.Redirect("../Bookings.aspx");
+            }
+        }
+
+        protected void displayPassword(object sender, EventArgs e)
+        {
+            //check if the account exist
+            try
+            {
+                if (auth.checkForAccountEmail(txtEmailUsername.Text.ToString().Replace(" ", string.Empty))
+                    == true)
+                {
+                    lError.Visible = false;
+                    //if the account exists hide the next button and show the password field and signin btn
+                    divNext.Visible = false;
+                    divPassword.Visible = true;
+                    divSignIn.Visible = true;
+                }
+                else
+                {
+                    //let the use know the account was not found
+                    lError.Visible = true;
+                    lError.Text = "Couldn't find your Cheveux Account";
+                }
+            }
+            catch (Exception Err)
+            {
+                //let the use know an erorr ocoured
+                lError.Visible = true;
+                lError.Text = "An error occurred communicating with the Cheveux Server Please try again later";
+                function.logAnError(Err.ToString());
+            }
+        }
+
+        protected void signIn(object sender, EventArgs e)
+        {
+            //sign in the user
+            //check if the credentials are correct
+            string[] result = auth.AuthenticateEmail(txtEmailUsername.Text.ToString().Replace(" ", string.Empty),
+                txtPassword.Text.ToString().Replace(" ", string.Empty));
+
+            /*
+                 * if the user deatails are incorect let the user know
+                 */
+            if (result[0].ToString().Replace(" ", string.Empty) == "Incorect")
+            {
+                //let the use know the account details were incorect
+                lError.Visible = true;
+                lError.Text = "Wrong password";
+            }
+            //if there was an error let the user know
+            else if (result[0].ToString().Replace(" ", string.Empty) == "Error")
+            {
+                //let the use know ther was an error
+                Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
+            }
+            //if the user details are coorect create a session cookie and return them to the previous or home page
+            else if (result[1].ToString().Replace(" ", string.Empty) == "C" 
+                || result[1].ToString().Replace(" ", string.Empty) == "E")
+            {
+                //remove the 'reg' cookie
+                HttpCookie cookie = new HttpCookie("reg");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+                //log the user in by creating a cookie to manage their state
+                cookie = new HttpCookie("CheveuxUserID");
+                // Set the user id in it.
+                cookie["ID"] = result[0].ToString().Replace(" ", string.Empty);
+                cookie["UT"] = result[1].ToString().Replace(" ", string.Empty);
+                // Add it to the current web response.
+                Response.Cookies.Add(cookie);
+
+                //access control
+                //send the user to the correct page based on their usertype
+                if (result[1].Replace(" ", string.Empty) == "C")
+                {
+                    //go back to the previous page if there is one
+                    goToPreviousPage();
+                    Response.Redirect("../Default.aspx?" + "WB=" + result[2].ToString().Replace(" ", string.Empty));
+                }
+                else if (result[1].Replace(" ", string.Empty) == "E")
+                {
+                    string EmpType = handler.getEmployeeType(result[1].ToString().Replace(" ", string.Empty)).Type;
+                    if (EmpType == "R")
+                    {
+                        //Receptionist
+                        cookie["UT"] = "R";
+                        goToPreviousPage();
+                        Response.Redirect("../Receptionist/Receptionist.aspx");
+                    }
+                    else if (EmpType == "M")
+                    {
+                        //Manager
+                        cookie["UT"] = "M";
+                        goToPreviousPage();
+                        Response.Redirect("../Manager/Dashboard.aspx?WB=True");
+                    }
+                    else if (EmpType == "S")
+                    {
+                        //stylist
+                        cookie["UT"] = "S";
+                        //go back to the previous page if there is one
+                        goToPreviousPage();
+                        Response.Redirect("../Stylist/Stylist.aspx");
+                    }
+                    else
+                    {
+                        function.logAnError("Unknown user type found during login - User details (from Email Login):" +
+                            result[1].ToString().Replace(" ", string.Empty));
+                        Response.Redirect("../Default.aspx");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("../Default.aspx?" + "WB=" + result[2].Replace(" ", string.Empty));
+                }
             }
         }
     }
