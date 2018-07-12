@@ -15,7 +15,9 @@ namespace BLL
     {
         IDBHandler handler = new DBHandler();
 
-        public bool checkForAccountEmail(string emailOrUsername)
+        Functions function = new Functions();
+
+        public bool checkForAccountEmail(string emailOrUsername, bool register)
         {
             bool exists = false;
             //check if the account exists and it is a emmail count type
@@ -23,11 +25,19 @@ namespace BLL
             {
                 if (handler.checkForAccountTypeEmail(emailOrUsername) == null)
                 {
-                    //the use accoun dose no exist
+                    //the use accoun dose not exist
                 } else
                     if (handler.checkForAccountTypeEmail(emailOrUsername).AccountType.Replace(" ", string.Empty) == "Email")
                 {
                     exists = true;
+                }
+                else
+                    if (handler.checkForAccountTypeEmail(emailOrUsername).AccountType.Replace(" ", string.Empty) == "Google")
+                {
+                    if (register == true)
+                    {
+                        exists = true;
+                    }
                 }
             }
             catch (Exception e)
@@ -134,8 +144,8 @@ namespace BLL
                 }
                 catch (ApplicationException e)
                 {
-                    throw new ApplicationException(e.ToString()
-                        + ". We are unable to create a new accounmt at this time try again later.");
+                    function.logAnError("Faild to add new acoount NewUser method of BLL.Authentication class" + e);
+                    throw new ApplicationException( ". We are unable to create a new accounmt at this time try again later.");
                 }
             }
             catch
@@ -145,6 +155,22 @@ namespace BLL
 
             //return results
             return succes;
+        }
+
+        public string GenerateRandomUserID()
+        {
+            string result;
+            do
+            {
+                int[] id = new int[21];
+                Random rn = new Random();
+                for (int i = 0; i < id.Length; i++)
+                {
+                    id[i] = rn.Next(0, 9);
+                }
+                result = string.Join("", id);
+            } while (handler.BLL_CheckForUserType(result) != null);
+            return result;
         }
     }
 }

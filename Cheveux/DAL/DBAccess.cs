@@ -128,20 +128,21 @@ namespace DAL
         {
             SP_AddUser TF = null;
             SqlParameter[] pars = new SqlParameter[]
-            {
+                {
             new SqlParameter("@ID", User.UserID),
             new SqlParameter("@FN", User.FirstName),
             new SqlParameter("@LN", User.LastName),
             new SqlParameter("@UN", User.UserName),
             new SqlParameter("@EM", User.Email),
             new SqlParameter("@CN", User.ContactNo),
-            new SqlParameter("@UI", User.UserImage.ToString()),
-            new SqlParameter("@UI", User.UserImage.ToString()),
-            new SqlParameter("@AT", User.AccountType.ToString())
-            };
+            new SqlParameter("@UI", User.UserImage),
+            new SqlParameter("@AT", User.AccountType),
+            new SqlParameter("@Pass", User.Password)
+                };
+
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_AddUser",
+                using (DataTable table = DBHelper.ParamSelect("SP_AddNewUser",
             CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count == 1)

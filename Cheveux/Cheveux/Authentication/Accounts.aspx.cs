@@ -16,6 +16,26 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //check if the user has requested a logout or login
+            String action = Request.QueryString["action"];
+            //login
+            if (action == "Logout")
+            {
+                //log out
+                //log the user out on googles servers
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "signOut()", true);
+                //remove the 'reg' cookie
+                HttpCookie cookie = new HttpCookie("reg");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+                //remove the 'CheveuxUserID' cookie
+                cookie = new HttpCookie("CheveuxUserID");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+                //retun the usere to the home page
+                Response.Redirect("../Default.aspx");
+            }
+
             //check if the user has requested to sign in with email
             string singInType = Request.QueryString["Type"];
             if (singInType == "Email")
@@ -23,6 +43,13 @@ namespace Cheveux
                 //hide sign in with div and show sign in with email
                 divAccountType.Visible = false;
                 divEmailAcount.Visible = true;
+                //check for any othe alerts
+                string alert = Request.QueryString["Alert"];
+                if(alert != null || alert != "")
+                {
+                    lError.Visible = true;
+                    lError.Text = alert;
+                }
             }
         }
 
@@ -40,11 +67,6 @@ namespace Cheveux
 
         protected void btnAuthenticate_Click(object sender, EventArgs e)
         {
-            //check if the user has requested a logout or login
-            String action = Request.QueryString["action"];
-            //login
-            if (action != "Logout")
-            {
                 //log in
                 //get the user data from the cookie
                 string reg = getRegCookie();
@@ -75,13 +97,22 @@ namespace Cheveux
                  */
                 if (result == "unRegUser")
                 {
-                    //Open the new account page, and set the page to redirect to as a querstring
-                    String PreviousPage = Request.QueryString["PreviousPage"];
-                    if (PreviousPage != null)
-                    {
-                        Response.Redirect("NewAccount.aspx?Type=Google&PreviousPage=" + PreviousPage);
+                    //get the user data from the cookie
+                    reg = getRegCookie();
+                        string[] regArray = reg.Split('|');
+                    if (auth.checkForAccountEmail(regArray[1].ToString(), false) == false){
+                        //Open the new account page, and set the page to redirect to as a querstring
+                        String PreviousPage = Request.QueryString["PreviousPage"];
+                        if (PreviousPage != null)
+                        {
+                            Response.Redirect("../Authentication/NewAccount.aspx?Type=Google&PreviousPage=" + PreviousPage);
+                        }
+                        Response.Redirect("../Authentication/NewAccount.aspx?Type=Google");
                     }
-                    Response.Redirect("NewAccount.aspx?Type=Google");
+                    else
+                    {
+                        Response.Redirect("../Authentication/Accounts.aspx?Type=Email&Alert=This email address is already Registerd try loging in");
+                    }
                 }
                 //if the user exists create a session cookie and return them to the previous or home page
                 else if (result == "C" || result == "E")
@@ -148,24 +179,6 @@ namespace Cheveux
                     Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
                 }
             }
-            //logout
-            else
-            {
-                //log out
-                //log the user out on googles servers
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "signOut()", true);
-                //remove the 'reg' cookie
-                HttpCookie cookie = new HttpCookie("reg");
-                cookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(cookie);
-                //remove the 'CheveuxUserID' cookie
-                cookie = new HttpCookie("CheveuxUserID");
-                cookie.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(cookie);
-                //retun the usere to the home page
-                Response.Redirect("../Default.aspx");
-            }
-        }
 
         private void goToPreviousPage()
         {
@@ -215,7 +228,7 @@ namespace Cheveux
             //check if the account exist
             try
             {
-                if (auth.checkForAccountEmail(txtEmailUsername.Text.ToString().Replace(" ", string.Empty))
+                if (auth.checkForAccountEmail(txtEmailUsername.Text.ToString().Replace(" ", string.Empty), false)
                     == true)
                 {
                     lError.Visible = false;
