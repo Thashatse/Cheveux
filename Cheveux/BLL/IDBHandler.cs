@@ -58,9 +58,11 @@ namespace BLL
         List<PRODUCT> getAllProducts();
         List<SP_GetProductTypes> getProductTypes();
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
-        bool BLL_AddEmployee(USER user, EMPLOYEE employee);
         List<SP_GetTodaysBookings> getTodaysBookings();
         USER checkForAccountTypeEmail(string identifier);
         USER logInEmail(string identifier, string password);
+        List<SP_UserList> userList();
+        List<SP_SearchForUser> searchForUser(string term);
+        bool addEmployee(EMPLOYEE e);
     }
 }

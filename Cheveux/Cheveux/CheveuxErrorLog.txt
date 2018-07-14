@@ -1,0 +1,135 @@
+
+TimeStamp: 7/14/2018 7:34:04 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 7:35:48 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 7:47:29 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 7:47:51 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 7:51:38 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 7:51:38 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 7:52:01 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 7:55:15 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/14/2018 8:01:37 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'FullName' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1591
+   at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
+   at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
+   at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29

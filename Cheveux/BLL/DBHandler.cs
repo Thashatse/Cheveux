@@ -254,9 +254,17 @@ namespace BLL
         {
             return db.getProductTypes();
         }
-        public bool BLL_AddEmployee(USER user, EMPLOYEE emp)
+        public List<SP_UserList> userList()
         {
-            return db.AddEmployee(user, emp);
+            return db.userList();
+        }
+        public List<SP_SearchForUser> searchForUser(string term)
+        {
+            return db.searchForUser(term);
+        }
+        public bool addEmployee(EMPLOYEE e)
+        {
+            return db.addEmployee(e);
         }
     }
 }

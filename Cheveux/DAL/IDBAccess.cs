@@ -58,9 +58,11 @@ namespace DAL
                 List<SP_GetStylists> GetStylistsForService(string serviceID);*/
 
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
-        bool AddEmployee(USER user, EMPLOYEE employee);
         List<SP_GetTodaysBookings> getTodaysBookings();
         USER checkForAccountTypeEmail(string identifier);
         USER logInEmail(string identifier, string password);
+        List<SP_UserList> userList();
+        List<SP_SearchForUser> searchForUser(string term);
+        bool addEmployee(EMPLOYEE e);
     }
 }

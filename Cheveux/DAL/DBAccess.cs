@@ -1471,32 +1471,6 @@ namespace DAL
             }
         }
 
-        public bool AddEmployee(USER user, EMPLOYEE emp)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@EmpID",user.UserID.ToString()),
-                    new SqlParameter("@FirstName", user.FirstName.ToString()),
-                    new SqlParameter("@LastName", user.LastName.ToString()),
-                    new SqlParameter("@UserName", user.UserName.ToString()),
-                    new SqlParameter("@Email", user.Email.ToString()),
-                    new SqlParameter("@ContactNo",user.ContactNo.ToString()),
-                    new SqlParameter("@UserImage",user.UserImage.ToString()),
-                    new SqlParameter("@AddressLine1", emp.AddressLine1.ToString()),
-                    new SqlParameter("@AddressLine2",emp.AddressLine2.ToString()),
-                    new SqlParameter("@EmpType", emp.Type.ToString()),
-                };
-
-                return DBHelper.NonQuery("SP_AddEmployee", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             SP_GetTodaysBookings booking = null;
@@ -1600,6 +1574,94 @@ namespace DAL
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_UserList> userList()
+        {
+            SP_UserList userList = null;
+            List<SP_UserList> list = new List<SP_UserList>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_UserList", CommandType.StoredProcedure))
+                {
+                    if(table.Rows.Count > 0)
+                    {
+                        foreach(DataRow row in table.Rows)
+                        {
+                            userList = new SP_UserList
+                            {
+                                UserImage = Convert.ToString(row["UserImage"]),
+                                UserID = Convert.ToString(row["UserID"]),
+                                FullName = Convert.ToString(row["FullName"]),
+                                UserName = Convert.ToString(row["UserName"]),
+                                Email = Convert.ToString(row["Email"]),
+                                ContactNo = Convert.ToString(row["ContactNo"])
+                            };
+                            list.Add(userList);
+                        }
+                    }
+                }
+                return list;
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_SearchForUser> searchForUser(string term)
+        {
+            SP_SearchForUser user = null;
+            List<SP_SearchForUser> list = new List<SP_SearchForUser>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@searchTerm", term)
+            };
+
+            try
+            {
+                using(DataTable table = DBHelper.ParamSelect("SP_SearchForUser", CommandType.StoredProcedure, pars))
+                {
+                    if(table.Rows.Count > 0)
+                    {
+                        foreach(DataRow row in table.Rows)
+                        {
+                            user = new SP_SearchForUser
+                            {
+                                UserImage = Convert.ToString(row["UserImage"]),
+                                UserID = Convert.ToString(row["UserID"]),
+                                FullName = Convert.ToString(row["FullName"]),
+                                UserName = Convert.ToString(row["UserName"]),
+                                Email = Convert.ToString(row["Email"]),
+                                ContactNo = Convert.ToString(row["ContactNo"])
+                            };
+                            list.Add(user);
+                        }
+                    }
+                }
+                return list;
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool addEmployee(EMPLOYEE e)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@employeeID", e.EmployeeID.ToString()),
+                    new SqlParameter("@AddressLine1", e.AddressLine1.ToString()),
+                    new SqlParameter("@AddressLine2", e.AddressLine2.ToString()),
+                    new SqlParameter("@Type", e.Type.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddEmployee", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
             }
         }
     }

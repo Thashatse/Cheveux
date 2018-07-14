@@ -16,106 +16,280 @@ namespace Cheveux.Manager
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        USER user;
-        EMPLOYEE emp;
-
+        List<SP_UserList> userList = null;
+        List<SP_SearchForUser> searchForUser = null;
+        EMPLOYEE emp = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            displayUsers();
         }
-
-        protected void btnGenUserID_Click(object sender, EventArgs e)
+        public void displayUsers()
         {
-            txtUserID.Text = GenerateRandomUserID();
-        }
-
-        public string GenerateRandomUserID()
-        {
-            int[] id = new int[21];
-            Random rn = new Random();
-            for(int i = 0; i < id.Length; i++)
-            {
-                id[i] = rn.Next(0, 9);
-            }
-            string result = string.Join("", id);
-
-            return result;
-        }
-        public byte[] UploadUserImage()
-        {
-            //not yet functional (NB) 
-
-            HttpPostedFile postedFile = imageUpload.PostedFile;
-
-            //create variable to retrieve the filename and store it in a variable
-            string fileName = Path.GetFileName(postedFile.FileName);
-            
-            //create variable to get the file extension
-            string fileExtension = Path.GetExtension(fileName);
-
-            //create a variable to get the file size
-            //int fileSize = postedFile.ContentLength;
-
-            byte[] bytes = new byte[1]; 
-            if (fileExtension.ToLower() == ".jpg" ||
-               fileExtension.ToLower() == ".bnp" ||
-               fileExtension.ToLower() == ".gif" ||
-               fileExtension.ToLower() == ".png")
-            {
-                //read the image data that will be inserted into the database
-
-                /*InputStream object is going to return us a stream object that points 
-                 *to the uploaded file using which we can read the contents of that file
-                 */
-                Stream stream = postedFile.InputStream;
-                BinaryReader binaryReader = new BinaryReader(stream);
-
-                bytes = binaryReader.ReadBytes((int)stream.Length);
-                
-            }
-            else
-            {
-                //message saying only images (.jpg, .bnp, .gif, .png) can be uploaded 
-                Response.Write("<script>alert('Only images (.jpg, .bnp, .gif, .png) can be uploaded.';</script>");
-            }
-            return bytes;
-        }
-
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-            byte[] image = UploadUserImage();
-            string selectedRadioButton = rblEmpType.SelectedValue;
+            Button btnAdd;
             try
             {
-                user = new USER();
-                emp = new EMPLOYEE();
+                userList = handler.userList();
 
-                user.UserID = txtUserID.Text.ToString();
-                user.FirstName = txtFirstName.Text.ToString();
-                user.LastName = txtLastName.Text.ToString();
-                user.UserName = txtUserName.Text.ToString();
-                user.Email = txtEmail.Text.ToString();
-                user.ContactNo = txtContactNo.Text.ToString();
-                user.UserImage = Convert.ToString(image);
-                emp.AddressLine1 = txtAddLine1.Text.ToString();
-                emp.AddressLine2 = txtAddLine2.Text.ToString();
-                emp.Type = selectedRadioButton;
+                
+                TableRow row = new TableRow();
+                row.Height = 50;
+                tblUsers.Rows.Add(row);
 
-                if (handler.BLL_AddEmployee(user, emp))
+                TableCell userImage = new TableCell();
+                userImage.Width = 300;
+                tblUsers.Rows[0].Cells.Add(userImage);
+
+                TableCell fullName = new TableCell();
+                fullName.Text = "Full Name";
+                fullName.Width = 300;
+                fullName.Font.Bold = true;
+                tblUsers.Rows[0].Cells.Add(fullName);
+
+                TableCell userType = new TableCell();
+                userType.Text = "User Type";
+                userType.Width = 200;
+                userType.Font.Bold = true;
+                tblUsers.Rows[0].Cells.Add(userType);
+
+                TableCell adLine1 = new TableCell();
+                adLine1.Text = "AddressLine 1";
+                adLine1.Width = 200;
+                adLine1.Font.Bold = true;
+                tblUsers.Rows[0].Cells.Add(adLine1);
+
+                TableCell adLine2 = new TableCell();
+                adLine2.Text = "AddressLine 2";
+                adLine2.Width = 200;
+                adLine2.Font.Bold = true;
+                tblUsers.Rows[0].Cells.Add(adLine2);
+
+                int i = 1;
+
+                foreach (SP_UserList u in userList)
                 {
-                    Response.Write("<script>alert('Successful.');</script>");
-                    Server.Transfer("../Manager/Dashboard.aspx");
-                }
-                else
-                {
-                    Response.Write("<script>alert('Failed.Try again.');</script>");
+                    TableRow r = new TableRow();
+                    tblUsers.Rows.Add(r);
+
+                    TableCell uImage = new TableCell();
+                    uImage.Width = 150;
+                    uImage.Text = "<img src=" + u.UserImage +
+                                    " alt='User Profile Picture' " + 
+                                    "width='80' height='80' />" ;
+                    tblUsers.Rows[i].Cells.Add(uImage);
+
+                    TableCell fName = new TableCell();
+                    fName.Text = u.FullName.ToString();
+                    fName.Width = 300;
+                    fName.Font.Bold = true;
+                    tblUsers.Rows[i].Cells.Add(fName);
+
+                    TableCell uTypeCell = new TableCell();
+                    uTypeCell.Height = 100;
+                    RadioButtonList uTypeList = new RadioButtonList();
+                    uTypeList.Items.Add("Receptionist");
+                    uTypeList.Items.Add("Stylist");
+                    string type = uTypeList.SelectedValue.ToString();
+                    uTypeCell.Controls.Add(uTypeList);
+                    tblUsers.Rows[i].Cells.Add(uTypeCell);
+
+                    TableCell a1 = new TableCell();
+                    TextBox txtAddLine1 = new TextBox();
+                    txtAddLine1.CssClass = "form-control";
+                    a1.Controls.Add(txtAddLine1);
+                    tblUsers.Rows[i].Cells.Add(a1);
+
+
+                    TableCell a2 = new TableCell();
+                    TextBox txtAddLine2 = new TextBox();
+                    txtAddLine2.CssClass = "form-control";
+                    a2.Controls.Add(txtAddLine2);
+                    tblUsers.Rows[i].Cells.Add(a2);
+
+
+                    TableCell buttonCell = new TableCell();
+                    buttonCell.Width = 200;
+                    buttonCell.Height = 50;
+                    btnAdd = new Button();
+                    btnAdd.Text = "Add";
+                    btnAdd.CssClass = "btn btn-default";
+                    btnAdd.Click += (ss, ee) =>
+                    {
+                        try
+                        {
+                            emp = new EMPLOYEE();
+
+                            emp.EmployeeID = u.UserID.ToString();
+                            emp.AddressLine1 = txtAddLine1.Text;
+                            emp.AddressLine2 = txtAddLine2.Text;
+                            emp.Type = type.ToString();
+
+                            if (handler.addEmployee(emp))
+                            {
+                                Response.Write("<script>alert('Employee Added');</script>");
+                                buttonCell.Visible = false;
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Error. Please try again');</script>");
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            Response.Write("<script>alert('Our apologies. An error has occured.')</script>");
+                            //add error to the error log and then display response tab to say that an error has occured
+                            function.logAnError(err.ToString());
+                        }
+                        
+
+                    };
+                    //add button to cell 
+                    buttonCell.Controls.Add(btnAdd);
+                    //add cell to row
+                    tblUsers.Rows[i].Cells.Add(buttonCell);
+
+                    i++;
                 }
             }
-            catch(ApplicationException err)
+            catch(ApplicationException E)
             {
-                function.logAnError(err.ToString());
-                Response.Redirect("../Error.aspx"); 
+                //dispaly error message below//
+
+                function.logAnError(E.ToString());
+            }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            phUsers.Visible = false;
+            phSearchedUsers.Visible = true;
+            Button btnAdd;
+            try
+            {
+                searchForUser = handler.searchForUser(txtSearch.Text.ToString());
+                TableRow row = new TableRow();
+                row.Height = 50;
+                tblSearchedUsers.Rows.Add(row);
+
+                TableCell userImage = new TableCell();
+                userImage.Width = 300;
+                tblSearchedUsers.Rows[0].Cells.Add(userImage);
+
+                TableCell fullName = new TableCell();
+                fullName.Text = "Full Name";
+                fullName.Width = 300;
+                fullName.Font.Bold = true;
+                tblSearchedUsers.Rows[0].Cells.Add(fullName);
+
+                TableCell userType = new TableCell();
+                userType.Text = "User Type";
+                userType.Width = 200;
+                userType.Font.Bold = true;
+                tblSearchedUsers.Rows[0].Cells.Add(userType);
+
+                TableCell adLine1 = new TableCell();
+                adLine1.Text = "AddressLine 1";
+                adLine1.Width = 200;
+                adLine1.Font.Bold = true;
+                tblSearchedUsers.Rows[0].Cells.Add(adLine1);
+
+                TableCell adLine2 = new TableCell();
+                adLine2.Text = "AddressLine 2";
+                adLine2.Width = 200;
+                adLine2.Font.Bold = true;
+                tblSearchedUsers.Rows[0].Cells.Add(adLine2);
+                int i = 1;
+
+                foreach (SP_SearchForUser u in searchForUser)
+                {
+                    TableRow r = new TableRow();
+                    tblSearchedUsers.Rows.Add(r);
+
+                    TableCell uImage = new TableCell();
+                    uImage.Width = 150;
+                    uImage.Text = "<img src=" + u.UserImage +
+                                    " alt='User Profile Picture' " +
+                                    "width='80' height='80' />";
+                    tblSearchedUsers.Rows[i].Cells.Add(uImage);
+
+                    TableCell fName = new TableCell();
+                    fName.Text = u.FullName.ToString();
+                    fName.Width = 300;
+                    fName.Font.Bold = true;
+                    tblSearchedUsers.Rows[i].Cells.Add(fName);
+
+                    TableCell uTypeCell = new TableCell();
+                    uTypeCell.Height = 100;
+                    RadioButtonList uTypeList = new RadioButtonList();
+                    uTypeList.Items.Add("Receptionist");
+                    uTypeList.Items.Add("Stylist");
+                    string type = uTypeList.SelectedValue.ToString();
+                    uTypeCell.Controls.Add(uTypeList);
+                    tblSearchedUsers.Rows[i].Cells.Add(uTypeCell);
+
+                    TableCell a1 = new TableCell();
+                    TextBox txtAddLine1 = new TextBox();
+                    txtAddLine1.CssClass = "form-control";
+                    a1.Controls.Add(txtAddLine1);
+                    tblSearchedUsers.Rows[i].Cells.Add(a1);
+
+
+                    TableCell a2 = new TableCell();
+                    TextBox txtAddLine2 = new TextBox();
+                    txtAddLine2.CssClass = "form-control";
+                    a2.Controls.Add(txtAddLine2);
+                    tblSearchedUsers.Rows[i].Cells.Add(a2);
+
+                    TableCell buttonCell = new TableCell();
+                    buttonCell.Width = 200;
+                    buttonCell.Height = 50;
+                    btnAdd = new Button();
+                    btnAdd.Text = "Add";
+                    btnAdd.CssClass = "btn btn-default";
+                    btnAdd.Click += (ss, ee) =>
+                    {
+                        try
+                        {
+                            emp = new EMPLOYEE();
+
+                            emp.EmployeeID = u.UserID.ToString();
+                            emp.AddressLine1 = txtAddLine1.Text;
+                            emp.AddressLine2 = txtAddLine2.Text;
+                            emp.Type = type.ToString();
+
+                            if (handler.addEmployee(emp))
+                            {
+                                Response.Write("<script>alert('Employee Added');</script>");
+                                buttonCell.Visible = false;
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Error. Please try again');</script>");
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            Response.Write("<script>alert('Our apologies. An error has occured.')</script>");
+                            //add error to the error log and then display response tab to say that an error has occured
+                            function.logAnError(err.ToString());
+                        }
+
+
+                    };
+                    //add button to cell 
+                    buttonCell.Controls.Add(btnAdd);
+                    //add cell to row
+                    tblSearchedUsers.Rows[i].Cells.Add(buttonCell);
+
+                    i++;
+                }
+
+            }
+            catch (ApplicationException E)
+            {
+                //dispaly error message below//
+
+                function.logAnError(E.ToString());
             }
         }
 

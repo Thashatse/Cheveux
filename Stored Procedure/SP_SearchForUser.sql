@@ -16,29 +16,22 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_AddEmployee
-	@employeeID nchar(30),
-	@AddressLine1 varchar(max) = null,
-	@AddressLine2 varchar(max) = null,
-	@Type nchar(10) = null
+CREATE PROCEDURE SP_SearchForUser
+	@searchTerm varchar(50)
 AS
 BEGIN
 
-	BEGIN TRY 
-		BEGIN TRANSACTION 
-			INSERT INTO EMPLOYEE
-						(EmployeeID,AddressLine1,AddressLine2,[Type])
-			VALUES		(@employeeID,@AddressLine1,@AddressLine2,@Type)
+	SET NOCOUNT ON;
 
-			UPDATE [USER]
-			SET	   [USER].UserType = @Type
-			WHERE  [USER].UserID = @employeeID
-		COMMIT TRANSACTION 
-	END TRY
-	BEGIN CATCH 
-		IF @@TRANCOUNT > 0 
-			ROLLBACK TRANSACTION
-	END CATCH 
+	SELECT u.UserImage,u.UserID, (u.FirstName + ' ' +u.LastName)AS[FullName] , u.UserName,u.Email,u.ContactNo
+	FROM [USER] u
+	WHERE (u.UserImage like '%'+@searchTerm+'%'
+		   Or u.UserID like '%'+@searchTerm+'%'  
+		   Or u.FirstName like '%'+@searchTerm+'%'
+		   Or u.LastName like '%'+@searchTerm+'%'
+		   Or u.FirstName + ' ' + u.LastName like '%'+@searchTerm+'%'
+		   Or u.UserName like '%'+@searchTerm+'%'
+		   Or u.Email like '%'+@searchTerm+'%'
+		   Or u.ContactNo like '%'+@searchTerm+'%')
 END
-
 GO
