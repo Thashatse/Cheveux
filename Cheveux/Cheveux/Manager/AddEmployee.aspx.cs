@@ -87,9 +87,11 @@ namespace Cheveux.Manager
                     TableCell uTypeCell = new TableCell();
                     uTypeCell.Height = 100;
                     RadioButtonList uTypeList = new RadioButtonList();
-                    uTypeList.Items.Add("Receptionist");
-                    uTypeList.Items.Add("Stylist");
-                    string type = uTypeList.SelectedValue.ToString();
+                    uTypeList.Items.Add("R");
+                    uTypeList.Items.Add("S");
+                    uTypeList.CellPadding = 10;
+                    uTypeList.RepeatDirection = RepeatDirection.Horizontal;
+                    uTypeList.DataBind();
                     uTypeCell.Controls.Add(uTypeList);
                     tblUsers.Rows[i].Cells.Add(uTypeCell);
 
@@ -122,12 +124,12 @@ namespace Cheveux.Manager
                             emp.EmployeeID = u.UserID.ToString();
                             emp.AddressLine1 = txtAddLine1.Text;
                             emp.AddressLine2 = txtAddLine2.Text;
-                            emp.Type = type.ToString();
+                            emp.Type = uTypeList.SelectedValue.ToString();
 
                             if (handler.addEmployee(emp))
                             {
                                 Response.Write("<script>alert('Employee Added');</script>");
-                                buttonCell.Visible = false;
+                                Response.Redirect(Request.RawUrl);
                             }
                             else
                             {
@@ -221,9 +223,11 @@ namespace Cheveux.Manager
                     TableCell uTypeCell = new TableCell();
                     uTypeCell.Height = 100;
                     RadioButtonList uTypeList = new RadioButtonList();
-                    uTypeList.Items.Add("Receptionist");
-                    uTypeList.Items.Add("Stylist");
-                    string type = uTypeList.SelectedValue.ToString();
+                    uTypeList.Items.Add("R");
+                    uTypeList.Items.Add("S");
+                    uTypeList.CellPadding = 10;
+                    uTypeList.RepeatDirection = RepeatDirection.Horizontal; 
+                    uTypeList.DataBind();
                     uTypeCell.Controls.Add(uTypeList);
                     tblSearchedUsers.Rows[i].Cells.Add(uTypeCell);
 
@@ -255,12 +259,12 @@ namespace Cheveux.Manager
                             emp.EmployeeID = u.UserID.ToString();
                             emp.AddressLine1 = txtAddLine1.Text;
                             emp.AddressLine2 = txtAddLine2.Text;
-                            emp.Type = type.ToString();
+                            emp.Type = uTypeList.SelectedValue.ToString(); 
 
                             if (handler.addEmployee(emp))
                             {
                                 Response.Write("<script>alert('Employee Added');</script>");
-                                buttonCell.Visible = false;
+                                Response.Redirect(Request.RawUrl);
                             }
                             else
                             {

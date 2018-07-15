@@ -31,7 +31,7 @@ BEGIN
 			VALUES		(@employeeID,@AddressLine1,@AddressLine2,@Type)
 
 			UPDATE [USER]
-			SET	   [USER].UserType = @Type
+			SET	   [USER].UserType = 'E'
 			WHERE  [USER].UserID = @employeeID
 		COMMIT TRANSACTION 
 	END TRY

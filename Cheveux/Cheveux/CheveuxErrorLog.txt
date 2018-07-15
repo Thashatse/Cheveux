@@ -133,3 +133,35 @@ System.ApplicationException: System.ArgumentException: Column 'FullName' does no
    at DAL.DBAccess.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 1608
    at BLL.DBHandler.userList() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 259
    at Cheveux.Manager.AddEmpolyee.displayUsers() in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 29
+
+TimeStamp: 7/15/2018 2:35:22 AM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Manager.AddEmpolyee.<>c__DisplayClass6_1.<displayUsers>b__0(Object ss, EventArgs ee) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 130
+
+TimeStamp: 7/15/2018 2:38:26 AM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Manager.AddEmpolyee.<>c__DisplayClass6_1.<displayUsers>b__0(Object ss, EventArgs ee) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 130
