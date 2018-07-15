@@ -287,6 +287,17 @@ namespace Cheveux.Manager
 
                     i++;
                 }
+                if (tblSearchedUsers.Rows.Count > 1)
+                {
+                    resultsHeading.InnerText = "Search results for " + "'"+
+                                                txtSearch.Text + "'";
+                    resultsHeading.Visible = true;
+                }
+                else if(tblSearchedUsers.Rows.Count == 1)
+                {
+                    resultsHeading.InnerText = "No results were found";
+                    resultsHeading.Visible = true;
+                }
 
             }
             catch (ApplicationException E)

@@ -33,5 +33,6 @@ BEGIN
 		   Or u.UserName like '%'+@searchTerm+'%'
 		   Or u.Email like '%'+@searchTerm+'%'
 		   Or u.ContactNo like '%'+@searchTerm+'%')
+		ORDER BY (u.FirstName + ' ' +u.LastName) ASC
 END
 GO
