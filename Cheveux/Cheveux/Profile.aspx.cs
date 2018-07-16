@@ -377,12 +377,26 @@ namespace Cheveux
                     newCell = new TableCell();
                     if (userID == null)
                     {
-                        newCell.Text = userDetails.ContactNo.ToString();
+                        if(userDetails.ContactNo == null || userDetails.ContactNo == "")
+                        {
+                            newCell.Text = "<a href = 'Profile.aspx?Action=Edit'>Add Contact No.</a>";
+                        }
+                        else
+                        {
+                            newCell.Text = userDetails.ContactNo.ToString();
+                        }
                     }
                     else
                     {
-                        newCell.Text = "<a href = 'tel:" + userDetails.ContactNo.ToString() +
+                        if (userDetails.ContactNo == null)
+                        {
+                            newCell.Text = "None";
+                        }
+                        else
+                        {
+                            newCell.Text = "<a href = 'tel:" + userDetails.ContactNo.ToString() +
                             "'>" + userDetails.ContactNo + " </ a > ";
+                        }
                     }
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
