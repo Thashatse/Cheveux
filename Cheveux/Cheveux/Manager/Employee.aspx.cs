@@ -150,10 +150,9 @@ namespace Cheveux.Manager
 
                             //view & edit
                             newCell = new TableCell();
-                            //Edit employee link to be added by sike
                             newCell.Text =
-                                "<button type = 'button' class='btn btn-default'>" + 
-                                "<a href = '#?" +
+                                "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = '../Manager/UpdateEmployee.aspx?" +
                                         "empID=" + emp.UserID.ToString().Replace(" ", string.Empty) +
                                         "&PreviousPage=../Manager/Employee.aspx'>Edit  </a></button>          " +
 

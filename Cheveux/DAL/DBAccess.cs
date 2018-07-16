@@ -1290,7 +1290,7 @@ namespace DAL
                                 phoneNumber = Convert.ToString(row["ContactNo"]),
                                 employeeType = Convert.ToString(row["Type"]),
                                 empImage = Convert.ToString(row["UserImage"]),
-                                active = Convert.ToChar(row[7].ToString()[0])
+                                active = Convert.ToChar(row["Active"])
                             };
                             employees.Add(employee);
                         }
@@ -1660,6 +1660,25 @@ namespace DAL
                 return DBHelper.NonQuery("SP_AddEmployee", CommandType.StoredProcedure, pars);
             }
             catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+        public bool updateEmployee(EMPLOYEE emp, USER user)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@empID", emp.EmployeeID.ToString()),
+                    new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
+                    new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
+                    new SqlParameter("@type", emp.Type.ToString()),
+                    new SqlParameter("@Active", user.Active.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateEmployee", CommandType.StoredProcedure, pars);
+            }
+            catch(Exception E)
             {
                 throw new ApplicationException(E.ToString());
             }

@@ -266,5 +266,9 @@ namespace BLL
         {
             return db.addEmployee(e);
         }
+        public bool updateEmployee(EMPLOYEE emp, USER user)
+        {
+            return db.updateEmployee(emp,user);
+        }
     }
 }
