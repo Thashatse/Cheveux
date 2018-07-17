@@ -19,6 +19,7 @@ namespace Cheveux
         SP_ViewStylistSpecialisation specialisation = null;
         string userType;
         HttpCookie cookie = null;
+        Authentication auth = new Authentication();
 
         //set the master page based on the user type
         protected void Page_PreInit(Object sender, EventArgs e)
@@ -102,8 +103,26 @@ namespace Cheveux
                 }
                 else if (action == "Edit")
                 {
-                    Edit.Visible = true;
-                    editUserDetails();
+                    if (Page.IsPostBack != true)
+                    {
+                        Edit.Visible = true;
+                        editUserDetails();
+                    }
+                    else
+                    {
+                        try
+                        {
+                            userDetails = handler.GetUserDetails(cookie["ID"].ToString());
+                            commitEdit(sender, e);
+                        }
+                        catch (ApplicationException Err)
+                        {
+                            function.logAnError(Err.ToString()
+                                + " An error occurred retrieving user details form DB needed to commit edit for user id: " 
+                                + cookie["ID"].ToString());
+                            Response.Redirect("Error.aspx?Error='An error occurred updating your profile'");
+                        }
+                    }
                 }
                 else if (action == "Delete")
                 {
@@ -507,7 +526,7 @@ namespace Cheveux
             catch (Exception Err)
             {
                 function.logAnError("An empty result was returned from the DB for user id: " + cookie["ID"].ToString()
-                    + " in the Profile Page");
+                    + " in the Profile Page" + Err);
                 profileLable.Text = "An error occurred retrieving user details";
             }
         }
@@ -530,68 +549,125 @@ namespace Cheveux
             //dipslay the use profile details
             if (userDetails != null)
             {
-                //diplay the user details
-                //image
-                profileImage.ImageUrl = userDetails.UserImage.ToString();
-                //username
-                profileLable.Text = userDetails.UserName.ToString().ToUpper();
-                //details
-                //track row count
-                int rowCount = 0;
-                //First name
-                editProfileTable.Rows[rowCount].Cells[0].Text = "Frist Name:";
-                editProfileTable.Rows[rowCount].Cells[1].Text = userDetails.FirstName.ToString();
-                //increment rowcount
-                rowCount++;
-
-                //Last name
-                editProfileTable.Rows[rowCount].Cells[0].Text = "Last Name:";
-                editProfileTable.Rows[rowCount].Cells[1].Text = userDetails.LastName.ToString();
-                //increment rowcount
-                rowCount++;
-
-                //E-mail
-                editProfileTable.Rows[rowCount].Cells[0].Text = "E-mail:";
-                editProfileTable.Rows[rowCount].Cells[1].Text = userDetails.Email.ToString();
-                //increment rowcount
-                rowCount++;
-
-                editProfileTable.Rows[rowCount].Cells[0].Text = "*The Above Details are managed by Google, " +
-                    "<a href ='https://myaccount.google.com/' target='_blank'>Manage Your Google Account</a>";
-                //increment rowcount
-                rowCount++;
-
-                //display user type if employee
-                if (userDetails.UserType.ToString() == "E")
+                if (userDetails.AccountType.Replace(" ", string.Empty) == "Google")
                 {
-                    //UserType
-                    editProfileTable.Rows[rowCount].Cells[0].Text = "Employee Type:";
-                    editProfileTable.Rows[rowCount].Cells[1].Text = function.GetFullEmployeeTypeText
-                        (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0]);
+                    //show the edit table
+                    editGoogleProfileTable.Visible = true;
+                    //dipslay the use profile details
+                    if (userDetails != null)
+                    {
+                        //diplay the user details
+                        //image
+                        profileImage.ImageUrl = userDetails.UserImage.ToString();
+                        //username
+                        profileLable.Text = userDetails.UserName.ToString().ToUpper();
+                        //details
+                        //track row count
+                        int rowCount = 0;
+                        //First name
+                        editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Frist Name:";
+                        editGoogleProfileTable.Rows[rowCount].Cells[1].Text = userDetails.FirstName.ToString() + " " + userDetails.LastName.ToString(); ;
+                        //increment rowcount
+                        rowCount++;
+
+                        //E-mail
+                        editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "E-mail:";
+                        editGoogleProfileTable.Rows[rowCount].Cells[1].Text = userDetails.Email.ToString();
+                        //increment rowcount
+                        rowCount++;
+
+                        editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "*The Above Details are managed by Google, " +
+                                "<a href ='https://myaccount.google.com/' target='_blank'>Manage Your Google Account</a>";
+                        //increment rowcount
+                        rowCount++;
+
+                        //Username
+                        editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Username:";
+                        userName.Attributes.Add("placeholder", userDetails.UserName.ToString());
+                        //increment rowcount
+                        rowCount++;
+
+                        //Contact No.
+                        editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Contact No.:";
+                        contactNumber.Attributes.Add("placeholder", userDetails.ContactNo.ToString());
+                        //increment rowcount
+                        rowCount++;
+
+                        //display user type if employee
+                        if (userDetails.UserType.ToString() == "E")
+                        {
+                            //UserType
+                            editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Employee Type:";
+                            editGoogleProfileTable.Rows[rowCount].Cells[1].Text = function.GetFullEmployeeTypeText
+                                (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0]);
+                            //increment rowcount
+                            rowCount++;
+
+                            editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "*Your Employee Type is managed by the salon manager";
+                            //increment rowcount
+                            rowCount++;
+                        }
+
+                    }
+                }
+                else if (userDetails.AccountType.Replace(" ", string.Empty) == "Email")
+                {
+                    //show the edit table
+                    editEmailProfileTable.Visible = true;
+                    //diplay the user details
+                    //image
+                    profileImage.ImageUrl = userDetails.UserImage.ToString();
+                    //username
+                    profileLable.Text = userDetails.UserName.ToString().ToUpper();
+                    //details
+                    //track row count
+                    int rowCount = 0;
+                    //First name
+                    editEmailProfileTable.Rows[rowCount].Cells[0].Text = "Name:";
+                    txtName.Attributes.Add("placeholder", userDetails.FirstName.ToString());
+                    txtLastName.Attributes.Add("placeholder", userDetails.LastName.ToString());
                     //increment rowcount
                     rowCount++;
 
-                    editProfileTable.Rows[rowCount].Cells[0].Text = "*Your Employee Type is managed by the salon manager";
+                    //E-mail
+                    editEmailProfileTable.Rows[rowCount].Cells[0].Text = "E-mail:";
+                    txtEmailAddress.Attributes.Add("placeholder", userDetails.Email.ToString());
                     //increment rowcount
                     rowCount++;
+
+                    //Username
+                    editEmailProfileTable.Rows[rowCount].Cells[0].Text = "Username:";
+                    txtUsername.Attributes.Add("placeholder", userDetails.UserName.ToString());
+                    //increment rowcount
+                    rowCount++;
+
+                    //Contact No.
+                    editEmailProfileTable.Rows[rowCount].Cells[0].Text = "Contact No.:";
+                    contactNumber.Attributes.Add("placeholder", userDetails.ContactNo.ToString());
+                    //increment rowcount
+                    rowCount++;
+
+                    //display user type if employee
+                    if (userDetails.UserType.ToString() == "E")
+                    {
+                        //UserType
+                        editEmailProfileTable.Rows[rowCount].Cells[0].Text = "Employee Type:";
+                        editEmailProfileTable.Rows[rowCount].Cells[1].Text = function.GetFullEmployeeTypeText
+                            (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0]);
+                        //increment rowcount
+                        rowCount++;
+
+                        editEmailProfileTable.Rows[rowCount].Cells[0].Text = "*Your Employee Type is managed by the salon manager";
+                        //increment rowcount
+                        rowCount++;
+                    }
                 }
                 else
                 {
-                    rowCount += 2;
+                    function.logAnError("unknown account type for use ID: " + cookie["ID"].ToString()
+                     + " on the Profile Page loading edit form");
+                    profileLable.Text = "An error occurred retrieving user details, please try again later.";
                 }
-
-
-                //Username
-                editProfileTable.Rows[rowCount].Cells[0].Text = "Username:";
-                userName.Attributes.Add("placeholder", userDetails.UserName.ToString());
-                //increment rowcount
-                rowCount++;
-
-                //Contact No.
-                editProfileTable.Rows[rowCount].Cells[0].Text = "Contact No.:";
-                contactNumber.Attributes.Add("placeholder", userDetails.ContactNo.ToString());
-                //increment rowcount
-                rowCount++;
             }
             else
             {
@@ -602,55 +678,230 @@ namespace Cheveux
             }
         }
 
-        protected void ShowConfirmEdit(object sender, EventArgs e)
-        {
-            //confirm Edit
-            confirm.Visible = true;
-            editProfileTable.Visible = false;
-            JumbotronLogedIn.Visible = false;
-            confirmHeaderPlaceHolder.Text = "<h1>Please Confirm Edit</h1>";
-            confirmPlaceHolder.Text = "Your Username will now be '" + userName.Text +
-                "' and your cellphone number , " + contactNumber.Text +
-                " do you want to continue with the edit";
-        }
-
-        //show edit
-        public void showEdit(object sender, EventArgs e)
-        {
-            confirm.Visible = false ;
-            editProfileTable.Visible = true;
-            JumbotronLogedIn.Visible = true;
-        }
-
         //commit edit to DB
         public void commitEdit(object sender, EventArgs e)
         {
-            editProfileTable.Visible = false;
-            JumbotronLogedIn.Visible = false;
-            USER userUpdate = new USER();
-            userUpdate.UserID = cookie["ID"].ToString();
-            userUpdate.UserName = userName.Text;
-            userUpdate.ContactNo = contactNumber.Text;
             bool check = false;
+
+            if (userDetails.AccountType.Replace(" ", string.Empty) == "Google")
+            {
+                if ((userName.Text == "" || userName.Text == null)
+                        && (contactNumber.Text == "" || contactNumber.Text == null))
+                {
+                    Response.Redirect("Profile.aspx");
+                }
+
+                if (userName.Text == "")
+                {
+                    USER userUpdate = new USER();
+                    userUpdate.UserID = cookie["ID"].ToString();
+
+                    if (userName.Text == "" || userName.Text == null)
+                    {
+                        userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.UserName = userName.Text;
+                    }
+                    if (contactNumber.Text == "" || contactNumber.Text == null)
+                    {
+                        userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.ContactNo = contactNumber.Text;
+                    }
+
+                    userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
+                    userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
+                    userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
+
+                    try
+                    {
+                        check = handler.updateUser(userUpdate);
+                        Response.Redirect("Profile.aspx");
+                    }
+                    catch (ApplicationException Err)
+                    {
+                        function.logAnError(Err.ToString()
+                            + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
+                        Response.Redirect("Profile.aspx");
+                    }
+                }
+                else if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
+                    == false)
+                {
+                    USER userUpdate = new USER();
+                    userUpdate.UserID = cookie["ID"].ToString();
+
+                    if (userName.Text == "" || userName.Text == null)
+                    {
+                        userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.UserName = userName.Text;
+                    }
+                    if (contactNumber.Text == "" || contactNumber.Text == null)
+                    {
+                        userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.ContactNo = contactNumber.Text;
+                    }
+
+                    userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
+                    userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
+                    userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
+
+                    try
+                    {
+                        check = handler.updateUser(userUpdate);
+                        Response.Redirect("Profile.aspx");
+                    }
+                    catch (ApplicationException Err)
+                    {
+                        function.logAnError(Err.ToString()
+                            + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
+                        Response.Redirect("Profile.aspx");
+                    }
+                }
+                else
+                {
+                    userName_TextChanged(sender, e);
+                }
+            }
+            else if (userDetails.AccountType.Replace(" ", string.Empty) == "Email")
+            {
+                if (txtUsername.Text == ""
+                    && txtContactNumber.Text == ""
+                    && txtName.Text == ""
+                    && txtLastName.Text == ""
+                    && txtEmailAddress.Text == "")
+                {
+                    Response.Redirect("Profile.aspx");
+                }
+
+                if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
+                    == false
+                    && auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
+                    == false)
+                {
+                    check = updateEmailAccount();
+                    if (txtUsername.Text == ""  && txtEmailAddress.Text == "")
+                    {
+                        check = updateEmailAccount();
+                    }
+                    else if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
+                       == false)
+                    {
+                        check = updateEmailAccount();
+                    }
+                    else if (txtUsername.Text == "")
+                    {
+                        check = updateEmailAccount();
+                    }
+                    else if (auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
+                       == false)
+                    {
+                        check = updateEmailAccount();
+                    }
+                    else if (txtEmailAddress.Text == "")
+                    {
+                        check = updateEmailAccount();
+                    }
+
+                    if (check == true)
+                    {
+                        Response.Redirect("Profile.aspx");
+                    }
+                    else if (check == false)
+                    {
+                        editEmailProfileTable.Visible = false;
+                        editGoogleProfileTable.Visible = false;
+                        JumbotronLogedIn.Visible = false;
+                        confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your user profile </h1>";
+                        confirmPlaceHolder.Text = "Please try again later";
+                        yes.Visible = false;
+                        no.Visible = false;
+                        OK.Visible = true;
+                    }
+                }
+
+                else if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
+                    == true
+                    || auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
+                    == true)
+                {
+                    userName_TextChanged(sender, e);
+                    txtEmailAddress_TextChanged(sender, e);
+                }
+            }
+        }
+
+        private bool updateEmailAccount()
+        {
+            USER userUpdate = new USER();
+            bool check = false;
+            userUpdate.UserID = cookie["ID"].ToString();
+
+            if (txtUsername.Text == "")
+            {
+                userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
+            }
+            else
+            {
+                userUpdate.UserName = txtUsername.Text;
+            }
+
+            if (txtContactNumber.Text == "")
+            {
+                userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
+            }
+            else
+            {
+                userUpdate.ContactNo = txtContactNumber.Text;
+            }
+
+            if (txtName.Text == "")
+            {
+                userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
+            }
+            else
+            {
+                userUpdate.FirstName = txtName.Text;
+            }
+
+            if (txtLastName.Text == "")
+            {
+                userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
+            }
+            else
+            {
+                userUpdate.LastName = txtLastName.Text;
+            }
+
+            if (txtEmailAddress.Text == "")
+            {
+                userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
+            }
+            else
+            {
+                userUpdate.Email = txtEmailAddress.Text;
+            }
+
             try
             {
                 check = handler.updateUser(userUpdate);
-            }catch(ApplicationException Err)
+            }
+            catch (ApplicationException Err)
             {
                 function.logAnError(Err.ToString()
                     + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
             }
-            if (check == true) {
-                confirmHeaderPlaceHolder.Text = "<h1> Your User Profile Has Been Updated </h1>";
-                confirmPlaceHolder.Text = "";
-            } else if (check == false)
-            {
-                confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your user profile </h1>";
-                confirmPlaceHolder.Text = "Please try again later";
-            }
-            yes.Visible = false;
-            no.Visible = false;
-            OK.Visible = true;
+            return check;
         }
 
         //display the delete user view
@@ -662,6 +913,67 @@ namespace Cheveux
         protected void OK_Click(object sender, EventArgs e)
         {
             Response.Redirect("Profile.aspx");
+        }
+
+        //check for existing user names
+        protected void userName_TextChanged(object sender, EventArgs e)
+        {
+            if(userDetails.AccountType.Replace(" ", string.Empty) == "Google")
+            {
+                if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
+                    == true)
+                {
+                    //if the account exists tell the user to try a difreting username
+                    LUserNameExistsGoogleAccount.Visible = true;
+                    LUserNameExistsGoogleAccount.Text = "Sorry, That Username is taken. Try Another one";
+                }
+                else
+                {
+                    LUserNameExistsGoogleAccount.Visible = false;
+                }
+            }
+            else if (userDetails.AccountType.Replace(" ", string.Empty) == "Email")
+            {
+                if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
+                    == true)
+                {
+                    //if the account exists tell the user to try a difreting username
+                    LUsernmaeExistsEmailAccount.Visible = true;
+                    LUsernmaeExistsEmailAccount.Text = "Sorry, That Username is taken. Try Another one";
+                    LEmailExists.Visible = true;
+                    LEmailExists.Text = "Sorry, That Email is taken. Try Another one";
+                }
+                else
+                {
+                    LUsernmaeExistsEmailAccount.Visible = false;
+                }
+            }
+        }
+
+        //check for existing email
+        protected void txtEmailAddress_TextChanged(object sender, EventArgs e)
+        {
+            if (auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
+                    == true)
+            {
+                //if the account exists tell the user to try a difreting username
+                LEmailExists.Visible = true;
+                LEmailExists.Text = "This email address is already registerd";
+            }
+            else
+            {
+                LEmailExists.Visible = false;
+            }
+        }
+
+        protected void no_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Profile.aspx?Action=Edit");
+        }
+
+        protected void btnSaveGoogle_Click(object sender, EventArgs e)
+        {
+            commitEdit(sender, e);
         }
     }
 }

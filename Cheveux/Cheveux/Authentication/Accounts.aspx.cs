@@ -138,9 +138,18 @@ namespace Cheveux
                         Response.Redirect("../Default.aspx?" + "WB=" + reg.Split('|')[2]);
                     }
                     else if (result == "E")
+                {
+                    string EmpType = "";
+                    try
                     {
-                        string EmpType = handler.getEmployeeType(reg.Split('|')[0]).Type.ToString().Replace(" ", string.Empty);
-                        if (EmpType == "R")
+                        EmpType = handler.getEmployeeType(reg.Split('|')[0]).Type.ToString().Replace(" ", string.Empty);
+                        Response.Redirect("../Default.aspx?" + "WB=" + reg.Split('|')[2]);
+                    }
+                    catch (NullReferenceException err)
+                    {
+                        function.logAnError("Error getting employe detais for user ID: "+ reg.Split('|')[0] +"\n "+err);
+                    }
+                    if (EmpType == "R")
                         {
                             //Receptionist
                             cookie["UT"] = "R";
@@ -236,6 +245,7 @@ namespace Cheveux
                     divNext.Visible = false;
                     divPassword.Visible = true;
                     divSignIn.Visible = true;
+                    txtEmailUsername.Attributes.Add("readonly", "readonly");
                 }
                 else
                 {
@@ -301,7 +311,7 @@ namespace Cheveux
                 }
                 else if (result[1].Replace(" ", string.Empty) == "E")
                 {
-                    string EmpType = handler.getEmployeeType(result[1].ToString().Replace(" ", string.Empty)).Type;
+                    string EmpType = handler.getEmployeeType(result[0].ToString().Replace(" ", string.Empty)).Type;
                     if (EmpType == "R")
                     {
                         //Receptionist
