@@ -15,17 +15,75 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
-        List<SP_GetServices> getAllServices = null;
-        List<SP_GetStylists> getStylists = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             //Check if the user is logged in
             cookie = Request.Cookies["CheveuxUserID"];
-
         }
-        public void btnStylist(object sender, EventArgs e)
+ 
+
+        protected void btnNext_Click(object sender, EventArgs e)
         {
-           
+            if(btnNext.Text == "Choose Hairstylist")
+            {
+                divServices.Visible = false;
+                divStylist.Visible = true;
+                btnPrevious.Visible = true;
+                btnPrevious.Text = "Choose Service(s)";
+                btnNext.Text = "Choose Date & Time";
+            }
+            else if (btnNext.Text == "Choose Date & Time")
+            {
+                divStylist.Visible = false;
+                divDateTime.Visible = true;
+               
+                btnPrevious.Visible = true;
+                btnPrevious.Text = "Choose Hairstylist";
+                btnNext.Text = "Booking Summary";
+            }
+            else if (btnNext.Text == "Booking Summary")
+            {
+                divDateTime.Visible = false;
+                divSummary.Visible = true;
+                
+                btnPrevious.Visible = true;
+                btnPrevious.Text = "Choose Date & Time";
+                btnNext.Text = "Submit";
+            }
+            else if (btnNext.Text == "Submit")
+            {
+                //Make Booking
+            }
+        }
+
+        protected void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (btnPrevious.Text == "Choose Service(s)")
+            {
+                divServices.Visible = true;
+                divStylist.Visible = false;
+                btnPrevious.Visible = false;
+                btnNext.Text = "Choose Hairstylist";
+            }
+            else if (btnPrevious.Text == "Choose Hairstylist")
+            {
+                divStylist.Visible = true;
+                divDateTime.Visible = false;
+
+                btnPrevious.Visible = true;
+                btnPrevious.Text = "Choose Service(s)";
+                btnNext.Text = "Choose Date & Time";
+            }
+            else if (btnPrevious.Text == "Choose Date & Time")
+            {
+                divDateTime.Visible = true;
+                divSummary.Visible = false;
+
+                btnPrevious.Visible = true;
+                btnPrevious.Text = "Choose Hairstylist";
+                btnNext.Text = "Choose Date & Time";
+            }
+      
         }
     }
 }
