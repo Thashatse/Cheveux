@@ -1,6 +1,6 @@
 ﻿.vertical-center {
-  position: fixed; /* or absolute */
-  top: 10%;
+    position: fixed; /* or absolute */
+    top: 10%;
 }
 
 @import url('http://getbootstrap.com/dist/css/bootstrap.css');
@@ -25,3 +25,7 @@ html, body, .container-table {
     .g-signin2 > div {
         margin: 0 auto;
     }
+
+body {
+    margin-top: 150px;
+}

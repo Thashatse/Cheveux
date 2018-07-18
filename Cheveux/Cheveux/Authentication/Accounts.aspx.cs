@@ -135,7 +135,7 @@ namespace Cheveux
                     {
                         //go back to the previous page if there is one
                         goToPreviousPage();
-                        Response.Redirect("../Default.aspx?" + "WB=" + reg.Split('|')[2]);
+                        Response.Redirect("../Default.aspx#page-top?" + "WB=" + reg.Split('|')[2]);
                     }
                     else if (result == "E")
                 {

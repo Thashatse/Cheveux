@@ -121,8 +121,23 @@
             <i class="fa fa-4x fa-angle-up"></i>
         </div>
     </div>
-    <!--Bootstrap-->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../Theam/vendor/jquery/jquery.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../Theam/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../Theam/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="../Theam/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../Theam/js/creative.min.js"></script>
+
+    <!--Old Bootstrap
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
+-->
 
     <!--jQuery to return user to the top of the page-->
     <script>
