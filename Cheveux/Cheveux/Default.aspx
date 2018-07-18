@@ -16,7 +16,7 @@
                         <h1 class="text-uppercase">
                             <strong>Cheveux</strong>
                         </h1>
-                        <hr>
+                        <hr >
                     </div>
                     <div class="col-lg-8 mx-auto">
                         <!--Welcome back-->

@@ -27,7 +27,7 @@ namespace Cheveux
                 if ("R" == userType)
                 {
                     //Receptionist
-                    Response.Redirect("/Receptionist/Receptionist.aspx");
+                    Response.Redirect("../Receptionist/Receptionist.aspx");
                 }
                 else if (userType == "M")
                 {

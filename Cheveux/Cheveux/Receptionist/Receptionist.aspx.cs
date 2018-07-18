@@ -35,7 +35,7 @@ namespace Cheveux
                     {
                         //Receptionist
                         //allowed access to this page
-                        //Response.Redirect("Receptionist.aspx");
+                        Response.Redirect("../Receptionist/Receptionist.aspx");
                     }
                     else if (userType == "M")
                     {
