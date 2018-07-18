@@ -97,3 +97,19 @@ Error Number:2812,State:62,Class:16
    at DAL.DBAccess.searchForUser(String term) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1646
    at BLL.DBHandler.searchForUser(String term) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 263
    at Cheveux.Manager.AddEmpolyee.btnSearch_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\AddEmployee.aspx.cs:line 171
+
+TimeStamp: 7/18/2018 9:34:24 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.16299.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Manager.UpdateEmployee.btnUpdate_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Manager\UpdateEmployee.aspx.cs:line 86

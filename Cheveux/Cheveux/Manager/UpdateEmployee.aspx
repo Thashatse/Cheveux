@@ -50,15 +50,6 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12 form-group">
-                    <asp:label id="lblActive" runat="server" text="Active"></asp:label>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                    <asp:radiobuttonlist id="rdoActive" runat="server" CellSpacing="5" RepeatDirection="Horizontal" RepeatLayout="flow">
-                        <asp:listitem id="ActiveOption1" runat="server" Text="Y" value="Y"/>
-                        <asp:listitem id="ActiveOption2" runat="server" Text="N" value="N"/>
-                    </asp:radiobuttonlist>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-md-12">

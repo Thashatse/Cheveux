@@ -64,6 +64,6 @@ namespace DAL
         List<SP_UserList> userList();
         List<SP_SearchForUser> searchForUser(string term);
         bool addEmployee(EMPLOYEE e);
-        bool updateEmployee(EMPLOYEE emp, USER user);
+        bool updateEmployee(EMPLOYEE emp);
     }
 }
