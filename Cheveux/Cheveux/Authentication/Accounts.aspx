@@ -5,11 +5,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Sign In - Cheveux</title>
-    <!--Bootstrap-->
+
+        <!-- Theam -->
+
+    <!-- Bootstrap core CSS -->
+    <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../Theam/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="../Theam/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/creative.min.css" rel="stylesheet">
+
+    <!-- Our CSS-->
+    <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
+
+    <!-- Default Theam
+
+    <!--Bootstrap
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
 
-    <!--CSS-->
+    <!--CSS
     <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
+-->
 
     <!--Google Authentecation code-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>

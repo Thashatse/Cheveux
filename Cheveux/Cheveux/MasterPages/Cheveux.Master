@@ -11,12 +11,37 @@
         <asp:ContentPlaceHolder ID="PageTitle" runat="server">
         </asp:ContentPlaceHolder>
     </title>
-    <!-- Bootstrap-->
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-    <!--Bootstrap font awesome for the icons-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <!--CSS-->
+
+    <!-- Theam -->
+
+    <!-- Bootstrap core CSS -->
+    <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../Theam/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="../Theam/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../Theam/css/creative.min.css" rel="stylesheet">
+
+    <!-- Our CSS-->
     <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
+
+    <!-- Default Theam
+
+    Bootstrap
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    Bootstrap font awesome for the icons
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    CSS
+    <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
+
+    -->
+
     <!-- Search Function-->
     <script>
         function search() {
@@ -27,83 +52,55 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top py-2">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <a class="navbar-brand" href="Default.aspx">
-            <img src="../IMG_0715.png" alt="logo" width="75" height="75" />
-        </a>
-
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav mx-auto">
-                <li>
-                    <button type="button" class="btn btn-light" style="margin-right: 10px;">
-                        <a href="../Bookings.aspx" style="text-decoration: none;">Bookings</a>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="btn btn-light" style="margin-right: 10px;">
-                        <a href="#Service" style="text-decoration: none;">Service</a>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="btn btn-light" style="margin-right: 10px;">
-                        <a href="#Products" style="text-decoration: none;">Products</a>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="btn btn-light" style="margin-right: 10px;">
-                        <a href="#Hairstylist" style="text-decoration: none;">Hairstylist</a>
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button" class="btn btn-light" style="margin-right: 10px;">
-                        <a href="#ContactUs" style="text-decoration: none;">Contact Us</a>
-                    </button>
-                </li>
-
-                <asp:PlaceHolder runat="server" ID="LogedOut">
-                    <!--Login Button-->
-                    <li>
-                        <button type="button" class="btn btn-light" style="margin-right: 10px;">
-                            <a href="../Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
-                        </button>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="Default.aspx#page-top">Cheveux
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Booking" style="text-decoration: none;">Bookings</a>
                     </li>
-                </asp:PlaceHolder>
-
-                <asp:PlaceHolder runat="server" ID="LogedIn">
-                    <!--Account Button-->
-                    <li>
-                        <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Service" style="text-decoration: none;">Service</a>
                     </li>
-
-                    <li>
-                        <button class="btn btn-light" style="margin-right: 10px;">
-                            <a href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
-                        </button>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Products" style="text-decoration: none;">Products</a>
                     </li>
-                </asp:PlaceHolder>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#Hairstylist" style="text-decoration: none;">Hairstylist</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#ContactUs" style="text-decoration: none;">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <asp:PlaceHolder runat="server" ID="LogedOut">
+                            <!--Login Button-->
+                            <a class="nav-link js-scroll-trigger" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
+                        </asp:PlaceHolder>
 
-                <!--Help-->
-                <li>
-                    <button type="button" class="btn btn-light" style="margin-right: 10px;">
-                        <a href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help Center</a>
-                    </button>
-                </li>
+                        <asp:PlaceHolder runat="server" ID="LogedIn">
+                            <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
+                            <a class="nav-link js-scroll-trigger" href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
+                        </asp:PlaceHolder>
+                    </li>
+                    <li class="nav-item">
 
-                <div class="form-group" style="float: right !important;">
-                    <!--Search Button & Text Box-->
-                    <input id="serchTerm" type="text" placeholder="Search">
-                    <a class="btn btn-default" href="javascript:search()" style="text-decoration: none;">Search</a>
-                </div>
-            </ul>
+                        <!--Help-->
+                        <a class="nav-link js-scroll-trigger" href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help Center</a>
+                    </li>
+                    <li class="nav-item">
+                        <!--Search Button & Text Box-->
+                        <input id="serchTerm" type="text" placeholder="Search">
+                        <a class="nav-link js-scroll-trigger" href="javascript:search()" style="text-decoration: none;">Search</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
