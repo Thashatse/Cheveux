@@ -366,7 +366,8 @@ namespace DAL
                             Email = row["Email"].ToString(),
                             ContactNo = row["ContactNo"].ToString(),
                             UserType = Convert.ToChar(row["UserType"]),
-                            UserImage = row["UserImage"].ToString()
+                            UserImage = row["UserImage"].ToString(),
+                            AccountType = row["AccountType"].ToString()
                         };
 
                     }
@@ -780,6 +781,9 @@ namespace DAL
                 new SqlParameter("@UserID", userUpdate.UserID.ToString()),
                 new SqlParameter("@UserName", userUpdate.UserName.ToString()),
                 new SqlParameter("@ContactNo", userUpdate.ContactNo.ToString()),
+                new SqlParameter("@Name", userUpdate.FirstName.ToString()),
+                new SqlParameter("@LName", userUpdate.LastName.ToString()),
+                new SqlParameter("@Email", userUpdate.Email.ToString()),
                 };
 
                 return DBHelper.NonQuery("SP_EditUser", CommandType.StoredProcedure, pars);
