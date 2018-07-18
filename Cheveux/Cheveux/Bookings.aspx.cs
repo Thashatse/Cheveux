@@ -58,7 +58,7 @@ namespace Cheveux
                 }
                 else
                 {
-                    Response.Redirect("../Default.aspx");
+                    Response.Redirect("Default.aspx");
                     function.logAnError("Unknown user type found during Loading of default.aspx: " +
                         cookie["UT"].ToString());
                 }

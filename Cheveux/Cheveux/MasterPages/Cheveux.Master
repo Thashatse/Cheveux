@@ -64,7 +64,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#Booking" style="text-decoration: none;">Bookings</a>
+                        <a class="nav-link" href="../Bookings.aspx" style="text-decoration: none;">Bookings</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#Service" style="text-decoration: none;">Service</a>
@@ -73,31 +73,34 @@
                         <a class="nav-link js-scroll-trigger" href="#Products" style="text-decoration: none;">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#Hairstylist" style="text-decoration: none;">Hairstylist</a>
+                        <a class="nav-link js-scroll-trigger" href="#Hairstylist" style="text-decoration: none;">Stylists</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#ContactUs" style="text-decoration: none;">Contact Us</a>
+                        <a class="nav-link js-scroll-trigger" href="#ContactUs" style="text-decoration: none;">Connect</a>
                     </li>
                     <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
                             <!--Login Button-->
-                            <a class="nav-link js-scroll-trigger" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
+                            <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
                         </asp:PlaceHolder>
-
+                    </li>
+                    <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedIn">
+                            <!--Profile Button-->
                             <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
-                            <a class="nav-link js-scroll-trigger" href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
                         </asp:PlaceHolder>
                     </li>
                     <li class="nav-item">
-
-                        <!--Help-->
-                        <a class="nav-link js-scroll-trigger" href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help Center</a>
+                        <!--Text Box-->
+                        &ensp;&ensp;<input id="serchTerm" type="text" placeholder="Search">
                     </li>
                     <li class="nav-item">
-                        <!--Search Button & Text Box-->
-                        <input id="serchTerm" type="text" placeholder="Search">
-                        <a class="nav-link js-scroll-trigger" href="javascript:search()" style="text-decoration: none;">Search</a>
+                        <!--Search Button-->
+                        <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <!--Help-->
+                        <a class="nav-link js-scroll-trigger" href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
                     </li>
                 </ul>
             </div>

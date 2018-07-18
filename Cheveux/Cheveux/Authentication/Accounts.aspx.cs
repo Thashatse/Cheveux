@@ -143,11 +143,11 @@ namespace Cheveux
                     try
                     {
                         EmpType = handler.getEmployeeType(reg.Split('|')[0]).Type.ToString().Replace(" ", string.Empty);
-                        Response.Redirect("../Default.aspx?" + "WB=" + reg.Split('|')[2]);
                     }
                     catch (NullReferenceException err)
                     {
                         function.logAnError("Error getting employe detais for user ID: "+ reg.Split('|')[0] +"\n "+err);
+                        Response.Redirect("../Default.aspx?" + "WB=" + reg.Split('|')[2]);
                     }
                     if (EmpType == "R")
                         {

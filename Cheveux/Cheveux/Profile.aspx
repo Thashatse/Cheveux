@@ -23,14 +23,21 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="jumbotron">
-                        <asp:Image ID="profileImage" runat="server" />
-                        &nbsp;
+                        <div class="row">
+                            <div class="col-md-10">
+                                <asp:Image ID="profileImage" runat="server" />
+                                &nbsp;
                         <asp:Label ID="profileLable" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary nav-link" href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
+                            </div>
+                        </div>
                     </div>
                     <asp:Table ID="profileTable" runat="server"></asp:Table>
                     <div class="container" runat="server" id="Edit" visible="false">
                         <form id="formEditProfile" runat="server">
-                            <asp:Table ID="editGoogleProfileTable" runat="server" Visible ="false">
+                            <asp:Table ID="editGoogleProfileTable" runat="server" Visible="false">
                                 <asp:TableRow Height="50">
                                     <asp:TableCell Font-Bold="true"></asp:TableCell>
                                     <asp:TableCell>
@@ -56,7 +63,8 @@
                                             <span class="glyphicon">&#63;</span>
                                         </a>
                                         <!--userName Validation-->
-                                        <asp:Label ID="LUserNameExistsGoogleAccount" runat="server" Text="Label" ForeColor="Red" Visible ="false"></asp:Label></asp:TableCell>
+                                        <asp:Label ID="LUserNameExistsGoogleAccount" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
+                                    </asp:TableCell>
                                 </asp:TableRow>
                                 <asp:TableRow Height="50">
                                     <asp:TableCell Font-Bold="true"></asp:TableCell>
@@ -107,7 +115,7 @@
                                         <!--Email-->
                                         <asp:TextBox ID="txtEmailAddress" runat="server" placeholder="Email" OnTextChanged="txtEmailAddress_TextChanged"></asp:TextBox>
                                         <!--Email Validation-->
-                                        <asp:Label ID="LEmailExists" runat="server" Text="Label" ForeColor="Red" Visible ="false"></asp:Label>
+                                        <asp:Label ID="LEmailExists" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
                                     </asp:TableCell>
                                 </asp:TableRow>
                                 <asp:TableRow Height="50">
@@ -121,7 +129,7 @@
                                             <span class="glyphicon">&#63;</span>
                                         </a>
                                         <!--userName Validation-->
-                                        <asp:Label ID="LUsernmaeExistsEmailAccount" runat="server" Text="Label" ForeColor="Red" Visible ="false"></asp:Label>
+                                        <asp:Label ID="LUsernmaeExistsEmailAccount" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
                                     </asp:TableCell>
                                 </asp:TableRow>
                                 <asp:TableRow Height="50">
@@ -153,7 +161,7 @@
                                     <asp:TableCell HorizontalAlign="Right">
                                         <a href='Profile.aspx'>Cancel   </a>
 
-                                        <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-default" OnClick="commitEdit"  />
+                                        <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-default" OnClick="commitEdit" />
                                     </asp:TableCell>
                                 </asp:TableRow>
                             </asp:Table>
@@ -172,7 +180,7 @@
             <br />
             <br />
             <!-- Edit -->
-            <asp:Button ID="no" runat="server" Text="No" class="btn btn-default" OnClick="no_Click"/>
+            <asp:Button ID="no" runat="server" Text="No" class="btn btn-default" OnClick="no_Click" />
             <asp:Button ID="yes" runat="server" Text="Yes" class="btn btn-default" OnClick="commitEdit" />
             <asp:Button ID="OK" runat="server" Text="OK" class="btn btn-default" OnClick="OK_Click" Visible="false" />
         </div>
