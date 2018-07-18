@@ -20,8 +20,7 @@ CREATE PROCEDURE SP_UpdateEmployee
 	@empID nchar(30),
 	@addLine1 varchar(max) = null,
 	@addLine2 varchar(max) = null,
-	@type nchar(10) = null,
-	@Active char(1) = null
+	@type nchar(10) = null
 AS
 BEGIN
 	BEGIN TRY
@@ -32,10 +31,6 @@ BEGIN
 				AddressLine2=@addLine2,
 				[Type]=@type
 			WHERE EmployeeID=@empID
-
-			UPDATE	[USER]
-			SET		Active=@Active
-			WHERE	UserID=@empID
 
 		COMMIT TRANSACTION 
 	END TRY 

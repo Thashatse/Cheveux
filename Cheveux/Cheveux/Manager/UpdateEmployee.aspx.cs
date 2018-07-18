@@ -16,12 +16,7 @@ namespace Cheveux.Manager
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         SP_ViewEmployee view = null;
-
-
         EMPLOYEE emp = null;
-        USER user = null;
-
-
         string userID;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -69,21 +64,19 @@ namespace Cheveux.Manager
             try
             {
                 emp = new EMPLOYEE();
-                user = new USER();
 
                 emp.EmployeeID = userID;
                 emp.AddressLine1 = txtAddLine1.Text.ToString();
                 emp.AddressLine2 = txtAddLine2.Text.ToString();
                 emp.Type = rdoType.SelectedValue.ToString();
-                user.Active = Convert.ToChar(rdoActive.SelectedValue);
 
-                if (handler.updateEmployee(emp, user))
+                if (handler.updateEmployee(emp))
                 {
 
                     //System.Threading.ThreadAbortException: Thread was being aborted error but updates on the database (fix) 
 
                     Response.Write("<script>alert('Successful Update.');</script>");
-                    Response.Redirect("../Manager/Employee.aspx");
+                    Response.Redirect("../Manager/Employee.aspx",false);
                 }
                 else
                 {

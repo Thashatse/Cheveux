@@ -1668,7 +1668,7 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
         }
-        public bool updateEmployee(EMPLOYEE emp, USER user)
+        public bool updateEmployee(EMPLOYEE emp)
         {
             try
             {
@@ -1677,8 +1677,7 @@ namespace DAL
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
-                    new SqlParameter("@type", emp.Type.ToString()),
-                    new SqlParameter("@Active", user.Active.ToString())
+                    new SqlParameter("@type", emp.Type.ToString())
                 };
                 return DBHelper.NonQuery("SP_UpdateEmployee", CommandType.StoredProcedure, pars);
             }
