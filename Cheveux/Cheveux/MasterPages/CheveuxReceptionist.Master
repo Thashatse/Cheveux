@@ -64,7 +64,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Receptionist/Receptionist.aspx" style="text-decoration:none;">Dashboard</a>
+                            <a class="nav-link js-scroll-trigger" href="../Receptionist/Receptionist.aspx#page-top" style="text-decoration:none;">Dashboard</a>
                         </li>
 
                         <li class="nav-item">

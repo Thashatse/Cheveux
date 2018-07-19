@@ -9,13 +9,38 @@
         <asp:ContentPlaceHolder ID="PageTitle" runat="server">
         </asp:ContentPlaceHolder>
     </title>
-    <!-- Bootstrap-->
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-    <!--Bootstrap font awesome for the icons-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <!--CSS-->
+
+     <!-- Theam -->
+
+    <!-- Bootstrap core CSS -->
+    <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../Theam/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="../Theam/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../Theam/css/creative.min.css" rel="stylesheet">
+
+    <!-- Our CSS-->
     <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
-        <!-- Search Function-->
+
+    <!-- Default Theam
+
+    Bootstrap
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    Bootstrap font awesome for the icons
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    CSS
+    <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
+
+    -->
+
+    <!-- Search Function-->
     <script>
         function search() {
             window.location.href = "../Search.aspx?ST="+document.getElementById('serchTerm').value;
@@ -25,71 +50,68 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body id="page-top">
     
         <!--Nav Bar-->
-        <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="../Manager/Dashboard.aspx">
-                 <img src="../IMG_0715.png" alt="logo" width="75" height="75" />
-            </a>
-
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="../Manager/Dashboard.aspx#page-top">Cheveux
+                </a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                    <ul class="navbar-nav mx-auto">
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Dashboard.aspx#page-top">Dashboard</a>         
+                        </li>
                         <!--../Manager/Reports.aspx-->
-                        <li><button type="button" class="btn btn-light">
-                            <a href="../Manager/Reports.aspx" style="text-decoration:none;">Reports</a>
-                            </button>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Reports.aspx">Reports</a>         
                         </li>
-                        <li><button type="button" class="btn btn-light">
-                            <a href="../Manager/Products.aspx" style="text-decoration:none;">Manage Products</a>
-                            </button>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx">Manage Products</a>
                         </li>
-                        <li><button type="button" class="btn btn-light">
-                            <a href="../Manager/Service.aspx" style="text-decoration:none;">Manage Services</a>
-                            </button>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Service.aspx">Manage Services</a>
                         </li>
-                        <li><button type="button" class="btn btn-light">
-                            <a href="../Manager/Employee.aspx" style="text-decoration:none;">Manage Employees</a>
-                            </button>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Employee.aspx">Manage Employees</a>
                         </li>
-                        <li><button type="button" class="btn btn-light">
-                            <a href="../Manager/BusinessSetting.aspx" style="text-decoration:none;">Business Settings</a>
-                            </button>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="../Manager/BusinessSetting.aspx">Business Settings</a>
                         </li>
-
-                        <asp:PlaceHolder runat="server" id="LogedOut">
+                        <li class="nav-item">
+                            <asp:PlaceHolder runat="server" id="LogedOut">
                                 <!--Login Button-->
-                                <li><button type="button" class="btn btn-light">
-                                    <a href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
-                                    </button></li>
+                                <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
                             </asp:PlaceHolder>
+                        </li>
+                        
 
+                        <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedIn">
-                                <!--Account Button-->
-                                <li><asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder></li>
-
-                                <li><button class="btn btn-light">
-                                    <a href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
-                                    </button></li>
+                            <!--Profile Button-->
+                            <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
                         </asp:PlaceHolder>
-
+                        </li>
+                        <li class="nav-item">
+                            <!--Text Box-->
+                            &ensp;&ensp;<input id="serchTerm" type="text" placeholder="Search">
+                        </li>
+                        <li class="nav-item">
+                            <!--Search Button-->
+                            <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
+                        </li>
+                        <li class="nav-item">
                             <!--Help-->
-                            <li><button type="button" class="btn btn-light">
-                                <a href="../Help/CheveuxHelpCenter.aspx" target="_blank"  style="text-decoration: none;">Help Center</a>
-                            </button></li>
-                            
-                            <div class="form-group" style="float:right !important;">
-                               <!--Search Button & Text Box-->
-                                <input id="serchTerm" type="text" placeholder="Search">
-                                <a class="btn btn-default" href="javascript:search()" style="text-decoration: none;">Search</a>
-                            </div>
+                            <a class="nav-link js-scroll-trigger" href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
+                        </li>
                     </ul>
                 </div>
+            </div>
         </nav>
 
 
@@ -110,47 +132,43 @@
             </div>
         </div>
 
-        <!--Bootstrap-->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../Theam/vendor/jquery/jquery.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../Theam/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../Theam/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="../Theam/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../Theam/js/creative.min.js"></script>
+
+    <!--Old Bootstrap
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
+-->
 
-    <!--jQuery to return user to the top of the page-->    
+    <!--jQuery to return user to the top of the page-->
     <script>
 
-            $(document).ready(function () {
-                $(window).scroll(function () {
-                    if ($(this).scrollTop() > 50) {
-                        $('.scrolltop:hidden').stop(true, true).fadeIn();
-                    } else {
-                        $('.scrolltop').stop(true, true).fadeOut();
-                    }
-                });
-
-                $(function () {
-                    $(".scroll").click(function () {
-                        $("html,body").animate({ scrollTop: $(".theTop").offset().top }, "1000");
-                        return false
-                    })
-                });
-            });
-        </script>
-
-    <!-- jQuery to display user image chosen for the upload -->
-    <script>
-        $(function () {
-            $(":file").change(function () {
-                if (this.files && this.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = imageIsLoaded;
-                    reader.readAsDataURL(this.files[0]);
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('.scrolltop:hidden').stop(true, true).fadeIn();
+                } else {
+                    $('.scrolltop').stop(true, true).fadeOut();
                 }
             });
+
+            $(function () {
+                $(".scroll").click(function () {
+                    $("html,body").animate({ scrollTop: $(".theTop").offset().top }, "1000");
+                    return false
+                })
+            });
         });
-
-        function imageIsLoaded(e) {
-            $('#myImg').attr('src', e.target.result);
-        };
     </script>
-
     <script src="../Scripts/bootstrap.min.js"></script>
 </body>
 </html>
