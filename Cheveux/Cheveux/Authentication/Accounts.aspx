@@ -60,8 +60,8 @@
                             <!-- sellect account Type -->
                             <div class="container" runat="server" id="divAccountType">
                                 <!--sign in with email buton-->
-                                <button type='button' class='btn'>
-                                    <a href="../Authentication/Accounts.aspx?Type=Email">
+                                <button type='button' class='btn btn-primary'>
+                                    <a href="../Authentication/Accounts.aspx?Type=Email" class="text-white" style="text-decoration:none;">
                                         <span class='glyphicon'>&#128231;</span> Sign In With Email
                                     </a>
                                 </button>
@@ -103,13 +103,13 @@
                                 <!-- email account Type login next btn -->
                                 <div class="container" runat="server" id="divNext">
                                     <!--next Button-->
-                                    <asp:Button ID="btnNext" runat="server" Text="Next" OnClick="displayPassword" Font-Bold="true" Width="150" Height="50" />
+                                    <asp:Button class='btn btn-primary' ID="btnNext" runat="server" Text="Next" OnClick="displayPassword" Font-Bold="true" Width="150" Height="50" />
                                 </div>
 
                                 <!-- email account Type login sign in button -->
                                 <div class="container" runat="server" id="divSignIn" visible="false">
                                     <!--Submition Button-->
-                                    <asp:Button ID="btnSignIn" runat="server" Text="Sign In" OnClick="signIn" Font-Bold="true" Width="150" Height="50" />
+                                    <asp:Button class='btn btn-primary' ID="btnSignIn" runat="server" Text="Sign In" OnClick="signIn" Font-Bold="true" Width="150" Height="50" />
                                 </div>
 
                                 <!--line break-->
@@ -122,7 +122,7 @@
                             <br />
                             <!--Help-->
                             <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Sign in with your Google account">
-                                <span class="glyphicon">&#63; Help</span>
+                                <span class="glyphicon">Help &#63;</span>
                             </a>
                         </div>
                     </div>

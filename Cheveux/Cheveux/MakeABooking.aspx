@@ -63,11 +63,11 @@
 
                 <div class="row">
                     <div class="col-2 text-left">
-                        <asp:Button runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click" />
+                        <asp:Button class='btn btn-basic' runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click" />
                     </div>
                     <div class="col-8"></div>
                     <div class="col-2 text-right">
-                        <asp:Button runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
+                        <asp:Button class='btn btn-primary' runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
                     </div>
                 </div>
             </div>

@@ -6,7 +6,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
         <!--page header-->
         <a name="Booking"></a>
         <header class="masthead text-center text-white d-flex">
@@ -383,5 +382,4 @@
                 </div>
             </div>
         </section>
-    </div>
 </asp:Content>

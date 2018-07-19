@@ -311,7 +311,7 @@ namespace Cheveux
                 }
                 else if (result[1].Replace(" ", string.Empty) == "E")
                 {
-                    string EmpType = handler.getEmployeeType(result[0].ToString().Replace(" ", string.Empty)).Type;
+                    string EmpType = handler.getEmployeeType(result[0].ToString().Replace(" ", string.Empty)).Type.Replace(" ", string.Empty);
                     if (EmpType == "R")
                     {
                         //Receptionist

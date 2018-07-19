@@ -40,7 +40,7 @@ namespace Cheveux
                 {
                     //stylist
                     //allowed access to this page
-                    Response.Redirect("Stylist.aspx");
+                    //Response.Redirect("Stylist.aspx");
                 }
                 else if (userType == "C")
                 {
