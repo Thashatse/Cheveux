@@ -874,3 +874,98 @@ User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
 Unknown user type found during Loading of default.aspx: E
+
+TimeStamp: 2018/07/19 11:21:37
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load contact info on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'TEFO-NTSAKO-HAS\thash'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:3cd3fa52-fac8-48e8-9aab-0786a53126ab
+Error Number:4060,State:1,Class:11
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 315
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 341
+   at BLL.DBHandler.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 48
+   at Cheveux.Default2.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 81
+
+TimeStamp: 2018/07/19 11:22:26
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'TEFO-NTSAKO-HAS\thash'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 33
+ClientConnectionId:7d1babab-0e32-48b8-b996-dc9b386cb997
+Error Number:4060,State:1,Class:11
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.checkForAccountTypeEmail(String identifier) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1531
+   at DAL.DBAccess.checkForAccountTypeEmail(String identifier) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1547
+   at BLL.DBHandler.checkForAccountTypeEmail(String identifier) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 28
+   at BLL.Authentication.checkForAccountEmail(String emailOrUsername, Boolean register) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 26Error in checkForAccountEmail method of Authentication
+   at BLL.Authentication.checkForAccountEmail(String emailOrUsername, Boolean register) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 45
+   at Cheveux.Accounts.displayPassword(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 240
+
+TimeStamp: 2018/07/19 16:28:35
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load contact info on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'TEFO-NTSAKO-HAS\thash'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:c55c7e69-8487-43ff-a2c7-0d27c25329eb
+Error Number:4060,State:1,Class:11
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 315
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 341
+   at BLL.DBHandler.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 48
+   at Cheveux.Default2.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 81

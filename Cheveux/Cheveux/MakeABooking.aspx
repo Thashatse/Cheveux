@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="jumbotron">
+                        <div class="jumbotron  bg-dark text-white">
                             <h1>Make A Booking</h1>
                             <br />
                             <asp:PlaceHolder runat="server" ID="BookingSummary"></asp:PlaceHolder>
@@ -60,6 +60,10 @@
 
                     </div>
                 </div>
+
+                <!--Line Break-->
+                <br />
+                <br />
 
                 <div class="row">
                     <div class="col-2 text-left">

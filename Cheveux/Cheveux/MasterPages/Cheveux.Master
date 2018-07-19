@@ -159,7 +159,5 @@
             });
         });
     </script>
-
-    <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

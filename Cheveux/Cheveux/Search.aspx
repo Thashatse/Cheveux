@@ -12,7 +12,7 @@
 </asp:content>
 <asp:content id="Content3" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <div class="container">
-<div class="jumbotron">
+<div class="jumbotron bg-dark text-white">
   <h1>Search</h1>
     <!--Search Box-->
     <asp:Label ID="JumbotronSearchBox" runat="server" Font-Bold="true"></asp:Label>
@@ -22,7 +22,7 @@
   <div class="form-group">
       <!--Search Button & Text Box-->
                         <input id="serchTermOnSearchPage" type="text" placeholder="Search">
-                        <a class="btn btn-default" href="javascript:searchOnSearchPage()">Search</a></div>
+                        <a class="btn btn-primary" href="javascript:searchOnSearchPage()">Search</a></div>
 </div>
         <!--Search Results-->
         <div class="row">

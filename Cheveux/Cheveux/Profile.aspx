@@ -10,10 +10,10 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <!-- if the user is loged Out -->
     <div class="container" runat="server" id="JumbotronLogedOut">
-        <div class="jumbotron">
+        <div class="jumbotron bg-dark text-white">
             <h1>Profile</h1>
             <p>Please log-in</p>
-            <button type="button" class="btn btn-default"><a href="Authentication/Accounts.aspx?PreviousPage=Profile.aspx" id="LogedOut">Login / Sign Up</a></button>
+            <a class="btn btn-primary" href="Authentication/Accounts.aspx?PreviousPage=Profile.aspx" id="LogedOut">Login</a>
         </div>
     </div>
     <!-- if the user is loged in -->
@@ -22,7 +22,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="jumbotron">
+
+                    <div class="jumbotron bg-dark text-white">
                         <div class="row">
                             <div class="col-md-10">
                                 <asp:Image ID="profileImage" runat="server" />
@@ -34,6 +35,7 @@
                             </div>
                         </div>
                     </div>
+
                     <asp:Table ID="profileTable" runat="server"></asp:Table>
                     <div class="container" runat="server" id="Edit" visible="false">
                         <form id="formEditProfile" runat="server">
