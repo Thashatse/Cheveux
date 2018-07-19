@@ -5,9 +5,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Register - Cheveux</title>
-    <!--Bootstrap-->
+
+
+    <!-- Theam -->
+
+    <!-- Bootstrap core CSS -->
+    <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../Theam/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="../Theam/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/creative.min.css" rel="stylesheet">
+
+    <!-- Our CSS-->
+    <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
+
+    <!-- Default Theam
+
+    <!--Bootstrap
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-    <!--CSS-->
+
+    <!--CSS
+    <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
+-->
 
 </head>
 <body>
@@ -29,7 +55,7 @@
                             <br />
                             <!--Get a username from the user-->
                             <asp:Label ID="Label3" runat="server" Text="User Name:"></asp:Label>
-                            <asp:TextBox ID="userName" runat="server" placeholder="Placecholder" OnTextChanged="userName_TextChanged"></asp:TextBox>
+                            <asp:TextBox ID="userName" runat="server" placeholder="Placecholder" CssClass="form-control" OnTextChanged="userName_TextChanged"></asp:TextBox>
                             <!--Help-->
                             <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
                                 <span class="glyphicon">&#63;</span>
@@ -38,15 +64,16 @@
                             <br />
                             <!--userName Validation-->
                             <asp:RequiredFieldValidator ID="RequiredFieldValidatorUsrname" runat="server" ErrorMessage="*Required" ControlToValidate="userName" ForeColor="Red"></asp:RequiredFieldValidator>
-                            &ensp; <asp:Label ID="LGoogleUsernameExists" runat="server" Text="Label" ForeColor="Red" Visible ="false"></asp:Label>    
+                            &ensp;
+                            <asp:Label ID="LGoogleUsernameExists" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
                             <!--line break-->
-                                <br />
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Sorry, your username must be between 6 and 30 charates long" ValidationExpression="^[\s\S]{6,30}$" ControlToValidate="userName" ForeColor="Red" ></asp:RegularExpressionValidator>
+                            <br />
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Sorry, your username must be between 6 and 30 charates long" ValidationExpression="^[\s\S]{6,30}$" ControlToValidate="userName" ForeColor="Red"></asp:RegularExpressionValidator>
                             <!--line break-->
                             <br />
                             <!--Get a contact number from the user-->
                             <asp:Label ID="Label4" runat="server" Text="Contact Number:"></asp:Label>
-                            <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389"></asp:TextBox>
+                            <asp:TextBox ID="contactNumber" runat="server" placeholder="041 243 8389" CssClass="form-control"></asp:TextBox>
                             <!--Help-->
                             <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number used is contact you and keep you up to date">
                                 <span class="glyphicon">&#63; (Optional)</span>
@@ -75,195 +102,206 @@
                     <div class="col-xs-2 col-md-2 text-center"></div>
                     <div class="col-xs-8 col-md-8 text-center">
                         <div class="jumbotron vertical-center">
-                            <table align="center">
-                                <tr>
-                                    <td colspan="2" align="center">
-                                        <!--Logo-->
-                                        <img src="../IMG_0715.png" alt="logo" width="100" height="100" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="center">
-                                        <h2>Create your Cheveux Account</h2>
-                                        <!--line break-->
-                                        <br />
-                                    </td>
-                                </tr>
+                            <!--Logo-->
+                            <img src="../IMG_0715.png" alt="logo" width="100" height="100" />
+                            <h2>Create your Cheveux Account</h2>
+                            <!--line break-->
+                            <br />
+                            <div class="row">
+                                <div class="col-2 text-left">
+                                    <!--Get the users last and first name-->
+                                    <!-- Lable -->
+                                    <asp:Label ID="name" runat="server" Text="Name:"></asp:Label>
+                                </div>
+                                <div class="col-4">
+                                    <!--input -->
+                                    &ensp;&ensp;<asp:TextBox ID="txtFirstName" runat="server" CssClass="form-control" placeholder="First Name"></asp:TextBox>
+                                </div>
+                                <div class="col-1">
+                                    <!--Help-->
+                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Your First Name">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
+                                </div>
+                                <div class="col-4 ">
+                                    <!--input -->
+                                    <asp:TextBox CssClass="form-control" ID="txtLastName" runat="server" placeholder="Last Name"></asp:TextBox>
+                                </div>
+                                <div class="col-1">
+                                    <!--Help-->
+                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Your Last Name">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
+                                </div>
+                            </div>
 
-                                <!--Get the users last and first name-->
-                                <tr>
-                                    <td align="left">
-                                        <!-- Lable -->
-                                        <asp:Label ID="name" runat="server" Text="Name:"></asp:Label>
-                                    </td>
-                                    <td align="left">
-                                        <!--input -->
-                                        &ensp;&ensp;<asp:TextBox ID="txtFirstName" runat="server" placeholder="First Name"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-2 text-left"></div>
+                                <div class="col-5">
+                                    <!--Validation-->
+                                    &ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidatortxtFirstName" runat="server" ErrorMessage="*First Name is Required" ControlToValidate="txtFirstName" ForeColor="Red"></asp:RequiredFieldValidator>
+                                </div>
+                                <div class="col-5">
+                                    <!--Validation-->
+                                    &ensp;&ensp;&ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidatortxtLastName" runat="server" ErrorMessage="*Last Name is Required" ControlToValidate="txtLastName" ForeColor="Red"></asp:RequiredFieldValidator>
+                                </div>
+                            </div>
 
-                                        <!--Help-->
-                                        <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Your First Name">
-                                            <span class="glyphicon">&#63;</span>
-                                        </a>
-                                        <!--input -->
-                                        &ensp;&ensp;<asp:TextBox ID="txtLastName" runat="server" placeholder="Last Name"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-2 text-left">
+                                    <!--Get a username from the user-->
+                                    <!-- Lable -->
+                                    <asp:Label ID="LUsername" runat="server" Text="Username:"></asp:Label>
+                                </div>
+                                <div class="col-9">
+                                    <!--input -->
+                                    &ensp;&ensp;<asp:TextBox CssClass="form-control" ID="txtUsername" runat="server" placeholder="Username" OnTextChanged="txtUsername_TextChanged"></asp:TextBox>
+                                </div>
+                                <div class="col-1">
+                                    <!--Help-->
+                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
+                                </div>
+                            </div>
 
-                                        <!--Help-->
-                                        <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Your Last Name">
-                                            <span class="glyphicon">&#63;</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="Left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidatortxtFirstName" runat="server" ErrorMessage="*First Name is Required" ControlToValidate="txtFirstName" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <!--Validation-->
-                                        &ensp;&ensp;&ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidatortxtLastName" runat="server" ErrorMessage="*Last Name is Required" ControlToValidate="txtLastName" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    </td>
-                                </tr>
+                            <div class="row">
+                                <div class="col-2 text-left"></div>
+                                <div class="col-10">
+                                    <!--Validation-->
+                                    &ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Username is required" ControlToValidate="txtUsername" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    &ensp;
+                                    <asp:Label ID="LUsernmaeExists" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
+                                </div>
+                            </div>
 
-                                <!--Get a username from the user-->
-                                <tr>
-                                    <td align="left">
-                                        <!-- Lable -->
-                                        <asp:Label ID="LUsername" runat="server" Text="Username:"></asp:Label>
-                                    </td>
-                                    <td align="left">
-                                        <!--input -->
-                                        &ensp;&ensp;<asp:TextBox ID="txtUsername" runat="server" placeholder="Username" OnTextChanged="txtUsername_TextChanged"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-2 text-left"></div>
+                                <div class="col-10">
+                                    <!--Validation-->
+                                    &ensp;&ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtUsername" runat="server" ErrorMessage="Sorry, your username must be between 6 and 30 charates long" ValidationExpression="^[\s\S]{6,30}$" ControlToValidate="txtUsername" ForeColor="Red"></asp:RegularExpressionValidator>
+                                </div>
+                            </div>
 
-                                        <!--Help-->
-                                        <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
-                                            <span class="glyphicon">&#63;</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Username is required" ControlToValidate="txtUsername" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        &ensp; <asp:Label ID="LUsernmaeExists" runat="server" Text="Label" ForeColor="Red" Visible ="false"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtUsername" runat="server" ErrorMessage="Sorry, your username must be between 6 and 30 charates long" ValidationExpression="^[\s\S]{6,30}$" ControlToValidate="txtUsername" ForeColor="Red" ></asp:RegularExpressionValidator>
-                                        </td>
-                                </tr>
+                            <div class="row">
+                                <div class="col-2 text-left">
+                                    <!--Get a email address from the user-->
 
-                                <!--Get a email address from the user-->
-                                <tr>
-                                    <td align="left">
-                                        <!-- Lable -->
-                                        <asp:Label ID="lEmail" runat="server" Text="Email:"></asp:Label>
-                                    </td>
-                                    <td align="left">
-                                        <!--input -->
-                                        &ensp;&ensp;<asp:TextBox ID="txtEmailAddress" runat="server" placeholder="Email Address" OnTextChanged="txtEmailAddress_TextChanged"></asp:TextBox>
+                                    <!-- Lable -->
+                                    <asp:Label ID="lEmail" runat="server" Text="Email:"></asp:Label>
+                                </div>
+                                <div class="col-9">
+                                    <!--input -->
+                                    &ensp;&ensp;<asp:TextBox CssClass="form-control" ID="txtEmailAddress" runat="server" placeholder="Email Address" OnTextChanged="txtEmailAddress_TextChanged"></asp:TextBox>
+                                </div>
+                                <div class="col-1">
+                                    <!--Help-->
+                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is contact you and keep you up to date">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
+                                </div>
+                            </div>
 
-                                        <!--Help-->
-                                        <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is contact you and keep you up to date">
-                                            <span class="glyphicon">&#63;</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailAddress" runat="server" ErrorMessage="*Email address is required" ControlToValidate="txtEmailAddress" ForeColor="Red"></asp:RequiredFieldValidator>
-                                    &ensp; <asp:Label ID="LEmailExists" runat="server" Text="Label" ForeColor="Red" Visible ="false"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtEmailAddress" runat="server" ErrorMessage="Sorry, please enter a valid email address" 
-                                            ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
-                                            ControlToValidate="txtEmailAddress" ForeColor="Red" ></asp:RegularExpressionValidator>
-                                        </td>
-                                </tr>
+                            <div class="row">
+                                <div class="col-2 text-left"></div>
+                                <div class="col-10 text-left">
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailAddress" runat="server" ErrorMessage="*Email address is required" ControlToValidate="txtEmailAddress" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    &ensp;
+                                    <asp:Label ID="LEmailExists" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
+                                </div>
+                            </div>
 
-                                <!--Get a contact number from the user-->
-                                <tr>
-                                    <td align="left">
-                                        <!-- Lable -->
-                                        <asp:Label ID="LContactNo" runat="server" Text="Contact No.:"></asp:Label>
-                                    </td>
-                                    <td align="left">
-                                        <!--input -->
-                                        &ensp;&ensp;<asp:TextBox ID="txtContactNumber" runat="server" placeholder="Contact Number"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-2 text-left"></div>
+                                <div class="col-10 text-left">
+                                    <!--Validation-->
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidatortxtEmailAddress" runat="server" ErrorMessage="Sorry, please enter a valid email address"
+                                        ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+                                        ControlToValidate="txtEmailAddress" ForeColor="Red"></asp:RegularExpressionValidator>
+                                </div>
+                            </div>
 
-                                        <!--Help-->
-                                        <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number used is contact you and keep you up to date">
-                                            <span class="glyphicon">&#63; (Optional)</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtContactNumber" runat="server" ErrorMessage="Sorry, please enter a valid 10-digit RSA cellphone number" ValidationExpression="^0[0-9]{9}$" ControlToValidate="txtContactNumber" ForeColor="Red" ></asp:RegularExpressionValidator>
-                                        </td>
-                                </tr>
+                            <div class="row">
+                                <div class="col-2 text-left">
+                                    <!--Get a contact number from the user-->
+                                    <!-- Lable -->
+                                    <asp:Label ID="LContactNo" runat="server" Text="Contact No.:"></asp:Label>
+                                </div>
+                                <div class="col-8">
+                                    <!--input -->
+                                    <asp:TextBox CssClass="form-control" ID="txtContactNumber" runat="server" placeholder="Contact Number"></asp:TextBox>
+                                </div>
+                                <div class="col-2">
+                                    <!--Help-->
+                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number used is contact you and keep you up to date">
+                                        <span class="glyphicon">(Optional)</span>
+                                    </a>
+                                </div>
+                            </div>
 
-                                <!--Get the pasword from the user-->
-                                <tr>
-                                    <td align="left">
-                                        <!-- Lable -->
-                                        <asp:Label ID="LPaswrod1" runat="server" Text="Password:"></asp:Label>
-                                    </td>
-                                    <td align="left">
-                                        <!--input -->
-                                        &ensp;&ensp;<asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password" ></asp:TextBox>
+                            <div class="row">
+                                <div class="col-2 text-left"></div>
+                                <div class="col-10">
+                                    <!--Validation-->
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidatortxtContactNumber" runat="server" ErrorMessage="Sorry, please enter a valid 10-digit RSA cellphone number" ValidationExpression="^0[0-9]{9}$" ControlToValidate="txtContactNumber" ForeColor="Red"></asp:RegularExpressionValidator>
+                                </div>
+                            </div>
 
-                                        <!--input -->
-                                        &ensp;&ensp;<asp:TextBox ID="txtConfirmPassword" runat="server" placeholder="Confirm Password" TextMode="password"></asp:TextBox>
+                            <div class="row">
+                                <div class="col-2 text-left">
+                                    <!--Get the pasword from the user-->
 
-                                        <!--Help-->
-                                        <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Used to securely identify you and keep your data safe">
-                                            <span class="glyphicon">&#63;</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="Left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RequiredFieldValidator ID="RequiredFieldValidatortxtPassword" runat="server" ErrorMessage="*Password is Required" ControlToValidate="txtPassword" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        <!--Validation (Done in code Behind-->
-                                        &ensp;&ensp;&ensp;&ensp;<asp:CompareValidator ID="CompareValidatorPassword" runat="server" ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword" ErrorMessage="Passwords do not match" ForeColor="Red"></asp:CompareValidator>
-                                        <asp:Label runat="server" ID="lConfirmPassword" ForeColor="Red"></asp:Label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td align="left">
-                                        <!--Validation-->
-                                        &ensp;&ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtPassword" runat="server" ErrorMessage="Sorry, please use 8 or more characters with a mix of letters, numbers & symbols" ValidationExpression="^.*(?=.{8,})(?=.*[\d])(?=.*[\W]).*$" ControlToValidate="txtPassword" ForeColor="Red" ></asp:RegularExpressionValidator>
-                                        </td>
-                                </tr>
+                                    <!-- Lable -->
+                                    <asp:Label ID="LPaswrod1" runat="server" Text="Password:"></asp:Label>
+                                </div>
+                                <div class="col-5">
+                                    <!--input -->
+                                    <asp:TextBox CssClass="form-control" ID="txtPassword" runat="server" placeholder="Password" TextMode="password"></asp:TextBox>
+                                </div>
+                                <div class="col-4">
+                                    <!--input -->
+                                    <asp:TextBox CssClass="form-control" ID="txtConfirmPassword" runat="server" placeholder="Confirm Password" TextMode="password"></asp:TextBox>
+                                </div>
+                                <div class="col-1">
+                                    <!--Help-->
+                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Used to securely identify you and keep your data safe">
+                                        <span class="glyphicon">&#63;</span>
+                                    </a>
+                                </div>
+                            </div>
 
-                                <tr>
-                                    <td colspan="2" align="center">
-                                        <!--Submition Button-->
-                                        <asp:Button ID="btnSubmitEmail" runat="server" Text="Submit" OnClick="btnSubmitEmail_Click" Font-Bold="true" Width="150" Height="50" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" align="center">
-                                        <!--line break-->
-                                        <br />
-                                        <a href="../Authentication/Accounts.aspx?Type=Email">Sign in instead</a>
-                                    </td>
-                                </tr>
-                            </table>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-5">
+                                    <!--Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtPassword" runat="server" ErrorMessage="*Password is Required" ControlToValidate="txtPassword" ForeColor="Red"></asp:RequiredFieldValidator>
+
+                                </div>
+                                <div class="col-5">
+
+                                    <!--Validation (Done in code Behind-->
+                                    &ensp;&ensp;&ensp;&ensp;<asp:CompareValidator ID="CompareValidatorPassword" runat="server" ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword" ErrorMessage="Passwords do not match" ForeColor="Red"></asp:CompareValidator>
+                                    <asp:Label runat="server" ID="lConfirmPassword" ForeColor="Red"></asp:Label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-10">
+                                    <!--Validation-->
+                                    &ensp;&ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtPassword" runat="server" ErrorMessage="Sorry, please use 8 or more characters with a mix of letters, numbers & symbols" ValidationExpression="^.*(?=.{8,})(?=.*[\d])(?=.*[\W]).*$" ControlToValidate="txtPassword" ForeColor="Red"></asp:RegularExpressionValidator>
+                                </div>
+                            </div>
+
+                            <!--Submition Button-->
+                            <asp:Button class='btn btn-primary' ID="btnSubmitEmail" runat="server" Text="Submit" OnClick="btnSubmitEmail_Click" Font-Bold="true" Width="150" Height="50" />
+
+                            <!--line break-->
+                            <br />
+                            <br />
+                            <a href="../Authentication/Accounts.aspx?Type=Email">Sign in instead</a>
+
                         </div>
                     </div>
                     <div class="col-xs-2 col-md-2 text-center"></div>
@@ -271,8 +309,21 @@
             </div>
         </div>
     </form>
-    <!--Bootstrap-->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../Theam/vendor/jquery/jquery.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../Theam/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../Theam/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="../Theam/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../Theam/js/creative.min.js"></script>
+
+    <!--Old Bootstrap
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
-    <script src="../Scripts/bootstrap.min.js"></script>
+-->
 </body>
 </html>

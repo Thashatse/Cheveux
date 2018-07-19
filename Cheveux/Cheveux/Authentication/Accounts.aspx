@@ -53,7 +53,7 @@
                             <!--line break-->
                             <br />
                             <!--Logo-->
-                            <img src="../IMG_0715.png" alt="logo" width="300" height="300" />
+                            <img src="../IMG_0715.png" alt="logo" width="300" height="300" class="img-fluid" />
                             <!--line break-->
                             <br />
                             <br />
@@ -74,26 +74,26 @@
 
                             <!-- email account Type login -->
                             <div class="container" runat="server" id="divEmailAcount" visible="false">
+
+                                <!-- Email Text Box & Validation-->
+                                <div class="container" runat="server" id="divTxtBoxEmail">
                                 <!-- Error Lable -->
                                 <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
-                                <!--line break-->
-                                <br />
 
                                 <!-- Enter Email -->
-                                <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username"></asp:TextBox>
-                                <!--line break-->
-                                <br />
+                                <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username" CssClass="form-control"></asp:TextBox>
+                                
                                 <!--Email / User Name Validation-->
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailUsername" runat="server"
                                     ErrorMessage="*Email or Username is required" ControlToValidate="txtEmailUsername"
                                     ForeColor="Red"></asp:RequiredFieldValidator>
 
+                                    </div>
                                 <!-- email account Type login enter password -->
                                 <div class="container" runat="server" id="divPassword" visible="false">
                                     <!-- Enter Password -->
-                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password"></asp:TextBox>
-                                    <!--line break-->
-                                <br />
+                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password" CssClass="form-control"></asp:TextBox>
+                                    
                                     <!--Password Validation-->
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatorTxtPassword" runat="server"
                                         ErrorMessage="*Password is required" ControlToValidate="txtPassword"
@@ -153,8 +153,21 @@
             });
         }
     </script>
-    <!--Bootstrap-->
+    <!-- Bootstrap core JavaScript -->
+    <script src="../Theam/vendor/jquery/jquery.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../Theam/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../Theam/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="../Theam/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../Theam/js/creative.min.js"></script>
+
+    <!--Old Bootstrap
     <script src="../Scripts/jquery-3.3.1.min.js"></script>
-    <script src="../Scripts/bootstrap.min.js"></script>
+-->
 </body>
 </html>
