@@ -41,7 +41,7 @@
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul class="navbar-nav mx-auto">
                         <li ><button type="button" class="btn btn-light" style="margin-right:10px;">
-                            <a href="../Receptionist/Receptionist.aspx" style="text-decoration:none;"><!--Agenda Page-->Agenda</a>
+                            <a href="../Receptionist/Receptionist.aspx" style="text-decoration:none;"><!--Agenda Page-->Dashboard</a>
                             </button>
                         </li>
 
