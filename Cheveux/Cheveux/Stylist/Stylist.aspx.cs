@@ -14,9 +14,12 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         String test = DateTime.Now.ToString("dddd d MMMM");
-        List<SP_GetMyNextCustomer> next = null;
+        //List<SP_GetMyNextCustomer> next = null;
         CUST_VISIT cust_visit;
         HttpCookie cookie = null;
+
+        List<SP_GetEmpAgenda> agenda = null;
+
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
         protected void Page_Load(object sender, EventArgs e)
 		{
@@ -66,16 +69,16 @@ namespace Cheveux
             theDate.InnerHtml = test;
             cookie = Request.Cookies["CheveuxUserID"];
             
-            getMyNextCustomer(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
+            getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
         }
 
-        public void getMyNextCustomer(string id, DateTime bookingDate)
+        public void getAgenda(string id, DateTime bookingDate)
         {
             Button btn;
 
             try
             {
-                next = handler.BLL_GetMyNextCustomer(id, bookingDate);
+                agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
 
                 //create row for the table 
                 TableRow row = new TableRow();
@@ -130,7 +133,7 @@ namespace Cheveux
 
                 //integer that will be appended in the foreach loop to access the new row for every iteration of the foreach
                 int i = 1;
-                foreach (SP_GetMyNextCustomer n in next)
+                foreach (SP_GetEmpAgenda n in agenda)
                 {
 
                     //create row 
@@ -139,44 +142,44 @@ namespace Cheveux
 
                     //create cell for the start time and add to row (cell : 0)
                     TableCell start = new TableCell();
-                    start.Width = 400;
                     start.Text = n.StartTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(start);
 
                     //create cell for the end time and add to row (cell : 1)
                     TableCell end = new TableCell();
-                    end.Width = 400;
                     end.Text = n.EndTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(end);
 
                     //create cell for the customer first name and add to row (cell : 2)
                     TableCell c = new TableCell();
-                    c.Width = 400;
-                    c.Text = n.CustomerFName.ToString();
+                    c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + n.UserID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + n.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
 
                     //create cell for the stylists name and add to row (cell : 3)
                     TableCell e = new TableCell();
-                    e.Width = 400;
-                    e.Text = n.EmpFName.ToString();
+                    e.Text = "<a href = '../Profile.aspx?Action=View" +
+                                        "&empID=" + n.empID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + n.EmpFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(e);
 
                     //create cell for the service name and add to row (cell : 4)
                     TableCell s = new TableCell();
-                    s.Width = 400;
-                    s.Text = n.ServiceName.ToString();
+                    s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + n.ProductID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + n.ServiceName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(s);
 
                     //create cell for the arrived status and add to row (cell : 5)
                     TableCell present = new TableCell();
-                    present.Width = 400;
-                    present.Text = n.Arrived.ToString();
+                    present.Text = function.GetFullArrivedStatus(n.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
 
                         //create cell which the button populates and add to row (cell : 6)
                         TableCell buttonCell = new TableCell();
                         buttonCell.Width = 200;
                         buttonCell.Height = 50;
+                    if(n.Arrived.ToString() == "Y")
+                    {
                         //create button 
                         btn = new Button();
                         btn.Text = "Create Visit Record";
@@ -232,10 +235,16 @@ namespace Cheveux
                             }
 
                         };
-                    //add button control to the cell
-                    buttonCell.Controls.Add(btn);
-                    //add the cell to the row
-                    AgendaTable.Rows[i].Cells.Add(buttonCell);
+                        //add button control to the cell
+                        buttonCell.Controls.Add(btn);
+                        //add the cell to the row
+                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+                    }
+                    else if(n.Arrived.ToString() == "N")
+                    {
+                        buttonCell.Text = "<p><i>Customer has not arrived</i></p>";
+                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+                    }
 
                     //increment i 
                     i++;
@@ -246,7 +255,7 @@ namespace Cheveux
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
                 function.logAnError(E.ToString());
                 Response.Write("<script>alert('An error has occured.Having trouble connecting to the database. Unable to display required data.');</script>");
-                Server.Transfer("../Error.aspx");
+                Response.Redirect(Request.RawUrl);
             }
         }
 

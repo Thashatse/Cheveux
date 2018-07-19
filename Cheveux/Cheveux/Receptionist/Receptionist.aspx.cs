@@ -223,12 +223,12 @@ namespace Cheveux
                     TableCell buttonCell = new TableCell();
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
-                    if (a.Arrived.ToString() == "N" || a.Arrived.ToString() == "")
+                    if (a.Arrived.ToString() == "N")
                     {
                         //create button
                         btn = new Button();
                         btn.Text = "Check-in";
-                        btn.CssClass = "btn btn-outline-dark";
+                        btn.CssClass = "btn btn-primary";
                         btn.Click += (ss, ee) => {
                             /*
                              *Check-in code here 
@@ -275,7 +275,7 @@ namespace Cheveux
                     {
                         //create button
                         TableCell newCell = new TableCell();
-                        newCell.Text = "<button type = 'button' class='btn btn-success'>" +
+                        newCell.Text = "<button type = 'button' class='btn btn-primary'>" +
                             "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
                             "&BookingType=CheckOut" +
                             "&PreviousPage=Receptionist.aspx' style='color:White'>Check-out</a></button>";
