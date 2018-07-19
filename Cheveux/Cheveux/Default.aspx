@@ -375,10 +375,12 @@
                 <div class="row">
                     <div class="col-lg-12 ml-auto text-center">
                         <hr class="my-4">
+                        <div class="embed-responsive embed-responsive-16by9">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.568475806453!2d25.667619415705655!3d-34.00361618061904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e6532ce6cb4c0f1%3A0x9d4d0eeed57a0841!2sUniversity+Way%2C+Port+Elizabeth!5e0!3m2!1sen!2sza!4v1531901636092"
                             width="1050" height="525" frameborder="0" style="border: 0" allowfullscreen></iframe>
                     </div>
+                        </div>
                 </div>
             </div>
         </section>
