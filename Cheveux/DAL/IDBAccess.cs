@@ -65,5 +65,9 @@ namespace DAL
         List<SP_SearchForUser> searchForUser(string term);
         bool addEmployee(EMPLOYEE e);
         bool updateEmployee(EMPLOYEE emp);
+
+        List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID);
+
+
     }
 }
