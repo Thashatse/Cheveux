@@ -27,18 +27,18 @@ namespace DAL
                 {
                     if (table.Rows.Count == 1)
                     {
-                            booking = new SP_GetCustomerBooking
-                            {
-                                serviceName = table.Rows[0]["Name"].ToString(),
-                                serviceDescripion = table.Rows[0]["ProductDescription"].ToString(),
-                                servicePrice = table.Rows[0]["Price"].ToString(),
-                                stylistFirstName = table.Rows[0]["FirstName"].ToString(),
-                                bookingDate = Convert.ToDateTime(table.Rows[0]["Date"].ToString()),
-                                bookingStartTime = Convert.ToDateTime(table.Rows[0]["StartTime"].ToString()),
-                                bookingID = table.Rows[0]["BookingID"].ToString(),
-                                CustomerID = table.Rows[0]["BookingID"].ToString(),
-                                serviceID = table.Rows[0]["ServiceID"].ToString()
-                            };
+                        booking = new SP_GetCustomerBooking
+                        {
+                            serviceName = table.Rows[0]["Name"].ToString(),
+                            serviceDescripion = table.Rows[0]["ProductDescription"].ToString(),
+                            servicePrice = table.Rows[0]["Price"].ToString(),
+                            stylistFirstName = table.Rows[0]["FirstName"].ToString(),
+                            bookingDate = Convert.ToDateTime(table.Rows[0]["Date"].ToString()),
+                            bookingStartTime = Convert.ToDateTime(table.Rows[0]["StartTime"].ToString()),
+                            bookingID = table.Rows[0]["BookingID"].ToString(),
+                            CustomerID = table.Rows[0]["BookingID"].ToString(),
+                            serviceID = table.Rows[0]["ServiceID"].ToString()
+                        };
                     }
                     return booking;
                 }
@@ -173,7 +173,7 @@ namespace DAL
         {
                 new SqlParameter("@searchTerm", searchTerm)
         };
-            
+
             try
             {
                 using (DataTable table = DBHelper.ParamSelect("SP_TreatmentSearchByTerm",
@@ -1257,7 +1257,7 @@ namespace DAL
                             serviceID = Convert.ToString(row[1]),
                             serviceName = Convert.ToString(row[2]),
                             serviceDescription = Convert.ToString(row[3]),
-                            servicePrice= Convert.ToDecimal(row[4].ToString()),
+                            servicePrice = Convert.ToDecimal(row[4].ToString()),
                             serviceType = Convert.ToChar(row[5].ToString()[0])//,
                             //serviceImage = Encoding.ASCII.GetBytes(row[6].ToString())
                         };
@@ -1408,7 +1408,7 @@ namespace DAL
             SP_GetAllTreatments treatment = null;
             List<SP_GetAllTreatments> treatments = new List<SP_GetAllTreatments>();
 
-            
+
             try
             {
                 //get accessories
@@ -1478,74 +1478,74 @@ namespace DAL
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             SP_GetTodaysBookings booking = null;
-                List<SP_GetTodaysBookings> bookings = new List<SP_GetTodaysBookings>();
-                try
+            List<SP_GetTodaysBookings> bookings = new List<SP_GetTodaysBookings>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetTodaysBookings",
+            CommandType.StoredProcedure))
                 {
-                    using (DataTable table = DBHelper.Select("SP_GetTodaysBookings",
-                CommandType.StoredProcedure))
+                    if (table.Rows.Count > 0)
                     {
-                        if (table.Rows.Count > 0)
+                        foreach (DataRow row in table.Rows)
                         {
-                            foreach (DataRow row in table.Rows)
+                            booking = new SP_GetTodaysBookings
                             {
-                                booking = new SP_GetTodaysBookings
-                                {
-                                    BookingID = row[0].ToString(),
-                                    SlotNo = row[1].ToString(),
-                                    StartTime = Convert.ToDateTime(row[2].ToString()),
-                                    EndTime = Convert.ToDateTime(row[3].ToString()),
-                                    CustomerID = row[4].ToString(),
-                                    CustomerFirstName = row[5].ToString(),
-                                    CustomerLastName = row[6].ToString(),
-                                    StylistID = row[7].ToString(),
-                                    ServiceID = row[8].ToString(),
-                                    ServiceName = row[9].ToString(),
-                                    Date = Convert.ToDateTime(row[10].ToString()),
-                                    Available = row[11].ToString(),
-                                    Arrived = row[12].ToString(),
-                                    Comment = row[13].ToString()
-                                };
-                                bookings.Add(booking);
-                            }
+                                BookingID = row[0].ToString(),
+                                SlotNo = row[1].ToString(),
+                                StartTime = Convert.ToDateTime(row[2].ToString()),
+                                EndTime = Convert.ToDateTime(row[3].ToString()),
+                                CustomerID = row[4].ToString(),
+                                CustomerFirstName = row[5].ToString(),
+                                CustomerLastName = row[6].ToString(),
+                                StylistID = row[7].ToString(),
+                                ServiceID = row[8].ToString(),
+                                ServiceName = row[9].ToString(),
+                                Date = Convert.ToDateTime(row[10].ToString()),
+                                Available = row[11].ToString(),
+                                Arrived = row[12].ToString(),
+                                Comment = row[13].ToString()
+                            };
+                            bookings.Add(booking);
                         }
-                        return bookings;
                     }
+                    return bookings;
                 }
-                catch (Exception e)
-                {
-                    throw new ApplicationException(e.ToString());
-                }
-            
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
         }
 
         public USER checkForAccountTypeEmail(string identifier)
         {
-                USER AT = null;
-                SqlParameter[] pars = new SqlParameter[]
-                {
+            USER AT = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
                 new SqlParameter("@identifier", identifier)
-                };
+            };
 
-                try
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForAccountTypeEmail",
+            CommandType.StoredProcedure, pars))
                 {
-                    using (DataTable table = DBHelper.ParamSelect("SP_CheckForAccountTypeEmail",
-                CommandType.StoredProcedure, pars))
+                    if (table.Rows.Count == 1)
                     {
-                        if (table.Rows.Count == 1)
+                        DataRow row = table.Rows[0];
+                        AT = new USER
                         {
-                            DataRow row = table.Rows[0];
-                            AT = new USER
-                            {
-                                AccountType = Convert.ToString(row[0])
-                            };
-                        }
-                        return AT;
+                            AccountType = Convert.ToString(row[0])
+                        };
                     }
+                    return AT;
                 }
-                catch (Exception e)
-                {
-                    throw new ApplicationException(e.ToString());
-                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
 
         public USER logInEmail(string identifier, string password)
@@ -1588,9 +1588,9 @@ namespace DAL
             {
                 using (DataTable table = DBHelper.Select("SP_UserList", CommandType.StoredProcedure))
                 {
-                    if(table.Rows.Count > 0)
+                    if (table.Rows.Count > 0)
                     {
-                        foreach(DataRow row in table.Rows)
+                        foreach (DataRow row in table.Rows)
                         {
                             userList = new SP_UserList
                             {
@@ -1607,7 +1607,7 @@ namespace DAL
                 }
                 return list;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -1624,11 +1624,11 @@ namespace DAL
 
             try
             {
-                using(DataTable table = DBHelper.ParamSelect("SP_SearchForUser", CommandType.StoredProcedure, pars))
+                using (DataTable table = DBHelper.ParamSelect("SP_SearchForUser", CommandType.StoredProcedure, pars))
                 {
-                    if(table.Rows.Count > 0)
+                    if (table.Rows.Count > 0)
                     {
-                        foreach(DataRow row in table.Rows)
+                        foreach (DataRow row in table.Rows)
                         {
                             user = new SP_SearchForUser
                             {
@@ -1645,7 +1645,7 @@ namespace DAL
                 }
                 return list;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -1681,10 +1681,60 @@ namespace DAL
                 };
                 return DBHelper.NonQuery("SP_UpdateEmployee", CommandType.StoredProcedure, pars);
             }
-            catch(Exception E)
+            catch (Exception E)
             {
                 throw new ApplicationException(E.ToString());
             }
         }
-    }
+
+        public List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID)
+        {
+            SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
+            List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
+
+            SP_BookingsReportForHairstylist bookingsReportForHairstylist = null;
+
+            SqlParameter[] pars = new SqlParameter[];
+            {
+                new SqlParameter("@stylistID", stylistID);
+            }
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylist", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+
+                            hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
+                            {
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                slotNo = Convert.ToString(row["slotNo"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"]),
+                                EndTime = Convert.ToDateTime(row["EndTime"]),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
+                                FirstName = Convert.ToString(row["FirstName"]),
+                                LastName = Convert.ToString(row["LastName"]),
+                                stylistID = Convert.ToString(row["StylistID"]),
+                                serviceID = Convert.ToString(row["ServiceID"]),
+                                Name = Convert.ToString(row["Name"]),
+                                Date = Convert.ToDateTime(row["Date"]),
+                                Available = Convert.ToString(row["Available"]),
+                                Arrived = Convert.ToString(row["Arrived"]),
+                                Comment = Convert.ToString(row["Comment"]),
+                            };
+                        list.Add(hairstylistBookingReportrecord);
+                    }
+                }
+                return list;
+            } catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        
+
+        }
+    }                  
 }
