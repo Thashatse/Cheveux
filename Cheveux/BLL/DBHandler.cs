@@ -270,5 +270,12 @@ namespace BLL
         {
             return db.updateEmployee(emp);
         }
+
+        public List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID )
+        {
+            return db.getBookingsReportForHairstylist(stylistID);
+        }
+
+
     }
 }
