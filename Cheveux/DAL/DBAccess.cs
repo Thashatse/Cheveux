@@ -1732,9 +1732,58 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
+        }
 
-        
+        public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
+        {
+
+            SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
+            List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
+
+            SP_BookingsReportForHairstylist bookingsReportForHairstylist = null;
+
+            SqlParameter[] pars = new SqlParameter[];
+            {
+                new SqlParameter("@stylistID", stylistID);
+                new SqlParameter("@startDate", startDate);  
+                new SqlParameter("@endDate", endDate);
+            }
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylist", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+
+                            hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
+                            {
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                slotNo = Convert.ToString(row["slotNo"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"]),
+                                EndTime = Convert.ToDateTime(row["EndTime"]),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
+                                FirstName = Convert.ToString(row["FirstName"]),
+                                LastName = Convert.ToString(row["LastName"]),
+                                stylistID = Convert.ToString(row["StylistID"]),
+                                serviceID = Convert.ToString(row["ServiceID"]),
+                                Name = Convert.ToString(row["Name"]),
+                                Date = Convert.ToDateTime(row["Date"]),
+                                Available = Convert.ToString(row["Available"]),
+                                Arrived = Convert.ToString(row["Arrived"]),
+                                Comment = Convert.ToString(row["Comment"]),
+                            };
+                        list.Add(hairstylistBookingReportrecord);
+                    }
+                }
+                return list;
+            } catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
 
         }
+    
     }                  
 }
