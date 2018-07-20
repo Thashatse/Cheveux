@@ -28,17 +28,17 @@ namespace Cheveux
                 if ("R" == userType)
                 {
                     //Receptionist
-                    Response.Redirect("../Receptionist/Receptionist.aspx");
+                    Response.Redirect("/Receptionist/Receptionist.aspx");
                 }
                 else if (userType == "M")
                 {
                     //Manager
-                    Response.Redirect("../Manager/Manager.aspx");
+                    Response.Redirect("/Manager/dashboard.aspx");
                 }
                 else if (userType == "S")
                 {
                     //stylist
-                    Response.Redirect("../Stylist/Stylist.aspx");
+                    Response.Redirect("/Stylist/Stylist.aspx");
                 }
                 else if (userType == "C")
                 {
