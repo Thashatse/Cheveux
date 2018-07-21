@@ -160,7 +160,6 @@
     <Content Include="MasterPages\Cheveux.Master" />
     <Content Include="MasterPages\CheveuxStylist.Master" />
     <Content Include="Stylist\Stylist.aspx" />
-    <Content Include="Stylist\myUpcomingApps.aspx" />
     <Content Include="Theam\css\creative.css" />
     <Content Include="Theam\css\creative.min.css" />
     <Content Include="Theam\gulpfile.js" />
@@ -466,13 +465,6 @@
     </Compile>
     <Compile Include="Stylist\Stylist.aspx.designer.cs">
       <DependentUpon>Stylist.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Stylist\myUpcomingApps.aspx.cs">
-      <DependentUpon>myUpcomingApps.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Stylist\myUpcomingApps.aspx.designer.cs">
-      <DependentUpon>myUpcomingApps.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewBooking.aspx.cs">
       <DependentUpon>ViewBooking.aspx</DependentUpon>
