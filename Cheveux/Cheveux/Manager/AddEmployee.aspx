@@ -24,7 +24,7 @@
                     <div id="search" class="text-center">
                         <!--- Search for user --->   
                         <asp:TextBox ID="txtSearch" runat="server" Placeholder="Search for user"></asp:TextBox>
-                        <asp:Button ID="btnSearch" class="btn btn-default" runat="server" Text="Find User" OnClick="btnSearch_Click" />
+                        <asp:Button ID="btnSearch" class="btn btn-primary" runat="server" Text="Find User" OnClick="btnSearch_Click" />
                     </div>
                 </div>
             </div>

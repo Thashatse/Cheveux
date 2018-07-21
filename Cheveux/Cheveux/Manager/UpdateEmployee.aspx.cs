@@ -21,7 +21,7 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             userID = Request.QueryString["empID"];
             if(userID != null)
             {
