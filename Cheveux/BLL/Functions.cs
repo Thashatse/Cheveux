@@ -198,5 +198,21 @@ namespace BLL
                 return null;
             }
         }
+
+        public string GenerateRandomBookingID()
+        {
+            string result;
+            do
+            {
+                int[] id = new int[9];
+                Random rn = new Random();
+                for (int i = 0; i < id.Length; i++)
+                {
+                    id[i] = rn.Next(0, 9);
+                }
+                result = string.Join("", id);
+            } while (Handler.getCustomerUpcomingBookingDetails(result) != null);
+            return result;
+        }
     }
 }
