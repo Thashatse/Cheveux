@@ -187,22 +187,26 @@ namespace Cheveux
 
                     //create start cell and add to row.. cell index: 0
                     TableCell start = new TableCell();
+                    start.Width = 200;
                     start.Text = a.StartTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(start);
 
                     //create end cell and add to row.. cell index: 1
                     TableCell end = new TableCell();
+                    end.Width = 200;
                     end.Text = a.EndTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(end);
 
                     //created customer name cell and add to row.. cell index: 2
                     TableCell c = new TableCell();
+                    c.Width = 300;
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
 
                     //create employee name cell and add to row.. cell index: 3
                     TableCell e = new TableCell();
+                    e.Width = 300;
                     e.Text = "<a href = '../Profile.aspx?Action=View" +
                                         "&empID=" + a.empID.ToString().Replace(" ", string.Empty) +
                                         "'>" + a.EmpFName.ToString()+ "</a>";
@@ -210,12 +214,14 @@ namespace Cheveux
 
                     //create service name cell and add to row.. cell index: 4
                     TableCell s = new TableCell();
+                    s.Width = 300;
                     s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + a.ProductID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.ServiceName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(s);
                     
                     //create arrival status cell and add to row.. cell index : 5
                     TableCell present = new TableCell();
+                    present.Width = 100;
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
 
@@ -223,8 +229,11 @@ namespace Cheveux
                     TableCell buttonCell = new TableCell();
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
-                    if (a.Arrived.ToString() == "N")
+
+
+                    if (function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "No")
                     {
+                                                
                         //create button
                         btn = new Button();
                         btn.Text = "Check-in";
@@ -270,9 +279,37 @@ namespace Cheveux
                         buttonCell.Controls.Add(btn);
                         //add cell to row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
+
+
+                        TableCell missedAppt = new TableCell();
+                        missedAppt.Width = 200;
+                        missedAppt.Height = 50;
+                        Button btnMissed = new Button();
+                        btnMissed.Text = "No arrival";
+                        btnMissed.CssClass = "btn btn-primary";
+                        btnMissed.Click += (zz, tt) =>
+                        {
+                            /*
+                             * Show pop-up asking would the receptionist like to cancel booking or update the booking
+                             * 
+                             * if(customerCall == false)
+                             * {
+                             *      add 'Customer did not arrive comment'
+                             *      send email about not arriving asking the customer
+                             *      to rebook
+                             * }
+                             * else if(customerCall is True){
+                             *      give the receptionist an option to
+                             *      rebook on the customers behalf
+                             * }
+                             */
+                        };
+                        missedAppt.Controls.Add(btnMissed);
+                        AgendaTable.Rows[i].Cells.Add(missedAppt);
                     }
-                    else if(a.Arrived.ToString() == "Y")
+                    else if(function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "Yes")
                     {
+                        
                         //create button
                         TableCell newCell = new TableCell();
                         newCell.Text = "<button type = 'button' class='btn btn-primary'>" +

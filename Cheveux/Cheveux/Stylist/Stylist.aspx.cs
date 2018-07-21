@@ -178,12 +178,12 @@ namespace Cheveux
                         TableCell buttonCell = new TableCell();
                         buttonCell.Width = 200;
                         buttonCell.Height = 50;
-                    if(n.Arrived.ToString() == "Y")
+                    if(function.GetFullArrivedStatus(n.Arrived.ToString()[0]) == "Yes")
                     {
                         //create button 
                         btn = new Button();
                         btn.Text = "Create Visit Record";
-                        btn.CssClass = "btn btn-outline-dark";
+                        btn.CssClass = "btn btn-primary";
                         //button's click event
                         btn.Click += (ss, ee) => {
                             try
@@ -212,7 +212,7 @@ namespace Cheveux
                                      */
 
                                     Response.Write("<script>alert('Customer visit record for the visit has been created.You will now be taken to customer visit process.');"
-                                        + "window.location = 'CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
+                                        + "window.location = '../Stylist/CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
                                         + "&customerID=" + cust_visit.CustomerID.ToString()
                                         + "';</script>");
                                 }
@@ -240,7 +240,7 @@ namespace Cheveux
                         //add the cell to the row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }
-                    else if(n.Arrived.ToString() == "N")
+                    else if(function.GetFullArrivedStatus(n.Arrived.ToString()[0]) == "No")
                     {
                         buttonCell.Text = "<p><i>Customer has not arrived</i></p>";
                         AgendaTable.Rows[i].Cells.Add(buttonCell);

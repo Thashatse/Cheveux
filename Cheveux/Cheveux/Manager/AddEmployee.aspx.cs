@@ -114,7 +114,7 @@ namespace Cheveux.Manager
                     buttonCell.Height = 50;
                     btnAdd = new Button();
                     btnAdd.Text = "Add";
-                    btnAdd.CssClass = "btn btn-default";
+                    btnAdd.CssClass = "btn btn-primary";
                     btnAdd.Click += (ss, ee) =>
                     {
                         try
@@ -249,7 +249,7 @@ namespace Cheveux.Manager
                     buttonCell.Height = 50;
                     btnAdd = new Button();
                     btnAdd.Text = "Add";
-                    btnAdd.CssClass = "btn btn-default";
+                    btnAdd.CssClass = "btn btn-primary";
                     btnAdd.Click += (ss, ee) =>
                     {
                         try
