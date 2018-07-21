@@ -275,7 +275,5 @@ namespace BLL
         {
             return db.getBookingsReportForHairstylist(stylistID);
         }
-
-
     }
 }

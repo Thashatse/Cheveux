@@ -1696,8 +1696,6 @@ namespace DAL
             SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
             List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
 
-            SP_BookingsReportForHairstylist bookingsReportForHairstylist = null;
-
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@stylistID", stylistID)
@@ -1738,13 +1736,12 @@ namespace DAL
             }
         }
 
+
         public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
         {
 
             SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
             List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
-
-            SP_BookingsReportForHairstylist bookingsReportForHairstylist = null;
 
             SqlParameter[] pars = new SqlParameter[]
             {
