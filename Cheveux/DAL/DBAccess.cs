@@ -1580,6 +1580,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public List<SP_UserList> userList()
         {
             SP_UserList userList = null;
@@ -1612,6 +1613,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public List<SP_SearchForUser> searchForUser(string term)
         {
             SP_SearchForUser user = null;
@@ -1650,6 +1652,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         public bool addEmployee(EMPLOYEE e)
         {
             try
@@ -1668,6 +1671,7 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
         }
+
         public bool updateEmployee(EMPLOYEE emp)
         {
             try
@@ -1694,10 +1698,10 @@ namespace DAL
 
             SP_BookingsReportForHairstylist bookingsReportForHairstylist = null;
 
-            SqlParameter[] pars = new SqlParameter[];
+            SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@stylistID", stylistID);
-            }
+                new SqlParameter("@stylistID", stylistID)
+            };
 
             try
             {
@@ -1742,12 +1746,12 @@ namespace DAL
 
             SP_BookingsReportForHairstylist bookingsReportForHairstylist = null;
 
-            SqlParameter[] pars = new SqlParameter[];
+            SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@stylistID", stylistID);
-                new SqlParameter("@startDate", startDate);  
-                new SqlParameter("@endDate", endDate);
-            }
+                new SqlParameter("@stylistID", stylistID),
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
 
             try
             {
@@ -1778,12 +1782,11 @@ namespace DAL
                     }
                 }
                 return list;
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-
         }
-    
     }                  
 }
