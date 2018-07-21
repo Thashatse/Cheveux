@@ -31,17 +31,6 @@
     <!-- Our CSS-->
     <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
 
-    <!-- Default Theam
-
-    Bootstrap
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-    Bootstrap font awesome for the icons
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    CSS
-    <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
-
-    -->
-
     <!-- Search Function-->
     <script>
         function search() {
@@ -58,7 +47,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="Default.aspx#page-top">Cheveux
+            <a class="navbar-brand js-scroll-trigger" href="../Default.aspx#page-top">Cheveux
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -66,19 +55,16 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="../Bookings.aspx">Bookings</a>
+                        <a class="nav-link js-scroll-trigger" href="../Default.aspx#Service" style="text-decoration: none;">Service</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#Service" style="text-decoration: none;">Service</a>
+                        <a class="nav-link js-scroll-trigger" href="../Default.aspx#Products" style="text-decoration: none;">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#Products" style="text-decoration: none;">Products</a>
+                        <a class="nav-link js-scroll-trigger" href="../Default.aspx#Hairstylist" style="text-decoration: none;">Stylists</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#Hairstylist" style="text-decoration: none;">Stylists</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#ContactUs" style="text-decoration: none;">Connect</a>
+                        <a class="nav-link js-scroll-trigger" href="../Default.aspx#ContactUs" style="text-decoration: none;">Connect</a>
                     </li>
                     <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
@@ -94,7 +80,7 @@
                     </li>
                     <li class="nav-item">
                         <!--Text Box-->
-                        &ensp;&ensp;<input id="serchTerm" type="text" placeholder="Search">
+                        <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
                     </li>
                     <li class="nav-item">
                         <!--Search Button-->
@@ -110,8 +96,8 @@
     </nav>
 
     <div class="theTop">
-    <!--Placeholder for Content-->
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+        <!--Placeholder for Content-->
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </div>
 
@@ -134,10 +120,6 @@
 
     <!-- Custom scripts for this template -->
     <script src="../Theam/js/creative.min.js"></script>
-
-    <!--Old Bootstrap
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
--->
 
     <!--jQuery to return user to the top of the page-->
     <script>

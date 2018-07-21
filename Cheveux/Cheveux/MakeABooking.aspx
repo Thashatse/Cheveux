@@ -6,6 +6,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container" id="Div1">
+            <!-- Top Margin -->
+            <br />
+            <br />
+            <br />
+        </div>
     <form id="MakeABooking" runat="server">
         <div class="container-fluid">
             <div class="container">

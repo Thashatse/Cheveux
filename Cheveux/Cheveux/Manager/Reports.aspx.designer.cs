@@ -76,6 +76,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Calendar CalendarDateRage;
         
         /// <summary>
+        /// divReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divReport;
+        
+        /// <summary>
         /// reportLable control.
         /// </summary>
         /// <remarks>
@@ -83,6 +92,33 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label reportLable;
+        
+        /// <summary>
+        /// reportGenerateDateLable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label reportGenerateDateLable;
+        
+        /// <summary>
+        /// reportByLable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label reportByLable;
+        
+        /// <summary>
+        /// reportDateRangeLable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label reportDateRangeLable;
         
         /// <summary>
         /// tblReport control.

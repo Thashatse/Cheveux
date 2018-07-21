@@ -8,73 +8,95 @@
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container" runat="server" id="ReportsPage">
-        <!-- if the user is loged In -->
-        <div class="container" runat="server" id="LogedIn" visible="false">
-            <div class="row">
-                <div class="col-md-12">
+    <div class="bg-secondary text-white" id="Div1">
+        <!-- Top Margin & Nav Bar Back Color -->
+        <br />
+        <br />
+        <br />
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-8 col-sm-10">
+            <!-- if the user is loged In -->
+            <div runat="server" id="LogedIn" visible="false">
+                <div class="row">
+                    <div class="col-md-12">
 
-                    <!-- Jumbo Tron -->
-                    <div class="jumbotron">
-                        <h1>Manage Employees</h1>
-                        <!-- line Break -->
-                        <br />
-                        <form runat="server">
-                            <!-- View By Selector -->
-                            <p>View Employess By: </p>
-                            <asp:DropDownList ID="drpEmpTyp" runat="server" AutoPostBack="True">
-                                <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                            </asp:DropDownList>
-
+                        <!-- Jumbo Tron -->
+                        <div class="jumbotron bg-dark text-white">
+                            <h1>Manage Employees</h1>
                             <!-- line Break -->
-                            <br /><br />
+                            <br />
+                            <form runat="server">
+                                <!-- View By Selector -->
+                                <p>View Employess By: </p>
+                                <asp:DropDownList ID="drpEmpTyp" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                </asp:DropDownList>
 
-                            <!-- View By search tearm -->
-                            <p>View Employess By Search Term: </p>
-                            <asp:TextBox ID="txtProductSearchTerm" runat="server"></asp:TextBox>
-                            <asp:Button ID="btnProductSearch" runat="server" Text="Search" />
-                        </form>
-                        <!-- line Break -->
-                        <br />
-                        <!--Help-->
-                        <a href="../Help/CheveuxHelpCenter.aspx#ManageEmployee" target="_blank" title="How To Manage Employees">
-                            <span class="glyphicon">&#63; Help</span></a>
+                                <!-- line Break -->
+                                <br />
+                                <br />
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- View By search tearm -->
+                                        <p>View Employess By Search Term: </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server"></asp:TextBox>
+                                    </div>
+                                    <div class="col-2">
+                                        <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" />
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- line Break -->
+                            <br />
+                            <!--Help-->
+                            <a href="../Help/CheveuxHelpCenter.aspx#ManageEmployee" target="_blank" title="How To Manage Employees">
+                                <span class="glyphicon">&#63; Help</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <asp:Label ID="employeeJumbotronLable" runat="server"></asp:Label>
+                    </div>
+                    <div class="col-md-2">
+                        <!--add employee btn -->
+                        <button type='button' class='btn btn-primary'><a class='btn btn-primary' href='../Manager/AddEmployee.aspx' target="_blank">New Employee </a></button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- List Employee Table -->
+                        <asp:Table ID="tblEmployeeTable" runat="server">
+                        </asp:Table>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-10">
-                    <asp:Label ID="employeeJumbotronLable" runat="server"></asp:Label>
-                </div>
-                <div class="col-md-2">
-                    <!--add employee btn -->
-                    <button type='button' class='btn btn-default'> <a href='../Manager/AddEmployee.aspx' target="_blank">New Employee </a></button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- List Employee Table -->
-                    <asp:Table ID="tblEmployeeTable" runat="server">
-                    </asp:Table>
-                </div>
-            </div>
-        </div>
-
-        <!-- if the user is loged Out -->
-        <div class="container" runat="server" id="LogedOut">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="jumbotron">
-                        <h1>Manage Employees</h1>
-                        <p>Please log-in to Manage Employees</p>
-                        <button type="button" class="btn btn-default">
-                            <a href="../Authentication/Accounts.aspx?PreviousPage=Employee.aspx" id="LogedOutButton">Login</a>
-                        </button>
+            <!-- if the user is loged Out -->
+            <div runat="server" id="LogedOut" jumbotron bg-dark text-white>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="jumbotron">
+                            <h1>Manage Employees</h1>
+                            <p>Please log-in to Manage Employees</p>
+                            <button type="button" class="btn btn-primary">
+                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Employee.aspx" id="LogedOutButton">Login</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-2 col-sm-1"></div>
     </div>
 </asp:Content>

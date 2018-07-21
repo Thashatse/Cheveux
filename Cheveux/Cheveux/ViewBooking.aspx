@@ -11,6 +11,12 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="container" id="Div1">
+            <!-- Top Margin -->
+            <br />
+            <br />
+            <br />
+        </div>
     <div class="container" runat="server" id="Bookings">
         <!-- if the user is loged In -->
         <!-- Display the Booking for the client -->

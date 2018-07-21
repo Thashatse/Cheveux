@@ -13,15 +13,6 @@ namespace Cheveux.Manager {
     public partial class Products {
         
         /// <summary>
-        /// ReportsPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReportsPage;
-        
-        /// <summary>
         /// LogedIn control.
         /// </summary>
         /// <remarks>

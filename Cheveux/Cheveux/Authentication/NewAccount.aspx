@@ -37,6 +37,12 @@
 
 </head>
 <body>
+    <div class="container" id="Div1">
+            <!-- Top Margin -->
+            <br />
+            <br />
+            <br />
+        </div>
     <!--form for regestering a new google user-->
     <form id="RegisterGoogleUser" runat="server" visible="false">
         <div class="container-fluid">
@@ -101,7 +107,7 @@
                 <div class="row">
                     <div class="col-xs-2 col-md-2 text-center"></div>
                     <div class="col-xs-8 col-md-8 text-center">
-                        <div class="jumbotron vertical-center">
+                        <div class="jumbotron bg-dark text-white vertical-center">
                             <!--Logo-->
                             <img src="../IMG_0715.png" alt="logo" width="100" height="100" />
                             <h2>Create your Cheveux Account</h2>

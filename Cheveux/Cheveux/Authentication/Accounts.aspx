@@ -39,6 +39,12 @@
     <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com">
 </head>
 <body>
+    <div class="container" id="Div1">
+            <!-- Top Margin -->
+            <br />
+            <br />
+            <br />
+        </div>
     <!--form for login in-->
     <form id="Login" runat="server">
         <div class="container-fluid">
@@ -47,7 +53,7 @@
                     <div class="col-2"></div>
                     <div class="col-6 text-center">
                         <!--jumbotron-->
-                        <div class="jumbotron">
+                        <div class="jumbotron bg-dark text-white">
                             <!--heading-->
                             <h2>Get started with<b> Cheveux</b1></h2>
                             <!--line break-->

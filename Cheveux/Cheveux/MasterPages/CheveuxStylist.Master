@@ -28,17 +28,6 @@
     <!-- Our CSS-->
     <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
 
-    <!-- Default Theam
-
-    Bootstrap
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-    Bootstrap font awesome for the icons
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    CSS
-    <link rel="stylesheet" type="text/css" href="../CSS/Cheveux.css">
-
-    -->
-
     <!-- Search Function-->
     <script>
         function search() {
@@ -67,10 +56,6 @@
                     <ul class="navbar-nav ml-auto">
 
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Stylist/Stylist.aspx#page-top" style="text-decoration:none;">Dashboard</a>
-                        </li>
-
-                        <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="#"  style="text-decoration:none;">Calendar</a>
                         </li>
                         <li class="nav-item">
@@ -90,7 +75,7 @@
                         </li>
                         <li class="nav-item">
                             <!--Text Box-->
-                            &ensp;&ensp;<input id="serchTerm" type="text" placeholder="Search">
+                            <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
                         </li>
                         <li class="nav-item">
                             <!--Search Button-->
@@ -107,7 +92,7 @@
 
 
         <!--Place older for Content-->
-        <div class="container-fluid theTop">
+        <div class="theTop">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
@@ -133,10 +118,6 @@
     <!-- Custom scripts for this template -->
     <script src="../Theam/js/creative.min.js"></script>
 
-    <!--Old Bootstrap
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
--->
-
     <!--jQuery to return user to the top of the page-->
     <script>
 
@@ -157,7 +138,5 @@
             });
         });
     </script>
-
-    <script src="../Scripts/bootstrap.min.js"></script>
 </body>
 </html>

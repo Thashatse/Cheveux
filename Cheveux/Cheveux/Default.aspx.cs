@@ -87,14 +87,14 @@ namespace Cheveux
                 //add the phone number
                 TableCell newCell = new TableCell();
                 newCell.Text = "<a href='tel:" + BusinessDetails.Phone.ToString()+"'" +
-                    "class='btn btn-light btn-xl js-scroll-trigger'> <span class='glyphicon'>&#9742;</ span >" +
+                    "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#9742;</ span >" +
                     " Phone </a>";
                 tblContactUs.Rows[0].Cells.Add(newCell);
 
                 //add email address
                 newCell = new TableCell();
                 newCell.Text = "<a href='mailto:" + handler.GetUserDetails("112413834414360855751").Email.ToString()+"'"+
-                    "class='btn btn-light btn-xl js-scroll-trigger'> <span class='glyphicon'>&#128231;</ span >" +
+                    "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#128231;</ span >" +
                     " Email </a>";
                 tblContactUs.Rows[0].Cells.Add(newCell);
 
@@ -103,7 +103,7 @@ namespace Cheveux
                 newCell.Text = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&destination=" +
                     BusinessDetails.AddressLine1.Replace(' ', '+')+"+"+
                     BusinessDetails.AddressLine2.Replace(' ', '+')+
-                "'class='btn btn-light btn-xl js-scroll-trigger'>" +
+                "'class='btn btn-primary btn-xl js-scroll-trigger'>" +
                 "<span class='glyphicon'>&#xe062;</span> Get Directions</a>";
                 tblContactUs.Rows[0].Cells.Add(newCell);
                 

@@ -11,7 +11,16 @@
     </script>
 </asp:content>
 <asp:content id="Content3" contentplaceholderid="ContentPlaceHolder1" runat="server">
-    <div class="container">
+    <div class="bg-secondary text-white" id="Div1">
+        <!-- Top Margin & Nav Bar Back Color -->
+        <br />
+        <br />
+        <br />
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-8 col-sm-10">
 <div class="jumbotron bg-dark text-white">
   <h1>Search</h1>
     <!--Search Box-->
@@ -42,5 +51,7 @@
                     <asp:Table id="StylistSearchResults" runat="server"></asp:Table>
                     </div>
             </div>
+    </div>
+                <div class="col-md-2 col-sm-1"></div>
     </div>
 </asp:content>

@@ -5,23 +5,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Cheveux Help Center</title>
-    <!-- Bootstrap-->
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-    <!--CSS-->
-    <link rel="stylesheet" type="text/css" href="/CSS/HelpCenter.css">
+    <!-- Theam -->
 
-    <!--Bootstrap font awesome for the icons-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../Theam/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="../Theam/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../Theam/css/creative.min.css" rel="stylesheet">
+
+    <!-- Our CSS-->
+    <link rel="stylesheet" type="text/css" href="/CSS/HelpCenter.css">
 </head>
 <body>
+    <div class="container" id="Div1">
+            <!-- Top Margin -->
+            <br />
+            <br />
+            <br />
+        </div>
     <form id="HelpForm" runat="server">
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <!--Jumbotron Header-->
-                        <div class="jumbotron theTop">
-                            <img src="/IMG_0715.png" alt="logo" width="150" height="150" />
+                        <div class="jumbotron bg-dark text-white theTop">
+                            <a href="../Default.aspx">
+                                <img src="/IMG_0715.png" alt="logo" width="150" height="150" />
+                            </a>
                             <h1>Help Center</h1>
                             <p>Welcome to the Cheveux Help Center</p>
                         </div>
@@ -35,6 +54,9 @@
                         </ul>
                     </div>
                 </div>
+                <!--line Break-->
+                <br />
+                <br />
 
                 <!--Help Section Template -->
                 <div class="row">
@@ -129,13 +151,20 @@
                     <div class="col-md-12">
                         <!-- if the user is loged Out -->
                         <a name="InternalHelp"></a>
-                        <div class="jumbotron">
+                        <div class="jumbotron bg-dark text-white theTop">
                             <h1>Internal Help</h1>
                             <div class="container" runat="server" id="JumbotronLogedOut">
-                                <h3>Please log-in</h3>
-                                <p>You must bee loged in as Receptionist, Stylist or Manager to view this section</p>
-                                <button type="button" class="btn btn-default"><a href="../Authentication/Accounts.aspx?PreviousPage=Help/CheveuxHelpCenter.aspx#InternalHelp" id="LogedOut">Login</a></button>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <h3>Please log-in</h3>
+                                        <p>You must bee loged in as Receptionist, Stylist or Manager to view this section</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" class="btn btn-primary"><a class="btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Help/CheveuxHelpCenter.aspx#InternalHelp" id="LogedOut">Login</a></button>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -322,7 +351,7 @@
 
                                     <!--line Break-->
                                     <br />
-                                   
+
                                     <!--Sub Heading-->
                                     <h3>Edit Service</h3>
                                     <ul>
@@ -348,8 +377,8 @@
                                     <ul>
                                         <li>To manage employees, you must be logged in as manager.</li>
                                         <li>Select ‘Manage Employees’ from the navigation bar</li>
-                                        
-                                    <a href="../Manager/Employee.aspx">Go to Manage Employees Page</a>
+
+                                        <a href="../Manager/Employee.aspx">Go to Manage Employees Page</a>
                                         <img src="Helpimages/ViewEmployeesBy.png" alt="Login" />
                                         <li>On the Employees page, you can view employees by employee type </li>
                                     </ul>
@@ -484,6 +513,17 @@
         });
     </script>
 
-    <script src="/Scripts/bootstrap.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../Theam/vendor/jquery/jquery.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../Theam/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../Theam/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="../Theam/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../Theam/js/creative.min.js"></script>
 </body>
 </html>
