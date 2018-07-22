@@ -35,22 +35,19 @@ namespace Cheveux.Manager
             try
             {
                 view = handler.viewEmployee(userID);
-
                 TableRow row = new TableRow();
                 tblUserImage.Rows.Add(row);
-
-                //needs to be centered
                 TableCell userImage = new TableCell();
-                userImage.Width = 150;
                 userImage.Text = "<img src=" + view.empImage
                                   + " alt='" + view.firstName + " " + view.lastName +
-                                 " Profile Image' width='75' height='75'/>";
+                                 " Profile Image' width='125' height='125'/>";
                 tblUserImage.Rows[0].Cells.Add(userImage);
-
+                TableRow newRow = new TableRow();
+                tblUserImage.Rows.Add(newRow);
                 TableCell username = new TableCell();
-                username.Text = view.userName.ToString();
+                username.Text = "<p style='font-size:2em !important;'>" + view.userName.ToString() + "</p>";
                 username.Font.Bold = true;
-                tblUserImage.Rows[0].Cells.Add(username);
+                tblUserImage.Rows[1].Cells.Add(username);
             }
             catch(Exception Err)
             {
@@ -72,9 +69,6 @@ namespace Cheveux.Manager
 
                 if (handler.updateEmployee(emp))
                 {
-
-                    //System.Threading.ThreadAbortException: Thread was being aborted error but updates on the database (fix) 
-
                     Response.Write("<script>alert('Successful Update.');</script>");
                     Response.Redirect("../Manager/Employee.aspx",false);
                 }
@@ -94,7 +88,7 @@ namespace Cheveux.Manager
 
         protected void btnBack_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../Manager/Dashboard.aspx");
+            Response.Redirect("../Manager/Employee.aspx");
         }
     }
 }
