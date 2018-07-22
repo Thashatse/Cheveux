@@ -433,8 +433,9 @@ namespace DAL
                                 stylistFirstName = row["FirstName"].ToString(),
                                 bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                                 bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                bookingID = row["BookingID"].ToString()
-
+                                bookingID = row["BookingID"].ToString(),
+                                serviceID = row["ProductID"].ToString(),
+                                stylistEmployeeID = row["StylistID"].ToString()
                             };
                             customerBookings.Add(booking);
                         }

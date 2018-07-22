@@ -192,7 +192,7 @@ namespace Cheveux
         private void goToPreviousPage()
         {
             //get the privious page to redirect to
-            String PreviousPage = Request.QueryString["PreviousPage"];
+            string PreviousPage = Request.QueryString["PreviousPage"];
             //go back to the previous page if there is one
             if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
             {
@@ -346,6 +346,17 @@ namespace Cheveux
                     Response.Redirect("../Default.aspx?" + "WB=" + result[2].Replace(" ", string.Empty));
                 }
             }
+        }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            //get the privious page to redirect to
+            string PreviousPage = Request.QueryString["PreviousPage"];
+            if(PreviousPage != null)
+            {
+                Response.Redirect("../Authentication/Accounts.aspx?PreviousPage="+PreviousPage+"&Type=Email");
+            }
+            Response.Redirect("../Authentication/Accounts.aspx?Type=Email");
         }
     }
 }

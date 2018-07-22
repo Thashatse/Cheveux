@@ -27,6 +27,7 @@ namespace Cheveux
             if (cookie == null)
             {
                 //if the user is not loged in do not diplay bookings details
+                Response.Redirect("Bookings.aspx");
             }
             else if (cookie != null)
             {

@@ -41,13 +41,15 @@
                         <asp:Label ID="profileLable" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                                     </div>
                                     <div class="col-md-2">
-                                        <a class="btn btn-primary nav-link" href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
+                                        <div runat="server" id="LogOutBTN" visible="false">
+                                            <a class="btn btn-primary nav-link" href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <asp:Table ID="profileTable" runat="server"></asp:Table>
-                            <div class="container" runat="server" id="Edit" visible="false">
+                            <div runat="server" id="Edit" visible="false">
                                 <form id="formEditProfile" runat="server">
                                     <asp:Table ID="editGoogleProfileTable" runat="server" Visible="false">
                                         <asp:TableRow Height="50">

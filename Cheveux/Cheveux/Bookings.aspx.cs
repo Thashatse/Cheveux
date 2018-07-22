@@ -85,6 +85,7 @@ namespace Cheveux
                 upcomingBookingsLable.Text =
                     "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
+
             //check if there are upcoming bookings
             if (bookingsList.Count > 0)
             {
@@ -96,73 +97,52 @@ namespace Cheveux
                 //create a header row and set cell withs
                 TableHeaderCell newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Date";
-                newHeaderCell.Width = 150;
+                newHeaderCell.Width = 100;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Time";
-                newHeaderCell.Width = 50;
+                newHeaderCell.Width = 100;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Stylist";
-                newHeaderCell.Width = 100;
+                newHeaderCell.Width = 190;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Service Name";
                 newHeaderCell.Width = 200;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Service Description";
-                newHeaderCell.Width = 400;
-                upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Price";
                 newHeaderCell.Width = 100;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Width = 300;
+                newHeaderCell.Width = 400;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
 
                 //create a loop to display each result
                 //creat a counter to keep track of the current row
                 int rowCount = 1;
-                foreach (SP_GetCustomerBooking bookings in bookingsList)
+                foreach (SP_GetCustomerBooking booking in bookingsList)
                 {
-                    // create a new row in the results table and set the height
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    upcomingBookings.Rows.Add(newRow);
-                    //fill the row with the data from the results object
-                    TableCell newCell = new TableCell();
-                    newCell.Text = bookings.bookingDate.ToString("dd-MM-yyyy");
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.stylistFirstName.ToString();
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.serviceName.ToString();
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.serviceDescripion.ToString();
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "R "+ Math.Round(Convert.ToDouble(bookings.servicePrice), 2).ToString();
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    //display cancel, edit and print buttons
-                    newCell.Text =
-                        "<a href = '../ViewBooking.aspx?Action=Cancel&BookingID=" +
-                        bookings.bookingID.ToString().Replace(" ", string.Empty) +
-                        "&PreviousPage=Bookings.aspx'>Cancel Booking   </a>   " +
-                        
-                        "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = '../ViewBooking.aspx?Action=Edit&BookingID=" +
-                        bookings.bookingID.ToString().Replace(" ", string.Empty) +
-                        "&PreviousPage=Bookings.aspx'>Edit Booking</a></button>";
-                    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
-                    rowCount++;
+                    if (booking.bookingDate.Date > DateTime.Now.Date)
+                    {
+                        addUpcomingBookingToTable(booking, rowCount);
+                        rowCount++;
+                    }
+                    else if (booking.bookingDate.Date == DateTime.Now.Date
+                        && booking.bookingStartTime.AddMinutes(20).TimeOfDay >= DateTime.Now.TimeOfDay)
+                    {
+                        addUpcomingBookingToTable(booking, rowCount);
+                        rowCount++;
+                    }
+                }
+
+                if(rowCount == 1)
+                {
+                    // if there aren't let the user know
+                    upcomingBookingsLable.Text =
+                        "<p> No Upcoming Bookings </p>";
+                    upcomingBookings.Visible = false;
                 }
             }
             else
@@ -172,6 +152,46 @@ namespace Cheveux
                     "<p> No Upcoming Bookings </p>";
             }
         }
+
+        public void addUpcomingBookingToTable (SP_GetCustomerBooking bookings, int rowCount)
+{
+    // create a new row in the results table and set the height
+    TableRow newRow = new TableRow();
+    newRow.Height = 50;
+    upcomingBookings.Rows.Add(newRow);
+    //fill the row with the data from the results object
+    TableCell newCell = new TableCell();
+    newCell.Text = bookings.bookingDate.ToString("dd MMM yyyy");
+    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+    newCell = new TableCell();
+    newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
+    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+    newCell = new TableCell();
+    newCell.Text = "<a href='Profile.aspx?Action=View" +
+                    "&empID=" + bookings.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                    "'>" + bookings.stylistFirstName.ToString() + "</a>";
+    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+    newCell = new TableCell();
+    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookings.serviceID.Replace(" ", string.Empty) + "'>"
+        + bookings.serviceName.ToString() + "</a>";
+    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+    newCell = new TableCell();
+    newCell.Text = "R " + Math.Round(Convert.ToDouble(bookings.servicePrice), 2).ToString();
+    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+    newCell = new TableCell();
+    //display cancel, edit and print buttons
+    newCell.Text =
+        "<a href = '../ViewBooking.aspx?Action=Cancel&BookingID=" +
+        bookings.bookingID.ToString().Replace(" ", string.Empty) +
+        "&PreviousPage=Bookings.aspx'>Cancel Booking   </a> &nbsp; &nbsp;  " +
+
+        "<button type = 'button' class='btn btn-default'>" +
+        "<a href = '../ViewBooking.aspx?Action=Edit&BookingID=" +
+        bookings.bookingID.ToString().Replace(" ", string.Empty) +
+        "&PreviousPage=Bookings.aspx'>Edit Booking</a></button>";
+    upcomingBookings.Rows[rowCount].Cells.Add(newCell);
+    
+}
 
         public void displayPastBookings()
         {
@@ -226,42 +246,19 @@ namespace Cheveux
                 //create a loop to display each result
                 //creat a counter to keep track of the current row
                 int rowCount = 1;
-                foreach (SP_GetCustomerBooking bookings in bookingsList)
+                foreach (SP_GetCustomerBooking booking in bookingsList)
                 {
-                    // create a new row in the results table and set the height
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    pastBookings.Rows.Add(newRow);
-                    //fill the row with the data from the results object
-                    TableCell newCell = new TableCell();
-                    newCell.Text = bookings.bookingDate.ToString("dd-MM-yyyy");
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.stylistFirstName.ToString();
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.serviceName.ToString();
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = bookings.serviceDescripion.ToString();
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "R " + Math.Round(Convert.ToDouble(bookings.servicePrice), 2).ToString();
-                    pastBookings.Rows[rowCount].Cells.Add(newCell);
-                    if (bookings.arrived.ToString()[0] != 'N')
+                    if (booking.bookingDate.Date < DateTime.Now.Date)
                     {
-                        newCell = new TableCell();
-                        newCell.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = '../ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
-                            "&BookingType=Past" +
-                            "&PreviousPage=Bookings.aspx'>View Invoice</a></button>";
-                        pastBookings.Rows[rowCount].Cells.Add(newCell);
+                        addPastBookingToTable(booking, rowCount);
+                        rowCount++;
                     }
-                    rowCount++;
+                    else if (booking.bookingDate.Date == DateTime.Now.Date
+                        && booking.bookingStartTime.AddMinutes(20).TimeOfDay <= DateTime.Now.TimeOfDay)
+                    {
+                        addPastBookingToTable(booking, rowCount);
+                        rowCount++;
+                    }
                 }
             }
             else
@@ -269,6 +266,43 @@ namespace Cheveux
                 // if there aren't let the user know
                 pastBookingsLable.Text =
                     "<p> No Past Bookings </p>";
+            }
+        }
+
+        public void addPastBookingToTable(SP_GetCustomerBooking bookings, int rowCount)
+        {
+            // create a new row in the results table and set the height
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            pastBookings.Rows.Add(newRow);
+            //fill the row with the data from the results object
+            TableCell newCell = new TableCell();
+            newCell.Text = bookings.bookingDate.ToString("dd-MM-yyyy");
+            pastBookings.Rows[rowCount].Cells.Add(newCell);
+            newCell = new TableCell();
+            newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
+            pastBookings.Rows[rowCount].Cells.Add(newCell);
+            newCell = new TableCell();
+            newCell.Text = bookings.stylistFirstName.ToString();
+            pastBookings.Rows[rowCount].Cells.Add(newCell);
+            newCell = new TableCell();
+            newCell.Text = bookings.serviceName.ToString();
+            pastBookings.Rows[rowCount].Cells.Add(newCell);
+            newCell = new TableCell();
+            newCell.Text = bookings.serviceDescripion.ToString();
+            pastBookings.Rows[rowCount].Cells.Add(newCell);
+            newCell = new TableCell();
+            newCell.Text = "R " + Math.Round(Convert.ToDouble(bookings.servicePrice), 2).ToString();
+            pastBookings.Rows[rowCount].Cells.Add(newCell);
+            if (bookings.arrived.ToString()[0] != 'N')
+            {
+                newCell = new TableCell();
+                newCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
+                    "&BookingType=Past" +
+                    "&PreviousPage=Bookings.aspx'>View Invoice</a></button>";
+                pastBookings.Rows[rowCount].Cells.Add(newCell);
             }
         }
     }
