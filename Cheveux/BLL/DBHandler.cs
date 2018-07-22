@@ -276,12 +276,13 @@ namespace BLL
             return db.getBookingsReportForHairstylist(stylistID);
         }
 
-       public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
+       /*
+        public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
         {
           return db.getBookingReportForHairstylistWithDateRange(stylistID, startDate, endDate);
 
         }
-
+        */
 
     }
 }

@@ -66,11 +66,7 @@
                             <!-- sellect account Type -->
                             <div class="container" runat="server" id="divAccountType">
                                 <!--sign in with email buton-->
-                                <button type='button' class='btn btn-primary'>
-                                    <a href="../Authentication/Accounts.aspx?Type=Email" class="text-white" style="text-decoration:none;">
-                                        <span class='glyphicon'>&#128231;</span> Sign In With Email
-                                    </a>
-                                </button>
+                                <asp:button type='btnEmailSignIn' Cssclass='btn btn-primary' OnClick="Unnamed_Click" runat="server" Text="&#128231;  Sign In With Email"></asp:button>
                                 <!--line break-->
                                 <br />
                                 <br />

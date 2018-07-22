@@ -86,6 +86,7 @@ namespace Cheveux
                 if (action == null)
                 {
                     //load user details
+                    LogOutBTN.Visible = true;
                     loadUserDetails();
                 }
                 else if (action == "View")
@@ -499,8 +500,7 @@ namespace Cheveux
                 newCell = new TableCell();
 
                 string cellText;
-                cellText = "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = 'Profile.aspx?Action=Edit'>Edit Profile</a></button>   ";
+                cellText = "<a href = 'Profile.aspx?Action=Edit'>Edit Profile</a> &nbsp; &nbsp;";
                 if (userDetails.UserType == 'C')
                 {
                     cellText += "<button type = 'button' class='btn btn-default'> " +
