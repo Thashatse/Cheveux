@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,7 +67,8 @@ namespace BLL
         bool addEmployee(EMPLOYEE e);
         bool updateEmployee(EMPLOYEE emp);
         List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID);
-        //List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
+        List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
+        List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID);
     }
 }
 
