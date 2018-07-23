@@ -53,9 +53,9 @@ namespace DAL
         List<PRODUCT> getAllProducts();
         List<SP_GetProductTypes> getProductTypes();
 
-        /*        bool AddBooking(BOOKING addBooking);
-                List<SP_GetServices> GetAllServices();
-                List<SP_GetStylists> GetStylistsForService(string serviceID);*/
+        bool AddBooking(BOOKING addBooking);
+        List<SP_GetServices> GetAllServices();
+        List<SP_GetStylists> GetStylists();
 
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         List<SP_GetTodaysBookings> getTodaysBookings();
