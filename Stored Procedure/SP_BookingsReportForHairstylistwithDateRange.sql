@@ -7,8 +7,8 @@ GO
 -- =============================================
 CREATE PROCEDURE SP_BookingsReportForHairstylistwithDateRange
 	@stylistID nchar(30),
-	@startDate nchar(30),
-	@endDate   nchar(30)
+	@startDate datetime,
+	@endDate   datetime
 AS
 BEGIN
 
