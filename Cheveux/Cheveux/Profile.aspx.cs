@@ -312,11 +312,10 @@ namespace Cheveux
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //edit link
                     newCell = new TableCell();
-                    //Edit employee link to be added by sike
                     newCell.Text =
-                         "<a href = '#?" +
+                         "<a href = '/Manager/UpdateEmployee.aspx?" +
                                     "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                    "'> Edit Employee </a>";
+                                    "' target='_blank'> Edit Employee </a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
