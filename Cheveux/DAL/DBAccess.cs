@@ -957,8 +957,8 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
 
-            /*
-        public List<SP_GetServices> GetAllServices()
+           
+         public List<SP_GetServices> GetAllServices()
         {
             try
             {
@@ -971,6 +971,7 @@ namespace DAL
                         {
                             SP_GetServices services = new SP_GetServices
                             {
+                                ServiceID = Convert.ToString(row["ProductID"]),
                                 Name = Convert.ToString(row["Name"])
                             };
                             serviceList.Add(services);
@@ -984,38 +985,37 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylists> GetStylistsForService(string serviceID)
+        
+        public List<SP_GetStylists> GetStylists()
         {
             try
             {
                 List<SP_GetStylists> stylistList = new List<SP_GetStylists>();
-                SqlParameter[] pars = new SqlParameter[]
+
+                using (DataTable table = DBHelper.Select("SP_GetStylist", CommandType.StoredProcedure))
                 {
-                    new SqlParameter("@ServiceID", serviceID)
-                };
-                using(DataTable table = DBHelper.ParamSelect("SP_GetStylists", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count>0)
+                    if (table.Rows.Count > 0)
                     {
-                        foreach(DataRow row in table.Rows)
+                        foreach (DataRow row in table.Rows)
                         {
                             SP_GetStylists stylists = new SP_GetStylists
                             {
-                                FirstName = Convert.ToString(row["FirstName"])
+                                UserID = Convert.ToString(row["UserID"]),
+                                FirstName = Convert.ToString(row["FirstName"]),
+                                ServiceID = Convert.ToString(row["ServiceID"])
                             };
                             stylistList.Add(stylists);
                         }
                     }
                 }
                 return stylistList;
+                               
             }
             catch(Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-        }
-        */
-        }
+         }
 
         public List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
