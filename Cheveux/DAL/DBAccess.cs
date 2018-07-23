@@ -1709,13 +1709,12 @@ namespace DAL
                     if (table.Rows.Count > 0)
                     {
                         foreach (DataRow row in table.Rows)
-
                             hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
                                 slotNo = Convert.ToString(row["slotNo"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"]),
-                                EndTime = Convert.ToDateTime(row["EndTime"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
                                 CustomerID = Convert.ToString(row["CustomerID"]),
                                 FirstName = Convert.ToString(row["FirstName"]),
                                 LastName = Convert.ToString(row["LastName"]),
@@ -1763,8 +1762,8 @@ namespace DAL
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
                                 slotNo = Convert.ToString(row["slotNo"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"]),
-                                EndTime = Convert.ToDateTime(row["EndTime"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
                                 CustomerID = Convert.ToString(row["CustomerID"]),
                                 FirstName = Convert.ToString(row["FirstName"]),
                                 LastName = Convert.ToString(row["LastName"]),
