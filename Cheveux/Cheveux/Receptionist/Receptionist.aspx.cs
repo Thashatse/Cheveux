@@ -280,7 +280,7 @@ namespace Cheveux
                         //add cell to row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
 
-
+                     /*
                         TableCell missedAppt = new TableCell();
                         missedAppt.Width = 200;
                         missedAppt.Height = 50;
@@ -302,10 +302,11 @@ namespace Cheveux
                              *      give the receptionist an option to
                              *      rebook on the customers behalf
                              * }
-                             */
+                             *
                         };
                         missedAppt.Controls.Add(btnMissed);
                         AgendaTable.Rows[i].Cells.Add(missedAppt);
+                    */
                     }
                     else if(function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "Yes")
                     {
