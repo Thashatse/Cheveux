@@ -1754,7 +1754,7 @@ namespace DAL
 
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylist", CommandType.StoredProcedure, pars))
+                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylistwithDateRange", CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count > 0)
                     {
