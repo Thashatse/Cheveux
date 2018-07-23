@@ -172,20 +172,19 @@ namespace BLL
             return db.CreateCustVisit(cust_visit);
         }
 
-        /*public bool AddBooking(BOOKING addBooking)
-                {
-                    return db.AddBooking(addBooking);
-                }
+         public bool BLL_AddBooking(BOOKING addBooking)
+        {
+            return db.AddBooking(addBooking);
+        }
 
-                public List<SP_GetStylists> GetHairstylists(string serviceID)
-                {
-                    return db.GetStylistsForService(serviceID);
-                }
-                public List<SP_GetServices> GetServices()
-                {
-                    return db.GetAllServices();
-                }
-                */
+        public List<SP_GetStylists> BLL_GetStylists()
+        {
+            return db.GetStylists();
+        }
+        public List<SP_GetServices> BLL_GetAllServices()
+        {
+            return db.GetAllServices();
+        }
 
         public List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
