@@ -171,6 +171,7 @@ namespace BLL
         {
             return db.CreateCustVisit(cust_visit);
         }
+
         /*public bool AddBooking(BOOKING addBooking)
                 {
                     return db.AddBooking(addBooking);
@@ -185,6 +186,7 @@ namespace BLL
                     return db.GetAllServices();
                 }
                 */
+
         public List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
             return db.GetMyNextCustomer(employeeID, bookingDate);
@@ -254,18 +256,22 @@ namespace BLL
         {
             return db.getProductTypes();
         }
+
         public List<SP_UserList> userList()
         {
             return db.userList();
         }
+
         public List<SP_SearchForUser> searchForUser(string term)
         {
             return db.searchForUser(term);
         }
+
         public bool addEmployee(EMPLOYEE e)
         {
             return db.addEmployee(e);
         }
+
         public bool updateEmployee(EMPLOYEE emp)
         {
             return db.updateEmployee(emp);
@@ -276,18 +282,16 @@ namespace BLL
             return db.getBookingsReportForHairstylist(stylistID);
         }
 
-       public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
+        public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
         {
           return db.getBookingReportForHairstylistWithDateRange(stylistID, startDate, endDate);
 
         }
 
-       public List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID)
+        public List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID)
         {
             return db.getSaleOfHairstylist(stylistID);
 
         }
-
-
     }
 }
