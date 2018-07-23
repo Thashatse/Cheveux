@@ -22,10 +22,10 @@
     <link href="../Theam/css/creative.min.css" rel="stylesheet">
 
     <!-- Our CSS-->
-    <link rel="stylesheet" type="text/css" href="/CSS/HelpCenter.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/HelpCenter.css">
 </head>
 <body>
-    <div class="container" id="Div1">
+    <div class="container theTop" id="Div1">
             <!-- Top Margin -->
             <br />
             <br />
@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!--Jumbotron Header-->
-                        <div class="jumbotron bg-dark text-white theTop">
+                        <div class="jumbotron bg-dark text-white">
                             <a href="../Default.aspx">
                                 <img src="/IMG_0715.png" alt="logo" width="150" height="150" />
                             </a>
@@ -151,7 +151,7 @@
                     <div class="col-md-12">
                         <!-- if the user is loged Out -->
                         <a name="InternalHelp"></a>
-                        <div class="jumbotron bg-dark text-white theTop">
+                        <div class="jumbotron bg-dark text-white>
                             <h1>Internal Help</h1>
                             <div class="container" runat="server" id="JumbotronLogedOut">
                                 <div class="row">
@@ -488,9 +488,19 @@
             </div>
         </div>
     </form>
-    <!--Bootstrap-->
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
 
+    <!-- Bootstrap core JavaScript -->
+    <script src="../Theam/vendor/jquery/jquery.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../Theam/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../Theam/vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="../Theam/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../Theam/js/creative.min.js"></script>
 
     <!--jQuery to return user to the top of the page-->
     <script>
