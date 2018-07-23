@@ -1785,7 +1785,53 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
+
         }
+
+        public List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID)
+        {
+            SP_SaleOfHairstylist saleOfHairstylistrecord = null;
+            List<SP_SaleOfHairstylist> list = new List<SP_SaleOfHairstylist>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", stylistID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_SaleOfHairstylist", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            saleOfHairstylistrecord = new SP_SaleOfHairstylist
+                            {
+                                SaleID = Convert.ToString(row["SaleID"]),
+                                date = Convert.ToDateTime(row["Date"]),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
+                                paymentType = Convert.ToChar(row["PaymentType"]),
+                                stylistID = Convert.ToString(row["stylistID"]),
+                                serviceID = Convert.ToString(row["serviceID"]),
+                                Available = Convert.ToChar(row["Available"]),
+                                Arrived = Convert.ToChar(row["Arrived"]),
+                                Comment = Convert.ToString(row["Comment"]),
+
+
+                            };
+                            list.Add(saleOfHairstylistrecord);
+
+                        }
+                    }
+                }
+                    return list;
+               }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
     }
 }                  
-
