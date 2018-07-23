@@ -1709,6 +1709,7 @@ namespace DAL
                     if (table.Rows.Count > 0)
                     {
                         foreach (DataRow row in table.Rows)
+                        {
                             hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
@@ -1726,7 +1727,8 @@ namespace DAL
                                 Arrived = Convert.ToString(row["Arrived"]),
                                 Comment = Convert.ToString(row["Comment"]),
                             };
-                        list.Add(hairstylistBookingReportrecord);
+                            list.Add(hairstylistBookingReportrecord);
+                        }
                     }
                 }
                 return list;
@@ -1757,6 +1759,7 @@ namespace DAL
                     if (table.Rows.Count > 0)
                     {
                         foreach (DataRow row in table.Rows)
+                        {
 
                             hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
                             {
@@ -1775,7 +1778,8 @@ namespace DAL
                                 Arrived = Convert.ToString(row["Arrived"]),
                                 Comment = Convert.ToString(row["Comment"]),
                             };
-                        list.Add(hairstylistBookingReportrecord);
+                            list.Add(hairstylistBookingReportrecord);
+                        }
                     }
                 }
                 return list;
