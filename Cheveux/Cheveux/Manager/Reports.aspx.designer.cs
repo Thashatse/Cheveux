@@ -67,13 +67,31 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportDateRangeContainer;
         
         /// <summary>
-        /// CalendarDateRage control.
+        /// CalendarDateStrart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarDateRage;
+        protected global::System.Web.UI.WebControls.Calendar CalendarDateStrart;
+        
+        /// <summary>
+        /// CalendarDateEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar CalendarDateEnd;
+        
+        /// <summary>
+        /// lError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lError;
         
         /// <summary>
         /// divReport control.

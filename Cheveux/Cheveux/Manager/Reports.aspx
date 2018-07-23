@@ -60,10 +60,15 @@
                                     <br />
 
                                     <div class="container" runat="server" id="reportDateRangeContainer" visible="false">
-                                        <p>Report Date Range: </p>
-                                        <asp:Calendar ID="CalendarDateRage" runat="server"></asp:Calendar>
+                                        <p>Start Date: </p>
+                                        <asp:Calendar ID="CalendarDateStrart" runat="server"></asp:Calendar>
+                                        <p>End Date: </p>
+                                        <asp:Calendar ID="CalendarDateEnd" runat="server"></asp:Calendar>
                                     </div>
                                 </form>
+                                <!-- line Break -->
+                                <br />
+                                <asp:Label ID="lError" runat="server" Text="Label" Visible="false"></asp:Label>
                                 <!-- line Break -->
                                 <br />
                                 <!--Help-->
