@@ -32,11 +32,10 @@ namespace BLL
         SP_ViewCustVisit BLL_ViewCustVisit(string customerID, string bookingID);
         bool BLL_UpdateCustVisit(CUST_VISIT visit);
         bool BLL_CreateCustVisit(CUST_VISIT cust_visit);
-        /*bool BLL_AddBooking(BOOKING addBooking);
+        bool BLL_AddBooking(BOOKING addBooking);
 
-       List<SP_GetServices> BLL_GetAllServices();
-       List<SP_GetStylists> BLL_GetStylistsForService(string serviceID);
-       */
+        List<SP_GetServices> BLL_GetAllServices();
+        List<SP_GetStylists> BLL_GetStylists();
         List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate);
         bool createSalesDTLRecord(SALES_DTL detailLine);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
