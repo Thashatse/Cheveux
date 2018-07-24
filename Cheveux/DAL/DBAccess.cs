@@ -1898,6 +1898,38 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+           public List<SP_GetStylists> GetAllStylists()
+        {
+            try
+            {
+                List<SP_GetStylists> stylistList = new List<SP_GetStylists>();
+                using (DataTable table = DBHelper.Select("SP_GetStylist", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                   {
+                            SP_GetStylists stylists = new SP_GetStylists
+                            {
+                                UserID = Convert.ToString(row["UserID"]),
+                                FirstName = Convert.ToString(row["FirstName"]),
+                                ServiceID = Convert.ToString(row["ServiceID"])
+                            };
+                            stylistList.Add(stylists);
+                        }
+                    }
+                }
+                return stylistList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+
+            
+        }
+
 
     }
 }                  
