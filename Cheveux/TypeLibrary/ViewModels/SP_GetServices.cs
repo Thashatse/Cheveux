@@ -8,6 +8,7 @@ namespace TypeLibrary.ViewModels
 {
     public class SP_GetServices
     {
+        public string ServiceID { get; set; }
         public string Name { get; set; }
     }
 }

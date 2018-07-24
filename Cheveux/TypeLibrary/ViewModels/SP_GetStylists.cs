@@ -9,5 +9,7 @@ namespace TypeLibrary.ViewModels
     public class SP_GetStylists
     {
         public string FirstName { get; set; }
+        public string UserID { get; set; }
+        public string  ServiceID { get; set; }
     }
 }
