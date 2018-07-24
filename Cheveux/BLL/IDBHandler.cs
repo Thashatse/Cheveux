@@ -33,7 +33,8 @@ namespace BLL
         bool BLL_UpdateCustVisit(CUST_VISIT visit);
         bool BLL_CreateCustVisit(CUST_VISIT cust_visit);
         bool BLL_AddBooking(BOOKING addBooking);
-
+        List<SP_GetBookedTimes> BLL_GetBookedStylistTimes(string stylistID, DateTime bookingDate);
+        List<SP_GetSlotTimes> BLL_GetAllTimeSlots();
         List<SP_GetServices> BLL_GetAllServices();
         List<SP_GetStylists> BLL_GetStylists();
         List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate);
