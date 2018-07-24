@@ -55,7 +55,7 @@ namespace DAL
 
         bool AddBooking(BOOKING addBooking);
         List<SP_GetServices> GetAllServices();
-        List<SP_GetStylists> GetStylists();
+        List<SP_GetStylists> GetAllStylists();
         List<SP_GetBookedTimes> GetBookedStylistTimes(string stylistID, DateTime bookingDate);
         List<SP_GetSlotTimes> GetAllTimeSlots();
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
