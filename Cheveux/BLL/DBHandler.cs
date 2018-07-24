@@ -300,5 +300,9 @@ namespace BLL
             return db.getSaleOfHairstylist(stylistID);
 
         }
+                public List<SP_GetStylists> BLL_GetAllStylists()
+        {
+            return db.GetAllStylists();
+        }
     }
 }
