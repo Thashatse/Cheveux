@@ -11,6 +11,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <form runat="server">
     <div class="bg-secondary text-white" id="Div1">
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
@@ -212,4 +213,5 @@
         <div class="col-md-2 col-sm-1"></div>
     </div>
     </div>
+    </form>
 </asp:Content>

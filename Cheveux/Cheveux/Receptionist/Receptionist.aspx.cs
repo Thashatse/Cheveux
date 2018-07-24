@@ -240,7 +240,7 @@ namespace Cheveux
                         btn.CssClass = "btn btn-primary";
                         btn.Click += (ss, ee) => {
                             /*
-                             *Check-in code here 
+                             * Check-in code here 
                              * After clicking the button arrived should change to Y
                              * and the button text should change to Check-out
                              * and code should cater for the change as the stored procedure to check out and generate invoice
@@ -289,7 +289,7 @@ namespace Cheveux
                         btnMissed.CssClass = "btn btn-primary";
                         btnMissed.Click += (zz, tt) =>
                         {
-                            /*
+                 0           /*
                              * Show pop-up asking would the receptionist like to cancel booking or update the booking
                              * 
                              * if(customerCall == false)
