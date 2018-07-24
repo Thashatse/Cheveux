@@ -984,9 +984,9 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
-        }*/
+        }
         
-      /*  public List<SP_GetStylists> GetStylists()
+        public List<SP_GetStylists> GetStylists()
         {
             try
             {
@@ -1015,7 +1015,7 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
-         }*/
+         }
 
         public List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
@@ -1869,7 +1869,8 @@ namespace DAL
 
             }
             return null;
-        }
+         }
+
         public List<SP_GetSlotTimes> GetAllTimeSlots()
         {
             List<SP_GetSlotTimes> list = new List<SP_GetSlotTimes>();
