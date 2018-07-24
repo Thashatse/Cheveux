@@ -49,11 +49,45 @@ namespace Cheveux.Manager
             }
             else if (drpReport.SelectedIndex == 1)
             {
-                reportByContainer.Visible = false;
-                reportDateRangeContainer.Visible = false;
-                divReport.Visible = true;
-                //display the sales report
-                getSalesReport();
+                reportByContainer.Visible = true;
+                if (ddlReportFor.SelectedIndex == -1)
+                {
+                    try
+                    {
+                        List<SP_GetEmpNames> list = handler.BLL_GetEmpNames();
+                        foreach (SP_GetEmpNames emps in list)
+                        {
+                            //Load employee names into dropdownlist
+                            ddlReportFor.DataSource = list;
+                            //set the coloumn that will be displayed to the user
+                            ddlReportFor.DataTextField = "Name";
+                            //set the coloumn that will be used for the valuefield
+                            ddlReportFor.DataValueField = "EmployeeID";
+                            //bind the data
+                            ddlReportFor.DataBind();
+                            /*set the default (text (dropdownlist index[0]) that will first be displayed to the user.
+                             * in this case the "instruction" to select the employee
+                            */
+                            ddlReportFor.Items.Insert(0, new ListItem("Select Stylist", "-1"));
+                        }
+                    }
+                    catch (ApplicationException Err)
+                    {
+                        function.logAnError(Err.ToString());
+                        reportLable.Text = ("An error occurred communicating with the database. Please Try Again Later");
+                    }
+                }
+
+                if (ddlReportFor.SelectedValue != "-1")
+                {
+                    getBookingForHairstylist();
+                    reportByContainer.Visible = false;
+                    reportDateRangeContainer.Visible = false;
+                    divReport.Visible = true;
+                    //display the sales report
+                    getSalesReport();
+                }
+                
             }
             else if (drpReport.SelectedIndex == 2)
             {
@@ -151,6 +185,86 @@ namespace Cheveux.Manager
             reportGenerateDateLable.Text = DateTime.Now.ToString("HH:mm dd MMM yyyy");
             try
             {
+                List<SP_SaleOfHairstylist> report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue);
+                if (report.Count != 0)
+                {
+                    //counter to keep track of rows in report
+                    int reportRowCount = 0;
+                    // create a new row in the results table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "SaleID";
+                    newHeaderCell.Width = 100;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "date";
+                    newHeaderCell.Width = 100;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "CustomerID";
+                    newHeaderCell.Width = 100;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "paymentType";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "stylistID";
+                    newHeaderCell.Width = 500;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "serviceID";
+                    newHeaderCell.Width = 500;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Available";
+                    newHeaderCell.Width = 500;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Arrived ";
+                    newHeaderCell.Width = 50;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+
+                    //display each record
+                    foreach (SP_SaleOfHairstylist Sales in report)
+                    {
+                        // create a new row in the results table and set the height
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        //fill the row with the data from the product results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = Sales.SaleID.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = Sales.date.ToString("dd MMM yyy");
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = Sales.CustomerID.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = Sales.paymentType.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = Sales.stylistID.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = Sales.serviceID.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = Sales.Available.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = function.GetFullArrivedStatus(Sales.Arrived.ToString()[0]);
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        reportRowCount++;
+                    }
+                }
+
 
             }
             catch (ApplicationException Err)
