@@ -179,7 +179,7 @@ namespace BLL
 
         public List<SP_GetStylists> BLL_GetStylists()
         {
-            return db.GetStylists();
+            return db.GetAllStylists();
         }
         public List<SP_GetServices> BLL_GetAllServices()
         {
