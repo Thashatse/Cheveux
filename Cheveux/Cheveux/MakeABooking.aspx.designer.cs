@@ -19,7 +19,7 @@ namespace Cheveux {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder BookingSummary;
+        protected global::System.Web.UI.WebControls.Label BookingSummary;
         
         /// <summary>
         /// divServices control.
@@ -31,13 +31,13 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divServices;
         
         /// <summary>
-        /// cblPickAService control.
+        /// drpPickAService control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblPickAService;
+        protected global::System.Web.UI.WebControls.DropDownList drpPickAService;
         
         /// <summary>
         /// divStylist control.
@@ -85,6 +85,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.PlaceHolder AvailableTimes;
         
         /// <summary>
+        /// drpAvailableTimes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpAvailableTimes;
+        
+        /// <summary>
         /// divSummary control.
         /// </summary>
         /// <remarks>
@@ -110,6 +119,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TableRow Summary;
+        
+        /// <summary>
+        /// lblServices control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblServices;
+        
+        /// <summary>
+        /// lblStylist control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStylist;
         
         /// <summary>
         /// lblDate control.
