@@ -185,6 +185,14 @@ namespace BLL
         {
             return db.GetAllServices();
         }
+         public List<SP_GetSlotTimes> BLL_GetAllTimeSlots()
+        {
+            return db.GetAllTimeSlots();
+        }
+        public List<SP_GetBookedTimes> BLL_GetBookedStylistTimes(string stylistID, DateTime bookingDate)
+        {
+            return db.GetBookedStylistTimes(stylistID, bookingDate);
+        }
 
         public List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {

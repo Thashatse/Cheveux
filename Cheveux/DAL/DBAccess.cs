@@ -367,7 +367,7 @@ namespace DAL
                             ContactNo = row["ContactNo"].ToString(),
                             UserType = Convert.ToChar(row["UserType"]),
                             UserImage = row["UserImage"].ToString(),
-                            AccountType = row["AccountType"].ToString()
+                            AccountType = row[6].ToString()
                         };
 
                     }
@@ -984,9 +984,9 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
-        }
+        }*/
         
-        public List<SP_GetStylists> GetStylists()
+      /*  public List<SP_GetStylists> GetStylists()
         {
             try
             {
@@ -1015,7 +1015,7 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
-         }
+         }*/
 
         public List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
