@@ -1835,6 +1835,68 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+         public List<SP_GetBookedTimes> GetBookedStylistTimes(string stylistID, DateTime bookingDate)
+        {
+            List<SP_GetBookedTimes> bookings = new List<SP_GetBookedTimes>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@UserID", stylistID),
+                new SqlParameter("@Date", bookingDate)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_BookedTimes",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetBookedTimes times = new SP_GetBookedTimes
+                            {
+                                SlotNo = Convert.ToString(row["SlotNo"])
+                            };
+                            bookings.Add(times);
+                        }
+                    }
+
+                }
+                return bookings;
+            }
+            catch
+            {
+
+            }
+            return null;
+        }
+        public List<SP_GetSlotTimes> GetAllTimeSlots()
+        {
+            List<SP_GetSlotTimes> list = new List<SP_GetSlotTimes>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetSlotTimes", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetSlotTimes slots = new SP_GetSlotTimes
+                            {
+                                SlotNo = Convert.ToString(row["SlotNo"]),
+                                Time = Convert.ToDateTime(row["StartTime"].ToString())
+                            };
+                            list.Add(slots);
+                        }
+                    }
+                }
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
 
     }
 }                  
