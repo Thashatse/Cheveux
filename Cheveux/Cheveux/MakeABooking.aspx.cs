@@ -157,10 +157,10 @@ namespace Cheveux
                 divDateTime.Visible = false;
                 divSummary.Visible = true;
 
-                lblServices.Text = drpPickAService.Text;
-                lblStylist.Text = rblPickAStylist.Text;
-                lblDate.Text = calBooking.SelectedDate.ToString();
-                lblTime.Text = drpAvailableTimes.Text;
+                lblServices.Text = drpPickAService.SelectedItem.Text.ToString();
+                lblStylist.Text = rblPickAStylist.SelectedItem.Text.ToString();
+                lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
+                lblTime.Text = Convert.ToDateTime(drpAvailableTimes.SelectedItem.Text).ToString("hh:mm");
 
                 btnPrevious.Visible = true;
                 btnPrevious.Text = "Choose Date & Time";

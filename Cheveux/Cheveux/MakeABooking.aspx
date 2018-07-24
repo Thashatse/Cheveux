@@ -6,11 +6,22 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form id="MakeABooking" runat="server">
-        <div class="container-fluid">
-            <div class="container">
+    <div class="bg-secondary text-white" id="Div1">
+        <!-- Top Margin & Nav Bar Back Color -->
+        <br />
+        <br />
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-8 col-sm-10">
+            <form id="MakeABooking" runat="server">
+                <div class="container-fluid">
+                    <div class="row">
+                                           
                 <div class="col-12">
-                    <div class="jumbotron">
+                                           
+                    <div class="jumbotron  bg-dark text-white">
                         <h1>Make A Booking</h1>
                         <br />
                         <asp:Label runat="server" ID="BookingSummary"></asp:Label>
@@ -22,14 +33,14 @@
                         </asp:DropDownList>
                     </div>
 
-                    <div class="container" runat="server" id="divStylist" visible="false">
+                    <div runat="server" id="divStylist" visible="false">
                         <h3>Choose A Hairstylist</h3>
                         <br />
                         <asp:RadioButtonList runat="server" ID="rblPickAStylist">
                         </asp:RadioButtonList>
                     </div>
 
-                    <div class="container" runat="server" id="divDateTime" visible="false">
+                    <div runat="server" id="divDateTime" visible="false">
                         <h3>Choose A Date & Time</h3>
                         <br />
                         <asp:Calendar runat="server" ID="calBooking" Width="500" Height="500"></asp:Calendar>
@@ -39,7 +50,7 @@
                         </asp:PlaceHolder>
                     </div>
 
-                    <div class="container" runat="server" id="divSummary" visible="false">
+                    <div runat="server" id="divSummary" visible="false">
                         <h3>Booking Summary</h3>
                         <br />
                         <asp:Table ID="tblBookingSummary" runat="server">
@@ -65,19 +76,27 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="container-fluid">
-            <div class="container">
-                <div class="col-2 text-left">
-                    <asp:Button runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click"/>
+                <div class="row">
+
+                    <div class="col-2 text-left">
+
+                        <asp:Button class='btn btn-basic' runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click" />
+
+                    </div>
+
+                    <div class="col-8"></div>
+
+                    <div class="col-2 text-right">
+
+                        <asp:Button class='btn btn-primary' runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
+
+                    </div>
                 </div>
-                <div class="col-8"></div>
-                <div class="col-2 text-right">
-                    <asp:Button runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
-                </div>
-            </div>
+            </form>
         </div>
-    </form>
+        <div class="col-md-2 col-sm-1"></div>
+    </div>
 </asp:Content>
