@@ -1876,7 +1876,7 @@ namespace DAL
             List<SP_GetSlotTimes> list = new List<SP_GetSlotTimes>();
             try
             {
-                using (DataTable table = DBHelper.Select("SP_GetSlotTimes", CommandType.StoredProcedure))
+                using (DataTable table = DBHelper.Select("SP_GetTimeSlots", CommandType.StoredProcedure))
                 {
                     if (table.Rows.Count > 0)
                     {

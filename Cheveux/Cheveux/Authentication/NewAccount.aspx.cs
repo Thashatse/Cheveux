@@ -118,10 +118,9 @@ namespace Cheveux
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
                     //go back to the previous page or the home page by default
-                    String PreviousPage = Request.QueryString["PreviousPage"];
                     if (PreviousPage != null)
                     {
-                        Response.Redirect(PreviousPage);
+                        goToPreviousPage();
                     }
                     //tell the user the registration was a success on the home page
                     Response.Redirect("../Default.aspx?" + "NU=" + reg.Split('|')[2]);
@@ -185,10 +184,9 @@ namespace Cheveux
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
                     //go back to the previous page or the home page by default
-                    String PreviousPage = Request.QueryString["PreviousPage"];
                     if (PreviousPage != null)
                     {
-                        Response.Redirect(PreviousPage);
+                        goToPreviousPage();
                     }
                     //tell the user the registration was a success on the home page
                     Response.Redirect("../Default.aspx?" + "NU=" + txtFirstName.Text.ToString().Replace(" ", string.Empty));
@@ -248,6 +246,53 @@ namespace Cheveux
             else
             {
                 LGoogleUsernameExists.Visible = false;
+            }
+        }
+
+        private void goToPreviousPage()
+        {
+            //get the privious page to redirect to
+            string PreviousPage = Request.QueryString["PreviousPage"];
+            //go back to the previous page if there is one
+            if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
+            {
+                Response.Redirect("../Help/CheveuxHelpCenter.aspx#InternalHelp");
+            }
+            else if (PreviousPage == "BusinessSetting.aspx")
+            {
+                Response.Redirect("../Manager/BusinessSetting.aspx");
+            }
+            else if (PreviousPage == "Reports.aspx")
+            {
+                Response.Redirect("../Manager/Reports.aspx");
+            }
+            else if (PreviousPage == "Manager.aspx")
+            {
+                Response.Redirect("../Manager/Dashboard.aspx?WB=True");
+            }
+            else if (PreviousPage == "Employee.aspx")
+            {
+                Response.Redirect("../Manager/Employee.aspx");
+            }
+            else if (PreviousPage == "Products.aspx")
+            {
+                Response.Redirect("../Manager/Products.aspx");
+            }
+            else if (PreviousPage == "Service.aspx")
+            {
+                Response.Redirect("../Manager/Service.aspx");
+            }
+            else if (PreviousPage == "Profile.aspx")
+            {
+                Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "Bookings.aspx")
+            {
+                Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "MakeABooking")
+            {
+                Response.Redirect("<script language='javascript'> { window.close(); }</script>");
             }
         }
     }

@@ -6,7 +6,7 @@
 <head runat="server">
     <title>Sign In - Cheveux</title>
 
-        <!-- Theam -->
+    <!-- Theam -->
 
     <!-- Bootstrap core CSS -->
     <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -25,26 +25,23 @@
     <!-- Our CSS-->
     <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
 
-    <!-- Default Theam
-
-    <!--Bootstrap
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-
-    <!--CSS
-    <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
--->
-
     <!--Google Authentecation code-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com">
+
+    <script>
+        function CloseWindow() {
+    window.close();
+}
+    </script>
 </head>
 <body>
     <div class="container" id="Div1">
-            <!-- Top Margin -->
-            <br />
-            <br />
-            <br />
-        </div>
+        <!-- Top Margin -->
+        <br />
+        <br />
+        <br />
+    </div>
     <!--form for login in-->
     <form id="Login" runat="server">
         <div class="container-fluid">
@@ -66,7 +63,7 @@
                             <!-- sellect account Type -->
                             <div class="container" runat="server" id="divAccountType">
                                 <!--sign in with email buton-->
-                                <asp:button type='btnEmailSignIn' Cssclass='btn btn-primary' OnClick="Unnamed_Click" runat="server" Text="&#128231;  Sign In With Email"></asp:button>
+                                <asp:Button type='btnEmailSignIn' CssClass='btn btn-primary' OnClick="Unnamed_Click" runat="server" Text="&#128231;  Sign In With Email"></asp:Button>
                                 <!--line break-->
                                 <br />
                                 <br />
@@ -79,23 +76,23 @@
 
                                 <!-- Email Text Box & Validation-->
                                 <div class="container" runat="server" id="divTxtBoxEmail">
-                                <!-- Error Lable -->
-                                <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
+                                    <!-- Error Lable -->
+                                    <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
 
-                                <!-- Enter Email -->
-                                <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username" CssClass="form-control"></asp:TextBox>
-                                
-                                <!--Email / User Name Validation-->
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailUsername" runat="server"
-                                    ErrorMessage="*Email or Username is required" ControlToValidate="txtEmailUsername"
-                                    ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <!-- Enter Email -->
+                                    <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username" CssClass="form-control"></asp:TextBox>
 
-                                    </div>
+                                    <!--Email / User Name Validation-->
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailUsername" runat="server"
+                                        ErrorMessage="*Email or Username is required" ControlToValidate="txtEmailUsername"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+
+                                </div>
                                 <!-- email account Type login enter password -->
                                 <div class="container" runat="server" id="divPassword" visible="false">
                                     <!-- Enter Password -->
                                     <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password" CssClass="form-control"></asp:TextBox>
-                                    
+
                                     <!--Password Validation-->
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatorTxtPassword" runat="server"
                                         ErrorMessage="*Password is required" ControlToValidate="txtPassword"
@@ -117,7 +114,7 @@
                                 <!--line break-->
                                 <br />
                                 <!--Sign Up Button -->
-                                <a href="../Authentication/NewAccount.aspx?Type=Email">Create Acount</a>
+                                <asp:Label ID="lCreateAccount" runat="server"></asp:Label>
 
                             </div>
                             <!--line break-->

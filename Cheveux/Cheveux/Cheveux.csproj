@@ -125,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Authentication\Accounts.aspx" />
-    <Content Include="Bookings.aspx" />
     <Content Include="Cheveux\Products.aspx" />
     <Content Include="Cheveux\Services.aspx" />
     <Content Include="Cheveux\Stylists.aspx" />
@@ -282,13 +281,6 @@
     </Compile>
     <Compile Include="Authentication\Accounts.aspx.designer.cs">
       <DependentUpon>Accounts.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Bookings.aspx.cs">
-      <DependentUpon>Bookings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Bookings.aspx.designer.cs">
-      <DependentUpon>Bookings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Cheveux\Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>

@@ -1,26 +1,52 @@
 
-TimeStamp: 2018/07/22 13:50:08
+TimeStamp: 2018/07/25 17:14:09
 Machine Name: TEFO-NTSAKO-HAS
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: thash
 User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-System.ApplicationException: System.ArgumentException: Column 'StylistID' does not belong to table .
-   at System.Data.DataRow.GetDataColumn(String columnName)
-   at System.Data.DataRow.get_Item(String columnName)
-   at DAL.DBAccess.getCustomerUpcomingBookings(String CustomerID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 428
-   at DAL.DBAccess.getCustomerUpcomingBookings(String CustomerID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 448
-   at BLL.DBHandler.getCustomerUpcomingBookings(String CustomerID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 98
-   at Cheveux.Bookings.displayUpcomingBookings() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Bookings.aspx.cs:line 80
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Procedure or function SP_AddBooking has too many arguments specified.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 68
+ClientConnectionId:335d8844-d070-40ee-88d1-c78a55ea3a44
+Error Number:8144,State:2,Class:16
+   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
+   at DAL.DBAccess.AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 953
+   at DAL.DBAccess.AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 957
+   at BLL.DBHandler.BLL_AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 177
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 250
 
-TimeStamp: 2018/07/22 15:05:31
+TimeStamp: 2018/07/25 17:15:28
 Machine Name: TEFO-NTSAKO-HAS
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: thash
 User Domain: TEFO-NTSAKO-HAS
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 132
- get getBookingDeatails method in viewbooking form
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Procedure or function SP_AddBooking has too many arguments specified.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.InternalExecuteNonQuery(TaskCompletionSource`1 completion, String methodName, Boolean sendToPipe, Int32 timeout, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.ExecuteNonQuery()
+   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 68
+ClientConnectionId:335d8844-d070-40ee-88d1-c78a55ea3a44
+Error Number:8144,State:2,Class:16
+   at DAL.DBHelper.NonQuery(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 72
+   at DAL.DBAccess.AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 953
+   at DAL.DBAccess.AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 957
+   at BLL.DBHandler.BLL_AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 177
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 250

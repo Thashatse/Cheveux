@@ -16,6 +16,12 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //set the create acount URL
+            if (PreviousPage != null)
+            {
+                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email&PreviousPage=" + PreviousPage;
+            }
+            lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Acount</a>";
             //check if the user has requested a logout or login
             String action = Request.QueryString["action"];
             //login
@@ -228,7 +234,11 @@ namespace Cheveux
             }
             else if (PreviousPage == "Bookings.aspx")
             {
-                Response.Redirect("../Bookings.aspx");
+                Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "MakeABooking")
+            {
+                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
             }
         }
 

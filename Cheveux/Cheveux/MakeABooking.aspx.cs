@@ -23,6 +23,41 @@ namespace Cheveux
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region access control
+            HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
+            //access control
+            if (Authcookie != null)
+            {
+                if(Authcookie["UT"].ToString()[0] == 'C')
+                {
+                    //customer is aloud on mage
+                }
+                else if (Authcookie["UT"].ToString()[0] == 'R')
+                {
+                    //Redirect the user as they are not aloud to make bookings
+                    Response.Redirect("Error.aspx?Error='Receptionists are not able to make bookings, Login as a customer and try again.'");
+                }
+                //if stylist
+                else if (Authcookie["UT"].ToString()[0] == 'S')
+                {
+                    //Redirect the user as they are not aloud to make bookings
+                    Response.Redirect("Error.aspx?Error='Stylist are not able to make bookings, Login as a customer and try again.'");
+                }
+                //if Manager
+                else if (Authcookie["UT"].ToString()[0] == 'M')
+                {
+                    //Redirect the user as they are not aloud to make bookings
+                    Response.Redirect("Error.aspx?Error='Managers are not able to make bookings, Login as a customer and try again.'");
+                }
+                //default
+                else
+                {
+                    //Redirect the user as they are not aloud to make bookings
+                    Response.Redirect("Error.aspx?Error='An error occurred, please try again later.'");
+                }
+            }
+            #endregion
+
             //Check if the user is logged 
             try
             {
@@ -77,10 +112,9 @@ namespace Cheveux
 
         }
  
-
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            if(btnNext.Text == "Choose Hairstylist")
+            if (btnNext.Text == "Choose Hairstylist")
             {
                 foreach (SP_GetStylists stylists in stylistList)
                 {
@@ -106,7 +140,7 @@ namespace Cheveux
                 btnPrevious.Visible = true;
                 btnPrevious.Text = "Choose Service(s)";
                 btnNext.Text = "Choose Date & Time";
-                
+
             }
             else if (btnNext.Text == "Choose Date & Time")
             {
@@ -115,13 +149,13 @@ namespace Cheveux
                 Response.Cookies.Add(cookie);
                 AvailableTimes.Visible = true;
                 bookedList = handler.BLL_GetBookedStylistTimes(rblPickAStylist.SelectedValue.ToString(), calBooking.SelectedDate);
-                if(bookedList != null)
+                if (bookedList != null)
                 {
-                    foreach(SP_GetBookedTimes booked in bookedList)
+                    foreach (SP_GetBookedTimes booked in bookedList)
                     {
-                        foreach(SP_GetSlotTimes times in slotList)
+                        foreach (SP_GetSlotTimes times in slotList)
                         {
-                            if(booked.SlotNo != times.SlotNo)
+                            if (booked.SlotNo != times.SlotNo)
                             {
                                 drpAvailableTimes.DataSource = slotList;
                                 drpAvailableTimes.DataTextField = "Time";
@@ -138,10 +172,10 @@ namespace Cheveux
                     drpAvailableTimes.DataValueField = "SlotNo";
                     drpAvailableTimes.DataBind();
                 }
-                
-                
-                 
-                
+
+
+
+
                 divStylist.Visible = false;
                 divDateTime.Visible = true;
                 btnPrevious.Visible = true;
@@ -161,35 +195,66 @@ namespace Cheveux
                 lblStylist.Text = rblPickAStylist.SelectedItem.Text.ToString();
                 lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
                 lblTime.Text = Convert.ToDateTime(drpAvailableTimes.SelectedItem.Text).ToString("hh:mm");
-
                 btnPrevious.Visible = true;
+                #region access control
+                HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
+                if (Authcookie != null)
+                {
+                    if (Authcookie["UT"].ToString()[0] == 'C')
+                    {
+                        btnPrevious.Text = "Choose Date & Time";
+                        btnNext.Text = "Submit";
+                    }
+                    else
+                    {
+                        btnPrevious.Text = "Choose Date & Time";
+                        btnNext.Text = "Login";
+                    }
+                }
+                else
+                {
+                    btnPrevious.Text = "Choose Date & Time";
+                    btnNext.Text = "Login";
+                }
+                #endregion
+            }
+            //access control
+            else if (btnNext.Text == "Login")
+            {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
                 btnPrevious.Text = "Choose Date & Time";
                 btnNext.Text = "Submit";
             }
             else if (btnNext.Text == "Submit")
             {
-                //Make Booking
-                try
+                //access control
+                HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
+                btnPrevious.Visible = true;
+                if (Authcookie != null)
                 {
-                    book = new BOOKING();
+                    if (Authcookie["UT"].ToString()[0] == 'C') {
+                        //Make Booking
+                        try
+                        {
+                            book = new BOOKING();
 
-                    book.BookingID = function.GenerateRandomBookingID();
-                    book.SlotNo = drpAvailableTimes.SelectedValue;
-                    book.Date = calBooking.SelectedDate;
-                    book.CustomerID = cookie["ID"];
-                    book.ServiceID = drpPickAService.SelectedValue;
-                    book.StylistID = rblPickAStylist.SelectedValue;
-                    book.Available = "N";
+                            book.BookingID = function.GenerateRandomBookingID();
+                            book.SlotNo = drpAvailableTimes.SelectedValue;
+                            book.Date = calBooking.SelectedDate;
+                            book.CustomerID = cookie["ID"];
+                            book.ServiceID = drpPickAService.SelectedValue;
+                            book.StylistID = rblPickAStylist.SelectedValue;
+                            book.Available = "N";
 
-                    handler.BLL_AddBooking(book);
-                    Response.Redirect("Default.aspx");
+                            handler.BLL_AddBooking(book);
+                            Response.Redirect("Default.aspx");
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError(err.ToString());
+                        }
+                    }
                 }
-                catch (Exception err)
-                {
-                    function.logAnError(err.ToString());
-                }
-
-
             }
         }
 
