@@ -154,7 +154,7 @@ namespace Cheveux.Manager
                                 "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = '/Manager/UpdateEmployee.aspx?" +
                                         "empID=" + emp.UserID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Employee.aspx' target='_blank'>Edit  </a></button>          " +
+                                        "&PreviousPage=../Manager/Employee.aspx'>Edit  </a></button>          " +
 
                                         "<button type = 'button' class='btn btn-default'>" +
                                         "<a href = '../Profile.aspx?Action=View" +
