@@ -17,5 +17,7 @@ namespace TypeLibrary.ViewModels
         public string employeeType { get; set; }
         public string empImage { get; set; }
         public char active { get; set; }
+        public string addLine1 { get; set; }
+        public string addLine2 { get; set; }
     }
 }
