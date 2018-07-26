@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -1227,7 +1227,9 @@ namespace DAL
                             phoneNumber = Convert.ToString(row["ContactNo"]),
                             employeeType = Convert.ToString(row["Type"]),
                             empImage = Convert.ToString(row["UserImage"]),
-                            active = Convert.ToChar(row["Active"].ToString()[0])
+                            active = Convert.ToChar(row["Active"].ToString()[0]),
+                            addLine1 = Convert.ToString(row["AddressLine1"]),
+                            addLine2 = Convert.ToString(row["AddressLine2"])
                         };
                     }
                     return viewEmployee;
@@ -1900,6 +1902,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
            public List<SP_GetStylists> GetAllStylists()
         {
             try
@@ -1928,10 +1931,6 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
 
             }
-
-            
         }
-
-
     }
 }                  
