@@ -20,7 +20,7 @@ CREATE PROCEDURE SP_AddEmployee
 	@employeeID nchar(30),
 	@AddressLine1 varchar(max) = null,
 	@AddressLine2 varchar(max) = null,
-	@Type nchar(10) = null
+	@Type nchar(10)
 AS
 BEGIN
 
