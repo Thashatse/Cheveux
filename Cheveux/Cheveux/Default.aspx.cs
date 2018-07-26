@@ -18,7 +18,7 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //access control
+            #region access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
             //send the user to the correct page based on their usertype
             if (UserID != null)
@@ -52,9 +52,11 @@ namespace Cheveux
                         UserID["UT"].ToString());
                 }
             }
-                
-            //load home page info
+            #endregion
 
+            #region Home Page Info
+            //load home page info
+            #region Welcom Back
             //welcome back existing users
             String name = Request.QueryString["WB"];
             if (name != null)
@@ -71,8 +73,38 @@ namespace Cheveux
                         + "  You Are Now Registered With Cheveux";
                     }
                 }
+            #endregion
+
+            #region booking Confirimation 
+            //confirm booking
+            string stylistID = Request.QueryString["Sty"];
+            string Date = Request.QueryString["D"];
+            string slotNo = Request.QueryString["T"];
+            DateTime Time = Convert.ToDateTime("2001/01/01");
+
+            if (stylistID != null
+                && Date != null
+                && slotNo != null)
+            {
+                List<SP_GetSlotTimes> TSL = handler.BLL_GetAllTimeSlots();
+                foreach (SP_GetSlotTimes TS in TSL)
+                {
+                    if(TS.SlotNo == slotNo.Replace(string.Empty, ""))
+                    {
+                        Time = TS.Time;
+                    }
+                }
+                Welcome.Text = "You are now booked to see " 
+                    + handler.viewEmployee(stylistID.Replace(string.Empty, "")).firstName 
+                    + " at " + Time.ToString("hh:mm") 
+                    + " on the " + Convert.ToDateTime(Date).ToString("dd MMM yyyy");
+            }
+            #endregion
+
+            #region Featured Products
             //Load Products
 
+            #endregion
 
             //load contact us jumbotron
             try
@@ -113,6 +145,7 @@ namespace Cheveux
                 function.logAnError("unable to load contact info on default.aspx: " +
                     err);
             }
+            #endregion
         }
     }
 }
