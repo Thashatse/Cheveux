@@ -942,14 +942,15 @@ namespace DAL
         {
             try
             {
-                List<SqlParameter> pars = new List<SqlParameter>();
-                foreach (var prop in addBooking.GetType().GetProperties())
+                SqlParameter[] pars = new SqlParameter[]
                 {
-                    if (prop.GetValue(addBooking) != null)
-                    {
-                        pars.Add(new SqlParameter("@" + prop.Name.ToString(), prop.GetValue(addBooking)));
-                    }
-                }
+                    new SqlParameter("@BookingID", addBooking.BookingID.ToString()),
+                    new SqlParameter("@Slot", addBooking.SlotNo.ToString()),
+                    new SqlParameter("@CustomerID", addBooking.CustomerID.ToString()),
+                    new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
+                    new SqlParameter("@ServiceID", addBooking.ServiceID.ToString()),
+                    new SqlParameter("@Date", addBooking.Date.ToString()),
+                };
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
             }
             catch (Exception e)
@@ -972,7 +973,8 @@ namespace DAL
                             SP_GetServices services = new SP_GetServices
                             {
                                 ServiceID = Convert.ToString(row["ProductID"]),
-                                Name = Convert.ToString(row["Name"])
+                                Name = Convert.ToString(row["Name"]),
+                                ServiceType = Convert.ToChar(row["ServiceType"])
                             };
                             serviceList.Add(services);
                         }
