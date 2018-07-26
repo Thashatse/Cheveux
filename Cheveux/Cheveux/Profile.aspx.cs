@@ -292,6 +292,63 @@ namespace Cheveux
                 //the following will onl be displayed to managers
                 if (userType == "M")
                 {
+                    if (employee.addLine1 != ""
+                        && employee.addLine2 != "")
+                    {
+                        //add a new row
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        profileTable.Rows.Add(newRow);
+                        //Address
+                        newCell = new TableCell();
+                        newCell.Font.Bold = true;
+                        newCell.Text = "Address:";
+                        newCell.Width = 300;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = employee.addLine1;
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment rowcount
+                        rowCount++;
+                        //add a new row
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        profileTable.Rows.Add(newRow);
+                        //Address
+                        newCell = new TableCell();
+                        newCell.Font.Bold = true;
+                        newCell.Width = 300;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = employee.addLine2;
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment rowcount
+                        rowCount++;
+                    }
+                    else
+                    {
+                        //add a new row
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        profileTable.Rows.Add(newRow);
+                        //Address
+                        newCell = new TableCell();
+                        newCell.Font.Bold = true;
+                        newCell.Text = "Address:";
+                        newCell.Width = 300;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a href = '/Manager/UpdateEmployee.aspx?" +
+                                    "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                    "' target='_blank'> No Address on record, add one</a>";
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment rowcount
+                        rowCount++;
+                    }
+
                     //add a new row
                     newRow = new TableRow();
                     newRow.Height = 50;
@@ -321,23 +378,6 @@ namespace Cheveux
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
                     newCell.Text = function.GetFullEmployeeTypeText(employee.employeeType.ToString()[0]);
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //increment rowcount
-                    rowCount++;
-
-                    //add a new row
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    profileTable.Rows.Add(newRow);
-                    //Email
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Active:";
-                    newCell.Width = 300;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = function.GetFullActiveTypeText(employee.active.ToString()[0]);
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //edit link
@@ -480,8 +520,9 @@ namespace Cheveux
                 //display user type if employee
                 if (userDetails.UserType.ToString() == "E")
                 {
-                    //add a new row
-                    newRow = new TableRow();
+                        employee = handler.viewEmployee(cookie["ID"].ToString());
+                        //add a new row
+                        newRow = new TableRow();
                     newRow.Height = 50;
                     profileTable.Rows.Add(newRow);
                     //UserType
@@ -517,9 +558,64 @@ namespace Cheveux
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
                     rowCount++;
-                
-                //add a new row
-                newRow = new TableRow();
+
+                        if (employee.addLine1 != ""
+                        && employee.addLine2 != "")
+                        {
+                            //add a new row
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            profileTable.Rows.Add(newRow);
+                            //Address
+                            newCell = new TableCell();
+                            newCell.Font.Bold = true;
+                            newCell.Text = "Address:";
+                            newCell.Width = 300;
+                            profileTable.Rows[rowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = employee.addLine1;
+                            newCell.Width = 700;
+                            profileTable.Rows[rowCount].Cells.Add(newCell);
+                            //increment rowcount
+                            rowCount++;
+                            //add a new row
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            profileTable.Rows.Add(newRow);
+                            //Address
+                            newCell = new TableCell();
+                            newCell.Font.Bold = true;
+                            newCell.Width = 300;
+                            profileTable.Rows[rowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = employee.addLine2;
+                            newCell.Width = 700;
+                            profileTable.Rows[rowCount].Cells.Add(newCell);
+                            //increment rowcount
+                            rowCount++;
+                        }
+                        else
+                        {
+                            //add a new row
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            profileTable.Rows.Add(newRow);
+                            //Address
+                            newCell = new TableCell();
+                            newCell.Font.Bold = true;
+                            newCell.Text = "Address:";
+                            newCell.Width = 300;
+                            profileTable.Rows[rowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = "No Address on record, ask your manager to add one";
+                            newCell.Width = 700;
+                            profileTable.Rows[rowCount].Cells.Add(newCell);
+                            //increment rowcount
+                            rowCount++;
+                        }
+
+                        //add a new row
+                        newRow = new TableRow();
                 newRow.Height = 50;
                 profileTable.Rows.Add(newRow);
                 //Contact No.
