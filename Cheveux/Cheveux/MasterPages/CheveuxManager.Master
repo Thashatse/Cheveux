@@ -57,21 +57,21 @@
                             <a class="nav-link js-scroll-trigger" href="../Manager/Reports.aspx">Reports</a>         
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx">Manage Products</a>
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Manager/Service.aspx">Manage Services</a>
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Service.aspx">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Manager/Employee.aspx">Manage Employees</a>
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Employee.aspx">Employees</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Manager/BusinessSetting.aspx">Business Settings</a>
+                            <a class="nav-link js-scroll-trigger" href="../Manager/BusinessSetting.aspx">Settings</a>
                         </li>
                         <li class="nav-item">
                             <asp:PlaceHolder runat="server" id="LogedOut">
                                 <!--Login Button-->
-                                <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login/Sign Up</a>
+                                <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login</a>
                             </asp:PlaceHolder>
                         </li>
                         
