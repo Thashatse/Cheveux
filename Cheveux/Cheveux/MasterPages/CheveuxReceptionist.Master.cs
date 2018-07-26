@@ -34,7 +34,7 @@ namespace Cheveux
                         ("<img src=" + UserDetails.UserImage + "" +
                         " alt='" + UserDetails.UserName.ToString() +
                         " Profile Image' width='25' height='25'/>" +
-                        "   <a href='../Profile.aspx'>" + UserDetails.UserName.ToString() + "</a>"));
+                        "   <a href='../Profile.aspx'>" + UserDetails.UserName.ToString() + "</a> &nbsp; &nbsp;"));
                 }
                 else
                 {
