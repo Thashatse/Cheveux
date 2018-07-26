@@ -27,7 +27,7 @@ namespace Cheveux
             if (cookie == null)
             {
                 //if the user is not loged in do not diplay bookings details
-                Response.Redirect("Bookings.aspx");
+                Response.Redirect("Profile.aspx");
             }
             else if (cookie != null)
             {
@@ -256,12 +256,12 @@ namespace Cheveux
                             BookingTable.Rows.Add(newRow);
                             //fill in the item
                             newCell = new TableCell();
-                            newCell.Text = item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + Math.Round(item.price, 2).ToString();
+                            newCell.Text = item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + string.Format("{0:#.00}", item.price);
                             newRow.Cells.Add(newCell);
                             //fill in the Qty, unit price & TotalPrice
                             newCell = new TableCell();
                             newCell.HorizontalAlign = HorizontalAlign.Right;
-                            newCell.Text = "R" + Math.Round((item.Qty * item.price), 2).ToString();
+                            newCell.Text = "R" + string.Format("{0:#.00}", item.price);
                             BookingTable.Rows[rowCount].Cells.Add(newCell);
                             //increment final price
                             total = item.Qty * item.price;
@@ -284,7 +284,7 @@ namespace Cheveux
                         //fill in total Ecluding VAT
                         newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Right;
-                        newCell.Text = "R " + Math.Round(vatInfo.Item1, 2).ToString();
+                        newCell.Text = "R " + string.Format("{0:#.00}", vatInfo.Item1, 2);
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                         //increment row count 
@@ -310,7 +310,7 @@ namespace Cheveux
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Right;
-                        newCell.Text = "R " + Math.Round(vatInfo.Item2, 2).ToString();
+                        newCell.Text = "R " + string.Format("{0:#.00}", vatInfo.Item2, 2).ToString();
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                         //increment row count 
@@ -326,7 +326,7 @@ namespace Cheveux
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Right;
-                        newCell.Text = "R " + total.ToString();
+                        newCell.Text = "R " + string.Format("{0:#.00}", total).ToString();
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                         //increment row count 
