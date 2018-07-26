@@ -227,9 +227,9 @@ namespace Cheveux
             }
             else if (btnNext.Text == "Submit")
             {
+                btnPrevious.Visible = true;
                 //access control
                 HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
-                btnPrevious.Visible = true;
                 if (Authcookie != null)
                 {
                     if (Authcookie["UT"].ToString()[0] == 'C') {
@@ -237,7 +237,6 @@ namespace Cheveux
                         try
                         {
                             book = new BOOKING();
-
                             book.BookingID = function.GenerateRandomBookingID();
                             book.SlotNo = drpAvailableTimes.SelectedValue;
                             book.Date = calBooking.SelectedDate;
@@ -245,15 +244,19 @@ namespace Cheveux
                             book.ServiceID = drpPickAService.SelectedValue;
                             book.StylistID = rblPickAStylist.SelectedValue;
                             book.Available = "N";
-
                             handler.BLL_AddBooking(book);
-                            Response.Redirect("Default.aspx");
+                            //redirect and confirm booking
+                            Response.Redirect("Default.aspx?BS=True&Sty="+book.StylistID+"&D="+book.Date+"&T="+book.SlotNo);
                         }
                         catch (Exception err)
                         {
                             function.logAnError(err.ToString());
                         }
                     }
+                }
+                else
+                {
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
                 }
             }
         }

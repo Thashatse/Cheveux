@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="MakeABooking.aspx.cs" Inherits="Cheveux.MakeABooking" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
-    Profile - Cheveux
+    New Booking - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

@@ -7,27 +7,26 @@
     <title>Sign In - Cheveux</title>
 
     <!-- Theam -->
-
     <!-- Bootstrap core CSS -->
-    <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../Theam/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom fonts for this template -->
-    <link href="../Theam/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link href="../Theam/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'/>
 
     <!-- Plugin CSS -->
-    <link href="../Theam/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="../Theam/vendor/magnific-popup/magnific-popup.css" rel="stylesheet"/>
 
     <!-- Custom styles for this template -->
-    <link href="../css/creative.min.css" rel="stylesheet">
+    <link href="../css/creative.min.css" rel="stylesheet"/>
 
     <!-- Our CSS-->
-    <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css"/>
 
     <!--Google Authentecation code-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com"/>
 
     <script>
         function CloseWindow() {
@@ -36,7 +35,7 @@
     </script>
 </head>
 <body>
-    <div class="container" id="Div1">
+    <div>
         <!-- Top Margin -->
         <br />
         <br />
@@ -164,9 +163,5 @@
 
     <!-- Custom scripts for this template -->
     <script src="../Theam/js/creative.min.js"></script>
-
-    <!--Old Bootstrap
-    <script src="../Scripts/jquery-3.3.1.min.js"></script>
--->
 </body>
 </html>
