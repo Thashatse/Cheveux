@@ -517,48 +517,30 @@ namespace Cheveux
                 //increment rowcount
                 rowCount++;
 
-                //display user type if employee
-                if (userDetails.UserType.ToString() == "E")
-                {
-                        employee = handler.viewEmployee(cookie["ID"].ToString());
+                    if (userID == null)
+                    {
                         //add a new row
                         newRow = new TableRow();
-                    newRow.Height = 50;
-                    profileTable.Rows.Add(newRow);
-                    //UserType
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Employee Type:";
-                    newCell.Width = 300;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = function.GetFullEmployeeTypeText
-                        (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0]);
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //increment rowcount
-                    rowCount++;
-                }
+                        newRow.Height = 50;
+                        profileTable.Rows.Add(newRow);
+                        //Username
+                        newCell = new TableCell();
+                        newCell.Font.Bold = true;
+                        newCell.Text = "Username:";
+                        newCell.Width = 300;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = userDetails.UserName.ToString();
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment rowcount
+                        rowCount++;
+                    }
 
-                if (userID == null)
+                        //display user type if employee
+                        if (userDetails.UserType.ToString() == "E")
                 {
-                    //add a new row
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    profileTable.Rows.Add(newRow);
-                    //Username
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Username:";
-                    newCell.Width = 300;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = userDetails.UserName.ToString();
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //increment rowcount
-                    rowCount++;
-
+                        employee = handler.viewEmployee(cookie["ID"].ToString());
                         if (employee.addLine1 != ""
                         && employee.addLine2 != "")
                         {
@@ -614,6 +596,27 @@ namespace Cheveux
                             rowCount++;
                         }
 
+                        //add a new row
+                        newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //UserType
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Employee Type:";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = function.GetFullEmployeeTypeText
+                        (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0]);
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+                }
+
+                    if (userID == null)
+                    {
                         //add a new row
                         newRow = new TableRow();
                 newRow.Height = 50;
