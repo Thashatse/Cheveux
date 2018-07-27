@@ -129,51 +129,11 @@ namespace Cheveux.Manager
                             emp.AddressLine2 = txtAddLine2.Text;
                             emp.Type = uTypeList.SelectedValue.ToString();
 
-                            if (txtAddLine1.Text.ToString() == string.Empty || txtAddLine2.Text.ToString() == string.Empty || uTypeList.SelectedValue.ToString() == string.Empty)
+                            if ((txtAddLine1.Text.ToString() == string.Empty) || (txtAddLine2.Text.ToString() == string.Empty) || (uTypeList.SelectedValue.ToString() == string.Empty))
                             {
-
-                                if (String.IsNullOrEmpty(txtAddLine1.Text.ToString()) || String.IsNullOrEmpty(txtAddLine2.Text.ToString()) || String.IsNullOrEmpty(uTypeList.SelectedValue.ToString()))
-                                {
-                                    //RegularExpressionValidator regExpVal = new RegularExpressionValidator();
-                                    //regExpVal.Display = ValidatorDisplay.Dynamic;
-                                    //regExpVal.Text = "*Please enter all fields";
-                                    //regExpVal.ForeColor = System.Drawing.Color.Red;
-                                    lblValText.Text = "<p style='font-size:14px;color:red;'>&nbsp;*Please enter all fields</p>";
-                                    lblValText.Visible = true;
-                                    buttonCell.Controls.Add(lblValText);
-                                }
-                                else if (String.IsNullOrEmpty(uTypeList.SelectedValue.ToString()) || uTypeList.SelectedValue.ToString() == string.Empty)
-                                {
-                                    RegularExpressionValidator regExpVal = new RegularExpressionValidator();
-                                    regExpVal.ControlToValidate = uTypeList.ID;
-                                    regExpVal.Display = ValidatorDisplay.Dynamic;
-                                    regExpVal.Text = "*Please enter user type";
-                                    lblValText.Text = "<p style='font-size:14px;color:red;" + regExpVal.Text + "</p>";
-                                    lblValText.Visible = true;
-                                    buttonCell.Controls.Add(lblValText);
-                                }
-                                else if (String.IsNullOrEmpty(txtAddLine1.Text.ToString()))
-                                {
-                                    RegularExpressionValidator regExpVal = new RegularExpressionValidator();
-                                    regExpVal.ControlToValidate = txtAddLine1.ID;
-                                    regExpVal.Display = ValidatorDisplay.Dynamic;
-                                    regExpVal.Text = "*Please enter AddressLine 1";
-                                    lblValText.Text = "<p style='font-size:14px;color:red;" + regExpVal.Text + "</p>";
-                                    lblValText.Visible = true;
-                                    buttonCell.Controls.Add(lblValText);
-                                }
-                                else if (String.IsNullOrEmpty(txtAddLine2.Text.ToString()))
-                                {
-                                    RegularExpressionValidator regExpVal = new RegularExpressionValidator();
-                                    regExpVal.ControlToValidate = txtAddLine2.ID;
-                                    regExpVal.Display = ValidatorDisplay.Dynamic;
-                                    regExpVal.Text = "*Please enter AddressLine 2";
-                                    lblValText.Text = "<p style='font-size:14px;color:red;" + regExpVal.Text + "</p>";
-                                    lblValText.Visible = true;
-                                    buttonCell.Controls.Add(lblValText);
-                                }
-
-
+                                valLabel.Text = "<p style='font-size:14px;color:red;'>&nbsp;*Please enter all fields</p>";
+                                valLabel.Visible = true;
+                                buttonCell.Controls.Add(valLabel);
                             }
 
                             if (txtAddLine1.Text.ToString() != string.Empty && txtAddLine2.Text.ToString() != string.Empty && uTypeList.SelectedValue.ToString() != string.Empty)
