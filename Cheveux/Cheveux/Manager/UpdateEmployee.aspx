@@ -45,12 +45,16 @@
                 <div class="col-md-12 form-group">
                     <asp:label id="lblAddLine1" runat="server" text="Address Line 1"></asp:label>&nbsp; &nbsp; &nbsp; 
                     <asp:textbox id="txtAddLine1" runat="server" placeholder="Address Line 1"></asp:textbox>
+                    <!-- AddressLine 1 Validation-->
+                    <asp:RequiredFieldValidator ID="ad1Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine1"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 form-group">
                     <asp:label id="lblAddLine2" runat="server" text="Address Line 2"></asp:label>&nbsp; &nbsp; &nbsp; 
                     <asp:textbox id="txtAddLine2" runat="server" placeholder="Address Line 2"></asp:textbox>
+                    <!-- AddressLine 2 Validation-->
+                    <asp:RequiredFieldValidator ID="ad2Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine2"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="row">
@@ -60,6 +64,8 @@
                         <asp:listitem id="TypeOption1" runat="server" Text="Receptionist" value="R"/>
                         <asp:listitem id="TypeOption2" runat="server" Text="Stylist" value="S"/>
                     </asp:radiobuttonlist>
+                    <!-- RadioButtons Validation-->
+                    <asp:RequiredFieldValidator ID="rdoValidator" runat="server" ErrorMessage="*Please select user type" ForeColor="Red" ControlToValidate="rdoType"></asp:RequiredFieldValidator>
                 </div>
             </div>
             <div class="row">
