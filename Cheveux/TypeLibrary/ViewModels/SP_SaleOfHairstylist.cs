@@ -11,12 +11,8 @@ namespace TypeLibrary.ViewModels
         public string SaleID { get; set; }
         public DateTime date { get; set; }
         public string CustomerID { get; set; }
-        public char paymentType { get; set; }
-        public string stylistID { get; set; }
-        public string serviceID { get; set; }
-        public char Available { get; set; }
-        public char Arrived { get; set; }
-        public string Comment { get; set; }
+        public string FullName { get; set; }
+        public string BookingID { get; set; }
         
     }
 }
