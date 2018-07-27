@@ -32,6 +32,7 @@
                             <div class="col-5">
                                 <!--- Search for user --->
                                 <asp:TextBox class="form-control input-sm" ID="txtSearch" runat="server" Placeholder="Search for user"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="searchValidator" runat="server" ErrorMessage="Enter name of user" ForeColor="Red" ControlToValidate="txtSearch"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-2">
                                 <asp:Button ID="btnSearch" class="btn btn-primary" runat="server" Text="Find User" OnClick="btnSearch_Click" />
@@ -44,8 +45,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <asp:PlaceHolder ID="phUsers" runat="server" Visible="true">
-                            <asp:Table ID="tblUsers" runat="server"></asp:Table>
-                            <asp:Label ID="lblValText" runat="server" Text="Label" Visible="false"></asp:Label>
+                            <asp:Table ID="tblUsers" runat="server">
+                            </asp:Table>
+                            <asp:Label ID="valLabel" runat="server" Text="Label" Visible="false"></asp:Label>
                         </asp:PlaceHolder>
                     </div>
                 </div>
@@ -61,6 +63,7 @@
                     <div class="col-md-12">
                         <asp:PlaceHolder ID="phSearchedUsers" runat="server" Visible="false">
                             <asp:Table ID="tblSearchedUsers" runat="server"></asp:Table>
+                            <asp:Label ID="searchVal" runat="server" Text="Label" Visible="false"></asp:Label>
                         </asp:PlaceHolder>
                     </div>
                 </div>
