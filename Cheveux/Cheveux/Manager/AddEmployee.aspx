@@ -45,6 +45,7 @@
                     <div class="col-md-12">
                         <asp:PlaceHolder ID="phUsers" runat="server" Visible="true">
                             <asp:Table ID="tblUsers" runat="server"></asp:Table>
+                            <asp:Label ID="lblValText" runat="server" Text="Label" Visible="false"></asp:Label>
                         </asp:PlaceHolder>
                     </div>
                 </div>
