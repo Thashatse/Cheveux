@@ -22,6 +22,8 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //access control to be added
+
             displayUsers();
         }
         public void displayUsers()
@@ -118,7 +120,7 @@ namespace Cheveux.Manager
                     btnAdd = new Button();
                     btnAdd.Text = "Add";
                     btnAdd.CssClass = "btn btn-primary";
-                    btnAdd.Click += (ss, ee) =>
+                    btnAdd.Click += (ss, ee) => //buttonClick to be fixed 
                     {
                         try
                         {
@@ -180,149 +182,173 @@ namespace Cheveux.Manager
         {
             phUsers.Visible = false;
             phSearchedUsers.Visible = true;
-            Button btnAdd;
-            try
+
+            if (txtSearch.Text == string.Empty)
             {
-                searchForUser = handler.searchForUser(txtSearch.Text.ToString());
-                TableRow row = new TableRow();
-                row.Height = 50;
-                tblSearchedUsers.Rows.Add(row);
-
-                TableCell userImage = new TableCell();
-                userImage.Width = 300;
-                tblSearchedUsers.Rows[0].Cells.Add(userImage);
-
-                TableCell fullName = new TableCell();
-                fullName.Text = "Full Name";
-                fullName.Width = 300;
-                fullName.Font.Bold = true;
-                tblSearchedUsers.Rows[0].Cells.Add(fullName);
-
-                TableCell userType = new TableCell();
-                userType.Text = "User Type";
-                userType.Width = 200;
-                userType.Font.Bold = true;
-                tblSearchedUsers.Rows[0].Cells.Add(userType);
-
-                TableCell adLine1 = new TableCell();
-                adLine1.Text = "AddressLine 1";
-                adLine1.Width = 200;
-                adLine1.Font.Bold = true;
-                tblSearchedUsers.Rows[0].Cells.Add(adLine1);
-
-                TableCell adLine2 = new TableCell();
-                adLine2.Text = "AddressLine 2";
-                adLine2.Width = 200;
-                adLine2.Font.Bold = true;
-                tblSearchedUsers.Rows[0].Cells.Add(adLine2);
-                int i = 1;
-
-                foreach (SP_SearchForUser u in searchForUser)
+                lblVal.Text = "<p style='color:red;'>Enter name of user</p>"; 
+                lblVal.Visible = true;
+            }
+            else
+            {
+                lblVal.Visible = false;
+                Button btnAdd;
+                try
                 {
-                    TableRow r = new TableRow();
-                    tblSearchedUsers.Rows.Add(r);
 
-                    TableCell uImage = new TableCell();
-                    uImage.Width = 150;
-                    uImage.Text = "<img src=" + u.UserImage +
-                                    " alt='User Profile Picture' " +
-                                    "width='80' height='80' />";
-                    tblSearchedUsers.Rows[i].Cells.Add(uImage);
+                    searchForUser = handler.searchForUser(txtSearch.Text.ToString());
+                    TableRow row = new TableRow();
+                    row.Height = 50;
+                    tblSearchedUsers.Rows.Add(row);
 
-                    TableCell fName = new TableCell();
-                    fName.Text = u.FullName.ToString();
-                    fName.Width = 300;
-                    fName.Font.Bold = true;
-                    tblSearchedUsers.Rows[i].Cells.Add(fName);
+                    TableCell userImage = new TableCell();
+                    userImage.Width = 300;
+                    tblSearchedUsers.Rows[0].Cells.Add(userImage);
 
-                    TableCell uTypeCell = new TableCell();
-                    uTypeCell.Height = 100;
-                    RadioButtonList uTypeList = new RadioButtonList();
-                    uTypeList.Items.Add("R");
-                    uTypeList.Items.Add("S");
-                    uTypeList.CellPadding = 10;
-                    uTypeList.RepeatDirection = RepeatDirection.Horizontal;
-                    uTypeList.DataBind();
-                    uTypeCell.Controls.Add(uTypeList);
-                    tblSearchedUsers.Rows[i].Cells.Add(uTypeCell);
+                    TableCell fullName = new TableCell();
+                    fullName.Text = "Full Name";
+                    fullName.Width = 300;
+                    fullName.Font.Bold = true;
+                    tblSearchedUsers.Rows[0].Cells.Add(fullName);
 
-                    TableCell a1 = new TableCell();
-                    TextBox txtAddLine1 = new TextBox();
-                    txtAddLine1.CssClass = "form-control";
-                    a1.Controls.Add(txtAddLine1);
-                    tblSearchedUsers.Rows[i].Cells.Add(a1);
+                    TableCell userType = new TableCell();
+                    userType.Text = "User Type";
+                    userType.Width = 200;
+                    userType.Font.Bold = true;
+                    tblSearchedUsers.Rows[0].Cells.Add(userType);
 
+                    TableCell adLine1 = new TableCell();
+                    adLine1.Text = "AddressLine 1";
+                    adLine1.Width = 200;
+                    adLine1.Font.Bold = true;
+                    tblSearchedUsers.Rows[0].Cells.Add(adLine1);
 
-                    TableCell a2 = new TableCell();
-                    TextBox txtAddLine2 = new TextBox();
-                    txtAddLine2.CssClass = "form-control";
-                    a2.Controls.Add(txtAddLine2);
-                    tblSearchedUsers.Rows[i].Cells.Add(a2);
+                    TableCell adLine2 = new TableCell();
+                    adLine2.Text = "AddressLine 2";
+                    adLine2.Width = 200;
+                    adLine2.Font.Bold = true;
+                    tblSearchedUsers.Rows[0].Cells.Add(adLine2);
+                    int i = 1;
 
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Width = 200;
-                    buttonCell.Height = 50;
-                    btnAdd = new Button();
-                    btnAdd.Text = "Add";
-                    btnAdd.CssClass = "btn btn-primary";
-                    btnAdd.Click += (ss, ee) =>
+                    foreach (SP_SearchForUser u in searchForUser)
                     {
-                        try
+                        TableRow r = new TableRow();
+                        tblSearchedUsers.Rows.Add(r);
+
+                        TableCell uImage = new TableCell();
+                        uImage.Width = 150;
+                        uImage.Text = "<img src=" + u.UserImage +
+                                        " alt='User Profile Picture' " +
+                                        "width='80' height='80' />";
+                        tblSearchedUsers.Rows[i].Cells.Add(uImage);
+
+                        TableCell fName = new TableCell();
+                        fName.Text = u.FullName.ToString();
+                        fName.Width = 300;
+                        fName.Font.Bold = true;
+                        tblSearchedUsers.Rows[i].Cells.Add(fName);
+
+                        TableCell uTypeCell = new TableCell();
+                        uTypeCell.Height = 100;
+                        RadioButtonList uTypeList = new RadioButtonList();
+                        uTypeList.Items.Add("R");
+                        uTypeList.Items.Add("S");
+                        uTypeList.CellPadding = 10;
+                        uTypeList.RepeatDirection = RepeatDirection.Horizontal;
+                        uTypeList.DataBind();
+                        uTypeCell.Controls.Add(uTypeList);
+                        tblSearchedUsers.Rows[i].Cells.Add(uTypeCell);
+
+                        TableCell a1 = new TableCell();
+                        TextBox txtAddLine1 = new TextBox();
+                        txtAddLine1.CssClass = "form-control";
+                        a1.Controls.Add(txtAddLine1);
+                        tblSearchedUsers.Rows[i].Cells.Add(a1);
+
+
+                        TableCell a2 = new TableCell();
+                        TextBox txtAddLine2 = new TextBox();
+                        txtAddLine2.CssClass = "form-control";
+                        a2.Controls.Add(txtAddLine2);
+                        tblSearchedUsers.Rows[i].Cells.Add(a2);
+
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Width = 200;
+                        buttonCell.Height = 50;
+                        btnAdd = new Button();
+                        btnAdd.Text = "Add";
+                        btnAdd.CssClass = "btn btn-primary";
+                        btnAdd.Click += (aa, pp) =>
                         {
-                            emp = new EMPLOYEE();
+                            //button click problem to be fixed
 
-                            emp.EmployeeID = u.UserID.ToString();
-                            emp.AddressLine1 = txtAddLine1.Text;
-                            emp.AddressLine2 = txtAddLine2.Text;
-                            emp.Type = uTypeList.SelectedValue.ToString();
-
-                            if (handler.addEmployee(emp))
+                            try
                             {
-                                Response.Write("<script>alert('Employee Added');</script>");
-                                Response.Redirect(Request.RawUrl);
+                                emp = new EMPLOYEE();
+
+                                emp.EmployeeID = u.UserID.ToString();
+                                emp.AddressLine1 = txtAddLine1.Text;
+                                emp.AddressLine2 = txtAddLine2.Text;
+                                emp.Type = uTypeList.SelectedValue.ToString();
+
+                                if ((txtAddLine1.Text.ToString() == string.Empty) || (txtAddLine2.Text.ToString() == string.Empty) || (uTypeList.SelectedValue.ToString() == string.Empty))
+                                {
+                                    searchVal.Text = "<p style='font-size:14px;color:red;'>&nbsp;*Please enter all fields</p>";
+                                    searchVal.Visible = true;
+                                    buttonCell.Controls.Add(searchVal);
+                                }
+
+                                if (txtAddLine1.Text.ToString() != string.Empty && txtAddLine2.Text.ToString() != string.Empty && uTypeList.SelectedValue.ToString() != string.Empty)
+                                {
+                                    if (handler.addEmployee(emp))
+                                    {
+                                        Response.Write("<script>alert('Employee Added');</script>");
+                                    }
+                                    else
+                                    {
+                                        Response.Write("<script>alert('Error. Please try again');</script>");
+                                    }
+                                }
+
                             }
-                            else
+                            catch (Exception err)
                             {
-                                Response.Write("<script>alert('Error. Please try again');</script>");
+                                Response.Write("<script>alert('Our apologies. An error has occured.')</script>");
+                                //add error to the error log and then display response tab to say that an error has occured
+                                function.logAnError(err.ToString());
                             }
-                        }
-                        catch (Exception err)
-                        {
-                            Response.Write("<script>alert('Our apologies. An error has occured.')</script>");
-                            //add error to the error log and then display response tab to say that an error has occured
-                            function.logAnError(err.ToString());
-                        }
+                        };
+                        //add button to cell 
+                        buttonCell.Controls.Add(btnAdd);
+                        //add cell to row
+                        tblSearchedUsers.Rows[i].Cells.Add(buttonCell);
 
+                        i++;
+                    }
 
-                    };
-                    //add button to cell 
-                    buttonCell.Controls.Add(btnAdd);
-                    //add cell to row
-                    tblSearchedUsers.Rows[i].Cells.Add(buttonCell);
+                    if (tblSearchedUsers.Rows.Count > 1)
+                    {
+                        resultsHeading.InnerText = "Search results for " + "'" +
+                                                    txtSearch.Text + "'";
+                        resultsHeading.Visible = true;
+                    }
+                    else if (tblSearchedUsers.Rows.Count == 1)
+                    {
+                        resultsHeading.InnerText = "No results were found";
+                        resultsHeading.Visible = true;
+                    }
 
-                    i++;
                 }
-                if (tblSearchedUsers.Rows.Count > 1)
+                catch (ApplicationException E)
                 {
-                    resultsHeading.InnerText = "Search results for " + "'" +
-                                                txtSearch.Text + "'";
-                    resultsHeading.Visible = true;
-                }
-                else if (tblSearchedUsers.Rows.Count == 1)
-                {
-                    resultsHeading.InnerText = "No results were found";
-                    resultsHeading.Visible = true;
-                }
+                    //dispaly error message below//
 
+                    function.logAnError(E.ToString());
+                }
             }
-            catch (ApplicationException E)
-            {
-                //dispaly error message below//
+            
 
-                function.logAnError(E.ToString());
-            }
+            
         }
-
     }
 }
 

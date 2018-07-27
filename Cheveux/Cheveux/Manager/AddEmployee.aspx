@@ -32,10 +32,14 @@
                             <div class="col-5">
                                 <!--- Search for user --->
                                 <asp:TextBox class="form-control input-sm" ID="txtSearch" runat="server" Placeholder="Search for user"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="searchValidator" runat="server" ErrorMessage="Enter name of user" ForeColor="Red" ControlToValidate="txtSearch"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-2">
                                 <asp:Button ID="btnSearch" class="btn btn-primary" runat="server" Text="Find User" OnClick="btnSearch_Click" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8">
+                                <asp:Label ID="lblVal" runat="server" Text="Label" Visible="false"></asp:Label>
                             </div>
                         </div>
                     </div>
