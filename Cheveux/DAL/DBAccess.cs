@@ -1818,13 +1818,8 @@ namespace DAL
                                 SaleID = Convert.ToString(row["SaleID"]),
                                 date = Convert.ToDateTime(row["Date"]),
                                 CustomerID = Convert.ToString(row["CustomerID"]),
-                                paymentType = Convert.ToChar(row["PaymentType"]),
-                                stylistID = Convert.ToString(row["stylistID"]),
-                                serviceID = Convert.ToString(row["serviceID"]),
-                                Available = Convert.ToChar(row["Available"]),
-                                Arrived = Convert.ToChar(row["Arrived"]),
-                                Comment = Convert.ToString(row["Comment"]),
-
+                                FullName = Convert.ToString(row["FullName"]),
+                                BookingID = Convert.ToString(row["BookingID"])
 
                             };
                             list.Add(saleOfHairstylistrecord);
