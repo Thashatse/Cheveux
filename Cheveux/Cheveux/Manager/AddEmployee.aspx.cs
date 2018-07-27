@@ -31,7 +31,7 @@ namespace Cheveux.Manager
             {
                 userList = handler.userList();
 
-                
+
                 TableRow row = new TableRow();
                 row.Height = 50;
                 tblUsers.Rows.Add(row);
@@ -74,8 +74,8 @@ namespace Cheveux.Manager
                     TableCell uImage = new TableCell();
                     uImage.Width = 150;
                     uImage.Text = "<img src=" + u.UserImage +
-                                    " alt='User Profile Picture' " + 
-                                    "width='80' height='80' />" ;
+                                    " alt='User Profile Picture' " +
+                                    "width='80' height='80' />";
                     tblUsers.Rows[i].Cells.Add(uImage);
 
                     TableCell fName = new TableCell();
@@ -87,6 +87,7 @@ namespace Cheveux.Manager
                     TableCell uTypeCell = new TableCell();
                     uTypeCell.Height = 100;
                     RadioButtonList uTypeList = new RadioButtonList();
+                    uTypeList.ClientIDMode = ClientIDMode.AutoID;
                     uTypeList.Items.Add("R");
                     uTypeList.Items.Add("S");
                     uTypeList.CellPadding = 10;
@@ -97,6 +98,7 @@ namespace Cheveux.Manager
 
                     TableCell a1 = new TableCell();
                     TextBox txtAddLine1 = new TextBox();
+                    txtAddLine1.ClientIDMode = ClientIDMode.AutoID;
                     txtAddLine1.CssClass = "form-control";
                     a1.Controls.Add(txtAddLine1);
                     tblUsers.Rows[i].Cells.Add(a1);
@@ -104,14 +106,15 @@ namespace Cheveux.Manager
 
                     TableCell a2 = new TableCell();
                     TextBox txtAddLine2 = new TextBox();
+                    txtAddLine2.ClientIDMode = ClientIDMode.AutoID;
                     txtAddLine2.CssClass = "form-control";
                     a2.Controls.Add(txtAddLine2);
                     tblUsers.Rows[i].Cells.Add(a2);
 
 
                     TableCell buttonCell = new TableCell();
-                    buttonCell.Width = 200;
-                    buttonCell.Height = 50;
+                    buttonCell.Width = 300;
+                    buttonCell.Height = 100;
                     btnAdd = new Button();
                     btnAdd.Text = "Add";
                     btnAdd.CssClass = "btn btn-primary";
@@ -126,15 +129,67 @@ namespace Cheveux.Manager
                             emp.AddressLine2 = txtAddLine2.Text;
                             emp.Type = uTypeList.SelectedValue.ToString();
 
-                            if (handler.addEmployee(emp))
+                            if (txtAddLine1.Text.ToString() == string.Empty || txtAddLine2.Text.ToString() == string.Empty || uTypeList.SelectedValue.ToString() == string.Empty)
                             {
-                                Response.Write("<script>alert('Employee Added');</script>");
-                                Response.Redirect(Request.RawUrl);
+
+                                if (String.IsNullOrEmpty(txtAddLine1.Text.ToString()) || String.IsNullOrEmpty(txtAddLine2.Text.ToString()) || String.IsNullOrEmpty(uTypeList.SelectedValue.ToString()))
+                                {
+                                    //RegularExpressionValidator regExpVal = new RegularExpressionValidator();
+                                    //regExpVal.Display = ValidatorDisplay.Dynamic;
+                                    //regExpVal.Text = "*Please enter all fields";
+                                    //regExpVal.ForeColor = System.Drawing.Color.Red;
+                                    lblValText.Text = "<p style='font-size:14px;color:red;'>&nbsp;*Please enter all fields</p>";
+                                    lblValText.Visible = true;
+                                    buttonCell.Controls.Add(lblValText);
+                                }
+                                else if (String.IsNullOrEmpty(uTypeList.SelectedValue.ToString()) || uTypeList.SelectedValue.ToString() == string.Empty)
+                                {
+                                    RegularExpressionValidator regExpVal = new RegularExpressionValidator();
+                                    regExpVal.ControlToValidate = uTypeList.ID;
+                                    regExpVal.Display = ValidatorDisplay.Dynamic;
+                                    regExpVal.Text = "*Please enter user type";
+                                    lblValText.Text = "<p style='font-size:14px;color:red;" + regExpVal.Text + "</p>";
+                                    lblValText.Visible = true;
+                                    buttonCell.Controls.Add(lblValText);
+                                }
+                                else if (String.IsNullOrEmpty(txtAddLine1.Text.ToString()))
+                                {
+                                    RegularExpressionValidator regExpVal = new RegularExpressionValidator();
+                                    regExpVal.ControlToValidate = txtAddLine1.ID;
+                                    regExpVal.Display = ValidatorDisplay.Dynamic;
+                                    regExpVal.Text = "*Please enter AddressLine 1";
+                                    lblValText.Text = "<p style='font-size:14px;color:red;" + regExpVal.Text + "</p>";
+                                    lblValText.Visible = true;
+                                    buttonCell.Controls.Add(lblValText);
+                                }
+                                else if (String.IsNullOrEmpty(txtAddLine2.Text.ToString()))
+                                {
+                                    RegularExpressionValidator regExpVal = new RegularExpressionValidator();
+                                    regExpVal.ControlToValidate = txtAddLine2.ID;
+                                    regExpVal.Display = ValidatorDisplay.Dynamic;
+                                    regExpVal.Text = "*Please enter AddressLine 2";
+                                    lblValText.Text = "<p style='font-size:14px;color:red;" + regExpVal.Text + "</p>";
+                                    lblValText.Visible = true;
+                                    buttonCell.Controls.Add(lblValText);
+                                }
+
+
                             }
-                            else
+
+                            if (txtAddLine1.Text.ToString() != string.Empty && txtAddLine2.Text.ToString() != string.Empty && uTypeList.SelectedValue.ToString() != string.Empty)
                             {
-                                Response.Write("<script>alert('Error. Please try again');</script>");
+                                if (handler.addEmployee(emp))
+                                {
+                                    Response.Write("<script>alert('Employee Added');</script>");
+                                    Response.Redirect(Request.RawUrl);
+                                }
+                                else
+                                {
+                                    Response.Write("<script>alert('Error. Please try again');</script>");
+                                }
                             }
+
+
                         }
                         catch (Exception err)
                         {
@@ -142,7 +197,7 @@ namespace Cheveux.Manager
                             //add error to the error log and then display response tab to say that an error has occured
                             function.logAnError(err.ToString());
                         }
-                        
+
 
                     };
                     //add button to cell 
@@ -153,7 +208,7 @@ namespace Cheveux.Manager
                     i++;
                 }
             }
-            catch(ApplicationException E)
+            catch (ApplicationException E)
             {
                 //dispaly error message below//
 
@@ -226,7 +281,7 @@ namespace Cheveux.Manager
                     uTypeList.Items.Add("R");
                     uTypeList.Items.Add("S");
                     uTypeList.CellPadding = 10;
-                    uTypeList.RepeatDirection = RepeatDirection.Horizontal; 
+                    uTypeList.RepeatDirection = RepeatDirection.Horizontal;
                     uTypeList.DataBind();
                     uTypeCell.Controls.Add(uTypeList);
                     tblSearchedUsers.Rows[i].Cells.Add(uTypeCell);
@@ -259,7 +314,7 @@ namespace Cheveux.Manager
                             emp.EmployeeID = u.UserID.ToString();
                             emp.AddressLine1 = txtAddLine1.Text;
                             emp.AddressLine2 = txtAddLine2.Text;
-                            emp.Type = uTypeList.SelectedValue.ToString(); 
+                            emp.Type = uTypeList.SelectedValue.ToString();
 
                             if (handler.addEmployee(emp))
                             {
@@ -289,11 +344,11 @@ namespace Cheveux.Manager
                 }
                 if (tblSearchedUsers.Rows.Count > 1)
                 {
-                    resultsHeading.InnerText = "Search results for " + "'"+
+                    resultsHeading.InnerText = "Search results for " + "'" +
                                                 txtSearch.Text + "'";
                     resultsHeading.Visible = true;
                 }
-                else if(tblSearchedUsers.Rows.Count == 1)
+                else if (tblSearchedUsers.Rows.Count == 1)
                 {
                     resultsHeading.InnerText = "No results were found";
                     resultsHeading.Visible = true;
@@ -310,3 +365,4 @@ namespace Cheveux.Manager
 
     }
 }
+
