@@ -367,7 +367,7 @@ namespace DAL
                             ContactNo = row["ContactNo"].ToString(),
                             UserType = Convert.ToChar(row["UserType"]),
                             UserImage = row["UserImage"].ToString(),
-                            AccountType = row[6].ToString()
+                            AccountType = row["AccountType"].ToString()
                         };
 
                     }
