@@ -162,12 +162,12 @@
 
                                     <asp:TableRow Height="50">
                                         <asp:TableCell>
-                                    <a href = '#'>Delete Profile   </a>
+                                    <a href = '?Action=Delete'>Delete Profile   </a>
                                         </asp:TableCell>
                                         <asp:TableCell HorizontalAlign="Right">
                                             <a href='Profile.aspx'>Cancel   </a>
 
-                                            <asp:Button ID="btnSaveGoogle" runat="server" Text="Save" class="btn btn-default" OnClick="btnSaveGoogle_Click" />
+                                            <asp:Button ID="btnSaveGoogle" runat="server" Text="Save" class="btn btn-primary" OnClick="btnSaveGoogle_Click" />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
@@ -228,12 +228,12 @@
 
                                     <asp:TableRow Height="50">
                                         <asp:TableCell>
-                                    <a href = '#'>Delete Profile   </a>
+                                    <a href = '?Action=Delete'>Delete Profile   </a>
                                         </asp:TableCell>
                                         <asp:TableCell HorizontalAlign="Right">
                                             <a href='Profile.aspx'>Cancel   </a>
 
-                                            <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-default" OnClick="commitEdit" />
+                                            <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-primary" OnClick="commitEdit" />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
