@@ -10,5 +10,6 @@ namespace TypeLibrary.ViewModels
     {
         public string ServiceID { get; set; }
         public string Name { get; set; }
+        public char ServiceType { get; set; }
     }
 }
