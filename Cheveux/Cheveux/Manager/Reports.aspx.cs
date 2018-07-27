@@ -80,7 +80,6 @@ namespace Cheveux.Manager
 
                 if (ddlReportFor.SelectedValue != "-1")
                 {
-                    getBookingForHairstylist();
                     reportByContainer.Visible = false;
                     reportDateRangeContainer.Visible = false;
                     divReport.Visible = true;
@@ -180,88 +179,178 @@ namespace Cheveux.Manager
         private void getSalesReport()
         {
             reportLable.Text = "Sales";
-            reportByLable.Text = "All Stylists";
+            reportByLable.Text = ddlReportFor.SelectedItem.Text.ToString();
             reportDateRangeLable.Text = "All Time";
             reportGenerateDateLable.Text = DateTime.Now.ToString("HH:mm dd MMM yyyy");
             try
             {
                 List<SP_SaleOfHairstylist> report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue);
+                //get the invoice dt lines
                 if (report.Count != 0)
                 {
                     //counter to keep track of rows in report
                     int reportRowCount = 0;
-                    // create a new row in the results table and set the height
-                    TableRow newRow = new TableRow();
-                    newRow.Height = 50;
-                    tblReport.Rows.Add(newRow);
-                    //set the report headers
-                    TableHeaderCell newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "SaleID";
-                    newHeaderCell.Width = 100;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "date";
-                    newHeaderCell.Width = 100;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "CustomerID";
-                    newHeaderCell.Width = 100;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "paymentType";
-                    newHeaderCell.Width = 300;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "stylistID";
-                    newHeaderCell.Width = 500;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "serviceID";
-                    newHeaderCell.Width = 500;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Available";
-                    newHeaderCell.Width = 500;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Arrived ";
-                    newHeaderCell.Width = 50;
-                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    reportRowCount++;
+                    
 
                     //display each record
                     foreach (SP_SaleOfHairstylist Sales in report)
                     {
+                        // create a new row in the results table and set the height
+                        TableRow newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        //set the report headers
+                        TableHeaderCell newHeaderCell = new TableHeaderCell();
+                        newHeaderCell.Text = "Date";
+                        newHeaderCell.Width = 100;
+                        tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                        newHeaderCell = new TableHeaderCell();
+                        newHeaderCell.Text = "Customer Name";
+                        newHeaderCell.Width = 100;
+                        tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                        //empty cell
+                        newHeaderCell = new TableHeaderCell();
+                        newHeaderCell.Width = 100;
+                        tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                        reportRowCount++;
+
                         // create a new row in the results table and set the height
                         newRow = new TableRow();
                         newRow.Height = 50;
                         tblReport.Rows.Add(newRow);
                         //fill the row with the data from the product results object
                         TableCell newCell = new TableCell();
-                        newCell.Text = Sales.SaleID.ToString();
-                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                        newCell = new TableCell();
                         newCell.Text = Sales.date.ToString("dd MMM yyy");
                         tblReport.Rows[reportRowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.Text = Sales.CustomerID.ToString();
+                        newCell.Text = Sales.FullName.ToString();
                         tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        //empty cell
                         newCell = new TableCell();
-                        newCell.Text = Sales.paymentType.ToString();
-                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                        newCell = new TableCell();
-                        newCell.Text = Sales.stylistID.ToString();
-                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                        newCell = new TableCell();
-                        newCell.Text = Sales.serviceID.ToString();
-                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                        newCell = new TableCell();
-                        newCell.Text = Sales.Available.ToString();
-                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                        newCell = new TableCell();
-                        newCell.Text = function.GetFullArrivedStatus(Sales.Arrived.ToString()[0]);
                         tblReport.Rows[reportRowCount].Cells.Add(newCell);
                         reportRowCount++;
+
+                        #region Invoice
+                        //diplay invoice
+                        // create a new row in the results table and set the height
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        //get the invoice 
+                        List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(Sales.BookingID);
+                        //set the Invoice header
+                        newHeaderCell = new TableHeaderCell();
+                        newHeaderCell.Text = "Invoice:";
+                        tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                        //empty cell
+                        newHeaderCell = new TableHeaderCell();
+                        tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                        //empty cell
+                        newHeaderCell = new TableHeaderCell();
+                        tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                        reportRowCount++;
+                        //calculate total price
+                        double total = 0.0;
+
+                        foreach (SP_getInvoiceDL item in invoice)
+                        {
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblReport.Rows.Add(newRow);
+                            //empty cell
+                            newCell = new TableCell();
+                            newRow.Cells.Add(newCell);
+                            //fill in the item
+                            newCell = new TableCell();
+                            newCell.Text = item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + string.Format("{0:#.00}", item.price);
+                            newRow.Cells.Add(newCell);
+                            //fill in the Qty, unit price & TotalPrice
+                            newCell = new TableCell();
+                            newCell.HorizontalAlign = HorizontalAlign.Right;
+                            newCell.Text = "R" + string.Format("{0:#.00}", item.price);
+                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                            //increment final price
+                            total = item.Qty * item.price;
+
+                            //increment row count 
+                            reportRowCount ++;
+                        }
+
+                        // get vat info
+                        Tuple<double, double> vatInfo = function.getVat(total);
+
+                        //display total including and Excluding VAT
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        //empty cell
+                        newCell = new TableCell();
+                        newRow.Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "Total Ecluding VAT: ";
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        //fill in total Ecluding VAT
+                        newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "R " + string.Format("{0:#.00}", vatInfo.Item1, 2);
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        reportRowCount ++;
+
+                        //get the vat rate
+                        double VATRate = -1;
+                        try
+                        {
+                            VATRate = handler.GetVATRate().VATRate;
+                        }
+                        catch (ApplicationException Err)
+                        {
+                            function.logAnError(Err.ToString());
+                        }
+
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        //empty cell
+                        newCell = new TableCell();
+                        newRow.Cells.Add(newCell);
+                        //fill in total VAT due
+                        newCell = new TableCell();
+                        newCell.Text = "VAT @" + VATRate + "%";
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "R " + string.Format("{0:#.00}", vatInfo.Item2, 2).ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        reportRowCount++;
+
+                        //display the total due
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        //empty cell
+                        newCell = new TableCell();
+                        newRow.Cells.Add(newCell);
+                        //fill in total
+                        newCell = new TableCell();
+                        newCell.Text = "Total Due: ";
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "R " + string.Format("{0:#.00}", total).ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        reportRowCount ++;
+                        //empty row
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        reportRowCount++;
+                        #endregion
+
                     }
                 }
 
