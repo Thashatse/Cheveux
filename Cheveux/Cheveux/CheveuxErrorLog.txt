@@ -1,0 +1,40 @@
+
+TimeStamp: 2018/07/28 16:00:16
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 193
+
+TimeStamp: 2018/07/28 16:00:17
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 193
+
+TimeStamp: 2018/07/28 16:01:44
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 199
+
+TimeStamp: 2018/07/28 16:01:44
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 199

@@ -13,6 +13,18 @@ namespace BLL
     {
         private IDBAccess db;
 
+        #region Home Page Features
+        public List<HomePageFeatures> GetHomePageFeatures()
+        {
+            return db.GetHomePageFeatures();
+        }
+        #endregion
+
+        public bool deactivateUser(string userID)
+        {
+            return db.deactivateUser(userID);
+        }
+
         public DBHandler()
         {
             db = new DBAccess();

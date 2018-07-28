@@ -1,11 +1,11 @@
+﻿USE [CHEVEUX]
+GO
+/****** Description:	Sales for a hairstylist ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- =============================================
--- Description:	Sales for a hairstylist
--- =============================================
-create PROCEDURE SP_SaleOfHairstylist 
+CREATE PROCEDURE [dbo].[SP_SaleOfHairstylist]
 	@StylistID nchar(30)
 AS
 BEGIN
@@ -16,4 +16,3 @@ And b.StylistID = @StylistID
 And u.UserID = b.CustomerID
 And s.CustomerID = b.CustomerID
 END
-GO

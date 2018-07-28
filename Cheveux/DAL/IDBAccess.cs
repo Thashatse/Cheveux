@@ -10,27 +10,46 @@ namespace DAL
 {
     public interface IDBAccess
     {
+        #region Home Page Features
+        List<HomePageFeatures> GetHomePageFeatures();
+        #endregion
+
+        #region User Accounts
         SP_CheckForUserType CheckForUserType(string id);
         SP_AddUser AddUser(USER User);
-        Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
-        SP_GetCurrentVATate GetVATRate();
+        EMPLOYEE getEmployeeType(string EmployeeID);
+        bool updateUser(USER userUpdate);
+        bool addEmployee(EMPLOYEE e);
+        bool updateEmployee(EMPLOYEE emp);
+        #endregion
+
+        #region Bookings
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID);
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
-        List<SP_GetEmpNames> GetEmpNames();
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
-        List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
-        EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateBooking(BOOKING bookingUpdate);
-        bool updateUser(USER userUpdate);
         bool CheckIn(BOOKING bookingID);
         SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID);
         SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID);
         SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
         bool UpdateCustVisit(CUST_VISIT visit);
         bool CreateCustVisit(CUST_VISIT cust_visit);
+        #endregion
+
+        #region search
+        Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
+        List<SP_SearchForUser> searchForUser(string term);
+        #endregion
+
+        #region Functions
+        SP_GetCurrentVATate GetVATRate();
+        #endregion
+
+        List<SP_GetEmpNames> GetEmpNames();
+        List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
@@ -52,7 +71,7 @@ namespace DAL
         List<SP_GetEmployeeTypes> getEmpTypes();
         List<PRODUCT> getAllProducts();
         List<SP_GetProductTypes> getProductTypes();
-
+        bool deactivateUser(string userID);
         bool AddBooking(BOOKING addBooking);
         List<SP_GetServices> GetAllServices();
         List<SP_GetStylists> GetAllStylists();
@@ -63,9 +82,7 @@ namespace DAL
         USER checkForAccountTypeEmail(string identifier);
         USER logInEmail(string identifier, string password);
         List<SP_UserList> userList();
-        List<SP_SearchForUser> searchForUser(string term);
-        bool addEmployee(EMPLOYEE e);
-        bool updateEmployee(EMPLOYEE emp);
+        
         List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID);
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_SaleOfHairstylist> getSaleOfHairstylist (string stylistID);

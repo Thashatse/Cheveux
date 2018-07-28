@@ -12,6 +12,65 @@ namespace DAL
 {
     public class DBAccess : IDBAccess
     {
+        #region Home Page Features
+        public List<HomePageFeatures> GetHomePageFeatures()
+        {
+            List<HomePageFeatures> homePageFeatures = new List<HomePageFeatures>();
+
+                try
+                {
+                //hairstyls and products
+                    using (DataTable table = DBHelper.Select("SP_FeaturedProductsAndHairStyles",
+                CommandType.StoredProcedure))
+                    {
+                        if (table.Rows.Count > 0)
+                        {
+                            foreach (DataRow row in table.Rows)
+                            {
+                            HomePageFeatures feature = new HomePageFeatures
+                            {
+                                    FeatureID = row["FeatureID"].ToString(),
+                                    ItemID  = row["ItemID"].ToString(),
+                                    ImageURL = row["ImageURL"].ToString(),
+                                    Name = row["Name"].ToString(),
+                                    description = row["ProductDescription"].ToString(),
+                                price = Math.Round(Convert.ToDecimal(row["Price"]), 2).ToString()
+                                };
+                                homePageFeatures.Add(feature);
+                            }
+                        }
+                    }
+
+                //Contact us & stylists
+                using (DataTable table = DBHelper.Select("SP_FeaturedProductsAndContact",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            HomePageFeatures feature = new HomePageFeatures
+                            {
+                                FeatureID = row["FeatureID"].ToString(),
+                                ItemID = row["ItemID"].ToString(),
+                                ImageURL = row["ImageURL"].ToString(),
+                                firstName = row["FirstName"].ToString(),
+                                contactNo = row["ContactNo"].ToString(),
+                                email = row["Email"].ToString(),
+                            };
+                            homePageFeatures.Add(feature);
+                        }
+                    }
+                }
+                return homePageFeatures;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -788,6 +847,23 @@ namespace DAL
                 };
 
                 return DBHelper.NonQuery("SP_EditUser", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool deactivateUser(string userID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@UserID", userID.ToString())
+                };
+
+                return DBHelper.NonQuery("SP_DeactivateUser", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {

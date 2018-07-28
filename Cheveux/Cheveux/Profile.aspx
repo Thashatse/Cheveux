@@ -70,7 +70,7 @@
 
                     <div class="jumbotron bg-dark text-white">
                         <div class="row">
-                            <div class="col-lg-9 col-md-12 col-sm-12"> 
+                            <div class="col-lg-9 col-md-12 col-sm-12">
                                 <h1>Past Bookings</h1>
                             </div>
                             <div class="col-lg-3 col-md-2 col-sm-2">
@@ -100,15 +100,16 @@
                     <!-- if the user is loged in -->
                     <div runat="server" id="JumbotronLogedIn" visible="false">
 
-                        <div class="jumbotron bg-dark text-white">
+                        <div class="jumbotron bg-dark text-white" id="divProfileHeader" runat="server">
                             <asp:Image ID="profileImage" runat="server" Height="100" Width="100" />
                             &nbsp;
                         <asp:Label ID="profileLable" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                         </div>
 
-                        <asp:Table ID="profileTable" runat="server"></asp:Table>
-                        <div runat="server" id="Edit" visible="false">
-                            <form id="formEditProfile" runat="server">
+                        <form id="formEditProfile" runat="server">
+                            <asp:Table ID="profileTable" runat="server"></asp:Table>
+                            <div runat="server" id="Edit" visible="false">
+
                                 <asp:Table ID="editGoogleProfileTable" runat="server" Visible="false">
                                     <asp:TableRow Height="50">
                                         <asp:TableCell Font-Bold="true"></asp:TableCell>
@@ -237,24 +238,26 @@
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
-                            </form>
-                        </div>
 
-                        <div runat="server" id="confirm" visible="false">
-                            <div class="bg-secondary text-white">
-
-                                <asp:Label ID="confirmHeaderPlaceHolder" runat="server"></asp:Label>
-                                <asp:Label ID="confirmPlaceHolder" runat="server"></asp:Label>
-                                <!--Line Break-->
-                                <br />
-                                <br />
-                                <!-- Edit -->
-                                <asp:Button ID="no" runat="server" Text="No" class="btn btn-default" OnClick="no_Click" />
-                                <asp:Button ID="yes" runat="server" Text="Yes" class="btn btn-primary" OnClick="commitEdit" />
-                                <asp:Button ID="OK" runat="server" Text="OK" class="btn btn-primary" OnClick="OK_Click" Visible="false" />
                             </div>
-                        </div>
 
+                            <div runat="server" id="divConfirm" visible="false">
+                                <div class="jumbotron bg-dark text-white">
+                                    <asp:Label ID="confirmHeaderPlaceHolder" runat="server" Font-Size="X-Large"></asp:Label>
+                                    <!--Line Break-->
+                                    <br />
+                                    <asp:Label ID="confirmPlaceHolder" runat="server"></asp:Label>
+                                    <!--Line Break-->
+                                    <br />
+                                    <br />
+                                    <!-- Edit -->
+                                    <asp:Button ID="no" runat="server" Text="No" class="btn btn-default" OnClick="no_Click" />
+                                    <asp:Button ID="yes" runat="server" Text="Yes" class="btn btn-danger" OnClick="OK_Click1" />
+                                    <asp:Button ID="OK" runat="server" Text="OK" class="btn btn-primary" OnClick="OK_Click1" Visible="false" />
+                                </div>
+                            </div>
+
+                        </form>
 
                     </div>
                 </div>
