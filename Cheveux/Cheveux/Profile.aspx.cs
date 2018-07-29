@@ -387,9 +387,9 @@ namespace Cheveux
                     //edit link
                     newCell = new TableCell();
                     newCell.Text =
-                         "<a href = '/Manager/UpdateEmployee.aspx?" +
+                         "<a href='/Manager/UpdateEmployee.aspx?" +
                                     "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                    "' target='_blank'> Edit Employee </a>";
+                                    "'> Edit Employee </a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount

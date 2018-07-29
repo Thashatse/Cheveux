@@ -19,6 +19,8 @@ namespace Cheveux.Manager
         int alertCount = 0;
         List<SP_GetTodaysBookings> todaysBookings = null;
         int bookingCount = 0;
+        int dashOutCount = 0;
+        int dashLowCount = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -66,7 +68,7 @@ namespace Cheveux.Manager
                 //check out of stock treatments
                 foreach (SP_GetAllTreatments treat in products.Item2)
                 {
-                    if (treat.Qty <= 0)
+                    if (treat.Qty <= 0 && dashOutCount == 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "Out Of Stock",
@@ -74,12 +76,23 @@ namespace Cheveux.Manager
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
                             "&PreviousPage=../Manager/Dashboard.aspx'>" +
                             "The Treatment '" + treat.Name + "' is currently out off stock</a>");
+                        dashOutCount++;
+                    }
+                    else if (treat.Qty <= 0 && dashOutCount > 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#10071;", "",
+                            "<a href = '#?ProductID="
+                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Treatment '" + treat.Name + "' is currently out off stock</a>");
+                        dashOutCount++;
                     }
                 }
                 //check out of stock accessories
                 foreach (SP_GetAllAccessories Access in products.Item1)
                 {
-                    if (Access.Qty <= 0)
+                    if (Access.Qty <= 0 && dashOutCount == 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "Out Of Stock",
@@ -87,13 +100,24 @@ namespace Cheveux.Manager
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
                             "&PreviousPage=../Manager/Dashboard.aspx'>" +
                             "The Accessory '" + Access.Name + "' is currently out of stock</a>");
+                        dashOutCount++;
+                    }
+                    else if (Access.Qty <= 0 && dashOutCount > 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#10071;", "",
+                            "<a href = '#?ProductID="
+                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Accessory '" + Access.Name + "' is currently out of stock</a>");
+                        dashOutCount++;
                     }
                 }
                 //check for low stock
                 //check low stock treatments
                 foreach (SP_GetAllTreatments treat in products.Item2)
                 {
-                    if (treat.Qty < 10 && treat.Qty > 0)
+                    if (treat.Qty < 10 && treat.Qty > 0 && dashLowCount == 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
@@ -102,12 +126,24 @@ namespace Cheveux.Manager
                             "&PreviousPage=../Manager/Dashboard.aspx'>" +
                             "The Treatment '" + treat.Name + "' is currently runing low on stock with "
                             + treat.Qty + " Left in stock </a>");
+                        dashLowCount++;
+                    }
+                    else if (treat.Qty < 10 && treat.Qty > 0 && dashLowCount > 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#9888;", "",
+                            " <a href = '#?ProductID="
+                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Treatment '" + treat.Name + "' is currently runing low on stock with "
+                            + treat.Qty + " Left in stock </a>");
+                        dashLowCount++;
                     }
                 }
                 //check low stock accessories
                 foreach (SP_GetAllAccessories Access in products.Item1)
                 {
-                    if (Access.Qty < 10 && Access.Qty > 0)
+                    if (Access.Qty < 10 && Access.Qty > 0 && dashLowCount == 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
@@ -116,6 +152,18 @@ namespace Cheveux.Manager
                             "&PreviousPage=../Manager/Dashboard.aspx'>" +
                             "The Accessory '" + Access.Name + "' is currently runing low on stock with "
                             + Access.Qty + " Left in stock</a>");
+                        dashLowCount++;
+                    }
+                    else if (Access.Qty < 10 && Access.Qty > 0 && dashLowCount > 0)
+                    {
+                        //if the accessory is low and stock add an alert to the alert table
+                        addAlertToTable("&#9888;", "",
+                            "<a href = '#?ProductID="
+                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "The Accessory '" + Access.Name + "' is currently runing low on stock with "
+                            + Access.Qty + " Left in stock</a>");
+                        dashLowCount++;
                     }
                 }
             }

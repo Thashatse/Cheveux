@@ -15,11 +15,77 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         BUSINESS BusinessDetails = null;
+        List<HomePageFeatures> features = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             #region Redirect
             //rediret to product page or stylist profile with product id
+            //check if a redirect has been requested 
+            String goTo = Request.QueryString["Goto"];
+            if(goTo != null)
+            {
+                features = null;
+                try
+                {
+                    //get the home page featurs
+                    features = handler.GetHomePageFeatures();
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("unable to load featurd items from the DB on default.aspx for redirect: " +
+                        err);
+                }
+
+                if (goTo == "Prod1")
+                {
+                    if(features[0].ItemID == null)
+                    {
+                        Response.Redirect("../Cheveux/Products.aspx");
+                    }
+                    Response.Redirect("ViewProduct.aspx?ProductID="+features[0].ItemID.ToString());
+                }
+                else if (goTo == "Prod2")
+                {
+                    if (features[1].ItemID == null)
+                    {
+                        Response.Redirect("../Cheveux/Products.aspx");
+                    }
+                    Response.Redirect("ViewProduct.aspx?ProductID=" + features[1].ItemID.ToString());
+                }
+                else if (goTo == "Prod3")
+                {
+                    if (features[2].ItemID == null)
+                    {
+                        Response.Redirect("../Cheveux/Products.aspx");
+                    }
+                    Response.Redirect("ViewProduct.aspx?ProductID=" + features[2].ItemID.ToString());
+                }
+                else if (goTo == "Sty1")
+                {
+                    if (features[7].ItemID == null)
+                    {
+                        Response.Redirect("../Cheveux/Stylists.aspx");
+                    }
+                    Response.Redirect("Profile.aspx?Action=View&empID=" + features[7].ItemID.ToString());
+                }
+                else if (goTo == "Sty2")
+                {
+                    if (features[8].ItemID == null)
+                    {
+                        Response.Redirect("../Cheveux/Stylists.aspx");
+                    }
+                    Response.Redirect("Profile.aspx?Action=View&empID=" + features[8].ItemID.ToString());
+                }
+                else if (goTo == "Sty3")
+                {
+                    if (features[9].ItemID == null)
+                    {
+                        Response.Redirect("../Cheveux/Stylists.aspx");
+                    }
+                    Response.Redirect("Profile.aspx?Action=View&empID=" + features[9].ItemID.ToString());
+                }
+            }
 
             #endregion
 
@@ -107,7 +173,7 @@ namespace Cheveux
             #endregion
 
             #region Home Page Features
-            List<HomePageFeatures> features = null;
+            features = null;
             try
             {
                 //get the home page featurs

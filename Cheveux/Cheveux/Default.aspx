@@ -102,7 +102,7 @@
         <div class="container-fluid p-0">
             <div class="row no-gutters">
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="/Cheveux/Products.aspx">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Prod1">
                         <asp:PlaceHolder runat="server" ID="phProductImage1"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -117,7 +117,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Cheveux/Products.aspx">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Prod2">
                         <asp:PlaceHolder runat="server" ID="phProductImage2"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -132,7 +132,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Cheveux/Products.aspx">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Prod3">
                         <asp:PlaceHolder runat="server" ID="phProductImage3"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -177,7 +177,7 @@
         <div class="container-fluid p-0">
             <div class="row no-gutters">
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Cheveux/Stylists.aspx">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Sty1">
                         <asp:PlaceHolder runat="server" ID="phStylistImage1"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -192,7 +192,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Cheveux/Stylists.aspx">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Sty2">
                         <asp:PlaceHolder runat="server" ID="phStylistImage2"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
@@ -207,7 +207,7 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Cheveux/Stylists.aspx">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Sty3">
                         <asp:PlaceHolder runat="server" ID="phStylistImage3"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">

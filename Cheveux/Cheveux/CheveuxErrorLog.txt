@@ -38,3 +38,55 @@ Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
 unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
    at Cheveux.Default2.Page_Load(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 199
+
+TimeStamp: 2018/07/29 17:05:41
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: index
+   at System.Web.UI.ControlCollection.get_Item(Int32 index)
+   at System.Web.UI.WebControls.TableRowCollection.get_Item(Int32 index)
+   at Cheveux.Manager.Employee.loadEmployeeList(Char empType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Employee.aspx.cs:line 117 An error occurred retrieving list of emplyees for employee type: A - Manager in loadEmployeeList(char empType) method on Manager/Employee page
+
+TimeStamp: 2018/07/29 17:06:56
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: index
+   at System.Web.UI.ControlCollection.get_Item(Int32 index)
+   at System.Web.UI.WebControls.TableRowCollection.get_Item(Int32 index)
+   at Cheveux.Manager.Employee.loadEmployeeList(Char empType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Employee.aspx.cs:line 115 An error occurred retrieving list of emplyees for employee type: A - Manager in loadEmployeeList(char empType) method on Manager/Employee page
+
+TimeStamp: 2018/07/29 17:07:15
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: index
+   at System.Web.UI.ControlCollection.get_Item(Int32 index)
+   at System.Web.UI.WebControls.TableRowCollection.get_Item(Int32 index)
+   at Cheveux.Manager.Employee.loadEmployeeList(Char empType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Employee.aspx.cs:line 115 An error occurred retrieving list of emplyees for employee type: A - Manager in loadEmployeeList(char empType) method on Manager/Employee page
+
+TimeStamp: 2018/07/29 17:07:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
+Parameter name: index
+   at System.Web.UI.ControlCollection.get_Item(Int32 index)
+   at System.Web.UI.WebControls.TableRowCollection.get_Item(Int32 index)
+   at Cheveux.Manager.Employee.loadEmployeeList(Char empType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Employee.aspx.cs:line 115 An error occurred retrieving list of emplyees for employee type: A - Manager in loadEmployeeList(char empType) method on Manager/Employee page
