@@ -1695,45 +1695,6 @@ namespace DAL
             }
         }
 
-        public List<SP_SearchForUser> searchForUser(string term)
-        {
-            SP_SearchForUser user = null;
-            List<SP_SearchForUser> list = new List<SP_SearchForUser>();
-
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@searchTerm", term)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_SearchForUser", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            user = new SP_SearchForUser
-                            {
-                                UserImage = Convert.ToString(row["UserImage"]),
-                                UserID = Convert.ToString(row["UserID"]),
-                                FullName = Convert.ToString(row["FullName"]),
-                                UserName = Convert.ToString(row["UserName"]),
-                                Email = Convert.ToString(row["Email"]),
-                                ContactNo = Convert.ToString(row["ContactNo"])
-                            };
-                            list.Add(user);
-                        }
-                    }
-                }
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
         public bool addEmployee(EMPLOYEE e)
         {
             try

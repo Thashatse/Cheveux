@@ -280,12 +280,6 @@ namespace BLL
         {
             return db.userList();
         }
-
-        public List<SP_SearchForUser> searchForUser(string term)
-        {
-            return db.searchForUser(term);
-        }
-
         public bool addEmployee(EMPLOYEE e)
         {
             return db.addEmployee(e);
