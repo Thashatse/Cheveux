@@ -41,7 +41,6 @@ namespace DAL
 
         #region search
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
-        List<SP_SearchForUser> searchForUser(string term);
         #endregion
 
         #region Functions
@@ -82,8 +81,6 @@ namespace DAL
         USER checkForAccountTypeEmail(string identifier);
         USER logInEmail(string identifier, string password);
         List<SP_UserList> userList();
-        bool addEmployee(EMPLOYEE e);
-        bool updateEmployee(EMPLOYEE emp);
         List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID);
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_SaleOfHairstylist> getSaleOfHairstylist (string stylistID);
