@@ -17,6 +17,8 @@ namespace Cheveux.Manager
         HttpCookie cookie = null;
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
         List<SP_GetProductTypes> productTypes = null;
+        int treatCount = 0;
+        int accCount = 0;
 
         //set the master page based on the user type
         protected void Page_PreInit(Object sender, EventArgs e)
@@ -142,25 +144,30 @@ namespace Cheveux.Manager
                     //create a header row and set cell withs
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Name: ";
-                    newHeaderCell.Width = 300;
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                    //create a header row and set cell withs
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Product Type: ";
-                    newHeaderCell.Width = 200;
+                    newHeaderCell.Width = 700;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                     //create a header row and set cell withs
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Stock Count: ";
-                    newHeaderCell.Width = 100;
+                    newHeaderCell.Width = 200;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Width = 125;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 250;
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
 
+                    //increment rowcounter
+                    count++;
+
+                    //add a new row to the table
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblProductTable.Rows.Add(newRow);
+                    //Product Type
+                    newHeaderCell = new TableHeaderCell();
+                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = function.GetFullProductTypeText('A')+"'s:";
+                        tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                     //increment rowcounter
                     count++;
 
@@ -200,13 +207,12 @@ namespace Cheveux.Manager
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
                             //Name
+                            //Edit product link to be added by Lachea
+                            //view Product link to be added by Lachea
                             newCell = new TableCell();
-                            newCell.Text = Access.Name;
-                            tblProductTable.Rows[count].Cells.Add(newCell);
-
-                            //Product Type
-                            newCell = new TableCell();
-                            newCell.Text = function.GetFullProductTypeText(Access.ProductType[0]);
+                            newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
+                                        + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                                        "'>"+ Access.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
                             if ((Access.ProductType == "A" || Access.ProductType == "T") &&
@@ -217,19 +223,12 @@ namespace Cheveux.Manager
                                 newCell.Text = Access.Qty.ToString();
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
-                                //add stock button
+                                //Stock
                                 newCell = new TableCell();
-                                //Edit sok link to be added by Sivu
-                                string cellText = "";
-                                //add the add stock button only for Treatments and application services
                                 //add stock link to be added by Sivu
-                                cellText +=
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = '#?" +
-                                        "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Products.aspx'>Manage Stock  </a></button>            ";
-
-                                newCell.Text = cellText;
+                                newCell.Text = "<a class='btn  btn-secondary' href='#?" +
+                                            "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                                            "'>Manage Stock</a>";
                                 tblProductTable.Rows[count].Cells.Add(newCell);
                             }
                             else
@@ -242,26 +241,24 @@ namespace Cheveux.Manager
                                 tblProductTable.Rows[count].Cells.Add(newCell);
                             }
 
-                            //view & edit
-                            newCell = new TableCell();
-                            //Edit product link to be added by Lachea
-                            //view Product link to be added by Lachea
-                            newCell.Text =
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = '#?" +
-                                        "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Products.aspx'>Edit  </a></button>          " +
-
-                                        "<button type = 'button' class='btn btn-default'>" +
-                                        "<a href = '../'ViewProduct.aspx?ProductID="
-                                        + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Products.aspx'>View   </a></button>";
-                            tblProductTable.Rows[count].Cells.Add(newCell);
-
                             //increment counter
+                            accCount++;
                             count++;
                         }
                     }
+
+                    //add a new row to the table
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblProductTable.Rows.Add(newRow);
+                    //Product Type
+                    newHeaderCell = new TableHeaderCell();
+                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = function.GetFullProductTypeText('T') + "'s:";
+                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                    //increment rowcounter
+                    count++;
 
                     //display treatments
                     foreach (SP_GetAllTreatments treat in products.Item2)
@@ -300,12 +297,9 @@ namespace Cheveux.Manager
 
                             //Name
                             newCell = new TableCell();
-                            newCell.Text = treat.Name;
-                            tblProductTable.Rows[count].Cells.Add(newCell);
-                            
-                            //Product Type
-                            newCell = new TableCell();
-                            newCell.Text = function.GetFullProductTypeText(treat.ProductType[0]);
+                            newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
+                                        + treat.ProductID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + treat.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
                             if ((treat.ProductType == "A" || treat.ProductType == "T") && 
@@ -322,11 +316,9 @@ namespace Cheveux.Manager
                             string cellText = "";
                             //add the add stock button only for Treatments and application services
                             //add stock link to be added by Sivu
-                                cellText +=
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = '#?" +
+                                cellText += "<a class='btn  btn-secondary' href='#?" +
                                         "ProductID=" + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Products.aspx'>Manage Stock  </a></button>            ";
+                                        "'>Manage Stock</a>";
                             
                             newCell.Text = cellText;
                             tblProductTable.Rows[count].Cells.Add(newCell);
@@ -339,22 +331,6 @@ namespace Cheveux.Manager
                                 newCell = new TableCell();
                                 tblProductTable.Rows[count].Cells.Add(newCell);
                             }
-
-                            //view & edit
-                            newCell = new TableCell();
-                            //Edit product link to be added by Lachea
-                            //view Product link to be added by Lachea
-                            newCell.Text =
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = '#?" +
-                                        "ProductID=" + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Products.aspx'>Edit  </a></button>          " +
-
-                                        "<button type = 'button' class='btn btn-default'>" +
-                                        "<a href = '../'ViewProduct.aspx?ProductID=" 
-                                        + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Products.aspx'>View   </a></button>";
-                            tblProductTable.Rows[count].Cells.Add(newCell);
 
                             //increment counter
                             count++;

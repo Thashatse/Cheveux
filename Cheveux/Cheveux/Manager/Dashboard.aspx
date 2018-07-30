@@ -68,9 +68,7 @@
                     <div class="jumbotron bg-dark text-white">
                         <h1>Dashboard</h1>
                         <p>Please log-in to view your Dashboard</p>
-                        <button type="button" class="btn btn-default">
-                            <a href="../Authentication/Accounts.aspx?PreviousPage=Manager.aspx" id="LogedOutButton">Login</a>
-                        </button>
+                        <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Manager.aspx" id="LogedOutButton">Login</a>
                     </div>
                 </div>
             </div>

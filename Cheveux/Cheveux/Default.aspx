@@ -34,6 +34,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">At Your Service</h2>
+
                     <hr class="my-4">
                 </div>
             </div>
@@ -41,46 +42,37 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <h3 class="mb-3">
-                            <asp:Label ID="LService1Header" runat="server" Text="Label"></asp:Label>
-                        </h3>
-                        <p class="mb-0">
-                            <asp:Label ID="LService1Description" runat="server" Text="Label"></asp:Label>
-                        </p>
-                    </div>
+                    <h3 class="mb-3">
+                        <asp:Label ID="LService1Header" runat="server" Text="Label"></asp:Label>
+                    </h3>
+                    <p class="mb-0">
+                        <asp:Label ID="LService1Description" runat="server" Text="Label"></asp:Label>
+                    </p>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <h3 class="mb-3">
-                            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                        </h3>
-                        <p class="mb-0">
-                            <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-                        </p>
-                    </div>
+                    <h3 class="mb-3">
+                        <asp:Label ID="LService2Header" runat="server" Text="Label"></asp:Label>
+                    </h3>
+                    <p class="mb-0">
+                        <asp:Label ID="LService2Description" runat="server" Text="Label"></asp:Label>
+                    </p>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <h3 class="mb-3">
-                            <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-                        </h3>
-                        <p class="mb-0">
-                            <asp:Label ID="Label4" runat="server" Text="Label"></asp:Label>
-                        </p>
-                    </div>
+                    <h3 class="mb-3">
+                        <asp:Label ID="LService3Header" runat="server" Text="Label"></asp:Label>
+                    </h3>
+                    <p class="mb-0">
+                        <asp:Label ID="LService3Description" runat="server" Text="Label"></asp:Label>
+                    </p>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
-                    <div class="service-box mt-5 mx-auto">
-                        <h3 class="mb-3">
-                            <asp:Label ID="Label5" runat="server" Text="Label"></asp:Label>
-                        </h3>
-                        <p class="mb-0">
-                            <asp:Label ID="Label6" runat="server" Text="Label"></asp:Label>
-                        </p>
-                    </div>
+                    <h3 class="mb-3">
+                        <asp:Label ID="LService4Header" runat="server" Text="Label"></asp:Label>
+                    </h3>
+                    <p class="mb-0">
+                        <asp:Label ID="LService4Description" runat="server" Text="Label"></asp:Label>
+                    </p>
                 </div>
-
             </div>
         </div>
         <div class="container">
@@ -108,53 +100,47 @@
         </div>
 
         <div class="container-fluid p-0">
-            <div class="row no-gutters popup-gallery">
+            <div class="row no-gutters">
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Theam/img/portfolio/fullsize/1.jpg">
-                        <img class="img-fluid" src="../Theam/img/portfolio/thumbnails/1.jpg" alt="">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Prod1">
+                        <asp:PlaceHolder runat="server" ID="phProductImage1"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                 
-                                </div>
                                 <div class="project-name">
-                                    Project Name
-                 
+                                    <asp:Label ID="lProductHeader1" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="project-category text-faded">
+                                    <asp:Label ID="LProductDescription1" runat="server" Text="Label"></asp:Label>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Theam/img/portfolio/fullsize/2.jpg">
-                        <img class="img-fluid" src="../Theam/img/portfolio/thumbnails/2.jpg" alt="">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Prod2">
+                        <asp:PlaceHolder runat="server" ID="phProductImage2"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                 
-                                </div>
                                 <div class="project-name">
-                                    Project Name
-                 
+                                    <asp:Label ID="lProductHeader2" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="project-category text-faded">
+                                    <asp:Label ID="LProductDescription2" runat="server" Text="Label"></asp:Label>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Theam/img/portfolio/fullsize/3.jpg">
-                        <img class="img-fluid" src="../Theam/img/portfolio/thumbnails/3.jpg" alt="">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Prod3">
+                        <asp:PlaceHolder runat="server" ID="phProductImage3"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                 
-                                </div>
                                 <div class="project-name">
-                                    Project Name
-                 
+                                    <asp:Label ID="lProductHeader3" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="project-category text-faded">
+                                    <asp:Label ID="LProductDescription3" runat="server" Text="Label"></asp:Label>
                                 </div>
                             </div>
                         </div>
@@ -189,53 +175,47 @@
         </div>
 
         <div class="container-fluid p-0">
-            <div class="row no-gutters popup-gallery">
+            <div class="row no-gutters">
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Theam/img/portfolio/fullsize/1.jpg">
-                        <img class="img-fluid" src="../Theam/img/portfolio/thumbnails/1.jpg" alt="">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Sty1">
+                        <asp:PlaceHolder runat="server" ID="phStylistImage1"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                 
+                                 <div class="project-name">
+                                    <asp:Label ID="lStylistHeader1" runat="server" Text="Label"></asp:Label>
                                 </div>
-                                <div class="project-name">
-                                    Project Name
-                 
+                                <div class="project-category text-faded">
+                                    <asp:Label ID="lStylistDescription1" runat="server" Text="Label"></asp:Label>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Theam/img/portfolio/fullsize/2.jpg">
-                        <img class="img-fluid" src="../Theam/img/portfolio/thumbnails/2.jpg" alt="">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Sty2">
+                        <asp:PlaceHolder runat="server" ID="phStylistImage2"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                 
+                                 <div class="project-name">
+                                    <asp:Label ID="lStylistHeader2" runat="server" Text="Label"></asp:Label>
                                 </div>
-                                <div class="project-name">
-                                    Project Name
-                 
+                                <div class="project-category text-faded">
+                                    <asp:Label ID="lStylistDescription2" runat="server" Text="Label"></asp:Label>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-4 col-sm-6">
-                    <a class="portfolio-box" href="../Theam/img/portfolio/fullsize/3.jpg">
-                        <img class="img-fluid" src="../Theam/img/portfolio/thumbnails/3.jpg" alt="">
+                    <a class="portfolio-box" href="Default.aspx?Goto=Sty3">
+                        <asp:PlaceHolder runat="server" ID="phStylistImage3"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                <div class="project-category text-faded">
-                                    Category
-                 
+                                 <div class="project-name">
+                                    <asp:Label ID="lStylistHeader3" runat="server" Text="Label"></asp:Label>
                                 </div>
-                                <div class="project-name">
-                                    Project Name
-                 
+                                <div class="project-category text-faded">
+                                    <asp:Label ID="lStylistDescription3" runat="server" Text="Label"></asp:Label>
                                 </div>
                             </div>
                         </div>

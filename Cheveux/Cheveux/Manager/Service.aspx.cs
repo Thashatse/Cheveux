@@ -65,14 +65,15 @@ namespace Cheveux.Manager
                     //create a header row and set cell withs
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Name: ";
-                    newHeaderCell.Width = 500;
+                    newHeaderCell.Width = 300;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                     //create a header row and set cell withs
                     newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 100;
+                    newHeaderCell.Text = "Description: ";
+                    newHeaderCell.Width = 500;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 300;
+                    newHeaderCell.Width = 100;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
 
                     //increment rowcounter
@@ -97,10 +98,21 @@ namespace Cheveux.Manager
                             //image display to be added here
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
+                            //Edit service link to be added by Sivu
+                            //view service link to be added by Lachea
+
                             //Name
                             newCell = new TableCell();
-                            newCell.Text = prod.Name;
+                            newCell.Text = "<a class='btn btn-default' href ='../ViewProduct.aspx?ProductID="
+                                        + prod.ProductID.ToString().Replace(" ", string.Empty)+"'>" + prod.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
+
+                            //Description
+                            newCell = new TableCell();
+                            newCell.Text = "<a class='btn btn-default' href ='../ViewProduct.aspx?ProductID="
+                                        + prod.ProductID.ToString().Replace(" ", string.Empty) + "'>" + prod.ProductDescription + "</a> ";
+                            tblProductTable.Rows[count].Cells.Add(newCell);
+
 
                             if (prod.Active[0] == 'Y')
                             {
@@ -113,22 +125,6 @@ namespace Cheveux.Manager
                                 newCell.Text = "Inactive Service";
                                 tblProductTable.Rows[count].Cells.Add(newCell);
                             }
-
-                            //view & edit
-                            newCell = new TableCell();
-                            //Edit service link to be added by Sivu
-                            //view service link to be added by Lachea
-                            newCell.Text =
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = '#?" +
-                                        "ProductID=" + prod.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Service.aspx'>Edit  </a></button>          " +
-
-                                        "<button type = 'button' class='btn btn-default'>" +
-                                        "<a href = '../'ViewProduct.aspx?ProductID="
-                                        + prod.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Service.aspx'>View   </a></button>";
-                            tblProductTable.Rows[count].Cells.Add(newCell);
 
                             //increment counter
                             count++;

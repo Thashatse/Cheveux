@@ -83,22 +83,14 @@ namespace Cheveux.Manager
                     tblEmployeeTable.Rows.Add(newRow);
                     //create a header row and set cell withs
                     TableHeaderCell newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 100;
-                    tblEmployeeTable.Rows[rowCount].Cells.Add(newHeaderCell);
-                    //create a header row and set cell withs
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Full Name: ";
-                    newHeaderCell.Width = 300;
-                    tblEmployeeTable.Rows[rowCount].Cells.Add(newHeaderCell);
-                    //create a header row and set cell withs
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Employee Type: ";
-                    newHeaderCell.Width = 200;
-                    tblEmployeeTable.Rows[rowCount].Cells.Add(newHeaderCell);
-                    //create a header row and set cell withs
-                    newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Width = 250;
                     tblEmployeeTable.Rows[rowCount].Cells.Add(newHeaderCell);
+                    //create a header row and set cell withs
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Name: ";
+                    newHeaderCell.Width = 500;
+                    tblEmployeeTable.Rows[rowCount].Cells.Add(newHeaderCell);
+                    //create a header row and set cell withs
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Width = 250;
                     tblEmployeeTable.Rows[rowCount].Cells.Add(newHeaderCell);
@@ -106,6 +98,7 @@ namespace Cheveux.Manager
                     //increment rowcounter
                     rowCount++;
 
+                    char type = 'X';
                     foreach (SP_ViewEmployee emp in employees)
                     {
                         //if the employe maches the selected type
@@ -115,6 +108,25 @@ namespace Cheveux.Manager
                             compareToSearchTerm(emp.email) == true ||
                             compareToSearchTerm(emp.phoneNumber) == true))
                         {
+                            if (type != emp.employeeType[0])
+                            {
+                                //add a new row to the table
+                                newRow = new TableRow();
+                                newRow.Height = 50;
+                                tblEmployeeTable.Rows.Add(newRow);
+                                //employee Type
+                                newHeaderCell = new TableHeaderCell();
+                                newHeaderCell.Text = function.GetFullEmployeeTypeText(emp.employeeType[0])+"('s): ";
+                                tblEmployeeTable.Rows[rowCount].Cells.Add(newHeaderCell);
+                                //create a new row in the table and set the height
+                                newRow = new TableRow();
+                                newRow.Height = 50;
+                                tblEmployeeTable.Rows.Add(newRow);
+                                type = emp.employeeType[0];
+                                //increment rowcounter
+                                rowCount++;
+                            }
+
                             //diplay the employee details
                             //add a new row to the table
                             newRow = new TableRow();
@@ -130,12 +142,9 @@ namespace Cheveux.Manager
 
                             //Full Name
                             newCell = new TableCell();
-                            newCell.Text = emp.firstName + " " + emp.lastName;
-                            tblEmployeeTable.Rows[rowCount].Cells.Add(newCell);
-
-                            //Employee Type
-                            newCell = new TableCell();
-                            newCell.Text = function.GetFullEmployeeTypeText(emp.employeeType[0]);
+                            newCell.Text = "<a class='btn btn-default' href = '../Profile.aspx?Action=View" +
+                                        "&empID=" + emp.UserID.ToString().Replace(" ", string.Empty) +
+                                        "'>"+emp.firstName + " " + emp.lastName+ "</a>";
                             tblEmployeeTable.Rows[rowCount].Cells.Add(newCell);
 
                             //Contact (Phone & Email)
@@ -146,20 +155,6 @@ namespace Cheveux.Manager
                                 "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = 'mailto:" + emp.email.ToString() +
                                 "'>Email    </a></button>";
-                            tblEmployeeTable.Rows[rowCount].Cells.Add(newCell);
-
-                            //view & edit
-                            newCell = new TableCell();
-                            newCell.Text =
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = '/Manager/UpdateEmployee.aspx?" +
-                                        "empID=" + emp.UserID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Employee.aspx'>Edit  </a></button>          " +
-
-                                        "<button type = 'button' class='btn btn-default'>" +
-                                        "<a href = '../Profile.aspx?Action=View" +
-                                        "&empID=" + emp.UserID.ToString().Replace(" ", string.Empty) +
-                                        "&PreviousPage=../Manager/Employee.aspx'>View   </a></button>";
                             tblEmployeeTable.Rows[rowCount].Cells.Add(newCell);
 
                             //increment rowcounter

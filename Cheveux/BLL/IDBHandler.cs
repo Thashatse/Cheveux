@@ -10,6 +10,9 @@ namespace BLL
 {
     public interface IDBHandler
     {
+        #region Home Page Features
+        List<HomePageFeatures> GetHomePageFeatures();
+        #endregion
         SP_CheckForUserType BLL_CheckForUserType(string id);
         SP_AddUser BLL_AddUser(USER user);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
@@ -68,6 +71,7 @@ namespace BLL
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID);
         List<SP_GetStylists> BLL_GetAllStylists();
+        bool deactivateUser(string userID);
     }
 }
 

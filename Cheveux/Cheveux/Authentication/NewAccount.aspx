@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col-xs-2 col-md-2 text-center"></div>
                     <div class="col-xs-8 col-md-8 text-center">
-                        <div class="jumbotron">
+                        <div class="jumbotron bg-dark text-white vertical-center">
                             <!--Logo-->
                             <img src="../IMG_0715.png" alt="logo" width="100" height="100" />
                             <!--line break-->
@@ -91,7 +91,7 @@
                             <!--line break-->
                             <br />
                             <!--Submition Button-->
-                            <asp:Button ID="btnSubmitGoogle" runat="server" Text="Submit" OnClick="btnSubmitGoogle_Click" Font-Bold="true" Width="150" Height="50" />
+                            <asp:Button CssClass="btn btn-primary" ID="btnSubmitGoogle" runat="server" Text="Submit" OnClick="btnSubmitGoogle_Click" Font-Bold="true" Width="150" Height="50" />
                         </div>
                     </div>
                     <div class="col-xs-2 col-md-2 text-center"></div>

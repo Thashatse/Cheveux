@@ -85,6 +85,15 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl JumbotronLogedIn;
         
         /// <summary>
+        /// divProfileHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProfileHeader;
+        
+        /// <summary>
         /// profileImage control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label profileLable;
         
         /// <summary>
+        /// formEditProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm formEditProfile;
+        
+        /// <summary>
         /// profileTable control.
         /// </summary>
         /// <remarks>
@@ -119,15 +137,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Edit;
-        
-        /// <summary>
-        /// formEditProfile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formEditProfile;
         
         /// <summary>
         /// editGoogleProfileTable control.
@@ -274,13 +283,13 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button btnSaveEmail;
         
         /// <summary>
-        /// confirm control.
+        /// divConfirm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl confirm;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divConfirm;
         
         /// <summary>
         /// confirmHeaderPlaceHolder control.

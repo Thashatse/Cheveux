@@ -110,6 +110,20 @@ namespace Cheveux
 
                 if (result == true)
                 {
+                    //send an email notification
+                    var body = new System.Text.StringBuilder();
+                    body.AppendFormat("Hello, "+ User.FirstName+",");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"You have successfuly registerd with cheveux, Using the google account: " + User.Email.ToString()+",");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Regards,");
+                    body.AppendLine(@"The Cheveux Team");
+                    function.sendEmailAlert(User.Email.ToString(), User.FirstName.ToString() + " " + User.LastName.ToString(),
+                        "Welcome To Cheveux",
+                        body.ToString(),
+                        "Accounts Cheveux");
                     //log the user in by creating a cookie to manage their state
                     HttpCookie cookie = new HttpCookie("CheveuxUserID");
                     // Set the user id in it.
@@ -176,6 +190,21 @@ namespace Cheveux
 
                 if (result == true)
                 {
+                    //send an email notification
+                    var body = new System.Text.StringBuilder();
+                    body.AppendFormat("Hello, " + User.FirstName + ",");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"You have successfuly registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
+                    body.AppendLine(@"Your username is: "+User.UserName.ToString()+".");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Regards,");
+                    body.AppendLine(@"The Cheveux Team");
+                    function.sendEmailAlert(User.Email.ToString(), User.FirstName.ToString() + " " + User.LastName.ToString(),
+                        "Welcome To Cheveux",
+                        body.ToString(),
+                        "Accounts Cheveux");
                     //log the user in by creating a cookie to manage their state
                     HttpCookie cookie = new HttpCookie("CheveuxUserID");
                     // Set the user id in it.

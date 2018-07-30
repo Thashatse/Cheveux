@@ -37,10 +37,8 @@
                                         OnTextChanged="drpReport_SelectedIndexChanged1">
 
                                         <asp:ListItem Text="Select A Report" Value="0"></asp:ListItem>
-
-                                        <asp:ListItem Text="Sales" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Sales" Value="1" Selected="True"></asp:ListItem>
                                         <asp:ListItem Text="Bookings By Hairstylist" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="Booking By Hairstylist For Date Range" Value="3"></asp:ListItem>
 
                                     </asp:DropDownList>
 
@@ -58,27 +56,43 @@
                                     <br />
                                     <br />
 
-                                    <div class="container" runat="server" id="reportDateRangeContainer" visible="false">
-                                        <p>Start Date: </p>
-                                        <asp:Calendar ID="CalendarDateStrart" runat="server"></asp:Calendar>
-                                        <p>End Date: </p>
-                                        <asp:Calendar ID="CalendarDateEnd" runat="server"></asp:Calendar>
+                                    <div class="row" runat="server" id="reportDateRangeContainer" visible="false">
+                                        <div class="col-lg-5">
+                                            <p>Start Date: </p>
+                                            <asp:Calendar ID="CalendarDateStrart" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <p>End Date: </p>
+                                            <asp:Calendar ID="CalendarDateEnd" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
+                                        </div>
+                                    </div>
+
+                                    <!-- line Break  -->
+                                    <br />
+                                    <br />
+
+                                    <div class="row">
+                                        <div class="col-10"></div>
+                                        <div class="col-2">
+                                            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" OnClick="btnRefresh_Click" CssClass="btn btn-secondary" />
+                                        </div>
                                     </div>
                                 </form>
                                 <!-- line Break -->
                                 <br />
                                 <asp:Label ID="lError" runat="server" Text="Label" Visible="false"></asp:Label>
-                                <!-- line Break -->
-                                <br />
-                                <!--Help-->
-                                <a href="../Help/CheveuxHelpCenter.aspx#Reports" target="_blank" title="How To Generate Reports">
-                                    <span class="glyphicon">&#63; Help</span></a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div runat="server" id="divReport" visible="false">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--Logo-->
+                            <!-- <img src="../IMG_0715.png" alt="logo" width="300" height="300" class="img-fluid" />-->
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-8">
                             Title:
@@ -128,6 +142,8 @@
                         </div>
                         <div class="col-4"></div>
                     </div>
+                    <!--Print-->
+                    <a href='#' onclick='window.print()'>Print Report  </a>
                 </div>
             </div>
 
@@ -140,9 +156,7 @@
                             <p>Please log-in to view Reports</p>
                         </div>
                         <div class="col-2">
-                            <button type="button" class="btn btn-default">
-                                <a href="../Authentication/Accounts.aspx?PreviousPage=Reports.aspx" id="LogedOutButton">Login</a>
-                            </button>
+                            <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Reports.aspx" id="LogedOutButton">Login</a>
                         </div>
                     </div>
                 </div>

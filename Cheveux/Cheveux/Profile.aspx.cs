@@ -82,9 +82,8 @@ namespace Cheveux
                 if (cookie["UT"] == "C")
                 {
                     divTabs.Visible = true;
-                    /*
-         * Bookings Funcrions
-         */
+
+                    #region  Bookings Funcrions
                     //if the user is loged in diplay upcoming and futer services
                     JumbotronLogedIn.Visible = true;
                     JumbotronLogedOut.Visible = false;
@@ -94,8 +93,10 @@ namespace Cheveux
 
                     //load the users past bookings in top the past bookins tab
                     displayPastBookings();
+                    #endregion
                 }
 
+                #region Profile Functions
                 //ask the user to sign in first
                 //if the user is loged in diplay the profile container and hide the login container
                 JumbotronLogedIn.Visible = true;
@@ -151,6 +152,8 @@ namespace Cheveux
                 else if (action == "Delete")
                 {
                     divTabs.Visible = false;
+                    divProfileHeader.Visible = false;
+                    divConfirm.Visible = true;
                     deleteUser();
                 }
             } else if (cookie == null)
@@ -174,7 +177,8 @@ namespace Cheveux
                         loadUserDetails(Request.QueryString["UserID"]);
                     }
                 }
-            }    
+            }
+            #endregion
         }
 
         #region Profile Funcrions
@@ -383,9 +387,9 @@ namespace Cheveux
                     //edit link
                     newCell = new TableCell();
                     newCell.Text =
-                         "<a href = '/Manager/UpdateEmployee.aspx?" +
+                         "<a href='/Manager/UpdateEmployee.aspx?" +
                                     "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                    "' target='_blank'> Edit Employee </a>";
+                                    "'> Edit Employee </a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -1030,12 +1034,33 @@ namespace Cheveux
         //display the delete user view
         public void deleteUser()
         {
-
-        }
-
-        protected void OK_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Profile.aspx");
+            confirmHeaderPlaceHolder.Text = "Delete Account?";
+            confirmPlaceHolder.Text = "Are you sure you would like to delete your Cheveux Account?";
+            string confirmation = Request.QueryString["Confirm"];
+            if(confirmation == "false")
+            {
+                Response.Redirect("Profile.aspx");
+            }
+            else if(confirmation == "true")
+            {
+                try
+                {
+                    //deactivate the account
+                    bool success = handler.deactivateUser(cookie["ID"].ToString());
+                    if(success == false)
+                    {
+                        function.logAnError("An Error Occouer Deleting user profile ID:" + cookie["ID"].ToString());
+                        Response.Redirect("Error.aspx?Error=An error occurred deleting your profile'");
+                    }
+                    //sign the user out and return them to the home page
+                    Response.Redirect("/Authentication/Accounts.aspx?action=Logout");
+                }
+                catch (ApplicationException err)
+                {
+                    function.logAnError("An Error Occouer Deleting user profile ID:"+ cookie["ID"].ToString()+" | "+err);
+                    Response.Redirect("Error.aspx?Error=An error occurred deleting your profile'");
+                }
+            }
         }
 
         //check for existing user names
@@ -1091,12 +1116,17 @@ namespace Cheveux
 
         protected void no_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Profile.aspx?Action=Edit");
+            Response.Redirect("profile.aspx?Action=Delete&Confirm=false");
         }
 
         protected void btnSaveGoogle_Click(object sender, EventArgs e)
         {
             commitEdit(sender, e);
+        }
+
+        protected void OK_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("profile.aspx?Action=Delete&Confirm=true");
         }
         #endregion
 

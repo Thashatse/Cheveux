@@ -85,9 +85,7 @@
                 <div class="bg-dark text-white jumbotron">
                     <h1>Manage Products</h1>
                     <p>Please log-in to Manage Products</p>
-                    <button type="button" class="btn btn-default">
-                        <a href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
-                    </button>
+                        <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
                 </div>
             </div>
         </div>
