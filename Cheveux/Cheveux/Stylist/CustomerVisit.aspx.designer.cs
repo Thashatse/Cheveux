@@ -31,6 +31,24 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl theDate;
         
         /// <summary>
+        /// phVisitErr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phVisitErr;
+        
+        /// <summary>
+        /// lblVisitErr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVisitErr;
+        
+        /// <summary>
         /// lblBookingDetailsHeading control.
         /// </summary>
         /// <remarks>
@@ -85,30 +103,39 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Table serviceDetailsTable;
         
         /// <summary>
-        /// lblConfirmUpdateHeading control.
+        /// phBookingsErr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblConfirmUpdateHeading;
+        protected global::System.Web.UI.WebControls.PlaceHolder phBookingsErr;
         
         /// <summary>
-        /// phConfirmVisit control.
+        /// errorHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phConfirmVisit;
+        protected global::System.Web.UI.WebControls.Label errorHeader;
         
         /// <summary>
-        /// confirmVisitTable control.
+        /// errorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table confirmVisitTable;
+        protected global::System.Web.UI.WebControls.Label errorMessage;
+        
+        /// <summary>
+        /// errorToReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorToReport;
     }
 }

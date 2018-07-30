@@ -168,13 +168,13 @@ namespace Cheveux.Manager
                 {
                     reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
                         DateTime.Today.ToString("dd MMM yyyy");
-                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue);
+                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today) ;
                 }
                 else if (defaultDateRange == false)
                 {
                     reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
                         CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
-                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue);
+                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate);
                 }
 
                     //get the invoice dt lines

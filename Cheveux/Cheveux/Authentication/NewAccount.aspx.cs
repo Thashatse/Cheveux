@@ -119,6 +119,7 @@ namespace Cheveux
                     body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
                     body.AppendLine(@"");
                     body.AppendLine(@"Regards,");
+                    body.AppendLine(@"");
                     body.AppendLine(@"The Cheveux Team");
                     function.sendEmailAlert(User.Email.ToString(), User.FirstName.ToString() + " " + User.LastName.ToString(),
                         "Welcome To Cheveux",

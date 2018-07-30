@@ -25,6 +25,12 @@ namespace Cheveux
         HttpCookie cookie = null;
         protected void Page_Load(object sender, EventArgs e)
         {
+            errorHeader.Font.Bold = true;
+            errorHeader.Font.Underline = true;
+            errorHeader.Font.Size = 21;
+            errorMessage.Font.Size = 14;
+            errorToReport.Font.Size = 10;
+
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
             {
@@ -312,7 +318,7 @@ namespace Cheveux
                 //Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
                 phBookingsErr.Visible = true;
                 errorHeader.Text = "Oh no!";
-                errorMessage.Text = "It seems there is a communicating with the database."
+                errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
                 errorToReport.Text = "Error To report:" + E.ToString();
 

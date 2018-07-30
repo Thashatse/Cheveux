@@ -281,6 +281,11 @@ namespace BLL
             return db.userList();
         }
 
+        public List<SP_SearchForUser> searchForUser(string term)
+        {
+            return db.searchForUser(term);
+        }
+
         public bool addEmployee(EMPLOYEE e)
         {
             return db.addEmployee(e);
@@ -302,9 +307,9 @@ namespace BLL
 
         }
 
-        public List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID)
+        public List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID, DateTime startDate, DateTime endDate)
         {
-            return db.getSaleOfHairstylist(stylistID);
+            return db.getSaleOfHairstylist(stylistID, startDate,endDate);
 
         }
                 public List<SP_GetStylists> BLL_GetAllStylists()

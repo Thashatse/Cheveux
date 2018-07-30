@@ -22,6 +22,11 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            errorHeader.Font.Bold = true;
+            errorHeader.Font.Underline = true;
+            errorHeader.Font.Size = 21;
+            errorMessage.Font.Size = 14;
+            errorToReport.Font.Size = 10;
 
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
@@ -68,6 +73,13 @@ namespace Cheveux.Manager
             }
             catch(Exception Err)
             {
+                phUsersErr.Visible = true;
+                phMain.Visible = false;
+                errorHeader.Text = "Error displaying user details.";
+                errorMessage.Text = "It seems there is a problem communicating with the database."
+                                    + "Please report problem to admin or try again later.";
+                errorToReport.Text = "Error To report:" + Err.ToString();
+
                 function.logAnError(Err.ToString());
             }
 
@@ -91,14 +103,19 @@ namespace Cheveux.Manager
                 }
                 else
                 {
-                    Response.Write("<script>alert('Update Failed.Please Try Again.');</script>");
-                    Response.Redirect(Request.RawUrl);
+                    phUpdateErr.Visible = true;
+                    lblUpdateErr.Text = "An error has occured.We are unable to update the employees details at this point in time.<br/>"
+                                          + "Sorry for the inconvenience." +
+                                          "<br/>Please report to management or the administrator.";
                 }
             }
             catch (Exception Err)
             {
+                phUpdateErr.Visible = true;
+                lblUpdateErr.Text = "An error has occured.We are unable to update the employees details at this point in time.<br/>"
+                                      + "Sorry for the inconvenience.Please report to management or the administrator."
+                                      + "<br/>Error: " + Err.ToString();
                 function.logAnError(Err.ToString());
-                Response.Redirect("../Error.aspx");
             }
 
         }
