@@ -32,6 +32,13 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            errorHeader.Font.Bold = true;
+            errorHeader.Font.Underline = true;
+            errorHeader.Font.Size = 21;
+            errorMessage.Font.Size = 14;
+            errorToReport.Font.Size = 10;
+
+
             //access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
             //send the user to the correct page based on their usertype
@@ -238,13 +245,21 @@ namespace Cheveux
                              * to alert that the update was not successful
                              * (user friendly action status response)
                              */
-                            Response.Write("<script>alert('Error.Please Try Again.');</script>");
+                            //Response.Write("<script>alert('Error.Please Try Again.');</script>");
+                            phVisitErr.Visible = true;
+                            lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
+                                                  + "Please report to management or try again later. Sorry for the inconvenience."
+                                                  +"<br/>There is a problem with the database.";
                         }
                     }
                     catch (Exception err)
                     {
-                        Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
-                        //add error to the error log and then display response tab to say that an error has occured
+                        //Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
+                        //add error to the error log and then display response tab to say that an error has occured 
+                        phVisitErr.Visible = true;
+                        lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
+                                              + "Please report to management or try again later. Sorry for the inconvenience."
+                                              +"<br/>Error: " + err.ToString();
                         function.logAnError(err.ToString());
                     }
                 };
@@ -254,9 +269,22 @@ namespace Cheveux
             }
             catch(Exception Err)
             {
+                //Response.Write("<script>alert('An error has occured.Unable to display required data.');window.location='Stylist.aspx';</script>");
+
+                phServiceDetails.Visible = false;
+                phBookingDetails.Visible = false;
+                lblBookingDetailsHeading.Visible = false;
+                lblServiceHeading.Visible = false;
+
+                phBookingsErr.Visible = true;
+                errorHeader.Text = "Error.Cannot display booking details.";
+                errorMessage.Text = "It seems there is a problem communicating with the database."
+                                    + "Please report problem to admin or try again later.";
+                errorToReport.Text = "Error To report:" + Err.ToString();
+
+
                 //log error, display error message,redirect to the stylist page
                 function.logAnError(Err.ToString());
-                Response.Write("<script>alert('An error has occured.Unable to display required data.');window.location='Stylist.aspx';</script>");
             }
         }
         
@@ -349,10 +377,8 @@ namespace Cheveux
                     //will go back to bookings details content
                     phBookingDetails.Visible = true;
                     phServiceDetails.Visible = false;
-                    phConfirmVisit.Visible = false;
                     lblBookingDetailsHeading.Visible = true;
                     lblServiceHeading.Visible = false;
-                    lblConfirmUpdateHeading.Visible = false;
                 };
                 newCell.Controls.Add(sbtnBack);
                 //add cell to the row
@@ -368,9 +394,7 @@ namespace Cheveux
 
                     /* What this button does:
                      * =====================
-                     * 
                      * Updates customer visit record (service description column)
-                     * 
                      */
                     try
                     {
@@ -392,27 +416,25 @@ namespace Cheveux
                              * to alert that the update was not successful
                              * (user friendly action status response)
                              */
-                            Response.Write("<script>alert('Unsuccessful. Customer visit record was not updated');</script>");
+                            //Response.Write("<script>alert('Unsuccessful. Customer visit record was not updated');</script>");
+                            phVisitErr.Visible = true;
+                            lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
+                                                  + "Please report to management or try again later. Sorry for the inconvenience."
+                                                  + "<br/>There is a problem with the database.";
                         }
                     }
                     catch (Exception err)
                     {
-                        Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
+                        //Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
+                        phVisitErr.Visible = true;
+                        lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
+                                              + "Please report to management or try again later. Sorry for the inconvenience."
+                                              + "<br/>Error: " + err.ToString();
+
                         //add error to the error log and then display response tab to say that an error has occured
                         function.logAnError(err.ToString());
                     }
                     
-
-
-                    /*hide other placeholders headings and make the appropriate placeholder heading visible
-                     *will show user the customer visit content
-                     *
-                    phBookingDetails.Visible = false;
-                    phServiceDetails.Visible = false;
-                    phConfirmVisit.Visible = true;
-                    lblBookingDetailsHeading.Visible = false;
-                    lblServiceHeading.Visible = false;
-                    lblConfirmUpdateHeading.Visible = true;*/
                 };
                 newCell.Controls.Add(sbtnUpdate);
                 //add the cell to the row
@@ -420,9 +442,21 @@ namespace Cheveux
             }
             catch (Exception Err)
             {
-                //log error, display error message,redirect to the stylist page
+                phServiceDetails.Visible = false;
+                phBookingDetails.Visible = false;
+                lblBookingDetailsHeading.Visible = false;
+                lblServiceHeading.Visible = false;
+
+                //Response.Write("<script>alert('An error has occured.');window.location='Stylist.aspx';</script>");
+
+                phBookingsErr.Visible = true;
+                errorHeader.Text = "Error.Cannot display booking details.";
+                errorMessage.Text = "It seems there is a problem communicating with the database."
+                                    + "Please report problem to admin or try again later.";
+                errorToReport.Text = "Error To report:" + Err.ToString();
+
                 function.logAnError(Err.ToString());
-                Response.Write("<script>alert('An error has occured.');window.location='Stylist.aspx';</script>");
+                
             }
         }
         

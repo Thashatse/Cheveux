@@ -49,6 +49,60 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Table AgendaTable;
         
         /// <summary>
+        /// phVisitErr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phVisitErr;
+        
+        /// <summary>
+        /// lblVisitErr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblVisitErr;
+        
+        /// <summary>
+        /// phBookingsErr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phBookingsErr;
+        
+        /// <summary>
+        /// errorHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorHeader;
+        
+        /// <summary>
+        /// errorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorMessage;
+        
+        /// <summary>
+        /// errorToReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorToReport;
+        
+        /// <summary>
         /// noBookingsPH control.
         /// </summary>
         /// <remarks>

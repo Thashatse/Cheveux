@@ -23,6 +23,12 @@ namespace Cheveux
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
         protected void Page_Load(object sender, EventArgs e)
 		{
+            errorHeader.Font.Bold = true;
+            errorHeader.Font.Underline = true;
+            errorHeader.Font.Size = 21;
+            errorMessage.Font.Size = 14;
+            errorToReport.Font.Size = 10;
+
             //access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
 
@@ -218,12 +224,20 @@ namespace Cheveux
                                      * and that the customer visit record was not created
                                      * (user friendly action status response)
                                      */
-                                    Response.Write("<script>alert('Unsuccessful. Customer visit record not created');</script>");
+                                    //Response.Write("<script>alert('Unsuccessful. Customer visit record not created');</script>");
+                                    phVisitErr.Visible = true;
+                                    lblVisitErr.Text = "An error has occured.System is unable to create a visit record for the customer at this point in time.<br/>"
+                                                          + "Please report to management. Sorry for the inconvenience."+
+                                                          "<br/>Possible Error: Visit Record already exists. System does not allow double visit records.";
                                 }
                             }
                             catch (ApplicationException err)
                             {
-                                Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
+                                //Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
+                                phVisitErr.Visible = true;
+                                lblVisitErr.Text = "An error has occured.<br/>"
+                                                      + "Please report to management. Sorry for the inconvenience." +
+                                                      "<br/>Error: " + err.ToString();
                                 //add error to the error log and then display response tab to say that an error has occured
                                 function.logAnError(err.ToString());
                             }
@@ -246,10 +260,18 @@ namespace Cheveux
             }
             catch (ApplicationException E)
             {
+                //Response.Write("<script>alert('An error has occured.Having trouble connecting to the database. Unable to display required data.');</script>");
+                //Response.Redirect(Request.RawUrl);
+
+                phBookingsErr.Visible = true;
+                errorHeader.Text = "Oh no!";
+                errorMessage.Text = "It seems there is a problem communicating with the database."
+                                    + "Please report problem to admin or try again later.";
+                errorToReport.Text = "Error To report:" + E.ToString();
+
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
                 function.logAnError(E.ToString());
-                Response.Write("<script>alert('An error has occured.Having trouble connecting to the database. Unable to display required data.');</script>");
-                Response.Redirect(Request.RawUrl);
+                
             }
         }
 
