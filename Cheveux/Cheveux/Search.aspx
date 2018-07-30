@@ -15,7 +15,6 @@
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
         <br />
-        <br />
     </div>
     <br />
     <div class="row">

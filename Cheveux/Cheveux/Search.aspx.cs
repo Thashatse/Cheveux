@@ -113,22 +113,15 @@ namespace Cheveux
                                 serviceSearchResults.Rows.Add(newRow);
                                 //fill the row with the data from the product results object
                                 TableCell newCell = new TableCell();
-                                newCell.Text = result.Name.ToString();
+                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
+                                    result.Name.ToString()+"</a>";
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = result.ProductDescription.ToString();
+                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
+                                    result.ProductDescription.ToString() + "</a>";
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                                 newCell = new TableCell();
                                 newCell.Text = "R " + result.Price;
-                                serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
-                                newCell = new TableCell();
-                                newCell.Text = function.GetFullProductTypeText(result.ProductType);
-                                serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
-                                newCell = new TableCell();
-                                newCell.Text =
-                                    "<button type = 'button' class='btn btn-default'>" +
-                                    "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "'>View Service</a></button>";
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                             }
                             //products (Treatments)
@@ -147,19 +140,15 @@ namespace Cheveux
                                 ProductSearchResults.Rows.Add(newRow);
                                 //fill the row with the data from the product results object
                                 TableCell newCell = new TableCell();
-                                newCell.Text = result.Name.ToString();
+                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" + 
+                                    result.Name.ToString() + "</a>";
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = result.ProductDescription.ToString();
+                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" + 
+                                    result.ProductDescription.ToString() + "</a>";
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                                 newCell = new TableCell();
                                 newCell.Text = "R "+result.Price;
-                                ProductSearchResults.Rows[productCount].Cells.Add(newCell);
-                                newCell = new TableCell();
-                                newCell.Text =
-                                    "<button type = 'button' class='btn btn-default'>" +
-                                    "<a href = 'ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "''>View Product</a></button>";
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                             }
                             //error
@@ -180,18 +169,19 @@ namespace Cheveux
                             StylistSearchResults.Rows.Add(newRow);
                         //create a header row and set cell withs
                         TableHeaderCell newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Width = 400;
+                            newHeaderCell.Width = 150;
                             StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
                             newHeaderCell = new TableHeaderCell();
                             newHeaderCell.Text = "Stylist Name";
-                            newHeaderCell.Width = 450;
+                            newHeaderCell.Width = 750;
                             StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                            newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Width = 150;
-                            StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
+                        newHeaderCell = new TableHeaderCell();
+                        newHeaderCell.Text = "Stylist Specialization";
+                        newHeaderCell.Width = 750;
+                        StylistSearchResults.Rows[0].Cells.Add(newHeaderCell); ;
 
-                            //create a loop to display each result
-                            foreach (SP_SearchStylistsBySearchTerm result in results.Item2)
+                        //create a loop to display each result
+                        foreach (SP_SearchStylistsBySearchTerm result in results.Item2)
                             {
                                 stylistRowCount++;
                                 // create a new row in the results table and set the height
@@ -205,22 +195,20 @@ namespace Cheveux
                                     " Profile Image' width='75' height='75'/>";
                                 StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = result.StylistFName + " " + result.StylistLName;
+                                newCell.Text = "<a class='btn btn-default' href='Profile.aspx?Action=View&empID=" + result.StylistID.ToString().Replace(" ", string.Empty) + "'>"+ 
+                                    result.StylistFName + " " + result.StylistLName+ "</a>";
                                 StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
-                                newCell = new TableCell();
-                                newCell.Text =
-                                    "<button type = 'button' class='btn btn-default'>" +
-                                    "<a href = 'Profile.aspx?Action=View" +
-                                    "&empID=" + result.StylistID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Search.aspx?ST=" + searchTerm + "'>View Stylist Profile</a></button>";
-                                StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
-                            }
+                            newCell = new TableCell();
+                            newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + handler.viewStylistSpecialisation(result.StylistID.ToString()).serviceID.ToString().Replace(" ", string.Empty) + "'>" +
+                                handler.viewStylistSpecialisation(result.StylistID.ToString()).serviceName.ToString() + "</a>";
+                            StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                         }
-                
+                        }
 
-                //set the headings based on the search results
-                //products heading
-                if (productCount != 0)
+                    #region count headings
+                    //set the headings based on the search results
+                    //products heading
+                    if (productCount != 0)
                 {
                     //set the product search results heading
                     ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
@@ -243,11 +231,14 @@ namespace Cheveux
                     serviceResultsLable.Text = "<h2> 0 Search Results For '" + searchTerm + "' </h2>";
                 }
                 }
+                #endregion
+
                 catch (ApplicationException Err)
                 {
                     function.logAnError(Err.ToString());
                     serviceResultsLable.Text = "An Error Occurred Getting Search Results From The Server, Try Again Later";
                 }
+
 
             }
         }
@@ -267,15 +258,13 @@ namespace Cheveux
             ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
             newHeaderCell = new TableHeaderCell();
             newHeaderCell.Text = "Product Description";
-            newHeaderCell.Width = 600;
+            newHeaderCell.Width = 750;
             ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
             newHeaderCell = new TableHeaderCell();
             newHeaderCell.Text = "Price";
             newHeaderCell.Width = 300;
             ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
             newHeaderCell = new TableHeaderCell();
-            newHeaderCell.Width = 150;
-            ProductSearchResults.Rows[0].Cells.Add(newHeaderCell);
         }
 
         //create the service table header
@@ -293,18 +282,11 @@ namespace Cheveux
             serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
             newHeaderCell = new TableHeaderCell();
             newHeaderCell.Text = "Service Description";
-            newHeaderCell.Width = 600;
+            newHeaderCell.Width = 750;
             serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
             newHeaderCell = new TableHeaderCell();
             newHeaderCell.Text = "Price";
-            newHeaderCell.Width = 100;
-            serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
-            newHeaderCell = new TableHeaderCell();
-            newHeaderCell.Text = "Service Type";
-            newHeaderCell.Width = 200;
-            serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
-            newHeaderCell = new TableHeaderCell();
-            newHeaderCell.Width = 150;
+            newHeaderCell.Width = 300;
             serviceSearchResults.Rows[0].Cells.Add(newHeaderCell);
         }
     }
