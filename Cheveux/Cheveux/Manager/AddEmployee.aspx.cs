@@ -23,6 +23,12 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            errorHeader.Font.Bold = true;
+            errorHeader.Font.Underline = true;
+            errorHeader.Font.Size = 21;
+            errorMessage.Font.Size = 14;
+            errorToReport.Font.Size = 10;
+
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
             {
@@ -176,7 +182,7 @@ namespace Cheveux.Manager
                             //Response.Write("<script>alert('Our apologies. An error has occured.')</script>");
                             phAddErr.Visible = true;
                             lblAddErr.Text = "An error has occured.We are unable to add the employee at this point in time.<br/>"
-                                                  + "Sorry for the inconvenience."
+                                                  + "Sorry for the inconvenience.Please report to management or the administrator."
                                                   + "<br/>Error: " + err.ToString();
                             //add error to the error log and then display response tab to say that an error has occured
                             function.logAnError(err.ToString());
@@ -195,8 +201,8 @@ namespace Cheveux.Manager
             catch (ApplicationException E)
             {
                 phUsersErr.Visible = true;
-                errorHeader.Text = "Oh no!";
-                errorMessage.Text = "It seems there is a communicating with the database."
+                errorHeader.Text = "Error displaying users";
+                errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
                 errorToReport.Text = "Error To report:" + E.ToString();
 
