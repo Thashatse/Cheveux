@@ -13,7 +13,7 @@ namespace Cheveux
 	{
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        String test = DateTime.Now.ToString("dddd d MMMM");
+        String dayDate = DateTime.Now.ToString("dddd d MMMM");
         //List<SP_GetMyNextCustomer> next = null;
         CUST_VISIT cust_visit;
         HttpCookie cookie = null;
@@ -25,51 +25,45 @@ namespace Cheveux
 		{
             //access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
-            //send the user to the correct page based on their usertype
-            if (UserID != null)
-            {
-                string userType = UserID["UT"].ToString();
-                if ("R" == userType)
-                {
-                    //Receptionist
-                    Response.Redirect("../Receptionist/Receptionist.aspx");
-                }
-                else if (userType == "M")
-                {
-                    //Manager
-                    Response.Redirect("../Manager/Manager.aspx");
-                }
-                else if (userType == "S")
-                {
-                    //stylist
-                    //allowed access to this page
-                    //Response.Redirect("Stylist.aspx");
-                }
-                else if (userType == "C")
-                {
-                    //customer
-                    Response.Redirect("../Default.aspx");
 
+            if(UserID == null)
+            {
+                LoggedOut.Visible = true;
+                AgendaTable.Visible = false;
+                LoggedIn.Visible = false;
+            }
+            else if(UserID["UT"] != "S")
+            {
+                Response.Redirect("../Default.aspx");
+            }
+            else if(UserID["UT"] == "S")
+            {
+                LoggedOut.Visible =false;
+                LoggedIn.Visible = true;
+
+                lblDate.Text = dayDate;
+                string wB = Request.QueryString["WB"];
+                if (wB == "True")
+                {
+                    lblWelcome.Text = "Welcome Back " + handler.GetUserDetails(UserID["ID"]).FirstName;
+                }
+
+                cookie = Request.Cookies["CheveuxUserID"];
+                getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
+
+                //if theres no booking for the day dont display the tables headings
+                if(AgendaTable.Rows.Count == 1)
+                {
+                    AgendaTable.Visible = false;
+                    noBookingsPH.Visible = true;
+                    lblNoBookings.Text = "You have no bookings for the day.<br/> Refresh page for update";
                 }
                 else
                 {
-                    function.logAnError("Unknown user type found during Loading of default.aspx: " +
-                        UserID["UT"].ToString());
-                    Response.Redirect("../Default.aspx");
+                    //if there are bookings for the day display headings 
+                    AgendaTable.Visible = true;
                 }
-            }
-            else
-            {
-                //ask the user to login first 
-
-                //temp fix redirect to home page
-                Response.Redirect("../Default.aspx");
-            }
-            
-            theDate.InnerHtml = test;
-            cookie = Request.Cookies["CheveuxUserID"];
-            
-            getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
+            }            
         }
 
         public void getAgenda(string id, DateTime bookingDate)
@@ -108,13 +102,13 @@ namespace Cheveux
                 AgendaTable.Rows[0].Cells.Add(endTime);
 
                 TableCell cust = new TableCell();
-                cust.Text = "Customer Name";
+                cust.Text = "Customer";
                 cust.Font.Bold = true;
                 cust.Width = 400;
                 AgendaTable.Rows[0].Cells.Add(cust);
 
                 TableCell emp = new TableCell();
-                emp.Text = "Employee Name";
+                emp.Text = "Employee";
                 emp.Font.Bold = true;
                 emp.Width = 400;
                 AgendaTable.Rows[0].Cells.Add(emp);
@@ -122,13 +116,13 @@ namespace Cheveux
                 TableCell service = new TableCell();
                 service.Text = "Service";
                 service.Font.Bold = true;
-                service.Width = 400;
+                service.Width = 450;
                 AgendaTable.Rows[0].Cells.Add(service);
 
                 TableCell arrived = new TableCell();
                 arrived.Text = "Arrived";
                 arrived.Font.Bold = true;
-                arrived.Width = 400;
+                arrived.Width = 200;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
                 //integer that will be appended in the foreach loop to access the new row for every iteration of the foreach

@@ -17,103 +17,109 @@ namespace Cheveux
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        String test = DateTime.Now.ToString("dddd d MMMM");
+        String dayDate = DateTime.Today.ToString("D");
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
         BOOKING checkIn = null;
-
+        HttpCookie cookie = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //access control
-            HttpCookie UserID = Request.Cookies["CheveuxUserID"];
-            //send the user to the correct page based on their usertype
-            if (UserID != null)
+            cookie = Request.Cookies["CheveuxUserID"];
+            if(cookie == null)
             {
-                string userType = UserID["UT"].ToString();
-                    if ("R" == userType)
-                    {
-                        //Receptionist
-                        //allowed access to this page
-                        //Response.Redirect("../Receptionist/Receptionist.aspx");
-                    }
-                    else if (userType == "M")
-                    {
-                        //Manager
-                        Response.Redirect("../Manager/Manager.aspx");
-                    }
-                    else if (userType == "S")
-                    {
-                        //stylist
-                        Response.Redirect("../stylist/Stylist.aspx");
-                    }
-                else if (userType == "C")
-                {
-                    //customer
-                    Response.Redirect("../Default.aspx");
-
-                }
-                else
-                {
-                    Response.Redirect("../Default.aspx");
-                    function.logAnError("Unknown user type found during Loading of default.aspx: " +
-                        UserID["UT"].ToString());
-                }
+                LoggedOut.Visible = true;
+                viewStylistHeader.Visible = false;
+                drpEmpNames.Visible = false;
+                LoggedIn.Visible = false;
             }
-            else
+            else if(cookie["UT"] != "R")
             {
-                //ask the user to login first 
-                
-                //temp fix redirect to home page
                 Response.Redirect("../Default.aspx");
             }
-
-            theDate.InnerHtml = test;
-            list = handler.BLL_GetEmpNames();
-            if (!Page.IsPostBack)
+            else if(cookie["UT"] == "R")
             {
+                LoggedOut.Visible = false;
+                viewStylistHeader.Visible = true;
+                drpEmpNames.Visible = true;
+                LoggedIn.Visible = true;
+
+                lblDate.Text = dayDate;
+                string wB = Request.QueryString["WB"];
+                if (wB == "True")
+                {
+                    Welcome.Text = "Welcome Back " + handler.GetUserDetails(cookie["ID"]).FirstName;
+                }
+                list = handler.BLL_GetEmpNames();
+                if (!Page.IsPostBack)
+                {
+                    try
+                    {
+                        foreach (SP_GetEmpNames emps in list)
+                        {
+                            //Load employee names into dropdownlist
+                            drpEmpNames.DataSource = list;
+                            //set the coloumn that will be displayed to the user
+                            drpEmpNames.DataTextField = "Name";
+                            //set the coloumn that will be used for the valuefield
+                            drpEmpNames.DataValueField = "EmployeeID";
+                            //bind the data
+                            drpEmpNames.DataBind();
+                            /*set the default (text (dropdownlist index[0]) that will first be displayed to the user.
+                             * in this case the "instruction" to select the employee
+                            */
+                            drpEmpNames.Items.Insert(0, new ListItem("--Select Employee--", "-1"));
+                        }
+                    }
+                    catch (ApplicationException Err)
+                    {
+                        drpEmpNames.Items.Insert(0, new ListItem("Error"));
+                        phBookingsErr.Visible = true;
+                        errorHeader.Text = "Oh no!";
+                        errorMessage.Text = "It seems there is a problem retrieving data from the database"
+                                            + "Please report problem or try again later.";
+                        errorToReport.Text = "Error To report:" + Err.ToString();
+                        function.logAnError(Err.ToString());
+                    }
+
+                }
+
                 try
                 {
-                    foreach (SP_GetEmpNames emps in list)
+                    /*if the selected valus is not the "select employee" display the employee names
+                     * if the selected value is the "select employee" nothing will be displayed or added to the table
+                     * getAgenda method will not run
+                     */
+                    if (drpEmpNames.SelectedValue != "-1")
                     {
-                        //Load employee names into dropdownlist
-                        drpEmpNames.DataSource = list;
-                        //set the coloumn that will be displayed to the user
-                        drpEmpNames.DataTextField = "Name";
-                        //set the coloumn that will be used for the valuefield
-                        drpEmpNames.DataValueField = "EmployeeID";
-                        //bind the data
-                        drpEmpNames.DataBind();
-                        /*set the default (text (dropdownlist index[0]) that will first be displayed to the user.
-                         * in this case the "instruction" to select the employee
-                        */
-                        drpEmpNames.Items.Insert(0, new ListItem("--Select Employee--", "-1"));
+                        getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate));
+
+                        if(AgendaTable.Rows.Count == 1)
+                        {
+                            AgendaTable.Visible = false;
+                            noBookingsPH.Visible = true;
+                            lblNoBookings.Text = drpEmpNames.SelectedItem.Text + " has not been appointed to any bookings today."
+                                                + "<br/>Refresh to check for updated stylists bookings appointments.";
+                        }
+                        else if(AgendaTable.Rows.Count > 1)
+                        {
+                            noBookingsPH.Visible = false;
+                            AgendaTable.Visible = true;
+                        }
+                        
                     }
                 }
                 catch (ApplicationException Err)
                 {
-                    Response.Write("<script>alert('Could load data into dropdownlist.Problem communicating with the database.');</script>");
+                    AgendaTable.Visible = false;
+                    phBookingsErr.Visible = true;
+                    errorHeader.Text = "Error";
+                    errorMessage.Text = "It seems there is a problem connecting to the database.<br/>"
+                                        + "Please report problem or try again later.";
+                    errorToReport.Text = "Error To report:" + Err.ToString();
                     function.logAnError(Err.ToString());
                 }
-
-            }
-
-            try
-            {
-                /*if the selected valus is not the "select employee" display the employee names
-                 * if the selected value is the "select employee" nothing will be displayed or added to the table
-                 * getAgenda method will not run
-                 */ 
-                if (drpEmpNames.SelectedValue != "-1")
-                {
-                    getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate));
-                }
-            }
-            catch (ApplicationException Err)
-            {
-                Response.Write("<script>alert('Could load data into the table.Problem communicating with the database.');</script>");
-                function.logAnError(Err.ToString());
-            }
+            }   
         }
 
         public void getAgenda(string id, DateTime bookingDate)
@@ -256,19 +262,25 @@ namespace Cheveux
                                 if (handler.BLL_CheckIn(checkIn))
                                 {
                                     //if BLL_CheckIn successful and arrival status changed show user and refresh the page
-                                    Response.Write("<script>alert('Customer arrival status has been updated.');location.reload(true);</script>");
+                                    Response.Write("<script>alert('Customer has been checked-in.');location.reload(true);</script>");
                                 }
                                 else
                                 {
                                     //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
-                                    Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
+                                    //Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
+                                    phCheckInErr.Visible = true;
+                                    lblCheckinErr.Text = "An error has occured.We are unable to check-in the customer at this point in time.<br/>"
+                                                          + "Please report to management. Sorry for the inconvenience.";
                                 }
 
                             }
                             catch (ApplicationException err)
                             {
                                 //Error handling
-                                Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
+                                //Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
+                                phCheckInErr.Visible = true;
+                                lblCheckinErr.Text = "An error has occured during the check-in process.<br/>"
+                                                      + "Please report to management or try again later. Sorry for the inconvenience.";
                                 //add error to the error log and then display response tab to say that an error has occured
                                 function.logAnError(err.ToString());
                             }
@@ -279,34 +291,6 @@ namespace Cheveux
                         buttonCell.Controls.Add(btn);
                         //add cell to row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
-
-                     /*
-                        TableCell missedAppt = new TableCell();
-                        missedAppt.Width = 200;
-                        missedAppt.Height = 50;
-                        Button btnMissed = new Button();
-                        btnMissed.Text = "No arrival";
-                        btnMissed.CssClass = "btn btn-primary";
-                        btnMissed.Click += (zz, tt) =>
-                        {
-                 0           /*
-                             * Show pop-up asking would the receptionist like to cancel booking or update the booking
-                             * 
-                             * if(customerCall == false)
-                             * {
-                             *      add 'Customer did not arrive comment'
-                             *      send email about not arriving asking the customer
-                             *      to rebook
-                             * }
-                             * else if(customerCall is True){
-                             *      give the receptionist an option to
-                             *      rebook on the customers behalf
-                             * }
-                             *
-                        };
-                        missedAppt.Controls.Add(btnMissed);
-                        AgendaTable.Rows[i].Cells.Add(missedAppt);
-                    */
                     }
                     else if(function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "Yes")
                     {
@@ -325,7 +309,13 @@ namespace Cheveux
             }
             catch(ApplicationException E)
             {
-                Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
+                //Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
+                phBookingsErr.Visible = true;
+                errorHeader.Text = "Oh no!";
+                errorMessage.Text = "It seems there is a communicating with the database."
+                                    + "Please report problem to admin or try again later.";
+                errorToReport.Text = "Error To report:" + E.ToString();
+
                 function.logAnError(E.ToString());
             }
         }

@@ -160,7 +160,7 @@ namespace Cheveux
                             //Receptionist
                             cookie["UT"] = "R";
                             goToPreviousPage();
-                            Response.Redirect("../Receptionist/Receptionist.aspx");
+                            Response.Redirect("../Receptionist/Receptionist.aspx?WB=True");
                         }
                         else if (EmpType == "M")
                         {
@@ -175,7 +175,7 @@ namespace Cheveux
                             cookie["UT"] = "S";
                             //go back to the previous page if there is one
                             goToPreviousPage();
-                            Response.Redirect("../Stylist/Stylist.aspx");
+                            Response.Redirect("../Stylist/Stylist.aspx?WB=True");
                         }
                         else
                         {
@@ -327,7 +327,7 @@ namespace Cheveux
                         //Receptionist
                         cookie["UT"] = "R";
                         goToPreviousPage();
-                        Response.Redirect("../Receptionist/Receptionist.aspx");
+                        Response.Redirect("../Receptionist/Receptionist.aspx?WB=True");
                     }
                     else if (EmpType == "M")
                     {
@@ -342,7 +342,7 @@ namespace Cheveux
                         cookie["UT"] = "S";
                         //go back to the previous page if there is one
                         goToPreviousPage();
-                        Response.Redirect("../Stylist/Stylist.aspx");
+                        Response.Redirect("../Stylist/Stylist.aspx?WB=True");
                     }
                     else
                     {

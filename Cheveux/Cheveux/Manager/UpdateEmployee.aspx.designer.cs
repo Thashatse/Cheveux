@@ -13,6 +13,33 @@ namespace Cheveux.Manager {
     public partial class UpdateEmployee {
         
         /// <summary>
+        /// phLogIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phLogIn;
+        
+        /// <summary>
+        /// LoggedOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggedOut;
+        
+        /// <summary>
+        /// phMain control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phMain;
+        
+        /// <summary>
         /// tblUserImage control.
         /// </summary>
         /// <remarks>
@@ -40,6 +67,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.TextBox txtAddLine1;
         
         /// <summary>
+        /// ad1Validation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ad1Validation;
+        
+        /// <summary>
         /// lblAddLine2 control.
         /// </summary>
         /// <remarks>
@@ -56,6 +92,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAddLine2;
+        
+        /// <summary>
+        /// ad2Validation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ad2Validation;
         
         /// <summary>
         /// lblType control.
@@ -92,6 +137,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListItem TypeOption2;
+        
+        /// <summary>
+        /// rdoValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rdoValidator;
         
         /// <summary>
         /// btnBack control.

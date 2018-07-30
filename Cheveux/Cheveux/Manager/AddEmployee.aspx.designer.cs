@@ -13,31 +13,31 @@ namespace Cheveux.Manager {
     public partial class AddEmpolyee {
         
         /// <summary>
-        /// txtSearch control.
+        /// phLogIn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearch;
+        protected global::System.Web.UI.WebControls.PlaceHolder phLogIn;
         
         /// <summary>
-        /// btnSearch control.
+        /// LoggedOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearch;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggedOut;
         
         /// <summary>
-        /// lblVal control.
+        /// phMain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblVal;
+        protected global::System.Web.UI.WebControls.PlaceHolder phMain;
         
         /// <summary>
         /// phUsers control.
@@ -67,39 +67,57 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Label valLabel;
         
         /// <summary>
-        /// resultsHeading control.
+        /// phAddErr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl resultsHeading;
+        protected global::System.Web.UI.WebControls.PlaceHolder phAddErr;
         
         /// <summary>
-        /// phSearchedUsers control.
+        /// lblAddErr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phSearchedUsers;
+        protected global::System.Web.UI.WebControls.Label lblAddErr;
         
         /// <summary>
-        /// tblSearchedUsers control.
+        /// phUsersErr control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblSearchedUsers;
+        protected global::System.Web.UI.WebControls.PlaceHolder phUsersErr;
         
         /// <summary>
-        /// searchVal control.
+        /// errorHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label searchVal;
+        protected global::System.Web.UI.WebControls.Label errorHeader;
+        
+        /// <summary>
+        /// errorMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorMessage;
+        
+        /// <summary>
+        /// errorToReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errorToReport;
     }
 }

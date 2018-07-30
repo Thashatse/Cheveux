@@ -18,9 +18,26 @@ namespace Cheveux.Manager
         SP_ViewEmployee view = null;
         EMPLOYEE emp = null;
         string userID;
+        HttpCookie cookie = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            cookie = Request.Cookies["CheveuxUserID"];
+            if(cookie == null)
+            {
+                phLogIn.Visible = true;
+                phMain.Visible = false;
+            }
+            else if(cookie["UT"] != "M")
+            {
+                Response.Redirect("../Default.aspx");
+            }
+            else if(cookie["UT"] == "M")
+            {
+                phMain.Visible = true;
+                phLogIn.Visible = true;
+            }
 
             userID = Request.QueryString["empID"];
             if(userID != null)

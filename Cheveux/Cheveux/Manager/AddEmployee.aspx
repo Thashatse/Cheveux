@@ -16,7 +16,20 @@
         <div class="col-md-2 col-sm-1"></div>
         <div class="col-md-8 col-sm-10">
             <form runat="server">
-                <!-- Jumbo Tron -->
+                
+                <asp:PlaceHolder ID="phLogIn" runat="server">
+                <div class="container" runat="server" id="LoggedOut" visible="true">
+                    <div class="jumbotron bg-dark text-white">
+                        <h1>Please Log-in to proceed</h1>
+                        <button type="button" class="btn btn-default">
+                            <a href="../Authentication/Accounts.aspx?PreviousPage=AddEmployee.aspx" id="LogedOutButton">Login</a>
+                        </button>
+                    </div>
+                </div>
+                </asp:PlaceHolder>
+
+                <asp:PlaceHolder ID="phMain" runat="server">
+                <!-- Jumbotron -->
                 <div class="jumbotron bg-dark text-white">
                     <br />
                     <div id="search">
@@ -26,20 +39,6 @@
                                     <h1>Add Employee</h1>
                                 </header>
                                 <br />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
-                                <!--- Search for user --->
-                                <asp:TextBox class="form-control input-sm" ID="txtSearch" runat="server" Placeholder="Search for user"></asp:TextBox>
-                            </div>
-                            <div class="col-2">
-                                <asp:Button ID="btnSearch" class="btn btn-primary" runat="server" Text="Find User" OnClick="btnSearch_Click" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <asp:Label ID="lblVal" runat="server" Text="Label" Visible="false"></asp:Label>
                             </div>
                         </div>
                     </div>
@@ -56,21 +55,42 @@
                     </div>
                 </div>
 
-                <!--- List of Users found from search --->
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3 id="resultsHeading" class="text-center" runat="server" visible="false">...
-                        </h3>
-                    </div>
+                <!--Error adding user message-->
+                <div class="container row" runat="server">
+                <asp:PlaceHolder ID="phAddErr" runat="server" Visible="false">
+                        <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible">
+                            <asp:Label ID="lblAddErr" runat="server" Text="Label"></asp:Label>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                </asp:PlaceHolder>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <asp:PlaceHolder ID="phSearchedUsers" runat="server" Visible="false">
-                            <asp:Table ID="tblSearchedUsers" runat="server"></asp:Table>
-                            <asp:Label ID="searchVal" runat="server" Text="Label" Visible="false"></asp:Label>
-                        </asp:PlaceHolder>
+
+                <!--Error: If cant display list of users-->
+                <asp:PlaceHolder ID="phUsersErr" runat="server" Visible="false">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="jumbotron">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <!-- Error Image-->
+                                            <img src="https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png" alt="Error" width="100" height="100"></img>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <!--Error details placehoders-->
+                                            <asp:Label ID="errorHeader" runat="server"></asp:Label>
+                                                <br />
+                                            <asp:Label ID="errorMessage" runat="server"></asp:Label>
+                                            <asp:Label ID="errorToReport" runat="server"></asp:Label>    
+                                            </div>
+                                    </div>
+                                </div>
+                             </div>
+                         </div>
                     </div>
-                </div>
+                </asp:PlaceHolder>
+
+               </asp:PlaceHolder>
             </form>
         </div>
         <div class="col-md-2 col-sm-1"></div>
