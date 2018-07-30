@@ -65,11 +65,12 @@ namespace BLL
         USER checkForAccountTypeEmail(string identifier);
         USER logInEmail(string identifier, string password);
         List<SP_UserList> userList();
+        List<SP_SearchForUser> searchForUser(string term);
         bool addEmployee(EMPLOYEE e);
         bool updateEmployee(EMPLOYEE emp);
         List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID);
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
-        List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID);
+        List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_GetStylists> BLL_GetAllStylists();
         bool deactivateUser(string userID);
     }
