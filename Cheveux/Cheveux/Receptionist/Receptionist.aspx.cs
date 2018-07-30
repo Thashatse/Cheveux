@@ -317,7 +317,7 @@ namespace Cheveux
             {
                 //Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
                 phBookingsErr.Visible = true;
-                errorHeader.Text = "Oh no!";
+                errorHeader.Text = "Error getting employee agenda.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
                 errorToReport.Text = "Error To report:" + E.ToString();
