@@ -85,6 +85,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Calendar CalendarDateEnd;
         
         /// <summary>
+        /// btnRefresh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRefresh;
+        
+        /// <summary>
         /// lError control.
         /// </summary>
         /// <remarks>

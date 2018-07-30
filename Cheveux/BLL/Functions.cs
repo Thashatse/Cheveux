@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TypeLibrary.ViewModels;
 using System.Data;
 using System.Web.UI.WebControls;
+using System.Net;
+using System.Net.Mail;
 
 namespace BLL
 {
@@ -213,6 +215,44 @@ namespace BLL
                 result = string.Join("", id);
             } while (Handler.getCustomerUpcomingBookingDetails(result) != null);
             return result;
+        }
+
+        public bool sendEmailAlert(string receverAddress, string reciverName, string subject, string body, string senderName)
+        {
+            bool success = false;
+            try
+            {
+                var fromAddress = new MailAddress("BookingsCheveux2@gmail.com", senderName);
+                var toAddress = new MailAddress(receverAddress, reciverName);
+                const string fromPassword = "W$fu7a61k";
+
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                };
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body
+                })
+                {
+                    smtp.Send(message);
+                }
+                success = true;
+            }
+            catch (Exception err)
+            {
+                logAnError("Error sending email To: "+ receverAddress 
+                    +"Subject: "+ subject
+                    +" Error:"+ err);
+                success = false;
+            }
+            return success;
         }
     }
 }
