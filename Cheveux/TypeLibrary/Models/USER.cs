@@ -19,5 +19,6 @@ namespace TypeLibrary.Models
         public char Active { get; set; }
         public string UserImage { get; set; }
         public string AccountType { get; set; }
+        public char PreferredCommunication { get; set; }
     }
 }

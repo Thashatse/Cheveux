@@ -17,5 +17,6 @@ namespace TypeLibrary.Models
         public string Available { get; set; }
         public string Arrived { get; set; }
         public string Comment { get; set; }
+        public bool NotificationReminder { get; set; }
     }
 }
