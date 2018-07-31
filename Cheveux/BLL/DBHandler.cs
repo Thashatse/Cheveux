@@ -20,6 +20,18 @@ namespace BLL
         }
         #endregion
 
+        #region Email/SMS Notifications
+        public List<OGBkngNoti> GetOGBkngNotis()
+        {
+            return db.GetOGBkngNotis();
+        }
+
+        public bool updateNotiStatus(string bookingID, bool notiStatus)
+        {
+            return db.updateNotiStatus(bookingID, notiStatus);
+        }
+        #endregion
+
         public bool deactivateUser(string userID)
         {
             return db.deactivateUser(userID);

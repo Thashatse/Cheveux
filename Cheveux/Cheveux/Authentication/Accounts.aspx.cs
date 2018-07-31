@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,6 +16,11 @@ namespace Cheveux
         IDBHandler handler = new DBHandler();
 
         protected void Page_Load(object sender, EventArgs e)
+        {
+            Parallel.Invoke(() => loadPage(), () => function.sendOGBkngNoti());
+        }
+
+        private void loadPage()
         {
             //set the create acount URL
             if (PreviousPage != null)
@@ -51,7 +57,7 @@ namespace Cheveux
                 divEmailAcount.Visible = true;
                 //check for any othe alerts
                 string alert = Request.QueryString["Alert"];
-                if(alert != null || alert != "")
+                if (alert != null || alert != "")
                 {
                     lError.Visible = true;
                     lError.Text = alert;

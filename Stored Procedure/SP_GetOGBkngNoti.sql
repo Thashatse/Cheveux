@@ -12,12 +12,12 @@ GO
 -- =============================================
 -- Description: Get Out Going Booking Notifications: gets the details nessasry to send booking notifications for bookint taking place tommorow
 -- =============================================
-CREATE PROCEDURE SP_GetOGBkngNoti
+create PROCEDURE SP_GetOGBkngNoti
 AS
 BEGIN
 	SELECT BookingID
-	  ,[SlotNo], (select StartTime from TIMESLOT ts where ts.SlotNo = b.[SlotNo])
-      ,[CustomerID], u.FirstName, u.UserName, u.PreferredCommunication, u.Email, u.ContactNo
+	  ,[SlotNo], (select StartTime from TIMESLOT ts where ts.SlotNo = b.[SlotNo]) as StartTime
+      ,[CustomerID], u.FirstName, u.LastName, u.UserName, u.PreferredCommunication, u.Email, u.ContactNo
       ,[StylistID], (Select FirstName from [user] where UserID = [StylistID]) as StylistName
       ,[ServiceID], p.Name, p.Price
       ,[Date]

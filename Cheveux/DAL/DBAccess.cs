@@ -71,6 +71,71 @@ namespace DAL
         }
         #endregion
 
+        #region Email/SMS Notifications
+        public List<OGBkngNoti> GetOGBkngNotis()
+        {
+            List<OGBkngNoti> oGBkngNotiList = new List<OGBkngNoti>();
+            OGBkngNoti oGBkngNoti = null;
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetOGBkngNoti",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            oGBkngNoti = new OGBkngNoti
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                SlotNo = row["SlotNo"].ToString(),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                CustomerID = row["CustomerID"].ToString(),
+                                FirstName = row["FirstName"].ToString(),
+                                lastName = row["LastName"].ToString(),
+                                UserName = row["UserName"].ToString(),
+                                PreferredCommunication = row["PreferredCommunication"].ToString()[0],
+                                Email = row["Email"].ToString(),
+                                ContactNo = row["ContactNo"].ToString(),
+                                stylistFirstName = row["StylistName"].ToString(),
+                                ServiceID = row["ServiceID"].ToString(),
+                                Price = Convert.ToDecimal(row["Price"]),
+                                Date = Convert.ToDateTime(row["Date"].ToString()),
+                                NotificationReminder = Convert.ToBoolean(row["NotificationReminder"]),
+                                serviceName = row["Name"].ToString(),
+                                StylistID = row["StylistID"].ToString()
+                            };
+                            oGBkngNotiList.Add(oGBkngNoti);
+                        }
+                    }
+                    return oGBkngNotiList;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateNotiStatus(string bookingID, bool notiStatus)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BookingID", bookingID),
+                new SqlParameter("@NotiStatus", notiStatus)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateNotiStatus", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
         {
             SP_GetCustomerBooking booking = null;

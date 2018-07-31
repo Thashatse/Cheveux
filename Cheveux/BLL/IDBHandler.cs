@@ -13,6 +13,12 @@ namespace BLL
         #region Home Page Features
         List<HomePageFeatures> GetHomePageFeatures();
         #endregion
+
+        #region Email/SMS Notifications
+        List<OGBkngNoti> GetOGBkngNotis();
+        bool updateNotiStatus(string bookingID, bool notiStatus);
+        #endregion
+
         SP_CheckForUserType BLL_CheckForUserType(string id);
         SP_AddUser BLL_AddUser(USER user);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);

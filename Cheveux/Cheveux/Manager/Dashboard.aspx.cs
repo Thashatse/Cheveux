@@ -64,6 +64,7 @@ namespace Cheveux.Manager
                 products = Tuple.Create(products.Item1.OrderBy(o => o.Qty).ToList(),
                     products.Item2.OrderBy(o => o.Qty).ToList());
 
+                #region out of stock
                 //check for out of stock products
                 //check out of stock treatments
                 foreach (SP_GetAllTreatments treat in products.Item2)
@@ -74,8 +75,8 @@ namespace Cheveux.Manager
                         addAlertToTable("&#10071;", "Out Of Stock",
                             "<a href = '#?ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Treatment '" + treat.Name + "' is currently out off stock</a>");
+                            "'>"
+                             + treat.Name + "</a>");
                         dashOutCount++;
                     }
                     else if (treat.Qty <= 0 && dashOutCount > 0)
@@ -84,8 +85,7 @@ namespace Cheveux.Manager
                         addAlertToTable("&#10071;", "",
                             "<a href = '#?ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Treatment '" + treat.Name + "' is currently out off stock</a>");
+                            "'>" + treat.Name + "</a>");
                         dashOutCount++;
                     }
                 }
@@ -99,7 +99,7 @@ namespace Cheveux.Manager
                             "<a href = '#?ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
                             "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Accessory '" + Access.Name + "' is currently out of stock</a>");
+                            "" + Access.Name + "</a>");
                         dashOutCount++;
                     }
                     else if (Access.Qty <= 0 && dashOutCount > 0)
@@ -108,11 +108,13 @@ namespace Cheveux.Manager
                         addAlertToTable("&#10071;", "",
                             "<a href = '#?ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Accessory '" + Access.Name + "' is currently out of stock</a>");
+                            "'>" +
+                            "" + Access.Name + "</a>");
                         dashOutCount++;
                     }
                 }
+                #endregion
+                #region Low Stock
                 //check for low stock
                 //check low stock treatments
                 foreach (SP_GetAllTreatments treat in products.Item2)
@@ -123,9 +125,9 @@ namespace Cheveux.Manager
                         addAlertToTable("&#9888;", "Low Stock",
                             " <a href = '#?ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Treatment '" + treat.Name + "' is currently runing low on stock with "
-                            + treat.Qty + " Left in stock </a>");
+                            "'>" +
+                            "" + treat.Name + "</a> "
+                            + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
                     else if (treat.Qty < 10 && treat.Qty > 0 && dashLowCount > 0)
@@ -134,9 +136,9 @@ namespace Cheveux.Manager
                         addAlertToTable("&#9888;", "",
                             " <a href = '#?ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Treatment '" + treat.Name + "' is currently runing low on stock with "
-                            + treat.Qty + " Left in stock </a>");
+                            "'>" +
+                            "" + treat.Name + "</a> "
+                            + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
                 }
@@ -149,9 +151,9 @@ namespace Cheveux.Manager
                         addAlertToTable("&#9888;", "Low Stock",
                             "<a href = '#?ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Accessory '" + Access.Name + "' is currently runing low on stock with "
-                            + Access.Qty + " Left in stock</a>");
+                            "'>" +
+                            "" + Access.Name + "</a> "
+                            + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
                     else if (Access.Qty < 10 && Access.Qty > 0 && dashLowCount > 0)
@@ -160,12 +162,13 @@ namespace Cheveux.Manager
                         addAlertToTable("&#9888;", "",
                             "<a href = '#?ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
-                            "The Accessory '" + Access.Name + "' is currently runing low on stock with "
-                            + Access.Qty + " Left in stock</a>");
+                            "'>" +
+                            "" + Access.Name + "</a> "
+                            + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
                 }
+                #endregion
             }
             catch (Exception Err)
             {
@@ -183,7 +186,7 @@ namespace Cheveux.Manager
             {
                 TableRow newRow;
                 //disply the table headers
-                if (alertCount == 0)
+                if (alertType == "Out Of Stock" & dashOutCount == 0 )
                 {
                     //create a new row in the table and set the height
                     newRow = new TableRow();
@@ -194,12 +197,26 @@ namespace Cheveux.Manager
                     newHeaderCell.Width = 50;
                     tblAlerts.Rows[alertCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Type: ";
-                    newHeaderCell.Width = 200;
+                    newHeaderCell.Text = "Out Of Stock";
+                    newHeaderCell.Width = 950;
+                    tblAlerts.Rows[alertCount].Cells.Add(newHeaderCell);
+
+                    //increment rowcounter
+                    alertCount++;
+                }
+                else if (alertType == "Low Stock" & dashLowCount == 0)
+                {
+                    //create a new row in the table and set the height
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblAlerts.Rows.Add(newRow);
+                    //create a header row and set cell withs
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 50;
                     tblAlerts.Rows[alertCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Description: ";
-                    newHeaderCell.Width = 750;
+                    newHeaderCell.Text = "Low Stock";
+                    newHeaderCell.Width = 950;
                     tblAlerts.Rows[alertCount].Cells.Add(newHeaderCell);
 
                     //increment rowcounter
@@ -214,9 +231,6 @@ namespace Cheveux.Manager
                 //add the alert to the table
                 TableCell newCell = new TableCell();
                 newCell.Text = alertIcon;
-                tblAlerts.Rows[alertCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = alertType;
                 tblAlerts.Rows[alertCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = alertDescription;

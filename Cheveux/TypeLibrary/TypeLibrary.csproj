@@ -61,6 +61,7 @@
     <Compile Include="Models\WIDTH.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HomePageFeatures.cs" />
+    <Compile Include="ViewModels\OGBkngNoti.cs" />
     <Compile Include="ViewModels\SP_BookingsReportForHairstylist.cs" />
     <Compile Include="ViewModels\SP_GetAllAccessories.cs" />
     <Compile Include="ViewModels\SP_GetAllofBookingDTL.cs" />

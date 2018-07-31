@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -19,11 +20,16 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Parallel.Invoke(() => loadHomePage(), () => function.sendOGBkngNoti());
+        }
+
+        private void loadHomePage()
+        {
             #region Redirect
             //rediret to product page or stylist profile with product id
             //check if a redirect has been requested 
             String goTo = Request.QueryString["Goto"];
-            if(goTo != null)
+            if (goTo != null)
             {
                 features = null;
                 try
@@ -39,11 +45,11 @@ namespace Cheveux
 
                 if (goTo == "Prod1")
                 {
-                    if(features[0].ItemID == null)
+                    if (features[0].ItemID == null)
                     {
                         Response.Redirect("../Cheveux/Products.aspx");
                     }
-                    Response.Redirect("ViewProduct.aspx?ProductID="+features[0].ItemID.ToString());
+                    Response.Redirect("ViewProduct.aspx?ProductID=" + features[0].ItemID.ToString());
                 }
                 else if (goTo == "Prod2")
                 {
@@ -136,14 +142,14 @@ namespace Cheveux
             }
             else
             {
-                    //welcome new customers
-                    name = Request.QueryString["NU"];
-                    if (name != null)
-                    {
-                        Welcome.Text = "Congratulations " + name
-                        + "  You Are Now Registered With Cheveux";
-                    }
+                //welcome new customers
+                name = Request.QueryString["NU"];
+                if (name != null)
+                {
+                    Welcome.Text = "Congratulations " + name
+                    + "  You Are Now Registered With Cheveux";
                 }
+            }
             #endregion
 
             #region booking Confirimation 
@@ -160,14 +166,14 @@ namespace Cheveux
                 List<SP_GetSlotTimes> TSL = handler.BLL_GetAllTimeSlots();
                 foreach (SP_GetSlotTimes TS in TSL)
                 {
-                    if(TS.SlotNo == slotNo.Replace(string.Empty, ""))
+                    if (TS.SlotNo == slotNo.Replace(string.Empty, ""))
                     {
                         Time = TS.Time;
                     }
                 }
-                Welcome.Text = "You are now booked to see " 
-                    + handler.viewEmployee(stylistID.Replace(string.Empty, "")).firstName 
-                    + " at " + Time.ToString("hh:mm") 
+                Welcome.Text = "You are now booked to see "
+                    + handler.viewEmployee(stylistID.Replace(string.Empty, "")).firstName
+                    + " at " + Time.ToString("hh:mm")
                     + " on the " + Convert.ToDateTime(Date).ToString("dd MMM yyyy");
             }
             #endregion
@@ -190,25 +196,25 @@ namespace Cheveux
             {
                 LService1Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
                     features[3].FeatureID.ToString()
-                    + "'>"+ features[3].Name.ToString() + "</a></font>";
+                    + "'>" + features[3].Name.ToString() + "</a></font>";
                 LService1Description.Text = features[3].description.ToString()
                 + " from R" + features[3].price.ToString();
 
                 LService2Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
                     features[4].FeatureID.ToString()
-                    + "'>"+ features[4].Name.ToString() + "</a></font>";
+                    + "'>" + features[4].Name.ToString() + "</a></font>";
                 LService2Description.Text = features[4].description.ToString()
                 + " from R" + features[4].price.ToString();
 
                 LService3Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
                     features[5].FeatureID.ToString()
-                    + "'>"+ features[5].Name.ToString() + "</a></font>";
+                    + "'>" + features[5].Name.ToString() + "</a></font>";
                 LService3Description.Text = features[5].description.ToString()
                 + " from R" + features[5].price.ToString();
 
                 LService4Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
                     features[6].FeatureID.ToString()
-                    + "'>"+ features[6].Name.ToString() + "</a>";
+                    + "'>" + features[6].Name.ToString() + "</a>";
                 LService4Description.Text = features[6].description.ToString()
                 + " from R" + features[6].price.ToString();
             }
@@ -224,19 +230,19 @@ namespace Cheveux
             try
             {
                 phProductImage1.Controls.Add(new LiteralControl
-                    ("<img src=" + features[0].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src=" + features[0].ImageURL.ToString() + "/>"));
                 lProductHeader1.Text = features[0].Name.ToString();
                 LProductDescription1.Text = features[0].description.ToString()
                 + " from R" + features[0].price.ToString();
 
                 phProductImage2.Controls.Add(new LiteralControl
-                    ("<img src=" + features[1].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src=" + features[1].ImageURL.ToString() + "/>"));
                 lProductHeader2.Text = features[1].Name.ToString();
                 LProductDescription2.Text = features[1].description.ToString()
                 + " from R" + features[1].price.ToString();
 
                 phProductImage3.Controls.Add(new LiteralControl
-                    ("<img src=" + features[2].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src=" + features[2].ImageURL.ToString() + "/>"));
                 lProductHeader3.Text = features[2].Name.ToString();
                 LProductDescription3.Text = features[2].description.ToString()
                 + " from R" + features[2].price.ToString();
@@ -253,19 +259,19 @@ namespace Cheveux
             try
             {
                 phStylistImage1.Controls.Add(new LiteralControl
-                    ("<img src=" + features[7].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src=" + features[7].ImageURL.ToString() + "/>"));
                 lStylistHeader1.Text = features[7].firstName.ToString();
                 lStylistDescription1.Text = "Specializes in "
                     + handler.viewStylistSpecialisation(features[7].ItemID.ToString()).serviceName;
 
                 phStylistImage2.Controls.Add(new LiteralControl
-                    ("<img src=" + features[8].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src=" + features[8].ImageURL.ToString() + "/>"));
                 lStylistHeader2.Text = features[8].firstName.ToString();
                 lStylistDescription2.Text = "Specializes in "
                     + handler.viewStylistSpecialisation(features[8].ItemID.ToString()).serviceName;
 
                 phStylistImage3.Controls.Add(new LiteralControl
-                    ("<img src=" + features[9].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src=" + features[9].ImageURL.ToString() + "/>"));
                 lStylistHeader3.Text = features[9].firstName.ToString();
                 lStylistDescription3.Text = "Specializes in "
                     + handler.viewStylistSpecialisation(features[9].ItemID.ToString()).serviceName;
@@ -280,22 +286,22 @@ namespace Cheveux
             #region Contact Us
             try
             {
-                    //load contact us jumbotron
-                    //display the contact info
-                    //add a table row
-                    TableRow newRow = new TableRow();
+                //load contact us jumbotron
+                //display the contact info
+                //add a table row
+                TableRow newRow = new TableRow();
                 tblContactUs.Rows.Add(newRow);
 
                 //add the phone number
                 TableCell newCell = new TableCell();
-                newCell.Text = "<a href='tel:" + features[10].contactNo.ToString()+"'" +
+                newCell.Text = "<a href='tel:" + features[10].contactNo.ToString() + "'" +
                     "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#9742;</ span >" +
                     " Phone </a>";
                 tblContactUs.Rows[0].Cells.Add(newCell);
 
                 //add email address
                 newCell = new TableCell();
-                newCell.Text = "<a href='mailto:" + features[11].email.ToString()+"'"+
+                newCell.Text = "<a href='mailto:" + features[11].email.ToString() + "'" +
                     "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#128231;</ span >" +
                     " Email </a>";
                 tblContactUs.Rows[0].Cells.Add(newCell);
@@ -305,12 +311,12 @@ namespace Cheveux
                 BusinessDetails = handler.getBusinessTable();
                 newCell = new TableCell();
                 newCell.Text = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&destination=" +
-                    BusinessDetails.AddressLine1.Replace(' ', '+')+"+"+
-                    BusinessDetails.AddressLine2.Replace(' ', '+')+
+                    BusinessDetails.AddressLine1.Replace(' ', '+') + "+" +
+                    BusinessDetails.AddressLine2.Replace(' ', '+') +
                 "'class='btn btn-primary btn-xl js-scroll-trigger'>" +
                 "<span class='glyphicon'>&#xe062;</span> Get Directions</a>";
                 tblContactUs.Rows[0].Cells.Add(newCell);
-                
+
             }
             catch (Exception err)
             {

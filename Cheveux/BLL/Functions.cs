@@ -254,5 +254,46 @@ namespace BLL
             }
             return success;
         }
+
+        public void sendOGBkngNoti()
+        {
+            try
+            {
+                List<OGBkngNoti> oGBkngNotiList = Handler.GetOGBkngNotis();
+                foreach (OGBkngNoti oGBkngNoti in oGBkngNotiList)
+                {
+                    //check preferd means on comunication
+                    if (oGBkngNoti.PreferredCommunication == 'E')
+                    {
+                        //send an email notification
+                        var body = new System.Text.StringBuilder();
+                        body.AppendFormat("Hello, " + oGBkngNoti.FirstName.ToString() + ",");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"You have a booking with "+oGBkngNoti.stylistFirstName.ToString() + " Tomorow ("+oGBkngNoti.Date.ToString("dd MMM yyyy")+") at "+oGBkngNoti.StartTime.ToString("hh:mm")+".");
+                        body.AppendLine(@"You booking is for "+oGBkngNoti.serviceName.ToString() + " at a cost of R"+ string.Format("{0:#.00}", oGBkngNoti.Price.ToString()) +".");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/Profile.aspx.");
+                        body.AppendLine(@"See you tomorow at "+oGBkngNoti.StartTime.ToString("hh:mm") + ".");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Regards,");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"The Cheveux Team");
+                        sendEmailAlert(oGBkngNoti.Email.ToString(), oGBkngNoti.FirstName.ToString() + " " + oGBkngNoti.lastName.ToString(),
+                            "Don't Forget Your Booking Tommorow",
+                            body.ToString(),
+                            "Bookings Cheveux");
+                        Handler.updateNotiStatus(oGBkngNoti.BookingID.ToString(), true);
+                    }
+                    else if (oGBkngNoti.PreferredCommunication == 'S')
+                    {
+                        //send an SMS notification
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                logAnError("Error sending out going booking notifications: " + err);
+            }
+        }
     }
 }

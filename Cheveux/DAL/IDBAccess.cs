@@ -47,6 +47,11 @@ namespace DAL
         SP_GetCurrentVATate GetVATRate();
         #endregion
 
+        #region Email/SMS Notifications
+        List<OGBkngNoti> GetOGBkngNotis();
+        bool updateNotiStatus(string bookingID, bool notiStatus);
+        #endregion
+
         List<SP_GetEmpNames> GetEmpNames();
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
