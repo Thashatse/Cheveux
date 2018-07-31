@@ -21,16 +21,26 @@
                 <!--If the user is logged in-->
                 <!--jumbotron page heading-->
                 <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
-                        <!--Date-->
-                        <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
-                        <br />
-                        <!--Welcome-->
-                        <asp:Label ID="Welcome" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
+                    <!--Date-->
+                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
+                    <br />
+                    <!--Welcome-->
+                    <asp:Label ID="Welcome" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
                     <!--Line Break-->
                     <div class="container">
                         <br />
                     </div>
                 </div>
+
+                <!--Alerts-->
+                        <div runat="server" id="alertsContainer" visible="false">
+                            <!-- Alert Table -->
+                            <h1>Alerts </h1>
+                            <asp:Table ID="tblAlerts" runat="server">
+                            </asp:Table>
+                        </div>
+                <!-- line Break -->
+                <br />
 
                 <!--Dropdown with stylists names-->
                 <div id="viewAgenda" runat="server">
@@ -56,12 +66,12 @@
 
                 <!--Check-In Error Message-->
                 <div class="container row" runat="server">
-                <asp:PlaceHolder ID="phCheckInErr" runat="server" Visible="false">
+                    <asp:PlaceHolder ID="phCheckInErr" runat="server" Visible="false">
                         <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible">
                             <asp:Label ID="lblCheckinErr" runat="server" Text="Label"></asp:Label>
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         </div>
-                </asp:PlaceHolder>
+                    </asp:PlaceHolder>
                 </div>
 
                 <!--Bookings with the stylist on that day-->
@@ -75,12 +85,12 @@
 
                 <!--If stylist doesn't have bookings on that day-->
                 <div class="container row" runat="server">
-                <asp:PlaceHolder ID="noBookingsPH" runat="server" Visible="false">
+                    <asp:PlaceHolder ID="noBookingsPH" runat="server" Visible="false">
                         <div class="col-sm-12 col-md-12 alert alert-primary alert-dismissible">
                             <asp:Label ID="lblNoBookings" runat="server" Text="Label"></asp:Label>
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         </div>
-                </asp:PlaceHolder>
+                    </asp:PlaceHolder>
                 </div>
 
                 <!--Error: If cant display the stylists bookings-->
@@ -97,14 +107,14 @@
                                         <div class="col-md-10">
                                             <!--Error details placehoders-->
                                             <asp:Label ID="errorHeader" runat="server"></asp:Label>
-                                                <br />
+                                            <br />
                                             <asp:Label ID="errorMessage" runat="server"></asp:Label>
-                                            <asp:Label ID="errorToReport" runat="server"></asp:Label>    
-                                            </div>
+                                            <asp:Label ID="errorToReport" runat="server"></asp:Label>
+                                        </div>
                                     </div>
                                 </div>
-                             </div>
-                         </div>
+                            </div>
+                        </div>
                     </div>
                 </asp:PlaceHolder>
 

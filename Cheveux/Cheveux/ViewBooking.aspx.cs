@@ -19,6 +19,58 @@ namespace Cheveux
         string PreviousPageAdress = "";
         string BookingID;
 
+        #region Master Page
+        //set the master page based on the user type
+        protected void Page_PreInit(Object sender, EventArgs e)
+        {
+            //check the cheveux user id cookie for the user
+            HttpCookie cookie = Request.Cookies["CheveuxUserID"];
+            char userType;
+            //check if the cookie is empty or not
+            if (cookie != null)
+            {
+                //store the user Type in a variable and display the appropriate master page for the user
+                userType = cookie["UT"].ToString()[0];
+                //if customer
+                if (userType == 'C')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+                }
+                //if receptionist
+                else if (userType == 'R')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxReceptionist.Master";
+                }
+                //if stylist
+                else if (userType == 'S')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxStylist.Master";
+                }
+                //if Manager
+                else if (userType == 'M')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                }
+                //default
+                else
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+                }
+            }
+            //set the default master page if the cookie is empty
+            else
+            {
+                //set the master page
+                this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+            }
+        }
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
             PreviousPageAdress = Request.QueryString["PreviousPage"];
@@ -397,181 +449,7 @@ namespace Cheveux
             }
         }
 
-        public void checkOut(string BookingID)
-        {
-                //display the booking detail
-                try
-                {
-                    //get the details from the db
-                    SP_GetCustomerBooking BookingDetails = null;
-                    List<SP_getInvoiceDL> invoicDetailLines = null;
-                        //get booking deatils
-                        BookingDetails = handler.getBookingDetaisForCheckOut(BookingID);
-
-                //check if sales record exists
-                //if sales record dose not exist make a new one
-                if (handler.getInvoiceDL(BookingID).Count == 0)
-                {
-                    //create sales record
-                    handler.createSalesRecord(BookingID);
-                    //add booking to invoice
-                    SALES_DTL detailLine = new SALES_DTL();
-                    detailLine.ProductID = BookingDetails.serviceID;
-                    detailLine.SaleID = BookingID;
-                    detailLine.Qty = 1;
-                    handler.createSalesDTLRecord(detailLine);
-                }
-
-                        //get the invoice 
-                        invoicDetailLines = handler.getInvoiceDL(BookingID);
-
-                    //un-hide the checkout table 
-                    divCheckOut.Visible = true;
-
-                        //display a heading
-                        BookingLable.Text = "<h2> Booking Summary </h2>";
-
-                    //create a variable to track the row count
-                    int rowCount = 0;
-
-                    //add booking details to the table
-
-                    //service name
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.serviceName.ToString();
-
-                    //increment row count 
-                    rowCount++;
-
-                    //Service description
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.serviceDescripion.ToString();
-
-                    //increment row count 
-                    rowCount++;
-
-                    //stylist
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.stylistFirstName.ToString();
-
-                    //increment row count 
-                    rowCount++;
-
-                    //Date
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingDate.ToString("dd-MM-yyyy");
-                    
-                    //increment row count 
-                    rowCount++;
-
-                    //Time
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm");
-
-                    //increment row count 
-                    rowCount++;
-
-                    //invoice header here (Already in Table)
-                    //increment row count
-                    rowCount++;
-                    
-                    //diplay invoice
-                        //get invoice details
-                        List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
-
-                    //create a table for the invoice (To be added to tblCheckOut cell)
-                    string tblInvoice = "<table>";
-
-                    //calculate total price
-                    double total = 0.0;
-
-                        foreach (SP_getInvoiceDL item in invoice)
-                        {
-                        //new row
-                        tblInvoice += "<tr>";
-                        //add a new cell to the row
-                        //fill in the item
-                            tblInvoice += "<td  Width='250'>" + item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + item.price.ToString()+"</td>";
-
-                        //add a new cell to the row
-                        //fill in the Qty, unit price & TotalPrice
-                        tblInvoice += "<td align='right' Width='250'> R" + Math.Round((item.Qty * item.price), 2).ToString()+"</td>";
-                    tblInvoice += "</tr>";
-
-                    //increment final price
-                    total = item.Qty * item.price;
-                        }
-
-                // get vat info
-                Tuple<double, double> vatInfo = function.getVat(total);
-
-                    //display total including and Excluding VAT
-                    //new row
-                    tblInvoice += "<tr>";
-
-                    tblInvoice += "<td> Total Ecluding VAT: </td>";
-
-                    //fill in total Ecluding VAT
-
-                    tblInvoice += "<td align='right'> R" + Math.Round(vatInfo.Item1, 2).ToString()+"</td>";
-                tblInvoice += "</tr>";
-
-                //get the vat rate
-                double VATRate = -1;
-                        try
-                        {
-                            VATRate = handler.GetVATRate().VATRate;
-                        }
-                        catch (ApplicationException Err)
-                        {
-                            function.logAnError(Err.ToString());
-                        }
-
-                    //new row
-                    tblInvoice += "<tr>";
-
-                    //fill in total VAT due
-                    tblInvoice += "<td> VAT @" + VATRate + "% </td>";
-
-                    tblInvoice += "<td align='right'> R" + Math.Round(vatInfo.Item2, 2).ToString()+"</td>";
-
-                    //display the total due//new row
-                    tblInvoice += "</tr><tr>";
-
-                    //fill in total
-                    tblInvoice += "<td> Total Due: </td>";
-
-                    tblInvoice += "<td align='right'> R" + total.ToString()+"</td>";
-                tblInvoice += "</tr>";
-
-                tblInvoice += "</table>";
-
-                    //add the invoice to the table
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = tblInvoice;
-
-                    //increment row count 
-                    rowCount++;
-                rowCount++;
-
-                //check if paymentType Exists
-                string paymentType = handler.getSalePaymentType(BookingID);
-                    if ( paymentType != "")
-                    {
-                        tblCheckOut.Rows[rowCount].Cells[0].Text = "";
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = "";
-                    tblCheckOut.Rows[rowCount + 1].Cells[0].Text = "<a href = '#' onClick = 'window.print()'> Print This Page </a>";
-                        tblCheckOut.Rows[rowCount-1].Cells[1].Text = paymentType;
-                }
-                else
-                {
-                    tblCheckOut.Rows[rowCount+1].Cells[0].Text = "";
-                    tblCheckOut.Rows[rowCount+1].Cells[1].Text = "";
-                }
-
-                }
-                catch (Exception Err)
-                {
-                    function.logAnError(Err.ToString() + "\n get getBookingDeatails method in viewbooking form");
-                    BookingLable.Text =
-                            "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
-                }
-        }
-
+        #region Edit Booking
         public void editBooking(string BookingID)
         {
             //display the booking edit form
@@ -620,6 +498,49 @@ namespace Cheveux
             }
         }
 
+        //show edit
+        public void showEdit(object sender, EventArgs e)
+        {
+            confirm.Visible = false;
+            Edit.Visible = true;
+            LogedIn.Visible = true;
+        }
+
+        public void commitEdit(object sender, EventArgs e)
+        {
+            LogedIn.Visible = false;
+            LogedOut.Visible = false;
+            BOOKING updatedBooking = new BOOKING();
+            //fill the booking variable 
+
+
+            bool check = false;
+            try
+            {
+                //edit booking
+            }
+            catch (ApplicationException Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred editing booking id: " + BookingID);
+            }
+            if (check == true)
+            {
+                confirmHeaderPlaceHolder.Text = "<h1> Your Booking Been Updated </h1>";
+                confirmPlaceHolder.Text = "";
+            }
+            else if (check == false)
+            {
+                confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your Booking </h1>";
+                confirmPlaceHolder.Text = "Please try again later";
+            }
+            yes.Visible = false;
+            no.Visible = false;
+            OK.Visible = true;
+        }
+        #endregion
+        
+        #region Delete
         public void confirmDeleteBooking(string BookingID)
         {
             //display booking detatils & ask if the user is sure
@@ -676,6 +597,7 @@ namespace Cheveux
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
         }
+        #endregion
 
         protected void Save_Click(object sender, EventArgs e)
         {
@@ -685,51 +607,194 @@ namespace Cheveux
             confirmHeaderPlaceHolder.Text = "";
             confirmPlaceHolder.Text = "";
         }
-
-        //show edit
-        public void showEdit(object sender, EventArgs e)
-        {
-            confirm.Visible = false;
-            Edit.Visible = true;
-            LogedIn.Visible = true;
-        }
-
-        public void commitEdit(object sender, EventArgs e)
-        {
-            LogedIn.Visible = false;
-            LogedOut.Visible = false;
-            BOOKING updatedBooking = new BOOKING();
-            //fill the booking variable 
-
-
-            bool check = false;
-            try
-            {
-                //edit booking
-            }
-            catch (ApplicationException Err)
-            {
-                function.logAnError(Err.ToString()
-                    + " An error occurred editing booking id: " + BookingID);
-            }
-            if (check == true)
-            {
-                confirmHeaderPlaceHolder.Text = "<h1> Your Booking Been Updated </h1>";
-                confirmPlaceHolder.Text = "";
-            }
-            else if (check == false)
-            {
-                confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your Booking </h1>";
-                confirmPlaceHolder.Text = "Please try again later";
-            }
-            yes.Visible = false;
-            no.Visible = false;
-            OK.Visible = true;
-        }
-
+        
         protected void OK_Click(object sender, EventArgs e)
         {
             Response.Redirect("Bookings.aspx");
+        }
+
+        #region Check Out
+        public void checkOut(string BookingID)
+        {
+            //display the booking detail
+            try
+            {
+                //get the details from the db
+                SP_GetCustomerBooking BookingDetails = null;
+                List<SP_getInvoiceDL> invoicDetailLines = null;
+                //get booking deatils
+                BookingDetails = handler.getBookingDetaisForCheckOut(BookingID);
+
+                //check if sales record exists
+                //if sales record dose not exist make a new one
+                if (handler.getInvoiceDL(BookingID).Count == 0)
+                {
+                    //create sales record
+                    handler.createSalesRecord(BookingID);
+                    //add booking to invoice
+                    SALES_DTL detailLine = new SALES_DTL();
+                    detailLine.ProductID = BookingDetails.serviceID;
+                    detailLine.SaleID = BookingID;
+                    detailLine.Qty = 1;
+                    handler.createSalesDTLRecord(detailLine);
+                }
+
+                //get the invoice 
+                invoicDetailLines = handler.getInvoiceDL(BookingID);
+
+                //un-hide the checkout table 
+                divCheckOut.Visible = true;
+
+                //display a heading
+                BookingLable.Text = "<h2> Booking Summary </h2>";
+
+                //create a variable to track the row count
+                int rowCount = 0;
+
+                //add booking details to the table
+
+                //service name
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.serviceName.ToString();
+
+                //increment row count 
+                rowCount++;
+
+                //Service description
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.serviceDescripion.ToString();
+
+                //increment row count 
+                rowCount++;
+
+                //stylist
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.stylistFirstName.ToString();
+
+                //increment row count 
+                rowCount++;
+
+                //Date
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingDate.ToString("dd-MM-yyyy");
+
+                //increment row count 
+                rowCount++;
+
+                //Time
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm");
+
+                //increment row count 
+                rowCount++;
+
+                //invoice header here (Already in Table)
+                //increment row count
+                rowCount++;
+
+                //diplay invoice
+                #region invoice
+                //get invoice details
+                List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
+
+                //create a table for the invoice (To be added to tblCheckOut cell)
+                string tblInvoice = "<table>";
+
+                //calculate total price
+                double total = 0.0;
+
+                foreach (SP_getInvoiceDL item in invoice)
+                {
+                    //new row
+                    tblInvoice += "<tr>";
+                    //add a new cell to the row
+                    //fill in the item
+                    tblInvoice += "<td  Width='250'>" + item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + item.price.ToString() + "</td>";
+
+                    //add a new cell to the row
+                    //fill in the Qty, unit price & TotalPrice
+                    tblInvoice += "<td align='right' Width='250'> R" + Math.Round((item.Qty * item.price), 2).ToString() + "</td>";
+                    tblInvoice += "</tr>";
+
+                    //increment final price
+                    total = item.Qty * item.price;
+                }
+
+                // get vat info
+                Tuple<double, double> vatInfo = function.getVat(total);
+
+                //display total including and Excluding VAT
+                //new row
+                tblInvoice += "<tr>";
+
+                tblInvoice += "<td> Total Ecluding VAT: </td>";
+
+                //fill in total Ecluding VAT
+
+                tblInvoice += "<td align='right'> R" + Math.Round(vatInfo.Item1, 2).ToString() + "</td>";
+                tblInvoice += "</tr>";
+
+                //get the vat rate
+                double VATRate = -1;
+                try
+                {
+                    VATRate = handler.GetVATRate().VATRate;
+                }
+                catch (ApplicationException Err)
+                {
+                    function.logAnError(Err.ToString());
+                }
+
+                //new row
+                tblInvoice += "<tr>";
+
+                //fill in total VAT due
+                tblInvoice += "<td> VAT @" + VATRate + "% </td>";
+
+                tblInvoice += "<td align='right'> R" + Math.Round(vatInfo.Item2, 2).ToString() + "</td>";
+
+                //display the total due//new row
+                tblInvoice += "</tr><tr>";
+
+                //fill in total
+                tblInvoice += "<td> Total Due: </td>";
+
+                tblInvoice += "<td align='right'> R" + total.ToString() + "</td>";
+                tblInvoice += "</tr>";
+
+                tblInvoice += "</table>";
+
+                //add the invoice to the table
+                tblCheckOut.Rows[rowCount].Cells[1].Text = tblInvoice;
+
+                //increment row count 
+                rowCount++;
+                rowCount++;
+                rowCount++;
+                #endregion
+
+                //check if paymentType Exists
+                string paymentType = handler.getSalePaymentType(BookingID);
+                if (paymentType != "")
+                {
+                    //hide payment type busttons
+                    tblCheckOut.Rows[rowCount].Cells[0].Text = "";
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = "";
+                    //add print page
+                    tblCheckOut.Rows[rowCount + 1].Cells[0].Text = "<a href = '#' onClick = 'window.print()'> Print This Page </a>";
+                    //show payment type
+                    tblCheckOut.Rows[rowCount - 1].Cells[1].Text = paymentType;
+                    //hide add product button
+                    tblCheckOut.Rows[rowCount - 2].Cells[1].Text = "";
+                }
+                else
+                {
+                    tblCheckOut.Rows[rowCount + 1].Cells[0].Text = "";
+                    tblCheckOut.Rows[rowCount + 1].Cells[1].Text = "";
+                }
+
+            }
+            catch (Exception Err)
+            {
+                function.logAnError(Err.ToString() + "\n get getBookingDeatails method in viewbooking form");
+                BookingLable.Text =
+                        "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
+            }
         }
 
         protected void btnSavePaymentType_Click(object sender, EventArgs e)
@@ -749,5 +814,33 @@ namespace Cheveux
                 Response.Redirect(PreviousPageAdress);
             }
         }
+
+        protected void btnAddProduct_Click(object sender, EventArgs e)
+        {
+            //show the add product to sale view
+            divCheckOut.Visible = false;
+            divAddProducts.Visible = true;
+
+        }
+
+        protected void btnAddProductToSale_Click(object sender, EventArgs e)
+        {
+            //add the selectedproduct to the sale
+        }
+
+        protected void btnRemoveProductFromSale_Click(object sender, EventArgs e)
+        {
+            //remove the product from the sale
+        }
+
+        protected void btnSaveSale_Click(object sender, EventArgs e)
+        {
+            //Save The Sale
+            divAddProducts.Visible = false;
+            BookingID = Request.QueryString["BookingID"];
+            checkOut(BookingID);
+            divCheckOut.Visible = true;
+        }
+        #endregion
     }
 }

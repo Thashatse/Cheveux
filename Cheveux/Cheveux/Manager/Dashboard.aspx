@@ -35,7 +35,6 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-
                             <!--Alerts-->
                             <div class="container" runat="server" id="alertsContainer" visible="false">
                                 <!-- Alert Table -->
@@ -43,7 +42,6 @@
                                 <asp:Table ID="tblAlerts" runat="server">
                                 </asp:Table>
                             </div>
-
                         </div>
                     </div>
                     <!-- line Break -->
