@@ -44,7 +44,6 @@
             <div class="tab-content">
 
                 <div class="tab-pane" id="UpcomingService">
-
                     <div class="jumbotron bg-dark text-white">
                         <div class="row">
                             <div class="col-lg-9 col-md-12 col-sm-12">
