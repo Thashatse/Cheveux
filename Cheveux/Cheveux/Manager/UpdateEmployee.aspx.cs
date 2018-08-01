@@ -41,7 +41,7 @@ namespace Cheveux.Manager
             else if(cookie["UT"] == "M")
             {
                 phMain.Visible = true;
-                phLogIn.Visible = true;
+                phLogIn.Visible = false;
             }
 
             userID = Request.QueryString["empID"];
