@@ -207,7 +207,7 @@
                                 <asp:Button ID="btnAddProductToSale" runat="server" Text="Add Product" CssClass="btn btn-Secondary" OnClick="btnAddProductToSale_Click" />
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <asp:Button ID="btnRemoveProductFromSale" runat="server" Text="Remove Product" CssClass="btn" OnClick="btnRemoveProductFromSale_Click" />
+                                <asp:Button ID="btnRemoveProductFromSale" runat="server" Text="Remove Product(S)" CssClass="btn" OnClick="btnRemoveProductFromSale_Click" />
                             </div>
                         </div>
                         <div class="row">

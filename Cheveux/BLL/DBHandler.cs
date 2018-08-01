@@ -32,6 +32,18 @@ namespace BLL
         }
         #endregion
 
+        #region Invoice/Sale
+        public bool createProductSalesDTLRecord(SALES_DTL Sale)
+        {
+            return db.createProductSalesDTLRecord(Sale);
+        }
+
+        public bool removeProductSalesDTLRecord(SALES_DTL Sale)
+        {
+            return db.removeProductSalesDTLRecord(Sale);
+        }
+        #endregion
+
         public bool deactivateUser(string userID)
         {
             return db.deactivateUser(userID);

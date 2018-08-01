@@ -72,6 +72,7 @@ namespace DAL
         #endregion
 
         #region Email/SMS Notifications
+
         public List<OGBkngNoti> GetOGBkngNotis()
         {
             List<OGBkngNoti> oGBkngNotiList = new List<OGBkngNoti>();
@@ -128,6 +129,82 @@ namespace DAL
                 };
 
                 return DBHelper.NonQuery("SP_UpdateNotiStatus", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+        
+        #region Invoice/Sale
+        public List<SP_getInvoiceDL> getInvoiceDL(string BookingID)
+        {
+            List<SP_getInvoiceDL> InvoiceDetailIne = new List<SP_getInvoiceDL>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_getInvoiceDL",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_getInvoiceDL booking = new SP_getInvoiceDL
+                            {
+                                itemName = row["Name"].ToString(),
+                                itemID = row["ProductID"].ToString(),
+                                itemType = row["ProductType(T/A/S)"].ToString(),
+                                Qty = Convert.ToInt32(row["Qty"].ToString()),
+                                price = Convert.ToDouble(row["Price"].ToString())
+                            };
+                            InvoiceDetailIne.Add(booking);
+                        }
+                    }
+                    return InvoiceDetailIne;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool createProductSalesDTLRecord(SALES_DTL Sale)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@SaleID", Sale.SaleID.ToString()),
+                new SqlParameter("@ProductID", Sale.ProductID.ToString()),
+                new SqlParameter("@Qty", Sale.Qty)
+                };
+
+                return DBHelper.NonQuery("SP_CreateProductSalesDTLRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool removeProductSalesDTLRecord(SALES_DTL Sale)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@SaleID", Sale.SaleID.ToString()),
+                new SqlParameter("@ProductID", Sale.ProductID.ToString())
+                };
+
+                return DBHelper.NonQuery("SP_RemoveProductSalesDTLRecord", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -705,42 +782,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public List<SP_getInvoiceDL> getInvoiceDL(string BookingID)
-        {
-            List<SP_getInvoiceDL> InvoiceDetailIne = new List<SP_getInvoiceDL>();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@BookingID", BookingID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_getInvoiceDL",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            SP_getInvoiceDL booking = new SP_getInvoiceDL
-                            {
-                                itemName = row["Name"].ToString(),
-                                Qty = Convert.ToInt32(row["Qty"].ToString()),
-                                price = Convert.ToDouble(row["Price"].ToString())
-                            };
-                            InvoiceDetailIne.Add(booking);
-                        }
-                    }
-                    return InvoiceDetailIne;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();

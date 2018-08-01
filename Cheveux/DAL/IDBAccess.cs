@@ -47,13 +47,20 @@ namespace DAL
         SP_GetCurrentVATate GetVATRate();
         #endregion
 
+        #region Invoice/Sale
+        List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
+
+        bool createProductSalesDTLRecord(SALES_DTL Sale);
+
+        bool removeProductSalesDTLRecord(SALES_DTL Sale);
+        #endregion
+
         #region Email/SMS Notifications
         List<OGBkngNoti> GetOGBkngNotis();
         bool updateNotiStatus(string bookingID, bool notiStatus);
         #endregion
 
         List<SP_GetEmpNames> GetEmpNames();
-        List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
