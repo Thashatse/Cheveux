@@ -18,6 +18,7 @@ namespace Cheveux
         HttpCookie cookie = null;
         string PreviousPageAdress = "";
         string BookingID;
+        List<string> productIDs = new List<string>();
 
         #region Master Page
         //set the master page based on the user type
@@ -215,21 +216,7 @@ namespace Cheveux
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.serviceDescripion.ToString();
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                //increment row count 
-                rowCount++;
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Price:";
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = "R"+ Math.Round(Convert.ToDouble(BookingDetails.servicePrice), 2).ToString();
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-
+                
                 //increment row count 
                 rowCount++;
 
@@ -316,7 +303,7 @@ namespace Cheveux
                             newCell.Text = "R" + string.Format("{0:#.00}", item.price);
                             BookingTable.Rows[rowCount].Cells.Add(newCell);
                             //increment final price
-                            total = item.Qty * item.price;
+                            total += item.Qty * item.price;
 
                             //increment row count 
                             rowCount++;
@@ -714,7 +701,7 @@ namespace Cheveux
                     tblInvoice += "</tr>";
 
                     //increment final price
-                    total = item.Qty * item.price;
+                    total += item.Qty * item.price;
                 }
 
                 // get vat info
@@ -874,7 +861,7 @@ namespace Cheveux
                         tblInvoice += "</tr>";
 
                         //increment final price
-                        total = item.Qty * item.price;
+                        total += item.Qty * item.price;
                     }
 
                     // get vat info
@@ -943,9 +930,64 @@ namespace Cheveux
             }
         }
 
+        protected void loadproductIDs()
+        {
+            //load the product ids
+            products = handler.getAllProductsAndDetails();
+            if (products.Item1.Count != 0 && products.Item2.Count != 0)
+            {
+                //sort the products by alphabetical oder
+                products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
+                    products.Item2.OrderBy(o => o.Name).ToList());
+                //add treatments
+                foreach (SP_GetAllTreatments treat in products.Item2)
+                {
+                    //make sure there is stock
+                    if (treat.Qty > 0)
+                    {
+                        productIDs.Add(treat.ProductID.ToString());
+                    }
+                }
+
+                //add accessories
+                foreach (SP_GetAllAccessories Access in products.Item1)
+                {
+                    //make sure there is stock
+                    if (Access.Qty > 0)
+                    {
+                        productIDs.Add(Access.ProductID.ToString());
+                    }
+                }
+            }
+        }
+
         protected void btnAddProductToSale_Click(object sender, EventArgs e)
         {
-            //add the selectedproduct to the sale
+            if (lbProducts.SelectedIndex >= 0)
+            {
+                try
+                {
+                    //load the product ids
+                    loadproductIDs();
+                    //add the selectedproduct to the sale
+                    SALES_DTL newItem = new SALES_DTL();
+                    newItem.SaleID = BookingID;
+                    newItem.ProductID = productIDs[lbProducts.SelectedIndex];
+                    newItem.Qty = 1;
+                    handler.createSalesDTLRecord(newItem);
+                    btnAddProduct_Click(sender, e);
+                }
+                catch (Exception Err)
+                {
+                    function.logAnError(" An error occurred adding product to sales record"
+                        + " in btnAddProductToSale_Click(object sender, EventArgs e) method on viewBookings Page: " + Err.ToString());
+                    Response.Write("<script>alert('An error occoured adding the product, Please try again later.');location.reload(false);</script>");
+                }
+            }
+            else
+            {
+                btnAddProduct_Click(sender, e);
+            }
         }
 
         protected void btnRemoveProductFromSale_Click(object sender, EventArgs e)
