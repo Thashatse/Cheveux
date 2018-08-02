@@ -157,20 +157,7 @@ namespace Cheveux.Manager
 
                     //increment rowcounter
                     count++;
-
-                    //add a new row to the table
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    tblProductTable.Rows.Add(newRow);
-                    //Product Type
-                    newHeaderCell = new TableHeaderCell();
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = function.GetFullProductTypeText('A')+"'s:";
-                        tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                    //increment rowcounter
-                    count++;
-
+                    
                     //display accessories
                     foreach (SP_GetAllAccessories Access in products.Item1)
                     {
@@ -184,6 +171,25 @@ namespace Cheveux.Manager
                             compareToSearchTerm(Access.Colour) == true) &&
                             Access.ProductType[0] != 'S')
                         {
+                            //add header only before the first accessorie
+                            if (accCount == 0)
+                            {
+                                //add a new row to the table
+                                newRow = new TableRow();
+                                newRow.Height = 50;
+                                tblProductTable.Rows.Add(newRow);
+                                //Product Type
+                                newHeaderCell = new TableHeaderCell();
+                                tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                                newHeaderCell = new TableHeaderCell();
+                                newHeaderCell.Text = function.GetFullProductTypeText('A') + "'s:";
+                                tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                                //increment rowcounter
+                                count++;
+                                //increment accesorie cout
+                                accCount++;
+                            }
+
                             //diplay the product details
                             //add a new row to the table
                             newRow = new TableRow();
@@ -246,20 +252,7 @@ namespace Cheveux.Manager
                             count++;
                         }
                     }
-
-                    //add a new row to the table
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    tblProductTable.Rows.Add(newRow);
-                    //Product Type
-                    newHeaderCell = new TableHeaderCell();
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = function.GetFullProductTypeText('T') + "'s:";
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                    //increment rowcounter
-                    count++;
-
+                    
                     //display treatments
                     foreach (SP_GetAllTreatments treat in products.Item2)
                     {
@@ -273,6 +266,25 @@ namespace Cheveux.Manager
                             compareToSearchTerm(treat.brandType) == true) &&
                             treat.ProductType[0] != 'S')
                         {
+                            //add header only before the first product
+                            if (treatCount == 0)
+                            {
+                                //add a new row to the table
+                                newRow = new TableRow();
+                                newRow.Height = 50;
+                                tblProductTable.Rows.Add(newRow);
+                                //Product Type
+                                newHeaderCell = new TableHeaderCell();
+                                tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                                newHeaderCell = new TableHeaderCell();
+                                newHeaderCell.Text = function.GetFullProductTypeText('T') + "'s:";
+                                tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                                //increment rowcounter
+                                count++;
+                                //increment accesorie cout
+                                treatCount++;
+                            }
+
                             //diplay the product details
                             //add a new row to the table
                             newRow = new TableRow();
@@ -334,6 +346,7 @@ namespace Cheveux.Manager
 
                             //increment counter
                             count++;
+                            treatCount++;
                         }
                     }
                 }

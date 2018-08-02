@@ -199,7 +199,8 @@ namespace Cheveux
                 newCell.Width = 300;
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.serviceName.ToString();
+                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + BookingDetails.serviceID.Replace(" ", string.Empty) + "'>" + 
+                    BookingDetails.serviceName.ToString() + "</a>";
                 newCell.Width = 700;
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
 
@@ -214,7 +215,8 @@ namespace Cheveux
                 newCell.Text = "Service Description:";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.serviceDescripion.ToString();
+                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + BookingDetails.serviceID.Replace(" ", string.Empty) + "'>"+
+                    BookingDetails.serviceDescripion.ToString() + "</a>";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 
                 //increment row count 
@@ -228,7 +230,9 @@ namespace Cheveux
                 newCell.Text = "Stylist:";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.stylistFirstName.ToString();
+                newCell.Text = "<a href='Profile.aspx?Action=View" +
+                            "&empID=" + BookingDetails.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                            "'>" + BookingDetails.stylistFirstName.ToString() + "</a>";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                 //increment row count 
@@ -821,7 +825,10 @@ namespace Cheveux
                     foreach (SP_GetAllTreatments treat in products.Item2)
                     {
                         //make sure there is stock
-                        if(treat.Qty > 0)
+                        if(treat.Qty > 0
+                            && (compareToSearchTerm(treat.Name) == true 
+                            || compareToSearchTerm(treat.ProductDescription) == true
+                            || compareToSearchTerm(treat.Brandname) == true))
                         {
                             lbProducts.Items.Add(treat.Name.ToString());
                         }
@@ -831,7 +838,10 @@ namespace Cheveux
                     foreach (SP_GetAllAccessories Access in products.Item1)
                     {
                         //make sure there is stock
-                        if (Access.Qty > 0)
+                        if (Access.Qty > 0
+                            && (compareToSearchTerm(Access.Name) == true
+                            || compareToSearchTerm(Access.ProductDescription) == true
+                            || compareToSearchTerm(Access.Brandname) == true))
                         {
                             lbProducts.Items.Add(Access.Name.ToString());
                         }
@@ -872,7 +882,10 @@ namespace Cheveux
                     foreach (SP_GetAllTreatments treat in products.Item2)
                     {
                         //make sure there is stock
-                        if (treat.Qty > 0)
+                        if (treat.Qty > 0
+                            && (compareToSearchTerm(treat.Name) == true
+                            || compareToSearchTerm(treat.ProductDescription) == true
+                            || compareToSearchTerm(treat.Brandname) == true))
                         {
                             productIDs.Add(treat.ProductID.ToString());
                         }
@@ -882,7 +895,10 @@ namespace Cheveux
                     foreach (SP_GetAllAccessories Access in products.Item1)
                     {
                         //make sure there is stock
-                        if (Access.Qty > 0)
+                        if (Access.Qty > 0
+                            && (compareToSearchTerm(Access.Name) == true
+                            || compareToSearchTerm(Access.ProductDescription) == true
+                            || compareToSearchTerm(Access.Brandname) == true))
                         {
                             productIDs.Add(Access.ProductID.ToString());
                         }
@@ -973,6 +989,8 @@ namespace Cheveux
             //remove the product from the sale
             if (btnRemoveProductFromSale.Text == "Remove Product(S)")
             {
+                txtProductSearch.Visible = false;
+                btnSearchProduct.Visible = false;
                 btnRemoveProductFromSale.Text = "Add Product(s)";
                 btnAddProductToSale.Text = "Remove Product";
                 //load products to remove
@@ -980,6 +998,8 @@ namespace Cheveux
             }
             else if (btnRemoveProductFromSale.Text == "Add Product(s)")
             {
+                txtProductSearch.Visible = true;
+                btnSearchProduct.Visible = true;
                 btnRemoveProductFromSale.Text = "Remove Product(s)";
                 btnAddProductToSale.Text = "Add Product";
                 //load products to add
@@ -1112,6 +1132,25 @@ namespace Cheveux
             BookingID = Request.QueryString["BookingID"];
             checkOut(BookingID);
             divCheckOut.Visible = true;
+        }
+
+        public bool compareToSearchTerm(string toBeCompared)
+        {
+            bool result = false;
+            if (txtProductSearch.Text != null)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = txtProductSearch.Text.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
         }
         #endregion
     }

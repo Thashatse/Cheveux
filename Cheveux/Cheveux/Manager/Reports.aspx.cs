@@ -158,9 +158,9 @@ namespace Cheveux.Manager
             //clear the table
             tblReport.Rows.Clear();
 
-            reportLable.Text = "Sales";
-            reportByLable.Text = ddlReportFor.SelectedItem.Text.ToString();
-            reportGenerateDateLable.Text = DateTime.Now.ToString("HH:mm dd MMM yyyy");
+            reportLable.Text = "Sales Report";
+            reportByLable.Text = "For: "+ ddlReportFor.SelectedItem.Text.ToString();
+            reportGenerateDateLable.Text = "Generated: "+DateTime.Now.ToString("HH:mm dd MMM yyyy");
             try
             {
                 List<SP_SaleOfHairstylist> report = null;
@@ -363,9 +363,9 @@ namespace Cheveux.Manager
             tblReport.Rows.Clear();
 
             //set the headers
-            reportLable.Text = "Bookings";
-            reportByLable.Text = ddlReportFor.SelectedItem.Text.ToString();
-            reportGenerateDateLable.Text = DateTime.Now.ToString("HH:mm dd MMM yyyy");
+            reportLable.Text = "BookingsReport";
+            reportByLable.Text = "For: " + ddlReportFor.SelectedItem.Text.ToString();
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
             try
             {
                 List<SP_BookingsReportForHairstylist> report = null;

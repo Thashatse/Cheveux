@@ -6,49 +6,50 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="bg-secondary text-white" id="Div1">
-        <!-- Top Margin & Nav Bar Back Color -->
+    <form id="form1" runat="server">
+        <div class="bg-secondary text-white" id="Div1">
+            <!-- Top Margin & Nav Bar Back Color -->
+            <br />
+            <br />
+        </div>
         <br />
-        <br />
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="row">
+            <div class="col-md-2 col-sm-1"></div>
+            <div class="col-md-8 col-sm-10">
 
-            <!--jumbotron page heading-->
-            <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
-                <!--Date-->
-                <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
-                <br />
-                <!--Welcome-->
-                <asp:Label ID="lblWelcome" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
-
-                <!--Line Break-->
-                <div class="container">
+                <!--jumbotron page heading-->
+                <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
+                    <!--Date-->
+                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
                     <br />
-                </div>
-            </div>
+                    <!--Welcome-->
+                    <asp:Label ID="lblWelcome" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
 
-            <div id="Agenda">
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <asp:Table runat="server" ID="AgendaTable" Visible="false"></asp:Table>
+                    <!--Line Break-->
+                    <div class="container">
+                        <br />
                     </div>
                 </div>
-            </div>
 
-            <!--Create Customer Visit Error Message-->
+                <div id="Agenda">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <asp:Table runat="server" ID="AgendaTable" Visible="false"></asp:Table>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Create Customer Visit Error Message-->
                 <div class="container row" runat="server">
-                <asp:PlaceHolder ID="phVisitErr" runat="server" Visible="false">
+                    <asp:PlaceHolder ID="phVisitErr" runat="server" Visible="false">
                         <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible">
                             <asp:Label ID="lblVisitErr" runat="server" Text="Label"></asp:Label>
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         </div>
-                </asp:PlaceHolder>
+                    </asp:PlaceHolder>
                 </div>
 
-            <!--Error: If cant display the stylists bookings-->
+                <!--Error: If cant display the stylists bookings-->
                 <asp:PlaceHolder ID="phBookingsErr" runat="server" Visible="false">
                     <div class="container">
                         <div class="row">
@@ -62,28 +63,28 @@
                                         <div class="col-md-10">
                                             <!--Error details placehoders-->
                                             <asp:Label ID="errorHeader" runat="server"></asp:Label>
-                                                <br />
+                                            <br />
                                             <asp:Label ID="errorMessage" runat="server"></asp:Label>
-                                            <asp:Label ID="errorToReport" runat="server"></asp:Label>    
-                                            </div>
+                                            <asp:Label ID="errorToReport" runat="server"></asp:Label>
+                                        </div>
                                     </div>
                                 </div>
-                             </div>
-                         </div>
+                            </div>
+                        </div>
                     </div>
                 </asp:PlaceHolder>
 
-            
-            <div class="container row" runat="server">
-                <asp:PlaceHolder ID="noBookingsPH" runat="server" Visible="false">
+
+                <div class="container row" runat="server">
+                    <asp:PlaceHolder ID="noBookingsPH" runat="server" Visible="false">
                         <div class="col-sm-12 col-md-12 alert alert-primary alert-dismissible">
                             <asp:Label ID="lblNoBookings" runat="server" Text="Label"></asp:Label>
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         </div>
-                </asp:PlaceHolder>
-            </div>
+                    </asp:PlaceHolder>
+                </div>
 
-            <div class="container" runat="server" id="LoggedOut" visible="true">
+                <div class="container" runat="server" id="LoggedOut" visible="true">
                     <div class="jumbotron bg-dark text-white">
                         <h1>Please Log-in to proceed</h1>
                         <button type="button" class="btn btn-default">
@@ -92,12 +93,13 @@
                     </div>
                 </div>
 
-            <!--Line Break-->
-            <div class="container">
-                <br />
-            </div>
+                <!--Line Break-->
+                <div class="container">
+                    <br />
+                </div>
 
+            </div>
+            <div class="col-md-2 col-sm-1"></div>
         </div>
-        <div class="col-md-2 col-sm-1"></div>
-    </div>
+    </form>
 </asp:Content>

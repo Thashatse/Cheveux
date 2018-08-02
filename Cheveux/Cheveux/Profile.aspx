@@ -60,6 +60,8 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
                             <asp:Label runat="server" ID="upcomingBookingsLable"></asp:Label>
+                            <!-- Line Break -->
+                    <br />
                             <asp:Table ID="upcomingBookings" runat="server"></asp:Table>
                         </div>
                     </div>
@@ -82,6 +84,8 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
                             <asp:Label runat="server" ID="pastBookingsLable"></asp:Label>
+                            <!-- Line Break -->
+                    <br />
                             <asp:Table ID="pastBookings" runat="server"></asp:Table>
                         </div>
                     </div>
