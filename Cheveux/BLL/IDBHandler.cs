@@ -19,6 +19,14 @@ namespace BLL
         bool updateNotiStatus(string bookingID, bool notiStatus);
         #endregion
 
+        #region Invoice/Sale
+        List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
+
+        bool createProductSalesDTLRecord(SALES_DTL Sale);
+
+        bool removeProductSalesDTLRecord(SALES_DTL Sale);
+        #endregion
+
         SP_CheckForUserType BLL_CheckForUserType(string id);
         SP_AddUser BLL_AddUser(USER user);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
@@ -29,7 +37,6 @@ namespace BLL
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
-        List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
         List<SP_GetEmpNames> BLL_GetEmpNames();
         List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate);
         EMPLOYEE getEmployeeType(string EmployeeID);

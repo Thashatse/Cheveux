@@ -9,6 +9,8 @@ namespace TypeLibrary.ViewModels
     public class SP_getInvoiceDL
     {
         public string itemName { get; set; }
+        public string itemID { get; set; }
+        public string itemType { get; set; }
         public int Qty { get; set; }
         public double price { get; set; }
     }

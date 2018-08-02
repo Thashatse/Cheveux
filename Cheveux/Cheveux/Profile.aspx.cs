@@ -1298,10 +1298,6 @@ namespace Cheveux
                 newHeaderCell.Width = 400;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Price";
-                newHeaderCell.Width = 100;
-                pastBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Width = 200;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
 
@@ -1352,9 +1348,6 @@ namespace Cheveux
             pastBookings.Rows[rowCount].Cells.Add(newCell);
             newCell = new TableCell();
             newCell.Text = bookings.serviceDescripion.ToString();
-            pastBookings.Rows[rowCount].Cells.Add(newCell);
-            newCell = new TableCell();
-            newCell.Text = "R " + Math.Round(Convert.ToDouble(bookings.servicePrice), 2).ToString();
             pastBookings.Rows[rowCount].Cells.Add(newCell);
             if (bookings.arrived.ToString()[0] != 'N')
             {

@@ -80,6 +80,8 @@ namespace Cheveux
             {
                 agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
 
+                AgendaTable.CssClass = "table table-light table-hover";
+
                 //create row for the table 
                 TableRow row = new TableRow();
                 row.Height = 50;

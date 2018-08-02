@@ -54,6 +54,7 @@ namespace Cheveux.Manager
             {
                 userList = handler.userList();
 
+                tblUsers.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 row.Height = 50;

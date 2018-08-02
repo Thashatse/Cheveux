@@ -87,7 +87,7 @@ namespace Cheveux
                     {
                         drpEmpNames.Items.Insert(0, new ListItem("Error"));
                         phBookingsErr.Visible = true;
-                        errorHeader.Text = "Oh no!";
+                        errorHeader.Text = "Error retrieving employee names";
                         errorMessage.Text = "It seems there is a problem retrieving data from the database"
                                             + "Please report problem or try again later.";
                         errorToReport.Text = "Error To report:" + Err.ToString();
@@ -141,6 +141,8 @@ namespace Cheveux
             try
             {
                 agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
+
+                AgendaTable.CssClass = "table table-light table-hover";
                 
                 //create row for the table 
                 TableRow row = new TableRow();
@@ -170,13 +172,13 @@ namespace Cheveux
                 AgendaTable.Rows[0].Cells.Add(endTime);
 
                 TableCell cust = new TableCell();
-                cust.Text = "Customer Name";
+                cust.Text = "Customer";
                 cust.Width = 300;
                 cust.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(cust);
 
                 TableCell emp = new TableCell();
-                emp.Text = "Employee Name";
+                emp.Text = "Employee";
                 emp.Width = 300;
                 emp.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(emp);
