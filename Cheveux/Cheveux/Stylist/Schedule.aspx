@@ -5,6 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <form runat="server" id="frmDropdown">
     <div class="bg-secondary text-white" id="Div1">
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
@@ -44,8 +45,8 @@
                 <div id="viewDrpDown" class="container row">
                     <div class="col-xs-12 col-md-12">
                         <asp:DropDownList ID="drpViewAppt" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                            <asp:ListItem Text="Past Appointment" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="Upcoming Appointment" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Past Bookings" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Upcoming Bookings" Value="1"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -98,5 +99,5 @@
             </div>
         </div>
     </div>
-
+    </form>
 </asp:Content>

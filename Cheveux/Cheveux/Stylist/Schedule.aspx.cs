@@ -81,7 +81,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 150;
+                date.Width = 200;
                 date.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(date);
 
@@ -181,7 +181,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 150;
+                date.Width = 200;
                 date.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(date);
 
