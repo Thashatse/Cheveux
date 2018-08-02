@@ -184,6 +184,24 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddProducts;
         
         /// <summary>
+        /// txtProductSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProductSearch;
+        
+        /// <summary>
+        /// btnSearchProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSearchProduct;
+        
+        /// <summary>
         /// lbProducts control.
         /// </summary>
         /// <remarks>
@@ -193,15 +211,6 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.ListBox lbProducts;
         
         /// <summary>
-        /// tblSale control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblSale;
-        
-        /// <summary>
         /// btnAddProductToSale control.
         /// </summary>
         /// <remarks>
@@ -209,6 +218,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddProductToSale;
+        
+        /// <summary>
+        /// tblSale control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblSale;
         
         /// <summary>
         /// btnRemoveProductFromSale control.

@@ -59,11 +59,11 @@
                                     <div class="row" runat="server" id="reportDateRangeContainer" visible="false">
                                         <div class="col-lg-5">
                                             <p>Start Date: </p>
-                                            <asp:Calendar ID="CalendarDateStrart" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
+                                            <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateStrart" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
                                         </div>
                                         <div class="col-lg-5">
                                             <p>End Date: </p>
-                                            <asp:Calendar ID="CalendarDateEnd" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
+                                            <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateEnd" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
                                         </div>
                                     </div>
 
@@ -95,26 +95,22 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            Title:
-                                <asp:Label ID="reportLable" runat="server"></asp:Label>
+                                <asp:Label ID="reportLable" runat="server" Font-Bold Font-Size="XX-Large"></asp:Label>
 
                         </div>
                         <div class="col-4">
-                            Generated:
-                                <asp:Label ID="reportGenerateDateLable" runat="server"></asp:Label>
+                                <asp:Label ID="reportGenerateDateLable" runat="server" Font-Bold></asp:Label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            For:
-                                <asp:Label ID="reportByLable" runat="server"></asp:Label>
+                                <asp:Label ID="reportByLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
                         </div>
                         <div class="col-4"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            Date Range:
-                                <asp:Label ID="reportDateRangeLable" runat="server"></asp:Label>
+                                <asp:Label ID="reportDateRangeLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
                         </div>
                         <div class="col-4"></div>
                     </div>

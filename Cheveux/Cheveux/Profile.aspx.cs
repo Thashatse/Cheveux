@@ -208,7 +208,7 @@ namespace Cheveux
                 //image
                 profileImage.ImageUrl = employee.empImage.ToString();
                 //Styslis Name
-                profileLable.Text = (employee.firstName.ToString() + employee.lastName.ToString()).ToUpper();
+                profileLable.Text = (employee.firstName.ToString() +" " + employee.lastName.ToString()).ToUpper();
                 //details
                 TableRow newRow;
                 TableCell newCell;
@@ -436,7 +436,7 @@ namespace Cheveux
                 //image
                 profileImage.ImageUrl = userDetails.UserImage.ToString();
                 //username
-                profileLable.Text = userDetails.UserName.ToString().ToUpper();
+                profileLable.Text = (userDetails.FirstName.ToString() +" "+userDetails.LastName.ToString()).ToUpper();
                 //details
                 //add a new row
                 TableRow newRow = new TableRow();
@@ -444,25 +444,9 @@ namespace Cheveux
                 profileTable.Rows.Add(newRow);
                 //track row count
                 int rowCount = 0;
-                //Name
-                TableCell newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Name:";
-                newCell.Width = 300;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = userDetails.FirstName.ToString() +" "+userDetails.LastName.ToString();
-                newCell.Width = 700;
-                profileTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowcount
-                rowCount++;
 
-                    //add a new row
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    profileTable.Rows.Add(newRow);
                     //Contact No.
-                    newCell = new TableCell();
+                    TableCell newCell = new TableCell();
                     newCell.Font.Bold = true;
                     newCell.Text = "Contact No.:";
                     newCell.Width = 300;
@@ -687,13 +671,13 @@ namespace Cheveux
                         //image
                         profileImage.ImageUrl = userDetails.UserImage.ToString();
                         //username
-                        profileLable.Text = userDetails.UserName.ToString().ToUpper();
+                        profileLable.Text = (userDetails.FirstName.ToString() + " " + userDetails.LastName.ToString()).ToUpper();
                         //details
                         //track row count
                         int rowCount = 0;
                         //First name
                         editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Frist Name:";
-                        editGoogleProfileTable.Rows[rowCount].Cells[1].Text = userDetails.FirstName.ToString() + " " + userDetails.LastName.ToString(); ;
+                        editGoogleProfileTable.Rows[rowCount].Cells[1].Text = userDetails.FirstName.ToString() + " " + userDetails.LastName.ToString();
                         //increment rowcount
                         rowCount++;
 
@@ -745,7 +729,7 @@ namespace Cheveux
                     //image
                     profileImage.ImageUrl = userDetails.UserImage.ToString();
                     //username
-                    profileLable.Text = userDetails.UserName.ToString().ToUpper();
+                    profileLable.Text = (userDetails.FirstName.ToString() + " " + userDetails.LastName.ToString()).ToUpper();
                     //details
                     //track row count
                     int rowCount = 0;
@@ -1159,7 +1143,7 @@ namespace Cheveux
                 //create a header row and set cell withs
                 TableHeaderCell newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Date";
-                newHeaderCell.Width = 100;
+                newHeaderCell.Width = 200;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Time";
@@ -1167,11 +1151,11 @@ namespace Cheveux
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Stylist";
-                newHeaderCell.Width = 190;
+                newHeaderCell.Width = 200;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Service Name";
-                newHeaderCell.Width = 200;
+                newHeaderCell.Width = 300;
                 upcomingBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Price";
@@ -1204,7 +1188,12 @@ namespace Cheveux
                     // if there aren't let the user know
                     upcomingBookingsLable.Text =
                         "<p> No Upcoming Bookings </p>";
-                    upcomingBookings.Visible = false;
+                }
+                else
+                {
+                    // set the booking copunt
+                    upcomingBookingsLable.Text =
+                        "<p> "+ (rowCount-1) +" Upcoming Bookings </p>";
                 }
             }
             else
@@ -1279,26 +1268,22 @@ namespace Cheveux
                 //create a header row and set cell withs
                 TableHeaderCell newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Date";
-                newHeaderCell.Width = 150;
+                newHeaderCell.Width = 200;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Time";
-                newHeaderCell.Width = 50;
-                pastBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Stylist";
                 newHeaderCell.Width = 100;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Stylist";
+                newHeaderCell.Width = 200;
+                pastBookings.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
                 newHeaderCell.Text = "Service Name";
-                newHeaderCell.Width = 200;
+                newHeaderCell.Width = 300;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
                 newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Text = "Service Description";
                 newHeaderCell.Width = 400;
-                pastBookings.Rows[0].Cells.Add(newHeaderCell);
-                newHeaderCell = new TableHeaderCell();
-                newHeaderCell.Width = 200;
                 pastBookings.Rows[0].Cells.Add(newHeaderCell);
 
                 //create a loop to display each result
@@ -1317,6 +1302,18 @@ namespace Cheveux
                         addPastBookingToTable(booking, rowCount);
                         rowCount++;
                     }
+                }
+                if (rowCount == 1)
+                {
+                    // if there aren't let the user know
+                    pastBookingsLable.Text =
+                        "<p> No Past Bookings </p>";
+                }
+                else
+                {
+                    // set the booking copunt
+                    pastBookingsLable.Text =
+                        "<p> " + (rowCount-1) + " Past Bookings </p>";
                 }
             }
             else
@@ -1345,9 +1342,6 @@ namespace Cheveux
             pastBookings.Rows[rowCount].Cells.Add(newCell);
             newCell = new TableCell();
             newCell.Text = bookings.serviceName.ToString();
-            pastBookings.Rows[rowCount].Cells.Add(newCell);
-            newCell = new TableCell();
-            newCell.Text = bookings.serviceDescripion.ToString();
             pastBookings.Rows[rowCount].Cells.Add(newCell);
             if (bookings.arrived.ToString()[0] != 'N')
             {

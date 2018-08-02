@@ -213,6 +213,206 @@ namespace DAL
         }
         #endregion
 
+        #region Bookings
+        public List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID)
+        {
+            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustID", CustomerID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookings",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
+                            {
+                                serviceName = row["Name"].ToString(),
+                                serviceDescripion = row["ProductDescription"].ToString(),
+                                servicePrice = row["Price"].ToString(),
+                                stylistFirstName = row["FirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                bookingID = row["BookingID"].ToString(),
+                                serviceID = row["ProductID"].ToString(),
+                                stylistEmployeeID = row["StylistID"].ToString()
+                            };
+                            customerBookings.Add(booking);
+                        }
+                    }
+                    return customerBookings;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
+        {
+            SP_GetCustomerBooking booking = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookingDetails",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        booking = new SP_GetCustomerBooking
+                        {
+                            serviceName = row["Name"].ToString(),
+                            serviceDescripion = row["ProductDescription"].ToString(),
+                            servicePrice = row["Price"].ToString(),
+                            stylistEmployeeID = row["UserID"].ToString(),
+                            stylistFirstName = row["FirstName"].ToString(),
+                            bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                            bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            bookingID = row["BookingID"].ToString()
+
+                        };
+                    }
+
+                    return booking;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool deleteBooking(string BookingID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BookingID", BookingID),
+                };
+
+                return DBHelper.NonQuery("SP_DeleteBooking", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
+        {
+            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustID", CustomerID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerPastBooking",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
+                            {
+                                serviceName = row["Name"].ToString(),
+                                serviceDescripion = row["ProductDescription"].ToString(),
+                                servicePrice = row["Price"].ToString(),
+                                stylistFirstName = row["FirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                bookingID = row["BookingID"].ToString(),
+                                arrived = row["Arrived"].ToString()[0]
+                            };
+                            customerBookings.Add(booking);
+                        }
+                    }
+                    return customerBookings;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID)
+        {
+            SP_GetCustomerBooking booking = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerPastBookingDetail",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        booking = new SP_GetCustomerBooking
+                        {
+                            serviceName = row["Name"].ToString(),
+                            serviceDescripion = row["ProductDescription"].ToString(),
+                            servicePrice = row["Price"].ToString(),
+                            stylistFirstName = row["FirstName"].ToString(),
+                            bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                            bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            bookingID = row["BookingID"].ToString(),
+                            arrived = row["Arrived"].ToString()[0],
+                                serviceID = row["ProductID"].ToString(),
+                            stylistEmployeeID = row["StylistID"].ToString()
+                        };
+                    }
+                    return booking;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateBooking(BOOKING bookingUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
+                new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
+                new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
+                new SqlParameter("@ServiceID", bookingUpdate.StylistID.ToString()),
+                new SqlParameter("@Date", bookingUpdate.Date)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateBooking", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
+        #region CheckIN CheckOut Cust Vist
         public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -249,6 +449,114 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public bool createSalesRecord(string bookingID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@BookingID", bookingID)
+                };
+
+                return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool CheckIn(BOOKING booking)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@BookingID", booking.BookingID.ToString() ),
+                    new SqlParameter("@StylistID", booking.StylistID.ToString()),
+                };
+
+                return DBHelper.NonQuery("SP_CheckIn", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID)
+        {
+            SP_GetAllofBookingDTL bookingDTL = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", bookingID),
+                new SqlParameter("@CustomerID", customerID),
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetAllofBookingDTL",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        bookingDTL = new SP_GetAllofBookingDTL
+                        {
+                            BookingID = Convert.ToString(row["BookingID"]),
+                            CustomerID = Convert.ToString(row["CustomerID"]),
+                            CustomerName = Convert.ToString(row["CustomerName"]),
+                            ServiceName = Convert.ToString(row["ServiceName"]),
+                            ServiceDescription = Convert.ToString(row["ServiceDescription"]),
+                            Price = Convert.ToString(row["Price"]),
+                            Date = Convert.ToDateTime(row["Date"]),
+                            StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
+                            EndTime = TimeSpan.Parse((row["EndTime"]).ToString())
+                        };
+
+
+                    }
+                    return bookingDTL;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID)
+        {
+            SP_GetBookingServiceDTL serviceDTL = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                    new SqlParameter("@BookingID", bookingID),
+                    new SqlParameter("@CustomerID", customerID),
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServiceDTL",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        serviceDTL = new SP_GetBookingServiceDTL
+                        {
+                            BookingID = Convert.ToString(row["BookingID"]),
+                            ServiceName = Convert.ToString(row["ServiceName"]),
+                            ServiceDescription = Convert.ToString(row["ServiceDescription"])
+                        };
+                    }
+                    return serviceDTL;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
 
         public string getSalePaymentType(string saleID)
         {
@@ -608,180 +916,6 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID)
-        {
-            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@CustID", CustomerID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookings",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
-                            {
-                                serviceName = row["Name"].ToString(),
-                                serviceDescripion = row["ProductDescription"].ToString(),
-                                servicePrice = row["Price"].ToString(),
-                                stylistFirstName = row["FirstName"].ToString(),
-                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
-                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                bookingID = row["BookingID"].ToString(),
-                                serviceID = row["ProductID"].ToString(),
-                                stylistEmployeeID = row["StylistID"].ToString()
-                            };
-                            customerBookings.Add(booking);
-                        }
-                    }
-                    return customerBookings;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
-        {
-            SP_GetCustomerBooking booking = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@BookingID", BookingID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerUpcomingBookingDetails",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        booking = new SP_GetCustomerBooking
-                        {
-                            serviceName = row["Name"].ToString(),
-                            serviceDescripion = row["ProductDescription"].ToString(),
-                            servicePrice = row["Price"].ToString(),
-                            stylistEmployeeID = row["UserID"].ToString(),
-                            stylistFirstName = row["FirstName"].ToString(),
-                            bookingDate = Convert.ToDateTime(row["Date"].ToString()),
-                            bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                            bookingID = row["BookingID"].ToString()
-
-                        };
-                    }
-
-                    return booking;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool deleteBooking(string BookingID)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                new SqlParameter("@BookingID", BookingID),
-                };
-
-                return DBHelper.NonQuery("SP_DeleteBooking", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
-        {
-            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@CustID", CustomerID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerPastBooking",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
-                            {
-                                serviceName = row["Name"].ToString(),
-                                serviceDescripion = row["ProductDescription"].ToString(),
-                                servicePrice = row["Price"].ToString(),
-                                stylistFirstName = row["FirstName"].ToString(),
-                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
-                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                bookingID = row["BookingID"].ToString(),
-                                arrived = row["Arrived"].ToString()[0]
-                            };
-                            customerBookings.Add(booking);
-                        }
-                    }
-                    return customerBookings;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID)
-        {
-            SP_GetCustomerBooking booking = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@BookingID", BookingID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomerPastBookingDetail",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        booking = new SP_GetCustomerBooking
-                        {
-                            serviceName = row["Name"].ToString(),
-                            serviceDescripion = row["ProductDescription"].ToString(),
-                            servicePrice = row["Price"].ToString(),
-                            stylistFirstName = row["FirstName"].ToString(),
-                            bookingDate = Convert.ToDateTime(row["Date"].ToString()),
-                            bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                            bookingID = row["BookingID"].ToString(),
-                            arrived = row["Arrived"].ToString()[0]
-                        };
-                    }
-                    return booking;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
         
         public List<SP_GetEmpNames> GetEmpNames()
         {
@@ -882,62 +1016,8 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public bool updateBooking(BOOKING bookingUpdate)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
-                new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
-                new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
-                new SqlParameter("@ServiceID", bookingUpdate.StylistID.ToString()),
-                new SqlParameter("@Date", bookingUpdate.Date)
-                };
-
-                return DBHelper.NonQuery("SP_UpdateBooking", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool createSalesRecord(string bookingID)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@BookingID", bookingID)
-                };
-
-                return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool CheckIn(BOOKING booking)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@BookingID", booking.BookingID.ToString() ),
-                    new SqlParameter("@StylistID", booking.StylistID.ToString()),
-                };
-
-                return DBHelper.NonQuery("SP_CheckIn", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
+        
+        
 
         public bool updateUser(USER userUpdate)
         {
@@ -978,77 +1058,7 @@ namespace DAL
             }
         }
 
-        public SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID)
-        {
-            SP_GetAllofBookingDTL bookingDTL = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@BookingID", bookingID),
-                new SqlParameter("@CustomerID", customerID),
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetAllofBookingDTL",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        DataRow row = table.Rows[0];
-                        bookingDTL = new SP_GetAllofBookingDTL
-                        {
-                            BookingID = Convert.ToString(row["BookingID"]),
-                            CustomerID = Convert.ToString(row["CustomerID"]),
-                            CustomerName = Convert.ToString(row["CustomerName"]),
-                            ServiceName = Convert.ToString(row["ServiceName"]),
-                            ServiceDescription = Convert.ToString(row["ServiceDescription"]),
-                            Price = Convert.ToString(row["Price"]),
-                            Date = Convert.ToDateTime(row["Date"]),
-                            StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
-                            EndTime = TimeSpan.Parse((row["EndTime"]).ToString())
-                        };
-
-
-                    }
-                    return bookingDTL;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID)
-        {
-            SP_GetBookingServiceDTL serviceDTL = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                    new SqlParameter("@BookingID", bookingID),
-                    new SqlParameter("@CustomerID", customerID),
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServiceDTL",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        DataRow row = table.Rows[0];
-                        serviceDTL = new SP_GetBookingServiceDTL
-                        {
-                            BookingID = Convert.ToString(row["BookingID"]),
-                            ServiceName = Convert.ToString(row["ServiceName"]),
-                            ServiceDescription = Convert.ToString(row["ServiceDescription"])
-                        };
-                    }
-                    return serviceDTL;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
+        
 
         public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
         {
