@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace Cheveux
         Authentication auth = new Authentication();
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
+        string code = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +24,7 @@ namespace Cheveux
 
         private void loadPage()
         {
+            lHeader.Text = "<h2>Get started with<b> Cheveux</b></h2>";
             //set the create acount URL
             if (PreviousPage != null)
             {
@@ -47,9 +50,49 @@ namespace Cheveux
                 //retun the usere to the home page
                 Response.Redirect("../Default.aspx");
             }
+            else if (action == "Reset")
+            {
+                lHeader.Text = "<h2><b> Cheveux</b></h2>";
+                //check if the user has requested to reset thier passowrd or request a reset code
+                code = Request.QueryString["code"];
+                if (code == null)
+                {
+                    //Display the rest email Form
+                    divEmailAcount.Visible = false;
+                    divAccountType.Visible = false;
+                    divGetRestCode.Visible = true;
+                    divGetEmailToReset.Visible = true;
+                }
+                else
+                {
+                    //Display the rest Pasword Form
+                    string[] codeArray = code.Split('|');
+                    DateTime codeGenerate = Convert.ToDateTime(codeArray[0]);
+                    if (codeGenerate.AddMinutes(10).TimeOfDay >= DateTime.Now.TimeOfDay)
+                    {
+                        divEmailAcount.Visible = false;
+                        divAccountType.Visible = false;
+                        divResetPasword.Visible = true;
+                        divResetPaswordtxtPass.Visible = true;
+                        //get the user name and display it in the label
 
-            //check if the user has requested to sign in with email
-            string singInType = Request.QueryString["Type"];
+                        lPaswordResetUsernameLable.Text = "test";
+                    }
+                    else
+                    {
+                        //if the code has expierd
+                        //Display the rest email Form
+                        lEamailResetError.Text = "The Rest Request Has Expired, Try Again.";
+                        lEamailResetError.Visible = true;
+                        divEmailAcount.Visible = false;
+                        divAccountType.Visible = false;
+                        divGetRestCode.Visible = true;
+                        divGetEmailToReset.Visible = true;
+                    }
+                }
+            }
+                //check if the user has requested to sign in with email
+                string singInType = Request.QueryString["Type"];
             if (singInType == "Email")
             {
                 //hide sign in with div and show sign in with email
@@ -65,6 +108,54 @@ namespace Cheveux
             }
         }
 
+        private void goToPreviousPage()
+        {
+            //get the privious page to redirect to
+            string PreviousPage = Request.QueryString["PreviousPage"];
+            //go back to the previous page if there is one
+            if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
+            {
+                Response.Redirect("../Help/CheveuxHelpCenter.aspx#InternalHelp");
+            }
+            else if (PreviousPage == "BusinessSetting.aspx")
+            {
+                Response.Redirect("../Manager/BusinessSetting.aspx");
+            }
+            else if (PreviousPage == "Reports.aspx")
+            {
+                Response.Redirect("../Manager/Reports.aspx");
+            }
+            else if (PreviousPage == "Manager.aspx")
+            {
+                Response.Redirect("../Manager/Dashboard.aspx?WB=True");
+            }
+            else if (PreviousPage == "Employee.aspx")
+            {
+                Response.Redirect("../Manager/Employee.aspx");
+            }
+            else if (PreviousPage == "Products.aspx")
+            {
+                Response.Redirect("../Manager/Products.aspx");
+            }
+            else if (PreviousPage == "Service.aspx")
+            {
+                Response.Redirect("../Manager/Service.aspx");
+            }
+            else if (PreviousPage == "Profile.aspx")
+            {
+                Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "Bookings.aspx")
+            {
+                Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "MakeABooking")
+            {
+                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
+            }
+        }
+
+        #region Google Auth
         private string getRegCookie()
         {
             //get the user data from the cookie
@@ -200,54 +291,9 @@ namespace Cheveux
                     Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
                 }
             }
+        #endregion
 
-        private void goToPreviousPage()
-        {
-            //get the privious page to redirect to
-            string PreviousPage = Request.QueryString["PreviousPage"];
-            //go back to the previous page if there is one
-            if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
-            {
-                Response.Redirect("../Help/CheveuxHelpCenter.aspx#InternalHelp");
-            }
-            else if (PreviousPage == "BusinessSetting.aspx")
-            {
-                Response.Redirect("../Manager/BusinessSetting.aspx");
-            }
-            else if (PreviousPage == "Reports.aspx")
-            {
-                Response.Redirect("../Manager/Reports.aspx");
-            }
-            else if (PreviousPage == "Manager.aspx")
-            {
-                Response.Redirect("../Manager/Dashboard.aspx?WB=True");
-            }
-            else if (PreviousPage == "Employee.aspx")
-            {
-                Response.Redirect("../Manager/Employee.aspx");
-            }
-            else if (PreviousPage == "Products.aspx")
-            {
-                Response.Redirect("../Manager/Products.aspx");
-            }
-            else if (PreviousPage == "Service.aspx")
-            {
-                Response.Redirect("../Manager/Service.aspx");
-            }
-            else if (PreviousPage == "Profile.aspx")
-            {
-                Response.Redirect("../Profile.aspx");
-            }
-            else if (PreviousPage == "Bookings.aspx")
-            {
-                Response.Redirect("../Profile.aspx");
-            }
-            else if (PreviousPage == "MakeABooking")
-            {
-                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
-            }
-        }
-
+        #region Email Auth
         protected void displayPassword(object sender, EventArgs e)
         {
             //check if the account exist
@@ -374,5 +420,81 @@ namespace Cheveux
             }
             Response.Redirect("../Authentication/Accounts.aspx?Type=Email");
         }
+        #endregion
+
+        #region Email Pass Rest
+        protected void btnRestPassword_Click(object sender, EventArgs e)
+        {
+            if (btnRestPassword.Text == "Rest Pasword")
+            {
+                //check if the account exist
+                try
+                {
+                    if (auth.checkForAccountEmail(txtEmailToReset.Text.ToString().Replace(" ", string.Empty), false)
+                        == true)
+                    {
+                        lEamailResetError.Visible = false;
+                        //Create Reset Code and email to user
+
+                        //let the user know the password was succefuly rest
+                        lPaswordRestCodeFeedback.Visible = true;
+                        lPaswordRestCodeFeedback.Text = "A Password Rest Link Has Been Sent To Your Email";
+                        divGetEmailToReset.Visible = false;
+                        btnRestPassword.Text = "Done";
+                    }
+                    else
+                    {
+                        //let the use know the account was not found
+                        lEamailResetError.Visible = true;
+                        lEamailResetError.Text = "Couldn't find your Cheveux Account";
+                    }
+                }
+                catch (Exception Err)
+                {
+                    //let the use know an erorr ocoured
+                    lPaswordRestCodeFeedback.Visible = true;
+                    lPaswordRestCodeFeedback.Text = "An error occurred communicating with the Cheveux Server Please try again later";
+                    function.logAnError("Error checking for account when requestin rest password on accounts page" +
+                        Err.ToString());
+                }
+            }
+            else if (btnRestPassword.Text == "Done")
+            {
+                Response.Redirect("../Default.aspx");
+            }
+        }
+
+        protected void btnChangePass_Click(object sender, EventArgs e)
+        {
+            if (btnChangePass.Text == "Change Pasword")
+            {
+                code = Request.QueryString["code"];
+                string[] codeArray = code.Split('|');
+                //check if the account exist
+                try
+                {
+                    //re set the password
+
+                    //let the user know the password was succefuly rest
+                    lPaswordResetUsernameLable.Visible = true;
+                    lPaswordResetUsernameLable.Text = "Your Password Has Successfully Been Reset";
+                    divResetPaswordtxtPass.Visible = false;
+                        btnChangePass.Text = "Done";
+                }
+                catch (Exception Err)
+                {
+                    //let the use know an erorr ocoured
+                    lPaswordResetUsernameLable.Visible = true;
+                    lPaswordResetUsernameLable.Text = "An error occurred communicating with the Cheveux Server, Please try again later.";
+                    function.logAnError("Error reseting password on accounts page for reset code: "+code +
+                        Err.ToString());
+                }
+            }
+            else if (btnChangePass.Text == "Done")
+            {
+                Response.Redirect("../Authentication/Accounts.aspx?Type=Email");
+            }
+        }
+        #endregion
     }
 }
