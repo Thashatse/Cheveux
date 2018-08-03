@@ -9,7 +9,7 @@ namespace TypeLibrary.ViewModels
     public class SP_ViewCustVisit
     {
         public string CustomerID { get; set; }
-        public Nullable<DateTime> Date { get; set; }
+        public DateTime Date { get; set; }
         public string BookingID { get; set; }
         public string Description { get; set; }
     }

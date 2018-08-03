@@ -36,8 +36,6 @@ namespace Cheveux
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
-            errorToReport.Font.Size = 10;
-
 
             //access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
@@ -247,9 +245,8 @@ namespace Cheveux
                              */
                             //Response.Write("<script>alert('Error.Please Try Again.');</script>");
                             phVisitErr.Visible = true;
-                            lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
-                                                  + "Please report to management or try again later. Sorry for the inconvenience."
-                                                  +"<br/>There is a problem with the database.";
+                            lblVisitErr.Text = "System is unable to create a visit record at this point in time.<br/>"
+                                                  + "Please report to management or try again later. Sorry for the inconvenience.";
                         }
                     }
                     catch (Exception err)
@@ -258,8 +255,7 @@ namespace Cheveux
                         //add error to the error log and then display response tab to say that an error has occured 
                         phVisitErr.Visible = true;
                         lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
-                                              + "Please report to management or try again later. Sorry for the inconvenience."
-                                              +"<br/>Error: " + err.ToString();
+                                              + "Please report to management or try again later. Sorry for the inconvenience.";
                         function.logAnError(err.ToString());
                     }
                 };
@@ -269,8 +265,6 @@ namespace Cheveux
             }
             catch(Exception Err)
             {
-                //Response.Write("<script>alert('An error has occured.Unable to display required data.');window.location='Stylist.aspx';</script>");
-
                 phServiceDetails.Visible = false;
                 phBookingDetails.Visible = false;
                 lblBookingDetailsHeading.Visible = false;
@@ -280,9 +274,6 @@ namespace Cheveux
                 errorHeader.Text = "Error.Cannot display booking details.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + Err.ToString();
-
-
                 //log error, display error message,redirect to the stylist page
                 function.logAnError(Err.ToString());
             }
@@ -418,9 +409,8 @@ namespace Cheveux
                              */
                             //Response.Write("<script>alert('Unsuccessful. Customer visit record was not updated');</script>");
                             phVisitErr.Visible = true;
-                            lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
-                                                  + "Please report to management or try again later. Sorry for the inconvenience."
-                                                  + "<br/>There is a problem with the database.";
+                            lblVisitErr.Text = "System is unable to create a visit record at this point in time.<br/>"
+                                                  + "Please report to management or try again later. Sorry for the inconvenience.";
                         }
                     }
                     catch (Exception err)
@@ -428,9 +418,7 @@ namespace Cheveux
                         //Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
                         phVisitErr.Visible = true;
                         lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
-                                              + "Please report to management or try again later. Sorry for the inconvenience."
-                                              + "<br/>Error: " + err.ToString();
-
+                                              + "Please report to management or try again later. Sorry for the inconvenience.";
                         //add error to the error log and then display response tab to say that an error has occured
                         function.logAnError(err.ToString());
                     }
@@ -447,21 +435,13 @@ namespace Cheveux
                 lblBookingDetailsHeading.Visible = false;
                 lblServiceHeading.Visible = false;
 
-                //Response.Write("<script>alert('An error has occured.');window.location='Stylist.aspx';</script>");
-
                 phBookingsErr.Visible = true;
-                errorHeader.Text = "Error.Cannot display booking details.";
+                errorHeader.Text = "Error.Cannot display services details.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + Err.ToString();
-
                 function.logAnError(Err.ToString());
                 
             }
         }
-        
-       
-                
-        
     }
 }

@@ -53,7 +53,6 @@ namespace Cheveux
                     errorHeader.Text = "Error";
                     errorMessage.Text = "It seems there is a problem connecting to the database.<br/>"
                                         + "Please report problem or try again later.";
-                    errorToReport.Text = "Error To report:" + Err.ToString();
                     function.logAnError(Err.ToString());
                 }
             }
@@ -64,7 +63,6 @@ namespace Cheveux
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
-            errorToReport.Font.Size = 10;
         }
         public void getPastBookings(string empID)
         {
@@ -159,8 +157,6 @@ namespace Cheveux
                 errorHeader.Text = "Error getting past bookings.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + Err.ToString();
-
                 function.logAnError(Err.ToString());
             }
         }
@@ -259,8 +255,6 @@ namespace Cheveux
                 errorHeader.Text = "Error getting upcoming bookings";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + Err.ToString();
-
                 function.logAnError(Err.ToString());
             }
         }

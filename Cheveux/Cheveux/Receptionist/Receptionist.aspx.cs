@@ -30,7 +30,6 @@ namespace Cheveux
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
-            errorToReport.Font.Size = 10;
 
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
@@ -90,7 +89,6 @@ namespace Cheveux
                         errorHeader.Text = "Error retrieving employee names";
                         errorMessage.Text = "It seems there is a problem retrieving data from the database"
                                             + "Please report problem or try again later.";
-                        errorToReport.Text = "Error To report:" + Err.ToString();
                         function.logAnError(Err.ToString());
                     }
 
@@ -126,9 +124,8 @@ namespace Cheveux
                     AgendaTable.Visible = false;
                     phBookingsErr.Visible = true;
                     errorHeader.Text = "Error";
-                    errorMessage.Text = "It seems there is a problem connecting to the database.<br/>"
+                    errorMessage.Text = "It seems there is a problem retrieving employees bookings.<br/>"
                                         + "Please report problem or try again later.";
-                    errorToReport.Text = "Error To report:" + Err.ToString();
                     function.logAnError(Err.ToString());
                 }
             }   
@@ -328,8 +325,6 @@ namespace Cheveux
                 errorHeader.Text = "Error getting employee agenda.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + E.ToString();
-
                 function.logAnError(E.ToString());
             }
         }

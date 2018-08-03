@@ -1073,7 +1073,7 @@ namespace DAL
                 using (DataTable table = DBHelper.ParamSelect("SP_ViewCustVisit",
             CommandType.StoredProcedure, pars))
                 {
-                    if (table.Rows.Count > 0)
+                    if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
                         visit = new SP_ViewCustVisit

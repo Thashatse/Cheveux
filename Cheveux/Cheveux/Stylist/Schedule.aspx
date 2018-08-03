@@ -80,7 +80,6 @@
                                         <br />
                                         <asp:Label ID="errorMessage" runat="server"></asp:Label>
                                         <br />
-                                        <asp:Label ID="errorToReport" runat="server"></asp:Label>
                                     </div>
                                 </div>
                             </div>

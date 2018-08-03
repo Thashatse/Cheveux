@@ -84,7 +84,6 @@
                                             <asp:Label ID="errorHeader" runat="server"></asp:Label>
                                             <br />
                                             <asp:Label ID="errorMessage" runat="server"></asp:Label>
-                                            <asp:Label ID="errorToReport" runat="server"></asp:Label>
                                         </div>
                                     </div>
                                     <br />

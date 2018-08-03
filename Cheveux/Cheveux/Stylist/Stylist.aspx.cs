@@ -9,42 +9,39 @@ using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
 namespace Cheveux
 {
-	public partial class Stylist : System.Web.UI.Page
-	{
+    public partial class Stylist : System.Web.UI.Page
+    {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         String dayDate = DateTime.Now.ToString("dddd d MMMM");
-        //List<SP_GetMyNextCustomer> next = null;
         CUST_VISIT cust_visit;
         HttpCookie cookie = null;
-
+        SP_ViewCustVisit cv = null;
         List<SP_GetEmpAgenda> agenda = null;
 
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
         protected void Page_Load(object sender, EventArgs e)
-		{
+        {
             errorHeader.Font.Bold = true;
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
-            errorToReport.Font.Size = 10;
-
             //access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
 
-            if(UserID == null)
+            if (UserID == null)
             {
                 LoggedOut.Visible = true;
                 AgendaTable.Visible = false;
                 LoggedIn.Visible = false;
             }
-            else if(UserID["UT"] != "S")
+            else if (UserID["UT"] != "S")
             {
                 Response.Redirect("../Default.aspx");
             }
-            else if(UserID["UT"] == "S")
+            else if (UserID["UT"] == "S")
             {
-                LoggedOut.Visible =false;
+                LoggedOut.Visible = false;
                 LoggedIn.Visible = true;
 
                 lblDate.Text = dayDate;
@@ -58,7 +55,7 @@ namespace Cheveux
                 getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
 
                 //if theres no booking for the day dont display the tables headings
-                if(AgendaTable.Rows.Count == 1)
+                if (AgendaTable.Rows.Count == 1)
                 {
                     AgendaTable.Visible = false;
                     noBookingsPH.Visible = true;
@@ -69,7 +66,7 @@ namespace Cheveux
                     //if there are bookings for the day display headings 
                     AgendaTable.Visible = true;
                 }
-            }            
+            }
         }
 
         public void getAgenda(string id, DateTime bookingDate)
@@ -137,7 +134,7 @@ namespace Cheveux
                 int i = 1;
                 foreach (SP_GetEmpAgenda n in agenda)
                 {
-
+                    cv = handler.BLL_ViewCustVisit(n.UserID,n.BookingID);
                     //create row 
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
@@ -176,83 +173,90 @@ namespace Cheveux
                     present.Text = function.GetFullArrivedStatus(n.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
 
-                        //create cell which the button populates and add to row (cell : 6)
-                        TableCell buttonCell = new TableCell();
-                        buttonCell.Width = 200;
-                        buttonCell.Height = 50;
-                    if(function.GetFullArrivedStatus(n.Arrived.ToString()[0]) == "Yes")
+                    //create cell which the button populates and add to row (cell : 6)
+                    TableCell buttonCell = new TableCell();
+                    buttonCell.Width = 200;
+                    buttonCell.Height = 50;
+                    if (function.GetFullArrivedStatus(n.Arrived.ToString()[0]) == "Yes")
                     {
-                        //create button 
-                        btn = new Button();
-                        btn.Text = "Create Visit Record";
-                        btn.CssClass = "btn btn-primary";
-                        //button's click event
-                        btn.Click += (ss, ee) => {
-                            try
+                        if(cv == null)
+                        {   //if visit record doesn't exist show button
+
+                            //create button 
+                            btn = new Button();
+                            btn.Text = "Create Visit Record";
+                            btn.CssClass = "btn btn-primary";
+                            //button's click event
+                            btn.Click += (ss, ee) =>
                             {
-                                /* What does the button do:
-                                 * =======================
-                                 * button creates customer visit record in the CUST_VISIT table 
-                                 *and redirects user to the customer visit page of the booking
-                                 * 
-                                 */
-
-                                cust_visit = new CUST_VISIT();
-
-                                cust_visit.CustomerID = Convert.ToString(n.UserID);
-                                cust_visit.Date = Convert.ToDateTime(n.Date);
-                                cust_visit.BookingID = Convert.ToString(n.BookingID);
-                                cust_visit.Description = Convert.ToString(n.ServiceName);
-
-                                if (handler.BLL_CreateCustVisit(cust_visit))
+                                try
                                 {
-                                    /*
-                                     * alert user that customer visit record has been created
-                                     * after the user clicks okay on the alert window, the page redirects 
-                                     *  to the customer visit process.
-                                     *
+                                    /* What does the button do:
+                                     * =======================
+                                     * button creates customer visit record in the CUST_VISIT table 
+                                     *and redirects user to the customer visit page of the booking
+                                     * 
                                      */
 
-                                    Response.Write("<script>alert('Customer visit record for the visit has been created.You will now be taken to customer visit process.');"
-                                        + "window.location = '../Stylist/CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
-                                        + "&customerID=" + cust_visit.CustomerID.ToString()
-                                        + "';</script>");
+                                    cust_visit = new CUST_VISIT();
+
+                                    cust_visit.CustomerID = Convert.ToString(n.UserID);
+                                    cust_visit.Date = Convert.ToDateTime(n.Date);
+                                    cust_visit.BookingID = Convert.ToString(n.BookingID);
+                                    cust_visit.Description = Convert.ToString(n.ServiceName);
+
+                                    if (handler.BLL_CreateCustVisit(cust_visit))
+                                    {
+                                        /*
+                                         * alert user that customer visit record has been created
+                                         * after the user clicks okay on the alert window, the page redirects 
+                                         *  to the customer visit process.
+                                         *
+                                         */
+
+                                        Response.Write("<script>alert('Visit record created.You will now be taken to customer visit process.');"
+                                            + "window.location = '../Stylist/CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
+                                            + "&customerID=" + cust_visit.CustomerID.ToString()
+                                            + "';</script>");
+                                    }
+                                    else
+                                    {
+                                        /*
+                                         * if the insert fails, display failed message
+                                         *to alert that the insert was not successful
+                                         * and that the customer visit record was not created
+                                         * (user friendly action status response)
+                                         */
+                                        phVisitErr.Visible = true;
+                                        lblVisitErr.Text = "Error creating record<br/>Please try again later or report to admin.";
+                                    }
                                 }
-                                else
+                                catch (ApplicationException err)
                                 {
-                                    /*
-                                     * if the insert fails, display failed message
-                                     *to alert that the insert was not successful
-                                     * and that the customer visit record was not created
-                                     * (user friendly action status response)
-                                     */
-                                    //Response.Write("<script>alert('Unsuccessful. Customer visit record not created');</script>");
+                                    //Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
                                     phVisitErr.Visible = true;
-                                    lblVisitErr.Text = "An error has occured.System is unable to create a visit record for the customer at this point in time.<br/>"
-                                                          + "Please report to management. Sorry for the inconvenience."+
-                                                          "<br/>Possible Error: Visit Record already exists. System does not allow double visit records.";
+                                    lblVisitErr.Text = "Error:System is unable to create a visit record at this point in time.br/>"
+                                                          + "Please report to management. Sorry for the inconvenience.";
+                                    //add error to the error log and then display response tab to say that an error has occured
+                                    function.logAnError(err.ToString());
                                 }
-                            }
-                            catch (ApplicationException err)
-                            {
-                                //Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
-                                phVisitErr.Visible = true;
-                                lblVisitErr.Text = "An error has occured.<br/>"
-                                                      + "Please report to management. Sorry for the inconvenience." +
-                                                      "<br/>Error: " + err.ToString();
-                                //add error to the error log and then display response tab to say that an error has occured
-                                function.logAnError(err.ToString());
-                            }
 
-                        };
-                        //add button control to the cell
-                        buttonCell.Controls.Add(btn);
+                            };
+                            //add button control to the cell
+                            buttonCell.Controls.Add(btn);
+                        }
+                        else if(cv != null)
+                        {   //if visit record already exists dont show 'create visit record' button
+                            buttonCell.Text = "<a href='#'>View Visit</a>";
+                        }
+                        
                         //add the cell to the row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
+                        
                     }
-                    else if(function.GetFullArrivedStatus(n.Arrived.ToString()[0]) == "No")
+                    else if (function.GetFullArrivedStatus(n.Arrived.ToString()[0]) == "No")
                     {
-                        buttonCell.Text = "<p><i>Customer has not arrived</i></p>";
+                        buttonCell.Text = "<p style='font-size: 14px;'><i>Customer has not arrived</i></p>";
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }
 
@@ -262,20 +266,14 @@ namespace Cheveux
             }
             catch (ApplicationException E)
             {
-                //Response.Write("<script>alert('An error has occured.Having trouble connecting to the database. Unable to display required data.');</script>");
-                //Response.Redirect(Request.RawUrl);
-
                 phBookingsErr.Visible = true;
-                errorHeader.Text = "Oh no!";
+                errorHeader.Text = "Error getting employee agenda.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + E.ToString();
-
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
                 function.logAnError(E.ToString());
-                
+
             }
         }
-
     }
 }
