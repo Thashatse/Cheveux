@@ -37,6 +37,8 @@ namespace DAL
         SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
         bool UpdateCustVisit(CUST_VISIT visit);
         bool CreateCustVisit(CUST_VISIT cust_visit);
+        List<SP_GetStylistBookings> getStylistPastBookings(string empID);
+        List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);
         #endregion
 
         #region search

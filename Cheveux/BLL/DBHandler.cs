@@ -334,5 +334,13 @@ namespace BLL
         {
             return db.GetAllStylists();
         }
+        public List<SP_GetStylistBookings> getStylistPastBookings(string empID)
+        {
+            return db.getStylistPastBookings(empID);
+        }
+        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID)
+        {
+            return db.getStylistUpcomingBookings(empID);
+        }
     }
 }

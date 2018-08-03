@@ -141,6 +141,7 @@
     <Content Include="Manager\Reports.aspx" />
     <Content Include="Manager\Service.aspx" />
     <Content Include="Manager\UpdateEmployee.aspx" />
+    <Content Include="Stylist\Schedule.aspx" />
     <Content Include="Stylist\CustomerVisit.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
@@ -358,6 +359,13 @@
     </Compile>
     <Compile Include="Manager\UpdateEmployee.aspx.designer.cs">
       <DependentUpon>UpdateEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Stylist\Schedule.aspx.cs">
+      <DependentUpon>Schedule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Stylist\Schedule.aspx.designer.cs">
+      <DependentUpon>Schedule.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stylist\CustomerVisit.aspx.cs">
       <DependentUpon>CustomerVisit.aspx</DependentUpon>

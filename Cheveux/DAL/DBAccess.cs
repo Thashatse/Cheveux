@@ -2054,7 +2054,7 @@ namespace DAL
             }
         }
 
-           public List<SP_GetStylists> GetAllStylists()
+        public List<SP_GetStylists> GetAllStylists()
         {
             try
             {
@@ -2081,6 +2081,88 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
 
+            }
+        }
+        public List<SP_GetStylistBookings> getStylistPastBookings(string empID)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", empID)
+            };
+            try
+            {
+                using(DataTable table = DBHelper.ParamSelect("SP_StylistPastBookings", CommandType.StoredProcedure,pars))
+                {
+                    if(table.Rows.Count > 0)
+                    {
+                        foreach(DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                FullName = row["FullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                ServiceID = row["ProductID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString(),
+                                Price = row["Price"].ToString()
+                            };
+                           bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID)
+        {
+            SP_GetStylistBookings s = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", empID)
+            };
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_StylistUpcomingBookings", CommandType.StoredProcedure,pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                FullName = row["FullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                ServiceID = row["ProductID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString(),
+                                Price = row["Price"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
             }
         }
     }

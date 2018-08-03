@@ -56,7 +56,7 @@
                             <a class="nav-link js-scroll-trigger" href="../Stylist/Stylist.aspx" style="text-decoration:none;">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#"  style="text-decoration:none;">Calendar</a>
+                            <a class="nav-link js-scroll-trigger" href="../Stylist/Schedule.aspx"  style="text-decoration:none;">Schedule</a>
                         </li>
                         <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
