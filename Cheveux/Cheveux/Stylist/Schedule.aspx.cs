@@ -17,11 +17,10 @@ namespace Cheveux
         List<SP_GetStylistBookings> bList = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*
-             == Incomplete. Edits pending == 
-             */
             errorCssStyles();
+
             cookie = Request.Cookies["CheveuxUserID"];
+
             if (cookie == null)
             {
                 phLogIn.Visible = true;
@@ -40,11 +39,25 @@ namespace Cheveux
                 {
                     if(drpViewAppt.SelectedValue ==  "0")
                     {
+                        phCheckBox.Visible = false;
+                        phCal.Visible = false;
+
                         getUpcomingBookings(cookie["ID"].ToString());
                     }
                     else if(drpViewAppt.SelectedValue == "1")
                     {
-                        getPastBookings(cookie["ID"].ToString());
+                        phCheckBox.Visible = true;
+                        if (bxAll.Checked)
+                        {
+                            phBookingsErr.Visible = false;
+                            phCal.Visible = false;
+
+                            getPastBookings(cookie["ID"].ToString());
+                        }
+                        else if (!bxAll.Checked)
+                        {
+                            phCal.Visible = true;
+                        }
                     }
                 }
                 catch (ApplicationException Err)
@@ -263,7 +276,7 @@ namespace Cheveux
             Button btn;
             try
             {
-                bList = handler.getStylistPastBookingsDateRange(empID, startDate,endDate);
+                bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate);
 
                 phPast.Visible = true;
                 tblPast.CssClass = "table table-light table-hover";
@@ -352,6 +365,47 @@ namespace Cheveux
                 errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
                                     + "Please report problem to admin or try again later.";
                 function.logAnError(Err.ToString());
+            }
+
+                
+            
+        }
+        protected void calStart_SelectionChanged(object sender,EventArgs e)
+        {
+            lblDate1.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
+            if (lblDate1.Text==string.Empty || lblDate2.Text==string.Empty)
+            {
+                phBookingsErr.Visible = true;
+                lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+            }
+            else
+            {
+                phBookingsErr.Visible = false;
+                pastDateRange(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate);
+            }
+            
+        }
+        protected void calEnd_SelectionChanged(object sender, EventArgs e)
+        {
+            lblDate2.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
+            if (lblDate1.Text==string.Empty || lblDate2.Text==string.Empty)
+            {
+                phBookingsErr.Visible = true;
+                lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                    + "Hint: View bookings between 1/1/19(start date) and 12/12/19(end date)";
+            }
+            else
+            {
+                phBookingsErr.Visible = false;
+                pastDateRange(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate);
+            }
+        }
+        protected void cal_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date > DateTime.Today)
+            {
+                e.Day.IsSelectable = false;
             }
         }
     }

@@ -35,6 +35,6 @@ BEGIN
 	AND    B.StylistID = U.UserID 
 	AND    B.ServiceID = P.ProductID 
 	AND	   B.Arrived = 'Y'
-	ORDER BY B.[Date] desc
+	AND	   B.[Date] !> CAST(GETDATE() AS DATE)
 END
 GO

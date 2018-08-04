@@ -51,11 +51,48 @@
                     </div>
                 </div>
                 <br />
+                <asp:PlaceHolder ID="phCheckBox" runat="server">
+                    <div class="container row">
+                    <div class="col-sm-2">
+                        <asp:CheckBox ID="bxAll" runat="server" Text="All" AutoPostBack="true"/>
+                        <p style="font-size:12px;"><i>Note:Uncheck for date range</i></p>
+                    </div>
+                </div>
+                </asp:PlaceHolder>
+                <!-- Calendar -->
+                <asp:PlaceHolder ID="phCal" runat="server" Visible="false">
+                    <div class="row">
+                        <div class="col-lg-6 text-center">
+                            <asp:Label ID="lblStartDate" runat="server" Text="Start Date" Visible="true" CssClass="inline"></asp:Label>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <asp:Label ID="lblEndDate" runat="server" Text="End Date" Visible="true" CssClass="inline"></asp:Label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <asp:Calendar runat="server" ID="calStart" Width="350" Height="200" CssClass="inline" OnSelectionChanged="calStart_SelectionChanged" OnDayRender="cal_DayRender"></asp:Calendar>
+                        </div>
+                        <div class="col-lg-6">
+                            <asp:Calendar runat="server" ID="calEnd" Width="350" Height="200" CssClass="inline" OnSelectionChanged="calEnd_SelectionChanged" OnDayRender="cal_DayRender"></asp:Calendar>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 text-center">
+                            <asp:Label ID="lblDate1" runat="server" Text="" Visible="true" CssClass="inline"></asp:Label>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <asp:Label ID="lblDate2" runat="server" Text="" Visible="true" CssClass="inline"></asp:Label>
+                        </div>
+                    </div>
+                </asp:PlaceHolder>
+
+                <br />
+
                 <!--Past Bookings -->
                 <asp:PlaceHolder ID="phPast" runat="server" Visible="false">
                     <asp:Table ID="tblPast" runat="server"></asp:Table>
                 </asp:PlaceHolder>
-
                 <!--Upcoming Bookings -->
                 <asp:PlaceHolder ID="phUpcoming" runat="server" Visible="false">
                     <asp:Table ID="tblUpcoming" runat="server"></asp:Table>
@@ -89,9 +126,9 @@
             </asp:PlaceHolder>
             <!--err-->
             <div class="container row" runat="server">
-                <asp:PlaceHolder ID="noBookingsPH" runat="server" Visible="false">
+                <asp:PlaceHolder ID="phBookingsErr" runat="server" Visible="false">
                     <div class="col-sm-12 col-md-12 alert alert-primary alert-dismissible">
-                        <asp:Label ID="lblNoBookings" runat="server" Text="Label"></asp:Label>
+                        <asp:Label ID="lblBookingsErr" runat="server" Text="Label"></asp:Label>
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     </div>
                 </asp:PlaceHolder>

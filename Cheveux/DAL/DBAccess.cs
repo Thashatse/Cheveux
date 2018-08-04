@@ -2136,7 +2136,7 @@ namespace DAL
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_StylistPastBookings", CommandType.StoredProcedure, pars))
+                using (DataTable table = DBHelper.ParamSelect("SP_StylistPastBookingsDateRange", CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count > 0)
                     {
