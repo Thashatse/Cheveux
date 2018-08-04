@@ -616,7 +616,7 @@ namespace Cheveux
                 newCell = new TableCell();
 
                 string cellText;
-                cellText = "<a href = 'Profile.aspx?Action=Edit'>Edit Profile</a> &nbsp; &nbsp;";
+                cellText = "<a href='Authentication/Accounts.aspx?Action=ChangePass'>Change Password</a> &nbsp; &nbsp; <a href = 'Profile.aspx?Action=Edit'>Edit Profile</a> &nbsp; &nbsp;";
 
                 newCell.Text = cellText;
                 newCell.Width = 700;
