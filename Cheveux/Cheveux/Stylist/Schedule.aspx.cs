@@ -40,11 +40,11 @@ namespace Cheveux
                 {
                     if(drpViewAppt.SelectedValue ==  "0")
                     {
-                        getPastBookings(cookie["ID"].ToString());
+                        getUpcomingBookings(cookie["ID"].ToString());
                     }
                     else if(drpViewAppt.SelectedValue == "1")
                     {
-                        getUpcomingBookings(cookie["ID"].ToString());
+                        getPastBookings(cookie["ID"].ToString());
                     }
                 }
                 catch (ApplicationException Err)
@@ -155,7 +155,7 @@ namespace Cheveux
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting past bookings.";
-                errorMessage.Text = "It seems there is a problem communicating with the database."
+                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
                                     + "Please report problem to admin or try again later.";
                 function.logAnError(Err.ToString());
             }
@@ -253,7 +253,103 @@ namespace Cheveux
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting upcoming bookings";
-                errorMessage.Text = "It seems there is a problem communicating with the database."
+                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                    + "Please report problem to admin or try again later.";
+                function.logAnError(Err.ToString());
+            }
+        }
+        public void pastDateRange(string empID, DateTime startDate, DateTime endDate)
+        {
+            Button btn;
+            try
+            {
+                bList = handler.getStylistPastBookingsDateRange(empID, startDate,endDate);
+
+                phPast.Visible = true;
+                tblPast.CssClass = "table table-light table-hover";
+
+                TableRow row = new TableRow();
+                tblPast.Rows.Add(row);
+
+                TableCell date = new TableCell();
+                date.Text = "Date";
+                date.Width = 200;
+                date.Font.Bold = true;
+                tblPast.Rows[0].Cells.Add(date);
+
+                TableCell time = new TableCell();
+                time.Text = "Time";
+                time.Width = 50;
+                time.Font.Bold = true;
+                tblPast.Rows[0].Cells.Add(time);
+
+                TableCell customer = new TableCell();
+                customer.Text = "Customer";
+                customer.Width = 100;
+                customer.Font.Bold = true;
+                tblPast.Rows[0].Cells.Add(customer);
+
+                TableCell svName = new TableCell();
+                svName.Text = "Service";
+                svName.Width = 200;
+                svName.Font.Bold = true;
+                tblPast.Rows[0].Cells.Add(svName);
+
+                TableCell svDesc = new TableCell();
+                svDesc.Text = "Description";
+                svDesc.Width = 400;
+                svDesc.Font.Bold = true;
+                tblPast.Rows[0].Cells.Add(svDesc);
+
+                TableCell empty = new TableCell();
+                empty.Width = 200;
+                tblPast.Rows[0].Cells.Add(empty);
+
+                int rowCount = 1;
+                foreach (SP_GetStylistBookings b in bList)
+                {
+                    TableRow r = new TableRow();
+                    r.Height = 50;
+                    tblPast.Rows.Add(r);
+
+                    TableCell dateCell = new TableCell();
+                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                    tblPast.Rows[rowCount].Cells.Add(dateCell);
+
+                    TableCell timeCell = new TableCell();
+                    timeCell.Text = b.StartTime.ToString("HH:mm");
+                    tblPast.Rows[rowCount].Cells.Add(timeCell);
+
+                    TableCell customerCell = new TableCell();
+                    customerCell.Text = b.FullName.ToString();
+                    tblPast.Rows[rowCount].Cells.Add(customerCell);
+
+                    TableCell servNameCell = new TableCell();
+                    servNameCell.Text = b.ServiceName.ToString();
+                    tblPast.Rows[rowCount].Cells.Add(servNameCell);
+
+                    TableCell servDescCell = new TableCell();
+                    servDescCell.Text = b.ServiceDescription.ToString();
+                    tblPast.Rows[rowCount].Cells.Add(servDescCell);
+
+                    TableCell buttonCell = new TableCell();
+                    btn = new Button();
+                    btn.Text = "Click";
+                    btn.CssClass = "btn btn-default";
+                    btn.Click += (a, o) =>
+                    {
+                        //
+                    };
+                    buttonCell.Controls.Add(btn);
+                    tblPast.Rows[rowCount].Cells.Add(buttonCell);
+                    rowCount++;
+                }
+            }
+            catch (ApplicationException Err)
+            {
+                phScheduleErr.Visible = true;
+                errorHeader.Text = "Error getting past bookings within required date range.";
+                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
                                     + "Please report problem to admin or try again later.";
                 function.logAnError(Err.ToString());
             }
