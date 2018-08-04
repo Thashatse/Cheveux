@@ -378,7 +378,9 @@ namespace DAL
                             bookingID = row["BookingID"].ToString(),
                             arrived = row["Arrived"].ToString()[0],
                                 serviceID = row["ProductID"].ToString(),
-                            stylistEmployeeID = row["StylistID"].ToString()
+                            stylistEmployeeID = row["StylistID"].ToString(),
+                            CustFullName = row["CustFullName"].ToString(),
+                            CustomerID = row["CustomerID"].ToString()
                         };
                     }
                     return booking;
@@ -558,50 +560,7 @@ namespace DAL
         }
         #endregion
 
-        public string getSalePaymentType(string saleID)
-        {
-            string paymentType = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@SaleID", saleID)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        DataRow row = table.Rows[0];
-                        paymentType = Convert.ToString(row["PaymentType"]);
-                    }
-                    return paymentType;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool createSalesDTLRecord(SALES_DTL detailLine)
-        {
-            SqlParameter[] pars = new SqlParameter[]
-            {
-            new SqlParameter("@SaleID", detailLine.SaleID),
-            new SqlParameter("@ProductID", detailLine.ProductID),
-            new SqlParameter("@Qty", detailLine.Qty)
-            };
-            try
-            {
-                return DBHelper.NonQuery("SP_CreateSalesDTLRecord", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        #region User Accounts
         public SP_CheckForUserType CheckForUserType(string id)
         {
             SP_CheckForUserType TF = null;
@@ -672,6 +631,196 @@ namespace DAL
             }
         }
 
+        public bool updateUser(USER userUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@UserID", userUpdate.UserID.ToString()),
+                new SqlParameter("@UserName", userUpdate.UserName.ToString()),
+                new SqlParameter("@ContactNo", userUpdate.ContactNo.ToString()),
+                new SqlParameter("@Name", userUpdate.FirstName.ToString()),
+                new SqlParameter("@LName", userUpdate.LastName.ToString()),
+                new SqlParameter("@Email", userUpdate.Email.ToString()),
+                };
+
+                return DBHelper.NonQuery("SP_EditUser", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool deactivateUser(string userID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@UserID", userID.ToString())
+                };
+
+                return DBHelper.NonQuery("SP_DeactivateUser", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool createRestCode(string emailOrUsername, string restCode)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@restCode", restCode),
+                new SqlParameter("@Email", emailOrUsername)
+                };
+
+                return DBHelper.NonQuery("SP_CreateRestCode", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateUserAccountPassword(string password, string userID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@Password", password),
+                new SqlParameter("@UserID", userID)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateUserAccountPassword", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public USER GetAccountForRestCode(string code)
+        {
+            USER TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@Code", code)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetAccountForRestCode",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new USER
+                        {
+                            UserID = row["UserID"].ToString(),
+                            UserName = row["UserName"].ToString()
+                        };
+
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public USER GetUserDetails(string ID)
+        {
+            USER TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ID", ID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetUserDetails",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new USER
+                        {
+                            FirstName = row["FirstName"].ToString(),
+                            LastName = row["LastName"].ToString(),
+                            UserName = row["UserName"].ToString(),
+                            Email = row["Email"].ToString(),
+                            ContactNo = row["ContactNo"].ToString(),
+                            UserType = Convert.ToChar(row["UserType"]),
+                            UserImage = row["UserImage"].ToString(),
+                            AccountType = row["AccountType"].ToString()
+                        };
+
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
+        public string getSalePaymentType(string saleID)
+        {
+            string paymentType = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SaleID", saleID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        paymentType = Convert.ToString(row["PaymentType"]);
+                    }
+                    return paymentType;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool createSalesDTLRecord(SALES_DTL detailLine)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+            new SqlParameter("@SaleID", detailLine.SaleID),
+            new SqlParameter("@ProductID", detailLine.ProductID),
+            new SqlParameter("@Qty", detailLine.Qty)
+            };
+            try
+            {
+                return DBHelper.NonQuery("SP_CreateSalesDTLRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        
         public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
         {
             List<SP_ProductSearchByTerm> ProductSearchResults = new List<SP_ProductSearchByTerm>();
@@ -850,45 +999,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public USER GetUserDetails(string ID)
-        {
-            USER TF = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@ID", ID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetUserDetails",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        TF = new USER
-                        {
-                            FirstName = row["FirstName"].ToString(),
-                            LastName = row["LastName"].ToString(),
-                            UserName = row["UserName"].ToString(),
-                            Email = row["Email"].ToString(),
-                            ContactNo = row["ContactNo"].ToString(),
-                            UserType = Convert.ToChar(row["UserType"]),
-                            UserImage = row["UserImage"].ToString(),
-                            AccountType = row["AccountType"].ToString()
-                        };
-
-                    }
-                    return TF;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        
         public SP_GetCurrentVATate GetVATRate()
         {
             SP_GetCurrentVATate VATRate = null;
@@ -1017,49 +1128,6 @@ namespace DAL
             }
         }
         
-        
-
-        public bool updateUser(USER userUpdate)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                new SqlParameter("@UserID", userUpdate.UserID.ToString()),
-                new SqlParameter("@UserName", userUpdate.UserName.ToString()),
-                new SqlParameter("@ContactNo", userUpdate.ContactNo.ToString()),
-                new SqlParameter("@Name", userUpdate.FirstName.ToString()),
-                new SqlParameter("@LName", userUpdate.LastName.ToString()),
-                new SqlParameter("@Email", userUpdate.Email.ToString()),
-                };
-
-                return DBHelper.NonQuery("SP_EditUser", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool deactivateUser(string userID)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                new SqlParameter("@UserID", userID.ToString())
-                };
-
-                return DBHelper.NonQuery("SP_DeactivateUser", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        
-
         public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
         {
             SP_ViewCustVisit visit = null;
@@ -2114,49 +2182,6 @@ namespace DAL
                                 Price = row["Price"].ToString()
                             };
                            bookings.Add(s);
-                        }
-                    }
-                }
-                return bookings;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
-        {
-            SP_GetStylistBookings s = null;
-            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@stylistID", empID),
-                new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_StylistPastBookings", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            s = new SP_GetStylistBookings
-                            {
-                                BookingID = row["BookingID"].ToString(),
-                                StylistID = row["StylistID"].ToString(),
-                                CustomerID = row["CustomerID"].ToString(),
-                                FullName = row["FullName"].ToString(),
-                                BookingDate = Convert.ToDateTime(row["Date"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
-                            };
-                            bookings.Add(s);
                         }
                     }
                 }

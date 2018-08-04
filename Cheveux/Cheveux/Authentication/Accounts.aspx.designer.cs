@@ -211,6 +211,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtEmailToReset;
         
         /// <summary>
+        /// RegularExpressionValidatortxtEmailAddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidatortxtEmailAddress;
+        
+        /// <summary>
         /// btnRestPassword control.
         /// </summary>
         /// <remarks>
@@ -236,6 +245,42 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lPaswordResetUsernameLable;
+        
+        /// <summary>
+        /// divexistingPass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divexistingPass;
+        
+        /// <summary>
+        /// txtExistingPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtExistingPassword;
+        
+        /// <summary>
+        /// wrongExsistingPass control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label wrongExsistingPass;
+        
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
         /// divResetPaswordtxtPass control.

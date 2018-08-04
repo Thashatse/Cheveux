@@ -22,6 +22,9 @@ namespace DAL
         bool updateUser(USER userUpdate);
         bool addEmployee(EMPLOYEE e);
         bool updateEmployee(EMPLOYEE emp);
+        bool createRestCode(string emailOrUsername, string restCode);
+        USER GetAccountForRestCode(string code);
+        bool updateUserAccountPassword(string password, string userID);
         #endregion
 
         #region Bookings
@@ -38,7 +41,6 @@ namespace DAL
         bool UpdateCustVisit(CUST_VISIT visit);
         bool CreateCustVisit(CUST_VISIT cust_visit);
         List<SP_GetStylistBookings> getStylistPastBookings(string empID);
-        List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);
         #endregion
 
