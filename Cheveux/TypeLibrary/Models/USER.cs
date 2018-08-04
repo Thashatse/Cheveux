@@ -20,6 +20,5 @@ namespace TypeLibrary.Models
         public string UserImage { get; set; }
         public string AccountType { get; set; }
         public char PreferredCommunication { get; set; }
-        public string PassRestCode { get; set; }
     }
 }

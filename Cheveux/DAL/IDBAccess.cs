@@ -22,9 +22,6 @@ namespace DAL
         bool updateUser(USER userUpdate);
         bool addEmployee(EMPLOYEE e);
         bool updateEmployee(EMPLOYEE emp);
-        bool createRestCode(string emailOrUsername, string restCode);
-        USER GetAccountForRestCode(string code);
-        bool updateUserAccountPassword(string password, string userID);
         #endregion
 
         #region Bookings

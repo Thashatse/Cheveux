@@ -7,7 +7,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
-using TypeLibrary.Models;
 
 namespace Cheveux
 {
@@ -16,12 +15,11 @@ namespace Cheveux
         Authentication auth = new Authentication();
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        USER restPassAccount;
         string code = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-                Parallel.Invoke(() => loadPage(), () => function.sendOGBkngNoti());
+            Parallel.Invoke(() => loadPage(), () => function.sendOGBkngNoti());
         }
 
         private void loadPage()
@@ -69,47 +67,16 @@ namespace Cheveux
                 {
                     //Display the rest Pasword Form
                     string[] codeArray = code.Split('|');
-                    DateTime codeGenerate = DateTime.Now.AddYears(-10);
-                    try
+                    DateTime codeGenerate = Convert.ToDateTime(codeArray[0]);
+                    if (codeGenerate.AddMinutes(10).TimeOfDay >= DateTime.Now.TimeOfDay)
                     {
-                        codeGenerate = Convert.ToDateTime(codeArray[0].ToString() + " " + codeArray[1].ToString());
-                    }
-                    catch (Exception err)
-                    {
-                        function.logAnError("Bad Pass word reset code: "+ code +". Error: "+err);
-                        //if the code has expierd
-                        //Display the rest email Form
-                        lEamailResetError.Text = "The Rest Request Has Expired, Try Again.";
-                        lEamailResetError.Visible = true;
                         divEmailAcount.Visible = false;
-                        divAccountType.Visible = false;
-                        divGetRestCode.Visible = true;
-                        divGetEmailToReset.Visible = true;
-                    }
-                        if (codeGenerate.AddMinutes(10) >= DateTime.Now)
-                    {
-                        //check if the account exist and the code is valid
-                        restPassAccount = handler.GetAccountForRestCode(code);
-                        if (restPassAccount != null)
-                        {
-                            divEmailAcount.Visible = false;
                         divAccountType.Visible = false;
                         divResetPasword.Visible = true;
                         divResetPaswordtxtPass.Visible = true;
-                            //get the user name and display it in the label
-                            lPaswordResetUsernameLable.Text = restPassAccount.UserName.ToString();
-                        }
-                        else
-                        {
-                            //if the code has expierd
-                            //Display the rest email Form
-                            lEamailResetError.Text = "The Rest Request Has Expired, Try Again.";
-                            lEamailResetError.Visible = true;
-                            divEmailAcount.Visible = false;
-                            divAccountType.Visible = false;
-                            divGetRestCode.Visible = true;
-                            divGetEmailToReset.Visible = true;
-                        }
+                        //get the user name and display it in the label
+
+                        lPaswordResetUsernameLable.Text = "test";
                     }
                     else
                     {
@@ -122,25 +89,6 @@ namespace Cheveux
                         divGetRestCode.Visible = true;
                         divGetEmailToReset.Visible = true;
                     }
-                }
-            }
-            else if (action == "ChangePass")
-            {
-                lHeader.Text = "<h2> Change Password </h2>";
-                try
-                {
-                    HttpCookie UserID = Request.Cookies["CheveuxUserID"];
-                    divEmailAcount.Visible = false;
-                    divAccountType.Visible = false;
-                    divexistingPass.Visible = true;
-                    divResetPasword.Visible = true;
-                    divResetPaswordtxtPass.Visible = true;
-                    //get the user name and display it in the label
-                    lPaswordResetUsernameLable.Text = handler.GetUserDetails(UserID["ID"]).UserName.ToString();
-                }
-                catch (Exception err)
-                {
-                    Response.Redirect("Accounts.aspx?PreviousPage=Profile.aspx");
                 }
             }
                 //check if the user has requested to sign in with email
@@ -387,11 +335,17 @@ namespace Cheveux
             /*
                  * if the user deatails are incorect let the user know
                  */
-            if (result[0].ToString().Replace(" ", string.Empty) == "Error")
+            if (result[0].ToString().Replace(" ", string.Empty) == "Incorect")
             {
                 //let the use know the account details were incorect
                 lError.Visible = true;
                 lError.Text = "Wrong password";
+            }
+            //if there was an error let the user know
+            else if (result[0].ToString().Replace(" ", string.Empty) == "Error")
+            {
+                //let the use know ther was an error
+                Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
             }
             //if the user details are coorect create a session cookie and return them to the previous or home page
             else if (result[1].ToString().Replace(" ", string.Empty) == "C" 
@@ -468,7 +422,7 @@ namespace Cheveux
         }
         #endregion
 
-        #region Email Pass Change/Rest
+        #region Email Pass Rest
         protected void btnRestPassword_Click(object sender, EventArgs e)
         {
             if (btnRestPassword.Text == "Rest Pasword")
@@ -481,39 +435,12 @@ namespace Cheveux
                     {
                         lEamailResetError.Visible = false;
                         //Create Reset Code and email to user
-                        string code = DateTime.Now.ToString("yyyy/MM/dd|HH:mm") + "|"+auth.generatePassRestCode();
-                        bool success = handler.createRestCode(txtEmailToReset.Text.ToString(), code);
-                        if (success == true)
-                        {
-                            var body = new System.Text.StringBuilder();
-                            body.AppendFormat("Hello User,");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"To rest your password follow the link --> http://sict-iis.nmmu.ac.za/beauxdebut/Authentication/Accounts.aspx?action=Reset&code="+code);
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Regards,");
-                            body.AppendLine(@"The Cheveux Team");
-                            success = function.sendEmailAlert(txtEmailToReset.Text.ToString(), "Cheveux User",
-                                "Password Rest",
-                                body.ToString(),
-                                "Accounts Cheveux");
-                            //let the user know the password was succefuly rest
-                            lPaswordRestCodeFeedback.Visible = true;
-                            lPaswordRestCodeFeedback.Text = "A Password Rest Link Has Been Sent To Your Email";
-                            divGetEmailToReset.Visible = false;
-                            btnRestPassword.Text = "Done";
-                            if (success == false)
-                            {
-                                //let the use know the proccess fails
-                                lEamailResetError.Visible = true;
-                                lEamailResetError.Text = "An Error Occurred, Please Try Again Later";
-                            }
-                        }
-                        else if(success == false)
-                        {
-                            //let the use know the proccess fails
-                            lEamailResetError.Visible = true;
-                            lEamailResetError.Text = "An Error Occurred, Please Try Again Later";
-                        }
+
+                        //let the user know the password was succefuly rest
+                        lPaswordRestCodeFeedback.Visible = true;
+                        lPaswordRestCodeFeedback.Text = "A Password Rest Link Has Been Sent To Your Email";
+                        divGetEmailToReset.Visible = false;
+                        btnRestPassword.Text = "Done";
                     }
                     else
                     {
@@ -539,132 +466,33 @@ namespace Cheveux
 
         protected void btnChangePass_Click(object sender, EventArgs e)
         {
-            if (btnChangePass.Text == "Change Pasword" 
-                && divexistingPass.Visible == false)
+            if (btnChangePass.Text == "Change Pasword")
             {
-                    try
-                    {
-                    //re set the password
-                    bool success = handler.updateUserAccountPassword(txtNewPasword.Text.ToString(), restPassAccount.UserID.ToString());
-                    if (success == true)
-                    {
-                        //send confermation email
-                        var body = new System.Text.StringBuilder();
-                        body.AppendFormat("Hello User,");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"Your Password Was Succesfuly Rest.");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"Make a Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"Regards,");
-                        body.AppendLine(@"The Cheveux Team");
-                        success = function.sendEmailAlert(handler.GetUserDetails(restPassAccount.UserID.ToString()).Email.ToString(), "Cheveux User",
-                            "Password Rest Succesful",
-                            body.ToString(),
-                            "Accounts Cheveux");
-                        //let the user know the password was succefuly rest
-                        lPaswordResetUsernameLable.Visible = true;
-                        lPaswordResetUsernameLable.Text = "Your Password Has Successfully Been Reset";
-                        divResetPaswordtxtPass.Visible = false;
-                        btnChangePass.Text = "Done";
-                    }
-                    else
-                    {
-                        //let the user know the password was succefuly rest
-                        function.logAnError("Error reseting password on accounts page for reset code: " + code);
-                        lPaswordResetUsernameLable.Visible = true;
-                        lPaswordResetUsernameLable.Text = "An error occurred, Please try again later.";
-                        divResetPaswordtxtPass.Visible = false;
-                        btnChangePass.Text = "Done";
-                    }
-                    }
-                    catch (Exception Err)
-                    {
-                        //let the use know an erorr ocoured
-                        lPaswordResetUsernameLable.Visible = true;
-                        lPaswordResetUsernameLable.Text = "An error occurred communicating with the Cheveux Server, Please try again later.";
-                        function.logAnError("Error reseting password on accounts page for reset code: " + code +
-                            Err.ToString());
-                    }
-            }
-            else if (btnChangePass.Text == "Change Pasword"
-                && divexistingPass.Visible == true)
-                {
-                HttpCookie UserID = Request.Cookies["CheveuxUserID"];
-                USER user = handler.GetUserDetails(UserID["ID"]);
+                code = Request.QueryString["code"];
+                string[] codeArray = code.Split('|');
+                //check if the account exist
                 try
-                    {
-                    //check if the credentials are correct
-                    string[] result = auth.AuthenticateEmail(user.UserName.ToString().Replace(" ", string.Empty),
-                        txtExistingPassword.Text.ToString().Replace(" ", string.Empty));
+                {
+                    //re set the password
 
-                    /*
-                         * if the user deatails are incorect let the user know
-                         */
-                    if (result[0].ToString().Replace(" ", string.Empty) == "Error")
-                    {
-                        //let the use know the account details were incorect
-                        wrongExsistingPass.Visible = true;
-                        wrongExsistingPass.Text = "Wrong password";
-                    }
-                    //if the user details are corect change the password
-                    else if (result[1].ToString().Replace(" ", string.Empty) == "C"
-                        || result[1].ToString().Replace(" ", string.Empty) == "E")
-                    {
-                        //re set the password
-                        bool success = handler.updateUserAccountPassword(txtNewPasword.Text.ToString().Replace(" ", string.Empty),
-                            UserID["ID"].ToString().Replace(" ", string.Empty));
-                        if (success == true)
-                        {
-                            //send confermation email
-                            var body = new System.Text.StringBuilder();
-                            body.AppendFormat("Hello" + user.FirstName+",");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Your Password Was Succesfuly Changed.");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Make a Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Regards,");
-                            body.AppendLine(@"The Cheveux Team");
-                            success = function.sendEmailAlert(user.Email.ToString(), "Cheveux User",
-                                "Password Changed",
-                                body.ToString(),
-                                "Accounts Cheveux");
-                            //let the user know the password was succefuly rest
-                            lPaswordResetUsernameLable.Visible = true;
-                            lPaswordResetUsernameLable.Text = "Your Password Has Successfully Been Changed";
-                            divResetPaswordtxtPass.Visible = false;
-                            divexistingPass.Visible = false;
-                            btnChangePass.Text = "Done";
-                        }
-                        else
-                        {
-                            //let the user know the password was succefuly rest
-                            function.logAnError("Error changeing password for username: " + user.UserName.ToString());
-                            lPaswordResetUsernameLable.Visible = true;
-                            lPaswordResetUsernameLable.Text = "An error occurred, Please try again later.";
-                            divResetPaswordtxtPass.Visible = false;
-                            divexistingPass.Visible = false;
-                            btnChangePass.Text = "Done";
-                        }
-                    }
-                    }
-                    catch (Exception Err)
-                    {
-                        //let the use know an erorr ocoured
-                        lPaswordResetUsernameLable.Visible = true;
-                        lPaswordResetUsernameLable.Text = "An error occurred communicating with the Cheveux Server, Please try again later.";
-                    function.logAnError("Error changeing password for username: " + user.UserName.ToString() +
-                    Err.ToString());
-                    }
+                    //let the user know the password was succefuly rest
+                    lPaswordResetUsernameLable.Visible = true;
+                    lPaswordResetUsernameLable.Text = "Your Password Has Successfully Been Reset";
+                    divResetPaswordtxtPass.Visible = false;
+                        btnChangePass.Text = "Done";
                 }
-                else if (btnChangePass.Text == "Done" && txtExistingPassword.Text == null)
+                catch (Exception Err)
+                {
+                    //let the use know an erorr ocoured
+                    lPaswordResetUsernameLable.Visible = true;
+                    lPaswordResetUsernameLable.Text = "An error occurred communicating with the Cheveux Server, Please try again later.";
+                    function.logAnError("Error reseting password on accounts page for reset code: "+code +
+                        Err.ToString());
+                }
+            }
+            else if (btnChangePass.Text == "Done")
             {
                 Response.Redirect("../Authentication/Accounts.aspx?Type=Email");
-            }
-            else if (btnChangePass.Text == "Done" && txtExistingPassword.Text != null)
-            {
-                Response.Redirect("../Profile.aspx");
             }
         }
         #endregion

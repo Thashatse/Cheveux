@@ -13,11 +13,6 @@ namespace BLL
     {
         private IDBAccess db;
 
-        public DBHandler()
-        {
-            db = new DBAccess();
-        }
-
         #region Home Page Features
         public List<HomePageFeatures> GetHomePageFeatures()
         {
@@ -49,27 +44,16 @@ namespace BLL
         }
         #endregion
 
-        #region User Accounts
-        public bool updateUserAccountPassword(string password, string userID)
-        {
-            return db.updateUserAccountPassword(password, userID);
-        }
-
-        public USER GetAccountForRestCode(string code)
-        {
-            return db.GetAccountForRestCode(code);
-        }
-
-        public bool createRestCode(string emailOrUsername, string restCode)
-        {
-            return db.createRestCode(emailOrUsername, restCode);
-        }
-
         public bool deactivateUser(string userID)
         {
             return db.deactivateUser(userID);
         }
-        
+
+        public DBHandler()
+        {
+            db = new DBAccess();
+        }
+
         public USER logInEmail(string identifier, string password)
         {
             return db.logInEmail(identifier, password);
@@ -79,7 +63,6 @@ namespace BLL
         {
             return db.checkForAccountTypeEmail(identifier);
         }
-#endregion
 
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {

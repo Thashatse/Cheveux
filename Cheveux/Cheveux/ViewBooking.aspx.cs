@@ -225,59 +225,16 @@ namespace Cheveux
                 newRow = new TableRow();
                 newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);
-                if (cookie["UT"] == "C")
-                {
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Stylist:";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                "&empID=" + BookingDetails.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
-                                "'>" + BookingDetails.stylistFirstName.ToString() + "</a>";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                }
-                else if(cookie["UT"] == "S")
-                {
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Customer:";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                "&UserID=" + BookingDetails.CustomerID.ToString().Replace(" ", string.Empty) +
-                                "'>" + BookingDetails.CustFullName.ToString() + "</a>";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                }
-                else
-                {
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Stylist:";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                "&empID=" + BookingDetails.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
-                                "'>" + BookingDetails.stylistFirstName.ToString() + "</a>";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "Stylist:";
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Text = "<a href='Profile.aspx?Action=View" +
+                            "&empID=" + BookingDetails.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                            "'>" + BookingDetails.stylistFirstName.ToString() + "</a>";
+                BookingTable.Rows[rowCount].Cells.Add(newCell);
 
-                    //increment row count 
-                    rowCount++;
-
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    BookingTable.Rows.Add(newRow);
-
-                    newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "Customer:";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                "&UserID=" + BookingDetails.CustomerID.ToString().Replace(" ", string.Empty) +
-                                "'>" + BookingDetails.CustFullName.ToString() + "</a>";
-                    BookingTable.Rows[rowCount].Cells.Add(newCell);
-                }
                 //increment row count 
                 rowCount++;
 

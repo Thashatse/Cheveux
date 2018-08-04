@@ -136,7 +136,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <!-- Txt email -->
-                                            <asp:TextBox CssClass="form-control" ID="txtEmailToReset" runat="server" placeholder="Email"></asp:TextBox>
+                                            <asp:TextBox CssClass="form-control" ID="txtEmailToReset" runat="server" placeholder="Email or Username"></asp:TextBox>
                                             <!-- Error Lable -->
                                             <asp:Label ID="lEamailResetError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
                                         </div>
@@ -145,12 +145,12 @@
                                         <div class="col-12">
                                             <!-- Txt email validation -->
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailToReset" runat="server" ErrorMessage="*Email is Required" ControlToValidate="txtEmailToReset" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        &ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtEmailAddress" runat="server" ErrorMessage="Sorry, please enter a valid email address"
-                                        ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
-                                        ControlToValidate="txtEmailToReset" ForeColor="Red"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
+                                <!--line break-->
+                                        <br />
+                                        <br />
 <div class="row">
                                         <div class="col-12">
                                             <!-- reset Pasword -->
@@ -170,26 +170,11 @@
                                         <br />
                                     </div>
                                 </div>
-                                <div runat="server" id="divexistingPass" visible="false">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <!-- Txt Pasword -->
-                                            <asp:TextBox CssClass="form-control" ID="txtExistingPassword" runat="server" placeholder="Password" TextMode="password"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <!-- Txt Pasword validation -->
-                                            <asp:Label ID="wrongExsistingPass" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
-                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Password is Required" ControlToValidate="txtExistingPassword" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        </div>
-                                    </div>
-                                    </div>
                                 <div runat="server" id="divResetPaswordtxtPass" visible="false">
                                     <div class="row">
                                         <div class="col-12">
                                             <!-- Txt Pasword -->
-                                            <asp:TextBox CssClass="form-control" ID="txtNewPasword" runat="server" placeholder="New Password" TextMode="password"></asp:TextBox>
+                                            <asp:TextBox CssClass="form-control" ID="txtNewPasword" runat="server" placeholder="Password" TextMode="password"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -201,7 +186,7 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <!-- Txt Pasword confirm -->
-                                            <asp:TextBox CssClass="form-control" ID="txtConfirmNewPassword" runat="server" placeholder="Confirm New Password" TextMode="password"></asp:TextBox>
+                                            <asp:TextBox CssClass="form-control" ID="txtConfirmNewPassword" runat="server" placeholder="Confirm Password" TextMode="password"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="row">

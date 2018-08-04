@@ -172,18 +172,5 @@ namespace BLL
             } while (handler.BLL_CheckForUserType(result) != null);
             return result;
         }
-        
-        public string generatePassRestCode()
-        {
-            string result;
-            int[] id = new int[9];
-            Random rn = new Random();
-            for (int i = 0; i < id.Length; i++)
-            {
-                id[i] = rn.Next(0, 9);
-            }
-            result = string.Join("", id);
-            return result;
-        }
     }
 }

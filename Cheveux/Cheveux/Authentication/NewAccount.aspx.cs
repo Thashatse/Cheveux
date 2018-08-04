@@ -161,7 +161,7 @@ namespace Cheveux
                 User.Email = txtEmailAddress.Text.ToString().Replace(" ", string.Empty);
                 User.FirstName = txtFirstName.Text.ToString().Replace(" ", string.Empty);
                 User.LastName = txtLastName.Text.ToString().Replace(" ", string.Empty);
-                User.UserImage = "https://upload.wikimedia.org/wikipedia/commons/3/34/PICA.jpg";
+                User.UserImage = null;
                 User.UserName = txtUsername.Text.ToString().Replace(" ", string.Empty);
                 if (txtContactNumber.Text.ToString() != "")
                 {
@@ -173,6 +173,7 @@ namespace Cheveux
                 }
                 User.AccountType = "Email";
                 User.Password = txtPassword.Text.ToString().Replace(" ", string.Empty);
+                User.UserImage = null;
 
                 /*
                  * use the bll.NewUser to creat a new user
@@ -192,7 +193,7 @@ namespace Cheveux
                 {
                     //send an email notification
                     var body = new System.Text.StringBuilder();
-                    body.AppendFormat("Hello, " + User.FirstName);
+                    body.AppendFormat("Hello, " + User.FirstName + ",");
                     body.AppendLine(@"");
                     body.AppendLine(@"You have successfuly registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
                     body.AppendLine(@"Your username is: "+User.UserName.ToString()+".");

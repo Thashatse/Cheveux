@@ -27,14 +27,8 @@ namespace BLL
         bool removeProductSalesDTLRecord(SALES_DTL Sale);
         #endregion
 
-        #region User Accounts
-        bool updateUserAccountPassword(string password, string userID);
-        USER GetAccountForRestCode(string code);
-        bool createRestCode(string emailOrUsername, string restCode);
         SP_CheckForUserType BLL_CheckForUserType(string id);
         SP_AddUser BLL_AddUser(USER user);
-        #endregion
-
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();

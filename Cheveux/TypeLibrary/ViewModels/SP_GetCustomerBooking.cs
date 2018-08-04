@@ -13,7 +13,6 @@ namespace TypeLibrary.ViewModels
         public string servicePrice { get; set; }
         public string stylistEmployeeID { get; set; }
         public string stylistFirstName { get; set; }
-        public string CustFullName { get; set; }
         public DateTime bookingDate { get; set; }
         public DateTime bookingStartTime { get; set; }
         public string bookingID { get; set; }
