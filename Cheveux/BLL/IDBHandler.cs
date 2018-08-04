@@ -41,6 +41,7 @@ namespace BLL
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID);
         List<SP_GetStylistBookings> getStylistPastBookings(string empID);
+        List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);

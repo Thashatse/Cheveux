@@ -42,6 +42,7 @@ namespace DAL
         bool CreateCustVisit(CUST_VISIT cust_visit);
         List<SP_GetStylistBookings> getStylistPastBookings(string empID);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);
+        List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate);
         #endregion
 
         #region search
