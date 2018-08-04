@@ -15,9 +15,12 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		S.Maqabangqa
+-- Description: Gets stylists past bookings depending on the date range given.
 -- =============================================
-CREATE PROCEDURE SP_StylistPastBookings 
-	@stylistID nchar(30)
+CREATE PROCEDURE SP_StylistPastBookingsDateRange
+	@stylistID nchar(30),
+	@startDate datetime,
+	@endDate datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -35,6 +38,8 @@ BEGIN
 	AND    B.StylistID = U.UserID 
 	AND    B.ServiceID = P.ProductID 
 	AND	   B.Arrived = 'Y'
+	AND	  (B.[Date] BETWEEN @startDate AND @endDate)
+
 	ORDER BY B.[Date] desc
 END
 GO

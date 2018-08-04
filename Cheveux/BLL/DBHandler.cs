@@ -338,6 +338,10 @@ namespace BLL
         {
             return db.getStylistPastBookings(empID);
         }
+        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
+        {
+            return db.getStylistPastBookingsDateRange(empID, startDate, endDate);
+        }
         public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID)
         {
             return db.getStylistUpcomingBookings(empID);
