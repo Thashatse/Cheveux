@@ -1,0 +1,36 @@
+
+TimeStamp: 2018/08/04 14:27:05
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error changeing password for username: JPaul99                       System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Accounts.btnChangePass_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 601
+
+TimeStamp: 2018/08/04 14:35:04
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending email To: Subject: Password Rest Succesful Error:System.ArgumentException: The parameter 'address' cannot be an empty string.
+Parameter name: address
+   at System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
+   at System.Net.Mail.MailAddress..ctor(String address, String displayName)
+   at BLL.Functions.sendEmailAlert(String receverAddress, String reciverName, String subject, String body, String senderName) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 232
+
+TimeStamp: 2018/08/04 14:35:45
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending email To: Subject: Password Changed Error:System.ArgumentException: The parameter 'address' cannot be an empty string.
+Parameter name: address
+   at System.Net.Mail.MailAddress..ctor(String address, String displayName, Encoding displayNameEncoding)
+   at System.Net.Mail.MailAddress..ctor(String address, String displayName)
+   at BLL.Functions.sendEmailAlert(String receverAddress, String reciverName, String subject, String body, String senderName) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 232

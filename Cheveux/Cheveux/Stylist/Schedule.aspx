@@ -43,11 +43,15 @@
             
                 <!-- Past/Upcoming Dropdownlist -->
                 <div id="viewDrpDown" class="container row">
-                    <div class="col-xs-12 col-md-12">
+                    <div class="col-xs-12 col-md-10">
                         <asp:DropDownList ID="drpViewAppt" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
                             <asp:ListItem Text="Past Bookings" Value="0"></asp:ListItem>
                             <asp:ListItem Text="Upcoming Bookings" Value="1"></asp:ListItem>
                         </asp:DropDownList>
+                    </div>
+                    <div class="col-xs-12 col-md-2">
+                        <!-- Manage Schedule -->
+                <a class='btn btn-secondary' href='../Stylist/Schedule.aspx?Action=Manage'>Manage Schedule </a>
                     </div>
                 </div>
                 <br />
@@ -60,7 +64,7 @@
                 <asp:PlaceHolder ID="phUpcoming" runat="server" Visible="false">
                     <asp:Table ID="tblUpcoming" runat="server"></asp:Table>
                 </asp:PlaceHolder>
-
+                
             </asp:PlaceHolder>
 
             <!--Error: If cant display the stylists schedule-->
