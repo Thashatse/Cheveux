@@ -45,8 +45,8 @@
                 <div id="viewDrpDown" class="container row">
                     <div class="col-xs-12 col-md-10">
                         <asp:DropDownList ID="drpViewAppt" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                            <asp:ListItem Text="Past Bookings" Value="0"></asp:ListItem>
-                            <asp:ListItem Text="Upcoming Bookings" Value="1"></asp:ListItem>
+                            <asp:ListItem Text="Upcoming Bookings" Value="0"></asp:ListItem>
+                            <asp:ListItem Text="Past Bookings" Value="1"></asp:ListItem>
                         </asp:DropDownList>
                     </div>
                     <div class="col-xs-12 col-md-2">

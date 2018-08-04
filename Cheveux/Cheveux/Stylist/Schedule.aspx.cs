@@ -325,26 +325,26 @@ namespace Cheveux
                     tblPast.Rows[rowCount].Cells.Add(timeCell);
 
                     TableCell customerCell = new TableCell();
-                    customerCell.Text = b.FullName.ToString();
+                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + b.FullName.ToString() + "</a>";
                     tblPast.Rows[rowCount].Cells.Add(customerCell);
 
                     TableCell servNameCell = new TableCell();
-                    servNameCell.Text = b.ServiceName.ToString();
+                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
+                                        + b.ServiceName.ToString() + "</a>";
                     tblPast.Rows[rowCount].Cells.Add(servNameCell);
 
                     TableCell servDescCell = new TableCell();
-                    servDescCell.Text = b.ServiceDescription.ToString();
+                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
+                                        + b.ServiceDescription.ToString() + "</a>";
                     tblPast.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
-                    btn = new Button();
-                    btn.Text = "Click";
-                    btn.CssClass = "btn btn-default";
-                    btn.Click += (a, o) =>
-                    {
-                        //
-                    };
-                    buttonCell.Controls.Add(btn);
+                    buttonCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&BookingType=Past" +
+                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
                     tblPast.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
