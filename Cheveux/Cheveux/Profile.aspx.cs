@@ -16,7 +16,7 @@ namespace Cheveux
         IDBHandler handler = new DBHandler();
         USER userDetails = null;
         SP_ViewEmployee employee = null;
-        SP_ViewStylistSpecialisation specialisation = null;
+        SP_ViewStylistSpecialisationAndBio specialisationAndBio = null;
         string userType;
         HttpCookie cookie = null;
         Authentication auth = new Authentication();
@@ -201,7 +201,7 @@ namespace Cheveux
                 //check if its a stylist and retrevie the stylist specialisation
                 if (employee.employeeType.Replace(" ", string.Empty) == "S")
                 {
-                    specialisation = handler.viewStylistSpecialisation(empID);
+                    specialisationAndBio = handler.viewStylistSpecialisationAndBio(empID);
                 }
 
                 //diplay the employee details
@@ -214,8 +214,25 @@ namespace Cheveux
                 TableCell newCell;
                 //track row count
                 int rowCount = 0;
-                if (specialisation != null)
+                if (specialisationAndBio != null)
                 {
+                    //add a new row to the table
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //Specialisation Name
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Bio";
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = specialisationAndBio.Stylistbio.ToString();
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //increment rowcount
+                    rowCount++;
+
                     //add a new row to the table
                     newRow = new TableRow();
                     newRow.Height = 50;
@@ -227,8 +244,8 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
-                        "'>" + specialisation.serviceName + "</a>";
+                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                        "'>" + specialisationAndBio.serviceName + "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -245,8 +262,8 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisation.serviceID.ToString().Replace(" ", string.Empty) +
-                        "'>"+specialisation.serviceDescription+ "</a>";
+                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                        "'>"+specialisationAndBio.serviceDescription+ "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     //increment rowcount
@@ -437,16 +454,80 @@ namespace Cheveux
                 profileImage.ImageUrl = userDetails.UserImage.ToString();
                 //username
                 profileLable.Text = (userDetails.FirstName.ToString() +" "+userDetails.LastName.ToString()).ToUpper();
-                //details
-                //add a new row
-                TableRow newRow = new TableRow();
+                    //check if its a stylist and retrevie the stylist specialisation and bio
+                    if (userDetails.UserType == 'E')
+                    {
+                        if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString().Replace(" ", string.Empty)
+                            == "S")
+                        {
+                            specialisationAndBio = handler.viewStylistSpecialisationAndBio(cookie["ID"].ToString());
+                        }
+                    }
+                    //details
+                    //add a new row
+                    TableRow newRow = new TableRow();
                 newRow.Height = 50;
                 profileTable.Rows.Add(newRow);
                 //track row count
                 int rowCount = 0;
-
-                    //Contact No.
                     TableCell newCell = new TableCell();
+                    if (specialisationAndBio != null)
+                    {
+                        //add a new row to the table
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        profileTable.Rows.Add(newRow);
+                        //Specialisation Name
+                       
+                        newCell.Font.Bold = true;
+                        newCell.Text = "Bio";
+                        newCell.Width = 300;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = specialisationAndBio.Stylistbio.ToString();
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment rowcount
+                        rowCount++;
+
+                        //add a new row to the table
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        profileTable.Rows.Add(newRow);
+                        //Specialisation Name
+                        newCell = new TableCell();
+                        newCell.Font.Bold = true;
+                        newCell.Text = "Specialisation:";
+                        newCell.Width = 300;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                            "'>" + specialisationAndBio.serviceName + "</a>";
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment rowcount
+                        rowCount++;
+
+                        //add a new row
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        profileTable.Rows.Add(newRow);
+                        //service description
+                        newCell = new TableCell();
+                        newCell.Font.Bold = true;
+                        newCell.Text = "Specialisation Description:";
+                        newCell.Width = 300;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                            "'>" + specialisationAndBio.serviceDescription + "</a>";
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                        //increment rowcount
+                        rowCount++;
+                    }
+                    //Contact No.
+                    newCell = new TableCell();
                     newCell.Font.Bold = true;
                     newCell.Text = "Contact No.:";
                     newCell.Width = 300;

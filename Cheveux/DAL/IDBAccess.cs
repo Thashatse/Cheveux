@@ -83,7 +83,7 @@ namespace DAL
         bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd);
         bool updatePhoneNumber(string bussinesID, string PhoneNumber);
         SP_ViewEmployee viewEmployee(string empID);
-        SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID);
+        SP_ViewStylistSpecialisationAndBio viewStylistSpecialisationAndBio(string empID);
         List<SP_ViewEmployee> viewAllEmployees();
         List<SP_GetEmployeeTypes> getEmpTypes();
         List<PRODUCT> getAllProducts();

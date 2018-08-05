@@ -1502,9 +1502,9 @@ namespace DAL
             }
         }
 
-        public SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID)
+        public SP_ViewStylistSpecialisationAndBio viewStylistSpecialisationAndBio(string empID)
         {
-            SP_ViewStylistSpecialisation stylistSpecialisation = null;
+            SP_ViewStylistSpecialisationAndBio stylistSpecialisationAndBio = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@EmployeeID", empID)
@@ -1517,18 +1517,18 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        stylistSpecialisation = new SP_ViewStylistSpecialisation
+                        stylistSpecialisationAndBio = new SP_ViewStylistSpecialisationAndBio
                         {
                             EmployeeID = Convert.ToString(row[0]),
                             serviceID = Convert.ToString(row[1]),
                             serviceName = Convert.ToString(row[2]),
                             serviceDescription = Convert.ToString(row[3]),
                             servicePrice = Convert.ToDecimal(row[4].ToString()),
-                            serviceType = Convert.ToChar(row[5].ToString()[0])//,
-                            //serviceImage = Encoding.ASCII.GetBytes(row[6].ToString())
+                            serviceType = Convert.ToChar(row[5].ToString()[0]),
+                            Stylistbio = row["StylistBio"].ToString()
                         };
                     }
-                    return stylistSpecialisation;
+                    return stylistSpecialisationAndBio;
                 }
             }
             catch (Exception e)

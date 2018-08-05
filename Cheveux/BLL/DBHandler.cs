@@ -86,9 +86,9 @@ namespace BLL
             return db.getTodaysBookings();
         }
 
-        public SP_ViewStylistSpecialisation viewStylistSpecialisation(string empID)
+        public SP_ViewStylistSpecialisationAndBio viewStylistSpecialisationAndBio(string empID)
         {
-            return db.viewStylistSpecialisation(empID);
+            return db.viewStylistSpecialisationAndBio(empID);
         }
 
         public SP_ViewEmployee viewEmployee(string empID)

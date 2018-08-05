@@ -68,12 +68,12 @@
                                 <br />
                                 <br />
                                 <div class="row">
-                                        <div class="col-4"></div>
-                                    <div class="col-4" align="center">
+                                        <div class="col-lg-4 col-md-0"></div>
+                                    <div class="col-lg-4 col-md-12" align="center">
                                 <!--sign in with google buton-->
                                 <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
                                         </div>
-                                    <div class="col-4"></div>
+                                    <div class="col-lg-4 col-md-0"></div>
                                     </div>
                             </div>
 

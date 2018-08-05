@@ -138,7 +138,7 @@ namespace Cheveux
                     //get the user name and display it in the label
                     lPaswordResetUsernameLable.Text = handler.GetUserDetails(UserID["ID"]).UserName.ToString();
                 }
-                catch (Exception err)
+                catch (Exception)
                 {
                     Response.Redirect("Accounts.aspx?PreviousPage=Profile.aspx");
                 }

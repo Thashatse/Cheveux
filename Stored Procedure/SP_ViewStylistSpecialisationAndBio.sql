@@ -5,11 +5,12 @@ GO
 -- =============================================
 -- Description:	given an emplyeeID (Stylist) it returns that employee specialization
 -- =============================================
-CREATE PROCEDURE SP_ViewStylistSpecialisation 
+Alter PROCEDURE SP_ViewStylistSpecialisation 
 	@EmployeeID nchar(30)
 AS
 BEGIN
-	Select EmployeeID, ServiceID, [Name], ProductDescription, Price, [ProductType(T/A/S)], ProductImage
+	Select EmployeeID, ServiceID, [Name], ProductDescription, Price, [ProductType(T/A/S)], ProductImage, 
+	(Select Bio from EMPLOYEE where EmployeeID = @EmployeeID) as StylistBio
 	From STYLIST_SERVICE, PRODUCT
 	Where ProductID = ServiceID
 		And Active = 'Y'

@@ -264,7 +264,6 @@ namespace Cheveux
         }
         public void pastDateRange(string empID, DateTime startDate, DateTime endDate)
         {
-            Button btn;
             try
             {
                 bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate);

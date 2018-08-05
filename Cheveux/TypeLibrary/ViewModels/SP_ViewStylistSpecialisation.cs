@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypeLibrary.ViewModels
 {
-    public class SP_ViewStylistSpecialisation
+    public class SP_ViewStylistSpecialisationAndBio
     {
         public string EmployeeID { get; set; }
         public string serviceID { get; set; }
@@ -15,5 +15,6 @@ namespace TypeLibrary.ViewModels
         public decimal servicePrice { get; set; }
         public char serviceType { get; set; }
         public byte[] serviceImage { get; set; }
+        public string Stylistbio { get; set; }
     }
 }

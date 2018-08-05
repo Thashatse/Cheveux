@@ -262,19 +262,19 @@ namespace Cheveux
                     ("<img width='650' height='650' src=" + features[7].ImageURL.ToString() + "/>"));
                 lStylistHeader1.Text = features[7].firstName.ToString();
                 lStylistDescription1.Text = "Specializes in "
-                    + handler.viewStylistSpecialisation(features[7].ItemID.ToString()).serviceName;
+                    + handler.viewStylistSpecialisationAndBio(features[7].ItemID.ToString()).serviceName;
 
                 phStylistImage2.Controls.Add(new LiteralControl
                     ("<img width='650' height='650' src=" + features[8].ImageURL.ToString() + "/>"));
                 lStylistHeader2.Text = features[8].firstName.ToString();
                 lStylistDescription2.Text = "Specializes in "
-                    + handler.viewStylistSpecialisation(features[8].ItemID.ToString()).serviceName;
+                    + handler.viewStylistSpecialisationAndBio(features[8].ItemID.ToString()).serviceName;
 
                 phStylistImage3.Controls.Add(new LiteralControl
                     ("<img width='650' height='650' src=" + features[9].ImageURL.ToString() + "/>"));
                 lStylistHeader3.Text = features[9].firstName.ToString();
                 lStylistDescription3.Text = "Specializes in "
-                    + handler.viewStylistSpecialisation(features[9].ItemID.ToString()).serviceName;
+                    + handler.viewStylistSpecialisationAndBio(features[9].ItemID.ToString()).serviceName;
             }
             catch (Exception err)
             {

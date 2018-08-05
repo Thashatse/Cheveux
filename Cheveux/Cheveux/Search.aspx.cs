@@ -199,8 +199,8 @@ namespace Cheveux
                                     result.StylistFName + " " + result.StylistLName+ "</a>";
                                 StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                             newCell = new TableCell();
-                            newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + handler.viewStylistSpecialisation(result.StylistID.ToString()).serviceID.ToString().Replace(" ", string.Empty) + "'>" +
-                                handler.viewStylistSpecialisation(result.StylistID.ToString()).serviceName.ToString() + "</a>";
+                            newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + handler.viewStylistSpecialisationAndBio(result.StylistID.ToString()).serviceID.ToString().Replace(" ", string.Empty) + "'>" +
+                                handler.viewStylistSpecialisationAndBio(result.StylistID.ToString()).serviceName.ToString() + "</a>";
                             StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                         }
                         }
