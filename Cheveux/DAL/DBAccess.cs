@@ -568,7 +568,7 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@empID", bioUpdate.EmployeeID.ToString()),
-                    new SqlParameter("@addLine1", bioUpdate.Bio.ToString())
+                    new SqlParameter("@bioUpdate", bioUpdate.Bio.ToString())
                 };
                 return DBHelper.NonQuery("SP_UpdateStylistBio", CommandType.StoredProcedure, pars);
             }

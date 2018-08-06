@@ -183,7 +183,7 @@
                                         <asp:TableCell HorizontalAlign="Right">
                                             <a runat="server" id="aGoogleBioHelp" href='Profile.aspx'>Cancel   </a>
 
-                                            <asp:Button ID="btnSaveGoogle" runat="server" Text="Save" class="btn btn-primary" OnClick="btnSaveGoogle_Click" />
+                                            <asp:Button ID="btnSaveGoogle" runat="server" Text="Save" class="btn btn-primary" OnClick="commitEdit" UseSubmitBehavior="false" />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
@@ -261,7 +261,7 @@
                                         <asp:TableCell HorizontalAlign="Right">
                                             <a href='Profile.aspx'>Cancel   </a>
 
-                                            <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-primary" OnClick="btnSaveEmail_Click"/>
+                                            <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-primary" OnClick="commitEdit" UseSubmitBehavior="false"/>
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>

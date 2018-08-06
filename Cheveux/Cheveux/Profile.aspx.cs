@@ -912,151 +912,114 @@ namespace Cheveux
         public void commitEdit(object sender, EventArgs e)
         {
             bool check = false;
+            USER userUpdate = new USER();
+            EMPLOYEE bioUpdate = new EMPLOYEE();
+            userUpdate.UserID = cookie["ID"].ToString();
 
+            //if google account type
             if (userDetails.AccountType.Replace(" ", string.Empty) == "Google")
             {
-                if ((userName.Text == "" || userName.Text == null)
-                        && (contactNumber.Text == "" || contactNumber.Text == null))
+                //if no changes were made
+                if (txtUsername.Text == ""
+                    && contactNumber.Text == ""
+                    && userName.Text == ""
+                    && txtBio.Value.ToString() == "")
                 {
                     Response.Redirect("Profile.aspx");
                 }
 
-                if (userName.Text == "")
-                {
-                    USER userUpdate = new USER();
-                    EMPLOYEE bioUpdate = new EMPLOYEE();
-                    userUpdate.UserID = cookie["ID"].ToString();
-
-                    if (userName.Text == "" || userName.Text == null)
-                    {
-                        userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
-                    }
-                    else
-                    {
-                        userUpdate.UserName = userName.Text;
-                    }
-                    if (contactNumber.Text == "" || contactNumber.Text == null)
-                    {
-                        userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
-                    }
-                    else
-                    {
-                        userUpdate.ContactNo = contactNumber.Text;
-                    }
-                    if (cookie["UT"].ToString()[0] == 'S')
-                    {
-                        bioUpdate.EmployeeID = cookie["ID"].ToString();
-                        if (txtBio.Value.ToString() == "" || txtBio.Value.ToString() == null)
-                        {
-                            bioUpdate.Bio = specialisationAndBio.Stylistbio.ToString();
-                        }
-                        else
-                        {
-                            bioUpdate.Bio = txtBio.Value.ToString();
-                        }
-                    }
-
-                    userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
-                    userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
-                    userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
-
-                    try
-                    {
-                        check = handler.updateUser(userUpdate);
-                        Response.Redirect("Profile.aspx");
-                    }
-                    catch (ApplicationException Err)
-                    {
-                        function.logAnError(Err.ToString()
-                            + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
-                        Response.Redirect("Profile.aspx");
-                    }
-                }
-                else if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
+                if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
                     == false)
                 {
-                    USER userUpdate = new USER();
-                    EMPLOYEE bioUpdate = new EMPLOYEE();
-                    userUpdate.UserID = cookie["ID"].ToString();
-
+                    //get user name
                     if (userName.Text == "" || userName.Text == null)
-                    {
-                        userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
-                    }
-                    else
-                    {
-                        userUpdate.UserName = userName.Text;
-                    }
-                    if (contactNumber.Text == "" || contactNumber.Text == null)
-                    {
-                        userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
-                    }
-                    else
-                    {
-                        userUpdate.ContactNo = contactNumber.Text;
-                    }
-                    if (cookie["UT"].ToString()[0] == 'S')
-                    {
-                        bioUpdate.EmployeeID = cookie["ID"].ToString();
-                        if (txtABioEmail.Value.ToString() == "" || txtABioEmail.Value.ToString() == null)
-                        {
-                           bioUpdate.Bio = specialisationAndBio.Stylistbio.ToString();
-                        }
-                        else
-                        {
-                            bioUpdate.Bio = txtABioEmail.Value.ToString();
-                        }
-                    }
-                    if (txtName.Text == "" || txtName.Text == null)
-                    {
-                        userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
-                    }
-                    else
-                    {
-                        userUpdate.FirstName = txtName.Text;
-                    }
-                    if (txtLastName.Text == "" || txtLastName.Text == null)
-                    {
-                        userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
-                    }
-                    else
-                    {
-                        userUpdate.LastName = txtLastName.Text;
-                    }
-                    if (txtEmailAddress.Text == "" || txtEmailAddress == null)
-                    {
-                        userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
-                    }
-                    else
-                    {
-                        userUpdate.Email = txtEmailAddress.Text;
-                    }
-                    
-                    try
-                    {
-                        check = handler.updateUser(userUpdate);
-
-                        Response.Redirect("Profile.aspx");
-                    }
-                    catch (ApplicationException Err)
-                    {
-                        function.logAnError(Err.ToString()
-                            + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
-                        Response.Redirect("Profile.aspx");
-                    }
+                {
+                    userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
                 }
                 else
                 {
-                    userName_TextChanged(sender, e);
+                    userUpdate.UserName = userName.Text;
                 }
+
+                //get contact no.
+                if (contactNumber.Text == "" || contactNumber.Text == null)
+                {
+                    userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
+                }
+                else
+                {
+                    userUpdate.ContactNo = contactNumber.Text;
+                }
+
+                //get stylist bio if stylist
+                if (cookie["UT"].ToString()[0] == 'S')
+                {
+                    bioUpdate.EmployeeID = cookie["ID"].ToString();
+                    if (txtBio.Value.ToString() == "" || txtBio.Value.ToString() == null)
+                    {
+                            specialisationAndBio = handler.viewStylistSpecialisationAndBio(cookie["ID"].ToString());
+                            bioUpdate.Bio = specialisationAndBio.Stylistbio.ToString();
+                    }
+                    else
+                    {
+                        bioUpdate.Bio = txtBio.Value.ToString();
+                    }
+                }
+
+                userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
+                userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
+                userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
+
+                //comit to the db
+                try
+                {
+                    check = handler.updateUser(userUpdate);
+                        if (check == true)
+                        {
+                            check = handler.updateStylistBio(bioUpdate);
+                        }
+                }
+                catch (ApplicationException Err)
+                {
+                    function.logAnError(Err.ToString()
+                        + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
+                    Response.Redirect("Profile.aspx");
+                }
+                    //if error occours
+                    if (check == true)
+                    {
+                        Response.Redirect("Profile.aspx");
+                    }
+                    else if (check == false)
+                    {
+                        editEmailProfileTable.Visible = false;
+                        editGoogleProfileTable.Visible = false;
+                        JumbotronLogedIn.Visible = false;
+                        confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your user profile </h1>";
+                        confirmPlaceHolder.Text = "Please try again later";
+                        yes.Visible = false;
+                        no.Visible = false;
+                        OK.Visible = true;
+                    }
+                }
+            //if username exists
+            else if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
+                == true)
+            {
+                userName_TextChanged(sender, e);
             }
+        }
+
+            //if email acount type
             else if (userDetails.AccountType.Replace(" ", string.Empty) == "Email")
             {
+                //if no changes were made
                 if (txtUsername.Text == ""
                     && txtContactNumber.Text == ""
                     && txtName.Text == ""
                     && txtLastName.Text == ""
-                    && txtEmailAddress.Text == "")
+                    && txtEmailAddress.Text == ""
+                    && txtABioEmail.Value.ToString() == "")
                 {
                     Response.Redirect("Profile.aspx");
                 }
@@ -1066,28 +1029,84 @@ namespace Cheveux
                     && auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
                     == false)
                 {
-                    check = updateEmailAccount();
-                    if (txtUsername.Text == ""  && txtEmailAddress.Text == "")
+                    //username
+                    if (txtUsername.Text == "")
                     {
-                        check = updateEmailAccount();
+                        userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
                     }
-                    else if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
-                       == false)
+                    else
                     {
-                        check = updateEmailAccount();
+                        userUpdate.UserName = txtUsername.Text;
                     }
-                    else if (txtUsername.Text == "")
+
+                    //contact no.
+                    if (txtContactNumber.Text == "")
                     {
-                        check = updateEmailAccount();
+                        userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
                     }
-                    else if (auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
-                       == false)
+                    else
                     {
-                        check = updateEmailAccount();
+                        userUpdate.ContactNo = txtContactNumber.Text;
                     }
-                    else if (txtEmailAddress.Text == "")
+
+                    //first name
+                    if (txtName.Text == "")
                     {
-                        check = updateEmailAccount();
+                        userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.FirstName = txtName.Text;
+                    }
+
+                    //LastName name
+                    if (txtLastName.Text == "")
+                    {
+                        userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.LastName = txtLastName.Text;
+                    }
+
+                    //email address
+                    if (txtEmailAddress.Text == "")
+                    {
+                        userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.Email = txtEmailAddress.Text;
+                    }
+
+                    //get stylist bio if stylist
+                    if (cookie["UT"].ToString()[0] == 'S')
+                    {
+                        bioUpdate.EmployeeID = cookie["ID"].ToString();
+                        if (txtABioEmail.Value.ToString() == "" || txtABioEmail.Value.ToString() == null)
+                        {
+                            specialisationAndBio = handler.viewStylistSpecialisationAndBio(cookie["ID"].ToString());
+                            bioUpdate.Bio = specialisationAndBio.Stylistbio.ToString();
+                        }
+                        else
+                        {
+                            bioUpdate.Bio = txtABioEmail.Value.ToString();
+                        }
+                    }
+
+                    //comit updates
+                    try
+                    {
+                        check = handler.updateUser(userUpdate);
+                        if (check == true)
+                        {
+                            check = handler.updateStylistBio(bioUpdate);
+                        }
+                    }
+                    catch (ApplicationException Err)
+                    {
+                        function.logAnError(Err.ToString()
+                            + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
                     }
 
                     if (check == true)
@@ -1106,7 +1125,7 @@ namespace Cheveux
                         OK.Visible = true;
                     }
                 }
-
+                //if username or email address exists
                 else if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
                     == true
                     || auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
@@ -1116,69 +1135,6 @@ namespace Cheveux
                     txtEmailAddress_TextChanged(sender, e);
                 }
             }
-        }
-
-        private bool updateEmailAccount()
-        {
-            USER userUpdate = new USER();
-            bool check = false;
-            userUpdate.UserID = cookie["ID"].ToString();
-
-            if (txtUsername.Text == "")
-            {
-                userUpdate.UserName = userDetails.UserName.ToString().Replace(" ", string.Empty);
-            }
-            else
-            {
-                userUpdate.UserName = txtUsername.Text;
-            }
-
-            if (txtContactNumber.Text == "")
-            {
-                userUpdate.ContactNo = userDetails.ContactNo.ToString().Replace(" ", string.Empty);
-            }
-            else
-            {
-                userUpdate.ContactNo = txtContactNumber.Text;
-            }
-
-            if (txtName.Text == "")
-            {
-                userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
-            }
-            else
-            {
-                userUpdate.FirstName = txtName.Text;
-            }
-
-            if (txtLastName.Text == "")
-            {
-                userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
-            }
-            else
-            {
-                userUpdate.LastName = txtLastName.Text;
-            }
-
-            if (txtEmailAddress.Text == "")
-            {
-                userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
-            }
-            else
-            {
-                userUpdate.Email = txtEmailAddress.Text;
-            }
-
-            try
-            {
-                check = handler.updateUser(userUpdate);
-            }
-            catch (ApplicationException Err)
-            {
-                function.logAnError(Err.ToString()
-                    + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
-            }
-            return check;
         }
 
         //display the delete user view
@@ -1272,16 +1228,6 @@ namespace Cheveux
         protected void OK_Click1(object sender, EventArgs e)
         {
             Response.Redirect("profile.aspx?Action=Delete&Confirm=true");
-        }
-
-        protected void btnSaveGoogle_Click(object sender, EventArgs e)
-        {
-            commitEdit(sender, e);
-        }
-
-        protected void btnSaveEmail_Click(object sender, EventArgs e)
-        {
-            commitEdit(sender, e);
         }
         #endregion
 
