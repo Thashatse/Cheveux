@@ -163,13 +163,25 @@
                                     <asp:TableRow Height="50">
                                         <asp:TableCell ColumnSpan="2"></asp:TableCell>
                                     </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                        <asp:TableCell>
+                                            <!--Bio-->
+                                            <textarea runat="server" id="txtBio" cols="45" rows="5" placeholder="Placecholder"></textarea>
+                                            <!--Help-->
+                                            <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank"
+                                                title="Stylist Bio">
+                                                <span class="glyphicon">&#63;</span>
+                                            </a>
+                                          </asp:TableCell>
+                                    </asp:TableRow>
 
                                     <asp:TableRow Height="50">
                                         <asp:TableCell>
                                     <a href = '?Action=Delete'>Delete Profile   </a>
                                         </asp:TableCell>
                                         <asp:TableCell HorizontalAlign="Right">
-                                            <a href='Profile.aspx'>Cancel   </a>
+                                            <a runat="server" id="aGoogleBioHelp" href='Profile.aspx'>Cancel   </a>
 
                                             <asp:Button ID="btnSaveGoogle" runat="server" Text="Save" class="btn btn-primary" OnClick="btnSaveGoogle_Click" />
                                         </asp:TableCell>
@@ -229,6 +241,18 @@
                                     <asp:TableRow Height="50">
                                         <asp:TableCell ColumnSpan="2"></asp:TableCell>
                                     </asp:TableRow>
+                                    <asp:TableRow Height="50">
+                                        <asp:TableCell Font-Bold="true"></asp:TableCell>
+                                        <asp:TableCell>
+                                            <!--Bio-->
+                                            <textarea runat="server" id="txtABioEmail" cols="45" rows="5" placeholder="Placecholder"></textarea>
+                                            <!--Help-->
+                                            <a runat="server" id="aEmailBioHelp" href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank"
+                                                title="Stylist Bio">
+                                                <span class="glyphicon">&#63;</span>
+                                            </a>
+                                          </asp:TableCell>
+                                    </asp:TableRow>
 
                                     <asp:TableRow Height="50">
                                         <asp:TableCell>
@@ -237,7 +261,7 @@
                                         <asp:TableCell HorizontalAlign="Right">
                                             <a href='Profile.aspx'>Cancel   </a>
 
-                                            <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-primary" OnClick="commitEdit" />
+                                            <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-primary" OnClick="btnSaveEmail_Click"/>
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>

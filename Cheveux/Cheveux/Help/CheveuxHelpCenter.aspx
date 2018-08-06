@@ -151,7 +151,7 @@
                     <div class="col-md-12">
                         <!-- if the user is loged Out -->
                         <a name="InternalHelp"></a>
-                        <div class="jumbotron bg-dark text-white>
+                        <div class="jumbotron bg-dark text-white">
                             <h1>Internal Help</h1>
                             <div class="container" runat="server" id="JumbotronLogedOut">
                                 <div class="row">
@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            </div>
                         </div>
                     </div>
 

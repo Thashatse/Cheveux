@@ -730,6 +730,10 @@ namespace Cheveux
             try
             {
                 userDetails = handler.GetUserDetails(cookie["ID"].ToString());
+                if (cookie["UT"].ToString()[0] == 'S')
+                {
+                    specialisationAndBio = handler.viewStylistSpecialisationAndBio(cookie["ID"].ToString());
+                }
             }
             catch (ApplicationException Err)
             {
@@ -798,8 +802,23 @@ namespace Cheveux
                             editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "*Your Employee Type is managed by the salon manager";
                             //increment rowcount
                             rowCount++;
-                        }
 
+                            //display bio if employee & is a stylist
+                            if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S')
+                            {
+                                //Stylist Bio
+                                editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Bio:";
+                                txtBio.Attributes.Add("placeholder", specialisationAndBio.Stylistbio.ToString());
+                                //increment rowcount
+                                rowCount++;
+                            }
+                            
+                        }
+                        if (cookie["UT"].ToString()[0] != 'S')
+                        {
+                            txtBio.Visible = false;
+                            aGoogleBioHelp.Visible = false;
+                        }
                     }
                 }
                 else if (userDetails.AccountType.Replace(" ", string.Empty) == "Email")
@@ -852,6 +871,25 @@ namespace Cheveux
                         editEmailProfileTable.Rows[rowCount].Cells[0].Text = "*Your Employee Type is managed by the salon manager";
                         //increment rowcount
                         rowCount++;
+
+                        //display bio if employee & is a stylist
+                        if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S')
+                        {
+                            //Stylist Bio
+                            editEmailProfileTable.Rows[rowCount].Cells[0].Text = "Bio:";
+                            txtABioEmail.Attributes.Add("placeholder", specialisationAndBio.Stylistbio.ToString());
+                            //increment rowcount
+                            rowCount++;
+                        }
+                        else
+                        {
+                            txtABioEmail.Visible = false;
+                        }
+                    }
+                    if (cookie["UT"].ToString()[0] != 'S')
+                    {
+                        txtABioEmail.Visible = false;
+                        aEmailBioHelp.Visible = false;
                     }
                 }
                 else
@@ -886,6 +924,7 @@ namespace Cheveux
                 if (userName.Text == "")
                 {
                     USER userUpdate = new USER();
+                    EMPLOYEE bioUpdate = new EMPLOYEE();
                     userUpdate.UserID = cookie["ID"].ToString();
 
                     if (userName.Text == "" || userName.Text == null)
@@ -903,6 +942,18 @@ namespace Cheveux
                     else
                     {
                         userUpdate.ContactNo = contactNumber.Text;
+                    }
+                    if (cookie["UT"].ToString()[0] == 'S')
+                    {
+                        bioUpdate.EmployeeID = cookie["ID"].ToString();
+                        if (txtBio.Value.ToString() == "" || txtBio.Value.ToString() == null)
+                        {
+                            bioUpdate.Bio = specialisationAndBio.Stylistbio.ToString();
+                        }
+                        else
+                        {
+                            bioUpdate.Bio = txtBio.Value.ToString();
+                        }
                     }
 
                     userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
@@ -925,6 +976,7 @@ namespace Cheveux
                     == false)
                 {
                     USER userUpdate = new USER();
+                    EMPLOYEE bioUpdate = new EMPLOYEE();
                     userUpdate.UserID = cookie["ID"].ToString();
 
                     if (userName.Text == "" || userName.Text == null)
@@ -943,14 +995,47 @@ namespace Cheveux
                     {
                         userUpdate.ContactNo = contactNumber.Text;
                     }
-
-                    userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
-                    userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
-                    userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
-
+                    if (cookie["UT"].ToString()[0] == 'S')
+                    {
+                        bioUpdate.EmployeeID = cookie["ID"].ToString();
+                        if (txtABioEmail.Value.ToString() == "" || txtABioEmail.Value.ToString() == null)
+                        {
+                           bioUpdate.Bio = specialisationAndBio.Stylistbio.ToString();
+                        }
+                        else
+                        {
+                            bioUpdate.Bio = txtABioEmail.Value.ToString();
+                        }
+                    }
+                    if (txtName.Text == "" || txtName.Text == null)
+                    {
+                        userUpdate.FirstName = userDetails.FirstName.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.FirstName = txtName.Text;
+                    }
+                    if (txtLastName.Text == "" || txtLastName.Text == null)
+                    {
+                        userUpdate.LastName = userDetails.LastName.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.LastName = txtLastName.Text;
+                    }
+                    if (txtEmailAddress.Text == "" || txtEmailAddress == null)
+                    {
+                        userUpdate.Email = userDetails.Email.ToString().Replace(" ", string.Empty);
+                    }
+                    else
+                    {
+                        userUpdate.Email = txtEmailAddress.Text;
+                    }
+                    
                     try
                     {
                         check = handler.updateUser(userUpdate);
+
                         Response.Redirect("Profile.aspx");
                     }
                     catch (ApplicationException Err)
@@ -1184,14 +1269,19 @@ namespace Cheveux
             Response.Redirect("profile.aspx?Action=Delete&Confirm=false");
         }
 
+        protected void OK_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("profile.aspx?Action=Delete&Confirm=true");
+        }
+
         protected void btnSaveGoogle_Click(object sender, EventArgs e)
         {
             commitEdit(sender, e);
         }
 
-        protected void OK_Click1(object sender, EventArgs e)
+        protected void btnSaveEmail_Click(object sender, EventArgs e)
         {
-            Response.Redirect("profile.aspx?Action=Delete&Confirm=true");
+            commitEdit(sender, e);
         }
         #endregion
 

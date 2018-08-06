@@ -50,6 +50,11 @@ namespace BLL
         #endregion
 
         #region User Accounts
+        public bool updateStylistBio(EMPLOYEE bioUpdate)
+        {
+            return db.updateStylistBio(bioUpdate);
+        }
+
         public bool updateUserAccountPassword(string password, string userID)
         {
             return db.updateUserAccountPassword(password, userID);

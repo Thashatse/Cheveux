@@ -561,6 +561,23 @@ namespace DAL
         #endregion
 
         #region User Accounts
+        public bool updateStylistBio(EMPLOYEE bioUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@empID", bioUpdate.EmployeeID.ToString()),
+                    new SqlParameter("@addLine1", bioUpdate.Bio.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateStylistBio", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
         public SP_CheckForUserType CheckForUserType(string id)
         {
             SP_CheckForUserType TF = null;

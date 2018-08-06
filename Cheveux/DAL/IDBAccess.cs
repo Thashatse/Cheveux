@@ -25,6 +25,7 @@ namespace DAL
         bool createRestCode(string emailOrUsername, string restCode);
         USER GetAccountForRestCode(string code);
         bool updateUserAccountPassword(string password, string userID);
+        bool updateStylistBio(EMPLOYEE bioUpdate);
         #endregion
 
         #region Bookings

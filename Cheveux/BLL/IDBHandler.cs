@@ -33,6 +33,7 @@ namespace BLL
         bool createRestCode(string emailOrUsername, string restCode);
         SP_CheckForUserType BLL_CheckForUserType(string id);
         SP_AddUser BLL_AddUser(USER user);
+        bool updateStylistBio(EMPLOYEE bioUpdate);
         #endregion
 
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
