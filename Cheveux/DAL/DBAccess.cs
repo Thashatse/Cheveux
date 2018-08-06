@@ -2293,5 +2293,39 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public List<SP_AboutStylist> aboutStylist()
+        {
+            SP_AboutStylist s = null;
+            List<SP_AboutStylist> stylistsList = new List<SP_AboutStylist>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_AboutStylist", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_AboutStylist
+                            {
+                                UserImage = row["UserImage"].ToString(),
+                                EmployeeID = row["EmployeeID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                Type = row["Type"].ToString(),
+                                ServiceID= row["ServiceID"].ToString(),
+                                Specialisation= row["Specialisation"].ToString(),
+                                SpecDesc= row["SpecialisationDescription"].ToString(),
+                                Bio= row["Bio"].ToString(),
+                            };
+                            stylistsList.Add(s);
+                        }
+                    }
+                }
+                return stylistsList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }                  

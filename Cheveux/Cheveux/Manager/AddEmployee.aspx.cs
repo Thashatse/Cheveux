@@ -27,7 +27,6 @@ namespace Cheveux.Manager
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
-            errorToReport.Font.Size = 10;
 
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
@@ -205,8 +204,6 @@ namespace Cheveux.Manager
                 errorHeader.Text = "Error displaying users";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + E.ToString();
-
                 function.logAnError(E.ToString());
             }
         }

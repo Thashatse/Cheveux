@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-xs-12 col-md-2">
                         <!-- Manage Schedule -->
-                <a class='btn btn-secondary' href='../Stylist/Schedule.aspx?Action=Manage'>Manage Schedule </a>
+                        <a class='btn btn-secondary' href='../Stylist/Schedule.aspx?Action=Manage'>Manage Schedule </a>
                     </div>
                 </div>
                 <br />

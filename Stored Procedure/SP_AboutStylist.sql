@@ -15,28 +15,27 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		S.Maqabangqa
+-- Description: Gives customer intro about the stylists that work for the salon. 
 -- =============================================
-CREATE PROCEDURE SP_StylistUpcomingBookings
-@stylistID nchar(30)
+CREATE PROCEDURE SP_AboutStylist
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT BookingID,B.StylistID,B.CustomerID,
-			
-		   (SELECT (u.FirstName+' '+u.LastName)as[CustomerName]
-		   FROM [USER] u
-		   WHERE u.UserID=B.CustomerID)AS[FullName],
-
-		   B.[Date],TS.StartTime,P.ProductID,P.[Name],P.ProductDescription,B.Arrived,P.Price
-
-	From   BOOKING B, TIMESLOT TS, [User] U, PRODUCT P
-	Where  b.StylistID = @stylistID
-	AND    B.SlotNo = TS.SlotNo 
-	AND    B.StylistID = U.UserID 
-	AND    B.ServiceID = P.ProductID 
-	AND    B.Arrived = 'N'
-	AND    B.[Date] !< CAST(GETDATE() AS DATE)
-	ORDER BY B.[Date] asc
+	SELECT u.UserImage,
+		   e.EmployeeID,(u.FirstName + ' ' + u.LastName)AS[StylistName],e.[Type],
+		   s.ServiceID, p.[Name]AS[Specialisation], (p.ProductDescription)AS[SpecialisationDescription],
+		   e.Bio
+		   
+	FROM [USER] u, EMPLOYEE e, STYLIST_SERVICE s, PRODUCT p
+	
+	WHERE e.EmployeeID=u.[UserID]
+	AND   e.EmployeeID = s.EmployeeID
+	AND   p.ProductID = s.ServiceID
+	AND	  u.Active = 'T' 
+	AND   u.UserType = 'E'
+	AND   e.[Type] = 'S'
+	
+	ORDER BY StylistName asc
 
 END
 GO

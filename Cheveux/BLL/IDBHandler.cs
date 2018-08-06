@@ -95,6 +95,7 @@ namespace BLL
         List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_GetStylists> BLL_GetAllStylists();
         bool deactivateUser(string userID);
+        List<SP_AboutStylist> aboutStylist();
     }
 }
 

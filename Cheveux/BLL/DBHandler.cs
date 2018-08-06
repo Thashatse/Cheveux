@@ -368,5 +368,9 @@ namespace BLL
         {
             return db.getStylistUpcomingBookings(empID);
         }
+        public List<SP_AboutStylist> aboutStylist()
+        {
+            return db.aboutStylist();
+        }
     }
 }
