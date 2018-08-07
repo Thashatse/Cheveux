@@ -1180,7 +1180,7 @@ namespace DAL
             }
         }
 
-        public bool UpdateCustVisit(CUST_VISIT visit)
+        public bool UpdateCustVisit(CUST_VISIT visit, BOOKING b)
         {
             try
             {

@@ -56,11 +56,6 @@ namespace Cheveux
                 #endregion
 
                 lblDate.Text = dayDate;
-                string wB = Request.QueryString["WB"];
-                if (wB == "True")
-                {
-                    Welcome.Text = "Welcome Back " + handler.GetUserDetails(cookie["ID"]).FirstName;
-                }
                 list = handler.BLL_GetEmpNames();
                 if (!Page.IsPostBack)
                 {
@@ -140,7 +135,7 @@ namespace Cheveux
             {
                 agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
 
-                AgendaTable.CssClass = "table table-light table-hover";
+                AgendaTable.CssClass = "table table-light table-hover table-bordered";
                 
                 //create row for the table 
                 TableRow row = new TableRow();
@@ -192,6 +187,10 @@ namespace Cheveux
                 arrived.Width = 100;
                 arrived.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(arrived);
+
+                TableCell checkin = new TableCell();
+                checkin.Width = 200;
+                AgendaTable.Rows[0].Cells.Add(checkin);
 
                 //integer that will be incremented in the foreach loop to access the new row for every iteration of the foreach
                 int i = 1;
@@ -339,6 +338,8 @@ namespace Cheveux
 
         private void addAlertToTable(string alertIcon, string alertType, string alertDescription)
         {
+            tblAlerts.CssClass = "table table-dark table-hover table-bordered";
+
             alertsContainer.Visible = true;
             if (alertType != null
                 && alertDescription != null)
@@ -472,7 +473,7 @@ namespace Cheveux
                             " <a href = '#?ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
                             "'>" +
-                            "" + treat.Name + "</a> "
+                            "" + treat.Name + "</a><br/> "
                             + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -483,7 +484,7 @@ namespace Cheveux
                             " <a href = '#?ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
                             "'>" +
-                            "" + treat.Name + "</a> "
+                            "" + treat.Name + "</a><br/> "
                             + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -498,7 +499,7 @@ namespace Cheveux
                             "<a href = '#?ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
                             "'>" +
-                            "" + Access.Name + "</a> "
+                            "" + Access.Name + "</a><br/>"
                             + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -509,7 +510,7 @@ namespace Cheveux
                             "<a href = '#?ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
                             "'>" +
-                            "" + Access.Name + "</a> "
+                            "" + Access.Name + "</a><br/> "
                             + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }

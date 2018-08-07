@@ -4,6 +4,12 @@
     Receptionist Dashboard - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+        .inlineBlock { display: inline-block; }
+        .floatLeft { float: left; }
+    </style>
+
 </asp:Content>
 
 
@@ -39,7 +45,7 @@
                 <div id="viewAgenda" runat="server">
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
-                            <h3 id="viewStylistHeader" runat="server">View Stylist Agenda
+                            <h3 id="viewStylistHeader" runat="server">View Stylist Schedule
                             </h3>
                         </div>
                     </div>
