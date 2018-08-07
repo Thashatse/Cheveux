@@ -39,14 +39,7 @@
                 <!--jumbotron page heading-->
                 <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
                     <!--Date-->
-                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
-                    <br />
-                    <!--Welcome-->
-                    <asp:Label ID="Welcome" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
-                    <!--Line Break-->
-                    <div class="container">
-                        <br />
-                    </div>
+                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                 </div>
                     <!--Dropdown with stylists names-->
                 <div id="viewAgenda" runat="server">

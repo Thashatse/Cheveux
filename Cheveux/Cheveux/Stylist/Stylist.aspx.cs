@@ -45,11 +45,6 @@ namespace Cheveux
                 LoggedIn.Visible = true;
 
                 lblDate.Text = dayDate;
-                string wB = Request.QueryString["WB"];
-                if (wB == "True")
-                {
-                    lblWelcome.Text = "Welcome Back " + handler.GetUserDetails(UserID["ID"]).FirstName;
-                }
 
                 cookie = Request.Cookies["CheveuxUserID"];
                 getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
@@ -112,12 +107,6 @@ namespace Cheveux
                 cust.Width = 400;
                 AgendaTable.Rows[0].Cells.Add(cust);
 
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Font.Bold = true;
-                emp.Width = 400;
-                AgendaTable.Rows[0].Cells.Add(emp);
-
                 TableCell service = new TableCell();
                 service.Text = "Service";
                 service.Font.Bold = true;
@@ -139,41 +128,28 @@ namespace Cheveux
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
 
-                    //create cell for the start time and add to row (cell : 0)
                     TableCell start = new TableCell();
                     start.Text = n.StartTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(start);
 
-                    //create cell for the end time and add to row (cell : 1)
                     TableCell end = new TableCell();
                     end.Text = n.EndTime.ToString();
                     AgendaTable.Rows[i].Cells.Add(end);
 
-                    //create cell for the customer first name and add to row (cell : 2)
                     TableCell c = new TableCell();
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + n.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + n.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
 
-                    //create cell for the stylists name and add to row (cell : 3)
-                    TableCell e = new TableCell();
-                    e.Text = "<a href = '../Profile.aspx?Action=View" +
-                                        "&empID=" + n.empID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + n.EmpFName.ToString() + "</a>";
-                    AgendaTable.Rows[i].Cells.Add(e);
-
-                    //create cell for the service name and add to row (cell : 4)
                     TableCell s = new TableCell();
                     s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + n.ProductID.ToString().Replace(" ", string.Empty) +
                                     "'>" + n.ServiceName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(s);
 
-                    //create cell for the arrived status and add to row (cell : 5)
                     TableCell present = new TableCell();
                     present.Text = function.GetFullArrivedStatus(n.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
 
-                    //create cell which the button populates and add to row (cell : 6)
                     TableCell buttonCell = new TableCell();
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
@@ -253,11 +229,6 @@ namespace Cheveux
                         //add the cell to the row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
                         
-                    }
-                    else if (function.GetFullArrivedStatus(n.Arrived.ToString()[0]) == "No")
-                    {
-                        buttonCell.Text = "<p style='font-size: 14px;'><i>Customer has not arrived</i></p>";
-                        AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }
 
                     //increment i 

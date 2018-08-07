@@ -56,7 +56,7 @@ namespace BLL
         SP_GetAllofBookingDTL BLL_GetAllofBookingDTL(string bookingID, string customerID);
         SP_GetBookingServiceDTL BLL_GetBookingServiceDTL(string bookingID, string customerID);
         SP_ViewCustVisit BLL_ViewCustVisit(string customerID, string bookingID);
-        bool BLL_UpdateCustVisit(CUST_VISIT visit);
+        bool BLL_UpdateCustVisit(CUST_VISIT visit, BOOKING b);
         bool BLL_CreateCustVisit(CUST_VISIT cust_visit);
         bool BLL_AddBooking(BOOKING addBooking);
         List<SP_GetBookedTimes> BLL_GetBookedStylistTimes(string stylistID, DateTime bookingDate);

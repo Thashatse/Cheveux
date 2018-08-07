@@ -39,7 +39,7 @@ namespace DAL
         SP_GetAllofBookingDTL GetAllofBookingDTL(string bookingID, string customerID);
         SP_GetBookingServiceDTL GetBookingServiceDTL(string bookingID, string customerID);
         SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
-        bool UpdateCustVisit(CUST_VISIT visit);
+        bool UpdateCustVisit(CUST_VISIT visit, BOOKING b);
         bool CreateCustVisit(CUST_VISIT cust_visit);
         List<SP_GetStylistBookings> getStylistPastBookings(string empID);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);

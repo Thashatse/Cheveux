@@ -21,15 +21,13 @@ namespace Cheveux
         //get bookings service details
         SP_GetBookingServiceDTL sDTL = null;
 
-        //SP_ViewCustVisit viewCustomerVisit = null;
-
         //bookingID is going to go in here
         string bookingID;
         //customerID is going to go in here
         string customerID;
 
         CUST_VISIT visit;
-
+        BOOKING b;
         protected void Page_Load(object sender, EventArgs e)
         {
             errorHeader.Font.Bold = true;
@@ -228,7 +226,7 @@ namespace Cheveux
                         visit.BookingID = Convert.ToString(bookingID);
                         visit.Description = Convert.ToString(bDTL.ServiceDescription);
 
-                        if (handler.BLL_UpdateCustVisit(visit))
+                        if (handler.BLL_UpdateCustVisit(visit, b))
                         {
                             Response.Write("<script>alert('Create Customer Visit Record Process Successful.');</script>");
                             Response.Redirect("../Stylist/Stylist.aspx");
@@ -291,19 +289,6 @@ namespace Cheveux
                 TableRow newRow = new TableRow();
                 newRow.Height = 50;
                 serviceDetailsTable.Rows.Add(newRow);
-                //create cell for bookingID and it to the row
-                TableCell newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "BookingID:";
-                newCell.Width = 300;
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-                
-                //create a cell that displays the bookingID and add it to the row
-                newCell = new TableCell();
-                newCell.Text = bDTL.BookingID.ToString();
-                newCell.Width = 700;
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-                rowCount++;
 
                 //create a new row and add it to the table
                 newRow = new TableRow();
@@ -311,7 +296,7 @@ namespace Cheveux
                 serviceDetailsTable.Rows.Add(newRow);
                 
                 //create a cell for the service name and add it to the table
-                newCell = new TableCell();
+                TableCell newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Service Name:";
                 newCell.Width = 300;
@@ -395,7 +380,10 @@ namespace Cheveux
                         visit.BookingID = Convert.ToString(bookingID);
                         visit.Description = Convert.ToString(descBox.Text);
 
-                        if (handler.BLL_UpdateCustVisit(visit))
+                        b = new BOOKING();
+                        b.Comment = Convert.ToString(descBox.Text);
+
+                        if (handler.BLL_UpdateCustVisit(visit,b))
                         {
                             Response.Write("<script>alert('Update Successful.');</script>");
                             Response.Redirect("../Stylist/Stylist.aspx");

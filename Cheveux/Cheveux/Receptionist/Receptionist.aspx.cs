@@ -56,11 +56,6 @@ namespace Cheveux
                 #endregion
 
                 lblDate.Text = dayDate;
-                string wB = Request.QueryString["WB"];
-                if (wB == "True")
-                {
-                    Welcome.Text = "Welcome Back " + handler.GetUserDetails(cookie["ID"]).FirstName;
-                }
                 list = handler.BLL_GetEmpNames();
                 if (!Page.IsPostBack)
                 {
