@@ -15,8 +15,8 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-10 col-sm-10">
             <form runat="server">
                 <!--If the user is logged in-->
                 <!--jumbotron page heading-->
@@ -32,15 +32,8 @@
                     </div>
                 </div>
 
-                <!--Alerts-->
-                        <div runat="server" id="alertsContainer" visible="false">
-                            <!-- Alert Table -->
-                            <h1>Alerts </h1>
-                            <asp:Table ID="tblAlerts" runat="server">
-                            </asp:Table>
-                        </div>
-                <!-- line Break -->
-                <br />
+                <div class="row">
+                    <div class="col-md-9 col-sm-12">
 
                 <!--Dropdown with stylists names-->
                 <div id="viewAgenda" runat="server">
@@ -127,12 +120,19 @@
                     </div>
                 </div>
 
-                <!--Line Break-->
-                <div class="container">
-                    <br />
                 </div>
+                    <div class="col-3" style="border:solid #F05F40 2px;">
+                <!--Alerts-->
+                        <div runat="server" id="alertsContainer" visible="false">
+                            <!-- Alert Table -->
+                            <h1>Alerts </h1>
+                            <asp:Table ID="tblAlerts" runat="server">
+                            </asp:Table>
+                        </div>
+</div>
+                    </div>
             </form>
         </div>
-        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-1 col-sm-1"></div>
     </div>
 </asp:Content>

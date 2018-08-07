@@ -40,24 +40,6 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label Welcome;
         
         /// <summary>
-        /// alertsContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertsContainer;
-        
-        /// <summary>
-        /// tblAlerts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblAlerts;
-        
-        /// <summary>
         /// viewAgenda control.
         /// </summary>
         /// <remarks>
@@ -164,5 +146,23 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggedOut;
+        
+        /// <summary>
+        /// alertsContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alertsContainer;
+        
+        /// <summary>
+        /// tblAlerts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblAlerts;
     }
 }
