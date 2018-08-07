@@ -4,6 +4,12 @@
     Receptionist Dashboard - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+        .inlineBlock { display: inline-block; }
+        .floatLeft { float: left; }
+    </style>
+
 </asp:Content>
 
 
@@ -16,9 +22,20 @@
     <br />
     <div class="row">
         <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-md-12 col-sm-10">
             <form runat="server">
-                <!--If the user is logged in-->
+                <asp:Panel ID="pnlAlerts" runat="server" CssClass="inlineBlock floatLeft" Width="20%" HorizontalAlign="Left">
+                    <!--Alerts-->
+                        <div runat="server" id="alertsContainer" visible="false">
+                            <!-- Alert Table -->
+                            <asp:Table ID="tblAlerts" runat="server">
+                            </asp:Table>
+                        </div>
+                <!-- line Break -->
+                <br />
+                </asp:Panel>
+                <asp:Panel ID="pnlSchedule" runat="server" CssClass="inlineBlock" Width="70%" Height="500">
+                    <!--If the user is logged in-->
                 <!--jumbotron page heading-->
                 <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
                     <!--Date-->
@@ -31,22 +48,11 @@
                         <br />
                     </div>
                 </div>
-
-                <!--Alerts-->
-                        <div runat="server" id="alertsContainer" visible="false">
-                            <!-- Alert Table -->
-                            <h1>Alerts </h1>
-                            <asp:Table ID="tblAlerts" runat="server">
-                            </asp:Table>
-                        </div>
-                <!-- line Break -->
-                <br />
-
-                <!--Dropdown with stylists names-->
+                    <!--Dropdown with stylists names-->
                 <div id="viewAgenda" runat="server">
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
-                            <h3 id="viewStylistHeader" runat="server">View Stylist Agenda
+                            <h3 id="viewStylistHeader" runat="server">View Stylist Schedule
                             </h3>
                         </div>
                     </div>
@@ -126,7 +132,7 @@
                         </button>
                     </div>
                 </div>
-
+                </asp:Panel>
                 <!--Line Break-->
                 <div class="container">
                     <br />
