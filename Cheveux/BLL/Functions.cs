@@ -162,7 +162,7 @@ namespace BLL
                 }
             }catch(Exception err)
             {
-                throw new Exception(err.ToString());
+                //throw new Exception(err.ToString());
             }
         }
 
