@@ -127,9 +127,9 @@
                 </div>
 
                 </div>
-                    <div class="col-3" style="border:solid #F05F40 2px;">
+                    <div class="col-3" style="border:solid #F05F40 2px;" runat="server" id="alertsContainer" visible="false">
                 <!--Alerts-->
-                        <div runat="server" id="alertsContainer" visible="false">
+                        <div class="container" >
                             <!-- Alert Table -->
                             <h1>Alerts </h1>
                             <asp:Table ID="tblAlerts" runat="server">
