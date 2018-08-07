@@ -1356,7 +1356,7 @@ namespace Cheveux
                 "<button type = 'button' class='btn btn-default'>" +
                 "<a href = '../ViewBooking.aspx?Action=Edit&BookingID=" +
                 bookings.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=Bookings.aspx'>Edit Booking</a></button>";
+                "'>Edit Booking</a></button>";
             upcomingBookings.Rows[rowCount].Cells.Add(newCell);
 
         }
@@ -1455,10 +1455,13 @@ namespace Cheveux
             newCell.Text = bookings.bookingStartTime.ToString("HH:mm");
             pastBookings.Rows[rowCount].Cells.Add(newCell);
             newCell = new TableCell();
-            newCell.Text = bookings.stylistFirstName.ToString();
+            newCell.Text = "<a href='Profile.aspx?Action=View" +
+                            "&empID=" + bookings.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                            "'>" + bookings.stylistFirstName.ToString() + "</a>";
             pastBookings.Rows[rowCount].Cells.Add(newCell);
             newCell = new TableCell();
-            newCell.Text = bookings.serviceName.ToString();
+            newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookings.serviceID.Replace(" ", string.Empty) + "'>"
+                + bookings.serviceName.ToString() + "</a>";
             pastBookings.Rows[rowCount].Cells.Add(newCell);
             if (bookings.arrived.ToString()[0] != 'N')
             {
@@ -1466,8 +1469,8 @@ namespace Cheveux
                 newCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + bookings.bookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Invoice</a></button>";
+                    "&BookingType=Past'" +
+                    ">View Invoice</a></button>";
                 pastBookings.Rows[rowCount].Cells.Add(newCell);
             }
         }

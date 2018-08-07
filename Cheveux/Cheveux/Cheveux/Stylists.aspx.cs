@@ -20,6 +20,7 @@ namespace Cheveux.Cheveux
             errorCssStyles();
             diplayStylists();
         }
+
         public void errorCssStyles()
         {
             errorHeader.Font.Bold = true;
@@ -27,6 +28,7 @@ namespace Cheveux.Cheveux
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
         }
+
         public void diplayStylists()
         {
             //Edits and reviews+ratings feature to be added
