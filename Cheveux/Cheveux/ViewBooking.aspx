@@ -99,86 +99,83 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
                                 <!-- Check out -->
-                                <asp:Table ID="tblCheckOut" runat="server">
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true" Width="300"> Service: </asp:TableCell>
-                                        <asp:TableCell>
+                                <div style="border: solid #F05F40 2px;" runat="server" id="divCheckOutInvoice">
+                                    <div class="col-12">
+                                        <h2>Invoice: </h2>
+                                        <asp:Table ID="tblCheckOut" runat="server">
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell Font-Bold="true" Width="300"> Service: </asp:TableCell>
+                                                <asp:TableCell>
                                         <!--Service Name-->
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true"> Service Description: </asp:TableCell>
-                                        <asp:TableCell>
-                                            <!--Service Description-->
-                                            <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true"> Stylist: </asp:TableCell>
-                                        <asp:TableCell>
-                                            <!--Service Stylist-->
-                                            <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true"> Date: </asp:TableCell>
-                                        <asp:TableCell>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell Font-Bold="true"> Stylist: </asp:TableCell>
+                                                <asp:TableCell>
+                                                    <!--Service Stylist-->
+                                                    <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell Font-Bold="true"> Time & Date: </asp:TableCell>
+                                                <asp:TableCell>
                                     <!--Booking Date-->
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true"> Time: </asp:TableCell>
-                                        <asp:TableCell>
-                                    <!--Booking Time-->
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true" ColumnSpan="2">
-                                        <!--Invoice Lable--> Invoice: 
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell></asp:TableCell>
-                                        <asp:TableCell>
-                                        <!--Invoice-->
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell></asp:TableCell>
-                                        <asp:TableCell>
-                                            <!--Save Payment Type-->
-                                            <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" class="btn btn-secondary" />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell Font-Bold="true">
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell Font-Bold="true">
                                         <!--Payment Type Lable--> Payment Type: 
                                         </asp:TableCell>
-                                        <asp:TableCell>
+                                                <asp:TableCell>
                                         <!--Payment Type-->
                                         </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell>
-                                            <!--Payment Type-->
-                                            <asp:RadioButtonList ID="PaymentType" runat="server">
-                                                <asp:ListItem Selected="True"> Cash </asp:ListItem>
-                                                <asp:ListItem> Credit </asp:ListItem>
-                                            </asp:RadioButtonList>
-                                        </asp:TableCell>
-                                        <asp:TableCell>
-                                            <!--Save Payment Type-->
-                                            <asp:Button ID="btnSavePaymentType" runat="server" Text="Save" OnClick="btnSavePaymentType_Click" class="btn btn-primary" />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow Height="50">
-                                        <asp:TableCell></asp:TableCell>
-                                        <asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell></asp:TableCell>
+                                                <asp:TableCell>
+                                        <!--Invoice-->
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <!--Save Payment Type-->
+                                                    <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" class="btn btn-secondary" />
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell></asp:TableCell>
+                                                <asp:TableCell>
                                         <!--Print-->
-                                        <a href='#' onClick='window.print()' >Print This Page  </a>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                </asp:Table>
+                                        <a href='#' onClick='window.print()' >Print Invoice  </a>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                        </asp:Table>
+                                    </div>
+                                </div>
+                                <!-- Line Break -->
+                                <br />
+                                <!-- Payment Type-->
+                                <div style="border: solid #F05F40 2px;" runat="server" id="divPamentType">
+                                    <div class="col-12">
+                                        <h2>Payment Type:</h2>
+                                        <asp:Table ID="tblPaymentType" runat="server">
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell Width="300">
+                                                    <!--Payment Type-->
+                                                    <asp:RadioButtonList ID="PaymentType" runat="server">
+                                                        <asp:ListItem Selected="True"> Cash </asp:ListItem>
+                                                        <asp:ListItem> Credit </asp:ListItem>
+                                                    </asp:RadioButtonList>
+                                                </asp:TableCell>
+                                                <asp:TableCell>
+                                                    <!--Save Payment Type-->
+                                                    <asp:Button ID="btnSavePaymentType" runat="server" Text="Save" OnClick="btnSavePaymentType_Click" class="btn btn-primary" />
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                        </asp:Table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -187,16 +184,16 @@
                         <div class="row">
                             <div class="col-md-12 col-lg-6">
                                 <!--Line Break-->
-                            <br />
-                               <h3> Products: </h3>
+                                <br />
+                                <h3>Products: </h3>
                                 <!--Line Break-->
-                            <br />
+                                <br />
                                 <!-- Search -->
                                 <asp:TextBox ID="txtProductSearch" runat="server"></asp:TextBox>
                                 <asp:Button ID="btnSearchProduct" runat="server" Text="Search" CssClass="btn btn-Secondary" OnClick="btnAddProduct_Click" />
                                 <!--Line Break-->
-                            <br />
-                            <br />
+                                <br />
+                                <br />
 
                                 <asp:ListBox runat="server" ID="lbProducts" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
                                 <!-- Line Break -->
@@ -205,12 +202,12 @@
                             </div>
                             <div class="col-md-12 col-lg-6">
                                 <!--Line Break-->
-                            <br />
+                                <br />
                                 <!-- Invoice -->
                                 <!--Invoice Lable-->
-                               <h3> Invoice: </h3>
+                                <h3>Invoice: </h3>
                                 <!--Line Break-->
-                            <br />
+                                <br />
                                 <asp:Table ID="tblSale" runat="server">
                                     <asp:TableRow Height="50">
                                         <asp:TableCell>

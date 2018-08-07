@@ -126,6 +126,7 @@ namespace Cheveux
             }   
         }
 
+        #region Agenda
         public void getAgenda(string id, DateTime bookingDate)
         {
             Button btn;
@@ -327,6 +328,7 @@ namespace Cheveux
                 function.logAnError(E.ToString());
             }
         }
+        #endregion
 
         #region Alerts
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;

@@ -21,27 +21,27 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-12 col-sm-10">
+        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-10 col-sm-10">
             <form runat="server">
-                <asp:Panel ID="pnlAlerts" runat="server" CssClass="inlineBlock floatLeft" Width="20%" HorizontalAlign="Left">
-                    <!--Alerts-->
-                        <div runat="server" id="alertsContainer" visible="false">
-                            <!-- Alert Table -->
-                            <asp:Table ID="tblAlerts" runat="server">
-                            </asp:Table>
-                        </div>
-                <!-- line Break -->
-                <br />
-                </asp:Panel>
-                <asp:Panel ID="pnlSchedule" runat="server" CssClass="inlineBlock" Width="70%" Height="500">
-                    <!--If the user is logged in-->
+                <!--If the user is logged in-->
                 <!--jumbotron page heading-->
                 <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
                     <!--Date-->
-                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
+                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
+                    <br />
+                    <!--Welcome-->
+                    <asp:Label ID="Welcome" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
+                    <!--Line Break-->
+                    <div class="container">
+                        <br />
+                    </div>
                 </div>
-                    <!--Dropdown with stylists names-->
+
+                <div class="row">
+                    <div class="col-md-9 col-sm-12">
+
+                <!--Dropdown with stylists names-->
                 <div id="viewAgenda" runat="server">
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
@@ -125,13 +125,20 @@
                         </button>
                     </div>
                 </div>
-                </asp:Panel>
-                <!--Line Break-->
-                <div class="container">
-                    <br />
+
                 </div>
+                    <div class="col-3" style="border:solid #F05F40 2px;" runat="server" id="alertsContainer" visible="false">
+                <!--Alerts-->
+                        <div class="container" >
+                            <!-- Alert Table -->
+                            <h1>Alerts </h1>
+                            <asp:Table ID="tblAlerts" runat="server">
+                            </asp:Table>
+                        </div>
+</div>
+                    </div>
             </form>
         </div>
-        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-1 col-sm-1"></div>
     </div>
 </asp:Content>

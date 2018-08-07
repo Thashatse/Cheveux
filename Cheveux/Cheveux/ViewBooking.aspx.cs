@@ -651,7 +651,7 @@ namespace Cheveux
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
 
         public void checkOut(string BookingID)
-        {
+        {            
             //display the booking detail
             try
             {
@@ -682,7 +682,7 @@ namespace Cheveux
                 divCheckOut.Visible = true;
 
                 //display a heading
-                BookingLable.Text = "<h2> Booking Summary </h2>";
+                BookingLable.Text = "<h2> Check Out </h2>";
 
                 //create a variable to track the row count
                 int rowCount = 0;
@@ -695,32 +695,18 @@ namespace Cheveux
                 //increment row count 
                 rowCount++;
 
-                //Service description
-                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.serviceDescripion.ToString();
-
-                //increment row count 
-                rowCount++;
-
                 //stylist
                 tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.stylistFirstName.ToString();
 
                 //increment row count 
                 rowCount++;
 
-                //Date
-                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingDate.ToString("dd-MM-yyyy");
+                //Date & Time
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm") 
+                    +" "+BookingDetails.bookingDate.ToString("dd-MM-yyyy");
 
                 //increment row count 
                 rowCount++;
-
-                //Time
-                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm");
-
-                //increment row count 
-                rowCount++;
-
-                //invoice header here (Already in Table)
-                //increment row count
                 rowCount++;
 
                 //diplay invoice
@@ -803,30 +789,32 @@ namespace Cheveux
                 rowCount++;
                 rowCount++;
                 #endregion
-
+                
                 //check if paymentType Exists
                 string paymentType = handler.getSalePaymentType(BookingID);
                 if (paymentType != "")
                 {
-                    //hide payment type busttons
-                    tblCheckOut.Rows[rowCount].Cells[0].Text = "";
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = "";
-                    //add print page
-                    tblCheckOut.Rows[rowCount + 1].Cells[0].Text = "<a href = '#' onClick = 'window.print()'> Print This Page </a>";
+                    divPamentType.Visible = false;
                     //show payment type
-                    tblCheckOut.Rows[rowCount - 1].Cells[1].Text = paymentType;
+                    tblCheckOut.Rows[3].Cells[0].Text = "Payment Type:";
+                    tblCheckOut.Rows[3].Cells[1].Text = paymentType;
                     //hide add product button
-                    tblCheckOut.Rows[rowCount - 2].Cells[1].Text = "";
+                    tblCheckOut.Rows[5].Cells[1].Text = "";
+                    //add Print invoice button
+                    tblCheckOut.Rows[6].Cells[1].Text = "<a href='#' onClick='window.print()' >Print Invoice  </a>";
                 }
                 else
                 {
-                    tblCheckOut.Rows[rowCount + 1].Cells[0].Text = "";
-                    tblCheckOut.Rows[rowCount + 1].Cells[1].Text = "";
+                    tblCheckOut.Rows[3].Cells[0].Text = "";
+                    tblCheckOut.Rows[3].Cells[1].Text = "";
+                    //hide print button
+                    tblCheckOut.Rows[6].Cells[1].Text = "";
                 }
-
+                divCheckOutInvoice.Visible = true;
             }
             catch (Exception Err)
             {
+                divCheckOutInvoice.Visible = false;
                 function.logAnError(Err.ToString() + "\n get getBookingDeatails method in viewbooking form");
                 BookingLable.Text =
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";

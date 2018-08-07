@@ -154,7 +154,7 @@
 <div class="row">
                                         <div class="col-12">
                                             <!-- reset Pasword -->
-                                            <asp:Button ID="btnRestPassword" runat="server" Text="Rest Pasword" CssClass="btn btn-primary" OnClick="btnRestPassword_Click" />
+                                            <asp:Button ID="btnRestPassword" runat="server" Text="Reset Password" CssClass="btn btn-primary" OnClick="btnRestPassword_Click" />
                                         </div>
                                     </div>
                             </div>

@@ -14,11 +14,11 @@
         </div>
         <br />
         <div class="row">
-            <div class="col-md-2 col-sm-1"></div>
-            <div class="col-md-8 col-sm-10">
+            <div class="col-md-1"></div>
+            <div class="col-md-10 col-sm-12">
 
                 <!--jumbotron page heading-->
-                <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
+                <div class="bg-dark text-white jumbotron" runat="server" id="LoggedIn" visible="false">
                     <!--Date-->
                     <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                 </div>
@@ -91,7 +91,7 @@
                 </div>
 
             </div>
-            <div class="col-md-2 col-sm-1"></div>
+            <div class="col-md-1"></div>
         </div>
     </form>
 </asp:Content>
