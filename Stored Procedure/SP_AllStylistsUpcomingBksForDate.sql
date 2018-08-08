@@ -15,17 +15,15 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		S.Maqabangqa
--- Description: Gets stylists past bookings depending on the date range given.
+-- Description:	Gets bookings for all stylists for a specific day
 -- =============================================
-CREATE PROCEDURE SP_StylistPastBookingsDateRange
-	@stylistID nchar(30),
-	@startDate datetime,
-	@endDate datetime
+CREATE PROCEDURE SP_AllStylistsUpcomingBksForDate
+@bookingDate datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT BookingID,B.StylistID,B.CustomerID,
-
+			
 		   (SELECT (u.FirstName+' '+u.LastName)as[CustomerName]
 		   FROM [USER] u
 		   WHERE u.UserID=B.CustomerID)AS[FullName],
@@ -33,13 +31,12 @@ BEGIN
 		   B.[Date],TS.StartTime,P.ProductID,P.[Name],P.ProductDescription,B.Arrived,P.Price
 
 	From   BOOKING B, TIMESLOT TS, [User] U, PRODUCT P
-	Where  b.StylistID = @stylistID
-	AND    B.SlotNo = TS.SlotNo 
+	Where  B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = U.UserID 
 	AND    B.ServiceID = P.ProductID 
-	AND	   B.Arrived = 'Y'
-	AND	  (B.[Date] BETWEEN @startDate AND @endDate)
-
-	ORDER BY B.[Date],TS.StartTime desc
+	AND    B.Arrived = 'N' 
+	AND    B.[Date] = @bookingDate
+	AND    B.[Date] !< CAST(GETDATE() AS DATE)
+	ORDER BY B.[Date],TS.StartTime asc 
 END
 GO

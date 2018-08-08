@@ -170,12 +170,6 @@ namespace Cheveux
                 cust.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(cust);
 
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Width = 300;
-                emp.Font.Bold = true;
-                AgendaTable.Rows[0].Cells.Add(emp);
-
                 TableCell service = new TableCell();
                 service.Text = "Service";
                 service.Width = 300;
@@ -220,14 +214,6 @@ namespace Cheveux
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
-
-                    //create employee name cell and add to row.. cell index: 3
-                    TableCell e = new TableCell();
-                    e.Width = 300;
-                    e.Text = "<a href = '../Profile.aspx?Action=View" +
-                                        "&empID=" + a.empID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + a.EmpFName.ToString()+ "</a>";
-                    AgendaTable.Rows[i].Cells.Add(e);
 
                     //create service name cell and add to row.. cell index: 4
                     TableCell s = new TableCell();
