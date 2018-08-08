@@ -244,7 +244,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-9 ml-auto text-center">
+                <div class="col-lg-8 ml-auto text-center">
                     <asp:Table ID="tblContactUs" runat="server"></asp:Table>
                 </div>
             </div>
