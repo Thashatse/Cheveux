@@ -16,7 +16,14 @@
     <div class="row">
         <div class="col-md-2 col-sm-1"></div>
         <div class="col-md-8 col-sm-10">
-            Products Page
+            <div runat="server" id="divViewAll">
+                <!-- VIEW ALL PRODUCTS TABLE -->
+            </div>
+            <div runat="server" id="addandedit">
+                <form id="formAddEditProduct" runat="server">
+                    <!-- ADD EDIT PRODUCTS FORM -->
+                </form>
+            </div>
         </div>
         <div class="col-md-2 col-sm-1"></div>
     </div>

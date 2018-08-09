@@ -283,6 +283,57 @@ namespace Cheveux
             }
             #endregion
 
+            #region Operating Hours
+            try
+            {
+                //get the operating hourse from the db
+                BUSINESS operatingHours = handler.getBusinessTable();
+                //display the opperating hours
+                //add a table row
+                TableRow newRow = new TableRow();
+                tblContactUs.Rows.Add(newRow);
+
+                TableCell newCell = new TableCell();
+                newCell.Text = "<h3> Were open for business! </h3>";
+                tblContactUs.Rows[0].Cells.Add(newCell);
+
+                //add a table row
+                newRow = new TableRow();
+                tblContactUs.Rows.Add(newRow);
+
+                //add hours - weekday
+                newCell = new TableCell();
+                newCell.ColumnSpan = 3;
+                newCell.Text = "Weekdays: "+operatingHours.WeekdayStart.ToString("hh:mm") +" - " + operatingHours.WeekdayEnd.ToString("hh:mm");
+                tblContactUs.Rows[0].Cells.Add(newCell);
+
+                //add a table row
+                newRow = new TableRow();
+                tblContactUs.Rows.Add(newRow);
+
+                //add hours - weekend
+                newCell = new TableCell();
+                newCell.ColumnSpan = 3;
+                newCell.Text = "Weekends: " + operatingHours.WeekendStart.ToString("hh:mm") + " - " + operatingHours.WeekendEnd.ToString("hh:mm");
+                tblContactUs.Rows[0].Cells.Add(newCell);
+
+                //add a table row
+                newRow = new TableRow();
+                tblContactUs.Rows.Add(newRow);
+
+                //add hours - public holiday
+                newCell = new TableCell();
+                newCell.ColumnSpan = 3;
+                newCell.Text = "Public Holidays: " + operatingHours.PublicHolStart.ToString("hh:mm") + " - " + operatingHours.PublicHolEnd.ToString("hh:mm");
+                tblContactUs.Rows[0].Cells.Add(newCell);
+            }
+            catch (Exception err)
+            {
+                function.logAnError("unable to load operating hours on default.aspx: " +
+                    err);
+            }
+            #endregion
+
             #region Contact Us
             try
             {
@@ -297,14 +348,14 @@ namespace Cheveux
                 newCell.Text = "<a href='tel:" + features[10].contactNo.ToString() + "'" +
                     "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#9742;</ span >" +
                     " Phone </a>";
-                tblContactUs.Rows[0].Cells.Add(newCell);
+                tblContactUs.Rows[1].Cells.Add(newCell);
 
                 //add email address
                 newCell = new TableCell();
                 newCell.Text = "<a href='mailto:" + features[11].email.ToString() + "'" +
                     "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#128231;</ span >" +
                     " Email </a>";
-                tblContactUs.Rows[0].Cells.Add(newCell);
+                tblContactUs.Rows[1].Cells.Add(newCell);
 
                 //add the address
                 //get the curent bussines details
@@ -315,7 +366,7 @@ namespace Cheveux
                     BusinessDetails.AddressLine2.Replace(' ', '+') +
                 "'class='btn btn-primary btn-xl js-scroll-trigger'>" +
                 "<span class='glyphicon'>&#xe062;</span> Get Directions</a>";
-                tblContactUs.Rows[0].Cells.Add(newCell);
+                tblContactUs.Rows[1].Cells.Add(newCell);
 
             }
             catch (Exception err)

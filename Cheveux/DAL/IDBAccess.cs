@@ -44,6 +44,10 @@ namespace DAL
         List<SP_GetStylistBookings> getStylistPastBookings(string empID);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);
         List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate);
+        List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
         #endregion
 
         #region search

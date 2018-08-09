@@ -98,6 +98,11 @@ namespace BLL
         List<SP_GetStylists> BLL_GetAllStylists();
         bool deactivateUser(string userID);
         List<SP_AboutStylist> aboutStylist();
+        List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
+
     }
 }
 

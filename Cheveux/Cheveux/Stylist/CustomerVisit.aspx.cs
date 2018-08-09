@@ -315,19 +315,39 @@ namespace Cheveux
                 newRow.Height = 50;
                 serviceDetailsTable.Rows.Add(newRow);
 
+                //create a cell for the service name and add it to the table
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "Service Description:";
+                newCell.Width = 300;
+                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+
+                //create a cell that will display the service name and add it to the row. 
+                newCell = new TableCell();
+                newCell.Text = bDTL.ServiceDescription.ToString();
+                newCell.Width = 700;
+                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+                //increment rowCount
+                rowCount++;
+
+                //create a new row and add it to the table
+                newRow = new TableRow();
+                newRow.Height = 50;
+                serviceDetailsTable.Rows.Add(newRow);
+
                 //create a cell for the service description and add it to the row
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Booking comment:";
                 newCell.Width = 300;
                 serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-
+                
                 //create a cell that will be populated by the text box
                 newCell = new TableCell();
                 //newCell.Text = bDTL.ServiceDescription.ToString();
                 newCell.Width = 700;
                 TextBox descBox = new TextBox();
-                descBox.ID = "service_description";
+                descBox.ID = "bookingComment";
                 descBox.CssClass = "form-control";
                 //add control to cell
                 newCell.Controls.Add(descBox);
