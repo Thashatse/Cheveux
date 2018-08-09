@@ -11,6 +11,7 @@ namespace TypeLibrary.ViewModels
         public string BookingID { get; set; }
         public string StylistID { get; set; }
         public string CustomerID { get; set; }
+        public string StylistName { get; set; }
         public string FullName { get; set; }
         public DateTime BookingDate { get; set; }
         public DateTime StartTime { get; set; }

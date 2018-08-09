@@ -53,7 +53,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="#" style="text-decoration:none;">Calendar</a>
+                            <a class="nav-link js-scroll-trigger" href="../Receptionist/Appointments.aspx" style="text-decoration:none;">Appointments</a>
                         </li>
 
                         <li class="nav-item">
