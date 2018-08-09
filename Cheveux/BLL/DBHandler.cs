@@ -47,6 +47,11 @@ namespace BLL
         {
             return db.removeProductSalesDTLRecord(Sale);
         }
+
+        public bool UpdateProductSalesDTLRecordQty(SALES_DTL Sale)
+        {
+            return db.UpdateProductSalesDTLRecordQty(Sale);
+        }
         #endregion
 
         #region User Accounts

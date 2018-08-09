@@ -201,7 +201,8 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                 new SqlParameter("@SaleID", Sale.SaleID.ToString()),
-                new SqlParameter("@ProductID", Sale.ProductID.ToString())
+                new SqlParameter("@ProductID", Sale.ProductID.ToString()),
+                new SqlParameter("@Qty", Sale.Qty)
                 };
 
                 return DBHelper.NonQuery("SP_RemoveProductSalesDTLRecord", CommandType.StoredProcedure, pars);
@@ -211,6 +212,26 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public bool UpdateProductSalesDTLRecordQty(SALES_DTL Sale)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@SaleID", Sale.SaleID.ToString()),
+                new SqlParameter("@ProductID", Sale.ProductID.ToString()),
+                new SqlParameter("@Qty", Sale.Qty)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateProductSalesDTLRecordQty", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         #endregion
 
         #region Bookings

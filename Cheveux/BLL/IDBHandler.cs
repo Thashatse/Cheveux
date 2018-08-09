@@ -25,6 +25,8 @@ namespace BLL
         bool createProductSalesDTLRecord(SALES_DTL Sale);
 
         bool removeProductSalesDTLRecord(SALES_DTL Sale);
+
+        bool UpdateProductSalesDTLRecordQty(SALES_DTL Sale);
         #endregion
 
         #region User Accounts

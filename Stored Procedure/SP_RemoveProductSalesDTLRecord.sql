@@ -6,7 +6,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 create PROCEDURE SP_RemoveProductSalesDTLRecord
 	@SaleID nchar(10), 
-	@ProductID nchar(10)
+	@ProductID nchar(10),
+	@Qty int
 AS
 BEGIN
 	begin try
@@ -16,11 +17,11 @@ BEGIN
 					AND SaleID = @SaleID
 
 				UPDATE TREATMENT
-				SET Qty = (Select Qty+1 From TREATMENT Where TreatmentID = @ProductID)
+				SET Qty = (Select Qty+@Qty From TREATMENT Where TreatmentID = @ProductID)
 				WHERE TreatmentID = @ProductID
 
 				UPDATE ACCESSORY
-				SET Qty = (Select Qty+1 From ACCESSORY Where AccessoryID = @ProductID)
+				SET Qty = (Select Qty+@Qty From ACCESSORY Where AccessoryID = @ProductID)
 				WHERE AccessoryID = @ProductID
 		commit transaction
 	end try

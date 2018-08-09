@@ -19,6 +19,7 @@ namespace Cheveux
         string PreviousPageAdress = "";
         string BookingID;
         List<string> productIDs = new List<string>();
+        List<int> productSaleQty = new List<int>();
 
         #region Master Page
         //set the master page based on the user type
@@ -878,15 +879,21 @@ namespace Cheveux
                         }
                     }
 
-                    addRemoveProductInvoice();
-
                         //show the add product to sale view
                     divCheckOut.Visible = false;
                         divAddProducts.Visible = true;
+
+                    //load products currently on the invoice
+                    removeProducts();
                 }
                 else
                 {
                     Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                    //return to check out
+                    divAddProducts.Visible = false;
+                    BookingID = Request.QueryString["BookingID"];
+                    checkOut(BookingID);
+                    divCheckOut.Visible = true;
                 }
             }
             catch (Exception Err)
@@ -895,12 +902,18 @@ namespace Cheveux
                     + " An error occurred retrieving list of products" 
                     + " in btnAddProduct_Click(object sender, EventArgs e) method on viewBookings Page");
                 Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                //return to check out
+                divAddProducts.Visible = false;
+                BookingID = Request.QueryString["BookingID"];
+                checkOut(BookingID);
+                divCheckOut.Visible = true;
             }
         }
 
-        protected void loadproductIDs()
+        protected void loadproductIDs(char type)
         {
-            if (btnAddProductToSale.Text == "Add Product")
+            //add items
+            if (type == 'A')
             {
                 //load the product ids
                 products = handler.getAllProductsAndDetails();
@@ -936,7 +949,8 @@ namespace Cheveux
                     }
                 }
             }
-            else if (btnAddProductToSale.Text == "Remove Product")
+            //remove items
+            else if (type == 'R')
             {
                 //load the product ids
                 List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
@@ -948,6 +962,7 @@ namespace Cheveux
                         if (item.itemType != "S")
                         {
                             productIDs.Add(item.itemID.ToString());
+                            productSaleQty.Add(item.Qty);
                         }
                     }
                 }
@@ -956,84 +971,80 @@ namespace Cheveux
         
         protected void btnAddProductToSale_Click(object sender, EventArgs e)
         {
-            if (btnAddProductToSale.Text == "Add Product")
-            {
                 //a product to ivoice
                 if (lbProducts.SelectedIndex >= 0)
                 {
                     try
                     {
                         //load the product ids
-                        loadproductIDs();
+                        loadproductIDs('A');
                         //add the selectedproduct to the sale
                         SALES_DTL newItem = new SALES_DTL();
                         newItem.SaleID = BookingID;
                         newItem.ProductID = productIDs[lbProducts.SelectedIndex];
-                        newItem.Qty = 1;
+                        newItem.Qty = int.Parse(Qty.SelectedValue);
                         handler.createProductSalesDTLRecord(newItem);
                         btnAddProduct_Click(sender, e);
+                    Qty.SelectedIndex = 0;
                     }
                     catch (Exception Err)
                     {
                         function.logAnError(" An error occurred adding product to sales record"
                             + " in btnAddProductToSale_Click(object sender, EventArgs e) method on viewBookings Page: " + Err.ToString());
                         Response.Write("<script>alert('An error occoured adding the product, Please try again later.');location.reload(false);</script>");
-                    }
+                    //return to check out divAddProducts.Visible = false;
+                    divAddProducts.Visible = false;
+                    BookingID = Request.QueryString["BookingID"];
+                    checkOut(BookingID);
+                    divCheckOut.Visible = true;
+                }
                 }
                 else
                 {
                     btnAddProduct_Click(sender, e);
                 }
-            }
-            else if (btnAddProductToSale.Text == "Remove Product")
-            {
-                //remove product from ivoice
-                if (lbProducts.SelectedIndex >= 0)
-                {
-                    try
-                    {
-                        //load the product ids
-                        loadproductIDs();
-                        //remove the selected product to the sale
-                        SALES_DTL removeItem = new SALES_DTL();
-                        removeItem.SaleID = BookingID;
-                        removeItem.ProductID = productIDs[lbProducts.SelectedIndex];
-                        handler.removeProductSalesDTLRecord(removeItem);
-                        removeProducts();
-                    }
-                    catch (Exception Err)
-                    {
-                        function.logAnError(" An error occurred adding product to sales record"
-                            + " in btnAddProductToSale_Click(object sender, EventArgs e) method on viewBookings Page: " + Err.ToString());
-                        Response.Write("<script>alert('An error occoured adding the product, Please try again later.');location.reload(false);</script>");
-                    }
-                }
-                else
-                {
-                    removeProducts();
-                }
-            }
         }
 
         protected void btnRemoveProductFromSale_Click(object sender, EventArgs e)
         {
-            //remove the product from the sale
-            if (btnRemoveProductFromSale.Text == "Remove Product(S)")
+            //remove product from ivoice
+            if (lProductsOnSale.SelectedIndex >= 0)
             {
-                txtProductSearch.Visible = false;
-                btnSearchProduct.Visible = false;
-                btnRemoveProductFromSale.Text = "Add Product(s)";
-                btnAddProductToSale.Text = "Remove Product";
-                //load products to remove
-                removeProducts();
+                try
+                {
+                    //load the product ids
+                    loadproductIDs('R');
+                    //remove the selected product to the sale
+                    SALES_DTL removeItem = new SALES_DTL();
+                    removeItem.SaleID = BookingID;
+                    removeItem.ProductID = productIDs[lProductsOnSale.SelectedIndex];
+                    if (int.Parse(Qty.SelectedValue) < productSaleQty[lProductsOnSale.SelectedIndex])
+                    {
+                        removeItem.Qty = int.Parse(Qty.SelectedValue);
+                        handler.UpdateProductSalesDTLRecordQty(removeItem);
+                    }
+                    else
+                    {
+                        removeItem.Qty = productSaleQty[lProductsOnSale.SelectedIndex];
+                        handler.removeProductSalesDTLRecord(removeItem);
+                    }
+                    removeProducts();
+                    Qty.SelectedIndex = 0;
+                }
+                catch (Exception Err)
+                {
+                    function.logAnError(" An error occurred removing product from sales record"
+                        + " in btnRemoveProductFromSale_Click(object sender, EventArgs e) method on viewBookings Page: " + Err.ToString());
+                    Response.Write("<script>alert('An error occoured removing the product, Please try again later.');location.reload(true);</script>");
+                    //return to check out divAddProducts.Visible = false;
+                    divAddProducts.Visible = false;
+                    BookingID = Request.QueryString["BookingID"];
+                    checkOut(BookingID);
+                    divCheckOut.Visible = true;
+                }
             }
-            else if (btnRemoveProductFromSale.Text == "Add Product(s)")
+            else
             {
-                txtProductSearch.Visible = true;
-                btnSearchProduct.Visible = true;
-                btnRemoveProductFromSale.Text = "Remove Product(s)";
-                btnAddProductToSale.Text = "Add Product";
-                //load products to add
                 btnAddProduct_Click(sender, e);
             }
         }
@@ -1041,9 +1052,11 @@ namespace Cheveux
         protected void removeProducts()
         {
             //add Products to the list
-            lbProducts.Items.Clear();
+            lProductsOnSale.Items.Clear();
             try
             {
+                //track the number of products
+                int count = 0;
                 //get invoice details and the current products
                 List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
                 if (invoice.Count != 0)
@@ -1053,12 +1066,17 @@ namespace Cheveux
                     {
                         if (item.itemType != "S")
                         {
-                            lbProducts.Items.Add(item.itemName.ToString());
+                            lProductsOnSale.Items.Add(item.Qty.ToString()+"x "+
+                                item.itemName.ToString());
+                            count++;
                         }
                     }
-
-                    //refresh the invoice
-                    addRemoveProductInvoice();
+                    
+                    //if there are no products let the user know
+                    if(count == 0)
+                    {
+                        lProductsOnSale.Items.Add("No products added");
+                    }
 
                     //show the add product to sale view
                     divCheckOut.Visible = false;
@@ -1067,6 +1085,11 @@ namespace Cheveux
                 else
                 {
                     Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                    //return to check out
+                    divAddProducts.Visible = false;
+                    BookingID = Request.QueryString["BookingID"];
+                    checkOut(BookingID);
+                    divCheckOut.Visible = true;
                 }
             }
             catch (Exception Err)
@@ -1075,85 +1098,12 @@ namespace Cheveux
                     + " An error occurred retrieving list of products"
                     + " in btnAddProduct_Click(object sender, EventArgs e) method on viewBookings Page");
                 Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                //return to check out
+                divAddProducts.Visible = false;
+                BookingID = Request.QueryString["BookingID"];
+                checkOut(BookingID);
+                divCheckOut.Visible = true;
             }
-        }
-
-        protected void addRemoveProductInvoice()
-        {
-            #region invoice
-            //get invoice details
-            List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
-
-            //create a table for the invoice (To be added to tblCheckOut cell)
-            string tblInvoice = "<table>";
-
-            //calculate total price
-            double total = 0.0;
-
-            foreach (SP_getInvoiceDL item in invoice)
-            {
-                //new row
-                tblInvoice += "<tr>";
-                //add a new cell to the row
-                //fill in the item
-                tblInvoice += "<td  Width='250'>" + item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + item.price.ToString() + "</td>";
-
-                //add a new cell to the row
-                //fill in the Qty, unit price & TotalPrice
-                tblInvoice += "<td align='right' Width='250'> R" + Math.Round((item.Qty * item.price), 2).ToString() + "</td>";
-                tblInvoice += "</tr>";
-
-                //increment final price
-                total += item.Qty * item.price;
-            }
-
-            // get vat info
-            Tuple<double, double> vatInfo = function.getVat(total);
-
-            //display total including and Excluding VAT
-            //new row
-            tblInvoice += "<tr>";
-
-            tblInvoice += "<td> <br/> Total Ecluding VAT: </td>";
-
-            //fill in total Ecluding VAT
-
-            tblInvoice += "<td align='right'> <br/> R" + Math.Round(vatInfo.Item1, 2).ToString() + "</td>";
-            tblInvoice += "</tr>";
-
-            //get the vat rate
-            double VATRate = -1;
-            try
-            {
-                VATRate = handler.GetVATRate().VATRate;
-            }
-            catch (ApplicationException Err)
-            {
-                function.logAnError(Err.ToString());
-            }
-
-            //new row
-            tblInvoice += "<tr>";
-
-            //fill in total VAT due
-            tblInvoice += "<td> VAT @" + VATRate + "% </td>";
-
-            tblInvoice += "<td align='right'> R" + Math.Round(vatInfo.Item2, 2).ToString() + "</td>";
-
-            //display the total due//new row
-            tblInvoice += "</tr><tr>";
-
-            //fill in total
-            tblInvoice += "<td> <br/> Total Due: </td>";
-
-            tblInvoice += "<td align='right'> <br/> R" + total.ToString() + "</td>";
-            tblInvoice += "</tr>";
-
-            tblInvoice += "</table>";
-
-            //add the invoice to the table
-            tblSale.Rows[0].Cells[0].Text = tblInvoice;
-            #endregion
         }
 
         protected void btnSaveSale_Click(object sender, EventArgs e)

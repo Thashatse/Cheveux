@@ -16,11 +16,11 @@ BEGIN
 				values(@SaleID, @ProductID, @Qty, (select Price from PRODUCT where ProductID = @ProductID))
 
 				UPDATE TREATMENT
-				SET Qty = (Select Qty From TREATMENT Where TreatmentID = @ProductID)-1
+				SET Qty = (Select Qty From TREATMENT Where TreatmentID = @ProductID)-@Qty
 				WHERE TreatmentID = @ProductID
 
 				UPDATE ACCESSORY
-				SET Qty = (Select Qty From ACCESSORY Where AccessoryID = @ProductID)-1
+				SET Qty = (Select Qty From ACCESSORY Where AccessoryID = @ProductID)-@Qty
 				WHERE AccessoryID = @ProductID
 		commit transaction
 	end try

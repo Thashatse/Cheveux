@@ -202,6 +202,15 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddProducts;
         
         /// <summary>
+        /// lbProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbProducts;
+        
+        /// <summary>
         /// txtProductSearch control.
         /// </summary>
         /// <remarks>
@@ -220,15 +229,6 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button btnSearchProduct;
         
         /// <summary>
-        /// lbProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbProducts;
-        
-        /// <summary>
         /// btnAddProductToSale control.
         /// </summary>
         /// <remarks>
@@ -238,13 +238,13 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button btnAddProductToSale;
         
         /// <summary>
-        /// tblSale control.
+        /// Qty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblSale;
+        protected global::System.Web.UI.WebControls.DropDownList Qty;
         
         /// <summary>
         /// btnRemoveProductFromSale control.
@@ -263,6 +263,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSaveSale;
+        
+        /// <summary>
+        /// lProductsOnSale control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lProductsOnSale;
         
         /// <summary>
         /// BackButton control.
