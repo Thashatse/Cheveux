@@ -124,6 +124,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Receptionist\Appointments.aspx" />
     <Content Include="Authentication\Accounts.aspx" />
     <Content Include="Cheveux\Products.aspx" />
     <Content Include="Cheveux\Services.aspx" />
@@ -276,6 +277,13 @@
     <Content Include="ViewBooking.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Receptionist\Appointments.aspx.cs">
+      <DependentUpon>Appointments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Receptionist\Appointments.aspx.designer.cs">
+      <DependentUpon>Appointments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Authentication\Accounts.aspx.cs">
       <DependentUpon>Accounts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

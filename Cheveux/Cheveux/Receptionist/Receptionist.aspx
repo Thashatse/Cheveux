@@ -4,12 +4,6 @@
     Receptionist Dashboard - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-
-    <style type="text/css">
-        .inlineBlock { display: inline-block; }
-        .floatLeft { float: left; }
-    </style>
-
 </asp:Content>
 
 

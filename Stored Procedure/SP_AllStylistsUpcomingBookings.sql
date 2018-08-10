@@ -23,6 +23,10 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT BookingID,B.StylistID,B.CustomerID,
 			
+		   (SELECT (u.FirstName + ' ' + u.LastName)as[stylist]
+		   FROM [USER] u 
+		   WHERE u.UserID=B.StylistID)AS[StylistName],
+
 		   (SELECT (u.FirstName+' '+u.LastName)as[CustomerName]
 		   FROM [USER] u
 		   WHERE u.UserID=B.CustomerID)AS[FullName],

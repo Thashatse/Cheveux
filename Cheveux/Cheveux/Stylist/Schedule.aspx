@@ -58,7 +58,7 @@
                 <asp:PlaceHolder ID="phCheckBox" runat="server">
                     <div class="container row">
                     <div class="col-sm-2">
-                        <asp:CheckBox ID="bxAll" runat="server" Text="All" AutoPostBack="true"/>
+                        <asp:CheckBox ID="bxAll" runat="server" Text="All" AutoPostBack="true" Checked="true"/>
                         <p style="font-size:12px;"><i>Note:Uncheck for date range</i></p>
                     </div>
                 </div>
