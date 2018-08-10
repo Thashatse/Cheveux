@@ -583,6 +583,71 @@ namespace DAL
         }
         #endregion
 
+        #region Authentication
+        public USER logInEmail(string identifier, string password)
+        {
+            USER AT = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@identifier", identifier),
+                new SqlParameter("@password", password)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_LogInEmail",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        AT = new USER
+                        {
+                            UserID = Convert.ToString(row[0]),
+                            UserType = Convert.ToString(row[1])[0],
+                            FirstName = Convert.ToString(row[2])
+                        };
+                    }
+                    return AT;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public USER getPasHash(string identifier)
+        {
+            USER AT = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@identifier", identifier)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetPasHash",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        AT = new USER
+                        {
+                            Password = Convert.ToString(row[0])
+                        };
+                    }
+                    return AT;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         #region User Accounts
         public bool updateStylistBio(EMPLOYEE bioUpdate)
         {
@@ -1843,39 +1908,6 @@ namespace DAL
                         AT = new USER
                         {
                             AccountType = Convert.ToString(row[0])
-                        };
-                    }
-                    return AT;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public USER logInEmail(string identifier, string password)
-        {
-            USER AT = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@identifier", identifier),
-                new SqlParameter("@password", password)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_LogInEmail",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        AT = new USER
-                        {
-                            UserID = Convert.ToString(row[0]),
-                            UserType = Convert.ToString(row[1])[0],
-                            FirstName = Convert.ToString(row[2])
                         };
                     }
                     return AT;

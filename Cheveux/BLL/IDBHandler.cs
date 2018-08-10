@@ -38,6 +38,12 @@ namespace BLL
         bool updateStylistBio(EMPLOYEE bioUpdate);
         #endregion
 
+        #region Authentication
+        USER getPasHash(string identifier);
+
+        USER logInEmail(string identifier, string password);
+        #endregion
+
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
@@ -88,7 +94,6 @@ namespace BLL
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         List<SP_GetTodaysBookings> getTodaysBookings();
         USER checkForAccountTypeEmail(string identifier);
-        USER logInEmail(string identifier, string password);
         List<SP_UserList> userList();
         bool addEmployee(EMPLOYEE e);
         bool updateEmployee(EMPLOYEE emp);

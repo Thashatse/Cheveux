@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
-using TypeLibrary.Models;
+using TypeLibrary.Models; 
 
 //create a new user, using the bll.authenticate class
 namespace Cheveux
@@ -172,7 +172,7 @@ namespace Cheveux
                     User.ContactNo = null;
                 }
                 User.AccountType = "Email";
-                User.Password = txtPassword.Text.ToString().Replace(" ", string.Empty);
+                User.Password = auth.generatePassHash(txtPassword.Text.ToString().Replace(" ", string.Empty));
 
                 /*
                  * use the bll.NewUser to creat a new user
@@ -321,7 +321,7 @@ namespace Cheveux
             }
             else if (PreviousPage == "MakeABooking")
             {
-                Response.Redirect("<script language='javascript'> { window.close(); }</script>");
+                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
             }
         }
     }

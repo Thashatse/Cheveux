@@ -7,7 +7,7 @@ using Google.Apis;
 using BLL;
 using TypeLibrary.Models;
 using TypeLibrary.ViewModels;
-
+using CryptSharp;
 
 namespace BLL
 {
@@ -55,18 +55,25 @@ namespace BLL
             //check if the account credentials are correct
             try
             {
-                USER loginEmail = handler.logInEmail(Email, password);
-                if (loginEmail == null)
+                if (verifyPass(
+                    password, 
+                    handler.getPasHash(Email).Password.ToString().Replace(" ", string.Empty)
+                    ) == true)
                 {
-                    //the use accoun dose no exist
-                }
-                else if (loginEmail.UserID != null 
-                    && loginEmail.UserType.ToString() != null 
-                    && loginEmail.FirstName != null)
-                {
-                    cheveuxUserCookieDetails[0] = loginEmail.UserID.ToString();
-                    cheveuxUserCookieDetails[1] = loginEmail.UserType.ToString();
-                    cheveuxUserCookieDetails[2] = loginEmail.FirstName.ToString();
+                    USER loginEmail = handler.logInEmail(Email, 
+                        handler.getPasHash(Email).Password.ToString().Replace(" ", string.Empty));
+                    if (loginEmail == null)
+                    {
+                        //the password is wrong
+                    }
+                    else if (loginEmail.UserID != null
+                        && loginEmail.UserType.ToString() != null
+                        && loginEmail.FirstName != null)
+                    {
+                        cheveuxUserCookieDetails[0] = loginEmail.UserID.ToString();
+                        cheveuxUserCookieDetails[1] = loginEmail.UserType.ToString();
+                        cheveuxUserCookieDetails[2] = loginEmail.FirstName.ToString();
+                    }
                 }
             }
             catch (Exception e)
@@ -184,6 +191,16 @@ namespace BLL
             }
             result = string.Join("", id);
             return result;
+        }
+
+        public string generatePassHash(string password)
+        {
+            return Crypter.Blowfish.Crypt(password);
+        }
+
+        private bool verifyPass(string password, string hash)
+        {
+            return Crypter.CheckPassword(password, hash);
         }
     }
 }

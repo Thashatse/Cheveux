@@ -79,17 +79,24 @@ namespace BLL
         {
             return db.deactivateUser(userID);
         }
-        
-        public USER logInEmail(string identifier, string password)
-        {
-            return db.logInEmail(identifier, password);
-        }
 
         public USER checkForAccountTypeEmail(string identifier)
         {
             return db.checkForAccountTypeEmail(identifier);
         }
-#endregion
+        #endregion
+
+        #region Authentication
+        public USER getPasHash(string identifier)
+        {
+            return db.getPasHash(identifier);
+        }
+
+        public USER logInEmail(string identifier, string password)
+        {
+            return db.logInEmail(identifier, password);
+        }
+        #endregion
 
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
