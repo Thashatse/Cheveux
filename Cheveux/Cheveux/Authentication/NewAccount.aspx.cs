@@ -45,7 +45,7 @@ namespace Cheveux
                 try
                 {
                     string reg = getRegCookie();
-                    almostThere.Text = "Hey "+reg.Split('|')[2] + " you are new here, just one more step to complete your registration";
+                    almostThere.Text = "Hey " + reg.Split('|')[2] + " you are new here, just one more step to complete your registration";
                     userName.Attributes.Add("placeholder", (reg.Split('|')[1]).Split('@')[0]);
                     RegisterGoogleUser.Visible = true;
                 }
@@ -60,8 +60,65 @@ namespace Cheveux
             {
                 registeEmailUser.Visible = true;
             }
+            else if (type == "NewEmp")
+            {
+                registeEmailUser.Visible = true;
+                txtConfirmPassword.Visible = false;
+                txtPassword.Visible = false;
+                LPaswrod1.Visible = false;
+                passToolTip.Visible = false;
+                contactNoToolTip.Visible = false;
+            }
         }
-        
+
+        private void goToPreviousPage()
+        {
+            //get the privious page to redirect to
+            string PreviousPage = Request.QueryString["PreviousPage"];
+            //go back to the previous page if there is one
+            if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
+            {
+                Response.Redirect("../Help/CheveuxHelpCenter.aspx#InternalHelp");
+            }
+            else if (PreviousPage == "BusinessSetting.aspx")
+            {
+                Response.Redirect("../Manager/BusinessSetting.aspx");
+            }
+            else if (PreviousPage == "Reports.aspx")
+            {
+                Response.Redirect("../Manager/Reports.aspx");
+            }
+            else if (PreviousPage == "Manager.aspx")
+            {
+                Response.Redirect("../Manager/Dashboard.aspx?WB=True");
+            }
+            else if (PreviousPage == "Employee.aspx")
+            {
+                Response.Redirect("../Manager/Employee.aspx");
+            }
+            else if (PreviousPage == "Products.aspx")
+            {
+                Response.Redirect("../Manager/Products.aspx");
+            }
+            else if (PreviousPage == "Service.aspx")
+            {
+                Response.Redirect("../Manager/Service.aspx");
+            }
+            else if (PreviousPage == "Profile.aspx")
+            {
+                Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "Bookings.aspx")
+            {
+                Response.Redirect("../Profile.aspx");
+            }
+            else if (PreviousPage == "MakeABooking")
+            {
+                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
+            }
+        }
+
+        #region Google Accounts
         protected void btnSubmitGoogle_Click(object sender, EventArgs e)
         {
             if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
@@ -148,8 +205,27 @@ namespace Cheveux
             }
         }
 
+        protected void userName_TextChanged(object sender, EventArgs e)
+        {
+            if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
+                    == true)
+            {
+                //if the account exists tell the user to try a difreting username
+               LGoogleUsernameExists.Visible = true;
+                LGoogleUsernameExists.Text = "Sorry, That Username is taken. Try Another one";
+            }
+            else
+            {
+                LGoogleUsernameExists.Visible = false;
+            }
+        }
+        #endregion
+
+        #region Email
         protected void btnSubmitEmail_Click(object sender, EventArgs e)
         {
+            string type = Request.QueryString["Type"];
+
             if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
                     == false && auth.checkForAccountEmail(txtEmailAddress.Text.ToString().Replace(" ", string.Empty), true)
                     == false)
@@ -172,7 +248,22 @@ namespace Cheveux
                     User.ContactNo = null;
                 }
                 User.AccountType = "Email";
-                User.Password = auth.generatePassHash(txtPassword.Text.ToString().Replace(" ", string.Empty));
+
+                //variable to storetemp password
+                string tempPassword = "";
+
+                //if a user is being registered 
+                if (type == "Email")
+                {
+                    User.Password = auth.generatePassHash(txtPassword.Text.ToString().Replace(" ", string.Empty));
+                }
+                //if a employee is being registered by a manager
+                else if (type == "NewEmp")
+                {
+                    tempPassword = System.Web.Security.Membership.GeneratePassword(8, 1);
+                    User.Password = auth.generatePassHash(tempPassword);
+                }
+                
 
                 /*
                  * use the bll.NewUser to creat a new user
@@ -190,35 +281,68 @@ namespace Cheveux
 
                 if (result == true)
                 {
-                    //send an email notification
-                    var body = new System.Text.StringBuilder();
-                    body.AppendFormat("Hello, " + User.FirstName);
-                    body.AppendLine(@"");
-                    body.AppendLine(@"You have successfuly registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
-                    body.AppendLine(@"Your username is: "+User.UserName.ToString()+".");
-                    body.AppendLine(@"");
-                    body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
-                    body.AppendLine(@"");
-                    body.AppendLine(@"Regards,");
-                    body.AppendLine(@"The Cheveux Team");
-                    function.sendEmailAlert(User.Email.ToString(), User.FirstName.ToString() + " " + User.LastName.ToString(),
-                        "Welcome To Cheveux",
-                        body.ToString(),
-                        "Accounts Cheveux");
-                    //log the user in by creating a cookie to manage their state
-                    HttpCookie cookie = new HttpCookie("CheveuxUserID");
-                    // Set the user id in it.
-                    cookie["ID"] = userID;
-                    cookie["UT"] = "C";
-                    // Add it to the current web response.
-                    Response.Cookies.Add(cookie);
-                    //go back to the previous page or the home page by default
-                    if (PreviousPage != null)
+                    //if a user is being registered 
+                    if (type == "Email")
                     {
-                        goToPreviousPage();
+                        //send an email notification
+                        var body = new System.Text.StringBuilder();
+                        body.AppendFormat("Hello, " + User.FirstName);
+                        body.AppendLine(@"");
+                        body.AppendLine(@"You have successfuly registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
+                        body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Regards,");
+                        body.AppendLine(@"The Cheveux Team");
+                        function.sendEmailAlert(User.Email.ToString(), User.FirstName.ToString() + " " + User.LastName.ToString(),
+                            "Welcome To Cheveux",
+                            body.ToString(),
+                            "Accounts Cheveux");
                     }
-                    //tell the user the registration was a success on the home page
-                    Response.Redirect("../Default.aspx?" + "NU=" + txtFirstName.Text.ToString().Replace(" ", string.Empty));
+                    //if a employee is being registered by a manager
+                    else if (type == "NewEmp")
+                    {
+                        //send an email notification
+                        var body = new System.Text.StringBuilder();
+                        body.AppendFormat("Hello, " + User.FirstName);
+                        body.AppendLine(@"");
+                        body.AppendLine(@"You have successfuly been registerd with cheveux by your manager, Using the email address: " + User.Email.ToString() + ".");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
+                        body.AppendLine(@"Your password is: " + tempPassword + "");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Regards,");
+                        body.AppendLine(@"The Cheveux Team");
+                        function.sendEmailAlert(User.Email.ToString(), User.FirstName.ToString() + " " + User.LastName.ToString(),
+                            "Welcome To Cheveux",
+                            body.ToString(),
+                            "Accounts Cheveux");
+                    }
+
+                    //if a user is being registered 
+                    if (type == "Email")
+                    {
+                        //log the user in by creating a cookie to manage their state
+                        HttpCookie cookie = new HttpCookie("CheveuxUserID");
+                        // Set the user id in it.
+                        cookie["ID"] = userID;
+                        cookie["UT"] = "C";
+                        // Add it to the current web response.
+                        Response.Cookies.Add(cookie);
+                        //go back to the previous page or the home page by default
+                        if (PreviousPage != null)
+                        {
+                            goToPreviousPage();
+                        }
+                        //tell the user the registration was a success on the home page
+                        Response.Redirect("../Default.aspx?" + "NU=" + txtFirstName.Text.ToString().Replace(" ", string.Empty));
+                    }
+                    //if a employee is being registered by a manager
+                    else if (type == "NewEmp")
+                    {
+                        Response.Redirect("../Manager/UpdateEmployee.aspx?Type=NewEmp&empID=" + User.UserID);
+                    }
                 }
                 else if (result == false)
                 {
@@ -262,67 +386,6 @@ namespace Cheveux
                 LEmailExists.Visible = false;
             }
         }
-
-        protected void userName_TextChanged(object sender, EventArgs e)
-        {
-            if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
-                    == true)
-            {
-                //if the account exists tell the user to try a difreting username
-               LGoogleUsernameExists.Visible = true;
-                LGoogleUsernameExists.Text = "Sorry, That Username is taken. Try Another one";
-            }
-            else
-            {
-                LGoogleUsernameExists.Visible = false;
-            }
-        }
-
-        private void goToPreviousPage()
-        {
-            //get the privious page to redirect to
-            string PreviousPage = Request.QueryString["PreviousPage"];
-            //go back to the previous page if there is one
-            if (PreviousPage == "Help/CheveuxHelpCenter.aspx")
-            {
-                Response.Redirect("../Help/CheveuxHelpCenter.aspx#InternalHelp");
-            }
-            else if (PreviousPage == "BusinessSetting.aspx")
-            {
-                Response.Redirect("../Manager/BusinessSetting.aspx");
-            }
-            else if (PreviousPage == "Reports.aspx")
-            {
-                Response.Redirect("../Manager/Reports.aspx");
-            }
-            else if (PreviousPage == "Manager.aspx")
-            {
-                Response.Redirect("../Manager/Dashboard.aspx?WB=True");
-            }
-            else if (PreviousPage == "Employee.aspx")
-            {
-                Response.Redirect("../Manager/Employee.aspx");
-            }
-            else if (PreviousPage == "Products.aspx")
-            {
-                Response.Redirect("../Manager/Products.aspx");
-            }
-            else if (PreviousPage == "Service.aspx")
-            {
-                Response.Redirect("../Manager/Service.aspx");
-            }
-            else if (PreviousPage == "Profile.aspx")
-            {
-                Response.Redirect("../Profile.aspx");
-            }
-            else if (PreviousPage == "Bookings.aspx")
-            {
-                Response.Redirect("../Profile.aspx");
-            }
-            else if (PreviousPage == "MakeABooking")
-            {
-                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
-            }
-        }
+        #endregion
     }
 }
