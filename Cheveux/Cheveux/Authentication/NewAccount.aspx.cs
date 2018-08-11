@@ -151,6 +151,7 @@ namespace Cheveux
                 }
                 User.AccountType = regArray[5];
                 User.Password = null;
+                User.UserType = 'C';
 
                 /*
                  * use the bll.NewUser to creat a new user
@@ -248,18 +249,20 @@ namespace Cheveux
                     User.ContactNo = null;
                 }
                 User.AccountType = "Email";
-
+                
                 //variable to storetemp password
                 string tempPassword = "";
 
                 //if a user is being registered 
                 if (type == "Email")
                 {
+                    User.UserType = 'C';
                     User.Password = auth.generatePassHash(txtPassword.Text.ToString().Replace(" ", string.Empty));
                 }
                 //if a employee is being registered by a manager
                 else if (type == "NewEmp")
                 {
+                    User.UserType = 'E';
                     tempPassword = System.Web.Security.Membership.GeneratePassword(8, 1);
                     User.Password = auth.generatePassHash(tempPassword);
                 }

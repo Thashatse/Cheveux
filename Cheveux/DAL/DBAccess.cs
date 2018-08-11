@@ -710,6 +710,7 @@ namespace DAL
             new SqlParameter("@CN", User.ContactNo),
             new SqlParameter("@UI", User.UserImage),
             new SqlParameter("@AT", User.AccountType),
+            new SqlParameter("@UT", User.UserType),
             new SqlParameter("@Pass", User.Password)
                 };
 
