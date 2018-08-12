@@ -124,6 +124,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Receptionist\MakeInternalBooking.aspx" />
     <Content Include="Receptionist\Appointments.aspx" />
     <Content Include="Authentication\Accounts.aspx" />
     <Content Include="Cheveux\Products.aspx" />
@@ -142,6 +143,7 @@
     <Content Include="Manager\Reports.aspx" />
     <Content Include="Manager\Service.aspx" />
     <Content Include="Manager\UpdateEmployee.aspx" />
+    <Content Include="Receptionist\Receptionist.aspx" />
     <Content Include="Stylist\Schedule.aspx" />
     <Content Include="Stylist\CustomerVisit.aspx" />
     <Content Include="Default.aspx" />
@@ -154,7 +156,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Profile.aspx" />
-    <Content Include="Receptionist\Receptionist.aspx" />
     <Content Include="MasterPages\CheveuxReceptionist.Master" />
     <Content Include="MasterPages\CheveuxManager.Master" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
@@ -277,6 +278,13 @@
     <Content Include="ViewBooking.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Receptionist\MakeInternalBooking.aspx.cs">
+      <DependentUpon>MakeInternalBooking.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Receptionist\MakeInternalBooking.aspx.designer.cs">
+      <DependentUpon>MakeInternalBooking.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Receptionist\Appointments.aspx.cs">
       <DependentUpon>Appointments.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -368,6 +376,12 @@
     <Compile Include="Manager\UpdateEmployee.aspx.designer.cs">
       <DependentUpon>UpdateEmployee.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Receptionist\Receptionist.aspx.cs">
+      <DependentUpon>Receptionist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Receptionist\Receptionist.aspx.designer.cs">
+      <DependentUpon>Receptionist.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Stylist\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -452,13 +466,6 @@
     </Compile>
     <Compile Include="MasterPages\CheveuxStylist.Master.designer.cs">
       <DependentUpon>CheveuxStylist.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Receptionist\Receptionist.aspx.cs">
-      <DependentUpon>Receptionist.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Receptionist\Receptionist.aspx.designer.cs">
-      <DependentUpon>Receptionist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

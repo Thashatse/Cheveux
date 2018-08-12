@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
+
 namespace Cheveux
 {
     public partial class Appointments : System.Web.UI.Page
