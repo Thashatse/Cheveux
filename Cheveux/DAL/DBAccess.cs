@@ -435,6 +435,42 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public List<SP_GetBookedTimes> GetBookedStylistTimes(string stylistID, DateTime bookingDate)
+        {
+            List<SP_GetBookedTimes> bookings = new List<SP_GetBookedTimes>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@UserID", stylistID),
+                new SqlParameter("@Date", bookingDate)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookedTimes",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetBookedTimes times = new SP_GetBookedTimes
+                            {
+                                SlotNo = Convert.ToString(row["SlotNo"])
+                            };
+                            bookings.Add(times);
+                        }
+                    }
+
+                }
+                return bookings;
+            }
+            catch
+            {
+
+            }
+            return null;
+        }
         #endregion
 
         #region CheckIN CheckOut Cust Vist
@@ -583,6 +619,71 @@ namespace DAL
         }
         #endregion
 
+        #region Authentication
+        public USER logInEmail(string identifier, string password)
+        {
+            USER AT = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@identifier", identifier),
+                new SqlParameter("@password", password)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_LogInEmail",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        AT = new USER
+                        {
+                            UserID = Convert.ToString(row[0]),
+                            UserType = Convert.ToString(row[1])[0],
+                            FirstName = Convert.ToString(row[2])
+                        };
+                    }
+                    return AT;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public USER getPasHash(string identifier)
+        {
+            USER AT = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@identifier", identifier)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetPasHash",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        AT = new USER
+                        {
+                            Password = Convert.ToString(row[0])
+                        };
+                    }
+                    return AT;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         #region User Accounts
         public bool updateStylistBio(EMPLOYEE bioUpdate)
         {
@@ -645,6 +746,7 @@ namespace DAL
             new SqlParameter("@CN", User.ContactNo),
             new SqlParameter("@UI", User.UserImage),
             new SqlParameter("@AT", User.AccountType),
+            new SqlParameter("@UT", User.UserType),
             new SqlParameter("@Pass", User.Password)
                 };
 
@@ -1855,39 +1957,6 @@ namespace DAL
             }
         }
 
-        public USER logInEmail(string identifier, string password)
-        {
-            USER AT = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@identifier", identifier),
-                new SqlParameter("@password", password)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_LogInEmail",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        AT = new USER
-                        {
-                            UserID = Convert.ToString(row[0]),
-                            UserType = Convert.ToString(row[1])[0],
-                            FirstName = Convert.ToString(row[2])
-                        };
-                    }
-                    return AT;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
         public List<SP_UserList> userList()
         {
             SP_UserList userList = null;
@@ -2099,41 +2168,6 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-         public List<SP_GetBookedTimes> GetBookedStylistTimes(string stylistID, DateTime bookingDate)
-        {
-            List<SP_GetBookedTimes> bookings = new List<SP_GetBookedTimes>();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@UserID", stylistID),
-                new SqlParameter("@Date", bookingDate)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_BookedTimes",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            SP_GetBookedTimes times = new SP_GetBookedTimes
-                            {
-                                SlotNo = Convert.ToString(row["SlotNo"])
-                            };
-                            bookings.Add(times);
-                        }
-                    }
-
-                }
-                return bookings;
-            }
-            catch
-            {
-
-            }
-            return null;
-         }
 
         public List<SP_GetSlotTimes> GetAllTimeSlots()
         {
@@ -2688,6 +2722,120 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
+        }
+         public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ProductID", p.ProductID.ToString()),
+                    new SqlParameter("@Name", p.Name.ToString()),
+                    new SqlParameter("@Description", p.ProductDescription.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@Slots", s.NoOfSlots.ToString()),
+                    new SqlParameter("@Type", s.Type.ToString()),
+                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddService", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_GetWidth> GetWidths()
+        {
+            try
+            {
+                List<SP_GetWidth> widthList = new List<SP_GetWidth>();
+                using (DataTable table = DBHelper.Select("SP_GetWidths", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                           SP_GetWidth width = new SP_GetWidth
+                            {
+                               WidthID = Convert.ToString(row["WidthID"]),
+                               Description=Convert.ToString(row["Description"])
+                            };
+                            widthList.Add(width);
+                        }
+                    }
+                }
+                return widthList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+
+
+        }
+        public List<SP_GetStyles> GetStyles()
+        {
+            try
+            {
+                List<SP_GetStyles> styleList = new List<SP_GetStyles>();
+                using (DataTable table = DBHelper.Select("SP_GetStyles", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetStyles styles = new SP_GetStyles
+                            {
+                                StyleID = Convert.ToString(row["StyleID"]),
+                                Description = Convert.ToString(row["Description"])
+                            };
+                            styleList.Add(styles);
+                        }
+                    }
+                }
+                return styleList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+
+
+        }
+        public List<SP_GetLength> GetLengths()
+        {
+            try
+            {
+                List<SP_GetLength> lengthList = new List<SP_GetLength>();
+                using (DataTable table = DBHelper.Select("SP_GetLengths", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetLength length = new SP_GetLength
+                            {
+                                LengthID = Convert.ToString(row["LengthID"]),
+                                Description = Convert.ToString(row["Description"])
+                            };
+                            lengthList.Add(length);
+                        }
+                    }
+                }
+                return lengthList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+
+
         }
     }
 }                  

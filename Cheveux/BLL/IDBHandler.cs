@@ -38,6 +38,12 @@ namespace BLL
         bool updateStylistBio(EMPLOYEE bioUpdate);
         #endregion
 
+        #region Authentication
+        USER getPasHash(string identifier);
+
+        USER logInEmail(string identifier, string password);
+        #endregion
+
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
@@ -88,7 +94,6 @@ namespace BLL
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         List<SP_GetTodaysBookings> getTodaysBookings();
         USER checkForAccountTypeEmail(string identifier);
-        USER logInEmail(string identifier, string password);
         List<SP_UserList> userList();
         bool addEmployee(EMPLOYEE e);
         bool updateEmployee(EMPLOYEE emp);
@@ -102,6 +107,10 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
+        bool BLL_AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs);
+        List<SP_GetWidth> BLL_GetWidths();
+        List<SP_GetLength> BLL_GetLengths();
+        List<SP_GetStyles> BLL_GetStyles();
         List<SP_GetStylistBookings> getAllStylistsPastBookings();
         List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate);

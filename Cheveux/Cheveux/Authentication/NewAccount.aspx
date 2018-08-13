@@ -240,7 +240,7 @@
                                 </div>
                                 <div class="col-2">
                                     <!--Help-->
-                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number used is contact you and keep you up to date">
+                                    <a runat="server" id="contactNoToolTip" href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="10-digit RSA Cellphone number used is contact you and keep you up to date">
                                         <span class="glyphicon">(Optional)</span>
                                     </a>
                                 </div>
@@ -271,7 +271,7 @@
                                 </div>
                                 <div class="col-1">
                                     <!--Help-->
-                                    <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Used to securely identify you and keep your data safe">
+                                    <a runat="server" id="passToolTip" href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Used to securely identify you and keep your data safe">
                                         <span class="glyphicon">&#63;</span>
                                     </a>
                                 </div>

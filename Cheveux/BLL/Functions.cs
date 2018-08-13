@@ -160,9 +160,10 @@ namespace BLL
                     file.WriteLine("Error: ");
                     file.WriteLine(Err);
                 }
-            }catch(Exception err)
+            }
+            catch
             {
-                //throw new Exception(err.ToString());
+
             }
         }
 

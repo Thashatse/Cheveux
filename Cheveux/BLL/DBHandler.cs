@@ -79,17 +79,24 @@ namespace BLL
         {
             return db.deactivateUser(userID);
         }
-        
-        public USER logInEmail(string identifier, string password)
-        {
-            return db.logInEmail(identifier, password);
-        }
 
         public USER checkForAccountTypeEmail(string identifier)
         {
             return db.checkForAccountTypeEmail(identifier);
         }
-#endregion
+        #endregion
+
+        #region Authentication
+        public USER getPasHash(string identifier)
+        {
+            return db.getPasHash(identifier);
+        }
+
+        public USER logInEmail(string identifier, string password)
+        {
+            return db.logInEmail(identifier, password);
+        }
+        #endregion
 
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
@@ -392,6 +399,22 @@ namespace BLL
         public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings()
         {
             return db.getAllStylistsUpcomingBookings();
+        }
+         public bool BLL_AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        {
+            return db.AddService(p, s, bs);
+        }
+        public List<SP_GetWidth> BLL_GetWidths()
+        {
+            return db.GetWidths();
+        }
+        public List<SP_GetLength> BLL_GetLengths()
+        {
+            return db.GetLengths();
+        }
+        public List<SP_GetStyles> BLL_GetStyles()
+        {
+            return db.GetStyles();
         }
         public List<SP_GetStylistBookings> getAllStylistsPastBookings()
         {
