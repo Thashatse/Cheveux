@@ -25,7 +25,7 @@
                             </header>
                             <br />
                             <div class="container" runat="server" id="divServiceDetails" visible="true">
-                                <asp:Table runat="server" ID="tblServiveDetails">
+                                <asp:Table runat="server" ID="tblServiceDetails">
                                     <asp:TableRow>
                                         <asp:TableCell Text="Service Type"></asp:TableCell>
                                         <asp:TableCell>
@@ -39,21 +39,8 @@
                                             <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
                                         </asp:TableCell>
                                     </asp:TableRow>
-                                    <asp:TableRow>
-                                        <asp:TableCell Text="No of Slots: "></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="txtNoOfSlots"></asp:TextBox>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow>
-                                        <asp:TableCell Text="Price: "></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                </asp:Table>
-                            </div>
-                            <div class="container" runat="server" id="divBraidDetails" visible="false">
+                                    </asp:Table>
+                                <div class="container" runat="server" id="divBraidDetails" visible="false">
                                 <asp:Table runat="server" ID="tblBraidDetails">
                                     <asp:TableRow>
                                         <asp:TableCell Text="Style: "></asp:TableCell>
@@ -75,6 +62,28 @@
                                     </asp:TableRow>
                                 </asp:Table>
                             </div>
+                                <asp:Table runat="server" ID="tblServiceDetails2" Visible="true">
+                                    <asp:TableRow>
+                                        <asp:TableCell Text="No of Slots: "></asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:TextBox runat="server" ID="txtNoOfSlots"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell Text="Price: "></asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow>
+                                        <asp:TableCell Text="Description: "></asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:TextBox runat="server" ID="txtDescription"></asp:TextBox>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </div>
+                            
                             <div class="row">
 
                     <div class="col-2 text-left">
