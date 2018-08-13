@@ -2554,5 +2554,119 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+         public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ProductID", p.ProductID.ToString()),
+                    new SqlParameter("@Name", p.Name.ToString()),
+                    new SqlParameter("@Description", p.ProductDescription.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@Slots", s.NoOfSlots.ToString()),
+                    new SqlParameter("@Type", s.Type.ToString()),
+                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddService", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_GetWidth> GetWidths()
+        {
+            try
+            {
+                List<SP_GetWidth> widthList = new List<SP_GetWidth>();
+                using (DataTable table = DBHelper.Select("SP_GetWidths", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                           SP_GetWidth width = new SP_GetWidth
+                            {
+                               WidthID = Convert.ToString(row["WidthID"]),
+                               Description=Convert.ToString(row["Description"])
+                            };
+                            widthList.Add(width);
+                        }
+                    }
+                }
+                return widthList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+
+
+        }
+        public List<SP_GetStyles> GetStyles()
+        {
+            try
+            {
+                List<SP_GetStyles> styleList = new List<SP_GetStyles>();
+                using (DataTable table = DBHelper.Select("SP_GetStyles", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetStyles styles = new SP_GetStyles
+                            {
+                                StyleID = Convert.ToString(row["StyleID"]),
+                                Description = Convert.ToString(row["Description"])
+                            };
+                            styleList.Add(styles);
+                        }
+                    }
+                }
+                return styleList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+
+
+        }
+        public List<SP_GetLength> GetLengths()
+        {
+            try
+            {
+                List<SP_GetLength> lengthList = new List<SP_GetLength>();
+                using (DataTable table = DBHelper.Select("SP_GetLengths", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetLength length = new SP_GetLength
+                            {
+                                LengthID = Convert.ToString(row["LengthID"]),
+                                Description = Convert.ToString(row["Description"])
+                            };
+                            lengthList.Add(length);
+                        }
+                    }
+                }
+                return lengthList;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+
+
+        }
     }
 }                  
