@@ -10,14 +10,15 @@ namespace TypeLibrary.ViewModels
     {
         public string BookingID { get; set; }
         public string UserID { get; set; }
-        public Nullable<TimeSpan> StartTime { get; set; }
-        public Nullable<TimeSpan> EndTime { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string CustomerFName { get; set; }
         public string EmpFName { get; set; }
         public string ServiceName { get; set; }
+        public string ServiceDesc { get; set; }
         //public Nullable<char> Arrived { get; set; }
         public string Arrived { get; set; }
-        public Nullable<DateTime> Date { get; set; }
+        public DateTime Date { get; set; }
         public string ProductID { get; set; }
         public string empID { get; set; }
     }

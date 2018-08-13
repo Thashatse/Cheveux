@@ -148,6 +148,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Calendar calDay;
         
         /// <summary>
+        /// lblDay control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDay;
+        
+        /// <summary>
         /// phDateRange control.
         /// </summary>
         /// <remarks>
@@ -193,22 +202,22 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Calendar calEnd;
         
         /// <summary>
-        /// lblDate1 control.
+        /// lblStart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDate1;
+        protected global::System.Web.UI.WebControls.Label lblStart;
         
         /// <summary>
-        /// lblDate2 control.
+        /// lblEnd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDate2;
+        protected global::System.Web.UI.WebControls.Label lblEnd;
         
         /// <summary>
         /// phTable control.

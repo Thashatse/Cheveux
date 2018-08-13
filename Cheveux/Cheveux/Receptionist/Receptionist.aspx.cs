@@ -199,13 +199,13 @@ namespace Cheveux
                     //create start cell and add to row.. cell index: 0
                     TableCell start = new TableCell();
                     start.Width = 200;
-                    start.Text = a.StartTime.ToString();
+                    start.Text = a.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
 
                     //create end cell and add to row.. cell index: 1
                     TableCell end = new TableCell();
                     end.Width = 200;
-                    end.Text = a.EndTime.ToString();
+                    end.Text = a.EndTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(end);
 
                     //created customer name cell and add to row.. cell index: 2

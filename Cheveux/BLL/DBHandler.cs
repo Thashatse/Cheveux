@@ -393,5 +393,21 @@ namespace BLL
         {
             return db.getAllStylistsUpcomingBookings();
         }
+        public List<SP_GetStylistBookings> getAllStylistsPastBookings()
+        {
+            return db.getAllStylistsPastBookings();
+        }
+        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date)
+        {
+            return db.getAllStylistsPastBksForDate(date);
+        }
+        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate)
+        {
+            return db.getAllStylistsPastBookingsDateRange(startDate,endDate);
+        }
+        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day)
+        {
+            return db.getStylistPastBksForDate(empID, day);
+        }
     }
 }

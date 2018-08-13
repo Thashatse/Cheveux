@@ -102,7 +102,10 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
-
+        List<SP_GetStylistBookings> getAllStylistsPastBookings();
+        List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate);
+        List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate);
+        List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day);
     }
 }
 

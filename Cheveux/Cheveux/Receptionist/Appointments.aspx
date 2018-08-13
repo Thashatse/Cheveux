@@ -50,9 +50,8 @@
                         <asp:PlaceHolder ID="phWhen" runat="server">
                             <div class="col-xs-12 col-md-4">
                                 <asp:DropDownList ID="drpViewAppt" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                                    <asp:ListItem Text="---Select Period---" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Upcoming Bookings" Value="1"></asp:ListItem>
-                                    <asp:ListItem Text="Past Bookings" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="Upcoming Bookings" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Past Bookings" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </asp:PlaceHolder>
@@ -61,9 +60,8 @@
                         <asp:PlaceHolder ID="phStylists" runat="server">
                             <div class="col-xs-12 col-md-4">
                                 <asp:DropDownList ID="empSelectionType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                                    <asp:ListItem Text="---Group By---" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="All" Value="1"></asp:ListItem>
-                                    <asp:ListItem Text="Stylist" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="All Stylists" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Specific Stylist" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </asp:PlaceHolder>
@@ -72,7 +70,6 @@
                         <asp:PlaceHolder ID="phNames" runat="server" Visible="false">
                             <div class="col-xs-12 col-md-4">
                                 <asp:DropDownList ID="drpStylistNames" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                                    <asp:ListItem Text="---Choose Stylist---" Value="0"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </asp:PlaceHolder>
@@ -88,9 +85,10 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true" >
-                                    <asp:ListItem Text="Today" Value="0" ></asp:ListItem>
-                                    <asp:ListItem Text="Specific Day" Value="1"></asp:ListItem>
-                                    <asp:ListItem Text="Date Range" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="All" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Today" Value="1" ></asp:ListItem>
+                                    <asp:ListItem Text="Specific Day" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="Date Range" Value="3"></asp:ListItem>
                                 </asp:RadioButtonList>
                             </div>
                         </div>
@@ -101,7 +99,8 @@
                         <asp:PlaceHolder ID="phDay" runat="server" Visible="false">
                             <div class="row">
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Calendar ID="calDay" runat="server" Height="100" Width="200" ></asp:Calendar>
+                                    <asp:Calendar ID="calDay" runat="server" Height="100" Width="200" OnSelectionChanged="calDay_SelectionChanged" OnDayRender="scheduleCalender_DayRender"></asp:Calendar>
+                                    <asp:Label ID="lblDay" runat="server" Text="Label1" Visible="false"></asp:Label>
                                 </div>
                             </div>
                         </asp:PlaceHolder>
@@ -120,18 +119,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Calendar ID="calStart" runat="server" Height="100" Width="200" ></asp:Calendar>
+                                    <asp:Calendar ID="calStart" runat="server" Height="100" Width="200" OnSelectionChanged="calStart_SelectionChanged" OnDayRender="scheduleCalender_DayRender"></asp:Calendar>
                                 </div>
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Calendar ID="calEnd" runat="server" Height="100" Width="200" ></asp:Calendar>
+                                    <asp:Calendar ID="calEnd" runat="server" Height="100" Width="200" OnSelectionChanged="calEnd_SelectionChanged" OnDayRender="scheduleCalender_DayRender"></asp:Calendar>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Label ID="lblDate1" runat="server" Text="" Visible="true"></asp:Label>
+                                    <asp:Label ID="lblStart" runat="server" Text="LabelStart" Visible="false"></asp:Label>
                                 </div>
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Label ID="lblDate2" runat="server" Text="" Visible="true"></asp:Label>
+                                    <asp:Label ID="lblEnd" runat="server" Text="LabelEnd" Visible="false"></asp:Label>
                                 </div>
                             </div>
                         </asp:PlaceHolder>
@@ -140,7 +139,7 @@
                     <br />
 
                     <!-- Table displaying stylist bookings -->
-                    <asp:PlaceHolder ID="phTable" runat="server" Visible="false">
+                    <asp:PlaceHolder ID="phTable" runat="server">
                         <div class="row">
                             <div class="col-sm-12 col-md-10 col-lg-10">
                                 <asp:Table ID="tblSchedule" runat="server"></asp:Table>
