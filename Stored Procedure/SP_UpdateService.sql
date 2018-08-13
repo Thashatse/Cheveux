@@ -1,0 +1,29 @@
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE SP_UpdateService 
+	@ServiceID nchar(10),
+	@Price money,
+	@Slots int
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION 
+			UPDATE SERVICE
+			SET NoOfSlots = @Slots
+			WHERE ServiceID = @ServiceID
+
+			UPDATE PRODUCT
+			SET Price = @Price
+			WHERE ProductID = @ServiceID
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		IF @@TRANCOUNT > 0
+			ROLLBACK TRANSACTION
+	END CATCH
+END
+GO
