@@ -17,8 +17,40 @@
         <div class="col-md-2 col-sm-1"></div>
         <div class="col-md-8 col-sm-10">
             <div runat="server" id="divViewAll">
+                 <div class="jumbotron bg-dark text-white">
                 <!-- VIEW ALL PRODUCTS TABLE -->
+                     <header class="text-center">
+                            <h1>View all Products</h1>
+                        </header>
+
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <asp:Label ID="productJumbotronLable" runat="server"></asp:Label>
+                        <!-- List Product Table -->
+                        <asp:Table ID="tblProductTable" runat="server">
+                        </asp:Table>
+                    </div>
+
             </div>
+         </div>
+       </div>
+        <div class="container">
+                <div class="row">
+                    <div class="col-sm-auto col-md-auto col-lg-auto">
+                        <asp:PlaceHolder ID="prProducts" runat="server">
+                            <asp:Table ID="tblProducts" runat="server"></asp:Table>
+                        </asp:PlaceHolder>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
             <div runat="server" id="addandedit">
                 <form id="formAddEditProduct" runat="server">
                     <!-- ADD EDIT PRODUCTS FORM -->
