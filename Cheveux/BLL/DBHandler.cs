@@ -400,5 +400,21 @@ namespace BLL
         {
             return db.getAllStylistsUpcomingBookings();
         }
+         public bool BLL_AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        {
+            return db.AddService(p, s, bs);
+        }
+        public List<SP_GetWidth> BLL_GetWidths()
+        {
+            return db.GetWidths();
+        }
+        public List<SP_GetLength> BLL_GetLengths()
+        {
+            return db.GetLengths();
+        }
+        public List<SP_GetStyles> BLL_GetStyles()
+        {
+            return db.GetStyles();
+        }
     }
 }
