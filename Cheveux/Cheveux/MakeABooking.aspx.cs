@@ -87,8 +87,10 @@ namespace Cheveux
                 if (!Page.IsPostBack)
                 {
                     ListItem deselect = new ListItem("None", "0");
+                    deselect.Selected = true;
                     rblPickAServiceA.Items.Add(deselect);
                     rblPickAServiceB.Items.Add(deselect);
+
                     foreach (SP_GetServices services in serviceList)
                     {
 
@@ -127,6 +129,7 @@ namespace Cheveux
            
             if (btnNext.Text == "Choose Hairstylist")
             {
+                
                 
                 foreach (SP_GetStylists stylists in stylistList)
                 {
@@ -196,7 +199,7 @@ namespace Cheveux
                 {
                     lblServices.Text = rblPickAServiceB.SelectedItem.ToString();
                 }
-                else
+                else if(selectedServiceA != null)
                 {
                     lblServices.Text = rblPickAServiceA.SelectedItem.ToString();
                 }
@@ -342,6 +345,7 @@ namespace Cheveux
             int morningButtonCount = 1;
             int afternoonButtonCount = 11;
             bookedList = handler.BLL_GetBookedStylistTimes(rblPickAStylist.SelectedValue.ToString(), calBooking.SelectedDate);
+            HideButtons();
             foreach (SP_GetSlotTimes times in slotList)
             {
                 if (bookedList.Count != 0)
@@ -677,6 +681,29 @@ namespace Cheveux
             btnMorning8.CssClass = "btn btn-light";
             btnMorning9.CssClass = "btn btn-light";
             btnMorning10.CssClass = "btn btn-light";
+        }
+        private void HideButtons()
+        {
+            btnAfternoon11.Visible = false;
+            btnAfternoon12.Visible = false;
+            btnAfternoon13.Visible = false;
+            btnAfternoon14.Visible = false;
+            btnAfternoon15.Visible = false;
+            btnAfternoon16.Visible = false;
+            btnAfternoon17.Visible = false;
+            btnAfternoon18.Visible = false;
+            btnAfternoon19.Visible = false;
+            btnAfternoon20.Visible = false;
+            btnMorning1.Visible = false;
+            btnMorning2.Visible = false;
+            btnMorning3.Visible = false;
+            btnMorning4.Visible = false;
+            btnMorning5.Visible = false;
+            btnMorning6.Visible = false;
+            btnMorning7.Visible = false;
+            btnMorning8.Visible = false;
+            btnMorning9.Visible = false;
+            btnMorning10.Visible = false;
         }
         protected void btnAfternoon11_Click(object sender, EventArgs e)
         {

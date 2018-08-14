@@ -31,18 +31,27 @@
                                 <div class="container">
                                     <h3>Choose Service(s)</h3>
                                     <br />
-                                    <h5>Natural</h5>
-                                    <div runat="server" id="divNatural">
+                                    <asp:DropDownList runat="server" ID="drpCategories">
+                                        <asp:ListItem Text="All"></asp:ListItem>
+                                        <asp:ListItem Text="Braid"></asp:ListItem>
+                                        <asp:ListItem Text="Natural"></asp:ListItem>
+                                        <asp:ListItem Text="Application"></asp:ListItem>
+                                    </asp:DropDownList>
+                                    
+                                    <div runat="server" id="divNatural" visible="false">
+                                        <h5>Natural</h5>
                                         <asp:CheckBoxList runat="server" ID="cblPickAServiceN">
                                         </asp:CheckBoxList><br />
                                     </div>
-                                    <h5>Application</h5>
-                                    <div runat="server" id="divApplication">
+                                    
+                                    <div runat="server" id="divApplication" visible="false">
+                                        <h5>Application</h5>
                                         <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
                                         </asp:RadioButtonList><br />
                                     </div>
-                                    <h5>Braids</h5>
-                                    <div runat="server" id="divBraids">
+                                    
+                                    <div runat="server" id="divBraids" visible="false">
+                                        <h5>Braids</h5>
                                         <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
                                         </asp:RadioButtonList>
                                     </div>
@@ -128,10 +137,16 @@
                                     <h3>Booking Summary</h3>
                                     <br />
                                     <asp:Table ID="tblBookingSummary" runat="server">
-                                        <asp:TableRow ID="Summary" runat="server">
-                                            <asp:TableCell Text="Service(s):"></asp:TableCell>
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Date: "></asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblServices"></asp:Label>
+                                                <asp:Label runat="server" ID="lblDate"></asp:Label>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Time: "></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblTime"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
@@ -141,11 +156,13 @@
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
-                                            <asp:TableCell Text="Date & Time"></asp:TableCell>
+                                            <asp:TableCell Text="Service(s):"></asp:TableCell>
                                             <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblDate"></asp:Label>&ensp;&ensp;<asp:Label runat="server" ID="lblTime"></asp:Label>
+                                                <asp:Label runat="server" ID="lblServices"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
+
+
                                     </asp:Table>
                                 </div>
                             </div>
@@ -174,7 +191,7 @@
                     </div>
                 </div>
 
-                 <!-- Line Break-->
+                <!-- Line Break-->
                 <br />
                 <br />
 
