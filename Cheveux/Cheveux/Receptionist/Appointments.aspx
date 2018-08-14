@@ -127,10 +127,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Label ID="lblStart" runat="server" Text="LabelStart" Visible="false"></asp:Label>
+                                    <asp:Label ID="lblStart" runat="server" Text="" Visible="false"></asp:Label>
                                 </div>
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Label ID="lblEnd" runat="server" Text="LabelEnd" Visible="false"></asp:Label>
+                                    <asp:Label ID="lblEnd" runat="server" Text="" Visible="false"></asp:Label>
                                 </div>
                             </div>
                         </asp:PlaceHolder>

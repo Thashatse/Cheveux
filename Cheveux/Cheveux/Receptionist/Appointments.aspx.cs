@@ -132,7 +132,7 @@ namespace Cheveux
                         phDay.Visible = false;
                         phDateRange.Visible = true;
 
-                        if (lblStart.Text == "LabelStart" || lblEnd.Text == "LabelEnd")
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
@@ -197,7 +197,7 @@ namespace Cheveux
                             phDay.Visible = false;
                             phDateRange.Visible = true;
 
-                            if (lblStart.Text == "LabelStart" || lblEnd.Text == "LabelEnd")
+                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
@@ -270,7 +270,7 @@ namespace Cheveux
                         phDay.Visible = false;
                         phDateRange.Visible = true;
 
-                        if (lblStart.Text == "LabelStart" || lblEnd.Text == "LabelEnd")
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
@@ -335,7 +335,7 @@ namespace Cheveux
                             phDay.Visible = false;
                             phDateRange.Visible = true;
 
-                            if (lblStart.Text == "LabelStart" || lblEnd.Text == "LabelEnd")
+                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
@@ -359,7 +359,7 @@ namespace Cheveux
             {
                 bList = handler.getStylistPastBookings(empID);
 
-                phTable.Visible = true;
+                ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -454,7 +454,7 @@ namespace Cheveux
             {
                 bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate);
 
-                phTable.Visible = true;
+                ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -549,7 +549,7 @@ namespace Cheveux
             {
                 bList = handler.getStylistPastBksForDate(empID, day);
 
-                phTable.Visible = true;
+                ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -642,7 +642,7 @@ namespace Cheveux
         {
             try
             {
-                phTable.Visible = true;
+                ////phTable.Visible=true;
 
                 bList = handler.getStylistUpcomingBookings(empID);
 
@@ -828,7 +828,7 @@ namespace Cheveux
             {
                 bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate);
 
-                phTable.Visible = true;
+                ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -923,7 +923,7 @@ namespace Cheveux
             {
                 bList = handler.getAllStylistsUpcomingBksForDate(bookingDate);
 
-                phTable.Visible = true;
+                ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -1029,7 +1029,7 @@ namespace Cheveux
             {
                 bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate);
 
-                phTable.Visible = true;
+                ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -1135,7 +1135,7 @@ namespace Cheveux
             {
                 bList = handler.getAllStylistsUpcomingBookings();
 
-                phTable.Visible = true;
+                ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -1241,7 +1241,7 @@ namespace Cheveux
             {
                 bList = handler.getAllStylistsPastBookings();
 
-                phTable.Visible = true;
+                //phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -1347,7 +1347,7 @@ namespace Cheveux
             {
                 bList = handler.getAllStylistsPastBksForDate(date);
 
-                phTable.Visible = true;
+                //phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -1453,7 +1453,7 @@ namespace Cheveux
             {
                 bList = handler.getAllStylistsPastBookingsDateRange(startDate,endDate);
 
-                phTable.Visible = true;
+                //phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
                 TableRow row = new TableRow();
@@ -1617,8 +1617,8 @@ namespace Cheveux
         }
         protected void calStart_SelectionChanged(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
+
+
                 lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
                 //lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
 
@@ -1698,13 +1698,13 @@ namespace Cheveux
 
                     }
                 }
-            }
+
             
         }
         protected void calEnd_SelectionChanged(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
+
+
                 //lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
                 lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
 
@@ -1784,7 +1784,7 @@ namespace Cheveux
 
                     }
                 }
-            }
+
             
         }
         protected void scheduleCalender_DayRender(object sender, DayRenderEventArgs e)
