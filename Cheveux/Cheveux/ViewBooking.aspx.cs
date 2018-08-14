@@ -850,6 +850,7 @@ namespace Cheveux
                 products = handler.getAllProductsAndDetails();
                 if (products.Item1.Count != 0 && products.Item2.Count != 0)
                 {
+                    int prodCount = 0;
                     //sort the products by alphabetical oder
                     products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
                         products.Item2.OrderBy(o => o.Name).ToList());
@@ -863,6 +864,7 @@ namespace Cheveux
                             || compareToSearchTerm(treat.Brandname) == true))
                         {
                             lbProducts.Items.Add(treat.Name.ToString());
+                            prodCount++;
                         }
                     }
 
@@ -876,7 +878,14 @@ namespace Cheveux
                             || compareToSearchTerm(Access.Brandname) == true))
                         {
                             lbProducts.Items.Add(Access.Name.ToString());
+                            prodCount++;
                         }
+                    }
+
+                    //if no products found matching the criteria
+                    if (prodCount == 0)
+                    {
+                        lbProducts.Items.Add("No Products Found");
                     }
 
                         //show the add product to sale view
@@ -997,7 +1006,7 @@ namespace Cheveux
                     BookingID = Request.QueryString["BookingID"];
                     checkOut(BookingID);
                     divCheckOut.Visible = true;
-                }
+                    }
                 }
                 else
                 {

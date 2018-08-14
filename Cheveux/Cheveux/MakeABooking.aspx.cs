@@ -202,7 +202,7 @@ namespace Cheveux
                 lblServices.Text = selectedServiceN + selectedServiceA + selectedServiceB;
                 lblStylist.Text = rblPickAStylist.SelectedItem.Text.ToString();
                 lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
-                lblTime.Text = bookedTime;
+                //lblTime.Text = bookedTime;
                 btnPrevious.Visible = true;
                 #region access control
                 HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
@@ -246,7 +246,7 @@ namespace Cheveux
                         {
                             book = new BOOKING();
                             book.BookingID = function.GenerateRandomBookingID();
-                            book.SlotNo = bookedSlot;
+                            //book.SlotNo = bookedSlot;
                             book.Date = calBooking.SelectedDate;
                             book.CustomerID = cookie["ID"];
                             if(cblPickAServiceN.SelectedValue != null)

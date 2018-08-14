@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Models\ACCESSORY.cs" />
     <Compile Include="Models\BOOKING.cs" />
+    <Compile Include="Models\BRAID_SERVICE.cs" />
     <Compile Include="Models\BRAND.cs" />
     <Compile Include="Models\BUSINESS.cs" />
     <Compile Include="Models\CUST_VISIT.cs" />
@@ -77,13 +78,16 @@
     <Compile Include="ViewModels\SP_GetCustomerBooking.cs" />
     <Compile Include="ViewModels\SP_GetEmpAgenda.cs" />
     <Compile Include="ViewModels\SP_GetEmpNames.cs" />
+    <Compile Include="ViewModels\SP_GetLength.cs" />
     <Compile Include="ViewModels\SP_GetMyNextCustomer.cs" />
     <Compile Include="ViewModels\SP_GetProductTypes.cs" />
     <Compile Include="ViewModels\SP_GetServices.cs" />
     <Compile Include="ViewModels\SP_GetSlotTimes.cs" />
+    <Compile Include="ViewModels\SP_GetStyles.cs" />
     <Compile Include="ViewModels\SP_GetStylistBookings.cs" />
     <Compile Include="ViewModels\SP_GetStylists.cs" />
     <Compile Include="ViewModels\SP_GetTodaysBookings.cs" />
+    <Compile Include="ViewModels\SP_GetWidth.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
     <Compile Include="ViewModels\SP_SaleOfHairstylist.cs" />
     <Compile Include="ViewModels\SP_SearchStylistsBySearchTerm.cs" />

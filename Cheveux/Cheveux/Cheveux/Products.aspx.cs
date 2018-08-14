@@ -22,7 +22,6 @@ namespace Cheveux.Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             loadProductList('X');
         }
 
@@ -33,8 +32,8 @@ namespace Cheveux.Cheveux
                 //load a list of all products
                 products = handler.getAllProductsAndDetails();
                 //sort the products by stock count
-                products = Tuple.Create(products.Item1.OrderBy(o => o.Qty).ToList(),
-                    products.Item2.OrderBy(o => o.Qty).ToList());
+                products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
+                    products.Item2.OrderBy(o => o.Name).ToList());
                 //track row count & number of products cound
                 int count = 0;
 
@@ -50,16 +49,16 @@ namespace Cheveux.Cheveux
                     //create a header row and set cell withs
                     TableHeaderCell newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Name: ";
-                    newHeaderCell.Width = 700;
+                    newHeaderCell.Width = 600;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                     //create a header row and set cell withs
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Product Description: ";
-                    newHeaderCell.Width = 200;
+                    newHeaderCell.Width = 300;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Price: ";
-                    newHeaderCell.Width = 125;
+                    newHeaderCell.Width = 100;
                     tblProductTable.Rows[count].Cells.Add(newHeaderCell);
 
                     //increment rowcounter

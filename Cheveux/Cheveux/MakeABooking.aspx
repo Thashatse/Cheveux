@@ -152,6 +152,10 @@
                     </div>
                 </div>
 
+                <!-- Line Break -->
+                <br />
+                <br />
+
                 <div class="row">
 
                     <div class="col-2 text-left">
@@ -168,6 +172,10 @@
 
                     </div>
                 </div>
+
+                <!-- Line Break -->
+                <br />
+                <br />
             </form>
         </div>
         <div class="col-md-2 col-sm-1"></div>

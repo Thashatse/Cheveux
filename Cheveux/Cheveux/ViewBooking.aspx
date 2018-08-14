@@ -27,16 +27,16 @@
                 <div runat="server" id="LogedIn" visible="false">
                     <div class="jumbotron bg-dark text-white">
                         <!--Bookings Heading-->
-                        <asp:label runat="server" id="BookingLable"></asp:label>
+                        <asp:Label runat="server" ID="BookingLable"></asp:Label>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
                             <!--Booking Table-->
-                            <asp:table id="BookingTable" runat="server"></asp:table>
+                            <asp:Table ID="BookingTable" runat="server"></asp:Table>
                             <!--Edit Booking Table -->
                             <div runat="server" id="Edit" visible="false">
-                                <asp:table id="editBookingTable" runat="server">
+                                <asp:Table ID="editBookingTable" runat="server">
                                     <asp:TableRow Height="50">
                                         <asp:TableCell Font-Bold="true"></asp:TableCell>
                                         <asp:TableCell>
@@ -90,7 +90,7 @@
                                             <asp:Button ID="Save" runat="server" Text="Save" class="btn btn-default" OnClick="Save_Click" />
                                         </asp:TableCell>
                                     </asp:TableRow>
-                                </asp:table>
+                                </asp:Table>
                             </div>
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                                 <div style="border: solid #F05F40 2px;" runat="server" id="divCheckOutInvoice">
                                     <div class="col-12">
                                         <h2>Invoice: </h2>
-                                        <asp:table id="tblCheckOut" runat="server">
+                                        <asp:Table ID="tblCheckOut" runat="server">
                                             <asp:TableRow Height="50">
                                                 <asp:TableCell Font-Bold="true" Width="300"> Service: </asp:TableCell>
                                                 <asp:TableCell>
@@ -125,10 +125,10 @@
                                             <asp:TableRow Height="50">
                                                 <asp:TableCell Font-Bold="true">
                                         <!--Payment Type Lable--> Payment Type: 
-                                        </asp:TableCell>
+                                                </asp:TableCell>
                                                 <asp:TableCell>
                                         <!--Payment Type-->
-                                        </asp:TableCell>
+                                                </asp:TableCell>
                                             </asp:TableRow>
                                             <asp:TableRow Height="50">
                                                 <asp:TableCell></asp:TableCell>
@@ -150,7 +150,7 @@
                                         <a href='#' onClick='window.print()' >Print Invoice  </a>
                                                 </asp:TableCell>
                                             </asp:TableRow>
-                                        </asp:table>
+                                        </asp:Table>
                                     </div>
                                 </div>
                                 <!-- Line Break -->
@@ -159,7 +159,7 @@
                                 <div style="border: solid #F05F40 2px;" runat="server" id="divPamentType">
                                     <div class="col-12">
                                         <h2>Payment Type:</h2>
-                                        <asp:table id="tblPaymentType" runat="server">
+                                        <asp:Table ID="tblPaymentType" runat="server">
                                             <asp:TableRow Height="50">
                                                 <asp:TableCell Width="300">
                                                     <!--Payment Type-->
@@ -173,7 +173,7 @@
                                                     <asp:Button ID="btnSavePaymentType" runat="server" Text="Save" OnClick="btnSavePaymentType_Click" class="btn btn-primary" />
                                                 </asp:TableCell>
                                             </asp:TableRow>
-                                        </asp:table>
+                                        </asp:Table>
                                     </div>
                                 </div>
                             </div>
@@ -185,16 +185,15 @@
                             <div class="col-md-12 col-lg-5">
                                 <!--Line Break-->
                                 <br />
-                                <h3>Products: </h3>
+                                <h3 style="text-align: left; float: left;">Products: </h3>
+                                <p style="text-align: right; float: right;">
+                                    <!-- Search -->
+                                    <asp:TextBox ID="txtProductSearch" runat="server" AutoPostBack="true" placeholder="search"
+                                        OnDataBinding="btnAddProduct_Click" OnTextChanged="btnAddProduct_Click" CssClass="form-control"></asp:TextBox>
+                                </p>
                                 <!--Line Break-->
                                 <br />
-                                <asp:listbox runat="server" id="lbProducts" cssclass="form-control" datatextfield="Name" datavaluefield="ID" height="300"></asp:listbox>
-                                <!--Line Break-->
-                                <br />
-                                <br />
-                                <!-- Search -->
-                                <asp:textbox id="txtProductSearch" runat="server"></asp:textbox>
-                                <asp:button id="btnSearchProduct" runat="server" text="Search" cssclass="btn btn-Secondary" onclick="btnAddProduct_Click" />
+                                <asp:ListBox runat="server" ID="lbProducts" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
                             </div>
                             <div class="col-md-12 col-lg-2 text-center">
                                 <!-- Line Break -->
@@ -203,38 +202,37 @@
                                 <br />
                                 <br />
 
-                                <asp:button id="btnAddProductToSale" runat="server" text="Add Product" cssclass="btn btn-Secondary" onclick="btnAddProductToSale_Click" />
-
+                                <asp:Button ID="btnAddProductToSale" runat="server" Text="Add Product" CssClass="btn btn-Secondary" OnClick="btnAddProductToSale_Click" />
 
                                 <!-- Line Break -->
                                 <br />
                                 <br />
 
                                 Qty:
-                                <asp:dropdownlist runat="server" id="Qty" cssclass="btn btn-outline-secondary dropdown-toggle">
+                                <asp:DropDownList runat="server" ID="Qty" CssClass="btn btn-outline-secondary dropdown-toggle">
                                     <asp:ListItem Value="1">1</asp:ListItem>
                                     <asp:ListItem Value="2">2</asp:ListItem>
                                     <asp:ListItem Value="3">3</asp:ListItem>
                                     <asp:ListItem Value="4">4</asp:ListItem>
                                     <asp:ListItem Value="5">5</asp:ListItem>
                                     <asp:ListItem Value="6">6</asp:ListItem>
-                                    <asp:ListItem Value="7">7</asp:ListItem> 
+                                    <asp:ListItem Value="7">7</asp:ListItem>
                                     <asp:ListItem Value="8">8</asp:ListItem>
                                     <asp:ListItem Value="9">9</asp:ListItem>
                                     <asp:ListItem Value="10">10</asp:ListItem>
-                                </asp:dropdownlist>
+                                </asp:DropDownList>
 
                                 <!-- Line Break -->
                                 <br />
                                 <br />
 
-                                <asp:button id="btnRemoveProductFromSale" runat="server" text="Remove Product" cssclass="btn" onclick="btnRemoveProductFromSale_Click" />
+                                <asp:Button ID="btnRemoveProductFromSale" runat="server" Text="Remove Product" CssClass="btn" OnClick="btnRemoveProductFromSale_Click" />
 
                                 <!-- Line Break -->
                                 <br />
                                 <br />
 
-                                <asp:button id="btnSaveSale" runat="server" text="Return To Check Out" cssclass="btn btn-primary" onclick="btnSaveSale_Click" />
+                                <asp:Button ID="btnSaveSale" runat="server" Text="Return To Check Out" CssClass="btn btn-primary" OnClick="btnSaveSale_Click" />
                             </div>
                             <div class="col-md-12 col-lg-5">
                                 <!--Line Break-->
@@ -244,7 +242,7 @@
                                 <h3>Invoice: </h3>
                                 <!--Line Break-->
                                 <br />
-                                <asp:listbox runat="server" id="lProductsOnSale" cssclass="form-control" datatextfield="Name" datavaluefield="ID" height="300"></asp:listbox>
+                                <asp:ListBox runat="server" ID="lProductsOnSale" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
                             </div>
                         </div>
                         <div class="row">
@@ -255,7 +253,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <!-- Display the Booking for the client -->
-                            <asp:label id="BackButton" runat="server"></asp:label>
+                            <asp:Label ID="BackButton" runat="server"></asp:Label>
                         </div>
                     </div>
 
@@ -271,15 +269,15 @@
 
                     <div runat="server" id="confirm" visible="false">
                         <div class="jumbotron bg-dark text-white">
-                            <asp:label id="confirmHeaderPlaceHolder" runat="server"></asp:label>
-                            <asp:label id="confirmPlaceHolder" runat="server"></asp:label>
+                            <asp:Label ID="confirmHeaderPlaceHolder" runat="server"></asp:Label>
+                            <asp:Label ID="confirmPlaceHolder" runat="server"></asp:Label>
                             <!--Line Break-->
                             <br />
                             <br />
                             <!-- Edit -->
-                            <asp:button id="no" runat="server" text="No" class="btn btn-default" onclick="showEdit" />
-                            <asp:button id="yes" runat="server" text="Yes" class="btn btn-primary" onclick="commitEdit" />
-                            <asp:button id="OK" runat="server" text="OK" class="btn btn-primary" onclick="OK_Click" visible="false" />
+                            <asp:Button ID="no" runat="server" Text="No" class="btn btn-default" OnClick="showEdit" />
+                            <asp:Button ID="yes" runat="server" Text="Yes" class="btn btn-primary" OnClick="commitEdit" />
+                            <asp:Button ID="OK" runat="server" Text="OK" class="btn btn-primary" OnClick="OK_Click" Visible="false" />
                         </div>
                     </div>
                 </div>
