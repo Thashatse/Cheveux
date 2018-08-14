@@ -100,7 +100,7 @@ if ((Access.ProductType == "A" || Access.ProductType == "T") &&
                             //Name
                             TableCell newCell = new TableCell();
                             newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
-                                        + Access.Price.ToString().Replace(" ", string.Empty) +
+                                        + Access.ProductID.ToString().Replace(" ", string.Empty) +
                                         "'>" + Access.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
@@ -110,10 +110,10 @@ if ((Access.ProductType == "A" || Access.ProductType == "T") &&
                                 newCell.Text = Access.ProductDescription.ToString();
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
-                                //Stock
+                                //PRICE
                                 newCell = new TableCell();
-                                //add stock link to be added by Sivu
-                               
+                                newCell.Text = "R" + string.Format("{0:#.00}", Access.Price);
+                                
                                 tblProductTable.Rows[count].Cells.Add(newCell);
                             }
 
@@ -159,7 +159,7 @@ if ((treat.ProductType == "A" || treat.ProductType == "T") &&
                             //Name
                             TableCell newCell = new TableCell();
                             newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
-                                        + treat.Price.ToString().Replace(" ", string.Empty) +
+                                        + treat.ProductID.ToString().Replace(" ", string.Empty) +
                                         "'>" + treat.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
@@ -169,15 +169,9 @@ if ((treat.ProductType == "A" || treat.ProductType == "T") &&
                                 newCell.Text = treat.ProductDescription.ToString();
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
-                                //add stock button
+                                //PRICE
                                 newCell = new TableCell();
-                                //Edit sok link to be added by Sivu
-                                string cellText = "";
-                                //add the add stock button only for Treatments and application services
-                                //add stock link to be added by Sivu
-                              
-
-                                newCell.Text = cellText;
+                                newCell.Text = "R" + string.Format("{0:#.00}", treat.Price);
                                 tblProductTable.Rows[count].Cells.Add(newCell);
                             }
                             //increment counter
