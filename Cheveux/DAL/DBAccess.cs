@@ -919,6 +919,39 @@ namespace DAL
         }
         #endregion
 
+        #region Products
+            public PRODUCT CheckForProduct(string id)
+        {
+            PRODUCT TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ProductID", id)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForProduct",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new PRODUCT
+                        {
+                            ProductID = row[0].ToString()
+                        };
+
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         public string getSalePaymentType(string saleID)
         {
             string paymentType = null;

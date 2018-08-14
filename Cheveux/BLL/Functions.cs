@@ -224,6 +224,22 @@ namespace BLL
             return result;
         }
 
+        public string GenerateRandomProductID()
+        {
+            string result;
+            do
+            {
+                int[] id = new int[3];
+                Random rn = new Random();
+                for (int i = 0; i < id.Length; i++)
+                {
+                    id[i] = rn.Next(0, 9);
+                }
+                result = "Pr"+string.Join("", id);
+            } while (Handler.CheckForProduct(result) != null);
+            return result;
+        }
+
         public bool sendEmailAlert(string receverAddress, string reciverName, string subject, string body, string senderName)
         {
             bool success = false;

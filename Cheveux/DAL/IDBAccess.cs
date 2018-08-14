@@ -83,6 +83,10 @@ namespace DAL
         bool updateNotiStatus(string bookingID, bool notiStatus);
         #endregion
 
+        #region Products
+        PRODUCT CheckForProduct(string id);
+        #endregion
+
         List<SP_GetEmpNames> GetEmpNames();
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
