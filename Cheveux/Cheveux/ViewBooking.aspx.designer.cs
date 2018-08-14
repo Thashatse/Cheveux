@@ -202,15 +202,6 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddProducts;
         
         /// <summary>
-        /// lbProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbProducts;
-        
-        /// <summary>
         /// txtProductSearch control.
         /// </summary>
         /// <remarks>
@@ -220,13 +211,13 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.TextBox txtProductSearch;
         
         /// <summary>
-        /// btnSearchProduct control.
+        /// lbProducts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSearchProduct;
+        protected global::System.Web.UI.WebControls.ListBox lbProducts;
         
         /// <summary>
         /// btnAddProductToSale control.

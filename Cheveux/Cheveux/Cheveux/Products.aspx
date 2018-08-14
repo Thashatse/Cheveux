@@ -20,10 +20,8 @@
                  <div class="jumbotron bg-dark text-white">
                 <!-- VIEW ALL PRODUCTS TABLE -->
                      <header class="text-center">
-                            <h1>View all Products</h1>
+                            <h1>Products</h1>
                         </header>
-
-                    
                 </div>
                 <div class="row">
                     <div class="col-md-12">
