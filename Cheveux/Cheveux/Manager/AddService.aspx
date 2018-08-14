@@ -9,7 +9,6 @@
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
         <br />
-        <br />
     </div>
     <br />
     <div class="row">
@@ -27,79 +26,79 @@
                             <div class="container" runat="server" id="divServiceDetails" visible="true">
                                 <asp:Table runat="server" ID="tblServiceDetails">
                                     <asp:TableRow>
-                                        <asp:TableCell Text="Service Type"></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:DropDownList runat="server" ID="drpType" OnSelectedIndexChanged="drpType_SelectedIndexChanged">
+                                        <asp:TableCell Text="Service Type:" Width="150px"></asp:TableCell>
+                                        <asp:TableCell >
+                                            <asp:DropDownList runat="server" ID="drpType" OnSelectedIndexChanged="drpType_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
                                         </asp:TableCell>
                                     </asp:TableRow>
+                                </asp:Table>
+                                <div class="container" runat="server" id="divBraidDetails" visible="false">
+                                    <asp:Table runat="server" ID="tblBraidDetails">
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Style: " Width="150px"></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:RadioButtonList runat="server" ID="rblStyle"></asp:RadioButtonList>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Width: " Width="150px"></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:RadioButtonList runat="server" ID="rblWidth"></asp:RadioButtonList>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Length: " Width="150px"></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:RadioButtonList runat="server" ID="rblLength"></asp:RadioButtonList>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                    </asp:Table>
+                                </div>
+                                <asp:Table runat="server" ID="tblServiceDetails2" Visible="true">
                                     <asp:TableRow>
-                                        <asp:TableCell Text="Name: "></asp:TableCell>
+                                        <asp:TableCell Text="Name: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
                                         </asp:TableCell>
                                     </asp:TableRow>
-                                    </asp:Table>
-                                <div class="container" runat="server" id="divBraidDetails" visible="false">
-                                <asp:Table runat="server" ID="tblBraidDetails">
                                     <asp:TableRow>
-                                        <asp:TableCell Text="Style: "></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:RadioButtonList runat="server" ID="rblStyle"></asp:RadioButtonList>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow>
-                                        <asp:TableCell Text="Width: "></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:RadioButtonList runat="server" ID="rblWidth"></asp:RadioButtonList>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                    <asp:TableRow>
-                                        <asp:TableCell Text="Length: "></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:RadioButtonList runat="server" ID="rblLength"></asp:RadioButtonList>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                </asp:Table>
-                            </div>
-                                <asp:Table runat="server" ID="tblServiceDetails2" Visible="true">
-                                    <asp:TableRow>
-                                        <asp:TableCell Text="No of Slots: "></asp:TableCell>
+                                        <asp:TableCell Text="No of Slots: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtNoOfSlots"></asp:TextBox>
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
-                                        <asp:TableCell Text="Price: "></asp:TableCell>
+                                        <asp:TableCell Text="Price: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
-                                        <asp:TableCell Text="Description: "></asp:TableCell>
+                                        <asp:TableCell Text="Description: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtDescription"></asp:TextBox>
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
                             </div>
-                            
+
                             <div class="row">
 
-                    <div class="col-2 text-left">
+                                <div class="col-2 text-left">
 
-                        <asp:Button class='btn btn-basic' runat="server" ID="btnCancel" Visible="true" Text="Cancel" OnClick="btnCancel_Click"/>
+                                    <asp:Button class='btn btn-basic' runat="server" ID="btnCancel" Visible="true" Text="Cancel" OnClick="btnCancel_Click" />
 
-                    </div>
+                                </div>
 
-                    <div class="col-8"></div>
+                                <div class="col-8"></div>
 
-                    <div class="col-2 text-right">
+                                <div class="col-2 text-right">
 
-                        <asp:Button class='btn btn-primary' runat="server" ID="btnAdd" Visible="true" Text="Add Service" OnClick="btnAdd_Click" />
+                                    <asp:Button class='btn btn-primary' runat="server" ID="btnAdd" Visible="true" Text="Add Service" OnClick="btnAdd_Click" />
 
-                    </div>
-                </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

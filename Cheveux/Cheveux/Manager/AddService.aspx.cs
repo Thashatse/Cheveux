@@ -22,15 +22,18 @@ namespace Cheveux.Manager
         BRAID_SERVICE bservice = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            ListItem select = new ListItem(" --Select Type-- ", "");
-            select.Selected = true;
-            ListItem braid = new ListItem("Braid", "B");
-            ListItem application = new ListItem("Application", "A");
-            ListItem natural = new ListItem("Natural", "N");
-            drpType.Items.Add(select);
-            drpType.Items.Add(braid);
-            drpType.Items.Add(application);
-            drpType.Items.Add(natural);
+            if (!Page.IsPostBack)
+            {
+                ListItem select = new ListItem(" --Select Type-- ", "0");
+                ListItem braid = new ListItem("Braid", "1");
+                ListItem application = new ListItem("Application", "2");
+                ListItem natural = new ListItem("Natural", "3");
+                drpType.Items.Add(select);
+                drpType.Items.Add(braid);
+                drpType.Items.Add(application);
+                drpType.Items.Add(natural);
+            }
+           
 
             styleList = handler.BLL_GetStyles();
             widthList = handler.BLL_GetWidths();
@@ -54,14 +57,28 @@ namespace Cheveux.Manager
 
         protected void drpType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(drpType.SelectedValue.ToString() == "Braid")
+            if(drpType.SelectedValue == "0")
+            {
+                divBraidDetails.Visible = false;
+            }
+            else if(drpType.SelectedValue == "1")
             {
                 divBraidDetails.Visible = true;
+            }
+            else if(drpType.SelectedValue == "2")
+            {
+                divBraidDetails.Visible = false;
+            }
+            else if (drpType.SelectedValue == "3")
+            {
+                divBraidDetails.Visible = false;
             }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
+            //redirect to previous page
+            Response.Redirect("Service.aspx");
 
         }
 
