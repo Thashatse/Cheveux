@@ -57,8 +57,10 @@
                                     <asp:RadioButtonList runat="server" ID="rblPickAStylist">
                                     </asp:RadioButtonList>
                                 </div>
+                            </div>
 
-                                <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px;">
+                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px;">
+                                <div class="container">
                                     <h3>Choose A Date & Time</h3>
                                     <br />
                                     <div class="row">
@@ -152,8 +154,7 @@
                     </div>
                 </div>
 
-                <!-- Line Break -->
-                <br />
+                <!-- Line Break-->
                 <br />
 
                 <div class="row">
@@ -173,9 +174,10 @@
                     </div>
                 </div>
 
-                <!-- Line Break -->
+                 <!-- Line Break-->
                 <br />
                 <br />
+
             </form>
         </div>
         <div class="col-md-2 col-sm-1"></div>
