@@ -98,6 +98,13 @@ namespace BLL
         }
         #endregion
 
+        #region Products
+        public PRODUCT CheckForProduct(string id)
+        {
+            return db.CheckForProduct(id);
+        }
+        #endregion
+
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             return db.getTodaysBookings();
