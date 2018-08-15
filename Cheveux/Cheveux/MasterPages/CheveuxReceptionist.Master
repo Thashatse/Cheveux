@@ -57,7 +57,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx" style="text-decoration:none;">Manage Stock</a>
+                            <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx" style="text-decoration:none;">Products</a>
                         </li>
                         
                         <li class="nav-item">
