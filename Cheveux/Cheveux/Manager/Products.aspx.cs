@@ -229,13 +229,26 @@ namespace Cheveux.Manager
                                 newCell.Text = Access.Qty.ToString();
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
-                                //Stock
+                                #region Stock
                                 newCell = new TableCell();
-                                //add stock link to be added by Sivu
-                                newCell.Text = "<a class='btn  btn-secondary' href='#?" +
+                                //new stock oder
+                                newCell.Text = "<a class='btn  btn-secondary' href='Products.aspx?Action=NewOrder" +
                                             "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                                            "'>Manage Stock</a>";
+                                            "'>Make Oder</a>";
                                 tblProductTable.Rows[count].Cells.Add(newCell);
+
+                                /*
+                                if ()
+                                {
+                                    newCell = new TableCell();
+                                    //recive oder link to be added by Sivu
+                                    newCell.Text = "<a class='btn  btn-secondary' href='#?" +
+                                                "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                                                "'>Receive Order</a>";
+                                    tblProductTable.Rows[count].Cells.Add(newCell);
+                                }
+                                */
+                                #endregion
                             }
                             else
                             {
@@ -322,17 +335,30 @@ namespace Cheveux.Manager
                                 newCell.Text = treat.Qty.ToString();
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
-                                //add stock button
+                                #region orders
                                 newCell = new TableCell();
                             //Edit sok link to be added by Sivu
                             string cellText = "";
                             //add the add stock button only for Treatments and application services
                             //add stock link to be added by Sivu
-                                cellText += "<a class='btn  btn-secondary' href='#?" +
-                                        "ProductID=" + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                                        "'>Manage Stock</a>";
-                            
-                            newCell.Text = cellText;
+                                cellText += "<a class='btn  btn-secondary' href='Products.aspx?Action=NewOrder" +
+                                            "ProductID=" + treat.ProductID.ToString().Replace(" ", string.Empty) +
+                                            "'>Make Oder</a>";
+
+                                /*
+                                if ()
+                                {
+                                    newCell = new TableCell();
+                                    //recive oder link to be added by Sivu
+                                    newCell.Text = "<a class='btn  btn-secondary' href='#?" +
+                                                "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
+                                                "'>Receive Order</a>";
+                                    tblProductTable.Rows[count].Cells.Add(newCell);
+                                }
+                                */
+                                #endregion
+
+                                newCell.Text = cellText;
                             tblProductTable.Rows[count].Cells.Add(newCell);
                             }else
                             {
