@@ -408,7 +408,7 @@ namespace BLL
         {
             return db.getAllStylistsUpcomingBookings();
         }
-         public bool BLL_AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+         public bool BLL_AddService(PRODUCT p, SERVICE s)
         {
             return db.AddService(p, s, bs);
         }
