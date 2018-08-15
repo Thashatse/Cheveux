@@ -355,6 +355,7 @@ namespace Cheveux
 
         public void getStylistPastBookings(string empID)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getStylistPastBookings(empID);
@@ -450,6 +451,7 @@ namespace Cheveux
         }
         public void getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate);
@@ -545,6 +547,7 @@ namespace Cheveux
         }
         public void getStylistPastBksForDate(string empID, DateTime day)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getStylistPastBksForDate(empID, day);
@@ -640,6 +643,7 @@ namespace Cheveux
         }
         public void getStylistUpcomingBookings(string empID)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 ////phTable.Visible=true;
@@ -726,6 +730,7 @@ namespace Cheveux
         }
         public void getStylistUpcomingBksForDate(string id, DateTime bookingDate)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
@@ -824,6 +829,7 @@ namespace Cheveux
         }
         public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate);
@@ -919,6 +925,7 @@ namespace Cheveux
         }
         public void getAllStylistsUpcomingBksForDate(DateTime bookingDate)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getAllStylistsUpcomingBksForDate(bookingDate);
@@ -1025,6 +1032,7 @@ namespace Cheveux
         }
         public void getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate);
@@ -1131,6 +1139,7 @@ namespace Cheveux
         }
         public void getAllStylistsUpcomingBookings()
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getAllStylistsUpcomingBookings();
@@ -1237,6 +1246,7 @@ namespace Cheveux
         }
         public void getAllStylistsPastBookings()
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getAllStylistsPastBookings();
@@ -1343,6 +1353,7 @@ namespace Cheveux
         }
         public void getAllStylistsPastBksForDate(DateTime date)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getAllStylistsPastBksForDate(date);
@@ -1449,6 +1460,7 @@ namespace Cheveux
         }
         public void getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate)
         {
+            tblSchedule.Rows.Clear();
             try
             {
                 bList = handler.getAllStylistsPastBookingsDateRange(startDate,endDate);
