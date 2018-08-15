@@ -1813,14 +1813,14 @@ namespace DAL
             }
         }
 
-        /*add accessories
+        
         public bool addAccessories(ACCESSORY a)
         {
             try
             { 
             SqlParameter[] pars = new SqlParameter[]
                 {
-                
+                    
                     new SqlParameter("@colour", a.Colour.ToString()),
                     new SqlParameter("@qty", a.Qty.ToString()),
                     new SqlParameter("@brandID", a.BrandID.ToString())
@@ -1856,7 +1856,7 @@ namespace DAL
 
         }
 
-            */
+            
 
 
 

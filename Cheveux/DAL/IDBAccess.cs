@@ -127,9 +127,9 @@ namespace DAL
         List<SP_GetWidth> GetWidths();
         List<SP_GetLength> GetLengths();
         List<SP_GetStyles> GetStyles();
-       // List<SP_GetAllAccessories> getAllAccessories();
-        //List<SP_GetAllTreatments> getAllTreatments();
-        //bool AddAccessories(ACCESSORY a);
-        //bool AddTreatments(TREATMENT t);
+       
+
+        bool AddAccessories(ACCESSORY a);
+        bool AddTreatments(TREATMENT t);
     }
 }
