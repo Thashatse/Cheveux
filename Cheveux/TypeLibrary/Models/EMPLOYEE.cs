@@ -20,6 +20,8 @@ namespace TypeLibrary.Models
         public byte[] Employee1 { get; set; }
         public string AddressLine1 { get; set; }
         public string AddressLine2 { get; set; }
+        public string Suburb { get; set; }
+        public string City { get; set; }
         public string Bio { get; set; }
     }
 }

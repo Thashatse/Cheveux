@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace TypeLibrary.Models
 {
-    public class ACCESSORY
+    public class Order_DTL
     {
-        public string TreatmentID { get; set; }
-        public string Colour { get; set; }
+        public string OrderID { get; set; }
+        public string ProductID { get; set; }
         public Nullable<int> Qty { get; set; }
-        public string BrandID { get; set; }
-
-        public string supplierID { get; set; }
     }
 }

@@ -13,5 +13,7 @@ namespace TypeLibrary.Models
         public string Name { get; set; }
         public string TreatmentType { get; set; }
         public string BrandID { get; set; }
+
+        public string supplierID { get; set; }
     }
 }

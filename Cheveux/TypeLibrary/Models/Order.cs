@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace TypeLibrary.Models
 {
-    public class ACCESSORY
+    public class Order
     {
-        public string TreatmentID { get; set; }
-        public string Colour { get; set; }
-        public Nullable<int> Qty { get; set; }
-        public string BrandID { get; set; }
-
         public string supplierID { get; set; }
+        public string OrderID { get; set; }
+        public DateTime orderDate { get; set; }
+        public bool Received { get; set; }
+        public DateTime dateReceived { get; set; }
     }
 }
