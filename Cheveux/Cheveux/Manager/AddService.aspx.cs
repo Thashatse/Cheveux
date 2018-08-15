@@ -88,7 +88,7 @@ namespace Cheveux.Manager
             service = new SERVICE();
             bservice = new BRAID_SERVICE();
 
-            //product.ProductID =;
+            product.ProductID = function.GenerateRandomProductID();
             product.Name = txtName.Text;
             product.ProductDescription = txtDescription.Text;
             product.Price = Convert.ToDecimal(txtPrice.Text);
@@ -101,7 +101,21 @@ namespace Cheveux.Manager
             bservice.LengthID = rblLength.SelectedValue.ToString();
             bservice.WidthID = rblWidth.SelectedValue.ToString();
 
-            handler.BLL_AddService(product, service, bservice);
+            if (drpType.SelectedValue == "1")
+            {
+                handler.BLL_AddBraidService(bservice);
+                handler.BLL_AddService(product, service);
+            }
+            else if(drpType.SelectedValue == "2")
+            {
+                handler.BLL_AddService(product, service);
+            }
+            else if (drpType.SelectedValue == "3")
+            {
+                handler.BLL_AddService(product, service);
+            }
+
+
         }
     }
 }

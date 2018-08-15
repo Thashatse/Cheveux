@@ -26,58 +26,66 @@
                             <div class="container" runat="server" id="divServiceDetails" visible="true">
                                 <asp:Table runat="server" ID="tblServiceDetails">
                                     <asp:TableRow>
-                                        <asp:TableCell Text="Service Type:" Width="150px"></asp:TableCell>
+                                        <asp:TableCell Text="Service Type:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                         <asp:TableCell >
                                             <asp:DropDownList runat="server" ID="drpType" OnSelectedIndexChanged="drpType_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:DropDownList>
+                                            <br /><br />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
                                 <div class="container" runat="server" id="divBraidDetails" visible="false">
                                     <asp:Table runat="server" ID="tblBraidDetails">
                                         <asp:TableRow>
-                                            <asp:TableCell Text="Style: " Width="150px"></asp:TableCell>
+                                            <asp:TableCell Text="Style: " Width="150px" VerticalAlign="Middle"></asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:RadioButtonList runat="server" ID="rblStyle"></asp:RadioButtonList>
+                                                <br />
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
-                                            <asp:TableCell Text="Width: " Width="150px"></asp:TableCell>
+                                            <asp:TableCell Text="Width: " Width="150px" VerticalAlign="Middle" ></asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:RadioButtonList runat="server" ID="rblWidth"></asp:RadioButtonList>
+                                                <br />
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
-                                            <asp:TableCell Text="Length: " Width="150px"></asp:TableCell>
+                                            <asp:TableCell Text="Length: " Width="150px" VerticalAlign="Middle"></asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:RadioButtonList runat="server" ID="rblLength"></asp:RadioButtonList>
-                                            </asp:TableCell>
+                                                <br />
+                                            </asp:TableCell>                                           
                                         </asp:TableRow>
                                     </asp:Table>
                                 </div>
-                                <asp:Table runat="server" ID="tblServiceDetails2" Visible="true">
+                                <asp:Table runat="server" ID="tblServiceDetails2" Visible="true" VerticalAlign="Top">
                                     <asp:TableRow>
                                         <asp:TableCell Text="Name: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
+                                            <br />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
                                         <asp:TableCell Text="No of Slots: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtNoOfSlots"></asp:TextBox>
+                                            <br />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
                                         <asp:TableCell Text="Price: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
+                                            <br />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                     <asp:TableRow>
                                         <asp:TableCell Text="Description: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
                                             <asp:TextBox runat="server" ID="txtDescription"></asp:TextBox>
+                                            <br />
                                         </asp:TableCell>
                                     </asp:TableRow>
                                 </asp:Table>
