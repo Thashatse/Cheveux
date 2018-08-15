@@ -17,29 +17,29 @@ namespace DAL
         {
             List<HomePageFeatures> homePageFeatures = new List<HomePageFeatures>();
 
-                try
-                {
+            try
+            {
                 //hairstyls and products
-                    using (DataTable table = DBHelper.Select("SP_FeaturedProductsAndHairStyles",
-                CommandType.StoredProcedure))
+                using (DataTable table = DBHelper.Select("SP_FeaturedProductsAndHairStyles",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
                     {
-                        if (table.Rows.Count > 0)
+                        foreach (DataRow row in table.Rows)
                         {
-                            foreach (DataRow row in table.Rows)
-                            {
                             HomePageFeatures feature = new HomePageFeatures
                             {
-                                    FeatureID = row["FeatureID"].ToString(),
-                                    ItemID  = row["ItemID"].ToString(),
-                                    ImageURL = row["ImageURL"].ToString(),
-                                    Name = row["Name"].ToString(),
-                                    description = row["ProductDescription"].ToString(),
+                                FeatureID = row["FeatureID"].ToString(),
+                                ItemID = row["ItemID"].ToString(),
+                                ImageURL = row["ImageURL"].ToString(),
+                                Name = row["Name"].ToString(),
+                                description = row["ProductDescription"].ToString(),
                                 price = Math.Round(Convert.ToDecimal(row["Price"]), 2).ToString()
-                                };
-                                homePageFeatures.Add(feature);
-                            }
+                            };
+                            homePageFeatures.Add(feature);
                         }
                     }
+                }
 
                 //Contact us & stylists
                 using (DataTable table = DBHelper.Select("SP_FeaturedProductsAndContact",
@@ -136,7 +136,7 @@ namespace DAL
             }
         }
         #endregion
-        
+
         #region Invoice/Sale
         public List<SP_getInvoiceDL> getInvoiceDL(string BookingID)
         {
@@ -400,7 +400,7 @@ namespace DAL
                             bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                             bookingID = row["BookingID"].ToString(),
                             arrived = row["Arrived"].ToString()[0],
-                                serviceID = row["ProductID"].ToString(),
+                            serviceID = row["ProductID"].ToString(),
                             stylistEmployeeID = row["StylistID"].ToString(),
                             CustFullName = row["CustFullName"].ToString(),
                             CustomerID = row["CustomerID"].ToString()
@@ -919,39 +919,6 @@ namespace DAL
         }
         #endregion
 
-        #region Products
-            public PRODUCT CheckForProduct(string id)
-        {
-            PRODUCT TF = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@ProductID", id)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_CheckForProduct",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        TF = new PRODUCT
-                        {
-                            ProductID = row[0].ToString()
-                        };
-
-                    }
-                    return TF;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        #endregion
-
         public string getSalePaymentType(string saleID)
         {
             string paymentType = null;
@@ -995,7 +962,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
         {
             List<SP_ProductSearchByTerm> ProductSearchResults = new List<SP_ProductSearchByTerm>();
@@ -1174,7 +1141,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public SP_GetCurrentVATate GetVATRate()
         {
             SP_GetCurrentVATate VATRate = null;
@@ -1202,7 +1169,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
@@ -1303,7 +1270,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
         {
             SP_ViewCustVisit visit = null;
@@ -1396,16 +1363,16 @@ namespace DAL
             }
 
         }
-         public List<SP_GetServices> GetAllServices()
+        public List<SP_GetServices> GetAllServices()
         {
             try
             {
                 List<SP_GetServices> serviceList = new List<SP_GetServices>();
                 using (DataTable table = DBHelper.Select("SP_GetServices", CommandType.StoredProcedure))
                 {
-                    if(table.Rows.Count>0)
+                    if (table.Rows.Count > 0)
                     {
-                        foreach(DataRow row in table.Rows)
+                        foreach (DataRow row in table.Rows)
                         {
                             SP_GetServices services = new SP_GetServices
                             {
@@ -1419,12 +1386,12 @@ namespace DAL
                 }
                 return serviceList;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public List<SP_GetStylists> GetStylists()
         {
             try
@@ -1448,13 +1415,13 @@ namespace DAL
                     }
                 }
                 return stylistList;
-                               
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-         }
+        }
 
         public List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate)
         {
@@ -1813,6 +1780,53 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        //add accessories
+        public bool addAccessories(ACCESSORY a)
+        {
+            try
+            { 
+            SqlParameter[] pars = new SqlParameter[]
+                {
+                
+                    new SqlParameter("@colour", a.Colour.ToString()),
+                    new SqlParameter("@qty", a.Qty.ToString()),
+                    new SqlParameter("@brandID", a.BrandID.ToString())
+                   
+                };
+            return DBHelper.NonQuery("SP_AddAcessories", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+        //addTreatments
+        public bool addTreatments(TREATMENT t)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+                    new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
+                    new SqlParameter("@qty", t.Qty.ToString()),
+                    new SqlParameter("@qty", t.TreatmentType.ToString()),
+                    new SqlParameter("@brandID", t.BrandID.ToString())
+
+                    };
+                return DBHelper.NonQuery("SP_AddTreaments", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+
+
+
+
 
         public List<SP_GetProductTypes> getProductTypes()
         {
@@ -2194,8 +2208,8 @@ namespace DAL
                         }
                     }
                 }
-                    return list;
-               }
+                return list;
+            }
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
@@ -2240,7 +2254,7 @@ namespace DAL
                     if (table.Rows.Count > 0)
                     {
                         foreach (DataRow row in table.Rows)
-                   {
+                        {
                             SP_GetStylists stylists = new SP_GetStylists
                             {
                                 UserID = Convert.ToString(row["UserID"]),
@@ -2269,11 +2283,11 @@ namespace DAL
             };
             try
             {
-                using(DataTable table = DBHelper.ParamSelect("SP_StylistPastBookings", CommandType.StoredProcedure,pars))
+                using (DataTable table = DBHelper.ParamSelect("SP_StylistPastBookings", CommandType.StoredProcedure, pars))
                 {
-                    if(table.Rows.Count > 0)
+                    if (table.Rows.Count > 0)
                     {
-                        foreach(DataRow row in table.Rows)
+                        foreach (DataRow row in table.Rows)
                         {
                             s = new SP_GetStylistBookings
                             {
@@ -2290,7 +2304,7 @@ namespace DAL
                                 Arrived = row["Arrived"].ToString(),
                                 Price = row["Price"].ToString()
                             };
-                           bookings.Add(s);
+                            bookings.Add(s);
                         }
                     }
                 }
@@ -2355,7 +2369,7 @@ namespace DAL
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_StylistUpcomingBookings", CommandType.StoredProcedure,pars))
+                using (DataTable table = DBHelper.ParamSelect("SP_StylistUpcomingBookings", CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count > 0)
                     {
@@ -2639,7 +2653,7 @@ namespace DAL
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
-            SqlParameter[] pars = new SqlParameter[] 
+            SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@day", date)
             };
@@ -2740,10 +2754,10 @@ namespace DAL
                                 EmployeeID = row["EmployeeID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 Type = row["Type"].ToString(),
-                                ServiceID= row["ServiceID"].ToString(),
-                                Specialisation= row["Specialisation"].ToString(),
-                                SpecDesc= row["SpecialisationDescription"].ToString(),
-                                Bio= row["Bio"].ToString(),
+                                ServiceID = row["ServiceID"].ToString(),
+                                Specialisation = row["Specialisation"].ToString(),
+                                SpecDesc = row["SpecialisationDescription"].ToString(),
+                                Bio = row["Bio"].ToString(),
                             };
                             stylistsList.Add(s);
                         }
@@ -2756,7 +2770,8 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-         public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        
+        public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
         {
             try
             {
@@ -2779,8 +2794,9 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public List<SP_GetWidth> GetWidths()
+    
+        
+     public List<SP_GetWidth> GetWidths()
         {
             try
             {
@@ -2810,6 +2826,8 @@ namespace DAL
 
 
         }
+
+        
         public List<SP_GetStyles> GetStyles()
         {
             try
