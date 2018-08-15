@@ -18,9 +18,19 @@ GO
 -- =============================================
 CREATE PROCEDURE SP_AddEmployee
 	@employeeID nchar(30),
+	@bio varchar(max) = null,
 	@AddressLine1 varchar(max) = null,
 	@AddressLine2 varchar(max) = null,
-	@Type nchar(10)
+	@suburb nchar(100) = null,
+	@city nchar(100) = null,
+	@firstname varchar(50),
+	@lastname varchar(50),
+	@username nvarchar(50),
+	@email varchar(50),
+	@contactNo nchar(10),
+	@password varchar(max),
+	@userimage varchar(max) = null,
+	@passReset nchar(30) = null
 AS
 BEGIN
 
@@ -28,17 +38,22 @@ BEGIN
 		BEGIN TRANSACTION 
 			INSERT INTO EMPLOYEE
 						(EmployeeID,AddressLine1,AddressLine2,[Type])
-			VALUES		(@employeeID,@AddressLine1,@AddressLine2,@Type)
+			VALUES		(@employeeID,@AddressLine1,@AddressLine2,'S')
 
-			UPDATE [USER]
-			SET	   [USER].UserType = 'E'
-			WHERE  [USER].UserID = @employeeID
+			INSERT INTO [USER]
+						(UserID,FirstName,LastName,UserName,Email,ContactNo,
+						[Password],UserType,Active,UserImage,AccountType,
+						PreferredCommunication,PassRestCode)
+			VALUES		(@employeeID,@firstname,@lastname,@username,@email,@contactNo,
+						 @password,'E','T',@userimage,'Email',
+						 'E',@passReset)
+
 		COMMIT TRANSACTION 
 	END TRY
 	BEGIN CATCH 
 		IF @@TRANCOUNT > 0 
 			ROLLBACK TRANSACTION
-	END CATCH 
+	END CATCH  
 END
 
 GO
