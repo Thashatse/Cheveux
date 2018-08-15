@@ -336,19 +336,20 @@ namespace BLL
             return db.getAllProducts();
         }
 
-        /*
-        public bool AddAccessories(ACCESSORY accessory)
+        
+        public bool AddAccessories(ACCESSORY a)
         {
-            return db.AddAccessories(accessory);
+            return db.AddAccessories(a);
         }
 
 
-        public bool AddTreatments(TREATMENT treatment)
+        public bool AddTreatments(TREATMENT t)
         {
-            return db.AddTreatments(treatment);
+            return db.AddTreatments(t);
         }
 
-    */
+        
+
         public List<SP_GetProductTypes> getProductTypes()
         {
             return db.getProductTypes();
