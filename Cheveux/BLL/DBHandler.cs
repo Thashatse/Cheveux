@@ -450,5 +450,9 @@ namespace BLL
         {
             return db.addTreatments(t);
         }
+        public bool BLL_AddBraidService(BRAID_SERVICE bs)
+        {
+            return db.AddBraidService(bs);
+        }
     }
 }
