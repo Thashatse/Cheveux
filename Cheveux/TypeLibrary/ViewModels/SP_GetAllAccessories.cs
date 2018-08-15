@@ -20,5 +20,10 @@ namespace TypeLibrary.ViewModels
         public string BrandID { get; set; }
         public string Brandname { get; set; }
         public string brandType { get; set; }
+        public string supplierID { get; set; }
+        public string supplierName { get; set; }
+        public string contactName { get; set; }
+        public string contactNo { get; set; }
+        public string contactEmail { get; set; }
     }
 }
