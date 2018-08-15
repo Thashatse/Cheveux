@@ -1812,7 +1812,6 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
         
         public bool addAccessories(ACCESSORY a)
         {
@@ -1834,6 +1833,7 @@ namespace DAL
             }
 
         }
+
         //addTreatments
         public bool addTreatments(TREATMENT t)
         {
