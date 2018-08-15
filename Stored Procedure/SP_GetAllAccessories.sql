@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	gets all accessories in the database with details from the product Table
 -- =============================================
-CREATE PROCEDURE SP_GetAllAccessories
+create PROCEDURE SP_GetAllAccessories
 AS
 BEGIN
 	SELECT [ProductID]
@@ -19,9 +19,14 @@ BEGIN
       ,[Qty]
       ,BRAND.[BrandID]
 	  ,BRAND.Name
-	  , BRAND.[Type(T/A)]
-	FROM [CHEVEUX].[dbo].[PRODUCT], ACCESSORY, BRAND
-	WHERE ProductID = AccessoryID AND BRAND.BrandID = ACCESSORY.BrandID
+	  , BRAND.[Type(T/A)],
+	  s.SupplierName,
+	  s.ContactName,
+	  s.ContactEmail,
+	  s.ContactNo,
+	  s.SupplierID
+	FROM [CHEVEUX].[dbo].[PRODUCT], ACCESSORY, BRAND, Supplier s
+	WHERE ProductID = AccessoryID AND BRAND.BrandID = ACCESSORY.BrandID AND s.SupplierID = ACCESSORY.SupplierID 
 	order by [ProductType(T/A/S)]
 END
 GO

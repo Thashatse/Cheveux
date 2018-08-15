@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	gets all treatments and thier details from the product, treatment and brand tables
 -- =============================================
-CREATE PROCEDURE SP_GetAllTreatments
+create PROCEDURE SP_GetAllTreatments
 AS
 BEGIN
 	SELECT [ProductID]
@@ -19,9 +19,14 @@ BEGIN
       ,[TreatmentType]
       ,BRAND.[BrandID]
 	  ,BRAND.Name
-	  ,Brand.[Type(T/A)]
-	FROM [CHEVEUX].[dbo].[PRODUCT], TREATMENT, BRAND
-	WHERE ProductID = TreatmentID AND BRAND.BrandID = TREATMENT.BrandID
+	  ,Brand.[Type(T/A)],
+	  s.SupplierName,
+	  s.ContactName,
+	  s.ContactEmail,
+	  s.ContactNo,
+	  s.SupplierID
+	FROM [CHEVEUX].[dbo].[PRODUCT], TREATMENT, BRAND, Supplier s
+	WHERE ProductID = TreatmentID AND BRAND.BrandID = TREATMENT.BrandID AND s.SupplierID = TREATMENT.SupplierID 
 	order by [ProductType(T/A/S)]
 END
 GO
