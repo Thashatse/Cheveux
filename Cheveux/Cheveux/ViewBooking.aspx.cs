@@ -1145,7 +1145,6 @@ namespace Cheveux
             return result;
         }
         
-
         protected void PaymentType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(PaymentType.SelectedIndex == 0)
@@ -1179,6 +1178,9 @@ namespace Cheveux
             }
             catch (Exception err)
             {
+                function.logAnError("invalid Amount entered when caluclation chage on check out on " +
+                    "txtAmounTenderd_TextChanged(object sender, EventArgs e) of view booking. Amount: " 
+                    + txtAmounTenderd.Text.ToString() + " Error: " + err);
                 lChangeDue.Text = "Invalid value for amount tendered";
             }
         }

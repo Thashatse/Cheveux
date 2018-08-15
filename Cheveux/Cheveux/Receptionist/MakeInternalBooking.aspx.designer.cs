@@ -31,6 +31,24 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSelectStyle;
         
         /// <summary>
+        /// txtStyleSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtStyleSearch;
+        
+        /// <summary>
+        /// lBServices control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lBServices;
+        
+        /// <summary>
         /// btnSelectCustomer control.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,24 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSelectUser;
         
         /// <summary>
+        /// txtCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCustomer;
+        
+        /// <summary>
+        /// lbCustomers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbCustomers;
+        
+        /// <summary>
         /// btnComfirmation control.
         /// </summary>
         /// <remarks>
@@ -58,13 +94,49 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button btnComfirmation;
         
         /// <summary>
-        /// divSummary control.
+        /// btnAddServiceToBooking control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSummary;
+        protected global::System.Web.UI.WebControls.Button btnAddServiceToBooking;
+        
+        /// <summary>
+        /// lSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lSummary;
+        
+        /// <summary>
+        /// lDateandTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lDateandTime;
+        
+        /// <summary>
+        /// lBservicestoBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lBservicestoBook;
+        
+        /// <summary>
+        /// BackButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label BackButton;
         
         /// <summary>
         /// btnMakeBooking control.

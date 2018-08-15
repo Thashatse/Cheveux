@@ -409,10 +409,12 @@ namespace BLL
             return db.getAllStylistsUpcomingBookings();
         }
 
+        /*
          public bool BLL_AddService(PRODUCT p, SERVICE s)
         {
             return db.AddService(p, s);
         }
+        */
 
         public List<SP_GetWidth> BLL_GetWidths()
         {
@@ -442,7 +444,7 @@ namespace BLL
         {
             return db.getStylistPastBksForDate(empID, day);
         }
-
+        /*
         public bool addAccessories(ACCESSORY a)
         {
             return db.addAccessories(a);
@@ -456,5 +458,6 @@ namespace BLL
         {
             return db.AddBraidService(bs);
         }
+        */
     }
 }

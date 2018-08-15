@@ -25,6 +25,7 @@ namespace Cheveux
         string selectedServiceN = "";
         string selectedServiceA = "";
         string selectedServiceB = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             #region access control
@@ -126,11 +127,8 @@ namespace Cheveux
  
         protected void btnNext_Click(object sender, EventArgs e)
         {
-           
             if (btnNext.Text == "Choose Hairstylist")
             {
-                
-                
                 foreach (SP_GetStylists stylists in stylistList)
                 {
                     rblPickAStylist.DataSource = stylistList;
@@ -147,8 +145,7 @@ namespace Cheveux
                     }
 
                 }
-
-
+                
                 if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
                 {
                     lblBookingSummary.Visible = true;
@@ -164,8 +161,6 @@ namespace Cheveux
                     btnPrevious.Text = "Choose Service(s)";
                     btnNext.Text = "Choose Date & Time";
                 }
-               
-
             }
             else if (btnNext.Text == "Choose Date & Time")
             {           
@@ -208,6 +203,7 @@ namespace Cheveux
                 HttpCookie bookingTime = Request.Cookies["BookTime"];
                 lblTime.Text = bookingTime["Time"];
                 btnPrevious.Visible = true;
+
                 #region access control
                 HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
                 if (Authcookie != null)
@@ -230,13 +226,14 @@ namespace Cheveux
                 }
                 #endregion
             }
-            //access control
+            #region access control
             else if (btnNext.Text == "Login")
             {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
                 btnPrevious.Text = "Choose Date & Time";
                 btnNext.Text = "Submit";
             }
+            #endregion
             else if (btnNext.Text == "Submit")
             {
                 btnPrevious.Visible = true;

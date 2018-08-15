@@ -13,9 +13,9 @@ namespace Cheveux.Cheveux
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        HttpCookie cookie = null;
+        //HttpCookie cookie = null;
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
-        List<SP_GetProductTypes> productTypes = null;
+        //List<SP_GetProductTypes> productTypes = null;
         int treatCount = 0;
         int accCount = 0;
 

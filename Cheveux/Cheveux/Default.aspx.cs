@@ -135,7 +135,7 @@ namespace Cheveux
             //load home page info
             #region Welcom Back
             //welcome back existing users
-            String name = Request.QueryString["WB"];
+            string name = Request.QueryString["WB"];
             if (name != null)
             {
                 Welcome.Text = "Welcome Back To Cheveux " + name;
