@@ -119,8 +119,8 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate);
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day);
-        //bool addAccessories(ACCESSORY a);
-        //bool addTreatments(TREATMENT t);
+        bool addAccessories(ACCESSORY a);
+        bool addTreatments(TREATMENT t);
 
 
     }

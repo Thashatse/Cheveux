@@ -335,19 +335,6 @@ namespace BLL
         {
             return db.getAllProducts();
         }
-
-        
-        public bool AddAccessories(ACCESSORY a)
-        {
-            return db.AddAccessories(a);
-        }
-
-
-        public bool AddTreatments(TREATMENT t)
-        {
-            return db.AddTreatments(t);
-        }
-
         
 
         public List<SP_GetProductTypes> getProductTypes()
@@ -452,6 +439,16 @@ namespace BLL
         public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day)
         {
             return db.getStylistPastBksForDate(empID, day);
+        }
+
+        public bool addAccessories(ACCESSORY a)
+        {
+            return db.addAccessories(a);
+        }
+
+        public bool addTreatments(TREATMENT t)
+        {
+            return db.addTreatments(t);
         }
     }
 }
