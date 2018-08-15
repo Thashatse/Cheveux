@@ -20,6 +20,7 @@ namespace Cheveux
         string BookingID;
         List<string> productIDs = new List<string>();
         List<int> productSaleQty = new List<int>();
+        
 
         #region Master Page
         //set the master page based on the user type
@@ -650,6 +651,8 @@ namespace Cheveux
 
         #region Check Out
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
+        //calculate total price
+        double total = 0.0;
 
         public void checkOut(string BookingID)
         {            
@@ -718,8 +721,7 @@ namespace Cheveux
                 //create a table for the invoice (To be added to tblCheckOut cell)
                 string tblInvoice = "<table>";
 
-                //calculate total price
-                double total = 0.0;
+                
 
                 foreach (SP_getInvoiceDL item in invoice)
                 {
@@ -1141,6 +1143,44 @@ namespace Cheveux
                 result = true;
             }
             return result;
+        }
+        
+
+        protected void PaymentType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(PaymentType.SelectedIndex == 0)
+            {
+                divCalcuateChange.Visible = true;
+                lAmountDue.Text = "R" + total.ToString();
+            }
+            else
+            {
+                divCalcuateChange.Visible = false;
+            }
+        }
+
+        protected void txtAmounTenderd_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                double change = Convert.ToDouble(txtAmounTenderd.Text.ToString()) - total;
+                if (change < 0)
+                {
+                    lChangeDue.Text = "Insufficient funds";
+                }
+                else if (change == 0)
+                {
+                    lChangeDue.Text = "No Change";
+                }
+                else
+                {
+                    lChangeDue.Text = "R" + Math.Round(change, 2).ToString();
+                }
+            }
+            catch (Exception err)
+            {
+                lChangeDue.Text = "Invalid value for amount tendered";
+            }
         }
         #endregion
     }

@@ -193,6 +193,42 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button btnSavePaymentType;
         
         /// <summary>
+        /// divCalcuateChange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCalcuateChange;
+        
+        /// <summary>
+        /// lAmountDue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lAmountDue;
+        
+        /// <summary>
+        /// txtAmounTenderd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAmounTenderd;
+        
+        /// <summary>
+        /// lChangeDue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lChangeDue;
+        
+        /// <summary>
         /// divAddProducts control.
         /// </summary>
         /// <remarks>

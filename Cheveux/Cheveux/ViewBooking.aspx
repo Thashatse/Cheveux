@@ -163,8 +163,8 @@
                                             <asp:TableRow Height="50">
                                                 <asp:TableCell Width="300">
                                                     <!--Payment Type-->
-                                                    <asp:RadioButtonList ID="PaymentType" runat="server">
-                                                        <asp:ListItem Selected="True"> Cash </asp:ListItem>
+                                                    <asp:RadioButtonList ID="PaymentType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PaymentType_SelectedIndexChanged">
+                                                        <asp:ListItem> Cash </asp:ListItem>
                                                         <asp:ListItem> Credit </asp:ListItem>
                                                     </asp:RadioButtonList>
                                                 </asp:TableCell>
@@ -173,6 +173,20 @@
                                                     <asp:Button ID="btnSavePaymentType" runat="server" Text="Save" OnClick="btnSavePaymentType_Click" class="btn btn-primary" />
                                                 </asp:TableCell>
                                             </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell ColumnSpan="2">
+                                                    <div runat="server" id="divCalcuateChange" visible="false">
+                                                        Amount Due: <asp:Label runat="server" ID="lAmountDue"></asp:Label>
+                                                        <br/>
+                                                        <br/>
+                                                        <p style="text-align: left; float: left;">Amount Tenderd: </p>
+                                                        <p style="text-align: right; float: right;"><asp:TextBox runat="server" ID="txtAmounTenderd" OnTextChanged="txtAmounTenderd_TextChanged" AutoPostBack="true"></asp:TextBox></p>
+                                                        <br/>
+                                                        Change Due: <asp:Label runat="server" ID="lChangeDue"></asp:Label>
+                                                        <br/>
+                                                    </div>
+                                                    </asp:TableCell>
+                                                </asp:TableRow>
                                         </asp:Table>
                                     </div>
                                 </div>
