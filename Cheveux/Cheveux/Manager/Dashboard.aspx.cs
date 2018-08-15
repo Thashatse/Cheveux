@@ -73,9 +73,10 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "Out Of Stock",
-                            "<a href = '#?ProductID="
+                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "'>"
+                            "&PreviousPage=Dashboard.aspx'>"
                              + treat.Name + "</a>");
                         dashOutCount++;
                     }
@@ -83,9 +84,10 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "",
-                            "<a href = '#?ProductID="
+                            "<a href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "'>" + treat.Name + "</a>");
+                            "&PreviousPage=Dashboard.aspx'>" + treat.Name + "</a>");
                         dashOutCount++;
                     }
                 }
@@ -96,9 +98,10 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "Out Of Stock",
-                            "<a href = '#?ProductID="
+                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>" +
+                            "&PreviousPage=Dashboard.aspx'>" +
                             "" + Access.Name + "</a>");
                         dashOutCount++;
                     }
@@ -106,9 +109,10 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "",
-                            "<a href = '#?ProductID="
+                            "<a href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "'>" +
+                            "&PreviousPage=Dashboard.aspx'>" +
                             "" + Access.Name + "</a>");
                         dashOutCount++;
                     }
@@ -123,10 +127,11 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
-                            " <a href = '#?ProductID="
+                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "'>" +
-                            "" + treat.Name + "</a> "
+                            "&PreviousPage=Dashboard.aspx'>" +
+                            "" + treat.Name + "</a><br/> "
                             + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -134,10 +139,11 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "",
-                            " <a href = '#?ProductID="
+                            " <a  href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "'>" +
-                            "" + treat.Name + "</a> "
+                            "&PreviousPage=Dashboard.aspx'>" +
+                            "" + treat.Name + "</a><br/> "
                             + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -149,10 +155,11 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
-                            "<a href = '#?ProductID="
+                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "'>" +
-                            "" + Access.Name + "</a> "
+                            "&PreviousPage=Dashboard.aspx'>" +
+                            "" + Access.Name + "</a><br/>"
                             + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -160,10 +167,11 @@ namespace Cheveux.Manager
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "",
-                            "<a href = '#?ProductID="
+                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
+                                            "ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "'>" +
-                            "" + Access.Name + "</a> "
+                            "&PreviousPage=Dashboard.aspx'>" +
+                            "" + Access.Name + "</a><br/> "
                             + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -173,7 +181,7 @@ namespace Cheveux.Manager
             catch (Exception Err)
             {
                 addAlertToTable("", "Error", "An error occurred loading all alerts");
-                function.logAnError("unable to load alerts on Manager/Dashboard.aspx: " +
+                function.logAnError("unable to load alerts on Receptionist/Dashboard.aspx: " +
                     Err);
             }
         }
