@@ -374,19 +374,19 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -459,19 +459,19 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -544,19 +544,19 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -819,19 +819,19 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -905,7 +905,7 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
@@ -917,13 +917,13 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -1002,7 +1002,7 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
@@ -1014,13 +1014,13 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -1098,7 +1098,7 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
@@ -1110,13 +1110,13 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -1195,7 +1195,7 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
@@ -1207,13 +1207,13 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -1291,7 +1291,7 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
@@ -1303,13 +1303,13 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
@@ -1388,7 +1388,7 @@ namespace Cheveux
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
 
@@ -1400,13 +1400,13 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 240;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 240;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
