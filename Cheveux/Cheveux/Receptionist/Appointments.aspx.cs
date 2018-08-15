@@ -368,7 +368,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -389,12 +389,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -424,11 +418,6 @@ namespace Cheveux
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
                 + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
-
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -464,7 +453,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -485,12 +474,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -520,11 +503,6 @@ namespace Cheveux
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
-
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -560,7 +538,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -581,12 +559,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -617,11 +589,6 @@ namespace Cheveux
                 + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
-
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
@@ -629,6 +596,7 @@ namespace Cheveux
                     "&BookingType=Past" +
                     "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
                     rowCount++;
                 }
             }
@@ -680,11 +648,9 @@ namespace Cheveux
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 440;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
+                TableCell empty = new TableCell();
+                empty.Width = 200;
+                tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
                 foreach (SP_GetStylistBookings b in bList)
@@ -711,10 +677,14 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
+                    TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&BookingType=Past" +
+                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    rowCount++;
 
                     rowCount++;
                 }
@@ -776,11 +746,9 @@ namespace Cheveux
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 440;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
+                TableCell empty = new TableCell();
+                empty.Width = 200;
+                tblSchedule.Rows[0].Cells.Add(empty);
 
                 //integer that will be incremented in the foreach loop to access the new row for every iteration of the foreach
                 int rowCount = 1;
@@ -809,10 +777,13 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ProductID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDesc.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
+                    TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&BookingType=Past" +
+                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
                     rowCount++;
                 }
@@ -842,7 +813,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -864,11 +835,6 @@ namespace Cheveux
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -898,11 +864,6 @@ namespace Cheveux
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
-
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -938,7 +899,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -965,12 +926,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -1006,11 +961,6 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
-
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
@@ -1018,6 +968,7 @@ namespace Cheveux
                     "&BookingType=Past" +
                     "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
                     rowCount++;
                 }
             }
@@ -1045,7 +996,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1072,12 +1023,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -1112,11 +1057,6 @@ namespace Cheveux
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
-
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -1152,7 +1092,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1179,12 +1119,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -1220,11 +1154,6 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
-
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
@@ -1232,6 +1161,7 @@ namespace Cheveux
                     "&BookingType=Past" +
                     "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
                     rowCount++;
                 }
             }
@@ -1259,7 +1189,7 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 240;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1286,12 +1216,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -1326,11 +1250,6 @@ namespace Cheveux
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
-
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -1366,7 +1285,7 @@ namespace Cheveux
 
                 TableCell dateC = new TableCell();
                 dateC.Text = "Date";
-                dateC.Width = 200;
+                dateC.Width = 240;
                 dateC.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(dateC);
 
@@ -1393,12 +1312,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -1434,11 +1347,6 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
-
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
@@ -1446,6 +1354,7 @@ namespace Cheveux
                     "&BookingType=Past" +
                     "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
                     rowCount++;
                 }
             }
@@ -1473,7 +1382,7 @@ namespace Cheveux
 
                 TableCell dateC = new TableCell();
                 dateC.Text = "Date";
-                dateC.Width = 200;
+                dateC.Width = 240;
                 dateC.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(dateC);
 
@@ -1500,12 +1409,6 @@ namespace Cheveux
                 svName.Width = 200;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -1541,11 +1444,6 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servDescCell);
-
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
@@ -1553,6 +1451,7 @@ namespace Cheveux
                     "&BookingType=Past" +
                     "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
                     rowCount++;
                 }
             }
