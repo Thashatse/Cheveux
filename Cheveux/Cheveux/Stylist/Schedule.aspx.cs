@@ -214,11 +214,6 @@ namespace Cheveux
                 svName.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(svName);
 
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 440;
-                svDesc.Font.Bold = true;
-                tblUpcoming.Rows[0].Cells.Add(svDesc);
 
                 int rowCount = 1;
                 foreach (SP_GetStylistBookings b in bList)
@@ -245,10 +240,6 @@ namespace Cheveux
                 + b.ServiceName.ToString() + "</a>";
                     tblUpcoming.Rows[rowCount].Cells.Add(servNameCell);
 
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceDescription.ToString() + "</a>";
-                    tblUpcoming.Rows[rowCount].Cells.Add(servDescCell);
                     
                     rowCount++;
                 }
