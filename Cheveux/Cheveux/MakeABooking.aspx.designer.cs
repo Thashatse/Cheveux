@@ -13,22 +13,13 @@ namespace Cheveux {
     public partial class MakeABooking {
         
         /// <summary>
-        /// BookingSummary control.
+        /// lblBookingSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label BookingSummary;
-        
-        /// <summary>
-        /// lblValidation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblValidation;
+        protected global::System.Web.UI.WebControls.Label lblBookingSummary;
         
         /// <summary>
         /// divServices control.
@@ -38,15 +29,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divServices;
-        
-        /// <summary>
-        /// drpCategories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpCategories;
         
         /// <summary>
         /// divNatural control.
@@ -101,6 +83,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblPickAServiceB;
+        
+        /// <summary>
+        /// Summary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder Summary;
         
         /// <summary>
         /// divStylist control.

@@ -24,36 +24,48 @@
                             <div class="jumbotron  bg-dark text-white">
                                 <h1>Make A Booking</h1>
                                 <br />
-                                <asp:Label runat="server" ID="BookingSummary"></asp:Label>
-                                <asp:Label runat="server" ID="lblValidation" Visible="false"></asp:Label>
+                                <asp:Label runat="server" ID="lblBookingSummary" Visible="false"></asp:Label>
                             </div>
+
                             <div runat="server" id="divServices" visible="true" style="border: solid #F05F40 2px;">
                                 <div class="container">
-                                    <h3>Choose Service(s)</h3>
+                                    <h6><b>Select Service(s)</b></h6>
                                     <br />
-                                    <asp:DropDownList runat="server" ID="drpCategories">
-                                        <asp:ListItem Text="All"></asp:ListItem>
-                                        <asp:ListItem Text="Braid"></asp:ListItem>
-                                        <asp:ListItem Text="Natural"></asp:ListItem>
-                                        <asp:ListItem Text="Application"></asp:ListItem>
-                                    </asp:DropDownList>
-                                    
-                                    <div runat="server" id="divNatural" visible="false">
-                                        <h5>Natural</h5>
-                                        <asp:CheckBoxList runat="server" ID="cblPickAServiceN">
-                                        </asp:CheckBoxList><br />
-                                    </div>
-                                    
-                                    <div runat="server" id="divApplication" visible="false">
-                                        <h5>Application</h5>
-                                        <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
-                                        </asp:RadioButtonList><br />
-                                    </div>
-                                    
-                                    <div runat="server" id="divBraids" visible="false">
-                                        <h5>Braids</h5>
-                                        <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
-                                        </asp:RadioButtonList>
+                                    <!--Nav Pills for external system-->
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
+                                        <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
+                                        <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
+                                    </ul>
+                                    <div class="row">
+
+                                        <div class="col-6">
+                                            <div runat="server" id="divNatural" visible="true">
+                                                <a name="Natural"></a>
+                                                <h5>Natural</h5>
+                                                <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="cblPickAServiceN_SelectedIndexChanged">
+                                                </asp:CheckBoxList><br />
+                                            </div>
+
+                                            <div runat="server" id="divApplication" visible="true">
+                                                <a name="Application"></a>
+                                                <h5>Application</h5>
+                                                <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
+                                                </asp:RadioButtonList><br />
+                                            </div>
+
+                                            <div runat="server" id="divBraids" visible="true">
+                                                <a name="Braid"></a>
+                                                <h5>Braids</h5>
+                                                <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
+                                                </asp:RadioButtonList>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <asp:PlaceHolder runat="server" ID="Summary" Visible="true">
+                                               
+                                            </asp:PlaceHolder>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -75,7 +87,7 @@
                                     <div class="row">
 
                                         <div class="col-6">
-                                            <asp:Calendar runat="server" ID="calBooking" Width="500" Height="500" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged"></asp:Calendar>
+                                            <asp:Calendar runat="server" ID="calBooking" Width="300" Height="150" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged"></asp:Calendar>
                                         </div>
                                         <div class="col-6">
                                             <div class="row">

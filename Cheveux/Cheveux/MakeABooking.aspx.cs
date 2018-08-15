@@ -76,7 +76,7 @@ namespace Cheveux
             {
                 function.logAnError("unable to comunicate with the database on Make A Booking page: " +
                     err);
-                BookingSummary.Text = "Database connection failed. Please try again later";
+                lblBookingSummary.Text = "Database connection failed. Please try again later";
                 divServices.Visible = false;
 
 
@@ -151,13 +151,13 @@ namespace Cheveux
 
                 if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
                 {
-                    lblValidation.Visible = true;
-                    lblValidation.Text = "Please select a service(s) before moving to the next step!";
+                    lblBookingSummary.Visible = true;
+                    lblBookingSummary.Text = "Please select a service(s) before moving to the next step!";
                     divServices.Visible = true;
                 }
                 else
                 {
-                    lblValidation.Visible = false;
+                    lblBookingSummary.Visible = false;
                     divServices.Visible = false;
                     divStylist.Visible = true;
                     btnPrevious.Visible = true;
@@ -171,8 +171,8 @@ namespace Cheveux
             {           
                 if(rblPickAStylist.SelectedValue.ToString() == "")
                 {
-                    lblValidation.Visible = true;
-                    lblValidation.Text = "Please select a hairstylist before moving to the next step!";
+                    lblBookingSummary.Visible = true;
+                    lblBookingSummary.Text = "Please select a hairstylist before moving to the next step!";
                     divStylist.Visible = true;
                 }
                 else 
@@ -907,6 +907,7 @@ namespace Cheveux
 
         protected void rblPickAServiceA_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             if(rblPickAServiceA.SelectedValue != "0")
             {
                 rblPickAServiceB.Enabled = false;
@@ -921,7 +922,8 @@ namespace Cheveux
 
         protected void rblPickAServiceB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(rblPickAServiceB.SelectedValue != "0")
+
+            if (rblPickAServiceB.SelectedValue != "0")
             {
                 rblPickAServiceA.Enabled = false;
             }
@@ -931,6 +933,11 @@ namespace Cheveux
                 //selectedServiceA = "";
             }
             
+        }
+
+        protected void cblPickAServiceN_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
