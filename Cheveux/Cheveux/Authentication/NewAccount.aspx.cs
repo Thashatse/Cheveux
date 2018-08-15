@@ -222,7 +222,7 @@ namespace Cheveux
         }
         #endregion
 
-        #region Email
+        #region Email Accounts
         protected void btnSubmitEmail_Click(object sender, EventArgs e)
         {
             string type = Request.QueryString["Type"];
