@@ -98,13 +98,6 @@ namespace BLL
         }
         #endregion
 
-        #region Products
-        public PRODUCT CheckForProduct(string id)
-        {
-            return db.CheckForProduct(id);
-        }
-        #endregion
-
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             return db.getTodaysBookings();
@@ -336,6 +329,16 @@ namespace BLL
             return db.getAllProducts();
         }
 
+        public bool AddAccessories(ACCESSORY accessory)
+        {
+            return db.AddAccessories(accessory);
+        }
+
+
+        public bool AddTreatments(TREATMENT treatment)
+        {
+            return db.AddTreatments(treatment);
+        }
         public List<SP_GetProductTypes> getProductTypes()
         {
             return db.getProductTypes();

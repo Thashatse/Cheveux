@@ -44,10 +44,6 @@ namespace BLL
         USER logInEmail(string identifier, string password);
         #endregion
 
-        #region Products
-        PRODUCT CheckForProduct(string id);
-        #endregion
-
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
@@ -119,6 +115,10 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate);
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day);
+        bool addAccessories(ACCESSORY a);
+        bool addTreatments(TREATMENT t);
+
+
     }
 }
 
