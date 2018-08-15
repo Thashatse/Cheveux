@@ -948,90 +948,6 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
-        public Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails()
-        {
-            SP_GetAllAccessories accessory = null;
-            List<SP_GetAllAccessories> accessories = new List<SP_GetAllAccessories>();
-            SP_GetAllTreatments treatment = null;
-            List<SP_GetAllTreatments> treatments = new List<SP_GetAllTreatments>();
-
-
-            try
-            {
-                //get accessories
-                using (DataTable table = DBHelper.Select("SP_GetAllAccessories",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            accessory = new SP_GetAllAccessories
-                            {
-                                ProductID = row["ProductID"].ToString(),
-                                Name = row["Name"].ToString(),
-                                ProductDescription = row["ProductDescription"].ToString(),
-                                Price = Convert.ToDecimal(row["Price"].ToString()),
-                                ProductType = row["ProductType(T/A/S)"].ToString(),
-                                Active = row["Active"].ToString(),
-                                //ProductImage = row["ProductImage"]
-                                Colour = row["Colour"].ToString(),
-                                Qty = Convert.ToInt32(row["Qty"].ToString()),
-                                BrandID = row["BrandID"].ToString(),
-                                Brandname = row[11].ToString(),
-                                brandType = row["Type(T/A)"].ToString(),
-                                supplierID = row["SupplierID"].ToString(),
-                                supplierName = row["SupplierName"].ToString(),
-                                contactName = row["ContactName"].ToString(),
-                                contactEmail = row["ContactEmail"].ToString(),
-                                contactNo = row["ContactNo"].ToString()
-                            };
-                            accessories.Add(accessory);
-                        }
-                    }
-                }
-
-                //get Treatments
-                using (DataTable table = DBHelper.Select("SP_GetAllTreatments",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            treatment = new SP_GetAllTreatments
-                            {
-                                ProductID = row["ProductID"].ToString(),
-                                Name = row["Name"].ToString(),
-                                ProductDescription = row["ProductDescription"].ToString(),
-                                Price = Convert.ToDecimal(row["Price"].ToString()),
-                                ProductType = row["ProductType(T/A/S)"].ToString(),
-                                Active = row["Active"].ToString(),
-                                //ProductImage = row["ProductImage"]
-                                TreatmentType = row["TreatmentType"].ToString(),
-                                Qty = Convert.ToInt32(row["Qty"].ToString()),
-                                BrandID = row["BrandID"].ToString(),
-                                Brandname = row[11].ToString(),
-                                brandType = row["Type(T/A)"].ToString(),
-                                supplierID = row["SupplierID"].ToString(),
-                                supplierName = row["SupplierName"].ToString(),
-                                contactName = row["ContactName"].ToString(),
-                                contactEmail = row["ContactEmail"].ToString(),
-                                contactNo = row["ContactNo"].ToString()
-                            };
-                            treatments.Add(treatment);
-                        }
-                    }
-                }
-
-                return Tuple.Create(accessories, treatments);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
         #endregion
 
 
@@ -1896,8 +1812,9 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         
-        public bool addAccessories(ACCESSORY a)
+        public bool AddAccessories(ACCESSORY a)
         {
             try
             { 
@@ -1917,9 +1834,8 @@ namespace DAL
             }
 
         }
-
         //addTreatments
-        public bool addTreatments(TREATMENT t)
+        public bool AddTreatments(TREATMENT t)
         {
             try
             {
@@ -1972,7 +1888,83 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
         
+        public Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails()
+        {
+            SP_GetAllAccessories accessory = null;
+            List<SP_GetAllAccessories> accessories = new List<SP_GetAllAccessories>();
+            SP_GetAllTreatments treatment = null;
+            List<SP_GetAllTreatments> treatments = new List<SP_GetAllTreatments>();
+
+
+            try
+            {
+                //get accessories
+                using (DataTable table = DBHelper.Select("SP_GetAllAccessories",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            accessory = new SP_GetAllAccessories
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Convert.ToDecimal(row["Price"].ToString()),
+                                ProductType = row["ProductType(T/A/S)"].ToString(),
+                                Active = row["Active"].ToString(),
+                                //ProductImage = row["ProductImage"]
+                                Colour = row["Colour"].ToString(),
+                                Qty = Convert.ToInt32(row["Qty"].ToString()),
+                                BrandID = row["BrandID"].ToString(),
+                                Brandname = row[11].ToString(),
+                                brandType = row["Type(T/A)"].ToString()
+                            };
+                            accessories.Add(accessory);
+                        }
+                    }
+                }
+
+                //get Treatments
+                using (DataTable table = DBHelper.Select("SP_GetAllTreatments",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            treatment = new SP_GetAllTreatments
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Convert.ToDecimal(row["Price"].ToString()),
+                                ProductType = row["ProductType(T/A/S)"].ToString(),
+                                Active = row["Active"].ToString(),
+                                //ProductImage = row["ProductImage"]
+                                TreatmentType = row["TreatmentType"].ToString(),
+                                Qty = Convert.ToInt32(row["Qty"].ToString()),
+                                BrandID = row["BrandID"].ToString(),
+                                Brandname = row[11].ToString(),
+                                brandType = row["Type(T/A)"].ToString()
+                            };
+                            treatments.Add(treatment);
+                        }
+                    }
+                }
+
+                return Tuple.Create(accessories, treatments);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        
+
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             SP_GetTodaysBookings booking = null;
@@ -2086,9 +2078,19 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@employeeID", e.EmployeeID.ToString()),
+                    new SqlParameter("@bio", e.Bio.ToString()),
                     new SqlParameter("@AddressLine1", e.AddressLine1.ToString()),
                     new SqlParameter("@AddressLine2", e.AddressLine2.ToString()),
-                    new SqlParameter("@Type", e.Type.ToString())
+                    new SqlParameter("@suburb", e.Suburb.ToString()),
+                    new SqlParameter("@city", e.City.ToString()),
+                    new SqlParameter("@firstname", e.FirstName.ToString()),
+                    new SqlParameter("@lastname", e.Surname.ToString()),
+                    new SqlParameter("@username", e.UserName.ToString()),
+                    new SqlParameter("@email", e.Email.ToString()),
+                    new SqlParameter("@contactNo", e.ContactNo.ToString()),
+                    new SqlParameter("@password", e.Password.ToString()),
+                    new SqlParameter("@userimage", e.UserImage.ToString()),
+                    new SqlParameter("@passReset", e.PassReset.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddEmployee", CommandType.StoredProcedure, pars);
             }
@@ -2813,7 +2815,7 @@ namespace DAL
             }
         }
         
-        public bool AddService(PRODUCT p, SERVICE s)
+        public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
         {
             try
             {
@@ -2825,6 +2827,9 @@ namespace DAL
                     new SqlParameter("@Price", p.Price.ToString()),
                     new SqlParameter("@Slots", s.NoOfSlots.ToString()),
                     new SqlParameter("@Type", s.Type.ToString()),
+                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                    new SqlParameter("@WidthID", bs.WidthID.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddService", CommandType.StoredProcedure, pars);
             }
@@ -2926,24 +2931,6 @@ namespace DAL
             }
 
 
-        }
-        public bool AddBraidService(BRAID_SERVICE bs)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@ProductID", bs.ServiceID.ToString()),
-                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
-                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
-                    new SqlParameter("@WidthID", bs.WidthID.ToString())
-                };
-                return DBHelper.NonQuery("SP_AddBraidService", CommandType.StoredProcedure, pars);
-            }
-            catch(Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
         }
     }
 }                  
