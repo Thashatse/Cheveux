@@ -2813,7 +2813,7 @@ namespace DAL
             }
         }
         
-        public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        public bool AddService(PRODUCT p, SERVICE s)
         {
             try
             {
@@ -2825,9 +2825,6 @@ namespace DAL
                     new SqlParameter("@Price", p.Price.ToString()),
                     new SqlParameter("@Slots", s.NoOfSlots.ToString()),
                     new SqlParameter("@Type", s.Type.ToString()),
-                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
-                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
-                    new SqlParameter("@WidthID", bs.WidthID.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddService", CommandType.StoredProcedure, pars);
             }
@@ -2929,6 +2926,24 @@ namespace DAL
             }
 
 
+        }
+        public bool AddBraidService(BRAID_SERVICE bs)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ProductID", bs.ServiceID.ToString()),
+                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddBraidService", CommandType.StoredProcedure, pars);
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
         }
     }
 }                  
