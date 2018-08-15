@@ -23,5 +23,7 @@ namespace TypeLibrary.Models
         public string Bio { get; set; }
         public string Suburb { get; set; }
         public string City { get; set; }
+        public string UserImage { get; set; }
+        public string PassReset { get; set; }
     }
 }
