@@ -67,13 +67,13 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSelectUser;
         
         /// <summary>
-        /// txtCustomer control.
+        /// txtCustomerSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCustomer;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerSearch;
         
         /// <summary>
         /// lbCustomers control.
@@ -101,6 +101,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAddServiceToBooking;
+        
+        /// <summary>
+        /// btnAddCustomerToBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddCustomerToBooking;
         
         /// <summary>
         /// lSummary control.

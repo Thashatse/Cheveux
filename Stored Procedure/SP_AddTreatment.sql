@@ -2,11 +2,11 @@ USE [CHEVEUX]
 GO
 /****** Object:  StoredProcedure [dbo].[SP_AddAccessory]    Script Date: 8/14/2018 3:06:38 PM ******/
 SET ANSI_NULLS ON
-GO
+GO 
 SET QUOTED_IDENTIFIER ON
 GO
 -- Description:	Inserting of a product
-alter PROCEDURE SP_TREATMENT
+Create PROCEDURE SP_TREATMENT
 	@treatmentID nchar(10),
 	@qty int,
 	@treatmentType varchar(50),

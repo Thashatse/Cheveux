@@ -46,10 +46,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-5">
-                                        <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server"></asp:TextBox>
+                                        <asp:TextBox class="form-control" AutoPostBack="true" ID="txtProductSearchTerm" 
+                                            runat="server" OnTextChanged="Page_Load"></asp:TextBox>
                                     </div>
                                     <div class="col-2">
-                                        <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" />
+                                        <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" 
+                                            Text="Search" />
                                     </div>
                                 </div>
                             </form>

@@ -13,8 +13,6 @@ CREATE PROCEDURE SP_AddAccessory
 	@qty int,
 	@BrandID nchar(10) 
  
-
-
 AS
 BEGIN
 	BEGIN TRY

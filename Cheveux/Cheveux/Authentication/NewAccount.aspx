@@ -61,7 +61,8 @@
                             <br />
                             <!--Get a username from the user-->
                             <asp:Label ID="Label3" runat="server" Text="User Name:"></asp:Label>
-                            <asp:TextBox ID="userName" runat="server" placeholder="Placecholder" CssClass="form-control" OnTextChanged="userName_TextChanged"></asp:TextBox>
+                            <asp:TextBox ID="userName" runat="server" placeholder="Placecholder" CssClass="form-control"
+                                OnTextChanged="userName_TextChanged" AutoPostBack="true"></asp:TextBox>
                             <!--Help-->
                             <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="This is used to identify you on the Cheveux platform">
                                 <span class="glyphicon">&#63;</span>
@@ -161,7 +162,8 @@
                                 </div>
                                 <div class="col-9">
                                     <!--input -->
-                                    &ensp;&ensp;<asp:TextBox CssClass="form-control" ID="txtUsername" runat="server" placeholder="Username" OnTextChanged="txtUsername_TextChanged"></asp:TextBox>
+                                    &ensp;&ensp;<asp:TextBox CssClass="form-control" ID="txtUsername" runat="server" 
+                                        placeholder="Username" OnTextChanged="txtUsername_TextChanged" AutoPostBack="true"></asp:TextBox>
                                 </div>
                                 <div class="col-1">
                                     <!--Help-->
@@ -198,7 +200,8 @@
                                 </div>
                                 <div class="col-9">
                                     <!--input -->
-                                    &ensp;&ensp;<asp:TextBox CssClass="form-control" ID="txtEmailAddress" runat="server" placeholder="Email Address" OnTextChanged="txtEmailAddress_TextChanged"></asp:TextBox>
+                                    &ensp;&ensp;<asp:TextBox CssClass="form-control" ID="txtEmailAddress" runat="server" AutoPostBack="true" 
+                                        placeholder="Email Address" OnTextChanged="txtEmailAddress_TextChanged"></asp:TextBox>
                                 </div>
                                 <div class="col-1">
                                     <!--Help-->

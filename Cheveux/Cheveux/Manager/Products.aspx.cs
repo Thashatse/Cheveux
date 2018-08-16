@@ -72,6 +72,11 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Page.IsPostBack)
+            {
+               tblProductTable.Rows.Clear();
+            }
+
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
 

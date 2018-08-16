@@ -52,8 +52,8 @@
                                 <h3 style="text-align: left; float: left;">Select Customer: </h3>
                                 <p style="text-align: right; float: right;">
                                     <!-- Search -->
-                                    <asp:TextBox ID="txtCustomer" runat="server" AutoPostBack="true" placeholder="search"
-                                        OnDataBinding="txtCustomer_DataBinding" OnTextChanged="txtCustomer_DataBinding" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtCustomerSearch" runat="server" AutoPostBack="true" placeholder="search"
+                                        OnDataBinding="txtCustomerSearch_DataBinding" OnTextChanged="txtCustomerSearch_DataBinding" CssClass="form-control"></asp:TextBox>
                                 </p>
                                 <!--Line Break-->
                                 <br />
@@ -71,6 +71,7 @@
                         <br />
                         <br />
                         <asp:Button ID="btnAddServiceToBooking" runat="server" Text="Add Service" CssClass="btn btn-Secondary" OnClick="btnAddServiceToBooking_Click" />
+                        <asp:Button ID="btnAddCustomerToBooking" runat="server" Text="Add Customer" CssClass="btn btn-Secondary" OnClick="lbCustomers_SelectedIndexChanged" Visible="false" />
 
                     </div>
                     <div class="col-md-12 col-lg-5">

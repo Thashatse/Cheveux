@@ -46,8 +46,8 @@
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
-                    <div class="col-2"></div>
-                    <div class="col-6 text-center">
+                    <div class="col-lg-3 col-sm-1 col-md-2"></div>
+                    <div class="col-lg-6 col-sm-10 col-md-8 text-center">
                         <!--jumbotron-->
                         <div class="jumbotron bg-dark text-white">
                             <!--heading-->
@@ -86,7 +86,8 @@
                                     <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
 
                                     <!-- Enter Email -->
-                                    <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username" 
+                                        CssClass="form-control"></asp:TextBox>
 
                                     <!--Email / User Name Validation-->
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailUsername" runat="server"
@@ -97,7 +98,8 @@
                                 <!-- email account Type login enter password -->
                                 <div class="container" runat="server" id="divPassword" visible="false">
                                     <!-- Enter Password -->
-                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password" CssClass="form-control"></asp:TextBox>
+                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password" 
+                                        CssClass="form-control"></asp:TextBox>
 
                                     <!--Password Validation-->
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatorTxtPassword" runat="server"
@@ -226,7 +228,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-2"></div>
+                    <div class="col-lg-3 col-sm-1 col-md-2"></div>
                 </div>
             </div>
         </div>

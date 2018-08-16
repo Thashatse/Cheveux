@@ -917,6 +917,40 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public List<SP_UserList> userList()
+        {
+            SP_UserList userList = null;
+            List<SP_UserList> list = new List<SP_UserList>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_UserList", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            userList = new SP_UserList
+                            {
+                                UserImage = Convert.ToString(row["UserImage"]),
+                                UserID = Convert.ToString(row["UserID"]),
+                                FullName = Convert.ToString(row["FullName"]),
+                                UserName = Convert.ToString(row["UserName"]),
+                                Email = Convert.ToString(row["Email"]),
+                                ContactNo = Convert.ToString(row["ContactNo"]),
+                                userType = Convert.ToChar(row["UserType"])
+                            };
+                            list.Add(userList);
+                        }
+                    }
+                }
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Products
@@ -2041,38 +2075,7 @@ namespace DAL
             }
         }
 
-        public List<SP_UserList> userList()
-        {
-            SP_UserList userList = null;
-            List<SP_UserList> list = new List<SP_UserList>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_UserList", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            userList = new SP_UserList
-                            {
-                                UserImage = Convert.ToString(row["UserImage"]),
-                                UserID = Convert.ToString(row["UserID"]),
-                                FullName = Convert.ToString(row["FullName"]),
-                                UserName = Convert.ToString(row["UserName"]),
-                                Email = Convert.ToString(row["Email"]),
-                                ContactNo = Convert.ToString(row["ContactNo"])
-                            };
-                            list.Add(userList);
-                        }
-                    }
-                }
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
+        
 
         public bool addEmployee(EMPLOYEE e)
         {

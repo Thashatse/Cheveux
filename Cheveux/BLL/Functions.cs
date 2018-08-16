@@ -318,5 +318,25 @@ namespace BLL
                     logAnError("Error sending out going booking notifications: " + err);
             }
         }
+
+        public bool compareToSearchTerm(string toBeCompared, string comparedTo)
+        {
+            //check if toBeCompared is contained in comparedTo 
+            bool result = false;
+            if (comparedTo != null)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = comparedTo.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
+        }
     }
 }

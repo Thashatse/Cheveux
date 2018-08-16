@@ -14,5 +14,6 @@ namespace TypeLibrary.ViewModels
         public string UserName { get; set; }
         public string Email { get; set; }
         public string ContactNo { get; set; }
+        public char userType { get; set; }
     }
 }
