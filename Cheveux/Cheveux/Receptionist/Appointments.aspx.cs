@@ -12,8 +12,6 @@ namespace Cheveux
 {
     public partial class Appointments : System.Web.UI.Page
     {
-        //incomplete.. edits pending 
-
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
@@ -80,14 +78,12 @@ namespace Cheveux
         {
             if (drpViewAppt.SelectedValue == "0")
             {
-                #region Upcoming
                 //upcoming
                 phNames.Visible = false;
                 phCalendars.Visible = false;
 
                 if (empSelectionType.SelectedValue == "0")
                 {
-                    #region ALL Stylists
                     phNames.Visible = false;
                     phCalendars.Visible = true;
                     phDay.Visible = false;
@@ -145,11 +141,10 @@ namespace Cheveux
                         }
                         
                     }
-                    #endregion
                 }
                 else if (empSelectionType.SelectedValue == "1")
                 {
-                    #region Specific Stylist
+                    
                     //stylist
                     phNames.Visible = true;
                     phCalendars.Visible = false;
@@ -210,13 +205,10 @@ namespace Cheveux
                             }
                         }
                     }
-                    #endregion
                 }
-                #endregion
             }
             else if (drpViewAppt.SelectedValue == "1")
             {
-                #region Past
                 //Past
                 phNames.Visible = false;
                 phCalendars.Visible = false;
@@ -349,10 +341,8 @@ namespace Cheveux
                         }
                     }
                 }
-                #endregion
             }
         }
-
         public void getStylistPastBookings(string empID)
         {
             tblSchedule.Rows.Clear();
@@ -1521,182 +1511,174 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        //getStylistPastBksForDate(drpStylistNames.SelectedValue,calDay.SelectedDate);
+                        getStylistPastBksForDate(drpStylistNames.SelectedValue,calDay.SelectedDate);
                     }
                 }
             }
         }
         protected void calStart_SelectionChanged(object sender, EventArgs e)
         {
+            lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
+            //lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
 
-
-                lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
-                //lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
-
-                if (drpViewAppt.SelectedValue == "0")//upcoming bookings
+            if (drpViewAppt.SelectedValue == "0")//upcoming bookings
+            {
+                if (empSelectionType.SelectedValue == "0")//all
                 {
-                    if (empSelectionType.SelectedValue == "0")//all
+                    if (rdoDate.SelectedValue == "3")//date range
                     {
-                        if (rdoDate.SelectedValue == "3")//date range
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate);
-                            }
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
-                    }
-                    else if (empSelectionType.SelectedValue == "1")//stylist
-                    {
-                        if (rdoDate.SelectedValue == "3")
+                        else
                         {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
-                            }
+                            phBookingsErr.Visible = false;
+                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate);
                         }
-
                     }
                 }
-                else if (drpViewAppt.SelectedValue == "1")//past bookings
+                else if (empSelectionType.SelectedValue == "1")//stylist
                 {
-                    if (empSelectionType.SelectedValue == "0")//all
+                    if (rdoDate.SelectedValue == "3")
                     {
-                        if (rdoDate.SelectedValue == "3")//date range
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate);
-                            }
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                        }
+                        else
+                        {
+                            phBookingsErr.Visible = false;
+                            getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
                         }
                     }
-                    else if (empSelectionType.SelectedValue == "1")//stylist
-                    {
-                        if (rdoDate.SelectedValue == "3")
-                        {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
-                            }
-                        }
 
+                }
+            }
+            else if (drpViewAppt.SelectedValue == "1")//past bookings
+            {
+                if (empSelectionType.SelectedValue == "0")//all
+                {
+                    if (rdoDate.SelectedValue == "3")//date range
+                    {
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
+                        {
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                        }
+                        else
+                        {
+                            phBookingsErr.Visible = false;
+                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate);
+                        }
                     }
                 }
+                else if (empSelectionType.SelectedValue == "1")//stylist
+                {
+                    if (rdoDate.SelectedValue == "3")
+                    {
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
+                        {
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                        }
+                        else
+                        {
+                            phBookingsErr.Visible = false;
+                            getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                        }
+                    }
 
-            
+                }
+            }
         }
         protected void calEnd_SelectionChanged(object sender, EventArgs e)
         {
+            //lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
+            lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
 
-
-                //lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
-                lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
-
-                if (drpViewAppt.SelectedValue == "0")//upcoming bookings
+            if (drpViewAppt.SelectedValue == "0")//upcoming bookings
+            {
+                if (empSelectionType.SelectedValue == "0")//all
                 {
-                    if (empSelectionType.SelectedValue == "0")//all
+                    if (rdoDate.SelectedValue == "3")//date range
                     {
-                        if (rdoDate.SelectedValue == "3")//date range
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate);
-                            }
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
-                    }
-                    else if (empSelectionType.SelectedValue == "1")//stylist
-                    {
-                        if (rdoDate.SelectedValue == "3")
+                        else
                         {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
-                            }
+                            phBookingsErr.Visible = false;
+                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate);
                         }
-
                     }
                 }
-                else if (drpViewAppt.SelectedValue == "1")//past bookings
+                else if (empSelectionType.SelectedValue == "1")//stylist
                 {
-                    if (empSelectionType.SelectedValue == "0")//all
+                    if (rdoDate.SelectedValue == "3")
                     {
-                        if (rdoDate.SelectedValue == "3")//date range
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate);
-                            }
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                        }
+                        else
+                        {
+                            phBookingsErr.Visible = false;
+                            getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
                         }
                     }
-                    else if (empSelectionType.SelectedValue == "1")//stylist
-                    {
-                        if (rdoDate.SelectedValue == "3")
-                        {
-                            if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
-                            {
-                                phBookingsErr.Visible = true;
-                                lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
-                            }
-                            else
-                            {
-                                phBookingsErr.Visible = false;
-                                getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
-                            }
-                        }
 
+                }
+            }
+            else if (drpViewAppt.SelectedValue == "1")//past bookings
+            {
+                if (empSelectionType.SelectedValue == "0")//all
+                {
+                    if (rdoDate.SelectedValue == "3")//date range
+                    {
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
+                        {
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                        }
+                        else
+                        {
+                            phBookingsErr.Visible = false;
+                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate);
+                        }
                     }
                 }
+                else if (empSelectionType.SelectedValue == "1")//stylist
+                {
+                    if (rdoDate.SelectedValue == "3")
+                    {
+                        if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
+                        {
+                            phBookingsErr.Visible = true;
+                            lblBookingsErr.Text = "Please select a start and end date.<br/>"
+                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                        }
+                        else
+                        {
+                            phBookingsErr.Visible = false;
+                            getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                        }
+                    }
 
-            
+                }
+            }
         }
         protected void scheduleCalender_DayRender(object sender, DayRenderEventArgs e)
         {
