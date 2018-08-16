@@ -14,7 +14,9 @@ namespace Cheveux
     {
         Authentication auth = new Authentication();
         Functions function = new Functions();
-
+        IDBHandler handler = new DBHandler();
+        EMPLOYEE emp = null;
+        
         private string getRegCookie()
         {
             //get the user data from the cookie
@@ -344,7 +346,16 @@ namespace Cheveux
                     //if a employee is being registered by a manager
                     else if (type == "NewEmp")
                     {
-                        Response.Redirect("../Manager/UpdateEmployee.aspx?Type=NewEmp&empID=" + User.UserID);
+                        if (handler.addEmployee(User.UserID,null,null,null,
+                                                null,null,User.FirstName,User.LastName,User.UserName,User.Email,
+                                                User.ContactNo,User.Password,User.UserImage,User.PassRestCode))
+                        {
+                            Response.Redirect("../Manager/UpdateEmployee.aspx?Type=NewEmp&empID=" + User.UserID);
+                        }
+                        else
+                        {
+                            Response.Redirect("~/Error.aspx?UserID");
+                        }
                     }
                 }
                 else if (result == false)

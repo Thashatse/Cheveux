@@ -2074,26 +2074,28 @@ namespace DAL
             }
         }
 
-        public bool addEmployee(EMPLOYEE e)
+        public bool addEmployee(string empID,string bio,string ad1,string ad2,string suburb,string city,string firstname
+                                ,string lastname,string username,string email,string contactNo,string password,
+                                string userimage,string passReset)
         {
             try
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
-                    new SqlParameter("@employeeID", e.EmployeeID.ToString()),
-                    new SqlParameter("@bio", e.Bio.ToString()),
-                    new SqlParameter("@AddressLine1", e.AddressLine1.ToString()),
-                    new SqlParameter("@AddressLine2", e.AddressLine2.ToString()),
-                    new SqlParameter("@suburb", e.Suburb.ToString()),
-                    new SqlParameter("@city", e.City.ToString()),
-                    new SqlParameter("@firstname", e.FirstName.ToString()),
-                    new SqlParameter("@lastname", e.Surname.ToString()),
-                    new SqlParameter("@username", e.UserName.ToString()),
-                    new SqlParameter("@email", e.Email.ToString()),
-                    new SqlParameter("@contactNo", e.ContactNo.ToString()),
-                    new SqlParameter("@password", e.Password.ToString()),
-                    new SqlParameter("@userimage", e.UserImage.ToString()),
-                    new SqlParameter("@passReset", e.PassReset.ToString())
+                    new SqlParameter("@employeeID", empID),
+                    new SqlParameter("@bio", bio),
+                    new SqlParameter("@AddressLine1",ad1),
+                    new SqlParameter("@AddressLine2",ad2 ),
+                    new SqlParameter("@suburb", suburb),
+                    new SqlParameter("@city", city),
+                    new SqlParameter("@firstname", firstname),
+                    new SqlParameter("@lastname", lastname),
+                    new SqlParameter("@username", username),
+                    new SqlParameter("@email", email),
+                    new SqlParameter("@contactNo", contactNo),
+                    new SqlParameter("@password", password),
+                    new SqlParameter("@userimage", userimage),
+                    new SqlParameter("@passReset", passReset),
                 };
                 return DBHelper.NonQuery("SP_AddEmployee", CommandType.StoredProcedure, pars);
             }

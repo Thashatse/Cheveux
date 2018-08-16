@@ -346,9 +346,12 @@ namespace BLL
         {
             return db.userList();
         }
-        public bool addEmployee(EMPLOYEE e)
+        public bool addEmployee(string empID, string bio, string ad1, string ad2, string suburb, string city, string firstname
+                                , string lastname, string username, string email, string contactNo, string password,
+                                string userimage, string passReset)
         {
-            return db.addEmployee(e);
+            return db.addEmployee(empID,bio,ad1,ad2,suburb,city,firstname,lastname
+                                    ,username,email,contactNo,password,userimage,passReset);
         }
 
         public bool updateEmployee(EMPLOYEE emp)

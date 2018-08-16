@@ -22,21 +22,27 @@ CREATE PROCEDURE SP_AddEmployee
 	@passReset nchar(30) = null
 AS
 BEGIN
+	BEGIN TRY
+		BEGIN TRANSACTION 
+			INSERT INTO	dbo.[EMPLOYEE]
+						(EmployeeID,[Type],Bio,AddressLine1,AddressLine2,Suburb,City)
+			VALUES		(@employeeID,'S',@bio,@AddressLine1,@AddressLine2,@suburb,@city)
+			COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH 
+		IF @@TRANCOUNT > 0 
+			ROLLBACK TRANSACTION
+	END CATCH  
 
 	BEGIN TRY 
 		BEGIN TRANSACTION 
-			INSERT INTO EMPLOYEE
-						(EmployeeID,AddressLine1,AddressLine2,[Type])
-			VALUES		(@employeeID,@AddressLine1,@AddressLine2,'S')
-
 			INSERT INTO [USER]
 						(UserID,FirstName,LastName,UserName,Email,ContactNo,
 						[Password],UserType,Active,UserImage,AccountType,
 						PreferredCommunication,PassRestCode)
 			VALUES		(@employeeID,@firstname,@lastname,@username,@email,@contactNo,
-						 @password,'E','T',@userimage,'Email',
-						 'E',@passReset)
-
+							@password,'E','T',@userimage,'Email',
+							'E',@passReset)
 		COMMIT TRANSACTION 
 	END TRY
 	BEGIN CATCH 

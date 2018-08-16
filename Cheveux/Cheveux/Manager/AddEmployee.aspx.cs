@@ -161,6 +161,7 @@ namespace Cheveux.Manager
 
                             if (txtAddLine1.Text.ToString() != string.Empty && txtAddLine2.Text.ToString() != string.Empty && uTypeList.SelectedValue.ToString() != string.Empty)
                             {
+                                /*
                                 if (handler.addEmployee(emp))
                                 {
                                     Response.Write("<script>alert('Employee Added');</script>");
@@ -173,6 +174,7 @@ namespace Cheveux.Manager
                                     lblAddErr.Text = "An error has occured.Please try again or report to management.<br/>"
                                                           + "Sorry for the inconvenience.";
                                 }
+                                */
                             }
 
 

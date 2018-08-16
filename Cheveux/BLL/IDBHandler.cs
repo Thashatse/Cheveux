@@ -99,7 +99,9 @@ namespace BLL
         List<SP_GetTodaysBookings> getTodaysBookings();
         USER checkForAccountTypeEmail(string identifier);
         List<SP_UserList> userList();
-        bool addEmployee(EMPLOYEE e);
+        bool addEmployee(string empID, string bio, string ad1, string ad2, string suburb, string city, string firstname
+                                , string lastname, string username, string email, string contactNo, string password,
+                                string userimage, string passReset);
         bool updateEmployee(EMPLOYEE emp);
         List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID);
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);

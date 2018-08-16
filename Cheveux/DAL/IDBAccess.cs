@@ -20,7 +20,9 @@ namespace DAL
         USER GetUserDetails(string ID);
         EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateUser(USER userUpdate);
-        bool addEmployee(EMPLOYEE e);
+        bool addEmployee(string empID, string bio, string ad1, string ad2, string suburb, string city, string firstname
+                                , string lastname, string username, string email, string contactNo, string password,
+                                string userimage, string passReset);
         bool updateEmployee(EMPLOYEE emp);
         bool createRestCode(string emailOrUsername, string restCode);
         USER GetAccountForRestCode(string code);
