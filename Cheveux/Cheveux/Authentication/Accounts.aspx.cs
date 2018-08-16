@@ -198,12 +198,13 @@ namespace Cheveux
                 Response.Redirect("../Profile.aspx");
             }
             else if (PreviousPage == "Bookings.aspx")
-            {
+            { 
                 Response.Redirect("../Profile.aspx");
             }
             else if (PreviousPage == "MakeABooking")
             {
-                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
+                String x = "<script type='text/javascript'>window.close();return false;</script>";
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "script", x, false);
             }
         }
 

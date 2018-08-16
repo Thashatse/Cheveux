@@ -111,7 +111,7 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
-        bool BLL_AddService(PRODUCT p, SERVICE s);
+        //bool BLL_AddService(PRODUCT p, SERVICE s);
         List<SP_GetWidth> BLL_GetWidths();
         List<SP_GetLength> BLL_GetLengths();
         List<SP_GetStyles> BLL_GetStyles();
@@ -119,10 +119,9 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate);
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day);
-        bool addAccessories(ACCESSORY a);
-        bool addTreatments(TREATMENT t);
- bool BLL_AddBraidService(BRAID_SERVICE bs);
-
+        //bool addAccessories(ACCESSORY a);
+        //bool addTreatments(TREATMENT t);
+        //bool BLL_AddBraidService(BRAID_SERVICE bs);
     }
 }
 

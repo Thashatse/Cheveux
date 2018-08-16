@@ -23,7 +23,7 @@ namespace Cheveux
         List<SP_GetEmpAgenda> agenda = null;
         BOOKING checkIn = null;
         HttpCookie cookie = null;
-        string currentBookingStylistID = null;
+        //string currentBookingStylistID = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
