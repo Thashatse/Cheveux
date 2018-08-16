@@ -34,7 +34,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-5">
-                                        <asp:TextBox ID="txtProductSearchTerm" runat="server" class="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtProductSearchTerm" runat="server" class="form-control" AutoPostBack="true"
+                                    OnTextChanged="Page_Load"></asp:TextBox>
                                     </div>
                                     <div class="col-2">
                                         <asp:Button ID="btnProductSearch" runat="server" Text="Search" CssClass="btn btn-primary" />

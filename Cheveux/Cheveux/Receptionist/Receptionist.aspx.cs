@@ -328,8 +328,6 @@ namespace Cheveux
 
         private void addAlertToTable(string alertIcon, string alertType, string alertDescription)
         {
-            tblAlerts.CssClass = "table table-dark table-hover table-bordered";
-
             alertsContainer.Visible = true;
             if (alertType != null
                 && alertDescription != null)

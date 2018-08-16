@@ -17,7 +17,7 @@
         <div class="col-md-8 col-sm-10">
             <div runat="server" id="managerDashboardPage">
                 <!-- if the user is loged In -->
-                <div class="container" runat="server" id="LogedIn" visible="false">
+                <div runat="server" id="LogedIn" visible="false">
                     <div class="row">
                         <div class="col-md-12">
 
@@ -34,20 +34,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
-                            <!--Alerts-->
-                            <div class="container" runat="server" id="alertsContainer" visible="false">
-                                <!-- Alert Table -->
-                                <h1>Alerts </h1>
-                                <asp:Table ID="tblAlerts" runat="server">
-                                </asp:Table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- line Break -->
-                    <br />
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-lg-9 col-md-12">
 
                             <!--Todays Bookings-->
                             <h1>Todays Bookings </h1>
@@ -58,6 +45,17 @@
                             <asp:Table ID="tblBookings" runat="server">
                             </asp:Table>
 
+                        </div>
+                        <div class="col-lg-3 col-md-12">
+                            <!--Alerts-->
+                            <div class="container" runat="server" id="alertsContainer" visible="false" style="border: solid #F05F40 2px;">
+                                <div class="container">
+                                <!-- Alert Table -->
+                                <h1>Alerts </h1>
+                                <asp:Table ID="tblAlerts" runat="server">
+                                </asp:Table>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>

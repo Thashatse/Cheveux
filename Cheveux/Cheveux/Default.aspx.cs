@@ -153,28 +153,41 @@ namespace Cheveux
             #endregion
 
             #region booking Confirimation 
-            //confirm booking
-            string stylistID = Request.QueryString["Sty"];
-            string Date = Request.QueryString["D"];
-            string slotNo = Request.QueryString["T"];
-            DateTime Time = Convert.ToDateTime("2001/01/01");
+                //confirm booking
+                string stylistID = Request.QueryString["Sty"];
+                string Date = Request.QueryString["D"];
+                string slotNo = Request.QueryString["T"];
+                DateTime Time = Convert.ToDateTime("2001/01/01");
 
-            if (stylistID != null
-                && Date != null
-                && slotNo != null)
+            try
             {
-                List<SP_GetSlotTimes> TSL = handler.BLL_GetAllTimeSlots();
-                foreach (SP_GetSlotTimes TS in TSL)
+                if (stylistID != null
+                    && Date != null
+                    && slotNo != null)
                 {
-                    if (TS.SlotNo == slotNo.Replace(string.Empty, ""))
+                    List<SP_GetSlotTimes> TSL = handler.BLL_GetAllTimeSlots();
+                    foreach (SP_GetSlotTimes TS in TSL)
                     {
-                        Time = TS.Time;
+                        if (TS.SlotNo == slotNo.Replace(" ", string.Empty))
+                        {
+                            Time = TS.Time;
+                        }
                     }
+                    Welcome.Text = "You are now booked to see "
+                        + handler.viewEmployee(stylistID.Replace(" ", string.Empty)).firstName
+                        + " at " + Time.ToString("hh:mm")
+                        + " on the " + Convert.ToDateTime(Date).ToString("dd MMM yyyy");
                 }
-                Welcome.Text = "You are now booked to see "
-                    + handler.viewEmployee(stylistID.Replace(string.Empty, "")).firstName
-                    + " at " + Time.ToString("hh:mm")
-                    + " on the " + Convert.ToDateTime(Date).ToString("dd MMM yyyy");
+            }
+            catch (Exception err)
+            {
+                function.logAnError("unable to load booking confirmaton on default.aspx." +
+                    "stylist ID : " + stylistID +
+                    " | Date : " + Date +
+                    " | Slot No. : " + slotNo +
+                    " | Time : " + Time +
+                    " | CustID : " + UserID["ID"].ToString() +
+                    " | Error : " + err);
             }
             #endregion
 
