@@ -11,7 +11,7 @@ namespace BLL
     public interface IDBHandler
     {
         #region Bookings
-        List<BookingService> getBookingServices(string CustomerID);
+        List<BookingService> getBookingServices(string BookingID);
         #endregion
         
         #region Home Page Features
