@@ -2976,5 +2976,16 @@ public List<BookingService> getBookingServices(string CustomerID)
 
 
         }
+        public bool AddBraidService(BRAID_SERVICE bs)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+            };
+            return DBHelper.NonQuery("SP_AddBraidService", CommandType.StoredProcedure, pars);
+        }
+    
     }
 }                  
