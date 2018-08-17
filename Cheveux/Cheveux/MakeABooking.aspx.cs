@@ -21,6 +21,7 @@ namespace Cheveux
         List<SP_GetBookedTimes> bookedList = null;
         List<SP_GetSlotTimes> slotList = null;
         BOOKING book = null;
+        BookingService bookService = null;
         string[,] availableTimes = new string[21,2];
         List<string> pickedServiceName = null;
         List<string> pickedServiceID = null;
@@ -237,8 +238,8 @@ namespace Cheveux
                     if (Authcookie["UT"].ToString()[0] == 'C') {
                         //Make Booking
                         try
-                        {
-                           
+                        {   
+                            //Add to booking
                             book = new BOOKING();
                             book.BookingID = function.GenerateRandomBookingID();
                             HttpCookie bookingTime = Request.Cookies["BookTime"];
@@ -260,6 +261,13 @@ namespace Cheveux
                             book.StylistID = rblPickAStylist.SelectedValue;
                             book.Available = "N";
                             handler.BLL_AddBooking(book);
+
+                            //Add to bookingservice
+                            foreach()
+                            {
+
+                            }
+
                             USER user = handler.GetUserDetails(cookie["ID"]);
                             //send an email notification
                             var body = new System.Text.StringBuilder();
@@ -936,15 +944,9 @@ namespace Cheveux
                {
                  if (item.Selected)
                  {
-                    try
-                    {
                         pickedServiceID.Add(item.Value);
                         pickedServiceName.Add(item.Text);
-                    }
-                    catch
-                    {
 
-                    }
                  }
 
             }
