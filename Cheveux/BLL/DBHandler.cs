@@ -105,6 +105,13 @@ namespace BLL
         }
         #endregion
 
+#region Bookings
+        public List<BookingService> getBookingServices(string bookingID)
+        {
+            return db.getBookingServices(bookingID);
+        }
+        #endregion
+
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             return db.getTodaysBookings();
