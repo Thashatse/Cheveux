@@ -412,12 +412,12 @@ namespace BLL
             return db.getAllStylistsUpcomingBookings();
         }
 
-        /*
+        
          public bool BLL_AddService(PRODUCT p, SERVICE s)
         {
             return db.AddService(p, s);
         }
-        */
+        
 
         public List<SP_GetWidth> BLL_GetWidths()
         {
@@ -456,11 +456,11 @@ namespace BLL
         public bool addTreatments(TREATMENT t)
         {
             return db.addTreatments(t);
-        }
+        }*/
         public bool BLL_AddBraidService(BRAID_SERVICE bs)
         {
             return db.AddBraidService(bs);
         }
-        */
+        
     }
 }
