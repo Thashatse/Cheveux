@@ -103,6 +103,18 @@ namespace BLL
         {
             return db.CheckForProduct(id);
         }
+
+        public SP_GetAllAccessories selectAccessory(string accessoryID)
+        {
+                 return db.selectAccessory(accessoryID);
+        }
+
+        public SP_GetAllTreatments selectTreatment(string treatmentID)
+         {  
+                return db.selectTreatment(treatmentID);
+
+         }
+
         #endregion
 
         public List<SP_GetTodaysBookings> getTodaysBookings()

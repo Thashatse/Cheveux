@@ -1,0 +1,368 @@
+
+TimeStamp: 8/17/2018 11:20:32 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:22:44 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:22:51 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:25:30 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:25:56 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:26:12 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:26:38 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:26:46 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:27:13 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:27:21 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:27:22 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:28:05 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:28:27 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:28:29 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: maryjofficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 432
+
+TimeStamp: 8/17/2018 11:28:40 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load alerts on Receptionist/Dashboard.aspx: System.ApplicationException: System.ArgumentException: Column 'SupplierID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 1002
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 1062
+   at BLL.DBHandler.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 160
+   at Cheveux.Receptionist.checkForLowStock() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 397
+
+TimeStamp: 8/17/2018 11:29:02 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:29:02 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:31:20 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:31:42 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+ An error occurred retrieving list of products external products page. Error: System.ApplicationException: System.ArgumentException: Column 'SupplierID' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 1002
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 1062
+   at BLL.DBHandler.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 160
+   at Cheveux.Cheveux.Products.loadProductList(Char productType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\Cheveux\Cheveux\Products.aspx.cs:line 33
+
+TimeStamp: 8/17/2018 11:31:54 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:31:57 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:32:03 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:32:12 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:32:16 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 11:32:17 AM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/17/2018 3:49:12 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 89
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\DAL\DBAccess.cs:line 117
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux7\Cheveux\BLL\Functions.cs:line 285

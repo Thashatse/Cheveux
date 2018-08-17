@@ -91,6 +91,8 @@
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
     <Compile Include="ViewModels\SP_SaleOfHairstylist.cs" />
     <Compile Include="ViewModels\SP_SearchStylistsBySearchTerm.cs" />
+    <Compile Include="ViewModels\SP_SelectAccessory.cs" />
+    <Compile Include="ViewModels\SP_SelectTreatment.cs" />
     <Compile Include="ViewModels\SP_UserList.cs" />
     <Compile Include="ViewModels\SP_ViewCustVisit.cs" />
     <Compile Include="ViewModels\SP_ViewEmployee.cs" />

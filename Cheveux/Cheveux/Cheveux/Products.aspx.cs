@@ -22,7 +22,26 @@ namespace Cheveux.Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            loadProductList('X');
+            //check query string
+            string productID = Request.QueryString["ProductID"];
+
+            //load all products
+            if (productID == null)
+            {
+                DisplayProduct.Visible = false;
+                addandedit.Visible = false;
+                 loadProductList('X');
+
+            }
+            else //load specific product
+            {
+                DisplayProduct.Visible = true;
+                addandedit.Visible = false;
+                divViewAll.Visible = false;
+
+                LoadProduct(productID);
+            }
+
         }
 
         public void loadProductList(char productType)
@@ -209,6 +228,13 @@ if ((treat.ProductType == "A" || treat.ProductType == "T") &&
             }
         }
 
+        public void LoadProduct(string productID)
+        {
+            //Display specific product
+
+
+
+        }
 
     }
 }

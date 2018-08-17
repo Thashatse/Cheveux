@@ -33,8 +33,8 @@
 
             </div>
          </div>
-       </div>
-        <div class="container">
+       <!--View specific product-->
+        <div runat="server" id="DisplayProduct">
                 <div class="row">
                     <div class="col-sm-auto col-md-auto col-lg-auto">
                         <asp:PlaceHolder ID="prProducts" runat="server">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-
+            
 
 
 
@@ -51,10 +51,15 @@
 
             <div runat="server" id="addandedit">
                 <form id="formAddEditProduct" runat="server">
-                    <!-- ADD EDIT PRODUCTS FORM -->
+                    <!-- ADD EDIT PRODUCTS FORM --> 
+
+
+
+
+
                 </form>
             </div>
         </div>
         <div class="col-md-2 col-sm-1"></div>
-    </div>
+        </div>
 </asp:Content>

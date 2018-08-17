@@ -1062,6 +1062,92 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        //select accessory
+        public SP_GetAllAccessories selectAccessory(string accessoryID)
+        {
+            SP_GetAllAccessories accessory = null;
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@accessoryID", accessoryID)
+
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetAllAccessories", CommandType.StoredProcedure, parameters))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        accessory = new SP_GetAllAccessories();
+                        accessory.Name = Convert.ToString(row["Name"]);
+                        accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
+                        accessory.Price = Convert.ToInt32(row["Price"]);
+                        accessory.ProductType = Convert.ToString(row["ProductType"]);
+                        accessory.Active = Convert.ToString(row["Active"]);
+                        //accessory.ProductImage = Convert.ToByte(row["ProductImage"]);
+                        accessory.Colour = Convert.ToString(row["Colour"]);
+                        accessory.Qty = Convert.ToInt32("Qty");
+                        accessory.BrandID = Convert.ToString("BrandID");
+                        accessory.Brandname = Convert.ToString("BrandName");
+                        accessory.brandType = Convert.ToString("BrandType(T/A)");
+
+                     }
+
+                }
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+                        
+            return accessory;
+        }
+
+        //select treatment
+        public SP_GetAllTreatments selectTreatment(string treatmentID)
+        {
+            SP_GetAllTreatments treatment = null;
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@treatmentID", treatmentID)
+
+            };
+
+            try
+                {  using (DataTable table = DBHelper.ParamSelect("SP_GetAllTreatments", CommandType.StoredProcedure, parameters))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        treatment = new SP_GetAllTreatments();
+                        treatment.Name = Convert.ToString(row["Name"]);
+                        treatment.ProductDescription = Convert.ToString(row["ProductDescription"]);
+                        treatment.Price = Convert.ToInt32(row["Price"]);
+                        treatment.ProductType = Convert.ToString(row["ProductType"]);
+                        treatment.Active = Convert.ToString(row["Active"]);
+                        //treatment.ProductImage = Convert["ProductImage"]);
+                        treatment.Qty = Convert.ToInt32("Qty");
+                        treatment.BrandID = Convert.ToString("BrandID");
+                        treatment.Brandname = Convert.ToString("BrandName");
+                        treatment.brandType = Convert.ToString("BrandType(T/A)");
+
+                     }
+                  }
+             }
+
+            catch (Exception e)
+            {
+                 throw new ApplicationException(e.ToString());
+            }
+
+
+            return treatment;
+        }
+
+
+
         #endregion
 
         public string getSalePaymentType(string saleID)
@@ -1084,7 +1170,7 @@ namespace DAL
                     return paymentType;
                 }
             }
-            catch (Exception e) 
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
@@ -1508,6 +1594,7 @@ namespace DAL
             }
 
         }
+
         public List<SP_GetServices> GetAllServices()
         {
             try
@@ -1926,20 +2013,20 @@ namespace DAL
             }
         }
 
-        
+
         public bool AddAccessories(ACCESSORY a)
         {
             try
-            { 
-            SqlParameter[] pars = new SqlParameter[]
-                {
-                    
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+
                     new SqlParameter("@colour", a.Colour.ToString()),
                     new SqlParameter("@qty", a.Qty.ToString()),
                     new SqlParameter("@brandID", a.BrandID.ToString())
-                   
-                };
-            return DBHelper.NonQuery("SP_AddAcessories", CommandType.StoredProcedure, pars.ToArray());
+
+                    };
+                return DBHelper.NonQuery("SP_AddAcessories", CommandType.StoredProcedure, pars.ToArray());
             }
             catch (Exception e)
             {
@@ -1968,8 +2055,10 @@ namespace DAL
             }
 
         }
+       
 
-            
+
+
 
 
 
@@ -2000,7 +2089,7 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
-        }        
+        }
 
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
@@ -2075,11 +2164,11 @@ namespace DAL
             }
         }
 
-        
 
-        public bool addEmployee(string empID,string bio,string ad1,string ad2,string suburb,string city,string firstname
-                                ,string lastname,string username,string email,string contactNo,string password,
-                                string userimage,string passReset)
+
+        public bool addEmployee(string empID, string bio, string ad1, string ad2, string suburb, string city, string firstname
+                                , string lastname, string username, string email, string contactNo, string password,
+                                string userimage, string passReset)
         {
             try
             {
@@ -2825,7 +2914,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
         {
             try
@@ -2849,9 +2938,9 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-    
-        
-     public List<SP_GetWidth> GetWidths()
+
+
+        public List<SP_GetWidth> GetWidths()
         {
             try
             {
@@ -2862,10 +2951,10 @@ namespace DAL
                     {
                         foreach (DataRow row in table.Rows)
                         {
-                           SP_GetWidth width = new SP_GetWidth
+                            SP_GetWidth width = new SP_GetWidth
                             {
-                               WidthID = Convert.ToString(row["WidthID"]),
-                               Description=Convert.ToString(row["Description"])
+                                WidthID = Convert.ToString(row["WidthID"]),
+                                Description = Convert.ToString(row["Description"])
                             };
                             widthList.Add(width);
                         }
@@ -2882,7 +2971,7 @@ namespace DAL
 
         }
 
-        
+
         public List<SP_GetStyles> GetStyles()
         {
             try
@@ -2943,5 +3032,10 @@ namespace DAL
 
 
         }
+      
+        
+           
+}
+
     }
-}                  
+         

@@ -46,6 +46,8 @@ namespace BLL
 
         #region Products
         PRODUCT CheckForProduct(string id);
+        SP_GetAllAccessories selectAccessory(string accessoryID);
+        SP_GetAllTreatments  selectTreatment(string treatmentID);
         #endregion
         
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
