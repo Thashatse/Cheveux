@@ -276,6 +276,40 @@ namespace DAL
             }
         }
 
+public List<BookingService> getBookingServices(string CustomerID)
+        {
+            List<BookingService> bookingServices = new List<BookingService>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", CustomerID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServices",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            BookingService service = new BookingService
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                ServiceID = row["ServiceID"].ToString()
+                            };
+                            bookingServices.Add(service);
+                        }
+                    }
+                    return bookingServices;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
