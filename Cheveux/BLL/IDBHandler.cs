@@ -10,6 +10,10 @@ namespace BLL
 {
     public interface IDBHandler
     {
+        #region Bookings
+        List<BookingService> getBookingServices(string CustomerID);
+        #endregion
+        
         #region Home Page Features
         List<HomePageFeatures> GetHomePageFeatures();
         #endregion
