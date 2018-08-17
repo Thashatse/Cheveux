@@ -37,7 +37,7 @@ namespace DAL
         #endregion
 
         #region Bookings
-            List<BookingService> getBookingServices(string CustomerID);
+        List<BookingService> getBookingServices(string BookingID);
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID);
         bool deleteBooking(string BookingID);
