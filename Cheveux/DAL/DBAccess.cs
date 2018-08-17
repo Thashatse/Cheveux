@@ -254,14 +254,10 @@ namespace DAL
                         {
                             SP_GetCustomerBooking booking = new SP_GetCustomerBooking
                             {
-                                serviceName = row["Name"].ToString(),
-                                serviceDescripion = row["ProductDescription"].ToString(),
-                                servicePrice = row["Price"].ToString(),
                                 stylistFirstName = row["FirstName"].ToString(),
                                 bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                                 bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                                 bookingID = row["BookingID"].ToString(),
-                                serviceID = row["ProductID"].ToString(),
                                 stylistEmployeeID = row["StylistID"].ToString()
                             };
                             customerBookings.Add(booking);
@@ -275,41 +271,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-public List<BookingService> getBookingServices(string BookingID)
-        {
-            List<BookingService> bookingServices = new List<BookingService>();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@BookingID", BookingID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServices",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            BookingService service = new BookingService
-                            {
-                                BookingID = row["BookingID"].ToString(),
-                                ServiceID = row["ServiceID"].ToString()
-                            };
-                            bookingServices.Add(service);
-                        }
-                    }
-                    return bookingServices;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        
         public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -328,9 +290,6 @@ public List<BookingService> getBookingServices(string BookingID)
                         DataRow row = table.Rows[0];
                         booking = new SP_GetCustomerBooking
                         {
-                            serviceName = row["Name"].ToString(),
-                            serviceDescripion = row["ProductDescription"].ToString(),
-                            servicePrice = row["Price"].ToString(),
                             stylistEmployeeID = row["UserID"].ToString(),
                             stylistFirstName = row["FirstName"].ToString(),
                             bookingDate = Convert.ToDateTime(row["Date"].ToString()),
@@ -341,6 +300,43 @@ public List<BookingService> getBookingServices(string BookingID)
                     }
 
                     return booking;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_GetBookingServices> getBookingServices(string BookingID)
+        {
+            List<SP_GetBookingServices> bookingServices = new List<SP_GetBookingServices>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServices",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetBookingServices service = new SP_GetBookingServices
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                ServiceID = row["ServiceID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                serviceDescripion = row["ProductDescription"].ToString(),
+                                Price = Convert.ToDouble(row["Price"])
+                            };
+                            bookingServices.Add(service);
+                        }
+                    }
+                    return bookingServices;
                 }
             }
             catch (Exception e)
@@ -385,15 +381,11 @@ public List<BookingService> getBookingServices(string BookingID)
                         {
                             SP_GetCustomerBooking booking = new SP_GetCustomerBooking
                             {
-                                serviceName = row["Name"].ToString(),
-                                serviceDescripion = row["ProductDescription"].ToString(),
-                                servicePrice = row["Price"].ToString(),
                                 stylistFirstName = row["FirstName"].ToString(),
                                 bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                                 bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                                 bookingID = row["BookingID"].ToString(),
                                 arrived = row["Arrived"].ToString()[0],
-                                serviceID = row["ProductID"].ToString(),
                                 stylistEmployeeID = row["StylistID"].ToString()
                             };
                             customerBookings.Add(booking);
@@ -426,15 +418,11 @@ public List<BookingService> getBookingServices(string BookingID)
                         DataRow row = table.Rows[0];
                         booking = new SP_GetCustomerBooking
                         {
-                            serviceName = row["Name"].ToString(),
-                            serviceDescripion = row["ProductDescription"].ToString(),
-                            servicePrice = row["Price"].ToString(),
                             stylistFirstName = row["FirstName"].ToString(),
                             bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                             bookingID = row["BookingID"].ToString(),
                             arrived = row["Arrived"].ToString()[0],
-                            serviceID = row["ProductID"].ToString(),
                             stylistEmployeeID = row["StylistID"].ToString(),
                             CustFullName = row["CustFullName"].ToString(),
                             CustomerID = row["CustomerID"].ToString()

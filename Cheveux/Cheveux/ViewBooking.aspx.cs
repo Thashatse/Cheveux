@@ -168,11 +168,14 @@ namespace Cheveux
             {
                 SP_GetCustomerBooking BookingDetails = null;
                 List<SP_getInvoiceDL> invoicDetailLines = null;
+                List<SP_GetBookingServices> bookingServiceList = null;
                 //check if this is a past or upcoming booking and display the details acordingly
                 if (pastBooking == false)
                 {
                     BookingDetails =
                         handler.getCustomerUpcomingBookingDetails(BookingID);
+                    //get the services
+                    bookingServiceList = handler.getBookingServices(BookingID);
                 }
                 else if (pastBooking == true)
                 {
@@ -180,13 +183,32 @@ namespace Cheveux
                     BookingDetails = handler.getCustomerPastBookingDetails(BookingID);
                     //get the invoice 
                     invoicDetailLines = handler.getInvoiceDL(BookingID);
+                    //get the services
+                    bookingServiceList = handler.getBookingServices(BookingID);
                     //get the review
-                    
+
                 }
-               
+
+                if (bookingServiceList.Count == 1)
+                {
                     //display a heading
-                    BookingLable.Text = "<h2> " + BookingDetails.serviceName.ToString() + " with " +
+                    BookingLable.Text = "<h2> " + bookingServiceList[0].ServiceName.ToString() + " with " +
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                else if (bookingServiceList.Count == 2)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> " + bookingServiceList[0].ServiceName.ToString() +
+                    " & " +  bookingServiceList[0].ServiceName.ToString() + " with " +
+                    BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                else if (bookingServiceList.Count > 2)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> Booking with" +
+                    BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+
 
                 //create a variablew to track the row count
                 int rowCount = 0;
@@ -197,33 +219,73 @@ namespace Cheveux
                 BookingTable.Rows.Add(newRow);
                 TableCell newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "Service Name:";
+                if (bookingServiceList.Count == 1)
+                {
+                    newCell.Text = "Service:";
+                }
+                else if (bookingServiceList.Count > 1)
+                {
+                    newCell.Text = "Services:";
+                }
                 newCell.Width = 300;
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + BookingDetails.serviceID.Replace(" ", string.Empty) + "'>" + 
-                    BookingDetails.serviceName.ToString() + "</a>";
-                newCell.Width = 700;
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                //increment row count 
-                rowCount++;
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Description:";
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + BookingDetails.serviceID.Replace(" ", string.Empty) + "'>"+
-                    BookingDetails.serviceDescripion.ToString() + "</a>";
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 
-                //increment row count 
-                rowCount++;
+                if (bookingServiceList.Count == 1)
+                {
+                    newCell = new TableCell();
+                    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    + bookingServiceList[0].ServiceName.ToString() + "</a>";
+                    newCell.Width = 700;
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
 
+                    //increment row count 
+                    rowCount++;
+                }
+                else if (bookingServiceList.Count > 1)
+                {
+                    int i = 0;
+                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    {
+                        if(i > 0)
+                        {
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            BookingTable.Rows.Add(newRow);
+                            newCell = new TableCell();
+                            newCell.Width = 300;
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        }
+
+                        newCell = new TableCell();
+                        newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                        + service.ServiceName.ToString() + "</a>";
+                        newCell.Width = 700;
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+                        i++;
+                    }
+                }
+
+                if (bookingServiceList.Count == 1)
+                {
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Service Description:";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>" +
+                    bookingServiceList[0].serviceDescripion.ToString() + "</a>";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+                }
+                
                 newRow = new TableRow();
                 newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);

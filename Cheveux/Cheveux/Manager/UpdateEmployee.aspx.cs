@@ -95,8 +95,8 @@ namespace Cheveux.Manager
                 emp.Type = rdoType.SelectedValue.ToString();
                 emp.AddressLine1 = txtAddLine1.Text.ToString();
                 emp.AddressLine2 = txtAddLine2.Text.ToString();
-                emp.Suburb = txtSuburb.Text.ToString();
-                emp.City = txtCity.Text.ToString();
+                //emp.Suburb = txtSuburb.Text.ToString();
+                //emp.City = txtCity.Text.ToString();
 
                 if (handler.updateEmployee(emp))
                 {

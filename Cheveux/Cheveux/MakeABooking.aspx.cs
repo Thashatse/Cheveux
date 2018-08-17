@@ -262,11 +262,12 @@ namespace Cheveux
                             book.Available = "N";
                             handler.BLL_AddBooking(book);
 
-                            //Add to bookingservice
+                            /*Add to bookingservice
                             foreach()
                             {
 
                             }
+                            */
 
                             USER user = handler.GetUserDetails(cookie["ID"]);
                             //send an email notification

@@ -9,8 +9,9 @@ CREATE PROCEDURE SP_GetBookingServices
 	@BookingID nchar(10)
 AS
 BEGIN
-	SELECT [BookingID], [ServiceID]
-	FROM [CHEVEUX].[dbo].[BookingService]
+	SELECT bs.[BookingID], bs.[ServiceID], p.[Name], p.Price, p.ProductDescription
+	FROM BookingService bs, PRODUCT p
 	where BookingID = @BookingID
+		AND bs.[ServiceID] = p.ProductID
 END
 GO

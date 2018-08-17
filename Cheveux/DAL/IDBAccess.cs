@@ -37,7 +37,7 @@ namespace DAL
         #endregion
 
         #region Bookings
-        List<BookingService> getBookingServices(string BookingID);
+        List<SP_GetBookingServices> getBookingServices(string BookingID);
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID);
         bool deleteBooking(string BookingID);
@@ -88,6 +88,16 @@ namespace DAL
 
         #region Products
         PRODUCT CheckForProduct(string id);
+        //bool addAccessories(ACCESSORY a);
+        //bool addTreatments(TREATMENT t);
+        #endregion
+
+        #region Services
+        //bool AddService(PRODUCT p, SERVICE s);
+        bool AddBraidService(BRAID_SERVICE bs);
+        List<SP_GetWidth> GetWidths();
+        List<SP_GetLength> GetLengths();
+        List<SP_GetStyles> GetStyles();
         #endregion
 
         List<SP_GetEmpNames> GetEmpNames();
@@ -126,12 +136,5 @@ namespace DAL
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_SaleOfHairstylist> getSaleOfHairstylist (string stylistID, DateTime startDate, DateTime endDate);
         List<SP_AboutStylist> aboutStylist();
-        bool AddService(PRODUCT p, SERVICE s);
-        bool AddBraidService(BRAID_SERVICE bs);
-        List<SP_GetWidth> GetWidths();
-        List<SP_GetLength> GetLengths();
-        List<SP_GetStyles> GetStyles();
-        //bool addAccessories(ACCESSORY a);
-        //bool addTreatments(TREATMENT t);
     }
 }
