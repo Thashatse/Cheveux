@@ -92,9 +92,11 @@ namespace Cheveux.Manager
                 emp = new EMPLOYEE();
 
                 emp.EmployeeID = userID;
+                emp.Type = rdoType.SelectedValue.ToString();
                 emp.AddressLine1 = txtAddLine1.Text.ToString();
                 emp.AddressLine2 = txtAddLine2.Text.ToString();
-                emp.Type = rdoType.SelectedValue.ToString();
+                emp.Suburb = txtSuburb.Text.ToString();
+                emp.City = txtCity.Text.ToString();
 
                 if (handler.updateEmployee(emp))
                 {

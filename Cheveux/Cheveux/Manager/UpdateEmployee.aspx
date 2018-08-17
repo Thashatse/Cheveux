@@ -78,15 +78,6 @@
 
                     <div class="row">
                         <div class="col-md-12 form-group">
-                            <asp:Label ID="lblBio" runat="server" Text="Bio"></asp:Label>&nbsp; &nbsp; &nbsp; 
-                            <!--Bio-->
-                            <textarea runat="server" id="txtBio" cols="45" rows="5" placeholder="Employee Bio"></textarea>
-                            <!-- Add Bio Validation-->
-                            <asp:RequiredFieldValidator ID="bioValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtBio"></asp:RequiredFieldValidator>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 form-group">
                             <asp:Label ID="lblAddLine1" runat="server" Text="Address Line 1"></asp:Label>&nbsp; &nbsp; &nbsp; 
                         <asp:TextBox ID="txtAddLine1" runat="server" placeholder="Address Line 1"></asp:TextBox>
                             <!-- AddressLine 1 Validation-->
