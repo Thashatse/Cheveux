@@ -276,12 +276,12 @@ namespace DAL
             }
         }
 
-public List<BookingService> getBookingServices(string CustomerID)
+public List<BookingService> getBookingServices(string BookingID)
         {
             List<BookingService> bookingServices = new List<BookingService>();
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@BookingID", CustomerID)
+                new SqlParameter("@BookingID", BookingID)
             };
 
             try
