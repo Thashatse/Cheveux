@@ -2116,7 +2116,6 @@ namespace DAL
                 {
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
                     new SqlParameter("@type", emp.Type.ToString()),
-                    new SqlParameter("@bio",emp.Bio.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
                     new SqlParameter("@suburb", emp.Suburb.ToString()),
