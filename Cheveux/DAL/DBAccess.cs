@@ -2115,9 +2115,12 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
+                    new SqlParameter("@type", emp.Type.ToString()),
+                    new SqlParameter("@bio",emp.Bio.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
-                    new SqlParameter("@type", emp.Type.ToString())
+                    new SqlParameter("@suburb", emp.Suburb.ToString()),
+                    new SqlParameter("@city", emp.City.ToString())
                 };
                 return DBHelper.NonQuery("SP_UpdateEmployee", CommandType.StoredProcedure, pars);
             }
