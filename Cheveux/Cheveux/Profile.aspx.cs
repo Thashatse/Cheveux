@@ -107,7 +107,6 @@ namespace Cheveux
                 if (action == null)
                 {
                     //load user details
-
                     LogOutBTN.Visible = true;
                     loadUserDetails();
                 }
@@ -1247,6 +1246,7 @@ namespace Cheveux
         /*
          * Bookings Funcrions
          */
+        #region Upcoming
         public void displayUpcomingBookings()
         {
             //get the uppcoming bookins from the Data Base
@@ -1403,7 +1403,9 @@ namespace Cheveux
             upcomingBookings.Rows[rowCount].Cells.Add(newCell);
 
         }
+        #endregion
 
+        #region Past
         public void displayPastBookings()
         {
             //get the Past bookins from the Data Base
@@ -1468,6 +1470,7 @@ namespace Cheveux
                     // if there aren't let the user know
                     pastBookingsLable.Text =
                         "<p> No Past Bookings </p>";
+                    pastBookings.Rows.Clear();
                 }
                 else
                 {
@@ -1541,6 +1544,7 @@ namespace Cheveux
                 pastBookings.Rows[rowCount].Cells.Add(newCell);
             }
         }
+        #endregion
         #endregion
     }
 }

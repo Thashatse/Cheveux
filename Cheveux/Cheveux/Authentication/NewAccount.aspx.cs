@@ -15,7 +15,6 @@ namespace Cheveux
         Authentication auth = new Authentication();
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        EMPLOYEE emp = null;
         
         private string getRegCookie()
         {

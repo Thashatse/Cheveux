@@ -72,7 +72,6 @@ namespace DAL
         #endregion
 
         #region Email/SMS Notifications
-
         public List<OGBkngNoti> GetOGBkngNotis()
         {
             List<OGBkngNoti> oGBkngNotiList = new List<OGBkngNoti>();
@@ -99,11 +98,8 @@ namespace DAL
                                 Email = row["Email"].ToString(),
                                 ContactNo = row["ContactNo"].ToString(),
                                 stylistFirstName = row["StylistName"].ToString(),
-                                ServiceID = row["ServiceID"].ToString(),
-                                Price = Convert.ToDecimal(row["Price"]),
                                 Date = Convert.ToDateTime(row["Date"].ToString()),
                                 NotificationReminder = Convert.ToBoolean(row["NotificationReminder"]),
-                                serviceName = row["Name"].ToString(),
                                 StylistID = row["StylistID"].ToString()
                             };
                             oGBkngNotiList.Add(oGBkngNoti);
@@ -520,7 +516,8 @@ namespace DAL
                             bookingDate = Convert.ToDateTime(table.Rows[0]["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(table.Rows[0]["StartTime"].ToString()),
                             bookingID = table.Rows[0]["BookingID"].ToString(),
-                            CustomerID = table.Rows[0]["BookingID"].ToString(),
+                            CustomerID = table.Rows[0]["CustomerID"].ToString(),
+                            CustFullName = table.Rows[0]["custFullName"].ToString(),
                             serviceID = table.Rows[0]["ServiceID"].ToString()
                         };
                     }
@@ -632,6 +629,32 @@ namespace DAL
                         };
                     }
                     return serviceDTL;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public string getSalePaymentType(string saleID)
+        {
+            string paymentType = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SaleID", saleID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        paymentType = Convert.ToString(row["PaymentType"]);
+                    }
+                    return paymentType;
                 }
             }
             catch (Exception e)
@@ -1085,33 +1108,7 @@ namespace DAL
             }
         }
         #endregion
-
-        public string getSalePaymentType(string saleID)
-        {
-            string paymentType = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@SaleID", saleID)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        DataRow row = table.Rows[0];
-                        paymentType = Convert.ToString(row["PaymentType"]);
-                    }
-                    return paymentType;
-                }
-            }
-            catch (Exception e) 
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        
         public bool createSalesDTLRecord(SALES_DTL detailLine)
         {
             SqlParameter[] pars = new SqlParameter[]

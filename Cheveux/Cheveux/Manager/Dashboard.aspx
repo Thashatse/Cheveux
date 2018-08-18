@@ -35,6 +35,14 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-9 col-md-12">
+                            <div runat="server" id="divStats">
+                                <!--Stats-->
+                                <h1>Stats </h1>
+
+                            </div>
+
+                            <!-- Line Break -->
+                            <br />
 
                             <!--Todays Bookings-->
                             <h1>Todays Bookings </h1>

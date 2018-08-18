@@ -104,7 +104,19 @@
                                         <h2>Invoice: </h2>
                                         <asp:Table ID="tblCheckOut" runat="server">
                                             <asp:TableRow Height="50">
-                                                <asp:TableCell Font-Bold="true" Width="300"> Service: </asp:TableCell>
+                                                <asp:TableCell Font-Bold="true"> Billed To: </asp:TableCell>
+                                                <asp:TableCell>
+                                    <!--Billed To-->
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell Font-Bold="true"> Time & Date: </asp:TableCell>
+                                                <asp:TableCell>
+                                    <!--Booking Date-->
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow Height="50">
+                                                <asp:TableCell Font-Bold="true" Width="250"> Service: </asp:TableCell>
                                                 <asp:TableCell>
                                         <!--Service Name-->
                                                 </asp:TableCell>
@@ -117,12 +129,6 @@
                                                 </asp:TableCell>
                                             </asp:TableRow>
                                             <asp:TableRow Height="50">
-                                                <asp:TableCell Font-Bold="true"> Time & Date: </asp:TableCell>
-                                                <asp:TableCell>
-                                    <!--Booking Date-->
-                                                </asp:TableCell>
-                                            </asp:TableRow>
-                                            <asp:TableRow Height="50">
                                                 <asp:TableCell Font-Bold="true">
                                         <!--Payment Type Lable--> Payment Type: 
                                                 </asp:TableCell>
@@ -131,14 +137,15 @@
                                                 </asp:TableCell>
                                             </asp:TableRow>
                                             <asp:TableRow Height="50">
-                                                <asp:TableCell></asp:TableCell>
-                                                <asp:TableCell>
+                                                <asp:TableCell ColumnSpan="2">
                                         <!--Invoice-->
                                                 </asp:TableCell>
                                             </asp:TableRow>
                                             <asp:TableRow Height="50">
                                                 <asp:TableCell></asp:TableCell>
                                                 <asp:TableCell>
+                                                    <!-- Line Breake -->
+                                                    <br />
                                                     <!--Save Payment Type-->
                                                     <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" class="btn btn-secondary" />
                                                 </asp:TableCell>
@@ -176,13 +183,15 @@
                                             <asp:TableRow Height="50">
                                                 <asp:TableCell ColumnSpan="2">
                                                     <div runat="server" id="divCalcuateChange" visible="false">
-                                                        Amount Due: <asp:Label runat="server" ID="lAmountDue"></asp:Label>
+                                                        <p style="text-align: left; float: left;">Amount Due: &nbsp; </p>
+                                                        <p style="text-align: right; float: right;"><asp:Label runat="server" ID="lAmountDue"></asp:Label></p>
                                                         <br/>
                                                         <br/>
-                                                        <p style="text-align: left; float: left;">Amount Tenderd: </p>
+                                                        <p style="text-align: left; float: left;">Amount Tenderd: &nbsp; </p>
                                                         <p style="text-align: right; float: right;"><asp:TextBox runat="server" ID="txtAmounTenderd" OnTextChanged="txtAmounTenderd_TextChanged" AutoPostBack="true"></asp:TextBox></p>
                                                         <br/>
-                                                        Change Due: <asp:Label runat="server" ID="lChangeDue"></asp:Label>
+                                                        <p style="text-align: left; float: left;">Change Due: &nbsp; </p>
+                                                        <p style="text-align: right; float: right;"><asp:Label runat="server" ID="lChangeDue"></asp:Label></p>
                                                         <br/>
                                                     </div>
                                                     </asp:TableCell>
