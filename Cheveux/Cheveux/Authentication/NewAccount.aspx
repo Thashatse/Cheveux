@@ -311,6 +311,16 @@
                             <br />
                             <a href="../Authentication/Accounts.aspx?Type=Email">Sign in instead</a>
 
+                            <!--err-->
+                            <div class="container row" runat="server">
+                                <asp:PlaceHolder ID="phAddEmpErr" runat="server" Visible="false">
+                                    <div class="col-sm-12 col-md-12 alert alert-primary alert-dismissible">
+                                        <asp:Label ID="lblAddEmpErr" runat="server" Text="Label"></asp:Label>
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    </div>
+                                </asp:PlaceHolder>
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-xs-2 col-md-2 text-center"></div>

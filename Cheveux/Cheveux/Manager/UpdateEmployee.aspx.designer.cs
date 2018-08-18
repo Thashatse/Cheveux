@@ -67,6 +67,51 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Label lblUpdateErr;
         
         /// <summary>
+        /// lblType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblType;
+        
+        /// <summary>
+        /// rdoType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rdoType;
+        
+        /// <summary>
+        /// TypeOption1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListItem TypeOption1;
+        
+        /// <summary>
+        /// TypeOption2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListItem TypeOption2;
+        
+        /// <summary>
+        /// rdoValidator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rdoValidator;
+        
+        /// <summary>
         /// lblAddLine1 control.
         /// </summary>
         /// <remarks>
@@ -121,49 +166,58 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ad2Validation;
         
         /// <summary>
-        /// lblType control.
+        /// lblSuburb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblType;
+        protected global::System.Web.UI.WebControls.Label lblSuburb;
         
         /// <summary>
-        /// rdoType control.
+        /// txtSuburb control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdoType;
+        protected global::System.Web.UI.WebControls.TextBox txtSuburb;
         
         /// <summary>
-        /// TypeOption1 control.
+        /// suburbValidation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListItem TypeOption1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator suburbValidation;
         
         /// <summary>
-        /// TypeOption2 control.
+        /// lblCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListItem TypeOption2;
+        protected global::System.Web.UI.WebControls.Label lblCity;
         
         /// <summary>
-        /// rdoValidator control.
+        /// txtCity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rdoValidator;
+        protected global::System.Web.UI.WebControls.TextBox txtCity;
+        
+        /// <summary>
+        /// cityValidation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator cityValidation;
         
         /// <summary>
         /// btnBack control.

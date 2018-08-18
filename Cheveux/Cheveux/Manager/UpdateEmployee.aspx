@@ -8,7 +8,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <form runat="server">
-        <div>
+        
             <div class="bg-secondary text-white" id="Div1">
                 <!-- Top Margin & Nav Bar Back Color -->
                 <br />
@@ -28,111 +28,111 @@
             </asp:PlaceHolder>
 
             <asp:PlaceHolder runat="server" ID="phMain">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-1"></div>
-                        <div class="col-md-12 col-sm-10">
-                            <div class="jumbotron bg-dark text-white">
-                                <br />
-                                <div class="row">
-                                    <div class="col-12">
-                                        <header>
-                                            <h1 id="updateEmpHeading">Update Employee Details
-                                            </h1>
-                                        </header>
-                                        <br />
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-1"></div>
+                            <div class="col-md-12 col-sm-10">
+                                <div class="jumbotron bg-dark text-white">
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <header>
+                                                <h1 id="updateEmpHeading">Update Employee Details
+                                                </h1>
+                                            </header>
+                                            <br />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        <asp:Table ID="tblUserImage" runat="server"></asp:Table>
+                                    <div class="row">
+                                        <div class="col-5">
+                                            <asp:Table ID="tblUserImage" runat="server"></asp:Table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <!--Error updating user message-->
-                <div class="container row" runat="server">
-                    <asp:PlaceHolder ID="phUpdateErr" runat="server" Visible="false">
-                        <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible">
-                            <asp:Label ID="lblUpdateErr" runat="server" Text="Label"></asp:Label>
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        </div>
-                    </asp:PlaceHolder>
-                </div>
-
-                <div id="empDetails" class="container">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:Label ID="lblType" runat="server" Text="Employee Type:"></asp:Label>
-                        </div>
-                        <div class="col-sm-12 col-md-4 col-lg-4">
-                            <asp:RadioButtonList ID="rdoType" runat="server" RepeatDirection="Horizontal" RepeatLayout="flow">
-                                <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist" Value="R" />
-                                <asp:ListItem id="TypeOption2" runat="server" Text="Stylist" Value="S" />
-                            </asp:RadioButtonList>
-                            <!-- RadioButtons Validation-->
-                            <asp:RequiredFieldValidator ID="rdoValidator" runat="server" ErrorMessage="*Please select user type" ForeColor="Red" ControlToValidate="rdoType"></asp:RequiredFieldValidator>
-                        </div>
+                    <!--Error updating user message-->
+                    <div class="container row" runat="server">
+                        <asp:PlaceHolder ID="phUpdateErr" runat="server" Visible="false">
+                            <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible">
+                                <asp:Label ID="lblUpdateErr" runat="server" Text="Label"></asp:Label>
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            </div>
+                        </asp:PlaceHolder>
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:Label ID="lblAddLine1" runat="server" Text="Address Line 1"></asp:Label>
+                    <div id="empDetails" class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Label ID="lblType" runat="server" Text="Employee Type:"></asp:Label>
+                            </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <asp:RadioButtonList ID="rdoType" runat="server" RepeatDirection="Horizontal" RepeatLayout="flow">
+                                    <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist" Value="R" />
+                                    <asp:ListItem id="TypeOption2" runat="server" Text="Stylist" Value="S" />
+                                </asp:RadioButtonList>
+                                <!-- RadioButtons Validation-->
+                                <asp:RequiredFieldValidator ID="rdoValidator" runat="server" ErrorMessage="*Please select user type" ForeColor="Red" ControlToValidate="rdoType"></asp:RequiredFieldValidator>
+                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:TextBox ID="txtAddLine1" runat="server" placeholder="Address Line 1"></asp:TextBox>
-                            <!-- AddressLine 1 Validation-->
-                            <asp:RequiredFieldValidator ID="ad1Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine1"></asp:RequiredFieldValidator>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:Label ID="lblAddLine2" runat="server" Text="Address Line 2"></asp:Label>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Label ID="lblAddLine1" runat="server" Text="Address Line 1"></asp:Label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:TextBox ID="txtAddLine1" runat="server" placeholder="AddressLine 1"></asp:TextBox>
+                                <!-- AddressLine 1 Validation-->
+                                <asp:RequiredFieldValidator ID="ad1Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine1"></asp:RequiredFieldValidator>
+                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:TextBox ID="txtAddLine2" runat="server" placeholder="Address Line 2"></asp:TextBox>
-                            <!-- AddressLine 2 Validation-->
-                            <asp:RequiredFieldValidator ID="ad2Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine2"></asp:RequiredFieldValidator>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:Label ID="lblSuburb" runat="server" Text="Suburb"></asp:Label>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Label ID="lblAddLine2" runat="server" Text="Address Line 2"></asp:Label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:TextBox ID="txtAddLine2" runat="server" placeholder="AddressLine 2"></asp:TextBox>
+                                <!-- AddressLine 2 Validation-->
+                                <asp:RequiredFieldValidator ID="ad2Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine2"></asp:RequiredFieldValidator>
+                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:TextBox ID="txtSuburb" runat="server" placeholder="Suburb"></asp:TextBox>
-                            <!-- Suburb Validation-->
-                            <asp:RequiredFieldValidator ID="suburbValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtSuburb"></asp:RequiredFieldValidator>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:Label ID="lblCity" runat="server" Text="City"></asp:Label>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Label ID="lblSuburb" runat="server" Text="Suburb"></asp:Label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:TextBox ID="txtSuburb" runat="server" placeholder="Suburb"></asp:TextBox>
+                                <!-- Suburb Validation-->
+                                <asp:RequiredFieldValidator ID="suburbValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtSuburb"></asp:RequiredFieldValidator>
+                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:TextBox ID="txtCity" runat="server" placeholder="City"></asp:TextBox>
-                            <!-- City Validation-->
-                            <asp:RequiredFieldValidator ID="cityValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtCity"></asp:RequiredFieldValidator>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:Button ID="btnBack" class="btn btn-primary" runat="server" Text="Back" OnClick="btnBack_Click" />
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Label ID="lblCity" runat="server" Text="City"></asp:Label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:TextBox ID="txtCity" runat="server" placeholder="City"></asp:TextBox>
+                                <!-- City Validation-->
+                                <asp:RequiredFieldValidator ID="cityValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtCity"></asp:RequiredFieldValidator>
+                            </div>
                         </div>
-                        <div class="col-sm-12 col-md-2 col-lg-2">
-                            <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Update" OnClick="btnUpdate_Click" />
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Button ID="btnBack" class="btn btn-primary" runat="server" Text="Back" OnClick="btnBack_Click" />
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Update" OnClick="btnUpdate_Click" />
+                            </div>
                         </div>
                     </div>
-                </div>
-        </div>
+           
         </asp:PlaceHolder>
 
             <!--Error: If cant display user -->
@@ -162,6 +162,5 @@
 
         <br />
         <br />
-        </div>
     </form>
 </asp:Content>

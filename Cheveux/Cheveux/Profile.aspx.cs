@@ -408,8 +408,19 @@ namespace Cheveux
                          "<a href='/Manager/UpdateEmployee.aspx?" +
                                     "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
                                     "'> Edit Employee </a>";
+
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
+                    //view schedule
+                    newCell = new TableCell();
+                    newCell.Text =
+                         "<a href='/Stylist/Schedule.aspx?Action=ViewSchedule&" +
+                                    "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                    "'> View Schedule </a>";
+
+                    newCell.Width = 700;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
+
                     //increment rowcount
                     rowCount++;
                 }

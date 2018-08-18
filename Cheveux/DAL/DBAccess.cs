@@ -1800,7 +1800,9 @@ namespace DAL
                             empImage = Convert.ToString(row["UserImage"]),
                             active = Convert.ToChar(row["Active"].ToString()[0]),
                             addLine1 = Convert.ToString(row["AddressLine1"]),
-                            addLine2 = Convert.ToString(row["AddressLine2"])
+                            addLine2 = Convert.ToString(row["AddressLine2"]),
+                            suburb = Convert.ToString(row["Suburb"]),
+                            city = Convert.ToString(row["City"])
                         };
                     }
                     return viewEmployee;

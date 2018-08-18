@@ -277,12 +277,22 @@ namespace Cheveux
                 bool result = false;
                 try
                 {
-                    result = auth.NewUser(User);
+                    if(type== "Email")
+                    {
+                        result = auth.NewUser(User);
+                    }
+                    else if (type=="NewEmp")
+                    {
+                        result = handler.addEmployee(User.UserID, null, null, null,
+                                            null, null, User.FirstName, User.LastName, User.UserName, User.Email,
+                                            User.ContactNo, User.Password, User.UserImage, User.PassRestCode);   
+                    }
                 }
                 catch (ApplicationException err)
                 {
                     Response.Redirect("../Error.aspx?Error='" + err + "'");
                 }
+
 
                 if (result == true)
                 {
@@ -346,22 +356,22 @@ namespace Cheveux
                     //if a employee is being registered by a manager
                     else if (type == "NewEmp")
                     {
-                        if (handler.addEmployee(User.UserID,null,null,null,
-                                                null,null,User.FirstName,User.LastName,User.UserName,User.Email,
-                                                User.ContactNo,User.Password,User.UserImage,User.PassRestCode))
+                        if (result == true)
                         {
                             Response.Redirect("../Manager/UpdateEmployee.aspx?Type=NewEmp&empID=" + User.UserID);
                         }
                         else
                         {
-                            Response.Redirect("~/Error.aspx?UserID");
+                            phAddEmpErr.Visible = true;
+                            lblAddEmpErr.Text = "Unable to add employee at this point in time.<br/>"
+                                                + "Please try again later.";
                         }
                     }
                 }
                 else if (result == false)
                 {
                     //open error page
-                    Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux sereve'");
+                    Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux server'");
                 }
             }
             else
