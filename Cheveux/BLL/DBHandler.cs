@@ -242,9 +242,9 @@ namespace BLL
             return db.GetEmpNames();
         }
 
-        public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate)
+        public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir)
         {
-            return db.GetEmpAgenda(employeeID, bookingDate);
+            return db.GetEmpAgenda(employeeID, bookingDate,sortBy,sortDir);
         }
 
         public SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID)
@@ -428,19 +428,19 @@ namespace BLL
             return db.GetAllStylists();
         }
 
-        public List<SP_GetStylistBookings> getStylistPastBookings(string empID)
+        public List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir)
         {
-            return db.getStylistPastBookings(empID);
+            return db.getStylistPastBookings(empID,sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
-            return db.getStylistPastBookingsDateRange(empID,startDate,endDate);
+            return db.getStylistPastBookingsDateRange(empID,startDate,endDate,sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID)
+        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
-            return db.getStylistUpcomingBookings(empID);
+            return db.getStylistUpcomingBookings(empID,sortBy,sortDir);
         }
 
         public List<SP_AboutStylist> aboutStylist()
@@ -448,44 +448,44 @@ namespace BLL
             return db.aboutStylist();
         }
 
-        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
-            return db.getStylistUpcomingBookingsDR(empID, startDate, endDate);
+            return db.getStylistUpcomingBookingsDR(empID, startDate, endDate,sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
-            return db.getAllStylistsUpcomingBksForDate(bookingDate);
+            return db.getAllStylistsUpcomingBksForDate(bookingDate,sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
-            return db.getAllStylistsUpcomingBksDR(startDate,endDate);
+            return db.getAllStylistsUpcomingBksDR(startDate,endDate,sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings()
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
-            return db.getAllStylistsUpcomingBookings();
+            return db.getAllStylistsUpcomingBookings(sortBy,sortDir);
         }
         
-        public List<SP_GetStylistBookings> getAllStylistsPastBookings()
+        public List<SP_GetStylistBookings> getAllStylistsPastBookings(string sortBy, string sortDir)
         {
-            return db.getAllStylistsPastBookings();
+            return db.getAllStylistsPastBookings(sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date)
+        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date, string sortBy, string sortDir)
         {
-            return db.getAllStylistsPastBksForDate(date);
+            return db.getAllStylistsPastBksForDate(date,sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
-            return db.getAllStylistsPastBookingsDateRange(startDate,endDate);
+            return db.getAllStylistsPastBookingsDateRange(startDate,endDate,sortBy,sortDir);
         }
 
-        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day)
+        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
-            return db.getStylistPastBksForDate(empID, day);
+            return db.getStylistPastBksForDate(empID, day,sortBy,sortDir);
         }
     }
 }

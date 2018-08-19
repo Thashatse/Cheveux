@@ -95,7 +95,8 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = false;
                             phCal.Visible = false;
-                            getUpcomingBookings(cookie["ID"].ToString());
+                            getUpcomingBookings(cookie["ID"].ToString(), 
+                                        drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                         else if (!bxAll.Checked)
                         {
@@ -110,7 +111,8 @@ namespace Cheveux
                             phBookingsErr.Visible = false;
                             phCal.Visible = false;
 
-                            getPastBookings(cookie["ID"].ToString());
+                            getPastBookings(cookie["ID"].ToString(), drpSortBy.SelectedItem.Text, 
+                                                    drpSortDir.SelectedItem.Text);
                         }
                         else if (!bxAll.Checked)
                         {
@@ -152,7 +154,8 @@ namespace Cheveux
                                 {
                                     phBookingsErr.Visible = false;
                                     phCal.Visible = false;
-                                    getUpcomingBookings(empID);
+                                    getUpcomingBookings(empID, drpSortBy.SelectedItem.Text,
+                                                drpSortDir.SelectedItem.Text);
                                 }
                                 else if (!bxAll.Checked)
                                 {
@@ -167,7 +170,8 @@ namespace Cheveux
                                     phBookingsErr.Visible = false;
                                     phCal.Visible = false;
 
-                                    getPastBookings(empID);
+                                    getPastBookings(empID, drpSortBy.SelectedItem.Text,
+                                                        drpSortDir.SelectedItem.Text);
                                 }
                                 else if (!bxAll.Checked)
                                 {
@@ -241,11 +245,11 @@ namespace Cheveux
         }
 
         #region PAST
-        public void getPastBookings(string empID)
+        public void getPastBookings(string empID,string sortBy,string sortDir)
         {
             try
             {
-                bList = handler.getStylistPastBookings(empID);
+                bList = handler.getStylistPastBookings(empID,sortBy,sortDir);
 
                 phPast.Visible = true;
                 tblPast.CssClass= "table table-light table-hover";
@@ -336,11 +340,11 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void pastDateRange(string empID, DateTime startDate, DateTime endDate)
+        public void pastDateRange(string empID, DateTime startDate, DateTime endDate,string sortBy,string sortDir)
         {
             try
             {
-                bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate);
+                bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate,sortBy, sortDir);
 
                 phPast.Visible = true;
                 tblPast.CssClass = "table table-light table-hover";
@@ -436,13 +440,13 @@ namespace Cheveux
         }
         #endregion
         #region UPCOMING
-        public void getUpcomingBookings(string empID)
+        public void getUpcomingBookings(string empID,string sortBy,string sortDir)
         {
             try
             {
                 phUpcoming.Visible = true;
 
-                bList = handler.getStylistUpcomingBookings(empID);
+                bList = handler.getStylistUpcomingBookings(empID,sortBy,sortDir);
 
                 tblUpcoming.Visible = true;
                 tblUpcoming.CssClass = "table table-light table-hover";
@@ -513,12 +517,12 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate)
+        public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate,string sortBy,string sortDir)
         {
             tblUpcoming.Rows.Clear();
             try
             {
-                bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate);
+                bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate,sortBy,sortDir);
 
                 ////phTable.Visible=true;
                 tblUpcoming.CssClass = "table table-light table-hover table-bordered";
@@ -617,7 +621,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getStylistUpcomingBookingsDR(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate);
+                        getStylistUpcomingBookingsDR(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate,
+                                            drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
                 else if (drpViewAppt.SelectedValue == "1")
@@ -631,7 +636,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        pastDateRange(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate);
+                        pastDateRange(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate, 
+                                        drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
             }
@@ -649,7 +655,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getStylistUpcomingBookingsDR(empID, calStart.SelectedDate, calEnd.SelectedDate);
+                        getStylistUpcomingBookingsDR(empID, calStart.SelectedDate, calEnd.SelectedDate,
+                                                drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
                 else if (drpViewAppt.SelectedValue == "1")
@@ -663,7 +670,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        pastDateRange(empID, calStart.SelectedDate, calEnd.SelectedDate);
+                        pastDateRange(empID, calStart.SelectedDate, calEnd.SelectedDate
+                                , drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
             }
@@ -686,7 +694,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getStylistUpcomingBookingsDR(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate);
+                        getStylistUpcomingBookingsDR(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate,
+                                                     drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
                 else if (drpViewAppt.SelectedValue == "1")//past
@@ -700,7 +709,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        pastDateRange(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate);
+                        pastDateRange(cookie["ID"].ToString(), calStart.SelectedDate, calEnd.SelectedDate, 
+                                                drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
             }
@@ -719,7 +729,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getStylistUpcomingBookingsDR(empID, calStart.SelectedDate, calEnd.SelectedDate);
+                        getStylistUpcomingBookingsDR(empID, calStart.SelectedDate, calEnd.SelectedDate, 
+                                                drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
                 else if (drpViewAppt.SelectedValue == "1")//past
@@ -733,7 +744,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        pastDateRange(empID, calStart.SelectedDate, calEnd.SelectedDate);
+                        pastDateRange(empID, calStart.SelectedDate, calEnd.SelectedDate, 
+                                    drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
             }

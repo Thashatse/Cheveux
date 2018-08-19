@@ -110,6 +110,26 @@
 
                     <br />
 
+                    <!--Sorting-->
+                    <asp:PlaceHolder ID="phSorting" runat="server">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4 col-lg-4">
+                                <asp:DropDownList ID="drpSortDir" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:ListItem Text="Ascending" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Descending" Value="1"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="col-xs-12 col-md-4 col-lg-4">
+                                <asp:DropDownList ID="drpSortBy" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:ListItem Text="Date" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Stylist" Value="1"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+                    </asp:PlaceHolder>
+
+                    <br />
+
                     <!--Past Bookings -->
                     <asp:PlaceHolder ID="phPast" runat="server" Visible="false">
                         <asp:Table ID="tblPast" runat="server"></asp:Table>

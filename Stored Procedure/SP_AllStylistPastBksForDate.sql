@@ -18,7 +18,9 @@ GO
 -- Description:	Gets all stylists past bookings for a specific date
 -- =============================================
 CREATE PROCEDURE SP_AllStylistPastBksForDate
-@day datetime
+@day datetime,
+@sortBy nvarchar(max)=null,
+	@sortDir nvarchar(max)=null
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -41,6 +43,26 @@ BEGIN
 	AND    B.Arrived = 'Y' 
 	AND    B.[Date] = @day
 	AND    B.[Date] !> CAST(GETDATE() AS DATE)
-	ORDER BY B.[Date],TS.StartTime asc 
+	ORDER BY 
+		(CASE 
+		 WHEN @sortBy='Stylist' AND @sortDir='Descending'
+		 THEN (SELECT (u.FirstName + ' ' + u.LastName)as[stylist]
+				FROM [USER] u 
+				WHERE u.UserID=B.StylistID)
+		 END) DESC,
+		 (CASE
+		  WHEN @sortBy='Date' AND @sortDir='Descending'
+		  THEN B.[Date]
+		  END) DESC,
+		  (CASE
+		 WHEN @sortBy='Stylist' AND @sortDir='Ascending'
+		 THEN (SELECT (u.FirstName + ' ' + u.LastName)as[stylist]
+				FROM [USER] u 
+				WHERE u.UserID=B.StylistID)
+		 END) ASC,
+		 (CASE
+		  WHEN @sortBy='Date' AND @sortDir='Ascending'
+		  THEN B.[Date]
+		  END) ASC
 END
 GO

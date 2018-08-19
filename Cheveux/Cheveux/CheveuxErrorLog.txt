@@ -1,0 +1,32 @@
+
+TimeStamp: 8/19/2018 11:21:50 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: maryjofficial  Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 434
+
+TimeStamp: 8/20/2018 1:14:38 AM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: keepitonthelolo Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 449

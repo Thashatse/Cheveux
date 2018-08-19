@@ -50,17 +50,17 @@ namespace DAL
         SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID);
         bool UpdateCustVisit(CUST_VISIT visit, BOOKING b);
         bool CreateCustVisit(CUST_VISIT cust_visit);
-        List<SP_GetStylistBookings> getStylistPastBookings(string empID);
-        List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);
-        List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day);
-        List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
-        List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
-        List<SP_GetStylistBookings> getAllStylistsPastBookings();
-        List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate);
+        List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBookings(string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsPastBookings(string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate, string sortBy, string sortDir);
         #endregion
 
         #region search
@@ -101,7 +101,7 @@ namespace DAL
         #endregion
 
         List<SP_GetEmpNames> GetEmpNames();
-        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate);
+        List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
         bool createSalesRecord(string bookingID);

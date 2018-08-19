@@ -22,7 +22,7 @@ namespace Cheveux
         Authentication auth = new Authentication();
         List<SP_GetCustomerBooking> bookingsList = null;
         List<SP_GetBookingServices> bookingServiceList = null;
-
+        SP_CheckForUserType checkUserType = null;
         //set the master page based on the user type
         protected void Page_PreInit(Object sender, EventArgs e)
         {
@@ -202,6 +202,7 @@ namespace Cheveux
                 if (employee.employeeType.Replace(" ", string.Empty) == "S")
                 {
                     specialisationAndBio = handler.viewStylistSpecialisationAndBio(empID);
+                    
                 }
 
                 //diplay the employee details
@@ -410,15 +411,19 @@ namespace Cheveux
 
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //view schedule
-                    newCell = new TableCell();
-                    newCell.Text =
-                         "<a href='/Stylist/Schedule.aspx?Action=ViewSchedule&" +
-                                    "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                    "'> View Schedule </a>";
 
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
+                    if(employee.employeeType.Replace(" ", string.Empty) == "S")
+                    {
+                        // if employee is a stylist allow manager to view schedule
+                        newCell = new TableCell();
+                        newCell.Text =
+                             "<a href='/Stylist/Schedule.aspx?Action=ViewSchedule&" +
+                                        "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                        "'> View Schedule </a>";
+
+                        newCell.Width = 700;
+                        profileTable.Rows[rowCount].Cells.Add(newCell);
+                    }
 
                     //increment rowcount
                     rowCount++;

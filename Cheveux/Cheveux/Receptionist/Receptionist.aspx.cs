@@ -101,7 +101,7 @@ namespace Cheveux
                         displayMAB(drpEmpNames.SelectedValue);
                         #endregion
 
-                        getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate));
+                        getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate),null,null);
 
                         if(AgendaTable.Rows.Count == 1)
                         {
@@ -131,13 +131,13 @@ namespace Cheveux
         }
 
         #region Agenda
-        public void getAgenda(string id, DateTime bookingDate)
+        public void getAgenda(string id, DateTime bookingDate,string sortBy, string sortDir)
         {
             Button btn;
 
             try
             {
-                agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
+                agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
 
                 AgendaTable.CssClass = "table table-light table-hover table-bordered";
                 

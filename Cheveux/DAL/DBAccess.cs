@@ -1359,14 +1359,16 @@ namespace DAL
             return list;
         }
 
-        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate)
+        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir)
         {
             SP_GetEmpAgenda emp = null;
             List<SP_GetEmpAgenda> agenda = new List<SP_GetEmpAgenda>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@EmployeeID", employeeID),
-                new SqlParameter("@Date", bookingDate)
+                new SqlParameter("@Date", bookingDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             try
             {
@@ -2348,13 +2350,15 @@ namespace DAL
 
             }
         }
-        public List<SP_GetStylistBookings> getStylistPastBookings(string empID)
+        public List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@stylistID", empID)
+                new SqlParameter("@stylistID", empID),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             try
             {
@@ -2390,7 +2394,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
@@ -2398,7 +2402,9 @@ namespace DAL
             {
                 new SqlParameter("@stylistID", empID),
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
+                new SqlParameter("@endDate", endDate),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             try
             {
@@ -2434,12 +2440,14 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID)
+        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@stylistID", empID)
+                new SqlParameter("@stylistID", empID),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2476,14 +2484,16 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@stylistID", empID),
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate",endDate)
+                new SqlParameter("@endDate",endDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2520,12 +2530,14 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@bookingDate", bookingDate)
+                new SqlParameter("@bookingDate", bookingDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2562,13 +2574,15 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
+                new SqlParameter("@endDate", endDate),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2605,13 +2619,15 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day)
+        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@stylistID", empID),
-                new SqlParameter("@day", day)
+                new SqlParameter("@day", day),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir",sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2648,89 +2664,101 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings()
-        {
-            SP_GetStylistBookings s = null;
-            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_AllStylistsUpcomingBookings", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            s = new SP_GetStylistBookings
-                            {
-                                BookingID = row["BookingID"].ToString(),
-                                StylistID = row["StylistID"].ToString(),
-                                CustomerID = row["CustomerID"].ToString(),
-                                StylistName = row["StylistName"].ToString(),
-                                FullName = row["FullName"].ToString(),
-                                BookingDate = Convert.ToDateTime(row["Date"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
-                            };
-                            bookings.Add(s);
-                        }
-                    }
-                }
-                return bookings;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        public List<SP_GetStylistBookings> getAllStylistsPastBookings()
-        {
-            SP_GetStylistBookings s = null;
-            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_AllStylistsPastBookings", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            s = new SP_GetStylistBookings
-                            {
-                                BookingID = row["BookingID"].ToString(),
-                                StylistID = row["StylistID"].ToString(),
-                                CustomerID = row["CustomerID"].ToString(),
-                                StylistName = row["StylistName"].ToString(),
-                                FullName = row["FullName"].ToString(),
-                                BookingDate = Convert.ToDateTime(row["Date"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
-                            };
-                            bookings.Add(s);
-                        }
-                    }
-                }
-                return bookings;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@day", date)
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_AllStylistsUpcomingBookings", CommandType.StoredProcedure,pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                FullName = row["FullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                ServiceID = row["ProductID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString(),
+                                Price = row["Price"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetStylistBookings> getAllStylistsPastBookings(string sortBy, string sortDir)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_AllStylistsPastBookings", CommandType.StoredProcedure,pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                FullName = row["FullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                ServiceID = row["ProductID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString(),
+                                Price = row["Price"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date, string sortBy, string sortDir)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@day", date),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir",sortDir)
             };
 
             try
@@ -2767,14 +2795,16 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
+                new SqlParameter("@endDate", endDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
 
             try

@@ -184,6 +184,33 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblDate2;
         
         /// <summary>
+        /// phSorting control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phSorting;
+        
+        /// <summary>
+        /// drpSortDir control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpSortDir;
+        
+        /// <summary>
+        /// drpSortBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpSortBy;
+        
+        /// <summary>
         /// phPast control.
         /// </summary>
         /// <remarks>
