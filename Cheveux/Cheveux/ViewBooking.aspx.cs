@@ -160,22 +160,6 @@ namespace Cheveux
             }
         }
 
-        #region BTN Click's
-        protected void Save_Click(object sender, EventArgs e)
-        {
-            confirm.Visible = true;
-            LogedIn.Visible = false;
-            LogedOut.Visible = false;
-            confirmHeaderPlaceHolder.Text = "";
-            confirmPlaceHolder.Text = "";
-        }
-
-        protected void OK_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Bookings.aspx");
-        }
-        #endregion
-
         #region View Booking
         public void getBookingDeatails(string BookingID, bool pastBooking, bool checkOut)
         {
@@ -372,7 +356,7 @@ namespace Cheveux
                 newCell.Text = "When:";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.bookingStartTime.ToString("HH:mm") + " " + BookingDetails.bookingDate.ToString("dd MMM yyyy"); ;
+                newCell.Text = BookingDetails.bookingStartTime.ToString("HH:mm") + " " + BookingDetails.bookingDate.ToString("dd MMM yyyy");
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                 //increment row count 
@@ -615,7 +599,7 @@ namespace Cheveux
             {
                 SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
                 List<SP_GetBookingServices> bookingServiceList = handler.getBookingServices(BookingID);
-
+                
                 #region Heading
                 if (bookingServiceList.Count == 1)
                 {
@@ -627,7 +611,7 @@ namespace Cheveux
                 {
                     //display a heading
                     BookingLable.Text = "<h2> Edit " + bookingServiceList[0].ServiceName.ToString() +
-                        "& " + bookingServiceList[1].ServiceName.ToString() + " with " +
+                        " & " + bookingServiceList[1].ServiceName.ToString() + " with " +
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
                 }
                 else if (bookingServiceList.Count > 2)
@@ -637,34 +621,156 @@ namespace Cheveux
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
                 }
                 #endregion
-                
-                //show and fill the Table
+
+                //show the edit div
                 Edit.Visible = true;
 
-                editBookingTable.Rows[0].Cells[0].Text = "Service Name:";
+                #region Summary
+                //row counter
+                int rowCount = 0;
 
-                editBookingTable.Rows[1].Cells[0].Text = "Service Description:";
+                //new row
+                TableRow newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
 
-                editBookingTable.Rows[2].Cells[0].Text = "Price:";
+                //date and time
+                TableCell newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Font.Bold = true;
+                newCell.Text = "When";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID="+ BookingDetails.bookingID+ "&EditType=DateTime'> "+
+                    BookingDetails.bookingStartTime.ToString("HH:mm") + " " + BookingDetails.bookingDate.ToString("dd MMM yyyy") 
+                    + " </a>";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                
+                //increment Row Count 
+                rowCount++;
 
-                editBookingTable.Rows[3].Cells[0].Text = "Stylist:";
+                //new row
+                newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
 
-                //creat a drop down list of stylists
-                //get hairstylist info
-                List<SP_GetEmpNames> Stylist = handler.BLL_GetEmpNames();
-                //bind the data to a list
-                DropDownList dropDownStylists = new DropDownList();
-                dropDownStylists.ID = "Stylist";
-                foreach (SP_GetEmpNames emps in Stylist)
+                //stylist
+                newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Font.Bold = true;
+                newCell.Text = "With";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Stylist'> " + 
+                    BookingDetails.stylistFirstName.ToString()
+                +" </a>";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                //increment Row Count 
+                rowCount++;
+
+                //new row
+                newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
+
+                //services
+                newCell = new TableCell();
+                newCell.Width = 300;
+                newCell.Font.Bold = true;
+                if (bookingServiceList.Count == 1)
                 {
-                    dropDownStylists.Items.Add(new ListItem(emps.Name.ToString(), emps.EmployeeID.ToString()));
-                    dropDownStylists.DataBind();
+                    newCell.Text = "Service:";
                 }
-                dropDownStylists.Items.FindByValue(BookingDetails.stylistEmployeeID.ToString()).Selected = true;
+                else if (bookingServiceList.Count > 1)
+                {
+                    newCell.Text = "Services:";
+                }
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Width = 300;
+                if (bookingServiceList.Count == 1)
+                {
+                    newCell = new TableCell();
+                    newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Service'> " +
+                     bookingServiceList[0].ServiceName.ToString() + "</a>";
+                    newCell.Width = 700;
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
 
-                editBookingTable.Rows[5].Cells[0].Text = "Time:";
+                    //increment row count 
+                    rowCount++;
+                }
+                else if (bookingServiceList.Count > 1)
+                {
+                    int i = 0;
+                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    {
+                        if (i > 0)
+                        {
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblEditSummary.Rows.Add(newRow);
+                            newCell = new TableCell();
+                            newCell.Width = 300;
+                            tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                        }
 
-                editBookingTable.Rows[4].Cells[0].Text = "Date:";
+                        newCell = new TableCell();
+                        newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Service'> " +
+                        service.ServiceName.ToString() + "</a>";
+                        newCell.Width = 700;
+                        tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+                        i++;
+                    }
+                }
+
+                if (bookingServiceList.Count == 1)
+                {
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblEditSummary.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Service Description:";
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = bookingServiceList[0].serviceDescripion.ToString();
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+                }
+
+                //increment Row Count 
+                rowCount++;
+                #endregion
+
+                #region Display Edit Div
+                string editType = Request.QueryString["EditType"];
+                if(editType == null)
+                {
+                    divEditNone.Visible = true;
+                }
+                else if (editType == "DateTime")
+                {
+                    divEditDateTime.Visible = true;
+                }
+                else if (editType == "Stylist")
+                {
+                    loadEditStylist();
+                    diveditStylist.Visible = true;
+                }
+                else if (editType == "Service")
+                {
+                    loadEditServices();
+                    divEditService.Visible = true;
+                }
+                #endregion
             }
             catch (ApplicationException Err)
             {
@@ -674,48 +780,184 @@ namespace Cheveux
             }
         }
 
-        //show edit
-        public void showEdit(object sender, EventArgs e)
+        public bool saveEdit(bool stylist, bool dateAndTime, bool service)
         {
-            confirm.Visible = false;
-            Edit.Visible = true;
-            LogedIn.Visible = true;
-        }
-
-        public void commitEdit(object sender, EventArgs e)
-        {
-            LogedIn.Visible = false;
-            LogedOut.Visible = false;
-            BOOKING updatedBooking = new BOOKING();
-            //fill the booking variable 
-
-
-            bool check = false;
+            bool result = false;
             try
             {
-                //edit booking
+                //get current booking details 
+                SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                List<SP_GetBookingServices> bookingServiceList = handler.getBookingServices(BookingID);
+
+                //fill updated booking
+                BOOKING updatedBooking = new BOOKING();
+                updatedBooking.BookingID = BookingID;
+                //date and time
+                if(dateAndTime == false)
+                {
+                    //if unchanged
+                    updatedBooking.SlotNo = BookingDetails.slotNo;
+                    updatedBooking.Date = BookingDetails.bookingDate;
+                }
+                else
+                {
+                    //if changed
+
+                }
+                //services
+                if (service == false)
+                {
+                    //if unchanged
+
+                }
+                else
+                {
+                    //if changed
+
+                }
+                //stylist
+                if (stylist == false)
+                {
+                    //if unchanged
+                    updatedBooking.StylistID = BookingDetails.stylistEmployeeID;
+                }
+                else
+                {
+                    //if changed
+                    updatedBooking.StylistID = rblPickAStylist.SelectedValue;
+                }
+                //commit
+                result = handler.updateBooking(updatedBooking);
             }
-            catch (ApplicationException Err)
+            catch (Exception err)
             {
-                function.logAnError(Err.ToString()
-                    + " An error occurred editing booking id: " + BookingID);
+                function.logAnError("Error commining booking edit to Db in saveEdit(Stylist:"+stylist
+                    +" dateAndTime: "+dateAndTime+" service: "+service+") | bookingID: " + BookingID + 
+                    " | Error:" + err);
+                result = false;
             }
-            if (check == true)
+            return result;
+        }
+
+        #region load div content
+        //Edit
+        public void loadEditError()
+        {
+            diveditStylist.Visible = false;
+            divEditNone.Visible = false;
+            divEditDateTime.Visible = false;
+            divEditService.Visible = false;
+            divEditError.Visible = true;
+        }
+
+        //Stylist
+        public void loadEditStylist()
+        {
+            try
             {
-                confirmHeaderPlaceHolder.Text = "<h1> Your Booking Been Updated </h1>";
-                confirmPlaceHolder.Text = "";
+                SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                List<SP_GetStylists> stylistList = handler.BLL_GetAllStylists();
+                foreach (SP_GetStylists stylist in stylistList)
+                {
+                    ListItem item = new ListItem(stylist.FirstName + " - Specializes in " + stylist.ServiceName,
+                        stylist.UserID);
+                    if (BookingDetails.stylistEmployeeID == stylist.UserID)
+                    {
+                        item.Selected = true;
+                    }
+                    rblPickAStylist.Items.Add(item);
+                }
             }
-            else if (check == false)
+            catch (Exception err)
             {
-                confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your Booking </h1>";
-                confirmPlaceHolder.Text = "Please try again later";
+                function.logAnError("Error loading stylist in loadEditStylist() in viewbooking for edit | " 
+                    + err);
+                loadEditError();
             }
-            yes.Visible = false;
-            no.Visible = false;
-            OK.Visible = true;
+        }
+
+        //Service
+        public void loadEditServices()
+        {
+
         }
         #endregion
-        
+
+        #region btn functions
+        //redirect back to previous page
+        protected void btnDoneEdit_Click(object sender, EventArgs e)
+        {
+            if (PreviousPageAdress == null)
+            {
+                Response.Redirect("Profile.aspx");
+            }
+            else if (PreviousPageAdress == "Receptionist")
+            {
+                Response.Redirect("../Receptionist/Receptionist.aspx");
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewBooking.aspx?Action=Edit&BookingID=" + BookingID);
+        }
+
+        #region Date & Time
+        protected void btnSaveEditDateAndTime_Click(object sender, EventArgs e)
+        {
+            //save edit
+            bool result = saveEdit(false, true, false);
+
+            if (result == true)
+            {
+                //return to edit page
+                btnCancel_Click(sender, e);
+            }
+            else
+            {
+                loadEditError();
+            }
+        }
+        #endregion
+
+        #region Stylist
+        protected void btnSaveEditStylist_Click(object sender, EventArgs e)
+        {
+            //save edit
+            bool result = saveEdit(true, false, false);
+
+            if(result == true)
+            {
+                //return to edit page
+                btnCancel_Click(sender, e);
+            }
+            else
+            {
+                loadEditError();
+            }
+        }
+        #endregion
+
+        #region Service
+        protected void btnSaveEditService_Click(object sender, EventArgs e)
+        {
+            //save edit
+            bool result = saveEdit(false, false, true);
+
+            if (result == true)
+            {
+                //return to edit page
+                btnCancel_Click(sender, e);
+            }
+            else
+            {
+                loadEditError();
+            }
+        }
+        #endregion
+        #endregion
+        #endregion
+
         #region Delete
         public void confirmDeleteBooking(string BookingID)
         {

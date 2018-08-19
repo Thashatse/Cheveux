@@ -290,8 +290,8 @@ namespace DAL
                             stylistFirstName = row["FirstName"].ToString(),
                             bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            slotNo = row["SlotNo"].ToString(),
                             bookingID = row["BookingID"].ToString()
-
                         };
                     }
 
@@ -442,7 +442,6 @@ namespace DAL
                 new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
                 new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
                 new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
-                new SqlParameter("@ServiceID", bookingUpdate.StylistID.ToString()),
                 new SqlParameter("@Date", bookingUpdate.Date)
                 };
 
@@ -2334,7 +2333,8 @@ namespace DAL
                             {
                                 UserID = Convert.ToString(row["UserID"]),
                                 FirstName = Convert.ToString(row["FirstName"]),
-                                ServiceID = Convert.ToString(row["ServiceID"])
+                                ServiceID = Convert.ToString(row["ServiceID"]),
+                                ServiceName = Convert.ToString(row["Name"])
                             };
                             stylistList.Add(stylists);
                         }
