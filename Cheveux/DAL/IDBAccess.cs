@@ -93,7 +93,7 @@ namespace DAL
         #endregion
 
         #region Services
-        //bool AddService(PRODUCT p, SERVICE s);
+        bool AddService(PRODUCT p, SERVICE s);
         bool AddBraidService(BRAID_SERVICE bs);
         List<SP_GetWidth> GetWidths();
         List<SP_GetLength> GetLengths();
