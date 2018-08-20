@@ -124,12 +124,12 @@ namespace BLL
         #endregion
 
         #region Services
-        /*
+        
          public bool BLL_AddService(PRODUCT p, SERVICE s)
         {
             return db.AddService(p, s);
         }
-        */
+        
 
         public List<SP_GetWidth> BLL_GetWidths()
         {
