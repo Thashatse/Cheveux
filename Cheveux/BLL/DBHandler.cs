@@ -487,5 +487,9 @@ namespace BLL
         {
             return db.getStylistPastBksForDate(empID, day,sortBy,sortDir);
         }
+        public bool BLL_AddToBookingService(BookingService bs)
+        {
+            return db.AddToBookingService(bs);
+        }
     }
 }
