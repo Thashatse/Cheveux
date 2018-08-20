@@ -124,6 +124,7 @@ namespace DAL
         List<SP_GetProductTypes> getProductTypes();
         bool deactivateUser(string userID);
         bool AddBooking(BOOKING addBooking);
+        bool AddToBookingService(BookingService bs);
         List<SP_GetServices> GetAllServices();
         List<SP_GetStylists> GetAllStylists();
         List<SP_GetBookedTimes> GetBookedStylistTimes(string stylistID, DateTime bookingDate);
