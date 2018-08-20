@@ -2876,7 +2876,7 @@ namespace DAL
             }
         }
         
-        public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        public bool AddService(PRODUCT p, SERVICE s)
         {
             try
             {
@@ -2888,9 +2888,7 @@ namespace DAL
                     new SqlParameter("@Price", p.Price.ToString()),
                     new SqlParameter("@Slots", s.NoOfSlots.ToString()),
                     new SqlParameter("@Type", s.Type.ToString()),
-                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
-                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
-                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+
                 };
                 return DBHelper.NonQuery("SP_AddService", CommandType.StoredProcedure, pars);
             }
