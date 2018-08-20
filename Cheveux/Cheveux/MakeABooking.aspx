@@ -4,6 +4,7 @@
     Make A Booking - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="bg-secondary text-white" id="Div1">
@@ -25,21 +26,26 @@
                                 <h1>Make A Booking</h1>
                                 <br />
                                 <asp:Label runat="server" ID="lblBookingSummary" Visible="false"></asp:Label>
+                                <br />
                             </div>
-
-                            <div runat="server" id="divServices" visible="true" style="border: solid #F05F40 2px;">
-                                <div class="container">
-                                    <h6><b>Select Service(s)</b></h6>
-                                    <br />
+                            <div class="container">
+                                <h6><b>Select Service(s)</b></h6>
+                                  
                                     <!--Nav Pills for external system-->
                                     <ul class="nav nav-pills nav-stacked">
                                         <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
                                         <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
                                         <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
                                     </ul> <a name="Natural"></a>
+                                <br />
+                            </div>
+
+                            <div runat="server" id="divServices" visible="true"  >
+                                <div class="container">
+                                    
                                     <div class="row">
 
-                                        <div class="col-6">
+                                        <div class="col-5" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
                                             <div runat="server" id="divNatural" visible="true">
                                                
                                                 <h5>Natural</h5>
@@ -61,17 +67,15 @@
                                                 </asp:RadioButtonList>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <asp:PlaceHolder runat="server" ID="Summary" Visible="true">
-                                               
-                                            </asp:PlaceHolder>
-                                        </div>
+                                        <div class="col-2"></div>
+                                        <div class="col-5" style="border: solid #F05F40 2px; width:575px; height:400px;">
+
                                     </div>
                                 </div>
 
                             </div>
 
-                            <div runat="server" id="divStylist" visible="false" style="border: solid #F05F40 2px;">
+                            <div runat="server" id="divStylist" visible="false" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
                                 <div class="container">
                                     <h3>Choose A Hairstylist</h3>
                                     <br />
@@ -80,7 +84,7 @@
                                 </div>
                             </div>
 
-                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px;">
+                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
                                 <div class="container">
                                     <h3>Choose A Date & Time</h3>
                                     <br />
@@ -144,7 +148,7 @@
                                 </div>
                             </div>
 
-                            <div runat="server" id="divSummary" visible="false" style="border: solid #F05F40 2px;">
+                            <div runat="server" id="divSummary" visible="false" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
                                 <div class="container">
                                     <h3>Booking Summary</h3>
                                     <br />

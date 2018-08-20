@@ -22,9 +22,10 @@ namespace Cheveux
         List<SP_GetSlotTimes> slotList = null;
         BOOKING book = null;
         BookingService bookService = null;
+        int count = 0;
         string[,] availableTimes = new string[21,2];
-        List<string> pickedServiceName = null;
-        List<string> pickedServiceID = null;
+        List<string> pickedServiceName;
+        List<string> pickedServiceID;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -180,18 +181,9 @@ namespace Cheveux
                 //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
                 divDateTime.Visible = false;
                 divSummary.Visible = true;
-
-                if(cblPickAServiceN.SelectedValue != null)
+                foreach (string name in pickedServiceName)
                 {
-                    lblServices.Text = cblPickAServiceN.SelectedItem.ToString();
-                }
-                else if(rblPickAServiceB.SelectedValue != null)
-                {
-                    lblServices.Text = rblPickAServiceB.SelectedItem.ToString();
-                }
-                else if(rblPickAServiceA.SelectedValue != null)
-                {
-                    lblServices.Text = rblPickAServiceA.SelectedItem.ToString();
+                    lblServices.Text = name;
                 }
                 lblStylist.Text = rblPickAStylist.SelectedItem.Text.ToString();
                 lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
@@ -247,28 +239,17 @@ namespace Cheveux
                             book.SlotNo = bookingTime["TimeSlot"];
                             book.Date = calBooking.SelectedDate;
                             book.CustomerID = cookie["ID"];
-                            if(cblPickAServiceN.SelectedValue != null)
-                            {
-                                book.ServiceID = cblPickAServiceN.SelectedValue.ToString();
-                            }
-                            else if(rblPickAServiceB.SelectedValue != null)
-                            {
-                                book.ServiceID = rblPickAServiceB.SelectedValue.ToString();
-                            }
-                            else
-                            {
-                                book.ServiceID = rblPickAServiceA.SelectedValue.ToString();
-                            }
                             book.StylistID = rblPickAStylist.SelectedValue;
                             book.Available = "N";
                             handler.BLL_AddBooking(book);
 
-                            /*Add to bookingservice
-                            foreach()
+                            bookService = new BookingService();
+                            foreach(string id in pickedServiceID)
                             {
-
+                                bookService.BookingID = book.BookingID;
+                                bookService.ServiceID = id;
                             }
-                            */
+                            handler.BLL_AddToBookingService(bookService);
 
                             #region Email Notification
                             USER user = handler.GetUserDetails(cookie["ID"]);
@@ -924,8 +905,24 @@ namespace Cheveux
             if (rblPickAServiceA.SelectedValue != "0")
             {             
                 rblPickAServiceB.Enabled = false;
-                pickedServiceID.Add(rblPickAServiceA.SelectedValue);
-                pickedServiceName.Add(rblPickAServiceA.Text);
+                if (pickedServiceID == null)
+                {
+                    if (pickedServiceName == null)
+                    {
+                        pickedServiceName = new List<string>();
+                        pickedServiceID = new List<string>();
+                        pickedServiceID.Add(rblPickAServiceA.SelectedValue);
+                        pickedServiceName.Add(rblPickAServiceA.Text);
+                        count++;
+                    }
+                    
+                }
+                else
+                {
+                    pickedServiceID.Add(rblPickAServiceA.SelectedValue);
+                    pickedServiceName.Add(rblPickAServiceA.Text);
+                    count++;
+                }
 
             }
             else
@@ -940,9 +937,26 @@ namespace Cheveux
 
             if (rblPickAServiceB.SelectedValue != "0")
             {
+                if (pickedServiceID == null)
+                {
+                    if (pickedServiceName == null)
+                    {
+                        pickedServiceID = new List<string>();
+                        pickedServiceName = new List<string>();
+                        pickedServiceID.Add(rblPickAServiceB.SelectedValue);
+                        pickedServiceName.Add(rblPickAServiceB.Text);
+                        count++;
+                    }
+                   
+                }
+                else
+                {
+                    pickedServiceID.Add(rblPickAServiceB.SelectedValue);
+                    pickedServiceName.Add(rblPickAServiceB.Text);
+                    count++;
+                }
                 rblPickAServiceA.Enabled = false;
-                pickedServiceID.Add(rblPickAServiceB.SelectedValue);
-                pickedServiceName.Add(rblPickAServiceB.Text);
+                
             }
             else
             {
@@ -955,12 +969,28 @@ namespace Cheveux
         {
 
             foreach(ListItem item in cblPickAServiceN.Items)
-               {
-                 if (item.Selected)
+            {
+                if (item.Selected)
                  {
+                    if (pickedServiceID == null)
+                    {
+                        if (pickedServiceName == null)
+                        {
+                            pickedServiceName = new List<string>();
+                            pickedServiceID = new List<string>();
+                            pickedServiceID.Add(item.Value);
+                            pickedServiceName.Add(item.Text);
+                            count++;
+                        }
+                      
+                    }
+                    else
+                    {
                         pickedServiceID.Add(item.Value);
                         pickedServiceName.Add(item.Text);
-
+                        count++;
+                    }
+                    
                  }
 
             }
