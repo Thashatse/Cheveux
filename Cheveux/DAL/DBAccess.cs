@@ -3025,6 +3025,24 @@ namespace DAL
             }
 
         }
+        public bool UpdateService(PRODUCT p, SERVICE s)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ServiceID", p.ProductID.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@Slots", s.NoOfSlots.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateService", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
     
     }
 }                  
