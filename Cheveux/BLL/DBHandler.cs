@@ -491,5 +491,9 @@ namespace BLL
         {
             return db.AddToBookingService(bs);
         }
+        public bool BLL_UpdateService(PRODUCT p, SERVICE s)
+        {
+            return db.UpdateService(p, s);
+        }
     }
 }
