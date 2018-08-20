@@ -53,7 +53,6 @@ namespace Cheveux.Manager
         }
         public void getUser(string userID)
         {
-            
             try
             {
                 view = handler.viewEmployee(userID);
@@ -71,7 +70,7 @@ namespace Cheveux.Manager
                 username.Font.Bold = true;
                 tblUserImage.Rows[1].Cells.Add(username);
             }
-            catch(Exception Err)
+            catch (Exception Err)
             {
                 phUsersErr.Visible = true;
                 phMain.Visible = false;
@@ -92,14 +91,14 @@ namespace Cheveux.Manager
                 emp = new EMPLOYEE();
 
                 emp.EmployeeID = userID;
+                emp.Type = rdoType.SelectedValue.ToString();
                 emp.AddressLine1 = txtAddLine1.Text.ToString();
                 emp.AddressLine2 = txtAddLine2.Text.ToString();
-                emp.Type = rdoType.SelectedValue.ToString();
-
+                emp.Suburb = txtSuburb.Text.ToString();
+                emp.City = txtCity.Text.ToString();
                 if (handler.updateEmployee(emp))
                 {
-                    Response.Write("<script>alert('Successful Update.');</script>");
-                    Response.Redirect("../Manager/Employee.aspx",false);
+                    Response.Redirect("../Manager/Employee.aspx?EmployeeID="+emp.EmployeeID.ToString().Replace(" ",string.Empty),false);
                 }
                 else
                 {

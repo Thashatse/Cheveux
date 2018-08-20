@@ -64,6 +64,16 @@
                     </div>
                 </div>
 
+                <!--User Friendly Notification-->
+                <div class="container row" runat="server">
+                    <asp:PlaceHolder ID="phNotif" runat="server" Visible="false">
+                        <div class="col-sm-12 col-md-12 alert alert-success alert-dismissible">
+                            <asp:Label ID="lblNotif" runat="server" Text="Label"></asp:Label>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                    </asp:PlaceHolder>
+                </div>
+
                 <div class="row">
                     <div class="col-md-10">
                         <asp:Label ID="employeeJumbotronLable" runat="server"></asp:Label>

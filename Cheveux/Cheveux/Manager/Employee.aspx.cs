@@ -19,6 +19,7 @@ namespace Cheveux.Manager
         List<SP_ViewEmployee> employees = null;
         List<SP_GetEmployeeTypes> empTypes = null;
 
+        SP_ViewEmployee emp = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Page.IsPostBack)
@@ -63,11 +64,32 @@ namespace Cheveux.Manager
                     drpEmpTyp.Items.RemoveAt(0);
                     drpEmpTyp.SelectedIndex = 0;
                 }
+
+                //upon successful employee update
+                string employeeID = Request.QueryString["EmployeeID"];
+                if(employeeID != null)
+                {
+                    try
+                    {
+                        //get the employees name
+                        emp = handler.viewEmployee(employeeID);
+                        phNotif.Visible = true;
+                        lblNotif.Text = "Update successful for "
+                                        +emp.firstName.ToString() + ' '
+                                        +emp.lastName.ToString();
+                    }
+                    catch (Exception Err)
+                    {
+                        phNotif.Visible = false;
+                        function.logAnError(Err.ToString());
+                    }
+                }
+
+
                 //get the selected sort by and display the results
                 loadEmployeeList(drpEmpTyp.SelectedValue.ToString()[0]);
             }
         }
-
         public void loadEmployeeList(char empType)
         {
             try

@@ -9,7 +9,6 @@ CREATE PROCEDURE SP_UpdateBooking
 	@BookingID nchar(10),
 	@SlotNo nchar(10),
 	@StylistID nchar(30),
-	@ServiceID nchar(10),
 	@Date datetime
 AS
 BEGIN
@@ -18,16 +17,11 @@ BEGIN
 			UPDATE BOOKING
 			SET SlotNo = @SlotNo, 
 				StylistID = @StylistID,
-				ServiceID = @ServiceID,
 				[Date] = @Date,
-				Arrived = 'N'
-			Where BookingID = @BookingID 
-			AND (select Available
-					from BOOKING
-					Where Date = @Date
-					AND SlotNo = @SlotNo
-					AND StylistID = @StylistID) = 'Y'
-					commit transaction
+				Arrived = 'N',
+				NotificationReminder = 0
+			Where BookingID = @BookingID
+		commit transaction
 	end try
 	begin catch
 		if @@TRANCOUNT > 0

@@ -35,6 +35,14 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-9 col-md-12">
+                            <div runat="server" id="divStats">
+                                <!--Stats-->
+                                <h1>Stats </h1>
+
+                            </div>
+
+                            <!-- Line Break -->
+                            <br />
 
                             <!--Todays Bookings-->
                             <h1>Todays Bookings </h1>
@@ -45,16 +53,26 @@
                             <asp:Table ID="tblBookings" runat="server">
                             </asp:Table>
 
+                            <!-- Line Break -->
+                            <br />
+                            <div runat="server" id="divOrders">
+                                <!--Orders-->
+                                <h1>Outstanting Product Orders </h1>
+                                <!-- Orders Table -->
+                                <asp:Table ID="productOrders" runat="server">
+                                </asp:Table>
+                            </div>
+
                         </div>
                         <div class="col-lg-3 col-md-12">
                             <!--Alerts-->
                             <div class="container" runat="server" id="alertsContainer" visible="false" style="border: solid #F05F40 2px;">
                                 <div class="container">
-                                <!-- Alert Table -->
-                                <h1>Alerts </h1>
-                                <asp:Table ID="tblAlerts" runat="server">
-                                </asp:Table>
-                                    </div>
+                                    <!-- Alert Table -->
+                                    <h1>Alerts </h1>
+                                    <asp:Table ID="tblAlerts" runat="server">
+                                    </asp:Table>
+                                </div>
                             </div>
                         </div>
                     </div>

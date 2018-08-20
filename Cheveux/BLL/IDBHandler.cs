@@ -10,6 +10,10 @@ namespace BLL
 {
     public interface IDBHandler
     {
+        #region Bookings
+        List<SP_GetBookingServices> getBookingServices(string BookingID);
+        #endregion
+        
         #region Home Page Features
         List<HomePageFeatures> GetHomePageFeatures();
         #endregion
@@ -47,20 +51,28 @@ namespace BLL
         #region Products
         PRODUCT CheckForProduct(string id);
         #endregion
-        
+
+        #region Services
+        //bool BLL_AddService(PRODUCT p, SERVICE s);
+        List<SP_GetWidth> BLL_GetWidths();
+        List<SP_GetLength> BLL_GetLengths();
+        List<SP_GetStyles> BLL_GetStyles();
+        bool BLL_AddBraidService(BRAID_SERVICE bs);
+        #endregion
+
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID);
-        List<SP_GetStylistBookings> getStylistPastBookings(string empID);
-        List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID);
+        List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir);
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
         List<SP_GetEmpNames> BLL_GetEmpNames();
-        List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate);
+        List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         EMPLOYEE getEmployeeType(string EmployeeID);
         bool updateBooking(BOOKING bookingUpdate);
         bool BLL_CheckIn(BOOKING booking);
@@ -109,21 +121,16 @@ namespace BLL
         List<SP_GetStylists> BLL_GetAllStylists();
         bool deactivateUser(string userID);
         List<SP_AboutStylist> aboutStylist();
-        List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
-        List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
-        //bool BLL_AddService(PRODUCT p, SERVICE s);
-        List<SP_GetWidth> BLL_GetWidths();
-        List<SP_GetLength> BLL_GetLengths();
-        List<SP_GetStyles> BLL_GetStyles();
-        List<SP_GetStylistBookings> getAllStylistsPastBookings();
-        List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate);
-        List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate);
-        List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day);
+        List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsUpcomingBookings(string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsPastBookings(string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir);
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
-        //bool BLL_AddBraidService(BRAID_SERVICE bs);
     }
 }
 

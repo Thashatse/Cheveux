@@ -6,7 +6,7 @@
 -- command (Ctrl-Shift-M) to fill in the parameter 
 -- values below.
 SET ANSI_NULLS ON
-GO
+GO 
 SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
@@ -19,13 +19,11 @@ BEGIN
 	  ,[SlotNo], (select StartTime from TIMESLOT ts where ts.SlotNo = b.[SlotNo]) as StartTime
       ,[CustomerID], u.FirstName, u.LastName, u.UserName, u.PreferredCommunication, u.Email, u.ContactNo
       ,[StylistID], (Select FirstName from [user] where UserID = [StylistID]) as StylistName
-      ,[ServiceID], p.Name, p.Price
       ,[Date]
       ,[NotificationReminder]
-  FROM [BOOKING] b, [USER] u, PRODUCT p
+  FROM [BOOKING] b, [USER] u
   WHERE u.UserID = b.CustomerID
-		AND P.ProductID = b.ServiceID
 		AND [NotificationReminder] = 0
-		AND [Date] between getdate() and DATEADD(DAY, 2, GETDATE())
+		AND [Date] between getdate() and DATEADD(DAY, 1, GETDATE())
 END
 GO

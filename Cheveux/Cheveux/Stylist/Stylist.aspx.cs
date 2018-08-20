@@ -47,7 +47,7 @@ namespace Cheveux
                 lblDate.Text = dayDate;
 
                 cookie = Request.Cookies["CheveuxUserID"];
-                getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
+                getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate),null,null);
 
                 //if theres no booking for the day dont display the tables headings
                 if (AgendaTable.Rows.Count == 1)
@@ -64,13 +64,13 @@ namespace Cheveux
             }
         }
 
-        public void getAgenda(string id, DateTime bookingDate)
+        public void getAgenda(string id, DateTime bookingDate,string sortBy,string sortDir)
         {
             Button btn;
 
             try
             {
-                agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
+                agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
 
                 AgendaTable.CssClass = "table table-light table-hover";
 
@@ -222,8 +222,13 @@ namespace Cheveux
                             buttonCell.Controls.Add(btn);
                         }
                         else if(cv != null)
-                        {   //if visit record already exists dont show 'create visit record' button
-                            buttonCell.Text = "<a href='#'>View Visit</a>";
+                        {   //if visit record already exists stylist should be able to update the visit
+                            buttonCell.Text =   "<button type='button' class='btn btn-primary'>"
+                                                +"<a href='../Stylist/CustomerVisit.aspx?bookingID="
+                                                +n.BookingID.ToString().Replace(" ", string.Empty)
+                                                + "&customerID="+n.UserID.ToString().Replace(" ", string.Empty)
+                                                + "' style='color:White' >Update Customer Visit Record</a>"
+                                                + "</button>";
                         }
                         
                         //add the cell to the row

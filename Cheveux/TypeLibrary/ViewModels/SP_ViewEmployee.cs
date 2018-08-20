@@ -19,5 +19,7 @@ namespace TypeLibrary.ViewModels
         public char active { get; set; }
         public string addLine1 { get; set; }
         public string addLine2 { get; set; }
+        public string suburb { get; set; }
+        public string city { get; set; }
     }
 }

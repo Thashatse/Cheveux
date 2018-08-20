@@ -378,6 +378,7 @@
     </Compile>
     <Compile Include="Receptionist\Receptionist.aspx.cs">
       <DependentUpon>Receptionist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Receptionist\Receptionist.aspx.designer.cs">
       <DependentUpon>Receptionist.aspx</DependentUpon>

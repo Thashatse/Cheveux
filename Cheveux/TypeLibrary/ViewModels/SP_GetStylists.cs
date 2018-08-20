@@ -11,5 +11,6 @@ namespace TypeLibrary.ViewModels
         public string FirstName { get; set; }
         public string UserID { get; set; }
         public string  ServiceID { get; set; }
+        public string  ServiceName { get; set; }
     }
 }

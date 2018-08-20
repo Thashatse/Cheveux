@@ -72,7 +72,6 @@ namespace DAL
         #endregion
 
         #region Email/SMS Notifications
-
         public List<OGBkngNoti> GetOGBkngNotis()
         {
             List<OGBkngNoti> oGBkngNotiList = new List<OGBkngNoti>();
@@ -99,11 +98,8 @@ namespace DAL
                                 Email = row["Email"].ToString(),
                                 ContactNo = row["ContactNo"].ToString(),
                                 stylistFirstName = row["StylistName"].ToString(),
-                                ServiceID = row["ServiceID"].ToString(),
-                                Price = Convert.ToDecimal(row["Price"]),
                                 Date = Convert.ToDateTime(row["Date"].ToString()),
                                 NotificationReminder = Convert.ToBoolean(row["NotificationReminder"]),
-                                serviceName = row["Name"].ToString(),
                                 StylistID = row["StylistID"].ToString()
                             };
                             oGBkngNotiList.Add(oGBkngNoti);
@@ -254,14 +250,10 @@ namespace DAL
                         {
                             SP_GetCustomerBooking booking = new SP_GetCustomerBooking
                             {
-                                serviceName = row["Name"].ToString(),
-                                serviceDescripion = row["ProductDescription"].ToString(),
-                                servicePrice = row["Price"].ToString(),
                                 stylistFirstName = row["FirstName"].ToString(),
                                 bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                                 bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                                 bookingID = row["BookingID"].ToString(),
-                                serviceID = row["ProductID"].ToString(),
                                 stylistEmployeeID = row["StylistID"].ToString()
                             };
                             customerBookings.Add(booking);
@@ -275,7 +267,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
+        
         public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -294,19 +286,53 @@ namespace DAL
                         DataRow row = table.Rows[0];
                         booking = new SP_GetCustomerBooking
                         {
-                            serviceName = row["Name"].ToString(),
-                            serviceDescripion = row["ProductDescription"].ToString(),
-                            servicePrice = row["Price"].ToString(),
                             stylistEmployeeID = row["UserID"].ToString(),
                             stylistFirstName = row["FirstName"].ToString(),
                             bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            slotNo = row["SlotNo"].ToString(),
                             bookingID = row["BookingID"].ToString()
-
                         };
                     }
 
                     return booking;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_GetBookingServices> getBookingServices(string BookingID)
+        {
+            List<SP_GetBookingServices> bookingServices = new List<SP_GetBookingServices>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServices",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetBookingServices service = new SP_GetBookingServices
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                ServiceID = row["ServiceID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                serviceDescripion = row["ProductDescription"].ToString(),
+                                Price = Convert.ToDouble(row["Price"])
+                            };
+                            bookingServices.Add(service);
+                        }
+                    }
+                    return bookingServices;
                 }
             }
             catch (Exception e)
@@ -351,15 +377,11 @@ namespace DAL
                         {
                             SP_GetCustomerBooking booking = new SP_GetCustomerBooking
                             {
-                                serviceName = row["Name"].ToString(),
-                                serviceDescripion = row["ProductDescription"].ToString(),
-                                servicePrice = row["Price"].ToString(),
                                 stylistFirstName = row["FirstName"].ToString(),
                                 bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                                 bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                                 bookingID = row["BookingID"].ToString(),
                                 arrived = row["Arrived"].ToString()[0],
-                                serviceID = row["ProductID"].ToString(),
                                 stylistEmployeeID = row["StylistID"].ToString()
                             };
                             customerBookings.Add(booking);
@@ -392,15 +414,11 @@ namespace DAL
                         DataRow row = table.Rows[0];
                         booking = new SP_GetCustomerBooking
                         {
-                            serviceName = row["Name"].ToString(),
-                            serviceDescripion = row["ProductDescription"].ToString(),
-                            servicePrice = row["Price"].ToString(),
                             stylistFirstName = row["FirstName"].ToString(),
                             bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                             bookingID = row["BookingID"].ToString(),
                             arrived = row["Arrived"].ToString()[0],
-                            serviceID = row["ProductID"].ToString(),
                             stylistEmployeeID = row["StylistID"].ToString(),
                             CustFullName = row["CustFullName"].ToString(),
                             CustomerID = row["CustomerID"].ToString()
@@ -424,7 +442,6 @@ namespace DAL
                 new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
                 new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
                 new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
-                new SqlParameter("@ServiceID", bookingUpdate.StylistID.ToString()),
                 new SqlParameter("@Date", bookingUpdate.Date)
                 };
 
@@ -498,7 +515,8 @@ namespace DAL
                             bookingDate = Convert.ToDateTime(table.Rows[0]["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(table.Rows[0]["StartTime"].ToString()),
                             bookingID = table.Rows[0]["BookingID"].ToString(),
-                            CustomerID = table.Rows[0]["BookingID"].ToString(),
+                            CustomerID = table.Rows[0]["CustomerID"].ToString(),
+                            CustFullName = table.Rows[0]["custFullName"].ToString(),
                             serviceID = table.Rows[0]["ServiceID"].ToString()
                         };
                     }
@@ -610,6 +628,32 @@ namespace DAL
                         };
                     }
                     return serviceDTL;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public string getSalePaymentType(string saleID)
+        {
+            string paymentType = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SaleID", saleID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        DataRow row = table.Rows[0];
+                        paymentType = Convert.ToString(row["PaymentType"]);
+                    }
+                    return paymentType;
                 }
             }
             catch (Exception e)
@@ -1063,33 +1107,7 @@ namespace DAL
             }
         }
         #endregion
-
-        public string getSalePaymentType(string saleID)
-        {
-            string paymentType = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@SaleID", saleID)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        DataRow row = table.Rows[0];
-                        paymentType = Convert.ToString(row["PaymentType"]);
-                    }
-                    return paymentType;
-                }
-            }
-            catch (Exception e) 
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        
         public bool createSalesDTLRecord(SALES_DTL detailLine)
         {
             SqlParameter[] pars = new SqlParameter[]
@@ -1341,14 +1359,16 @@ namespace DAL
             return list;
         }
 
-        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate)
+        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir)
         {
             SP_GetEmpAgenda emp = null;
             List<SP_GetEmpAgenda> agenda = new List<SP_GetEmpAgenda>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@EmployeeID", employeeID),
-                new SqlParameter("@Date", bookingDate)
+                new SqlParameter("@Date", bookingDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             try
             {
@@ -1778,7 +1798,9 @@ namespace DAL
                             empImage = Convert.ToString(row["UserImage"]),
                             active = Convert.ToChar(row["Active"].ToString()[0]),
                             addLine1 = Convert.ToString(row["AddressLine1"]),
-                            addLine2 = Convert.ToString(row["AddressLine2"])
+                            addLine2 = Convert.ToString(row["AddressLine2"]),
+                            suburb = Convert.ToString(row["Suburb"]),
+                            city = Convert.ToString(row["City"])
                         };
                     }
                     return viewEmployee;
@@ -2115,9 +2137,11 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
+                    new SqlParameter("@type", emp.Type.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
-                    new SqlParameter("@type", emp.Type.ToString())
+                    new SqlParameter("@suburb", emp.Suburb.ToString()),
+                    new SqlParameter("@city", emp.City.ToString())
                 };
                 return DBHelper.NonQuery("SP_UpdateEmployee", CommandType.StoredProcedure, pars);
             }
@@ -2311,7 +2335,8 @@ namespace DAL
                             {
                                 UserID = Convert.ToString(row["UserID"]),
                                 FirstName = Convert.ToString(row["FirstName"]),
-                                ServiceID = Convert.ToString(row["ServiceID"])
+                                ServiceID = Convert.ToString(row["ServiceID"]),
+                                ServiceName = Convert.ToString(row["Name"])
                             };
                             stylistList.Add(stylists);
                         }
@@ -2325,13 +2350,15 @@ namespace DAL
 
             }
         }
-        public List<SP_GetStylistBookings> getStylistPastBookings(string empID)
+        public List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@stylistID", empID)
+                new SqlParameter("@stylistID", empID),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             try
             {
@@ -2367,7 +2394,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
@@ -2375,7 +2402,9 @@ namespace DAL
             {
                 new SqlParameter("@stylistID", empID),
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
+                new SqlParameter("@endDate", endDate),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             try
             {
@@ -2411,12 +2440,14 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID)
+        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@stylistID", empID)
+                new SqlParameter("@stylistID", empID),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2453,14 +2484,16 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@stylistID", empID),
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate",endDate)
+                new SqlParameter("@endDate",endDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2497,12 +2530,14 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@bookingDate", bookingDate)
+                new SqlParameter("@bookingDate", bookingDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2539,13 +2574,15 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
+                new SqlParameter("@endDate", endDate),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2582,13 +2619,15 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day)
+        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@stylistID", empID),
-                new SqlParameter("@day", day)
+                new SqlParameter("@day", day),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir",sortDir)
             };
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             try
@@ -2625,89 +2664,101 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings()
-        {
-            SP_GetStylistBookings s = null;
-            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_AllStylistsUpcomingBookings", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            s = new SP_GetStylistBookings
-                            {
-                                BookingID = row["BookingID"].ToString(),
-                                StylistID = row["StylistID"].ToString(),
-                                CustomerID = row["CustomerID"].ToString(),
-                                StylistName = row["StylistName"].ToString(),
-                                FullName = row["FullName"].ToString(),
-                                BookingDate = Convert.ToDateTime(row["Date"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
-                            };
-                            bookings.Add(s);
-                        }
-                    }
-                }
-                return bookings;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        public List<SP_GetStylistBookings> getAllStylistsPastBookings()
-        {
-            SP_GetStylistBookings s = null;
-            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_AllStylistsPastBookings", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            s = new SP_GetStylistBookings
-                            {
-                                BookingID = row["BookingID"].ToString(),
-                                StylistID = row["StylistID"].ToString(),
-                                CustomerID = row["CustomerID"].ToString(),
-                                StylistName = row["StylistName"].ToString(),
-                                FullName = row["FullName"].ToString(),
-                                BookingDate = Convert.ToDateTime(row["Date"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
-                            };
-                            bookings.Add(s);
-                        }
-                    }
-                }
-                return bookings;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             SqlParameter[] pars = new SqlParameter[]
             {
-                new SqlParameter("@day", date)
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_AllStylistsUpcomingBookings", CommandType.StoredProcedure,pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                FullName = row["FullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                ServiceID = row["ProductID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString(),
+                                Price = row["Price"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetStylistBookings> getAllStylistsPastBookings(string sortBy, string sortDir)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_AllStylistsPastBookings", CommandType.StoredProcedure,pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                FullName = row["FullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                ServiceID = row["ProductID"].ToString(),
+                                ServiceName = row["Name"].ToString(),
+                                ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString(),
+                                Price = row["Price"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date, string sortBy, string sortDir)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@day", date),
+                new SqlParameter("@sortBy",sortBy),
+                new SqlParameter("@sortDir",sortDir)
             };
 
             try
@@ -2744,14 +2795,16 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate)
+        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
             List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
             SqlParameter[] pars = new SqlParameter[]
             {
                 new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
+                new SqlParameter("@endDate", endDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
             };
 
             try
@@ -2940,5 +2993,16 @@ namespace DAL
 
 
         }
+        public bool AddBraidService(BRAID_SERVICE bs)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+            };
+            return DBHelper.NonQuery("SP_AddBraidService", CommandType.StoredProcedure, pars);
+        }
+    
     }
 }                  

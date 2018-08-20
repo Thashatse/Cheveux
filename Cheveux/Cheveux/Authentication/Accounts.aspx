@@ -122,7 +122,7 @@
 <!--line break-->
                                 <br />
                                 <!--rest Button -->
-                                <a href="Accounts.aspx?action=Reset">Forgot Password?</a>
+                                <a href="Accounts.aspx?action=Reset" runat="server" id="aRestPass" visible="false">Forgot Password?</a>
                                 <!--line break-->
                                 <br />
                                 <br />

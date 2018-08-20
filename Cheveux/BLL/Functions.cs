@@ -285,22 +285,83 @@ namespace BLL
                 List<OGBkngNoti> oGBkngNotiList = Handler.GetOGBkngNotis();
                 foreach (OGBkngNoti oGBkngNoti in oGBkngNotiList)
                 {
+                    List<SP_GetBookingServices> bookingServiceList = Handler.getBookingServices(oGBkngNoti.BookingID.ToString());
                     //check preferd means on comunication
                     if (oGBkngNoti.PreferredCommunication == 'E')
                     {
                         //send an email notification
                         var body = new System.Text.StringBuilder();
-                        body.AppendFormat("Hello, " + oGBkngNoti.FirstName.ToString() + ",");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"You have a booking with "+oGBkngNoti.stylistFirstName.ToString() + " Tomorow ("+oGBkngNoti.Date.ToString("dd MMM yyyy")+") at "+oGBkngNoti.StartTime.ToString("hh:mm")+".");
-                        body.AppendLine(@"You booking is for "+oGBkngNoti.serviceName.ToString() + " at a cost of R"+ string.Format("{0:#.00}", oGBkngNoti.Price.ToString()) +".");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/Profile.aspx.");
-                        body.AppendLine(@"See you tomorow at "+oGBkngNoti.StartTime.ToString("hh:mm") + ".");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"Regards,");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"The Cheveux Team");
+
+                        //construct the email boady
+                        if (bookingServiceList.Count == 1)
+                        {
+                            body.AppendFormat("Hello, " + oGBkngNoti.FirstName.ToString() + ",");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"You have a booking with " + oGBkngNoti.stylistFirstName.ToString() +
+                                " Tomorow (" + oGBkngNoti.Date.ToString("dd MMM yyyy") + ") at " +
+                                oGBkngNoti.StartTime.ToString("HH:mm") + ".");
+                            body.AppendLine(@"You booking is for " + bookingServiceList[0].ServiceName.ToString() +
+                                " at a cost of R" + string.Format("{0:#.00}", bookingServiceList[0].Price.ToString()) + ".");                           body.AppendLine(@"");
+                            body.AppendLine(@"View or change your booking details here: "+
+                                "http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + 
+                                oGBkngNoti.BookingID.ToString().Replace(" ", string.Empty) + ".");
+                            body.AppendLine(@"See you tomorow at " + oGBkngNoti.StartTime.ToString("HH:mm") + ".");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"Regards,");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"The Cheveux Team");
+                        }
+                        else if (bookingServiceList.Count == 2)
+                        {
+                            //calculate Price
+                            double price = 0;
+                            foreach (SP_GetBookingServices servicePrice in bookingServiceList)
+                            {
+                                price += servicePrice.Price;
+                            }
+                            body.AppendFormat("Hello, " + oGBkngNoti.FirstName.ToString() + ",");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"You have a booking with " + oGBkngNoti.stylistFirstName.ToString() +
+                                " Tomorow (" + oGBkngNoti.Date.ToString("dd MMM yyyy") + ") at " +
+                                oGBkngNoti.StartTime.ToString("HH:mm") + ".");
+                            body.AppendLine(@"You booking is for " + bookingServiceList[0].ServiceName.ToString() +
+                                " & " + bookingServiceList[1].ServiceName.ToString() + " at a cost of R" +
+                                string.Format("{0:#.00}", price) + "."); body.AppendLine(@"");
+                            body.AppendLine(@"View or change your booking details here: " +
+                                "http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" +
+                                oGBkngNoti.BookingID.ToString().Replace(" ", string.Empty) + ".");
+                            body.AppendLine(@"See you tomorow at " + oGBkngNoti.StartTime.ToString("HH:mm") + ".");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"Regards,");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"The Cheveux Team");
+                        }
+                        else if (bookingServiceList.Count > 2)
+                        {
+                            //calculate Price
+                            double price = 0;
+                            foreach (SP_GetBookingServices servicePrice in bookingServiceList)
+                            {
+                                price += servicePrice.Price;
+                            }
+                            body.AppendFormat("Hello, " + oGBkngNoti.FirstName.ToString() + ",");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"You have a booking with " + oGBkngNoti.stylistFirstName.ToString() + 
+                                " Tomorow (" + oGBkngNoti.Date.ToString("dd MMM yyyy") + ") at " + 
+                                oGBkngNoti.StartTime.ToString("HH:mm") + ".");
+                            body.AppendLine(@"You booking will cost of R" +
+                                string.Format("{0:#.00}", price) + "."); body.AppendLine(@"");
+                            body.AppendLine(@"View or change your booking details here: "+
+                                "http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + 
+                                oGBkngNoti.BookingID.ToString().Replace(" ", string.Empty) + ".");
+                            body.AppendLine(@"See you tomorow at " + oGBkngNoti.StartTime.ToString("HH:mm") + ".");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"Regards,");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"The Cheveux Team");
+                        }
+                        
+                        //send the email
                         sendEmailAlert(oGBkngNoti.Email.ToString(), oGBkngNoti.FirstName.ToString() + " " + oGBkngNoti.lastName.ToString(),
                             "Don't Forget Your Booking Tommorow",
                             body.ToString(),
