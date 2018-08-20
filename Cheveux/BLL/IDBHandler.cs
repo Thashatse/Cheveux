@@ -53,7 +53,7 @@ namespace BLL
         #endregion
 
         #region Services
-        //bool BLL_AddService(PRODUCT p, SERVICE s);
+        bool BLL_AddService(PRODUCT p, SERVICE s);
         List<SP_GetWidth> BLL_GetWidths();
         List<SP_GetLength> BLL_GetLengths();
         List<SP_GetStyles> BLL_GetStyles();
