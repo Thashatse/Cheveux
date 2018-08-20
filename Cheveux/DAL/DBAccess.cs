@@ -473,7 +473,7 @@ namespace DAL
                         {
                             SP_GetBookedTimes times = new SP_GetBookedTimes
                             {
-                                SlotNo = Convert.ToString(row["SlotNo"])
+                                SlotNo = Convert.ToString(row["SlotNo"]),
                             };
                             bookings.Add(times);
                         }

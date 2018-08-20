@@ -37,7 +37,7 @@
                             <!--Edit Booking Table -->
                             <div runat="server" id="Edit" visible="false">
                                 <div class="row">
-                                    <div class="col-md-12 col-lg-6">
+                                    <div class="col-md-12 col-lg-5">
                                         <!-- Summary -->
                                         <!--Line Break-->
                                         <br />
@@ -51,7 +51,7 @@
                                         <br />
                                     </div>
 
-                                    <div class="col-md-12 col-lg-6">
+                                    <div class="col-md-12 col-lg-7">
                                         <!-- edit Pane -->
                                         <div runat="server" id="divEditNone" visible="false" class="text-center">
                                             <!--Line Break-->
@@ -76,6 +76,67 @@
                                             <br />
                                             <!--Lable-->
                                             <h3>Date & Time: </h3>
+                                            <!--Line Break-->
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-12">
+                                                    <!-- Calander -->
+                                                    <asp:Calendar ID="calMAB" runat="server" CssClass="bg-secondary text-primary"
+                                                        SelectedDate="<%#DateTime.Today%>" OnDayRender="calMAB_DayRender"
+                                                        OnSelectionChanged="calMAB_SelectionChanged" AutoPostBack="True"></asp:Calendar>
+                                                <!--Line Break-->
+                                            <br />
+                                                </div>
+                                                <!-- Times -->
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <h5>Morning</h5>
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning1" OnClick="btnMorning1_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning2" OnClick="btnMorning2_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning3" OnClick="btnMorning3_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning4" OnClick="btnMorning4_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning5" OnClick="btnMorning5_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning6" OnClick="btnMorning6_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning7" OnClick="btnMorning7_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning8" OnClick="btnMorning8_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning9" OnClick="btnMorning9_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnMorning10" OnClick="btnMorning10_Click" Visible="false" AutoPostBack="true" />
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <h5>Afternoon</h5>
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon11" OnClick="btnAfternoon11_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon12" OnClick="btnAfternoon12_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon13" OnClick="btnAfternoon13_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon14" OnClick="btnAfternoon14_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon15" OnClick="btnAfternoon15_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon16" OnClick="btnAfternoon16_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon17" OnClick="btnAfternoon17_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon18" OnClick="btnAfternoon18_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon19" OnClick="btnAfternoon19_Click" Visible="false" AutoPostBack="true" /><br />
+                                                            <br />
+                                                            <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon20" OnClick="btnAfternoon20_Click" Visible="false" AutoPostBack="true" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <!--Line Break-->
                                             <br />
                                             <asp:Button ID="btnCancelEditDateAndTime" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel_Click" />
