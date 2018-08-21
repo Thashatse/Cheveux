@@ -18,12 +18,11 @@ namespace Cheveux
         List<SP_GetEmpAgenda> agenda = null;
         List<SP_GetStylistBookings> bList = null;
         List<SP_GetEmpNames> list = null;
-
+        
         string today = DateTime.Now.ToString("yyyy-MM-dd");
         protected void Page_Load(object sender, EventArgs e)
         {
             errorCssStyles();
-
             cookie = Request.Cookies["CheveuxUserID"];
 
             if (cookie == null)
@@ -78,6 +77,7 @@ namespace Cheveux
         {
             if (drpViewAppt.SelectedValue == "0")
             {
+
                 //upcoming
                 phNames.Visible = false;
                 phCalendars.Visible = false;
@@ -147,7 +147,6 @@ namespace Cheveux
                 }
                 else if (empSelectionType.SelectedValue == "1")
                 {
-                    
                     //stylist
                     phNames.Visible = true;
                     phCalendars.Visible = false;
@@ -929,7 +928,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1026,7 +1025,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1122,7 +1121,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1222,7 +1221,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1318,7 +1317,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1415,7 +1414,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1742,6 +1741,19 @@ namespace Cheveux
                 {
                     e.Day.IsSelectable = false;
                 }
+            }
+        }
+        protected void empSelectionType_Changed(object sender, EventArgs e)
+        {
+            if (empSelectionType.SelectedValue == "0")
+            {
+                drpSortBy.Items.RemoveAt(1);
+                drpSortBy.Items.Add("Stylist");
+            }
+            else if (empSelectionType.SelectedValue == "1")
+            {
+                drpSortBy.Items.RemoveAt(1);
+                drpSortBy.Items.Add("Customer");
             }
         }
     }

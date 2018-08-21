@@ -259,33 +259,27 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 220;
                 date.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 120;
                 time.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 150;
                 customer.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 150;
                 svName.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblPast.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -315,11 +309,6 @@ namespace Cheveux
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
                 + b.ServiceName.ToString() + "</a>";
                     tblPast.Rows[rowCount].Cells.Add(servNameCell);
-
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceDescription.ToString() + "</a>";
-                    tblPast.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -354,33 +343,27 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 200;
+                date.Width = 220;
                 date.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 50;
+                time.Width = 120;
                 time.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 100;
+                customer.Width = 150;
                 customer.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 200;
+                svName.Width = 150;
                 svName.Font.Bold = true;
                 tblPast.Rows[0].Cells.Add(svName);
-
-                TableCell svDesc = new TableCell();
-                svDesc.Text = "Description";
-                svDesc.Width = 400;
-                svDesc.Font.Bold = true;
-                tblPast.Rows[0].Cells.Add(svDesc);
 
                 TableCell empty = new TableCell();
                 empty.Width = 200;
@@ -410,11 +393,6 @@ namespace Cheveux
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
                                         + b.ServiceName.ToString() + "</a>";
                     tblPast.Rows[rowCount].Cells.Add(servNameCell);
-
-                    TableCell servDescCell = new TableCell();
-                    servDescCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceDescription.ToString() + "</a>";
-                    tblPast.Rows[rowCount].Cells.Add(servDescCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -456,28 +434,31 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 240;
+                date.Width = 220;
                 date.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 90;
+                time.Width = 120;
                 time.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 150;
                 customer.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 150;
                 svName.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(svName);
 
+                TableCell empty = new TableCell();
+                empty.Width = 200;
+                tblUpcoming.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
                 foreach (SP_GetStylistBookings b in bList)
@@ -504,7 +485,14 @@ namespace Cheveux
                 + b.ServiceName.ToString() + "</a>";
                     tblUpcoming.Rows[rowCount].Cells.Add(servNameCell);
 
-                    
+                    TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&BookingType=Past" +
+                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    tblUpcoming.Rows[rowCount].Cells.Add(buttonCell);
+
                     rowCount++;
                 }
             }
@@ -532,25 +520,25 @@ namespace Cheveux
 
                 TableCell date = new TableCell();
                 date.Text = "Date";
-                date.Width = 240;
+                date.Width = 220;
                 date.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
                 time.Text = "Time";
-                time.Width = 90;
+                time.Width = 120;
                 time.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(time);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 150;
                 customer.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 150;
                 svName.Font.Bold = true;
                 tblUpcoming.Rows[0].Cells.Add(svName);
 

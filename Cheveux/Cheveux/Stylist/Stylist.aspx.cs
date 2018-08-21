@@ -129,11 +129,11 @@ namespace Cheveux
                     AgendaTable.Rows.Add(r);
 
                     TableCell start = new TableCell();
-                    start.Text = n.StartTime.ToString();
+                    start.Text = n.StartTime.ToString("dd-MM-yyyy");
                     AgendaTable.Rows[i].Cells.Add(start);
 
                     TableCell end = new TableCell();
-                    end.Text = n.EndTime.ToString();
+                    end.Text = n.EndTime.ToString("dd-MM-yyyy");
                     AgendaTable.Rows[i].Cells.Add(end);
 
                     TableCell c = new TableCell();

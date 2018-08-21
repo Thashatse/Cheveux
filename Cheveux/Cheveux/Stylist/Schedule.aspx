@@ -14,8 +14,8 @@
         </div>
         <br />
         <div class="row">
-            <div class="col-md-2 col-sm-1"></div>
-            <div class="col-md-8 col-sm-10">
+            <div class="col-md-1 col-sm-1"></div>
+            <div class="col-md-10 col-sm-10">
                 <!-- If stylist is not logged in-->
                 <asp:PlaceHolder ID="phLogIn" runat="server">
                     <div class="container" runat="server" id="LoggedOut">
@@ -47,7 +47,7 @@
                             </div>
                         </asp:PlaceHolder>
 
-                        <asp:Label ID="Header" runat="server" Text="View Schedule" Font-Bold="true" Font-Size="Large"></asp:Label>
+                        <asp:Label ID="Header" runat="server" Text="View Schedule" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                         <!--Line Break-->
                         <div class="container">
                             <br />
@@ -114,15 +114,17 @@
                     <asp:PlaceHolder ID="phSorting" runat="server">
                         <div class="row">
                             <div class="col-xs-12 col-md-4 col-lg-4">
+                                Direction : 
                                 <asp:DropDownList ID="drpSortDir" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
                                     <asp:ListItem Text="Ascending" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Descending" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="col-xs-12 col-md-4 col-lg-4">
+                                Sort By : 
                                 <asp:DropDownList ID="drpSortBy" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
                                     <asp:ListItem Text="Date" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Stylist" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="Customer" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </div>
