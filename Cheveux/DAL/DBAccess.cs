@@ -1519,7 +1519,6 @@ namespace DAL
                     new SqlParameter("@Slot", addBooking.SlotNo.ToString()),
                     new SqlParameter("@CustomerID", addBooking.CustomerID.ToString()),
                     new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
-                    new SqlParameter("@ServiceID", addBooking.ServiceID.ToString()),
                     new SqlParameter("@Date", addBooking.Date.ToString()),
                 };
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
