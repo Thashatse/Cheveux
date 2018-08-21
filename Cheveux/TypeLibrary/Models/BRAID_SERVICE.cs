@@ -8,6 +8,7 @@ namespace TypeLibrary.Models
 {
     public class BRAID_SERVICE
     {
+        public string ProductID { get; set; }
         public string StyleID { get; set; }
         public string LengthID { get; set; }
         public string WidthID { get; set; }
