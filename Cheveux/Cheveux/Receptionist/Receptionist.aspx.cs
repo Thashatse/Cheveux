@@ -186,6 +186,10 @@ namespace Cheveux
                 arrived.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
+                TableCell edit = new TableCell();
+                edit.Width = 200;
+                AgendaTable.Rows[0].Cells.Add(edit);
+
                 TableCell checkin = new TableCell();
                 checkin.Width = 200;
                 AgendaTable.Rows[0].Cells.Add(checkin);
@@ -232,8 +236,16 @@ namespace Cheveux
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
 
-                    //create cell that will be populated by the button and add to row.. cell index: 6
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    AgendaTable.Rows[i].Cells.Add(buttonCell);
+
+                    //create cell that will be populated by the button and add to row.. cell index: 6
+                    buttonCell = new TableCell();
                     buttonCell.Width = 200;
                     buttonCell.Height = 50;
 

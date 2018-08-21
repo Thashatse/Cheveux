@@ -23,6 +23,7 @@ namespace Cheveux
         List<SP_GetCustomerBooking> bookingsList = null;
         List<SP_GetBookingServices> bookingServiceList = null;
         SP_CheckForUserType checkUserType = null;
+
         //set the master page based on the user type
         protected void Page_PreInit(Object sender, EventArgs e)
         {

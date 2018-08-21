@@ -887,6 +887,7 @@ namespace Cheveux
                         //the stylist is curently selected
                         text = stylist.FirstName + " - Specializes in " + stylist.ServiceName;
                         value = stylist.UserID;
+                        item.Selected = true;
                         selctedStylistIndex = stylistIndexCount;
                     }
                     else
@@ -930,8 +931,8 @@ namespace Cheveux
                     stylistIndexCount++;
                 }
 
-                //curent stylist
-                rblPickAStylist.Items[selctedStylistIndex].Selected = true;
+                //curent stylist (Fix Needed)
+                //rblPickAStylist.Items[selctedStylistIndex].Selected = true;
 
                 //unavalible stylists
                 if(disabledStylisIndex.Count != 0)

@@ -291,7 +291,9 @@ namespace DAL
                             bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                             slotNo = row["SlotNo"].ToString(),
-                            bookingID = row["BookingID"].ToString()
+                            bookingID = row["BookingID"].ToString(),
+                            CustFullName = row["CustFullName"].ToString(),
+                            CustomerID = row["CustomerID"].ToString()
                         };
                     }
 
