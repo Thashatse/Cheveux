@@ -125,16 +125,6 @@ namespace Cheveux
                 function.logAnError(err.ToString());
             }
 
-            TableRow newRow = new TableRow();
-            newRow.Height = 50;
-            tblSideSummary.Rows.Add(newRow);
-
-            TableCell newCell = new TableCell();
-            newCell.Text = "Choose a service to begin booking process...";
-            newCell.Width = 400;
-            //newCell.VerticalAlign = ;
-            //newCell.HorizontalAlign = ;
-            tblSideSummary.Rows[0].Cells.Add(newCell);
 
         }
 
@@ -190,12 +180,34 @@ namespace Cheveux
             else if (btnNext.Text == "Booking Summary")
             {
                 //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
+                rblPickAServiceA_SelectedIndexChanged(sender, e);
+                rblPickAServiceB_SelectedIndexChanged(sender, e);
+                cblPickAServiceN_SelectedIndexChanged(sender, e);
                 divDateTime.Visible = false;
-                divSummary.Visible = true;
-                foreach (string name in pickedServiceName)
+              
+                if (pickedServiceID != null)
                 {
-                    lblServices.Text = name;
+                    int serviceCount = 0;
+                    foreach (string name in pickedServiceName)
+                    {
+                        if (serviceCount == 0)
+                        {
+                            lblServices.Text = name;
+                            serviceCount++;
+                        }
+                        else
+                        {
+                            lblServices.Text += ", " + name;
+                        }
+                        
+                    }
                 }
+                else
+                {
+                    lblErrorSummary.Visible = true;
+                    lblErrorSummary.Text = "There was trouble retrieving the services";
+                }
+
                 lblStylist.Text = rblPickAStylist.SelectedItem.Text.ToString();
                 lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
                 HttpCookie bookingTime = Request.Cookies["BookTime"];
@@ -242,7 +254,10 @@ namespace Cheveux
                     if (Authcookie["UT"].ToString()[0] == 'C') {
                         //Make Booking
                         try
-                        {   
+                        {
+                            rblPickAServiceA_SelectedIndexChanged(sender, e);
+                            rblPickAServiceB_SelectedIndexChanged(sender, e);
+                            cblPickAServiceN_SelectedIndexChanged(sender, e);
                             //Add to booking
                             book = new BOOKING();
                             book.BookingID = function.GenerateRandomBookingID();
@@ -259,8 +274,9 @@ namespace Cheveux
                             {
                                 bookService.BookingID = book.BookingID;
                                 bookService.ServiceID = id;
+                                handler.BLL_AddToBookingService(bookService);
                             }
-                            handler.BLL_AddToBookingService(bookService);
+
 
                             #region Email Notification
                             USER user = handler.GetUserDetails(cookie["ID"]);
@@ -319,8 +335,6 @@ namespace Cheveux
             else if (btnPrevious.Text == "Choose Date & Time")
             {
                 divDateTime.Visible = true;
-                divSummary.Visible = false;
-
                 btnPrevious.Visible = true;
                 btnPrevious.Text = "Choose Hairstylist";
                 btnNext.Text = "Choose Date & Time";
