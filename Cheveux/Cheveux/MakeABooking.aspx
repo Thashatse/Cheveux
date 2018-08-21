@@ -4,7 +4,6 @@
     Make A Booking - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="bg-secondary text-white" id="Div1">
@@ -25,66 +24,81 @@
                             <div class="jumbotron  bg-dark text-white">
                                 <h1>Make A Booking</h1>
                                 <br />
-                                <asp:Label runat="server" ID="lblBookingSummary" Visible="false"></asp:Label>
+                                <asp:Label runat="server" ID="lblErrorSummary" Visible="false"></asp:Label>
                                 <br />
                             </div>
                             <div class="container">
                                 <h6><b>Select Service(s)</b></h6>
-                                  
-                                    <!--Nav Pills for external system-->
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
-                                        <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
-                                        <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
-                                    </ul> <a name="Natural"></a>
+
+                                <!--Nav Pills for external system-->
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
+                                    <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
+                                    <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
+                                </ul>
+                                <a name="Natural"></a>
                                 <br />
                             </div>
 
-                            <div runat="server" id="divServices" visible="true"  >
+                            <div runat="server" id="divServices" visible="true">
                                 <div class="container">
-                                    
+
                                     <div class="row">
 
-                                        <div class="col-5" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px; overflow-x: scroll;">
                                             <div runat="server" id="divNatural" visible="true">
-                                               
+
                                                 <h5>Natural</h5>
                                                 <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="cblPickAServiceN_SelectedIndexChanged">
-                                                </asp:CheckBoxList><br /><a name="Application"></a>
+                                                </asp:CheckBoxList><br />
+                                                <a name="Application"></a>
                                             </div>
 
                                             <div runat="server" id="divApplication" visible="true">
-                                                
+
                                                 <h5>Application</h5>
                                                 <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
-                                                </asp:RadioButtonList><br /><a name="Braid"></a>
+                                                </asp:RadioButtonList><br />
+                                                <a name="Braid"></a>
                                             </div>
 
                                             <div runat="server" id="divBraids" visible="true">
-                                                
+
                                                 <h5>Braids</h5>
                                                 <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
                                                 </asp:RadioButtonList>
                                             </div>
                                         </div>
                                         <div class="col-2"></div>
-                                        <div class="col-5" style="border: solid #F05F40 2px; width:575px; height:400px;">
-
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px;">
+                                            <asp:Table runat="server" ID="tblSideSummary">
+                                             </asp:Table>
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
 
-                            <div runat="server" id="divStylist" visible="false" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
+                            
+                            <div runat="server" id="divStylist" visible="false" >
                                 <div class="container">
+                                    <div class="row">
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px; overflow-x: scroll;">
                                     <h3>Choose A Hairstylist</h3>
                                     <br />
                                     <asp:RadioButtonList runat="server" ID="rblPickAStylist">
                                     </asp:RadioButtonList>
+                                            </div>
+                                        <div class="col-2"></div>
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px;">
+                                            <asp:Table runat="server" ID="tblSide">
+                                             </asp:Table>
+                                        </div>
+                                        </div>
                                 </div>
                             </div>
 
-                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
+                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px; width: 575px; height: 400px; overflow-x: scroll;">
                                 <div class="container">
                                     <h3>Choose A Date & Time</h3>
                                     <br />
@@ -148,7 +162,7 @@
                                 </div>
                             </div>
 
-                            <div runat="server" id="divSummary" visible="false" style="border: solid #F05F40 2px; width:575px; height:400px; overflow-x:scroll;">
+                            <div runat="server" id="divSummary" visible="false" style="border: solid #F05F40 2px; width: 575px; height: 400px; overflow-x: scroll;">
                                 <div class="container">
                                     <h3>Booking Summary</h3>
                                     <br />

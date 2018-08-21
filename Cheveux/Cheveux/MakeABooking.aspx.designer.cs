@@ -13,13 +13,13 @@ namespace Cheveux {
     public partial class MakeABooking {
         
         /// <summary>
-        /// lblBookingSummary control.
+        /// lblErrorSummary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBookingSummary;
+        protected global::System.Web.UI.WebControls.Label lblErrorSummary;
         
         /// <summary>
         /// divServices control.
@@ -85,6 +85,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.RadioButtonList rblPickAServiceB;
         
         /// <summary>
+        /// tblSideSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblSideSummary;
+        
+        /// <summary>
         /// divStylist control.
         /// </summary>
         /// <remarks>
@@ -101,6 +110,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblPickAStylist;
+        
+        /// <summary>
+        /// tblSide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblSide;
         
         /// <summary>
         /// divDateTime control.

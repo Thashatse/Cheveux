@@ -79,7 +79,7 @@ namespace Cheveux
             {
                 function.logAnError("unable to comunicate with the database on Make A Booking page: " +
                     err);
-                lblBookingSummary.Text = "Database connection failed. Please try again later";
+                lblErrorSummary.Text = "Database connection failed. Please try again later";
                 divServices.Visible = false;
 
 
@@ -125,6 +125,17 @@ namespace Cheveux
                 function.logAnError(err.ToString());
             }
 
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            tblSideSummary.Rows.Add(newRow);
+
+            TableCell newCell = new TableCell();
+            newCell.Text = "Choose a service to begin booking process...";
+            newCell.Width = 400;
+            //newCell.VerticalAlign = ;
+            //newCell.HorizontalAlign = ;
+            tblSideSummary.Rows[0].Cells.Add(newCell);
+
         }
 
         #region View
@@ -144,13 +155,13 @@ namespace Cheveux
                 
                 if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
                 {
-                    lblBookingSummary.Visible = true;
-                    lblBookingSummary.Text = "Please select a service(s) before moving to the next step!";
+                    lblErrorSummary.Visible = true;
+                    lblErrorSummary.Text = "Please select a service(s) before moving to the next step!";
                     divServices.Visible = true;
                 }
                 else
                 {
-                    lblBookingSummary.Visible = false;
+                    lblErrorSummary.Visible = false;
                     divServices.Visible = false;
                     divStylist.Visible = true;
                     btnPrevious.Visible = true;
@@ -162,8 +173,8 @@ namespace Cheveux
             {           
                 if(rblPickAStylist.SelectedValue.ToString() == "")
                 {
-                    lblBookingSummary.Visible = true;
-                    lblBookingSummary.Text = "Please select a hairstylist before moving to the next step!";
+                    lblErrorSummary.Visible = true;
+                    lblErrorSummary.Text = "Please select a hairstylist before moving to the next step!";
                     divStylist.Visible = true;
                 }
                 else 
