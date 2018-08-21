@@ -124,12 +124,12 @@ namespace BLL
         #endregion
 
         #region Services
-        /*
+        
          public bool BLL_AddService(PRODUCT p, SERVICE s)
         {
             return db.AddService(p, s);
         }
-        */
+        
 
         public List<SP_GetWidth> BLL_GetWidths()
         {
@@ -486,6 +486,14 @@ namespace BLL
         public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
             return db.getStylistPastBksForDate(empID, day,sortBy,sortDir);
+        }
+        public bool BLL_AddToBookingService(BookingService bs)
+        {
+            return db.AddToBookingService(bs);
+        }
+        public bool BLL_UpdateService(PRODUCT p, SERVICE s)
+        {
+            return db.UpdateService(p, s);
         }
     }
 }

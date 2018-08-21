@@ -53,11 +53,12 @@ namespace BLL
         #endregion
 
         #region Services
-        //bool BLL_AddService(PRODUCT p, SERVICE s);
+        bool BLL_AddService(PRODUCT p, SERVICE s);
         List<SP_GetWidth> BLL_GetWidths();
         List<SP_GetLength> BLL_GetLengths();
         List<SP_GetStyles> BLL_GetStyles();
         bool BLL_AddBraidService(BRAID_SERVICE bs);
+        bool BLL_UpdateService(PRODUCT p, SERVICE s);
         #endregion
 
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
@@ -83,6 +84,7 @@ namespace BLL
         bool BLL_UpdateCustVisit(CUST_VISIT visit, BOOKING b);
         bool BLL_CreateCustVisit(CUST_VISIT cust_visit);
         bool BLL_AddBooking(BOOKING addBooking);
+        bool BLL_AddToBookingService(BookingService bs);
         List<SP_GetBookedTimes> BLL_GetBookedStylistTimes(string stylistID, DateTime bookingDate);
         List<SP_GetSlotTimes> BLL_GetAllTimeSlots();
         List<SP_GetServices> BLL_GetAllServices();

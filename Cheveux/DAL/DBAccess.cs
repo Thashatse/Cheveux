@@ -291,7 +291,9 @@ namespace DAL
                             bookingDate = Convert.ToDateTime(row["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
                             slotNo = row["SlotNo"].ToString(),
-                            bookingID = row["BookingID"].ToString()
+                            bookingID = row["BookingID"].ToString(),
+                            CustFullName = row["CustFullName"].ToString(),
+                            CustomerID = row["CustomerID"].ToString()
                         };
                     }
 
@@ -473,7 +475,7 @@ namespace DAL
                         {
                             SP_GetBookedTimes times = new SP_GetBookedTimes
                             {
-                                SlotNo = Convert.ToString(row["SlotNo"])
+                                SlotNo = Convert.ToString(row["SlotNo"]),
                             };
                             bookings.Add(times);
                         }
@@ -2876,7 +2878,7 @@ namespace DAL
             }
         }
         
-        public bool AddService(PRODUCT p, SERVICE s, BRAID_SERVICE bs)
+        public bool AddService(PRODUCT p, SERVICE s)
         {
             try
             {
@@ -2888,9 +2890,7 @@ namespace DAL
                     new SqlParameter("@Price", p.Price.ToString()),
                     new SqlParameter("@Slots", s.NoOfSlots.ToString()),
                     new SqlParameter("@Type", s.Type.ToString()),
-                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
-                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
-                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+
                 };
                 return DBHelper.NonQuery("SP_AddService", CommandType.StoredProcedure, pars);
             }
@@ -2995,13 +2995,55 @@ namespace DAL
         }
         public bool AddBraidService(BRAID_SERVICE bs)
         {
-            SqlParameter[] pars = new SqlParameter[]
+            try
             {
-                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
-                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
-                    new SqlParameter("@WidthID", bs.WidthID.ToString())
-            };
-            return DBHelper.NonQuery("SP_AddBraidService", CommandType.StoredProcedure, pars);
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                        new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                        new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                        new SqlParameter("@WidthID", bs.WidthID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddBraidService", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool AddToBookingService(BookingService bs)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@BookingID", bs.BookingID.ToString()),
+                    new SqlParameter("@ServiceID", bs.ServiceID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddToBookingService", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+        public bool UpdateService(PRODUCT p, SERVICE s)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ServiceID", p.ProductID.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@Slots", s.NoOfSlots.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateService", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
         }
     
     }

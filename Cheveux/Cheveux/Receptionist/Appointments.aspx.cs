@@ -20,6 +20,7 @@ namespace Cheveux
         List<SP_GetEmpNames> list = null;
         
         string today = DateTime.Now.ToString("yyyy-MM-dd");
+
         protected void Page_Load(object sender, EventArgs e)
         {
             errorCssStyles();
@@ -73,6 +74,7 @@ namespace Cheveux
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
         }
+
         public void DropDownChanges()
         {
             if (drpViewAppt.SelectedValue == "0")
@@ -687,12 +689,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text = 
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
 
@@ -708,6 +718,7 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+
         public void getStylistUpcomingBksForDate(string id, DateTime bookingDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
@@ -787,12 +798,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
                     rowCount++;
@@ -808,6 +827,7 @@ namespace Cheveux
                 function.logAnError(E.ToString());
             }
         }
+
         public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
@@ -875,12 +895,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
@@ -978,12 +1006,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
                     rowCount++;
@@ -998,6 +1034,7 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+
         public void getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
@@ -1075,12 +1112,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
@@ -1094,6 +1139,7 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+
         public void getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
@@ -1141,6 +1187,10 @@ namespace Cheveux
                 empty.Width = 200;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
+                empty = new TableCell();
+                empty.Width = 200;
+                tblSchedule.Rows[0].Cells.Add(empty);
+
                 int rowCount = 1;
                 foreach (SP_GetStylistBookings b in bList)
                 {
@@ -1171,12 +1221,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type='button' class='btn btn-default'>" +
+                    "<a href='../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
                     rowCount++;
@@ -1554,6 +1612,7 @@ namespace Cheveux
                 }
             }
         }
+
         protected void calStart_SelectionChanged(object sender, EventArgs e)
         {
             lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
@@ -1640,6 +1699,7 @@ namespace Cheveux
                 }
             }
         }
+
         protected void calEnd_SelectionChanged(object sender, EventArgs e)
         {
             //lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
@@ -1726,6 +1786,7 @@ namespace Cheveux
                 }
             }
         }
+
         protected void scheduleCalender_DayRender(object sender, DayRenderEventArgs e)
         {
             if (drpViewAppt.SelectedValue == "0")

@@ -93,7 +93,7 @@ namespace DAL
         #endregion
 
         #region Services
-        //bool AddService(PRODUCT p, SERVICE s);
+        bool AddService(PRODUCT p, SERVICE s);
         bool AddBraidService(BRAID_SERVICE bs);
         List<SP_GetWidth> GetWidths();
         List<SP_GetLength> GetLengths();
@@ -124,6 +124,7 @@ namespace DAL
         List<SP_GetProductTypes> getProductTypes();
         bool deactivateUser(string userID);
         bool AddBooking(BOOKING addBooking);
+        bool AddToBookingService(BookingService bs);
         List<SP_GetServices> GetAllServices();
         List<SP_GetStylists> GetAllStylists();
         List<SP_GetBookedTimes> GetBookedStylistTimes(string stylistID, DateTime bookingDate);
@@ -136,5 +137,6 @@ namespace DAL
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_SaleOfHairstylist> getSaleOfHairstylist (string stylistID, DateTime startDate, DateTime endDate);
         List<SP_AboutStylist> aboutStylist();
+        bool UpdateService(PRODUCT p, SERVICE s);
     }
 }
