@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Updates An Existing Booking
 -- =============================================
-CREATE PROCEDURE SP_UpdateBooking 
+alter PROCEDURE SP_UpdateBooking 
 	@BookingID nchar(10),
 	@SlotNo nchar(10),
 	@StylistID nchar(30),
@@ -20,7 +20,8 @@ BEGIN
 				[Date] = @Date,
 				Arrived = 'N',
 				NotificationReminder = 0
-			Where BookingID = @BookingID
+			Where (BookingID = @BookingID
+					or  BOOKING.primaryBookingID = @BookingID)
 		commit transaction
 	end try
 	begin catch

@@ -235,24 +235,23 @@ namespace Cheveux
                     present.Width = 100;
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
-
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    AgendaTable.Rows[i].Cells.Add(buttonCell);
-
-                    //create cell that will be populated by the button and add to row.. cell index: 6
-                    buttonCell = new TableCell();
-                    buttonCell.Width = 200;
-                    buttonCell.Height = 50;
-
-
+                    
+                    //check in BTN
                     if (function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "No")
                     {
-                                                
+                        //edit
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+
+                        //create cell that will be populated by the button and add to row.. cell index: 6
+                        buttonCell = new TableCell();
+                        buttonCell.Width = 200;
+                        buttonCell.Height = 50;
+
                         //create button
                         btn = new Button();
                         btn.Text = "Check-in";
@@ -305,9 +304,14 @@ namespace Cheveux
                         //add cell to row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }
+                    //check Out BTN
                     else if(function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "Yes")
                     {
-                        
+                        //edit
+                        TableCell emptybuttonCell = new TableCell();
+                        emptybuttonCell.Text = "";
+                        AgendaTable.Rows[i].Cells.Add(emptybuttonCell);
+
                         //create button
                         TableCell newCell = new TableCell();
                         newCell.Text = "<button type = 'button' class='btn btn-primary'>" +

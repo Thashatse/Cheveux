@@ -1323,6 +1323,7 @@ namespace Cheveux
                     // if there aren't let the user know
                     upcomingBookingsLable.Text =
                         "<p> No Upcoming Bookings </p>";
+                    upcomingBookings.Visible = false;
                 }
                 else
                 {
@@ -1378,7 +1379,7 @@ namespace Cheveux
             {
                 newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "'>" + bookingServiceList[0].ServiceName.ToString() +
-                    " & " + bookingServiceList[1].ServiceName.ToString() + "</a>";
+                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
             }
             else if (bookingServiceList.Count > 2)
             {
@@ -1400,7 +1401,7 @@ namespace Cheveux
             newCell.Text =
                 "<a href = '../ViewBooking.aspx?Action=Cancel&BookingID=" +
                 booking.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=Bookings.aspx'>Cancel Booking   </a> &nbsp; &nbsp;  " +
+                "&PreviousPage=Profile.aspx'>Cancel Booking   </a> &nbsp; &nbsp;  " +
 
                 "<button type = 'button' class='btn btn-default'>" +
                 "<a href = '../ViewBooking.aspx?Action=Edit&BookingID=" +
@@ -1531,7 +1532,7 @@ namespace Cheveux
             {
                 newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "'>" + bookingServiceList[0].ServiceName.ToString() +
-                    " & " + bookingServiceList[1].ServiceName.ToString() + "</a>";
+                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
             }
             else if (bookingServiceList.Count > 2)
             {

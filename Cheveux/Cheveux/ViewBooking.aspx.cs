@@ -123,6 +123,7 @@ namespace Cheveux
                         //edit the booking
                         editBooking(BookingID);
                     }
+                    #region Cancel Booking
                     else if (action == "Cancel")
                     {
                         //confirm the delete the booking
@@ -130,22 +131,10 @@ namespace Cheveux
                     }
                     else if (action == "CancelConfirmed")
                     {
-                        //delete the booking
-                        deleteBooking(BookingID);
-                        //Set the page to redirect to the previous page in the querstring
-                        if (PreviousPageAdress != null)
-                        {
-                            BackButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = '" + PreviousPageAdress + ">Done</a></button>";
-                        }
-                        else
-                        {
-                            BackButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = 'Bookings.aspx'>Done</a></button>";
-                        }
+                            //delete the booking
+                            deleteBooking(BookingID);
                     }
+                    #endregion
                 }
                 else
                 {
@@ -203,7 +192,7 @@ namespace Cheveux
                 {
                     //display a heading
                     BookingLable.Text = "<h2> " + bookingServiceList[0].ServiceName.ToString() +
-                    " & " +  bookingServiceList[1].ServiceName.ToString() + " with " +
+                    ", " +  bookingServiceList[1].ServiceName.ToString() + " with " +
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
                 }
                 else if (bookingServiceList.Count > 2)
@@ -355,7 +344,7 @@ namespace Cheveux
                 BookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "When:";
+                newCell.Text = "Date & Time:";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = BookingDetails.bookingStartTime.ToString("HH:mm") + " " + BookingDetails.bookingDate.ToString("dd MMM yyyy");
@@ -640,7 +629,7 @@ namespace Cheveux
                 TableCell newCell = new TableCell();
                 newCell.Width = 150;
                 newCell.Font.Bold = true;
-                newCell.Text = "When";
+                newCell.Text = "Time & Date";
                 tblEditSummary.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Width = 150;
@@ -661,7 +650,7 @@ namespace Cheveux
                 newCell = new TableCell();
                 newCell.Width = 150;
                 newCell.Font.Bold = true;
-                newCell.Text = "With";
+                newCell.Text = "Stylist";
                 tblEditSummary.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Width = 150;
@@ -748,6 +737,18 @@ namespace Cheveux
                     rowCount++;
                 }
 
+                //cancel booking BTN
+                newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
+                newCell = new TableCell();
+                newCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?Action=Cancel&BookingID=" +
+                    BookingID.ToString().Replace(" ", string.Empty) +
+                    "&PreviousPage=Default.aspx'>Cancel Booking</a></button>";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                
                 //increment Row Count 
                 rowCount++;
                 #endregion
@@ -796,6 +797,7 @@ namespace Cheveux
             bool result = false;
             try
             {
+                #region update record
                 //get current booking details 
                 SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
                 List<SP_GetBookingServices> bookingServiceList = handler.getBookingServices(BookingID);
@@ -841,6 +843,63 @@ namespace Cheveux
                 }
                 //commit
                 result = handler.updateBooking(updatedBooking);
+                #endregion
+
+                #region change email
+                //get booking details
+                BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                //get user details
+                USER user = handler.GetUserDetails(BookingDetails.CustomerID);
+                //send an email notification
+                var body = new System.Text.StringBuilder();
+                body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                body.AppendLine(@"");
+                body.AppendLine(@"");
+                if (dateAndTime == true)
+                {
+                    //if changed
+                    body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " has been updated.");
+                }
+                else
+                {
+                    body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " has been updated.");
+                }
+                body.AppendLine(@"");
+                //date and time
+                if (dateAndTime == true)
+                {
+                    //if changed
+                    body.AppendLine(@"Your new date & time is " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " at "
+                    +BookingDetails.bookingStartTime.ToString("HH:mm"));
+                    body.AppendLine(@"");
+                }
+
+                //services
+                if (service == true)
+                {
+                    //if changed
+
+                    body.AppendLine(@"");
+                }
+
+                //stylist
+                if (stylist == true)
+                {
+                    //if changed
+                    body.AppendLine(@"Your new stylist is " + BookingDetails.stylistFirstName);
+                    body.AppendLine(@"");
+                }
+                
+                body.AppendLine(@"View your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + BookingDetails.bookingID.ToString().Replace(" ", string.Empty));
+                body.AppendLine(@"");
+                body.AppendLine(@"Regards,");
+                body.AppendLine(@"");
+                body.AppendLine(@"The Cheveux Team");
+                function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                    "Booking Updated",
+                    body.ToString(),
+                    "Bookings Cheveux");
+                #endregion
             }
             catch (Exception err)
             {
@@ -1623,21 +1682,41 @@ namespace Cheveux
             try
             {
                 SP_GetCustomerBooking BookingDetails =
-                        handler.getCustomerUpcomingBookingDetails(BookingID);
+                    handler.getCustomerUpcomingBookingDetails(BookingID);
+                List<SP_GetBookingServices> bookingServiceList =
+                    handler.getBookingServices(BookingID);
 
-                //display a heading
-                BookingLable.Text = "<div class='jumbotron'> <h1> Are you sure you want to cancel booking, </h1> " +
-                    " <p>" + BookingDetails.serviceName.ToString() +
+                #region get the service
+                string bookedServcices = "";
+                int serviceCount = 0;
+                foreach (SP_GetBookingServices service in bookingServiceList)
+                {
+                    if(serviceCount == 0)
+                    {
+                        bookedServcices = service.ServiceName;
+                        serviceCount++;
+                    }
+                    else
+                    {
+                        bookedServcices += ", "+ service.ServiceName;
+                    }
+                }
+                #endregion
+
+                #region  display a Confirmation
+                BookingLable.Text =
+                    "<h1> Are you sure you want to cancel booking, </h1> " +
+                    " <p>" + bookedServcices +
                     " with " + BookingDetails.stylistFirstName.ToString() +
                     " on " + BookingDetails.bookingDate.ToString("dd-MM-yyyy") +
-                    " at " + BookingDetails.bookingStartTime.ToString("HH:mm") + "? " +
-                    "</p>  <button type = 'button' class='btn btn-default'>" +
-                "<a href='javascript:goBack()'>No</a></button>  " +
-               "<button type = 'button' class='btn btn-danger'>" +
-                "<a href = ViewBooking.aspx?Action=CancelConfirmed&BookingID=" +
-                BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=" + PreviousPageAdress + ">Yes</a></button>" +
-               "</div> ";
+                    " at " + BookingDetails.bookingStartTime.ToString("HH:mm") + "? </p>  " +
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href='javascript:goBack()'>No</a></button>  " +
+                    "<button type = 'button' class='btn btn-danger'>" +
+                    "<a href = ViewBooking.aspx?Action=CancelConfirmed&BookingID=" +
+                    BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
+                    "&PreviousPage="+PreviousPageAdress+">Yes</a></button>";
+                #endregion
             }
             catch (Exception Err)
             {
@@ -1651,11 +1730,32 @@ namespace Cheveux
         {
             try
             {
+                SP_GetCustomerBooking BookingDetails =
+                        handler.getCustomerUpcomingBookingDetails(BookingID);
                 bool success =
                         handler.deleteBooking(BookingID);
                 //Let teh user know it was a success or not
                 if (success == true)
                 {
+                    #region Cancle Confirm Email
+                    //get user details
+                    USER user = handler.GetUserDetails(BookingDetails.CustomerID);
+                    //send an email notification
+                    var body = new System.Text.StringBuilder();
+                    body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Your booking is with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") +" has been canceled.");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"We would love to have you another time make a booking here: http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx" + ".");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Regards,");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"The Cheveux Team");
+                    function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                        "Booking Canceled",
+                        body.ToString(),
+                        "Bookings Cheveux");
+                    #endregion
                     Response.Redirect(PreviousPageAdress);
                 }
                 else
@@ -1681,7 +1781,8 @@ namespace Cheveux
         SP_GetCustomerBooking BookingDetails = null;
 
         public void checkOut(string BookingID)
-        {            
+        {
+            total = 0.0;
             //display the booking detail
             try
             {

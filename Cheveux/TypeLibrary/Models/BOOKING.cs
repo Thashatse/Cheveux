@@ -9,6 +9,7 @@ namespace TypeLibrary.Models
     public class BOOKING
     {
         public string BookingID { get; set; }
+        public string primaryBookingID { get; set; }
         public string SlotNo { get; set; }
         public string CustomerID { get; set; }
         public string StylistID { get; set; }

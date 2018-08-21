@@ -284,10 +284,11 @@ namespace Cheveux
                             var body = new System.Text.StringBuilder();
                             body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
                             body.AppendLine(@"");
+                            body.AppendLine(@"");
                             body.AppendLine(@"Your booking is with " + rblPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
                             body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
                             body.AppendLine(@"");
-                            body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty) + ".");
+                            body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
                             body.AppendLine(@"");
                             body.AppendLine(@"Regards,");
                             body.AppendLine(@"");
