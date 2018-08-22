@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="MakeABooking.aspx.cs" Inherits="Cheveux.MakeABooking" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="MakeABooking.aspx.cs" Inherits="Cheveux.MakeABooking" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
     Make A Booking - Cheveux
@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-md-12 col-lg-7">
                             <div runat="server" id="divServices" visible="true">
-                               
+
                                 <div class="container">
                                     <div class="container">
 
@@ -85,7 +85,7 @@
                                     </div>
 
 
-                                    <div style="border: solid #F05F40 2px;height: 400px; overflow-y: scroll;">
+                                    <div style="border: solid #F05F40 2px; height: 400px; overflow-y: scroll;">
                                         <div runat="server" id="divNatural" visible="true">
 
                                             <h5>Natural</h5>
@@ -112,127 +112,150 @@
 
 
                                 </div>
-</div>
+                            </div>
 
 
 
-                                <div runat="server" id="divStylist" visible="false">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px; overflow-x: scroll;">
-                                                <h3>Choose A Hairstylist</h3>
-                                                <br />
-                                                <asp:RadioButtonList runat="server" ID="rblPickAStylist">
-                                                </asp:RadioButtonList>
-                                            </div>
-                                            <div class="col-2"></div>
-                                            <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px;">
-                                                <asp:Table runat="server" ID="tblSide">
-                                                </asp:Table>
-                                            </div>
+                            <div runat="server" id="divStylist" visible="false">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px; overflow-x: scroll;">
+                                            <h3>Choose A Hairstylist</h3>
+                                            <br />
+                                            <asp:RadioButtonList runat="server" ID="rblPickAStylist">
+                                            </asp:RadioButtonList>
+                                        </div>
+                                        <div class="col-2"></div>
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px;">
+                                            <asp:Table runat="server" ID="tblSide">
+                                            </asp:Table>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-x: scroll;">
-                                    <div class="container">
-                                        <h3>Choose A Date & Time</h3>
-                                        <br />
-                                        <div class="row">
+                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-x: scroll;">
+                                <div class="container">
+                                    <h3>Choose A Date & Time</h3>
+                                    <br />
+                                    <div class="row">
 
-                                            <div class="col-6">
-                                                <asp:Calendar runat="server" ID="calBooking" Width="300" Height="150" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged"></asp:Calendar>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="row">
+                                        <div class="col-6">
+                                            <asp:Calendar runat="server" ID="calBooking" Width="300" Height="150" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged"></asp:Calendar>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
 
-                                                    <div class="col-6">
-                                                        <h4>Morning</h4>
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning1" OnClick="btnMorning1_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning2" OnClick="btnMorning2_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning3" OnClick="btnMorning3_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning4" OnClick="btnMorning4_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning5" OnClick="btnMorning5_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning6" OnClick="btnMorning6_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning7" OnClick="btnMorning7_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning8" OnClick="btnMorning8_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning9" OnClick="btnMorning9_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnMorning10" OnClick="btnMorning10_Click" Visible="false" /><br />
-                                                        <br />
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <h4>Afternoon</h4>
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon11" OnClick="btnAfternoon11_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon12" OnClick="btnAfternoon12_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon13" OnClick="btnAfternoon13_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon14" OnClick="btnAfternoon14_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon15" OnClick="btnAfternoon15_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon16" OnClick="btnAfternoon16_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon17" OnClick="btnAfternoon17_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon18" OnClick="btnAfternoon18_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon19" OnClick="btnAfternoon19_Click" Visible="false" /><br />
-                                                        <br />
-                                                        <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon20" OnClick="btnAfternoon20_Click" Visible="false" /><br />
-                                                        <br />
-                                                    </div>
+                                                <div class="col-6">
+                                                    <h4>Morning</h4>
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning1" OnClick="btnMorning1_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning2" OnClick="btnMorning2_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning3" OnClick="btnMorning3_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning4" OnClick="btnMorning4_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning5" OnClick="btnMorning5_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning6" OnClick="btnMorning6_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning7" OnClick="btnMorning7_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning8" OnClick="btnMorning8_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning9" OnClick="btnMorning9_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnMorning10" OnClick="btnMorning10_Click" Visible="false" /><br />
+                                                    <br />
+                                                </div>
+                                                <div class="col-6">
+                                                    <h4>Afternoon</h4>
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon11" OnClick="btnAfternoon11_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon12" OnClick="btnAfternoon12_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon13" OnClick="btnAfternoon13_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon14" OnClick="btnAfternoon14_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon15" OnClick="btnAfternoon15_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon16" OnClick="btnAfternoon16_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon17" OnClick="btnAfternoon17_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon18" OnClick="btnAfternoon18_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon19" OnClick="btnAfternoon19_Click" Visible="false" /><br />
+                                                    <br />
+                                                    <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon20" OnClick="btnAfternoon20_Click" Visible="false" /><br />
+                                                    <br />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-
+                            <div runat="server" id="divSelectUser" visible="false" 
+                                style="border: solid #F05F40 2px; width: 575px; height: 450px;">
+                                <!--User-->
+                                <div class="container">
+                                    <!--Line Break-->
+                                    <br />
+                                    <h3 style="text-align: left; float: left;">Select Customer: </h3>
+                                    <p style="text-align: right; float: right;">
+                                        <!-- Search -->
+                                        <asp:TextBox ID="txtCustomerSearch" runat="server" AutoPostBack="true" placeholder="search"
+                                            OnDataBinding="txtCustomerSearch_DataBinding" OnTextChanged="txtCustomerSearch_DataBinding" CssClass="form-control"></asp:TextBox>
+                                    </p>
+                                    <!--Line Break-->
+                                    <br />
+                                    <asp:ListBox runat="server" ID="lbCustomers" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
+                                    <!--Line Break-->
+                                    <br />
+                                    <p style="text-align: right; float: right;">
+                                        <asp:Button ID="btnNewCust" runat="server" OnClick="btnNewCust_Click" 
+                                        Text="New Customer" CssClass="btn btn-secondary btn-sm"/>
+                                    </p>
+                                </div>
                             </div>
 
                         </div>
-                    </div>
 
-                    <!-- Line Break-->
-                    <br />
-
-                    <div class="row">
-
-                        <div class="col-2 text-left">
-
-                            <asp:Button class='btn btn-basic' runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click" />
-
-                        </div>
-
-                        <div class="col-8"></div>
-
-                        <div class="col-2 text-right">
-
-                            <asp:Button class='btn btn-primary' runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
-
-                        </div>
                     </div>
                 </div>
 
-
-
                 <!-- Line Break-->
                 <br />
-                <br />
 
-            </form>
+                <div class="row">
+
+                    <div class="col-2 text-left">
+
+                        <asp:Button class='btn btn-basic' runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click" />
+
+                    </div>
+
+                    <div class="col-8"></div>
+
+                    <div class="col-2 text-right">
+
+                        <asp:Button class='btn btn-primary' runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
+
+                    </div>
+                </div>
         </div>
-        <div class="col-md-2 col-sm-1"></div>
+
+
+
+        <!-- Line Break-->
+        <br />
+        <br />
+
+        </form>
+    </div>
+    <div class="col-md-2 col-sm-1"></div>
     </div>
 </asp:Content>

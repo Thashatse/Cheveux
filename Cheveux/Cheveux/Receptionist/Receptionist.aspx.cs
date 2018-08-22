@@ -97,10 +97,6 @@ namespace Cheveux
                      */
                     if (drpEmpNames.SelectedValue != "-1")
                     {
-                        #region Make internal booking`
-                        displayMAB(drpEmpNames.SelectedValue);
-                        #endregion
-
                         getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate),null,null);
 
                         if(AgendaTable.Rows.Count == 1)
@@ -539,118 +535,16 @@ namespace Cheveux
         #endregion
 
         #region Make internal booking
-        public void displayMAB(string stylistID)
-        {
-            //display the make a booking panel
-            try
-            {
-                USER stylist = handler.GetUserDetails(stylistID);
-                lMABforStylist.Text = "with " + stylist.FirstName + " " + stylist.LastName;
-                makeABookingContainer.Visible = true;
-            }
-            catch (Exception err)
-            {
-                calMAB.Visible = false;
-                btnMakeInternalBooking.Visible = false;
-                lMABforStylist.Text = "Make A Booking Unavailable, Try Again Later";
-                makeABookingContainer.Visible = true;
-                function.logAnError("Error loading make a booking panel on receptionist page for stylist id: " +
-                    stylistID + " | Error: " + err);
-            }
-        }
-
-        protected void prossesBooking(object sender, EventArgs e)
-        {
-            try
-            {
-                if (calMAB.SelectedDate.ToString() != "0001/01/01 00:00:00" 
-                    && drpAvailableTimes.Visible == false)
-                {
-                    drpAvailableTimes.Visible = true;
-                }
-
-                //if time selected redirect to service & customer slection
-                if (drpAvailableTimes.SelectedValue != "-1" 
-                    && btnMakeInternalBooking.Visible == false)
-                {
-                    btnMakeInternalBooking.Visible = true;
-                }
-            }
-            catch (Exception err)
-            {
-                calMAB.Visible = false;
-                btnMakeInternalBooking.Visible = false;
-                drpAvailableTimes.Visible = false;
-                lMABforStylist.Text = "Make A Booking Unavailable, Try Again Later";
-                makeABookingContainer.Visible = true;
-                function.logAnError("Error loading avalible times and redirecting to make a booking page on receptionist page for stylist id: " +
-                    drpEmpNames.SelectedValue.Replace(" ", string.Empty) +
-                    "Date: " + calMAB.SelectedDate +
-                    "Time (SlotNo.): " + drpAvailableTimes.SelectedValue +
-                    " | Error: " + err);
-            }
-        }
-        
-        //remove dates befor today
-        protected void calMAB_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date <= DateTime.Now)
-            {
-                e.Cell.BackColor = ColorTranslator.FromHtml("#a9a9a9");
-                e.Day.IsSelectable = false;
-            }
-        }
-
         protected void btnMakeInternalBooking_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../Receptionist/MakeInternalBooking.aspx"
-                        + "?StyID=" + drpEmpNames.SelectedValue.Replace(" ", string.Empty) +
-                        "&Date=" + calMAB.SelectedDate.ToString("yyyy-MM-dd") +
-                        "&Time=" + drpAvailableTimes.SelectedValue.Replace(" ", string.Empty));
+            Response.Redirect("../MakeABooking.aspx?Type=Internal");
         }
-        
-        //cleares booking panel when new stylist selected
-        protected void clearBooking(object sender, EventArgs e)
-        {
-            btnMakeInternalBooking.Visible = false;
-            drpAvailableTimes.Visible = false;
-            calMAB.SelectedDate = Convert.ToDateTime("0001/01/01 00:00:00");
-        }
-        
-        protected void calMAB_SelectionChanged(object sender, EventArgs e)
-        {
-            #region Avalible Times
-            List<SP_GetBookedTimes> bookedList = handler.BLL_GetBookedStylistTimes(
-                drpEmpNames.SelectedValue.Replace(" ", string.Empty), calMAB.SelectedDate);
-            List<SP_GetSlotTimes> slotList = handler.BLL_GetAllTimeSlots();
-            slotList = slotList.OrderBy(o => o.Time).ToList();
-            drpAvailableTimes.Items.Clear();
-            if (bookedList.Count != 0)
-            {
-                foreach (SP_GetBookedTimes booked in bookedList)
-                {
-                    foreach (SP_GetSlotTimes times in slotList)
-                    {
-                        if (booked.SlotNo != times.SlotNo)
-                        {
-                            drpAvailableTimes.Items.Add(new ListItem(times.Time.ToString("hh:mm"),
-                            times.SlotNo));
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (SP_GetSlotTimes times in slotList)
-                {
-                    drpAvailableTimes.Items.Add(new ListItem(times.Time.ToString("hh:mm"),
-                    times.SlotNo));
-                }
-            }
-            drpAvailableTimes.Items.Insert(0, new ListItem("--Select Time--", "-1"));
-            #endregion
+        #endregion
 
-            prossesBooking(sender, e);
+        #region Register New Customer
+        protected void btnNewCust_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Authentication/NewAccount.aspx?Type=NewCust");
         }
         #endregion
     }

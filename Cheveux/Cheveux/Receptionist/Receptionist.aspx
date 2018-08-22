@@ -46,7 +46,7 @@
                             <div id="empDropdown" class="row">
                                 <div class="col-xs-12 col-md-12">
                                     <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True" 
-                                        CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="clearBooking">
+                                        CssClass="btn btn-primary dropdown-toggle">
                                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
@@ -122,28 +122,26 @@
                                 </asp:Table>
                             </div>
                         </div>
-                        <div style="border: solid #F05F40 2px;" runat="server" id="makeABookingContainer" visible="false">
+                        <!--Line Break-->
+                            <br />
+                        <div style="border: solid #F05F40 2px;" runat="server" id="makeABookingContainer">
                             <!--Bookings-->
-                            <div class="container">
-                                <h1>Make A Booking </h1>
-                                <asp:Label ID="lMABforStylist" runat="server" Text="Label"></asp:Label>
-                                <!--Line Break-->
-                                <br />
-                                <br />
-                                <asp:Calendar ID="calMAB" runat="server" CssClass="bg-secondary text-primary"  
-                                    SelectedDate="<%#DateTime.Today%>" OnDayRender="calMAB_DayRender" 
-                                    OnSelectionChanged="calMAB_SelectionChanged" AutoPostBack="True"></asp:Calendar>
-                                <!--Line Break-->
-                                <br />
-                                <!-- time --> 
-                                <asp:DropDownList OnSelectedIndexChanged="prossesBooking" runat="server" AutoPostBack="True" 
-                                    ID="drpAvailableTimes" Visible="false" CssClass="btn btn-secondary">
-                            </asp:DropDownList>
-                                <!--Line Break-->
-                                <br />
+                            <div class="container text-center">
                                 <br />
                                 <asp:Button ID="btnMakeInternalBooking" runat="server" OnClick="btnMakeInternalBooking_Click" 
-                                    Text="Make Booking" CssClass="btn btn-secondary" Visible="false" />
+                                    Text="Make a booking" CssClass="btn btn-secondary btn-lg"/>
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                        <!--Line Break-->
+                            <br />
+                        <div style="border: solid #F05F40 2px;" runat="server" id="DivNewCustomer">
+                            <!--Bookings-->
+                            <div class="container text-center">
+                                <br />
+                                <asp:Button ID="btnNewCust" runat="server" OnClick="btnNewCust_Click" 
+                                    Text="New Customer" CssClass="btn btn-secondary btn-lg"/>
                                 <br />
                                 <br />
                             </div>

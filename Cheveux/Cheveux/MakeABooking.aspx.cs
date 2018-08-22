@@ -26,8 +26,50 @@ namespace Cheveux
         string[,] availableTimes = new string[21,2];
         List<string> pickedServiceName;
         List<string> pickedServiceID;
+        string bookingType;
+        //internal booking variable
+        List<string> CustomerIDs = new List<string>();
 
+        #region set the master page based on the user type
+        protected void Page_PreInit(Object sender, EventArgs e)
+        {
+            //check the cheveux user id cookie for the user
+            HttpCookie cookie = Request.Cookies["CheveuxUserID"];
+            char userType;
+            //check if the cookie is empty or not
+            if (cookie != null)
+            {
+                //store the user Type in a variable and display the appropriate master page for the user
+                userType = cookie["UT"].ToString()[0];
+                //if customer
+                if (userType == 'C')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+                }
+                //if receptionist
+                else if (userType == 'R')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxReceptionist.Master";
+                }
+                //default
+                else
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+                }
+            }
+            //set the default master page if the cookie is empty
+            else
+            {
+                //set the master page
+                this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+            }
+        }
+        #endregion
 
+        #region page load
         protected void Page_Load(object sender, EventArgs e)
         {
             #region access control
@@ -41,8 +83,7 @@ namespace Cheveux
                 }
                 else if (Authcookie["UT"].ToString()[0] == 'R')
                 {
-                    //Redirect the user as they are not aloud to make bookings
-                    Response.Redirect("Error.aspx?Error='Receptionists are not able to make bookings, Login as a customer and try again.'");
+                    //Redirect is aloud to make booings
                 }
                 //if stylist
                 else if (Authcookie["UT"].ToString()[0] == 'S')
@@ -62,6 +103,15 @@ namespace Cheveux
                     //Redirect the user as they are not aloud to make bookings
                     Response.Redirect("Error.aspx?Error='An error occurred, please try again later.'");
                 }
+            }
+            #endregion
+
+            #region Internal Booking
+            //load booking type 
+            bookingType = Request.QueryString["Type"];
+            if (!Page.IsPostBack)
+            {
+                loadCustomerList();
             }
             #endregion
 
@@ -127,6 +177,7 @@ namespace Cheveux
 
 
         }
+        #endregion
 
         #region View
         protected void btnNext_Click(object sender, EventArgs e)
@@ -142,7 +193,7 @@ namespace Cheveux
                 }
 
 
-                
+
                 if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
                 {
                     lblErrorSummary.Visible = true;
@@ -160,81 +211,127 @@ namespace Cheveux
                 }
             }
             else if (btnNext.Text == "Choose Date & Time")
-            {           
-                if(rblPickAStylist.SelectedValue.ToString() == "")
+            {
+                if (rblPickAStylist.SelectedValue.ToString() == "")
                 {
                     lblErrorSummary.Visible = true;
                     lblErrorSummary.Text = "Please select a hairstylist before moving to the next step!";
                     divStylist.Visible = true;
                 }
-                else 
+                else
                 {
                     divStylist.Visible = false;
                     divDateTime.Visible = true;
                     btnPrevious.Visible = true;
                     btnPrevious.Text = "Choose Hairstylist";
-                    btnNext.Text = "Booking Summary";
-                }
-                
-            }
-            else if (btnNext.Text == "Booking Summary")
-            {
-                //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
-                rblPickAServiceA_SelectedIndexChanged(sender, e);
-                rblPickAServiceB_SelectedIndexChanged(sender, e);
-                cblPickAServiceN_SelectedIndexChanged(sender, e);
-                divDateTime.Visible = false;
-              
-                if (pickedServiceID != null)
-                {
-                    int serviceCount = 0;
-                    foreach (string name in pickedServiceName)
+                    //load booking type 
+                    bookingType = Request.QueryString["Type"];
+                    if (bookingType == "Internal")
                     {
-                        if (serviceCount == 0)
-                        {
-                            lblServices.Text = name;
-                            serviceCount++;
-                        }
-                        else
-                        {
-                            lblServices.Text += ", " + name;
-                        }
-                        
+                        //if internal booking
+                        btnNext.Text = "Select Customer";
+                    }
+                    else
+                    {
+                        //if external booking
+                        btnNext.Text = "Booking Summary";
                     }
                 }
-                else
+
+            }
+            #region Internal Booking
+            else if (btnNext.Text == "Select Customer")
+            {
+                loadCustomerList();
+                //if the booking is being made internaly i.e: by Receptionist
+                #region set the buttons
+                btnPrevious.Text = "Choose Date & Time";
+                btnNext.Text = "Booking Summary";
+                divDateTime.Visible = false;
+                divSelectUser.Visible = true;
+                btnPrevious.Visible = true;
+                #endregion
+            }
+            #endregion
+            else if (btnNext.Text == "Booking Summary")
+            {
+                #region Internal Booking
+                //load booking type 
+                bookingType = Request.QueryString["Type"];
+                if (lbCustomers.SelectedIndex == -1 && bookingType == "Internal")
                 {
                     lblErrorSummary.Visible = true;
-                    lblErrorSummary.Text = "There was trouble retrieving the services";
+                    lblErrorSummary.Text = "Please select a customer before moving to the next step!";
+                    divSelectUser.Visible = true;
                 }
-
-                lblStylist.Text = rblPickAStylist.SelectedItem.Text.ToString();
-                lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
-                HttpCookie bookingTime = Request.Cookies["BookTime"];
-                lblTime.Text = bookingTime["Time"];
-                btnPrevious.Visible = true;
-
-                #region access control
-                HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
-                if (Authcookie != null)
+                #endregion
+                else
                 {
-                    if (Authcookie["UT"].ToString()[0] == 'C')
+                    lblErrorSummary.Visible = false;
+                    //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
+                    rblPickAServiceA_SelectedIndexChanged(sender, e);
+                    rblPickAServiceB_SelectedIndexChanged(sender, e);
+                    cblPickAServiceN_SelectedIndexChanged(sender, e);
+                    divDateTime.Visible = false;
+                    divSelectUser.Visible = false;
+
+                    if (pickedServiceID != null)
                     {
-                        btnPrevious.Text = "Choose Date & Time";
-                        btnNext.Text = "Submit";
+                        int serviceCount = 0;
+                        foreach (string name in pickedServiceName)
+                        {
+                            if (serviceCount == 0)
+                            {
+                                lblServices.Text = name;
+                                serviceCount++;
+                            }
+                            else
+                            {
+                                lblServices.Text += ", " + name;
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        lblErrorSummary.Visible = true;
+                        lblErrorSummary.Text = "There was trouble retrieving the services";
+                    }
+
+                    lblStylist.Text = rblPickAStylist.SelectedItem.Text.ToString();
+                    lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
+                    HttpCookie bookingTime = Request.Cookies["BookTime"];
+                    lblTime.Text = bookingTime["Time"];
+                    btnPrevious.Visible = true;
+
+                    if(bookingType == "Internal")
+                    {
+                        btnPrevious.Text = "Select Customer";
                     }
                     else
                     {
                         btnPrevious.Text = "Choose Date & Time";
+                    }
+
+                        #region access control
+                        HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
+                    if (Authcookie != null)
+                    {
+                        if (Authcookie["UT"].ToString()[0] == 'C' || Authcookie["UT"].ToString()[0] == 'R')
+                        {
+                            btnNext.Text = "Submit";
+                        }
+                        else
+                        {
+                            btnNext.Text = "Login";
+                        }
+                    }
+                    else
+                    {
                         btnNext.Text = "Login";
                     }
+                    #endregion
                 }
-                else
-                {
-                    btnPrevious.Text = "Choose Date & Time";
-                    btnNext.Text = "Login";
-                }
-                #endregion
             }
             #region access control
             else if (btnNext.Text == "Login")
@@ -246,20 +343,26 @@ namespace Cheveux
             #endregion
             else if (btnNext.Text == "Submit")
             {
-                btnPrevious.Visible = true;
-                //access control
-                HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
-                if (Authcookie != null)
+                try
                 {
-                    if (Authcookie["UT"].ToString()[0] == 'C') {
-                        //Make Booking
-                        try
+                    btnPrevious.Visible = true;
+                    //initialize booking variable
+                    book = new BOOKING();
+                    //build service list
+                    rblPickAServiceA_SelectedIndexChanged(sender, e);
+                    rblPickAServiceB_SelectedIndexChanged(sender, e);
+                    cblPickAServiceN_SelectedIndexChanged(sender, e);
+
+                   
+                    //access control
+                    HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
+                    if (Authcookie != null)
+                    {
+                        #region external Booking (Customer)
+                        if (Authcookie["UT"].ToString()[0] == 'C')
                         {
-                            rblPickAServiceA_SelectedIndexChanged(sender, e);
-                            rblPickAServiceB_SelectedIndexChanged(sender, e);
-                            cblPickAServiceN_SelectedIndexChanged(sender, e);
+                            //Make Booking
                             //Add to booking
-                            book = new BOOKING();
                             book.BookingID = function.GenerateRandomBookingID();
                             HttpCookie bookingTime = Request.Cookies["BookTime"];
                             book.SlotNo = bookingTime["TimeSlot"];
@@ -268,49 +371,88 @@ namespace Cheveux
                             book.StylistID = rblPickAStylist.SelectedValue;
                             book.Available = "N";
                             handler.BLL_AddBooking(book);
-
                             bookService = new BookingService();
-                            foreach(string id in pickedServiceID)
+                            foreach (string id in pickedServiceID)
                             {
                                 bookService.BookingID = book.BookingID;
                                 bookService.ServiceID = id;
                                 handler.BLL_AddToBookingService(bookService);
                             }
-
-
-                            #region Email Notification
-                            USER user = handler.GetUserDetails(cookie["ID"]);
-                            //send an email notification
-                            var body = new System.Text.StringBuilder();
-                            body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Your booking is with " + rblPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
-                            body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Regards,");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"The Cheveux Team");
-                            function.sendEmailAlert(user.Email, user.FirstName +" " +user.LastName,
-                                "Booking Confirmation",
-                                body.ToString(),
-                                "Bookings Cheveux");
-                            #endregion
-
-                            //redirect and confirm booking
-                            Response.Redirect("Default.aspx?BS=True&Sty="+book.StylistID+"&D="+book.Date+"&T="+book.SlotNo);
                         }
-                        catch (Exception err)
+                        #endregion
+
+                        #region internal Booking (Receptionist)
+                        if (Authcookie["UT"].ToString()[0] == 'R')
                         {
-                            function.logAnError(err.ToString());
+                            //Make Booking
+                            //Add to booking
+                            book.BookingID = function.GenerateRandomBookingID();
+                            HttpCookie bookingTime = Request.Cookies["BookTime"];
+                            book.SlotNo = bookingTime["TimeSlot"];
+                            book.Date = calBooking.SelectedDate;
+                            //load customer IDs 
+                            loadCustomerID();
+                            //add customer id to booking
+                            book.CustomerID = CustomerIDs[lbCustomers.SelectedIndex];
+                            book.StylistID = rblPickAStylist.SelectedValue;
+                            book.Available = "N";
+                            handler.BLL_AddBooking(book);
+                            bookService = new BookingService();
+                            foreach (string id in pickedServiceID)
+                            {
+                                bookService.BookingID = book.BookingID;
+                                bookService.ServiceID = id;
+                                handler.BLL_AddToBookingService(bookService);
+                            }
                         }
+                        #endregion
+
+                        #region Email Notification
+                        USER user = handler.GetUserDetails(cookie["ID"]);
+                        //send an email notification
+                        var body = new System.Text.StringBuilder();
+                        body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Your booking is with " + rblPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
+                        body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Regards,");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"The Cheveux Team");
+                        function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                            "Booking Confirmation",
+                            body.ToString(),
+                            "Bookings Cheveux");
+                        #endregion
+
+                        #region Redirect
+                        //load booking type 
+                        bookingType = Request.QueryString["Type"];
+                        if (bookingType == null)
+                        {
+                            //if external booking
+                            //redirect and confirm booking
+                            Response.Redirect("Default.aspx?BS=True&Sty=" + book.StylistID + "&D=" + book.Date + "&T=" + book.SlotNo);
+                        }
+                        else
+                        {
+                            //if internal booking
+                            //redirect to booking summary
+                            Response.Redirect("ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                        }
+                        #endregion
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
                     }
                 }
-                else
+                catch (Exception err)
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
+                    function.logAnError("Error Making abooking "+err.ToString());
                 }
             }
         }
@@ -335,12 +477,36 @@ namespace Cheveux
             }
             else if (btnPrevious.Text == "Choose Date & Time")
             {
+                divSelectUser.Visible = false;
                 divDateTime.Visible = true;
                 btnPrevious.Visible = true;
                 btnPrevious.Text = "Choose Hairstylist";
-                btnNext.Text = "Choose Date & Time";
+                //load booking type 
+                bookingType = Request.QueryString["Type"];
+                if (bookingType == "Internal")
+                {
+                    //if internal booking
+                    btnNext.Text = "Select Customer";
+                }
+                else
+                {
+                    //if external booking
+                    btnNext.Text = "Booking Summary";
+                }
             }
-      
+            #region Internal Booking
+            else if (btnPrevious.Text == "Select Customer")
+            {
+                loadCustomerList();
+                //if the booking is being made internaly i.e: by Receptionist
+                #region set the buttons
+                btnPrevious.Text = "Choose Date & Time";
+                btnNext.Text = "Booking Summary";
+                divSelectUser.Visible = true;
+                btnPrevious.Visible = true;
+                #endregion
+            }
+            #endregion
         }
         #endregion
 
@@ -1021,6 +1187,99 @@ namespace Cheveux
 
             }
         }
+        #endregion
+
+        #region Internal Bookings
+        #region Customer list box & IDs
+        //CustomerList
+        private void loadCustomerList()
+        {
+            lbCustomers.Items.Clear();
+            //add all customers to the list
+            try
+            {
+                List<SP_UserList> customers = handler.userList();
+                int customerCount = 0;
+                if (customers.Count != 0)
+                {
+                    //sort the Customers by alphabetical oder
+                    customers = customers.OrderBy(o => o.FullName).ToList();
+                    //add customers
+                    foreach (SP_UserList customer in customers)
+                    {
+                        //make sure there is stock
+                        if (customer.userType == 'C'
+                            && (function.compareToSearchTerm(customer.FullName, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.Email, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.ContactNo, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.UserName, txtCustomerSearch.Text) == true))
+                        {
+                            lbCustomers.Items.Add(customer.FullName.ToString());
+                            customerCount++;
+                        }
+                    }
+
+                    //if no products found matching the criteria
+                    if (customerCount == 0)
+                    {
+                        lbCustomers.Items.Add("No Customers Found");
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                lbCustomers.Items.Clear();
+                lbCustomers.Items.Add("Error Loading Customers, Try Again Later");
+                function.logAnError("Error Loading Customer on MakeABooking | Error: " + err);
+            }
+        }
+
+        //customerIDS
+        private void loadCustomerID()
+        {
+            try
+            {
+                List<SP_UserList> customers = handler.userList();
+                if (customers.Count != 0)
+                {
+                    //sort the Customers by alphabetical oder
+                    customers = customers.OrderBy(o => o.FullName).ToList();
+                    //add customers ids to array
+                    foreach (SP_UserList customer in customers)
+                    {
+                        //make sure there is stock
+                        if (customer.userType == 'C'
+                            && (function.compareToSearchTerm(customer.FullName, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.Email, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.ContactNo, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.UserName, txtCustomerSearch.Text) == true))
+                        {
+                            CustomerIDs.Add(customer.UserID.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                lbCustomers.Items.Clear();
+                lbCustomers.Items.Add("Error adding customer, Try Again Later");
+                function.logAnError("Error Loading Customer IDs on MakeInternalBooking | Error: " + err);
+            }
+        }
+
+        //update customer for search criteria
+        protected void txtCustomerSearch_DataBinding(object sender, EventArgs e)
+        {
+            loadCustomerList();
+        }
+        #endregion
+
+        #region Register New Customer
+        protected void btnNewCust_Click(object sender, EventArgs e)
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/NewAccount.aspx?Type=NewCust&PreviousPage=MakeABooking','_newtab');", true);
+        }
+        #endregion
         #endregion
     }
 }
