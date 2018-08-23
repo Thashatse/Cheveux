@@ -793,10 +793,10 @@ namespace Cheveux
                                     "'>" + b.CustomerFName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(customerCell);
 
-                    TableCell servNameCell = new TableCell();
+                    /*TableCell servNameCell = new TableCell();
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ProductID.Replace(" ", string.Empty) + "'>"
                                         + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);*/
 
                     //edit
                     TableCell buttonCell = new TableCell();

@@ -21,6 +21,7 @@ namespace Cheveux
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
+        List<SP_GetBookingServices> bServices = null;
         BOOKING checkIn = null;
         HttpCookie cookie = null;
         //string currentBookingStylistID = null;
@@ -133,7 +134,7 @@ namespace Cheveux
         #region Agenda
         public void getAgenda(string id, DateTime bookingDate,string sortBy, string sortDir)
         {
-            Button btn;
+            Button btnCheckin;
 
             try
             {
@@ -222,14 +223,29 @@ namespace Cheveux
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
-
-                    //create service name cell and add to row.. cell index: 4
+                    
+                    bServices = handler.getBookingServices(a.BookingID.ToString());
                     TableCell s = new TableCell();
                     s.Width = 300;
-                    s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + a.ProductID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + a.ServiceName.ToString() + "</a>";
+                    if (bServices.Count == 1)
+                    {
+                        s.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                        + bServices[0].ServiceName.ToString() + "</a>";
+                    }
+                    else if (bServices.Count == 2)
+                    {
+                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "'>" + bServices[0].ServiceName.ToString() +
+                            ", " + bServices[1].ServiceName.ToString() + "</a>";
+                    }
+                    else if (bServices.Count > 2)
+                    {
+                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "'> Multiple Services </a>";
+                    }
                     AgendaTable.Rows[i].Cells.Add(s);
-                    
+                    //addServices(a,i);
+
                     //create arrival status cell and add to row.. cell index : 5
                     TableCell present = new TableCell();
                     present.Width = 100;
@@ -253,10 +269,10 @@ namespace Cheveux
                         buttonCell.Height = 50;
 
                         //create button
-                        btn = new Button();
-                        btn.Text = "Check-in";
-                        btn.CssClass = "btn btn-primary";
-                        btn.Click += (ss, ee) => {
+                        btnCheckin = new Button();
+                        btnCheckin.Text = "Check-in";
+                        btnCheckin.CssClass = "btn btn-primary";
+                        btnCheckin.Click += (ss, ee) => {
                             /*
                              * Check-in code here 
                              * After clicking the button arrived should change to Y
@@ -273,16 +289,20 @@ namespace Cheveux
 
                                 if (handler.BLL_CheckIn(checkIn))
                                 {
+                                    noBookingsPH.Visible = true;
+                                    lblNoBookings.Text = a.CustomerFName.ToString() + " has now been checked in.";
                                     //if BLL_CheckIn successful and arrival status changed show user and refresh the page
-                                    Response.Write("<script>alert('Customer has been checked-in.');location.reload(true);</script>");
+                                    //Response.Write("<script>alert('Customer has been checked-in.');location.reload(true);</script>");
                                 }
                                 else
                                 {
                                     //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
                                     //Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
+
                                     phCheckInErr.Visible = true;
                                     lblCheckinErr.Text = "An error has occured.We are unable to check-in the customer at this point in time.<br/>"
                                                           + "Please report to management. Sorry for the inconvenience.";
+
                                 }
 
                             }
@@ -300,7 +320,7 @@ namespace Cheveux
 
                         };
                         //add button to cell 
-                        buttonCell.Controls.Add(btn);
+                        buttonCell.Controls.Add(btnCheckin);
                         //add cell to row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }

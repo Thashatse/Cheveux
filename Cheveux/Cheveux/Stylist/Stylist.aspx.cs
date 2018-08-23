@@ -129,11 +129,11 @@ namespace Cheveux
                     AgendaTable.Rows.Add(r);
 
                     TableCell start = new TableCell();
-                    start.Text = n.StartTime.ToString("dd-MM-yyyy");
+                    start.Text = n.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
 
                     TableCell end = new TableCell();
-                    end.Text = n.EndTime.ToString("dd-MM-yyyy");
+                    end.Text = n.EndTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(end);
 
                     TableCell c = new TableCell();
@@ -141,10 +141,10 @@ namespace Cheveux
                                     "'>" + n.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
 
-                    TableCell s = new TableCell();
+                    /*TableCell s = new TableCell();
                     s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + n.ProductID.ToString().Replace(" ", string.Empty) +
                                     "'>" + n.ServiceName.ToString() + "</a>";
-                    AgendaTable.Rows[i].Cells.Add(s);
+                    AgendaTable.Rows[i].Cells.Add(s);*/
 
                     TableCell present = new TableCell();
                     present.Text = function.GetFullArrivedStatus(n.Arrived.ToString()[0]);
@@ -179,7 +179,7 @@ namespace Cheveux
                                     cust_visit.CustomerID = Convert.ToString(n.UserID);
                                     cust_visit.Date = Convert.ToDateTime(n.Date);
                                     cust_visit.BookingID = Convert.ToString(n.BookingID);
-                                    cust_visit.Description = Convert.ToString(n.ServiceName);
+                                    //cust_visit.Description = Convert.ToString(n.ServiceName);
 
                                     if (handler.BLL_CreateCustVisit(cust_visit))
                                     {
