@@ -21,7 +21,7 @@ namespace Cheveux
         List<SP_GetBookedTimes> bookedList = null;
         List<SP_GetSlotTimes> slotList = null;
         BOOKING book = null;
-        /*
+        
         BookingService bookService = null;
         int count = 0;
         string[,] availableTimes = new string[21,2];

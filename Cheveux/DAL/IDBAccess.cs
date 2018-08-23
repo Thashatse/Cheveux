@@ -28,6 +28,7 @@ namespace DAL
         USER GetAccountForRestCode(string code);
         bool updateUserAccountPassword(string password, string userID);
         bool updateStylistBio(EMPLOYEE bioUpdate);
+        bool updateService(PRODUCT p, SERVICE s);
         #endregion
 
         #region Authentication
@@ -141,10 +142,7 @@ namespace DAL
         /*
         bool AddService(PRODUCT p, SERVICE s);
         */
-        bool AddBraidService(BRAID_SERVICE bs);
-        List<SP_GetWidth> GetWidths();
-        List<SP_GetLength> GetLengths();
-        List<SP_GetStyles> GetStyles();
+      
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
 

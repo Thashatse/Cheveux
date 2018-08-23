@@ -1196,30 +1196,23 @@ namespace DAL
 
         #endregion
 
-        public string getSalePaymentType(string saleID)
+        public bool updateService(PRODUCT p, SERVICE s)
         {
-            string paymentType = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@SaleID", saleID)
-            };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetSalePaymentType",
-            CommandType.StoredProcedure, pars))
+                SqlParameter[] pars = new SqlParameter[]
                 {
-                    if (table.Rows.Count > 0)
-                    {
-                        DataRow row = table.Rows[0];
-                        paymentType = Convert.ToString(row["PaymentType"]);
-                    }
-                    return paymentType;
-                }
+                    new SqlParameter("@ServiceID", p.ProductID.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@Slots", s.NoOfSlots.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateService", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
+
         }
 
         public bool createSalesDTLRecord(SALES_DTL detailLine)

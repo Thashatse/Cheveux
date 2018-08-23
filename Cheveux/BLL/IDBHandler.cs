@@ -10,11 +10,11 @@ namespace BLL
 {
     public interface IDBHandler
     {
-        /*
+        
         #region Bookings
         List<SP_GetBookingServices> getBookingServices(string BookingID);
         #endregion
-        */
+        
         #region Home Page Features
         List<HomePageFeatures> GetHomePageFeatures();
         #endregion
@@ -61,7 +61,7 @@ namespace BLL
         List<SP_GetLength> BLL_GetLengths();
         List<SP_GetStyles> BLL_GetStyles();
         bool BLL_AddBraidService(BRAID_SERVICE bs);
-        bool BLL_UpdateService(PRODUCT p, SERVICE s);
+        bool updateService(PRODUCT p, SERVICE s);
         #endregion
 
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);

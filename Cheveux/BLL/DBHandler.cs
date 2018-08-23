@@ -469,17 +469,7 @@ namespace BLL
         {
             return db.getAllStylistsUpcomingBksForDate(bookingDate,sortBy,sortDir);
         }
-        
-            */
-        public List<SP_GetWidth> BLL_GetWidths()
-        {
-            return db.GetWidths();
-        }
-        public List<SP_GetLength> BLL_GetLengths()
-        {
-            return db.getAllStylistsUpcomingBksDR(startDate,endDate,sortBy,sortDir);
-        }
-
+       
         public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
             return db.getAllStylistsUpcomingBookings(sortBy,sortDir);
@@ -494,7 +484,10 @@ namespace BLL
         {
             return db.getAllStylistsPastBksForDate(date,sortBy,sortDir);
         }
-
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
+        {
+            return db.getAllStylistsUpcomingBksDR(startDate,endDate,sortBy,sortDir);
+        }
         public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             return db.getAllStylistsPastBookingsDateRange(startDate,endDate,sortBy,sortDir);
@@ -508,9 +501,10 @@ namespace BLL
         {
             return db.AddToBookingService(bs);
         }
-        public bool BLL_UpdateService(PRODUCT p, SERVICE s)
+        public bool updateService(PRODUCT p, SERVICE s)
         {
-            return db.UpdateService(p, s);
+            return db.updateService(p, s);
         }
+        
     }
 }
