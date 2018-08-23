@@ -355,6 +355,42 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button btnAfternoon20;
         
         /// <summary>
+        /// divSelectUser control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSelectUser;
+        
+        /// <summary>
+        /// txtCustomerSearch control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerSearch;
+        
+        /// <summary>
+        /// lbCustomers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbCustomers;
+        
+        /// <summary>
+        /// btnNewCust control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNewCust;
+        
+        /// <summary>
         /// btnPrevious control.
         /// </summary>
         /// <remarks>

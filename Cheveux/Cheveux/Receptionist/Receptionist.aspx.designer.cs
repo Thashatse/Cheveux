@@ -166,33 +166,6 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl makeABookingContainer;
         
         /// <summary>
-        /// lMABforStylist control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lMABforStylist;
-        
-        /// <summary>
-        /// calMAB control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar calMAB;
-        
-        /// <summary>
-        /// drpAvailableTimes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpAvailableTimes;
-        
-        /// <summary>
         /// btnMakeInternalBooking control.
         /// </summary>
         /// <remarks>
@@ -200,6 +173,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnMakeInternalBooking;
+        
+        /// <summary>
+        /// DivNew Customer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivNewCustomer;
+        
+        /// <summary>
+        /// btnNewCust control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNewCust;
         
         /// <summary>
         /// LoggedOut control.

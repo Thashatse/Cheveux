@@ -61,7 +61,7 @@ namespace Cheveux
             {
                 registeEmailUser.Visible = true;
             }
-            else if (type == "NewEmp")
+            else if (type == "NewEmp" || type == "NewCust")
             {
                 registeEmailUser.Visible = true;
                 txtConfirmPassword.Visible = false;
@@ -115,7 +115,14 @@ namespace Cheveux
             }
             else if (PreviousPage == "MakeABooking")
             {
+                Response.Write("<script language='javascript'> { window.close(); }</script>");
+
+                this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
+
                 Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
+
+                string jScript = "<script>window.close();</script>";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "keyClientBlock", jScript);
             }
         }
 
@@ -243,10 +250,12 @@ namespace Cheveux
                 User.UserName = txtUsername.Text.ToString().Replace(" ", string.Empty);
                 if (txtContactNumber.Text.ToString() != "")
                 {
+                    //if they did enter contact no
                     User.ContactNo = txtContactNumber.Text.ToString().Replace(" ", string.Empty);
                 }
                 else
                 {
+                    //if they did'nt enter contact no
                     User.ContactNo = null;
                 }
                 User.AccountType = "Email";
@@ -267,7 +276,13 @@ namespace Cheveux
                     tempPassword = System.Web.Security.Membership.GeneratePassword(8, 1);
                     User.Password = auth.generatePassHash(tempPassword);
                 }
-                
+                //if a customer is being registered by a receptionist
+                else if (type == "NewCust")
+                {
+                    User.UserType = 'C';
+                    tempPassword = System.Web.Security.Membership.GeneratePassword(8, 1);
+                    User.Password = auth.generatePassHash(tempPassword);
+                }
 
                 /*
                  * use the bll.NewUser to creat a new user
@@ -276,7 +291,7 @@ namespace Cheveux
                 bool result = false;
                 try
                 {
-                    if(type== "Email")
+                    if(type== "Email" || type == "NewCust")
                     {
                         result = auth.NewUser(User);
                     }
@@ -292,7 +307,6 @@ namespace Cheveux
                     Response.Redirect("../Error.aspx?Error='" + err + "'");
                 }
 
-
                 if (result == true)
                 {
                     //if a user is being registered 
@@ -305,7 +319,7 @@ namespace Cheveux
                         body.AppendLine(@"You have successfuly registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
                         body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
                         body.AppendLine(@"");
-                        body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                        body.AppendLine(@"Make Your First Booking Now: http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx");
                         body.AppendLine(@"");
                         body.AppendLine(@"Regards,");
                         body.AppendLine(@"The Cheveux Team");
@@ -325,6 +339,27 @@ namespace Cheveux
                         body.AppendLine(@"");
                         body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
                         body.AppendLine(@"Your password is: " + tempPassword + "");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Regards,");
+                        body.AppendLine(@"The Cheveux Team");
+                        function.sendEmailAlert(User.Email.ToString(), User.FirstName.ToString() + " " + User.LastName.ToString(),
+                            "Welcome To Cheveux",
+                            body.ToString(),
+                            "Accounts Cheveux");
+                    }
+                    //if a customer is being registered by a receptionist
+                    else if (type == "NewCust")
+                    {
+                        //send an email notification
+                        var body = new System.Text.StringBuilder();
+                        body.AppendFormat("Hello, " + User.FirstName);
+                        body.AppendLine(@"");
+                        body.AppendLine(@"You have successfuly been registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
+                        body.AppendLine(@"Your password is: " + tempPassword + "");
+                        body.AppendLine(@"");
+                        body.AppendLine(@"Visit our site now to view your profile: http://sict-iis.nmmu.ac.za/beauxdebut/Profile.aspx");
                         body.AppendLine(@"");
                         body.AppendLine(@"Regards,");
                         body.AppendLine(@"The Cheveux Team");
@@ -355,22 +390,27 @@ namespace Cheveux
                     //if a employee is being registered by a manager
                     else if (type == "NewEmp")
                     {
-                        if (result == true)
-                        {
-                            Response.Redirect("../Manager/UpdateEmployee.aspx?Type=NewEmp&empID=" + User.UserID);
-                        }
-                        else
-                        {
-                            phAddEmpErr.Visible = true;
-                            lblAddEmpErr.Text = "Unable to add employee at this point in time.<br/>"
-                                                + "Please try again later.";
-                        }
+                        Response.Redirect("../Manager/UpdateEmployee.aspx?Type=NewEmp&empID=" + User.UserID);
+                    }
+                    //if a customer is being registered by a receptionist
+                    else if (type == "NewCust")
+                    {
+                        //check if the receptionist was in the proccess of makeing a booking
+                        goToPreviousPage();
+                        Response.Redirect("../Profile.aspx?Action=View&UserID=" + User.UserID);
                     }
                 }
-                else if (result == false)
+                else if (result == false &&
+                    (type == "Email" || type == "NewCust"))
                 {
                     //open error page
                     Response.Redirect("../Error.aspx?Error='A Error in when authenticating with the Cheveux server'");
+                }
+                else if (result == false && type == "NewEmp")
+                {
+                    phAddEmpErr.Visible = true;
+                    lblAddEmpErr.Text = "Unable to add employee at this point in time.<br/>"
+                                        + "Please try again later.";
                 }
             }
             else
