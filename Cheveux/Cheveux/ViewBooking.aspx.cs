@@ -8,6 +8,8 @@ using BLL;
 using TypeLibrary.Models;
 using TypeLibrary.ViewModels;
 using System.Data;
+using System.Drawing;
+
 
 namespace Cheveux
 {
@@ -121,6 +123,7 @@ namespace Cheveux
                         //edit the booking
                         editBooking(BookingID);
                     }
+                    #region Cancel Booking
                     else if (action == "Cancel")
                     {
                         //confirm the delete the booking
@@ -128,22 +131,10 @@ namespace Cheveux
                     }
                     else if (action == "CancelConfirmed")
                     {
-                        //delete the booking
-                        deleteBooking(BookingID);
-                        //Set the page to redirect to the previous page in the querstring
-                        if (PreviousPageAdress != null)
-                        {
-                            BackButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = '" + PreviousPageAdress + ">Done</a></button>";
-                        }
-                        else
-                        {
-                            BackButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = 'Bookings.aspx'>Done</a></button>";
-                        }
+                            //delete the booking
+                            deleteBooking(BookingID);
                     }
+                    #endregion
                 }
                 else
                 {
@@ -160,6 +151,7 @@ namespace Cheveux
             }
         }
 
+        #region View Booking
         public void getBookingDeatails(string BookingID, bool pastBooking, bool checkOut)
         {
             //display the booking
@@ -168,11 +160,14 @@ namespace Cheveux
             {
                 SP_GetCustomerBooking BookingDetails = null;
                 List<SP_getInvoiceDL> invoicDetailLines = null;
+                List<SP_GetBookingServices> bookingServiceList = null;
                 //check if this is a past or upcoming booking and display the details acordingly
                 if (pastBooking == false)
                 {
                     BookingDetails =
                         handler.getCustomerUpcomingBookingDetails(BookingID);
+                    //get the services
+                    bookingServiceList = handler.getBookingServices(BookingID);
                 }
                 else if (pastBooking == true)
                 {
@@ -180,14 +175,35 @@ namespace Cheveux
                     BookingDetails = handler.getCustomerPastBookingDetails(BookingID);
                     //get the invoice 
                     invoicDetailLines = handler.getInvoiceDL(BookingID);
+                    //get the services
+                    bookingServiceList = handler.getBookingServices(BookingID);
                     //get the review
-                    
-                }
-               
-                    //display a heading
-                    BookingLable.Text = "<h2> " + BookingDetails.serviceName.ToString() + " with " +
-                    BookingDetails.stylistFirstName.ToString() + "</h2>";
 
+                }
+
+                #region Heading
+                if (bookingServiceList.Count == 1)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> " + bookingServiceList[0].ServiceName.ToString() + " with " +
+                    BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                else if (bookingServiceList.Count == 2)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> " + bookingServiceList[0].ServiceName.ToString() +
+                    ", " +  bookingServiceList[1].ServiceName.ToString() + " with " +
+                    BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                else if (bookingServiceList.Count > 2)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> Booking with " +
+                    BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                #endregion
+
+                #region Booking Details
                 //create a variablew to track the row count
                 int rowCount = 0;
 
@@ -197,33 +213,73 @@ namespace Cheveux
                 BookingTable.Rows.Add(newRow);
                 TableCell newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "Service Name:";
+                if (bookingServiceList.Count == 1)
+                {
+                    newCell.Text = "Service:";
+                }
+                else if (bookingServiceList.Count > 1)
+                {
+                    newCell.Text = "Services:";
+                }
                 newCell.Width = 300;
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + BookingDetails.serviceID.Replace(" ", string.Empty) + "'>" + 
-                    BookingDetails.serviceName.ToString() + "</a>";
-                newCell.Width = 700;
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                //increment row count 
-                rowCount++;
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Description:";
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + BookingDetails.serviceID.Replace(" ", string.Empty) + "'>"+
-                    BookingDetails.serviceDescripion.ToString() + "</a>";
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
                 
-                //increment row count 
-                rowCount++;
+                if (bookingServiceList.Count == 1)
+                {
+                    newCell = new TableCell();
+                    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    + bookingServiceList[0].ServiceName.ToString() + "</a>";
+                    newCell.Width = 700;
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
 
+                    //increment row count 
+                    rowCount++;
+                }
+                else if (bookingServiceList.Count > 1)
+                {
+                    int i = 0;
+                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    {
+                        if(i > 0)
+                        {
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            BookingTable.Rows.Add(newRow);
+                            newCell = new TableCell();
+                            newCell.Width = 300;
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        }
+
+                        newCell = new TableCell();
+                        newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                        + service.ServiceName.ToString() + "</a>";
+                        newCell.Width = 700;
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+                        i++;
+                    }
+                }
+
+                if (bookingServiceList.Count == 1)
+                {
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    BookingTable.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Service Description:";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>" +
+                    bookingServiceList[0].serviceDescripion.ToString() + "</a>";
+                    BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+                }
+                
                 newRow = new TableRow();
                 newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);
@@ -288,33 +344,20 @@ namespace Cheveux
                 BookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
-                newCell.Text = "Time:";
+                newCell.Text = "Date & Time:";
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = BookingDetails.bookingStartTime.ToString("HH:mm");
+                newCell.Text = BookingDetails.bookingStartTime.ToString("HH:mm") + " " + BookingDetails.bookingDate.ToString("dd MMM yyyy");
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                 //increment row count 
                 rowCount++;
+                #endregion
 
-                newRow = new TableRow();
-                newRow.Height = 50;
-                BookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Date:";
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = BookingDetails.bookingDate.ToString("dd-MM-yyyy");
-                BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                //increment row count 
-                rowCount++;
-
+                #region invoice
                 //only display arrived stataus for past bookings
                 if (pastBooking == true)
                 {
-
                     //diplay invoice
                     //get invoice details
                     List<SP_getInvoiceDL> invoice = handler.getInvoiceDL(BookingID);
@@ -334,6 +377,63 @@ namespace Cheveux
                         //increment row count 
                         rowCount++;
 
+                        //Billed to
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        BookingTable.Rows.Add(newRow);
+                        newCell = new TableCell();
+                        newCell.Text = "Billed To:";
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = BookingDetails.CustFullName.ToString();
+                        BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+
+                        if (cookie["UT"] == "C")
+                        {
+                            //invoice from
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            BookingTable.Rows.Add(newRow);
+                            newCell = new TableCell();
+                            newCell.Text = "From:";
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = "Cheveux";
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                            //increment row count 
+                            rowCount++;
+
+                            //from address
+                            BUSINESS bUSINESS = handler.getBusinessTable();
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            BookingTable.Rows.Add(newRow);
+                            newCell = new TableCell();
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = bUSINESS.AddressLine1;
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                            //increment row count 
+                            rowCount++;
+
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            BookingTable.Rows.Add(newRow);
+                            newCell = new TableCell();
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = bUSINESS.AddressLine2;
+                            BookingTable.Rows[rowCount].Cells.Add(newCell);
+
+                            //increment row count 
+                            rowCount++;
+                        }
+
                         //calculate total price
                         double total = 0.0;
 
@@ -344,11 +444,12 @@ namespace Cheveux
                             BookingTable.Rows.Add(newRow);
                             //fill in the item
                             newCell = new TableCell();
-                            newCell.Text = item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + string.Format("{0:#.00}", item.price);
+                            newCell.Text = item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + string.Format("{0:#.00}", item.price)
+                            + " &nbsp;";
                             newRow.Cells.Add(newCell);
                             //fill in the Qty, unit price & TotalPrice
                             newCell = new TableCell();
-                            newCell.HorizontalAlign = HorizontalAlign.Right;
+                            newCell.HorizontalAlign = HorizontalAlign.Left;
                             newCell.Text = "R" + string.Format("{0:#.00}", item.price);
                             BookingTable.Rows[rowCount].Cells.Add(newCell);
                             //increment final price
@@ -367,11 +468,12 @@ namespace Cheveux
                         newRow.Height = 50;
                         BookingTable.Rows.Add(newRow);
                         newCell = new TableCell();
-                        newCell.Text = "<br/> Total Ecluding VAT: ";
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "<br/> Total Ecluding VAT: &nbsp; ";
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
                         //fill in total Ecluding VAT
                         newCell = new TableCell();
-                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.HorizontalAlign = HorizontalAlign.Left;
                         newCell.Text = " <br/> R " + string.Format("{0:#.00}", vatInfo.Item1, 2);
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
 
@@ -394,10 +496,11 @@ namespace Cheveux
                         BookingTable.Rows.Add(newRow);
                         //fill in total VAT due
                         newCell = new TableCell();
-                        newCell.Text = "VAT @" + VATRate + "%";
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "VAT @" + VATRate + "% &nbsp; ";
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.HorizontalAlign = HorizontalAlign.Left;
                         newCell.Text = "R " + string.Format("{0:#.00}", vatInfo.Item2, 2).ToString();
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
 
@@ -410,16 +513,19 @@ namespace Cheveux
                         BookingTable.Rows.Add(newRow);
                         //fill in total
                         newCell = new TableCell();
-                        newCell.Text = "<br/> Total Due: ";
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.Text = "<br/> Total Due: &nbsp; ";
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.HorizontalAlign = HorizontalAlign.Right;
+                        newCell.HorizontalAlign = HorizontalAlign.Left;
                         newCell.Text = "<br/> R " + string.Format("{0:#.00}", total).ToString();
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
 
                         //increment row count 
                         rowCount++;
+                        #endregion
 
+                        #region Review
                         //display review
                         //diaplay a heading
                         newRow = new TableRow();
@@ -430,38 +536,27 @@ namespace Cheveux
 
                         //increment row count 
                         rowCount++;
-
-                        //where arrived status used. extra cell in table to be removed
-                        newRow = new TableRow();
-                        BookingTable.Rows.Add(newRow);
-                        newCell = new TableCell();
-                        newCell.Text = "";
-                        BookingTable.Rows[rowCount].Cells.Add(newCell);
-                        newCell = new TableCell();
-                        newCell.Text = "";
-                        BookingTable.Rows[rowCount].Cells.Add(newCell);
-
-                        //increment row count 
-                        rowCount++;
+                        #endregion
                     }
                 }
 
+                #region Buttons
                 newRow = new TableRow();
                 newRow.Height = 50;
                 BookingTable.Rows.Add(newRow);
                 newCell = new TableCell();
                 BookingTable.Rows[rowCount].Cells.Add(newCell);
                 newCell = new TableCell();
-
+                
                 //check for reivious page
                 if (PreviousPageAdress == null)
                 { PreviousPageAdress = "Bookings.aspx"; }
-
+                
                 //display the buttons bassed on if this is a past booking or not
                 if (pastBooking == true)
                 {
                     //print booking summary
-                    newCell.Text = "<a href='#' onClick='window.print()' >Print This Page  </a>";
+                    newCell.Text = "<a class='btn btn-primary' href='#' onClick='window.print()' >Print This Page  </a>";
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
                 else
@@ -476,6 +571,7 @@ namespace Cheveux
                     "&PreviousPage=" + PreviousPageAdress + "'>Edit Booking</a></button>";
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
+                #endregion
             }
             catch (Exception Err)
             {
@@ -484,6 +580,7 @@ namespace Cheveux
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
         }
+        #endregion
 
         #region Edit Booking
         public void editBooking(string BookingID)
@@ -491,40 +588,197 @@ namespace Cheveux
             //display the booking edit form
             try
             {
-                SP_GetCustomerBooking BookingDetails =
-                    handler.getCustomerUpcomingBookingDetails(BookingID);
-
-                //display a heading
-                BookingLable.Text = "<h2> " + BookingDetails.serviceName.ToString() + " with " +
+                SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                List<SP_GetBookingServices> bookingServiceList = handler.getBookingServices(BookingID);
+                
+                #region Heading
+                if (bookingServiceList.Count == 1)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> Edit " + bookingServiceList[0].ServiceName.ToString() + " with " +
                     BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                else if (bookingServiceList.Count == 2)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> Edit " + bookingServiceList[0].ServiceName.ToString() +
+                        " & " + bookingServiceList[1].ServiceName.ToString() + " with " +
+                    BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                else if (bookingServiceList.Count > 2)
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> Edit booking with " +
+                    BookingDetails.stylistFirstName.ToString() + "</h2>";
+                }
+                #endregion
 
-                //show and fill the Table
+                //show the edit div
                 Edit.Visible = true;
 
-                editBookingTable.Rows[0].Cells[0].Text = "Service Name:";
+                #region Summary
+                //row counter
+                int rowCount = 0;
 
-                editBookingTable.Rows[1].Cells[0].Text = "Service Description:";
+                //new row
+                TableRow newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
 
-                editBookingTable.Rows[2].Cells[0].Text = "Price:";
+                //date and time
+                TableCell newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Font.Bold = true;
+                newCell.Text = "Time & Date";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID="+ BookingDetails.bookingID+ "&EditType=DateTime'> "+
+                    BookingDetails.bookingStartTime.ToString("HH:mm") + " " + BookingDetails.bookingDate.ToString("dd MMM yyyy") 
+                    + " </a>";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                
+                //increment Row Count 
+                rowCount++;
 
-                editBookingTable.Rows[3].Cells[0].Text = "Stylist:";
+                //new row
+                newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
 
-                //creat a drop down list of stylists
-                //get hairstylist info
-                List<SP_GetEmpNames> Stylist = handler.BLL_GetEmpNames();
-                //bind the data to a list
-                DropDownList dropDownStylists = new DropDownList();
-                dropDownStylists.ID = "Stylist";
-                foreach (SP_GetEmpNames emps in Stylist)
+                //stylist
+                newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Font.Bold = true;
+                newCell.Text = "Stylist";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Width = 150;
+                newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Stylist'> " + 
+                    BookingDetails.stylistFirstName.ToString()
+                +" </a>";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                //increment Row Count 
+                rowCount++;
+
+                //new row
+                newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
+
+                //services
+                newCell = new TableCell();
+                newCell.Width = 300;
+                newCell.Font.Bold = true;
+                if (bookingServiceList.Count == 1)
                 {
-                    dropDownStylists.Items.Add(new ListItem(emps.Name.ToString(), emps.EmployeeID.ToString()));
-                    dropDownStylists.DataBind();
+                    newCell.Text = "Service:";
                 }
-                dropDownStylists.Items.FindByValue(BookingDetails.stylistEmployeeID.ToString()).Selected = true;
+                else if (bookingServiceList.Count > 1)
+                {
+                    newCell.Text = "Services:";
+                }
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+                newCell.Width = 300;
+                if (bookingServiceList.Count == 1)
+                {
+                    newCell = new TableCell();
+                    newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Service'> " +
+                     bookingServiceList[0].ServiceName.ToString() + "</a>";
+                    newCell.Width = 700;
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
 
-                editBookingTable.Rows[5].Cells[0].Text = "Time:";
+                    //increment row count 
+                    rowCount++;
+                }
+                else if (bookingServiceList.Count > 1)
+                {
+                    int i = 0;
+                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    {
+                        if (i > 0)
+                        {
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblEditSummary.Rows.Add(newRow);
+                            newCell = new TableCell();
+                            newCell.Width = 300;
+                            tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                        }
 
-                editBookingTable.Rows[4].Cells[0].Text = "Date:";
+                        newCell = new TableCell();
+                        newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Service'> " +
+                        service.ServiceName.ToString() + "</a>";
+                        newCell.Width = 700;
+                        tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                        //increment row count 
+                        rowCount++;
+                        i++;
+                    }
+                }
+
+                if (bookingServiceList.Count == 1)
+                {
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblEditSummary.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Service Description:";
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = bookingServiceList[0].serviceDescripion.ToString();
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+                }
+
+                //cancel booking BTN
+                newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
+                newCell = new TableCell();
+                newCell.Text =
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?Action=Cancel&BookingID=" +
+                    BookingID.ToString().Replace(" ", string.Empty) +
+                    "&PreviousPage=Default.aspx'>Cancel Booking</a></button>";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                
+                //increment Row Count 
+                rowCount++;
+                #endregion
+
+                #region Display Edit Div
+                string editType = Request.QueryString["EditType"];
+                if(editType == null)
+                {
+                    divEditNone.Visible = true;
+                }
+                else if (editType == "DateTime")
+                {
+                    divEditDateTime.Visible = true;
+                    if (!IsPostBack)
+                    {
+                        calMAB.SelectedDate = BookingDetails.bookingDate;
+                    }
+                    loadEditDateAndTime();
+                }
+                else if (editType == "Stylist")
+                {
+                    loadEditStylist();
+                    diveditStylist.Visible = true;
+                }
+                else if (editType == "Service")
+                {
+                    loadEditServices();
+                    divEditService.Visible = true;
+                }
+                #endregion
             }
             catch (ApplicationException Err)
             {
@@ -534,48 +788,892 @@ namespace Cheveux
             }
         }
 
-        //show edit
-        public void showEdit(object sender, EventArgs e)
+        #region keep track of selected time when editing date and time
+        HttpCookie bookingTime = new HttpCookie("BookTime");
+        #endregion
+
+        public bool saveEdit(bool stylist, bool dateAndTime, bool service)
         {
-            confirm.Visible = false;
-            Edit.Visible = true;
-            LogedIn.Visible = true;
-        }
-
-        public void commitEdit(object sender, EventArgs e)
-        {
-            LogedIn.Visible = false;
-            LogedOut.Visible = false;
-            BOOKING updatedBooking = new BOOKING();
-            //fill the booking variable 
-
-
-            bool check = false;
+            bool result = false;
             try
             {
-                //edit booking
+                #region update record
+                //get current booking details 
+                SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                List<SP_GetBookingServices> bookingServiceList = handler.getBookingServices(BookingID);
+
+                //fill updated booking
+                BOOKING updatedBooking = new BOOKING();
+                updatedBooking.BookingID = BookingID;
+                //date and time
+                if(dateAndTime == false)
+                {
+                    //if unchanged
+                    updatedBooking.SlotNo = BookingDetails.slotNo;
+                    updatedBooking.Date = BookingDetails.bookingDate;
+                }
+                else
+                {
+                    //if changed
+                    updatedBooking.Date = calMAB.SelectedDate;
+                    HttpCookie bookingTime = Request.Cookies["BookTime"];
+                    updatedBooking.SlotNo = bookingTime["TimeSlot"];
+                }
+                //services
+                if (service == false)
+                {
+                    //if unchanged
+
+                }
+                else
+                {
+                    //if changed
+
+                }
+                //stylist
+                if (stylist == false)
+                {
+                    //if unchanged
+                    updatedBooking.StylistID = BookingDetails.stylistEmployeeID;
+                }
+                else
+                {
+                    //if changed
+                    updatedBooking.StylistID = rblPickAStylist.SelectedValue;
+                }
+                //commit
+                result = handler.updateBooking(updatedBooking);
+                #endregion
+
+                #region change email
+                //get booking details
+                BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                //get user details
+                USER user = handler.GetUserDetails(BookingDetails.CustomerID);
+                //send an email notification
+                var body = new System.Text.StringBuilder();
+                body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                body.AppendLine(@"");
+                body.AppendLine(@"");
+                if (dateAndTime == true)
+                {
+                    //if changed
+                    body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " has been updated.");
+                }
+                else
+                {
+                    body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " has been updated.");
+                }
+                body.AppendLine(@"");
+                //date and time
+                if (dateAndTime == true)
+                {
+                    //if changed
+                    body.AppendLine(@"Your new date & time is " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " at "
+                    +BookingDetails.bookingStartTime.ToString("HH:mm"));
+                    body.AppendLine(@"");
+                }
+
+                //services
+                if (service == true)
+                {
+                    //if changed
+
+                    body.AppendLine(@"");
+                }
+
+                //stylist
+                if (stylist == true)
+                {
+                    //if changed
+                    body.AppendLine(@"Your new stylist is " + BookingDetails.stylistFirstName);
+                    body.AppendLine(@"");
+                }
+                
+                body.AppendLine(@"View your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + BookingDetails.bookingID.ToString().Replace(" ", string.Empty));
+                body.AppendLine(@"");
+                body.AppendLine(@"Regards,");
+                body.AppendLine(@"");
+                body.AppendLine(@"The Cheveux Team");
+                function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                    "Booking Updated",
+                    body.ToString(),
+                    "Bookings Cheveux");
+                #endregion
             }
-            catch (ApplicationException Err)
+            catch (Exception err)
             {
-                function.logAnError(Err.ToString()
-                    + " An error occurred editing booking id: " + BookingID);
+                function.logAnError("Error commining booking edit to Db in saveEdit(Stylist:"+stylist
+                    +" dateAndTime: "+dateAndTime+" service: "+service+") | bookingID: " + BookingID + 
+                    " | Error:" + err);
+                result = false;
             }
-            if (check == true)
+            return result;
+        }
+
+        #region load div content
+        //Edit
+        public void loadEditError()
+        {
+            diveditStylist.Visible = false;
+            divEditNone.Visible = false;
+            divEditDateTime.Visible = false;
+            divEditService.Visible = false;
+            divEditError.Visible = true;
+        }
+
+        //Stylist
+        public void loadEditStylist()
+        {
+            try
             {
-                confirmHeaderPlaceHolder.Text = "<h1> Your Booking Been Updated </h1>";
-                confirmPlaceHolder.Text = "";
+                int selctedStylistIndex = -1;
+                List<int> disabledStylisIndex = new List<int>();
+                int stylistIndexCount = 0;
+                SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                List<SP_GetStylists> stylistList = handler.BLL_GetAllStylists();
+                foreach (SP_GetStylists stylist in stylistList)
+                {
+                    //define variable to store the value and text
+                    string value = null; 
+                    string text = "";
+
+                    //create the item
+                    ListItem item = new ListItem(text, value);
+
+                    if (BookingDetails.stylistEmployeeID == stylist.UserID)
+                    {
+                        //the stylist is curently selected
+                        text = stylist.FirstName + " - Specializes in " + stylist.ServiceName;
+                        value = stylist.UserID;
+                        item.Selected = true;
+                        selctedStylistIndex = stylistIndexCount;
+                    }
+                    else
+                    {
+                        //check is stylist is avalible at the time
+                        List<SP_GetBookedTimes> stylistBookedSlots = handler.BLL_GetBookedStylistTimes(
+                            stylist.UserID, BookingDetails.bookingDate);
+                        if (stylistBookedSlots.Count != 0)
+                        {
+                            foreach (SP_GetBookedTimes stylistBookedSlot in stylistBookedSlots)
+                            {
+                                if (stylistBookedSlot.SlotNo == BookingDetails.slotNo)
+                                {
+                                    //if stylist is unavalable 
+                                    text = stylist.FirstName + " - (Unavalible at the selected time)";
+                                    value = "";
+                                    disabledStylisIndex.Add(stylistIndexCount);
+                                }
+                                else if (stylistBookedSlot.SlotNo != BookingDetails.slotNo)
+                                {
+                                    //if stylit is avalabile
+                                    text = stylist.FirstName + " - Specializes in " + stylist.ServiceName;
+                                    value = stylist.UserID;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            //stylist is avalible all day
+                            text = stylist.FirstName + " - Specializes in " + stylist.ServiceName;
+                            value = stylist.UserID;
+                        }
+                    }
+                    
+                    //fill the item
+                    item = new ListItem(text, value);
+                    //add to the list
+                    rblPickAStylist.Items.Add(item);
+
+                    //increment count
+                    stylistIndexCount++;
+                }
+
+                //curent stylist (Fix Needed)
+                //rblPickAStylist.Items[selctedStylistIndex].Selected = true;
+
+                //unavalible stylists
+                if(disabledStylisIndex.Count != 0)
+                {
+                    foreach(int index in disabledStylisIndex)
+                    {
+                        rblPickAStylist.Items[index].Enabled = false;
+                    }
+                }
             }
-            else if (check == false)
+            catch (Exception err)
             {
-                confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your Booking </h1>";
-                confirmPlaceHolder.Text = "Please try again later";
+                function.logAnError("Error loading stylist in loadEditStylist() in viewbooking for edit . BookingID: " + BookingID + " | "
+                    + err);
+                loadEditError();
             }
-            yes.Visible = false;
-            no.Visible = false;
-            OK.Visible = true;
+        }
+
+        //Service
+        public void loadEditServices()
+        {
+            try
+            {
+                
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error loading service Selector in loadEditStylist() in viewbooking for edit. BookingID: " + BookingID + " | "
+                    + err);
+                loadEditError();
+            }
+        }
+
+        #region date and time
+        //array to keep track of dynamic time button values
+        string[] availableTimes = new string[21];
+
+        //date and time
+        public void loadEditDateAndTime()
+        {
+            try
+            {
+                bookingTime["TimeSlot"] = "";
+                Response.Cookies.Add(bookingTime);
+                //load booking detais
+                SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                //set button counters
+                int morningButtonCount = 1;
+                int afternoonButtonCount = 11;
+                //get stylist booked times
+                List<SP_GetBookedTimes> bookedList = handler.BLL_GetBookedStylistTimes(BookingDetails.stylistEmployeeID, calMAB.SelectedDate);
+                //get all slot times
+                List<SP_GetSlotTimes> slotList = handler.BLL_GetAllTimeSlots();
+                //hide all the buttons 
+                HideButtons();
+                //load time buttons
+                foreach (SP_GetSlotTimes times in slotList)
+                {
+                    if (bookedList.Count != 0)
+                    {
+                        foreach (SP_GetBookedTimes booked in bookedList)
+                        {
+                            if (booked.SlotNo != times.SlotNo)
+                            {
+                                if (times.Time > Convert.ToDateTime("12:00"))
+                                {
+                                    if (afternoonButtonCount == 11)
+                                    {
+                                        btnAfternoon11.Visible = true;
+                                        btnAfternoon11.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[11] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 12)
+                                    {
+                                        btnAfternoon12.Visible = true;
+                                        btnAfternoon12.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[12] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 13)
+                                    {
+                                        btnAfternoon13.Visible = true;
+                                        btnAfternoon13.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[13] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 14)
+                                    {
+                                        btnAfternoon14.Visible = true;
+                                        btnAfternoon14.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[14] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 15)
+                                    {
+                                        btnAfternoon15.Visible = true;
+                                        btnAfternoon15.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[15] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 16)
+                                    {
+                                        btnAfternoon16.Visible = true;
+                                        btnAfternoon16.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[16] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 17)
+                                    {
+                                        btnAfternoon17.Visible = true;
+                                        btnAfternoon17.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[17] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 18)
+                                    {
+                                        btnAfternoon18.Visible = true;
+                                        btnAfternoon18.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[18] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 19)
+                                    {
+                                        btnAfternoon19.Visible = true;
+                                        btnAfternoon19.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[19] = times.SlotNo;
+                                    }
+                                    else if (afternoonButtonCount == 20)
+                                    {
+                                        btnAfternoon20.Visible = true;
+                                        btnAfternoon20.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[20] = times.SlotNo;
+                                    }
+                                    afternoonButtonCount++;
+                                }
+                                else
+                                {
+                                    if (morningButtonCount == 1)
+                                    {
+                                        btnMorning1.Visible = true;
+                                        btnMorning1.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[1] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 2)
+                                    {
+                                        btnMorning2.Visible = true;
+                                        btnMorning2.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[2] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 3)
+                                    {
+                                        btnMorning3.Visible = true;
+                                        btnMorning3.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[3] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 4)
+                                    {
+                                        btnMorning4.Visible = true;
+                                        btnMorning4.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[4] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 5)
+                                    {
+                                        btnMorning5.Visible = true;
+                                        btnMorning5.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[5] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 6)
+                                    {
+                                        btnMorning6.Visible = true;
+                                        btnMorning6.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[6] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 7)
+                                    {
+                                        btnMorning7.Visible = true;
+                                        btnMorning7.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[7] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 8)
+                                    {
+                                        btnMorning8.Visible = true;
+                                        btnMorning8.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[8] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 9)
+                                    {
+                                        btnMorning9.Visible = true;
+                                        btnMorning9.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[9] = times.SlotNo;
+                                    }
+                                    else if (morningButtonCount == 10)
+                                    {
+                                        btnMorning10.Visible = true;
+                                        btnMorning10.Text = times.Time.ToString("HH:mm");
+                                        availableTimes[10] = times.SlotNo;
+                                    }
+                                    morningButtonCount++;
+                                }
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (times.Time > Convert.ToDateTime("12:00"))
+                        {
+                            if (afternoonButtonCount == 11)
+                            {
+                                btnAfternoon11.Visible = true;
+                                btnAfternoon11.Text = times.Time.ToString("HH:mm");
+                                availableTimes[11] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 12)
+                            {
+                                btnAfternoon12.Visible = true;
+                                btnAfternoon12.Text = times.Time.ToString("HH:mm");
+                                availableTimes[12] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 13)
+                            {
+                                btnAfternoon13.Visible = true;
+                                btnAfternoon13.Text = times.Time.ToString("HH:mm");
+                                availableTimes[13] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 14)
+                            {
+                                btnAfternoon14.Visible = true;
+                                btnAfternoon14.Text = times.Time.ToString("HH:mm");
+                                availableTimes[14] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 15)
+                            {
+                                btnAfternoon15.Visible = true;
+                                btnAfternoon15.Text = times.Time.ToString("HH:mm");
+                                availableTimes[15] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 16)
+                            {
+                                btnAfternoon16.Visible = true;
+                                btnAfternoon16.Text = times.Time.ToString("HH:mm");
+                                availableTimes[16] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 17)
+                            {
+                                btnAfternoon17.Visible = true;
+                                btnAfternoon17.Text = times.Time.ToString("HH:mm");
+                                availableTimes[17] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 18)
+                            {
+                                btnAfternoon18.Visible = true;
+                                btnAfternoon18.Text = times.Time.ToString("HH:mm");
+                                availableTimes[18] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 19)
+                            {
+                                btnAfternoon19.Visible = true;
+                                btnAfternoon19.Text = times.Time.ToString("HH:mm");
+                                availableTimes[19] = times.SlotNo;
+                            }
+                            else if (afternoonButtonCount == 20)
+                            {
+                                btnAfternoon20.Visible = true;
+                                btnAfternoon20.Text = times.Time.ToString("HH:mm");
+                                availableTimes[20] = times.SlotNo;
+                            }
+                            afternoonButtonCount++;
+                        }
+                        else
+                        {
+                            if (morningButtonCount == 1)
+                            {
+                                btnMorning1.Visible = true;
+                                btnMorning1.Text = times.Time.ToString("HH:mm");
+                                availableTimes[1] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 2)
+                            {
+                                btnMorning2.Visible = true;
+                                btnMorning2.Text = times.Time.ToString("HH:mm");
+                                availableTimes[2] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 3)
+                            {
+                                btnMorning3.Visible = true;
+                                btnMorning3.Text = times.Time.ToString("HH:mm");
+                                availableTimes[3] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 4)
+                            {
+                                btnMorning4.Visible = true;
+                                btnMorning4.Text = times.Time.ToString("HH:mm");
+                                availableTimes[4] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 5)
+                            {
+                                btnMorning5.Visible = true;
+                                btnMorning5.Text = times.Time.ToString("HH:mm");
+                                availableTimes[5] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 6)
+                            {
+                                btnMorning6.Visible = true;
+                                btnMorning6.Text = times.Time.ToString("HH:mm");
+                                availableTimes[6] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 7)
+                            {
+                                btnMorning7.Visible = true;
+                                btnMorning7.Text = times.Time.ToString("HH:mm");
+                                availableTimes[7] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 8)
+                            {
+                                btnMorning8.Visible = true;
+                                btnMorning8.Text = times.Time.ToString("HH:mm");
+                                availableTimes[8] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 9)
+                            {
+                                btnMorning9.Visible = true;
+                                btnMorning9.Text = times.Time.ToString("HH:mm");
+                                availableTimes[9] = times.SlotNo;
+                            }
+                            else if (morningButtonCount == 10)
+                            {
+                                btnMorning10.Visible = true;
+                                btnMorning10.Text = times.Time.ToString("HH:mm");
+                                availableTimes[10] = times.SlotNo;
+                            }
+                            morningButtonCount++;
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error loading Date Time Selector in loadEditStylist() in viewbooking for edit. BookingID: "+BookingID+" | "
+                    + err);
+                loadEditError();
+            }
+        }
+
+        //remove dates befor today
+        protected void calMAB_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date <= DateTime.Now.AddDays(1))
+            {
+                e.Cell.BackColor = ColorTranslator.FromHtml("#a9a9a9");
+                e.Day.IsSelectable = false;
+            }
+        }
+
+        #region Time Buttons Functions
+        private void HideButtons()
+        {
+            btnAfternoon11.Visible = false;
+            btnAfternoon12.Visible = false;
+            btnAfternoon13.Visible = false;
+            btnAfternoon14.Visible = false;
+            btnAfternoon15.Visible = false;
+            btnAfternoon16.Visible = false;
+            btnAfternoon17.Visible = false;
+            btnAfternoon18.Visible = false;
+            btnAfternoon19.Visible = false;
+            btnAfternoon20.Visible = false;
+            btnMorning1.Visible = false;
+            btnMorning2.Visible = false;
+            btnMorning3.Visible = false;
+            btnMorning4.Visible = false;
+            btnMorning5.Visible = false;
+            btnMorning6.Visible = false;
+            btnMorning7.Visible = false;
+            btnMorning8.Visible = false;
+            btnMorning9.Visible = false;
+            btnMorning10.Visible = false;
+        }
+
+        private void deselectButton()
+        {
+            btnAfternoon11.CssClass = "btn btn-light";
+            btnAfternoon12.CssClass = "btn btn-light";
+            btnAfternoon13.CssClass = "btn btn-light";
+            btnAfternoon14.CssClass = "btn btn-light";
+            btnAfternoon15.CssClass = "btn btn-light";
+            btnAfternoon16.CssClass = "btn btn-light";
+            btnAfternoon17.CssClass = "btn btn-light";
+            btnAfternoon18.CssClass = "btn btn-light";
+            btnAfternoon19.CssClass = "btn btn-light";
+            btnAfternoon20.CssClass = "btn btn-light";
+            btnMorning1.CssClass = "btn btn-light";
+            btnMorning2.CssClass = "btn btn-light";
+            btnMorning3.CssClass = "btn btn-light";
+            btnMorning4.CssClass = "btn btn-light";
+            btnMorning5.CssClass = "btn btn-light";
+            btnMorning6.CssClass = "btn btn-light";
+            btnMorning7.CssClass = "btn btn-light";
+            btnMorning8.CssClass = "btn btn-light";
+            btnMorning9.CssClass = "btn btn-light";
+            btnMorning10.CssClass = "btn btn-light";
+        }
+        
+        #region monrning
+        protected void btnMorning1_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[1];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning1.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning2_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[2];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning2.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning3_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[3];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning3.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning4_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[4];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning4.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning5_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[5];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning5.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning6_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[6];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning6.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning7_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[7];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning7.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning8_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[8];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning8.CssClass = "btn btn-primary";
+        }
+
+        protected void btnMorning9_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[9];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning9.CssClass = "btn btn-primary";
         }
         #endregion
-        
+
+        #region afternoon
+        protected void btnMorning10_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[10];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnMorning10.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon11_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[11];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon11.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon12_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[12];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon12.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon13_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[13];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon13.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon14_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[14];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon14.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon15_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[15];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon15.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon16_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[16];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon16.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon17_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[17];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon17.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon18_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[18];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon18.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon19_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[19];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon19.CssClass = "btn btn-primary";
+        }
+
+        protected void btnAfternoon20_Click(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+            bookingTime["TimeSlot"] = availableTimes[20];
+            Response.Cookies.Add(bookingTime);
+            deselectButton();
+            btnAfternoon20.CssClass = "btn btn-primary";
+        }
+        #endregion
+        #endregion
+        #endregion
+        #endregion
+
+        #region btn functions / cal functions
+        //redirect back to previous page
+        protected void btnDoneEdit_Click(object sender, EventArgs e)
+        {
+            if (PreviousPageAdress == null)
+            {
+                Response.Redirect("Profile.aspx");
+            }
+            else if (PreviousPageAdress == "Receptionist")
+            {
+                Response.Redirect("../Receptionist/Receptionist.aspx");
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewBooking.aspx?Action=Edit&BookingID=" + BookingID);
+        }
+
+        #region Date & Time
+        protected void btnSaveEditDateAndTime_Click(object sender, EventArgs e)
+        {
+            HttpCookie bookingTime = Request.Cookies["BookTime"];
+            string SlotNo = bookingTime["TimeSlot"];
+            if (SlotNo != "")
+            {
+                //save edit
+                bool result = saveEdit(false, true, false);
+
+                if (result == true)
+                {
+                    //return to edit page
+                    btnCancel_Click(sender, e);
+                }
+                else
+                {
+                    loadEditError();
+                }
+            }
+            else
+            {
+                //return to edit page
+                btnCancel_Click(sender, e);
+            }
+        }
+
+        protected void calMAB_SelectionChanged(object sender, EventArgs e)
+        {
+            loadEditDateAndTime();
+        }
+        #endregion
+
+        #region Stylist
+        protected void btnSaveEditStylist_Click(object sender, EventArgs e)
+        {
+            if (rblPickAStylist.SelectedValue != null
+                && rblPickAStylist.SelectedValue != "")
+            {
+                //save edit
+                bool result = saveEdit(true, false, false);
+
+                if (result == true)
+                {
+                    //return to edit page
+                    btnCancel_Click(sender, e);
+                }
+                else
+                {
+                    loadEditError();
+                }
+            }
+            else
+            {
+                //return to edit page
+                btnCancel_Click(sender, e);
+            }
+        }
+        #endregion
+
+        #region Service
+        protected void btnSaveEditService_Click(object sender, EventArgs e)
+        {
+            //save edit
+            bool result = saveEdit(false, false, true);
+
+            if (result == true)
+            {
+                //return to edit page
+                btnCancel_Click(sender, e);
+            }
+            else
+            {
+                loadEditError();
+            }
+        }
+        #endregion
+        #endregion
+        #endregion
+
         #region Delete
         public void confirmDeleteBooking(string BookingID)
         {
@@ -584,21 +1682,41 @@ namespace Cheveux
             try
             {
                 SP_GetCustomerBooking BookingDetails =
-                        handler.getCustomerUpcomingBookingDetails(BookingID);
+                    handler.getCustomerUpcomingBookingDetails(BookingID);
+                List<SP_GetBookingServices> bookingServiceList =
+                    handler.getBookingServices(BookingID);
 
-                //display a heading
-                BookingLable.Text = "<div class='jumbotron'> <h1> Are you sure you want to cancel booking, </h1> " +
-                    " <p>" + BookingDetails.serviceName.ToString() +
+                #region get the service
+                string bookedServcices = "";
+                int serviceCount = 0;
+                foreach (SP_GetBookingServices service in bookingServiceList)
+                {
+                    if(serviceCount == 0)
+                    {
+                        bookedServcices = service.ServiceName;
+                        serviceCount++;
+                    }
+                    else
+                    {
+                        bookedServcices += ", "+ service.ServiceName;
+                    }
+                }
+                #endregion
+
+                #region  display a Confirmation
+                BookingLable.Text =
+                    "<h1> Are you sure you want to cancel booking, </h1> " +
+                    " <p>" + bookedServcices +
                     " with " + BookingDetails.stylistFirstName.ToString() +
                     " on " + BookingDetails.bookingDate.ToString("dd-MM-yyyy") +
-                    " at " + BookingDetails.bookingStartTime.ToString("HH:mm") + "? " +
-                    "</p>  <button type = 'button' class='btn btn-default'>" +
-                "<a href='javascript:goBack()'>No</a></button>  " +
-               "<button type = 'button' class='btn btn-danger'>" +
-                "<a href = ViewBooking.aspx?Action=CancelConfirmed&BookingID=" +
-                BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
-                "&PreviousPage=" + PreviousPageAdress + ">Yes</a></button>" +
-               "</div> ";
+                    " at " + BookingDetails.bookingStartTime.ToString("HH:mm") + "? </p>  " +
+                    "<button type = 'button' class='btn btn-default'>" +
+                    "<a href='javascript:goBack()'>No</a></button>  " +
+                    "<button type = 'button' class='btn btn-danger'>" +
+                    "<a href = ViewBooking.aspx?Action=CancelConfirmed&BookingID=" +
+                    BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
+                    "&PreviousPage="+PreviousPageAdress+">Yes</a></button>";
+                #endregion
             }
             catch (Exception Err)
             {
@@ -612,11 +1730,32 @@ namespace Cheveux
         {
             try
             {
+                SP_GetCustomerBooking BookingDetails =
+                        handler.getCustomerUpcomingBookingDetails(BookingID);
                 bool success =
                         handler.deleteBooking(BookingID);
                 //Let teh user know it was a success or not
                 if (success == true)
                 {
+                    #region Cancle Confirm Email
+                    //get user details
+                    USER user = handler.GetUserDetails(BookingDetails.CustomerID);
+                    //send an email notification
+                    var body = new System.Text.StringBuilder();
+                    body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Your booking is with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") +" has been canceled.");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"We would love to have you another time make a booking here: http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx" + ".");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Regards,");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"The Cheveux Team");
+                    function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                        "Booking Canceled",
+                        body.ToString(),
+                        "Bookings Cheveux");
+                    #endregion
                     Response.Redirect(PreviousPageAdress);
                 }
                 else
@@ -634,36 +1773,26 @@ namespace Cheveux
             }
         }
         #endregion
-
-        protected void Save_Click(object sender, EventArgs e)
-        {
-            confirm.Visible = true;
-            LogedIn.Visible = false;
-            LogedOut.Visible = false;
-            confirmHeaderPlaceHolder.Text = "";
-            confirmPlaceHolder.Text = "";
-        }
         
-        protected void OK_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Bookings.aspx");
-        }
-
         #region Check Out
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
         //calculate total price
         double total = 0.0;
+        SP_GetCustomerBooking BookingDetails = null;
 
         public void checkOut(string BookingID)
-        {            
+        {
+            total = 0.0;
             //display the booking detail
             try
             {
                 //get the details from the db
-                SP_GetCustomerBooking BookingDetails = null;
                 List<SP_getInvoiceDL> invoicDetailLines = null;
+                List<SP_GetBookingServices> bookingServiceList = null;
                 //get booking deatils
                 BookingDetails = handler.getBookingDetaisForCheckOut(BookingID);
+                //get the services to add to the sale
+                bookingServiceList = handler.getBookingServices(BookingID);
 
                 //check if sales record exists
                 //if sales record dose not exist make a new one
@@ -671,12 +1800,15 @@ namespace Cheveux
                 {
                     //create sales record
                     handler.createSalesRecord(BookingID);
-                    //add booking to invoice
-                    SALES_DTL detailLine = new SALES_DTL();
-                    detailLine.ProductID = BookingDetails.serviceID;
-                    detailLine.SaleID = BookingID;
-                    detailLine.Qty = 1;
-                    handler.createSalesDTLRecord(detailLine);
+                    //add booking to invoice for each product
+                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    {
+                        SALES_DTL detailLine = new SALES_DTL();
+                        detailLine.ProductID = service.ServiceID;
+                        detailLine.SaleID = BookingID;
+                        detailLine.Qty = 1;
+                        handler.createSalesDTLRecord(detailLine);
+                    }
                 }
 
                 //get the invoice 
@@ -685,6 +1817,7 @@ namespace Cheveux
                 //un-hide the checkout table 
                 divCheckOut.Visible = true;
 
+                #region Booking Details
                 //display a heading
                 BookingLable.Text = "<h2> Check Out </h2>";
 
@@ -693,8 +1826,42 @@ namespace Cheveux
 
                 //add booking details to the table
 
+                //Billed To
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.CustFullName.ToString();
+
+                //increment row count 
+                rowCount++;
+
+                //Date & Time
+                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm")
+                    + " " + BookingDetails.bookingDate.ToString("dd-MMM-yyyy");
+
+                //increment row count 
+                rowCount++;
+
                 //service name
-                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.serviceName.ToString();
+                int i = 0;
+                if (bookingServiceList.Count == 1)
+                {
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = bookingServiceList[0].ServiceName.ToString();
+                }
+                else if (bookingServiceList.Count > 1)
+                {
+                    string services = "";
+                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    {
+                        if (i == 0)
+                        {
+                            services += " " + service.ServiceName.ToString();
+                            i++;
+                        }
+                        else
+                        {
+                            services += ", " + service.ServiceName.ToString();
+                        }
+                    }
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = services;
+                }
 
                 //increment row count 
                 rowCount++;
@@ -704,14 +1871,8 @@ namespace Cheveux
 
                 //increment row count 
                 rowCount++;
-
-                //Date & Time
-                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm") 
-                    +" "+BookingDetails.bookingDate.ToString("dd-MM-yyyy");
-
-                //increment row count 
                 rowCount++;
-                rowCount++;
+                #endregion
 
                 //diplay invoice
                 #region invoice
@@ -720,20 +1881,18 @@ namespace Cheveux
 
                 //create a table for the invoice (To be added to tblCheckOut cell)
                 string tblInvoice = "<table>";
-
                 
-
                 foreach (SP_getInvoiceDL item in invoice)
                 {
                     //new row
                     tblInvoice += "<tr>";
                     //add a new cell to the row
                     //fill in the item
-                    tblInvoice += "<td  Width='250'>" + item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + item.price.ToString() + "</td>";
+                    tblInvoice += "<td  Width='250'>" + item.Qty.ToString() + " " + item.itemName.ToString() + " @ R" + item.price.ToString() + "&#09; </td>";
 
                     //add a new cell to the row
                     //fill in the Qty, unit price & TotalPrice
-                    tblInvoice += "<td align='right' Width='250'> R" + Math.Round((item.Qty * item.price), 2).ToString() + "</td>";
+                    tblInvoice += "<td align='left' Width='250'> R" + Math.Round((item.Qty * item.price), 2).ToString() + "</td>";
                     tblInvoice += "</tr>";
 
                     //increment final price
@@ -747,11 +1906,11 @@ namespace Cheveux
                 //new row
                 tblInvoice += "<tr>";
 
-                tblInvoice += "<td> <br/> Total Ecluding VAT: </td>";
+                tblInvoice += "<td align='right'> <br/> Total Ecluding VAT: &nbsp; </td>";
 
                 //fill in total Ecluding VAT
 
-                tblInvoice += "<td align='right'> <br/> R" + Math.Round(vatInfo.Item1, 2).ToString() + "</td>";
+                tblInvoice += "<td align='left'> <br/> R" + Math.Round(vatInfo.Item1, 2).ToString() + "</td>";
                 tblInvoice += "</tr>";
 
                 //get the vat rate
@@ -769,50 +1928,56 @@ namespace Cheveux
                 tblInvoice += "<tr>";
 
                 //fill in total VAT due
-                tblInvoice += "<td> VAT @" + VATRate + "% </td>";
+                tblInvoice += "<td align='right'> VAT @" + VATRate + "% &nbsp; </td>";
 
-                tblInvoice += "<td align='right'> R" + Math.Round(vatInfo.Item2, 2).ToString() + "</td>";
+                tblInvoice += "<td align='left'> R" + Math.Round(vatInfo.Item2, 2).ToString() + "</td>";
 
                 //display the total due//new row
                 tblInvoice += "</tr><tr>";
 
                 //fill in total
-                tblInvoice += "<td> <br/> Total Due: </td>";
+                tblInvoice += "<td align='right'> <br/> Total Due: &nbsp; </td>";
 
-                tblInvoice += "<td align='right'> <br/> R" + total.ToString() + "</td>";
+                tblInvoice += "<td align='left'> <br/>R" + total.ToString() + "</td>";
                 tblInvoice += "</tr>";
 
                 tblInvoice += "</table>";
 
                 //add the invoice to the table
-                tblCheckOut.Rows[rowCount].Cells[1].Text = tblInvoice;
+                tblCheckOut.Rows[rowCount].Cells[0].Text = tblInvoice;
 
                 //increment row count 
                 rowCount++;
                 rowCount++;
                 rowCount++;
                 #endregion
-                
+
+                #region PaymentType
                 //check if paymentType Exists
                 string paymentType = handler.getSalePaymentType(BookingID);
                 if (paymentType != "")
                 {
                     divPamentType.Visible = false;
                     //show payment type
-                    tblCheckOut.Rows[3].Cells[0].Text = "Payment Type:";
-                    tblCheckOut.Rows[3].Cells[1].Text = paymentType;
+                    tblCheckOut.Rows[4].Width = 50;
+                    tblCheckOut.Rows[4].Cells[0].Text = "Payment Type:";
+                    tblCheckOut.Rows[4].Cells[1].Text = paymentType;
                     //hide add product button
-                    tblCheckOut.Rows[5].Cells[1].Text = "";
+                    tblCheckOut.Rows[6].Cells[1].Text = "";
                     //add Print invoice button
-                    tblCheckOut.Rows[6].Cells[1].Text = "<a href='#' onClick='window.print()' >Print Invoice  </a>";
+                    tblCheckOut.Rows[7].Width = 50;
+                    tblCheckOut.Rows[7].Cells[1].Text = "<a class='btn btn-primary' href='#' onClick='window.print()' >Print Invoice  </a>";
                 }
                 else
                 {
-                    tblCheckOut.Rows[3].Cells[0].Text = "";
-                    tblCheckOut.Rows[3].Cells[1].Text = "";
+                    tblCheckOut.Rows[4].Width = 0;
+                    tblCheckOut.Rows[4].Cells[0].Text = "";
+                    tblCheckOut.Rows[4].Cells[1].Text = "";
                     //hide print button
-                    tblCheckOut.Rows[6].Cells[1].Text = "";
+                    tblCheckOut.Rows[7].Width = 0;
+                    tblCheckOut.Rows[7].Cells[1].Text = "";
                 }
+                #endregion
                 divCheckOutInvoice.Visible = true;
             }
             catch (Exception Err)
@@ -832,7 +1997,26 @@ namespace Cheveux
                 //add the pyment tye
                 handler.addPaymentTypeToSalesRecord(pT.Replace(" ", string.Empty), BookingID);
                 //refresh the page to reflect tha changes
+                total = 0.0;
                 checkOut(BookingID);
+                //send booking completion email
+                USER user = handler.GetUserDetails(BookingDetails.CustomerID);
+                //send an email notification
+                var body = new System.Text.StringBuilder();
+                body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                body.AppendLine(@"");
+                body.AppendLine(@"Thank you for choosing Cheveux,");
+                body.AppendLine(@"view your invoice here --> http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingType=Past&BookingID=" + BookingDetails.bookingID.ToString().Replace(" ", string.Empty)+".");
+                body.AppendLine(@"");
+                body.AppendLine(@"Make your next booking now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                body.AppendLine(@"");
+                body.AppendLine(@"Regards,");
+                body.AppendLine(@"");
+                body.AppendLine(@"The Cheveux Team");
+                function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                    "Booking Invoice",
+                    body.ToString(),
+                    "Bookings Cheveux");
             }
             catch (Exception Err)
             {

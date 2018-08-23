@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="MakeABooking.aspx.cs" Inherits="Cheveux.MakeABooking" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="MakeABooking.aspx.cs" Inherits="Cheveux.MakeABooking" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
     Make A Booking - Cheveux
@@ -24,63 +24,117 @@
                             <div class="jumbotron  bg-dark text-white">
                                 <h1>Make A Booking</h1>
                                 <br />
-                                <asp:Label runat="server" ID="lblBookingSummary" Visible="false"></asp:Label>
+                                <asp:Label runat="server" ID="lblErrorSummary" Visible="false"></asp:Label>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-5">
+                            <div style="border: solid #F05F40 2px; overflow-x: scroll;">
+                                <div class="container">
+                                    <h3>Booking Summary</h3>
+                                    <br />
+                                    <asp:Table ID="tblBookingSummary" runat="server">
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Date: "></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblDate"></asp:Label>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Time: "></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblTime"></asp:Label>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Stylist"></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblStylist"></asp:Label>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell Text="Service(s):"></asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblServices"></asp:Label>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+
+
+                                    </asp:Table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-7">
+                            <div runat="server" id="divServices" visible="true">
+
+                                <div class="container">
+                                    <div class="container">
+
+                                        <h6><b>Select Service(s)</b></h6>
+
+                                        <!--Nav Pills for external system-->
+                                        <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
+                                            <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
+                                            <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
+                                        </ul>
+                                        <a name="Natural"></a>
+                                        <br />
+                                    </div>
+
+
+                                    <div style="border: solid #F05F40 2px; height: 400px; overflow-y: scroll;">
+                                        <div runat="server" id="divNatural" visible="true">
+
+                                            <h5>Natural</h5>
+                                            <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="cblPickAServiceN_SelectedIndexChanged">
+                                            </asp:CheckBoxList><br />
+                                            <a name="Application"></a>
+                                        </div>
+
+                                        <div runat="server" id="divApplication" visible="true">
+
+                                            <h5>Application</h5>
+                                            <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
+                                            </asp:RadioButtonList><br />
+                                            <a name="Braid"></a>
+                                        </div>
+
+                                        <div runat="server" id="divBraids" visible="true">
+
+                                            <h5>Braids</h5>
+                                            <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
+                                            </asp:RadioButtonList>
+                                        </div>
+                                    </div>
+
+
+                                </div>
                             </div>
 
-                            <div runat="server" id="divServices" visible="true" style="border: solid #F05F40 2px;">
+
+
+                            <div runat="server" id="divStylist" visible="false">
                                 <div class="container">
-                                    <h6><b>Select Service(s)</b></h6>
-                                    <br />
-                                    <!--Nav Pills for external system-->
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
-                                        <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
-                                        <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
-                                    </ul> <a name="Natural"></a>
                                     <div class="row">
-
-                                        <div class="col-6">
-                                            <div runat="server" id="divNatural" visible="true">
-                                               
-                                                <h5>Natural</h5>
-                                                <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="cblPickAServiceN_SelectedIndexChanged">
-                                                </asp:CheckBoxList><br /><a name="Application"></a>
-                                            </div>
-
-                                            <div runat="server" id="divApplication" visible="true">
-                                                
-                                                <h5>Application</h5>
-                                                <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
-                                                </asp:RadioButtonList><br /><a name="Braid"></a>
-                                            </div>
-
-                                            <div runat="server" id="divBraids" visible="true">
-                                                
-                                                <h5>Braids</h5>
-                                                <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
-                                                </asp:RadioButtonList>
-                                            </div>
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px; overflow-x: scroll;">
+                                            <h3>Choose A Hairstylist</h3>
+                                            <br />
+                                            <asp:RadioButtonList runat="server" ID="rblPickAStylist">
+                                            </asp:RadioButtonList>
                                         </div>
-                                        <div class="col-6">
-                                            <asp:PlaceHolder runat="server" ID="Summary" Visible="true">
-                                               
-                                            </asp:PlaceHolder>
+                                        <div class="col-2"></div>
+                                        <div class="col-5" style="border: solid #F05F40 2px; width: 575px; height: 400px;">
+                                            <asp:Table runat="server" ID="tblSide">
+                                            </asp:Table>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
-                            <div runat="server" id="divStylist" visible="false" style="border: solid #F05F40 2px;">
-                                <div class="container">
-                                    <h3>Choose A Hairstylist</h3>
-                                    <br />
-                                    <asp:RadioButtonList runat="server" ID="rblPickAStylist">
-                                    </asp:RadioButtonList>
-                                </div>
-                            </div>
-
-                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px;">
+                            <div runat="server" id="divDateTime" visible="false" style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-x: scroll;">
                                 <div class="container">
                                     <h3>Choose A Date & Time</h3>
                                     <br />
@@ -144,42 +198,32 @@
                                 </div>
                             </div>
 
-                            <div runat="server" id="divSummary" visible="false" style="border: solid #F05F40 2px;">
+                            <div runat="server" id="divSelectUser" visible="false" 
+                                style="border: solid #F05F40 2px; width: 575px; height: 450px;">
+                                <!--User-->
                                 <div class="container">
-                                    <h3>Booking Summary</h3>
+                                    <!--Line Break-->
                                     <br />
-                                    <asp:Table ID="tblBookingSummary" runat="server">
-                                        <asp:TableRow>
-                                            <asp:TableCell Text="Date: "></asp:TableCell>
-                                            <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblDate"></asp:Label>
-                                            </asp:TableCell>
-                                        </asp:TableRow>
-                                        <asp:TableRow>
-                                            <asp:TableCell Text="Time: "></asp:TableCell>
-                                            <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblTime"></asp:Label>
-                                            </asp:TableCell>
-                                        </asp:TableRow>
-                                        <asp:TableRow>
-                                            <asp:TableCell Text="Stylist"></asp:TableCell>
-                                            <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblStylist"></asp:Label>
-                                            </asp:TableCell>
-                                        </asp:TableRow>
-                                        <asp:TableRow>
-                                            <asp:TableCell Text="Service(s):"></asp:TableCell>
-                                            <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblServices"></asp:Label>
-                                            </asp:TableCell>
-                                        </asp:TableRow>
-
-
-                                    </asp:Table>
+                                    <h3 style="text-align: left; float: left;">Select Customer: </h3>
+                                    <p style="text-align: right; float: right;">
+                                        <!-- Search -->
+                                        <asp:TextBox ID="txtCustomerSearch" runat="server" AutoPostBack="true" placeholder="search"
+                                            OnDataBinding="txtCustomerSearch_DataBinding" OnTextChanged="txtCustomerSearch_DataBinding" CssClass="form-control"></asp:TextBox>
+                                    </p>
+                                    <!--Line Break-->
+                                    <br />
+                                    <asp:ListBox runat="server" ID="lbCustomers" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
+                                    <!--Line Break-->
+                                    <br />
+                                    <p style="text-align: right; float: right;">
+                                        <asp:Button ID="btnNewCust" runat="server" OnClick="btnNewCust_Click" 
+                                        Text="New Customer" CssClass="btn btn-secondary btn-sm"/>
+                                    </p>
                                 </div>
                             </div>
 
                         </div>
+
                     </div>
                 </div>
 
@@ -202,13 +246,16 @@
 
                     </div>
                 </div>
-
-                <!-- Line Break-->
-                <br />
-                <br />
-
-            </form>
         </div>
-        <div class="col-md-2 col-sm-1"></div>
+
+
+
+        <!-- Line Break-->
+        <br />
+        <br />
+
+        </form>
+    </div>
+    <div class="col-md-2 col-sm-1"></div>
     </div>
 </asp:Content>

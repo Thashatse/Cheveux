@@ -59,7 +59,7 @@
                         <!-- For Stylist/For All Stylist Dropdown -->
                         <asp:PlaceHolder ID="phStylists" runat="server">
                             <div class="col-xs-12 col-md-4">
-                                <asp:DropDownList ID="empSelectionType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                <asp:DropDownList ID="empSelectionType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="empSelectionType_Changed">
                                     <asp:ListItem Text="All Stylists" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Specific Stylist" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
@@ -84,9 +84,9 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
-                                <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true" >
+                                <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true">
                                     <asp:ListItem Text="All" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Today" Value="1" ></asp:ListItem>
+                                    <asp:ListItem Text="Today" Value="1"></asp:ListItem>
                                     <asp:ListItem Text="Specific Day" Value="2"></asp:ListItem>
                                     <asp:ListItem Text="Date Range" Value="3"></asp:ListItem>
                                 </asp:RadioButtonList>
@@ -111,7 +111,7 @@
                         <asp:PlaceHolder ID="phDateRange" runat="server" Visible="false">
                             <div class="row">
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    <asp:Label ID="lblStartDate" runat="server" Text="Start Date" Visible="true" ></asp:Label>
+                                    <asp:Label ID="lblStartDate" runat="server" Text="Start Date" Visible="true"></asp:Label>
                                 </div>
                                 <div class="col-xs-12 col-md-4 col-lg-4">
                                     <asp:Label ID="lblEndDate" runat="server" Text="End Date" Visible="true"></asp:Label>
@@ -134,6 +134,28 @@
                                 </div>
                             </div>
                         </asp:PlaceHolder>
+                    </asp:PlaceHolder>
+
+                    <br />
+
+                    <!--Sorting-->
+                    <asp:PlaceHolder ID="phSorting" runat="server">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4 col-lg-4">
+                                Direction : 
+                                <asp:DropDownList ID="drpSortDir" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:ListItem Text="Ascending" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Descending" Value="1"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="col-xs-12 col-md-4 col-lg-4">
+                                Sort By : 
+                                <asp:DropDownList ID="drpSortBy" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:ListItem Text="Date" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Stylist" Value="1"></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                        </div>
                     </asp:PlaceHolder>
 
                     <br />

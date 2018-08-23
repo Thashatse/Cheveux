@@ -21,6 +21,7 @@ namespace Cheveux
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
+        List<SP_GetBookingServices> bServices = null;
         BOOKING checkIn = null;
         HttpCookie cookie = null;
         //string currentBookingStylistID = null;
@@ -97,11 +98,7 @@ namespace Cheveux
                      */
                     if (drpEmpNames.SelectedValue != "-1")
                     {
-                        #region Make internal booking`
-                        displayMAB(drpEmpNames.SelectedValue);
-                        #endregion
-
-                        getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate));
+                        getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate),null,null);
 
                         if(AgendaTable.Rows.Count == 1)
                         {
@@ -131,13 +128,13 @@ namespace Cheveux
         }
 
         #region Agenda
-        public void getAgenda(string id, DateTime bookingDate)
+        public void getAgenda(string id, DateTime bookingDate,string sortBy, string sortDir)
         {
-            Button btn;
+            Button btnCheckin;
 
             try
             {
-                agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
+                agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
 
                 AgendaTable.CssClass = "table table-light table-hover table-bordered";
                 
@@ -186,6 +183,10 @@ namespace Cheveux
                 arrived.Font.Bold = true;
                 AgendaTable.Rows[0].Cells.Add(arrived);
 
+                TableCell edit = new TableCell();
+                edit.Width = 200;
+                AgendaTable.Rows[0].Cells.Add(edit);
+
                 TableCell checkin = new TableCell();
                 checkin.Width = 200;
                 AgendaTable.Rows[0].Cells.Add(checkin);
@@ -218,34 +219,56 @@ namespace Cheveux
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
-
-                    //create service name cell and add to row.. cell index: 4
+                    
+                    bServices = handler.getBookingServices(a.BookingID.ToString());
                     TableCell s = new TableCell();
                     s.Width = 300;
-                    s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + a.ProductID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + a.ServiceName.ToString() + "</a>";
+                    if (bServices.Count == 1)
+                    {
+                        s.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                        + bServices[0].ServiceName.ToString() + "</a>";
+                    }
+                    else if (bServices.Count == 2)
+                    {
+                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "'>" + bServices[0].ServiceName.ToString() +
+                            ", " + bServices[1].ServiceName.ToString() + "</a>";
+                    }
+                    else if (bServices.Count > 2)
+                    {
+                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "'> Multiple Services </a>";
+                    }
                     AgendaTable.Rows[i].Cells.Add(s);
-                    
+                    //addServices(a,i);
+
                     //create arrival status cell and add to row.. cell index : 5
                     TableCell present = new TableCell();
                     present.Width = 100;
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
                     AgendaTable.Rows[i].Cells.Add(present);
-
-                    //create cell that will be populated by the button and add to row.. cell index: 6
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Width = 200;
-                    buttonCell.Height = 50;
-
-
+                    
+                    //check in BTN
                     if (function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "No")
                     {
-                                                
+                        //edit
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+
+                        //create cell that will be populated by the button and add to row.. cell index: 6
+                        buttonCell = new TableCell();
+                        buttonCell.Width = 200;
+                        buttonCell.Height = 50;
+
                         //create button
-                        btn = new Button();
-                        btn.Text = "Check-in";
-                        btn.CssClass = "btn btn-primary";
-                        btn.Click += (ss, ee) => {
+                        btnCheckin = new Button();
+                        btnCheckin.Text = "Check-in";
+                        btnCheckin.CssClass = "btn btn-primary";
+                        btnCheckin.Click += (ss, ee) => {
                             /*
                              * Check-in code here 
                              * After clicking the button arrived should change to Y
@@ -262,16 +285,20 @@ namespace Cheveux
 
                                 if (handler.BLL_CheckIn(checkIn))
                                 {
+                                    noBookingsPH.Visible = true;
+                                    lblNoBookings.Text = a.CustomerFName.ToString() + " has now been checked in.";
                                     //if BLL_CheckIn successful and arrival status changed show user and refresh the page
-                                    Response.Write("<script>alert('Customer has been checked-in.');location.reload(true);</script>");
+                                    //Response.Write("<script>alert('Customer has been checked-in.');location.reload(true);</script>");
                                 }
                                 else
                                 {
                                     //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
                                     //Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
+
                                     phCheckInErr.Visible = true;
                                     lblCheckinErr.Text = "An error has occured.We are unable to check-in the customer at this point in time.<br/>"
                                                           + "Please report to management. Sorry for the inconvenience.";
+
                                 }
 
                             }
@@ -289,13 +316,18 @@ namespace Cheveux
 
                         };
                         //add button to cell 
-                        buttonCell.Controls.Add(btn);
+                        buttonCell.Controls.Add(btnCheckin);
                         //add cell to row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }
+                    //check Out BTN
                     else if(function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "Yes")
                     {
-                        
+                        //edit
+                        TableCell emptybuttonCell = new TableCell();
+                        emptybuttonCell.Text = "";
+                        AgendaTable.Rows[i].Cells.Add(emptybuttonCell);
+
                         //create button
                         TableCell newCell = new TableCell();
                         newCell.Text = "<button type = 'button' class='btn btn-primary'>" +
@@ -523,118 +555,16 @@ namespace Cheveux
         #endregion
 
         #region Make internal booking
-        public void displayMAB(string stylistID)
-        {
-            //display the make a booking panel
-            try
-            {
-                USER stylist = handler.GetUserDetails(stylistID);
-                lMABforStylist.Text = "with " + stylist.FirstName + " " + stylist.LastName;
-                makeABookingContainer.Visible = true;
-            }
-            catch (Exception err)
-            {
-                calMAB.Visible = false;
-                btnMakeInternalBooking.Visible = false;
-                lMABforStylist.Text = "Make A Booking Unavailable, Try Again Later";
-                makeABookingContainer.Visible = true;
-                function.logAnError("Error loading make a booking panel on receptionist page for stylist id: " +
-                    stylistID + " | Error: " + err);
-            }
-        }
-
-        protected void prossesBooking(object sender, EventArgs e)
-        {
-            try
-            {
-                if (calMAB.SelectedDate.ToString() != "0001/01/01 00:00:00" 
-                    && drpAvailableTimes.Visible == false)
-                {
-                    drpAvailableTimes.Visible = true;
-                }
-
-                //if time selected redirect to service & customer slection
-                if (drpAvailableTimes.SelectedValue != "-1" 
-                    && btnMakeInternalBooking.Visible == false)
-                {
-                    btnMakeInternalBooking.Visible = true;
-                }
-            }
-            catch (Exception err)
-            {
-                calMAB.Visible = false;
-                btnMakeInternalBooking.Visible = false;
-                drpAvailableTimes.Visible = false;
-                lMABforStylist.Text = "Make A Booking Unavailable, Try Again Later";
-                makeABookingContainer.Visible = true;
-                function.logAnError("Error loading avalible times and redirecting to make a booking page on receptionist page for stylist id: " +
-                    drpEmpNames.SelectedValue.Replace(" ", string.Empty) +
-                    "Date: " + calMAB.SelectedDate +
-                    "Time (SlotNo.): " + drpAvailableTimes.SelectedValue +
-                    " | Error: " + err);
-            }
-        }
-        
-        //remove dates befor today
-        protected void calMAB_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date <= DateTime.Now)
-            {
-                e.Cell.BackColor = ColorTranslator.FromHtml("#a9a9a9");
-                e.Day.IsSelectable = false;
-            }
-        }
-
         protected void btnMakeInternalBooking_Click(object sender, EventArgs e)
         {
-            Response.Redirect("../Receptionist/MakeInternalBooking.aspx"
-                        + "?StyID=" + drpEmpNames.SelectedValue.Replace(" ", string.Empty) +
-                        "&Date=" + calMAB.SelectedDate.ToString("yyyy-MM-dd") +
-                        "&Time=" + drpAvailableTimes.SelectedValue.Replace(" ", string.Empty));
+            Response.Redirect("../MakeABooking.aspx?Type=Internal");
         }
-        
-        //cleares booking panel when new stylist selected
-        protected void clearBooking(object sender, EventArgs e)
-        {
-            btnMakeInternalBooking.Visible = false;
-            drpAvailableTimes.Visible = false;
-            calMAB.SelectedDate = Convert.ToDateTime("0001/01/01 00:00:00");
-        }
-        
-        protected void calMAB_SelectionChanged(object sender, EventArgs e)
-        {
-            #region Avalible Times
-            List<SP_GetBookedTimes> bookedList = handler.BLL_GetBookedStylistTimes(
-                drpEmpNames.SelectedValue.Replace(" ", string.Empty), calMAB.SelectedDate);
-            List<SP_GetSlotTimes> slotList = handler.BLL_GetAllTimeSlots();
-            slotList = slotList.OrderBy(o => o.Time).ToList();
-            drpAvailableTimes.Items.Clear();
-            if (bookedList.Count != 0)
-            {
-                foreach (SP_GetBookedTimes booked in bookedList)
-                {
-                    foreach (SP_GetSlotTimes times in slotList)
-                    {
-                        if (booked.SlotNo != times.SlotNo)
-                        {
-                            drpAvailableTimes.Items.Add(new ListItem(times.Time.ToString("hh:mm"),
-                            times.SlotNo));
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (SP_GetSlotTimes times in slotList)
-                {
-                    drpAvailableTimes.Items.Add(new ListItem(times.Time.ToString("hh:mm"),
-                    times.SlotNo));
-                }
-            }
-            drpAvailableTimes.Items.Insert(0, new ListItem("--Select Time--", "-1"));
-            #endregion
+        #endregion
 
-            prossesBooking(sender, e);
+        #region Register New Customer
+        protected void btnNewCust_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Authentication/NewAccount.aspx?Type=NewCust");
         }
         #endregion
     }

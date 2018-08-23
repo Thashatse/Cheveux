@@ -18,12 +18,12 @@ namespace Cheveux
         List<SP_GetEmpAgenda> agenda = null;
         List<SP_GetStylistBookings> bList = null;
         List<SP_GetEmpNames> list = null;
-
+        
         string today = DateTime.Now.ToString("yyyy-MM-dd");
+
         protected void Page_Load(object sender, EventArgs e)
         {
             errorCssStyles();
-
             cookie = Request.Cookies["CheveuxUserID"];
 
             if (cookie == null)
@@ -74,10 +74,12 @@ namespace Cheveux
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
         }
+
         public void DropDownChanges()
         {
             if (drpViewAppt.SelectedValue == "0")
             {
+
                 //upcoming
                 phNames.Visible = false;
                 phCalendars.Visible = false;
@@ -95,7 +97,7 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDateRange.Visible = false;
                         phDay.Visible = false;
-                        getAllStylistsUpcomingBookings();
+                        getAllStylistsUpcomingBookings(drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                     else if (rdoDate.SelectedValue == "1")
                     {
@@ -103,7 +105,8 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDay.Visible = false;
                         phDateRange.Visible = false;
-                        getAllStylistsUpcomingBksForDate(DateTime.Parse(today));
+                        getAllStylistsUpcomingBksForDate(DateTime.Parse(today), drpSortBy.SelectedItem.Text, 
+                                                        drpSortDir.SelectedItem.Text);
                     }
                     else if (rdoDate.SelectedValue == "2")
                     {
@@ -119,7 +122,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsUpcomingBksForDate(calDay.SelectedDate);
+                            getAllStylistsUpcomingBksForDate(calDay.SelectedDate, drpSortBy.SelectedItem.Text, 
+                                                            drpSortDir.SelectedItem.Text);
                         }
                     }
                     else if (rdoDate.SelectedValue == "3")
@@ -137,14 +141,14 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate);
+                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate,
+                                                    drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                         
                     }
                 }
                 else if (empSelectionType.SelectedValue == "1")
                 {
-                    
                     //stylist
                     phNames.Visible = true;
                     phCalendars.Visible = false;
@@ -158,7 +162,8 @@ namespace Cheveux
                             phBookingsErr.Visible = false;
                             phDateRange.Visible = false;
                             phDay.Visible = false;
-                            getStylistUpcomingBookings(drpStylistNames.SelectedValue);
+                            getStylistUpcomingBookings(drpStylistNames.SelectedValue, drpSortBy.SelectedItem.Text, 
+                                                        drpSortDir.SelectedItem.Text);
                         }
                         else if (rdoDate.SelectedValue == "1")
                         {
@@ -166,7 +171,8 @@ namespace Cheveux
                             phBookingsErr.Visible = false;
                             phDateRange.Visible = false;
                             phDay.Visible = false;
-                            getStylistUpcomingBksForDate(drpStylistNames.SelectedValue, DateTime.Parse(today));
+                            getStylistUpcomingBksForDate(drpStylistNames.SelectedValue, DateTime.Parse(today), 
+                                                        drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                         else if (rdoDate.SelectedValue == "2")
                         {
@@ -182,7 +188,8 @@ namespace Cheveux
                             else
                             {
                                 phBookingsErr.Visible = false;
-                                getStylistUpcomingBksForDate(drpStylistNames.SelectedValue, calDay.SelectedDate);
+                                getStylistUpcomingBksForDate(drpStylistNames.SelectedValue, calDay.SelectedDate, drpSortBy.SelectedItem.Text, 
+                                                                drpSortDir.SelectedItem.Text);
                             }
 
                         }
@@ -201,7 +208,8 @@ namespace Cheveux
                             else
                             {
                                 phBookingsErr.Visible = false;
-                                getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                                getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate, 
+                                                            drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                             }
                         }
                     }
@@ -227,7 +235,7 @@ namespace Cheveux
                         phDateRange.Visible = false;
                         phDay.Visible = false;
 
-                        getAllStylistsPastBookings();
+                        getAllStylistsPastBookings(drpSortBy.SelectedItem.Text,drpSortDir.SelectedItem.Text);
                     }
                     else if (rdoDate.SelectedValue == "1")
                     {
@@ -236,7 +244,8 @@ namespace Cheveux
                         phDay.Visible = false;
                         phDateRange.Visible = false;
 
-                        getAllStylistsPastBksForDate(DateTime.Parse(today));
+                        getAllStylistsPastBksForDate(DateTime.Parse(today)
+                                                    ,drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                     else if (rdoDate.SelectedValue == "2")
                     {
@@ -252,7 +261,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsPastBksForDate(calDay.SelectedDate);
+                            getAllStylistsPastBksForDate(calDay.SelectedDate, drpSortBy.SelectedItem.Text,
+                                                        drpSortDir.SelectedItem.Text);
                         }
 
                     }
@@ -271,7 +281,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate);
+                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate
+                                                        , drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
 
                     }
@@ -293,7 +304,8 @@ namespace Cheveux
                             phDateRange.Visible = false;
                             phDay.Visible = false;
 
-                            getStylistPastBookings(drpStylistNames.SelectedValue);
+                            getStylistPastBookings(drpStylistNames.SelectedValue, drpSortBy.SelectedItem.Text, 
+                                                                drpSortDir.SelectedItem.Text);
                         }
                         else if (rdoDate.SelectedValue == "1")
                         {
@@ -302,7 +314,8 @@ namespace Cheveux
                             phDay.Visible = false;
                             phDateRange.Visible = false;
 
-                            getStylistPastBksForDate(drpStylistNames.SelectedValue, DateTime.Parse(today));
+                            getStylistPastBksForDate(drpStylistNames.SelectedValue, DateTime.Parse(today)
+                                                    ,drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                         else if (rdoDate.SelectedValue == "2")
                         {
@@ -318,7 +331,8 @@ namespace Cheveux
                             else
                             {
                                 phBookingsErr.Visible = false;
-                                getStylistPastBksForDate(drpStylistNames.SelectedValue, calDay.SelectedDate);
+                                getStylistPastBksForDate(drpStylistNames.SelectedValue, calDay.SelectedDate,
+                                                        drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                             } 
                         }
                         else if(rdoDate.SelectedValue == "3")
@@ -336,19 +350,24 @@ namespace Cheveux
                             else
                             {
                                 phBookingsErr.Visible = false;
-                                getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                                getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate
+                                                            ,drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                             }
                         }
                     }
                 }
             }
         }
-        public void getStylistPastBookings(string empID)
+
+        #region Stylists bookings
+
+        #region Past
+        public void getStylistPastBookings(string empID, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getStylistPastBookings(empID);
+                bList = handler.getStylistPastBookings(empID,sortBy,sortDir);
 
                 ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -428,12 +447,12 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
+        public void getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate);
+                bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate,sortBy,sortDir);
 
                 ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -513,12 +532,12 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getStylistPastBksForDate(string empID, DateTime day)
+        public void getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getStylistPastBksForDate(empID, day);
+                bList = handler.getStylistPastBksForDate(empID, day,sortBy,sortDir);
 
                 ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -599,14 +618,17 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getStylistUpcomingBookings(string empID)
+        #endregion
+
+        #region Upcoming
+        public void getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
                 ////phTable.Visible=true;
 
-                bList = handler.getStylistUpcomingBookings(empID);
+                bList = handler.getStylistUpcomingBookings(empID,sortBy,sortDir);
 
                 tblSchedule.Visible = true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -667,12 +689,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text = 
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
 
@@ -688,12 +718,13 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getStylistUpcomingBksForDate(string id, DateTime bookingDate)
+
+        public void getStylistUpcomingBksForDate(string id, DateTime bookingDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
+                agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
 
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
 
@@ -762,17 +793,25 @@ namespace Cheveux
                                     "'>" + b.CustomerFName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(customerCell);
 
-                    TableCell servNameCell = new TableCell();
+                    /*TableCell servNameCell = new TableCell();
                     servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ProductID.Replace(" ", string.Empty) + "'>"
                                         + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);*/
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
                     rowCount++;
@@ -788,12 +827,13 @@ namespace Cheveux
                 function.logAnError(E.ToString());
             }
         }
-        public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate)
+
+        public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate);
+                bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate,sortBy,sortDir);
 
                 ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -855,12 +895,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
@@ -874,12 +922,19 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getAllStylistsUpcomingBksForDate(DateTime bookingDate)
+        #endregion
+
+        #endregion
+
+        #region All Stylists 
+
+        #region Upcoming
+        public void getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getAllStylistsUpcomingBksForDate(bookingDate);
+                bList = handler.getAllStylistsUpcomingBksForDate(bookingDate,sortBy,sortDir);
 
                 ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -901,7 +956,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -951,12 +1006,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
                     rowCount++;
@@ -971,12 +1034,13 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate)
+
+        public void getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate);
+                bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate, sortBy, sortDir);
 
                 ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -998,7 +1062,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1048,12 +1112,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
@@ -1067,12 +1139,13 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getAllStylistsUpcomingBookings()
+
+        public void getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getAllStylistsUpcomingBookings();
+                bList = handler.getAllStylistsUpcomingBookings(sortBy, sortDir);
 
                 ////phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -1094,7 +1167,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1111,6 +1184,10 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
+                empty.Width = 200;
+                tblSchedule.Rows[0].Cells.Add(empty);
+
+                empty = new TableCell();
                 empty.Width = 200;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
@@ -1144,12 +1221,20 @@ namespace Cheveux
                                         + b.ServiceName.ToString() + "</a>";
                     tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
 
+                    //edit
                     TableCell buttonCell = new TableCell();
+                    buttonCell.Text =
+                        "<button type='button' class='btn btn-default'>" +
+                    "<a href='../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                    "&Action=Edit'>Edit Booking</a></button>";
+                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    //view booking
+                    buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                    "'>View Booking</a></button>";
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
                     rowCount++;
@@ -1164,12 +1249,15 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getAllStylistsPastBookings()
+        #endregion
+
+        #region Past
+        public void getAllStylistsPastBookings(string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getAllStylistsPastBookings();
+                bList = handler.getAllStylistsPastBookings(sortBy,sortDir);
 
                 //phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -1191,7 +1279,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1260,12 +1348,12 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getAllStylistsPastBksForDate(DateTime date)
+        public void getAllStylistsPastBksForDate(DateTime date, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getAllStylistsPastBksForDate(date);
+                bList = handler.getAllStylistsPastBksForDate(date, sortBy, sortDir);
 
                 //phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -1287,7 +1375,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1357,12 +1445,12 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-        public void getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate)
+        public void getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             try
             {
-                bList = handler.getAllStylistsPastBookingsDateRange(startDate,endDate);
+                bList = handler.getAllStylistsPastBookingsDateRange(startDate,endDate, sortBy, sortDir);
 
                 //phTable.Visible=true;
                 tblSchedule.CssClass = "table table-light table-hover table-bordered";
@@ -1384,7 +1472,7 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 50;
+                emp.Width = 240;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
@@ -1454,6 +1542,10 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+        #endregion
+
+        #endregion
+
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
             lblDay.Text = calDay.SelectedDate.ToString("dd-MM-yyyy");
@@ -1469,7 +1561,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getAllStylistsUpcomingBksForDate(calDay.SelectedDate);
+                        getAllStylistsUpcomingBksForDate(calDay.SelectedDate, drpSortBy.SelectedItem.Text,
+                                                        drpSortDir.SelectedItem.Text);
                     }
                 }
                 else if(empSelectionType.SelectedValue == "1")//stylist
@@ -1482,7 +1575,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getStylistUpcomingBksForDate(drpStylistNames.SelectedValue, calDay.SelectedDate);
+                        getStylistUpcomingBksForDate(drpStylistNames.SelectedValue, calDay.SelectedDate, 
+                                                    drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
             }
@@ -1498,7 +1592,8 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getAllStylistsPastBksForDate(calDay.SelectedDate);
+                        getAllStylistsPastBksForDate(calDay.SelectedDate, drpSortBy.SelectedItem.Text,
+                                                    drpSortDir.SelectedItem.Text);
                     }
                 }
                 else if (empSelectionType.SelectedValue == "1")//a stylist
@@ -1511,11 +1606,13 @@ namespace Cheveux
                     else
                     {
                         phBookingsErr.Visible = false;
-                        getStylistPastBksForDate(drpStylistNames.SelectedValue,calDay.SelectedDate);
+                        getStylistPastBksForDate(drpStylistNames.SelectedValue,calDay.SelectedDate,
+                                                drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
                 }
             }
         }
+
         protected void calStart_SelectionChanged(object sender, EventArgs e)
         {
             lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
@@ -1536,7 +1633,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate);
+                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate, drpSortBy.SelectedItem.Text, 
+                                                        drpSortDir.SelectedItem.Text);
                         }
                     }
                 }
@@ -1553,7 +1651,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                            getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate, 
+                                                        drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                     }
 
@@ -1574,7 +1673,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate);
+                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate, 
+                                                            drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                     }
                 }
@@ -1591,13 +1691,15 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                            getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate, 
+                                                        drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                     }
 
                 }
             }
         }
+
         protected void calEnd_SelectionChanged(object sender, EventArgs e)
         {
             //lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
@@ -1618,7 +1720,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate);
+                            getAllStylistsUpcomingBksDR(calStart.SelectedDate, calEnd.SelectedDate,
+                                                    drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                     }
                 }
@@ -1635,7 +1738,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                            getStylistUpcomingBookingsDR(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate,
+                                                    drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                     }
 
@@ -1656,7 +1760,8 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate);
+                            getAllStylistsPastBookingsDateRange(calStart.SelectedDate, calEnd.SelectedDate, 
+                                                            drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                     }
                 }
@@ -1673,13 +1778,15 @@ namespace Cheveux
                         else
                         {
                             phBookingsErr.Visible = false;
-                            getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate);
+                            getStylistPastBookingsDateRange(drpStylistNames.SelectedValue, calStart.SelectedDate, calEnd.SelectedDate, 
+                                                        drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                     }
 
                 }
             }
         }
+
         protected void scheduleCalender_DayRender(object sender, DayRenderEventArgs e)
         {
             if (drpViewAppt.SelectedValue == "0")
@@ -1695,6 +1802,19 @@ namespace Cheveux
                 {
                     e.Day.IsSelectable = false;
                 }
+            }
+        }
+        protected void empSelectionType_Changed(object sender, EventArgs e)
+        {
+            if (empSelectionType.SelectedValue == "0")
+            {
+                drpSortBy.Items.RemoveAt(1);
+                drpSortBy.Items.Add("Stylist");
+            }
+            else if (empSelectionType.SelectedValue == "1")
+            {
+                drpSortBy.Items.RemoveAt(1);
+                drpSortBy.Items.Add("Customer");
             }
         }
     }

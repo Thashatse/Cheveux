@@ -17,7 +17,9 @@ GO
 -- Author:		S.Maqabangqa
 -- =============================================
 CREATE PROCEDURE SP_StylistPastBookings 
-	@stylistID nchar(30)
+	@stylistID nchar(30),
+	@sortBy nvarchar(max)=null,
+	@sortDir nvarchar(max)=null
 AS
 BEGIN
 	SET NOCOUNT ON;
@@ -40,5 +42,43 @@ BEGIN
 	AND    B.ServiceID = P.ProductID 
 	AND	   B.Arrived = 'Y'
 	AND	   B.[Date] !> CAST(GETDATE() AS DATE)
+	ORDER BY
+	(CASE 
+		 WHEN @sortBy='Stylist' AND @sortDir='Descending'
+		 THEN (SELECT (u.FirstName + ' ' + u.LastName)as[stylist]
+				FROM [USER] u 
+				WHERE u.UserID=B.StylistID)
+		 END) DESC,
+
+		 (CASE
+		  WHEN @sortBy='Date' AND @sortDir='Descending'
+		  THEN B.[Date]
+		  END) DESC,
+
+		  (CASE
+		  WHEN @sortBy='Customer' AND @sortDir='Descending'
+		  THEN (SELECT (u.FirstName+' '+u.LastName)as[CustomerName]
+		   FROM [USER] u
+		   WHERE u.UserID=B.CustomerID)
+		  END) DESC,
+
+		  (CASE
+		 WHEN @sortBy='Stylist' AND @sortDir='Ascending'
+		 THEN (SELECT (u.FirstName + ' ' + u.LastName)as[stylist]
+				FROM [USER] u 
+				WHERE u.UserID=B.StylistID)
+		 END) ASC,
+
+		 (CASE
+		  WHEN @sortBy='Date' AND @sortDir='Ascending'
+		  THEN B.[Date]
+		  END) ASC,
+
+		  (CASE
+		  WHEN @sortBy='Customer' AND @sortDir='Ascending'
+		  THEN (SELECT (u.FirstName+' '+u.LastName)as[CustomerName]
+		   FROM [USER] u
+		   WHERE u.UserID=B.CustomerID)
+		  END) ASC
 END
 GO

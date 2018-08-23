@@ -14,12 +14,12 @@ namespace TypeLibrary.ViewModels
         public DateTime EndTime { get; set; }
         public string CustomerFName { get; set; }
         public string EmpFName { get; set; }
-        public string ServiceName { get; set; }
-        public string ServiceDesc { get; set; }
+        //public string ServiceName { get; set; }
+        //public string ServiceDesc { get; set; }
         //public Nullable<char> Arrived { get; set; }
         public string Arrived { get; set; }
         public DateTime Date { get; set; }
-        public string ProductID { get; set; }
+        //public string ProductID { get; set; }
         public string empID { get; set; }
     }
 }

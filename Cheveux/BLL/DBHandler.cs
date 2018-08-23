@@ -104,6 +104,17 @@ namespace BLL
             return db.CheckForProduct(id);
         }
 
+        /*
+        public bool addAccessories(ACCESSORY a)
+        {
+            return db.addAccessories(a);
+        }
+
+        public bool addTreatments(TREATMENT t)
+        {
+            return db.addTreatments(t);
+        }*/
+
         public SP_GetAllAccessories selectAccessory(string accessoryID)
         {
                  return db.selectAccessory(accessoryID);
@@ -116,15 +127,44 @@ namespace BLL
          }
 
         #endregion
-        /*
-#region Bookings
-        public List<BookingService> getBookingServices(string bookingID)
+
+        #region Bookings
+        public List<SP_GetBookingServices> getBookingServices(string bookingID)
         {
             return db.getBookingServices(bookingID);
         }
         #endregion
-           */
-        public List<SP_GetTodaysBookings> getTodaysBookings()
+
+        #region Services
+        
+         public bool BLL_AddService(PRODUCT p, SERVICE s)
+        {
+            return db.AddService(p, s);
+        }
+        
+
+        public List<SP_GetWidth> BLL_GetWidths()
+        {
+            return db.GetWidths();
+        }
+
+        public List<SP_GetLength> BLL_GetLengths()
+        {
+            return db.GetLengths();
+        }
+
+        public List<SP_GetStyles> BLL_GetStyles()
+        {
+            return db.GetStyles(); 
+        }
+        
+        public bool BLL_AddBraidService(BRAID_SERVICE bs)
+        {
+            return db.AddBraidService(bs);
+        }
+        #endregion
+
+        public List<SP_GetTodaysBookings> getTodaysBookings() 
         {
             return db.getTodaysBookings();
         }
@@ -214,9 +254,9 @@ namespace BLL
             return db.GetEmpNames();
         }
 
-        public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate)
+        public List<SP_GetEmpAgenda> BLL_GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir)
         {
-            return db.GetEmpAgenda(employeeID, bookingDate);
+            return db.GetEmpAgenda(employeeID, bookingDate,sortBy,sortDir);
         }
 
         public SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID)
@@ -365,6 +405,7 @@ namespace BLL
         {
             return db.userList();
         }
+
         public bool addEmployee(string empID, string bio, string ad1, string ad2, string suburb, string city, string firstname
                                 , string lastname, string username, string email, string contactNo, string password,
                                 string userimage, string passReset)
@@ -398,43 +439,35 @@ namespace BLL
         {
             return db.GetAllStylists();
         }
-        public List<SP_GetStylistBookings> getStylistPastBookings(string empID)
+
+        public List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir)
         {
-            return db.getStylistPastBookings(empID);
+            return db.getStylistPastBookings(empID,sortBy,sortDir);
         }
-        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate)
+
+        public List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
-            return db.getStylistPastBookingsDateRange(empID,startDate,endDate);
+            return db.getStylistPastBookingsDateRange(empID,startDate,endDate,sortBy,sortDir);
         }
-        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID)
+
+        public List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
-            return db.getStylistUpcomingBookings(empID);
+            return db.getStylistUpcomingBookings(empID,sortBy,sortDir);
         }
+
         public List<SP_AboutStylist> aboutStylist()
         {
             return db.aboutStylist();
         }
-        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate)
+
+        public List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
-            return db.getStylistUpcomingBookingsDR(empID, startDate, endDate);
-        }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate)
-        {
-            return db.getAllStylistsUpcomingBksForDate(bookingDate);
-        }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate)
-        {
-            return db.getAllStylistsUpcomingBksDR(startDate,endDate);
-        }
-        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings()
-        {
-            return db.getAllStylistsUpcomingBookings();
+            return db.getStylistUpcomingBookingsDR(empID, startDate, endDate,sortBy,sortDir);
         }
 
-        /*
-         public bool BLL_AddService(PRODUCT p, SERVICE s)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
-            return db.AddService(p, s);
+            return db.getAllStylistsUpcomingBksForDate(bookingDate,sortBy,sortDir);
         }
         
             */
@@ -444,42 +477,40 @@ namespace BLL
         }
         public List<SP_GetLength> BLL_GetLengths()
         {
-            return db.GetLengths();
-        }
-        public List<SP_GetStyles> BLL_GetStyles()
-        {
-            return db.GetStyles();
-        }
-        public List<SP_GetStylistBookings> getAllStylistsPastBookings()
-        {
-            return db.getAllStylistsPastBookings();
-        }
-        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date)
-        {
-            return db.getAllStylistsPastBksForDate(date);
-        }
-        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate)
-        {
-            return db.getAllStylistsPastBookingsDateRange(startDate,endDate);
-        }
-        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day)
-        {
-            return db.getStylistPastBksForDate(empID, day);
-        }
-        /*
-        public bool addAccessories(ACCESSORY a)
-        {
-            return db.addAccessories(a);
+            return db.getAllStylistsUpcomingBksDR(startDate,endDate,sortBy,sortDir);
         }
 
-        public bool addTreatments(TREATMENT t)
+        public List<SP_GetStylistBookings> getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
-            return db.addTreatments(t);
-        }*/
-        public bool BLL_AddBraidService(BRAID_SERVICE bs)
-        {
-            return db.AddBraidService(bs);
+            return db.getAllStylistsUpcomingBookings(sortBy,sortDir);
         }
         
+        public List<SP_GetStylistBookings> getAllStylistsPastBookings(string sortBy, string sortDir)
+        {
+            return db.getAllStylistsPastBookings(sortBy,sortDir);
+        }
+
+        public List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime date, string sortBy, string sortDir)
+        {
+            return db.getAllStylistsPastBksForDate(date,sortBy,sortDir);
+        }
+
+        public List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
+        {
+            return db.getAllStylistsPastBookingsDateRange(startDate,endDate,sortBy,sortDir);
+        }
+
+        public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
+        {
+            return db.getStylistPastBksForDate(empID, day,sortBy,sortDir);
+        }
+        public bool BLL_AddToBookingService(BookingService bs)
+        {
+            return db.AddToBookingService(bs);
+        }
+        public bool BLL_UpdateService(PRODUCT p, SERVICE s)
+        {
+            return db.UpdateService(p, s);
+        }
     }
 }

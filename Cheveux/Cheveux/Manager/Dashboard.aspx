@@ -35,6 +35,39 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-9 col-md-12">
+                            <div runat="server" id="divStats">
+                                <!--Stats-->
+                                <h1>Stats </h1>
+                                <div class="row">
+                                    <div class="col-md-12 col-lg-3">
+                                        <h5>Todays Sales </h5>
+                                        <!-- Line Break -->
+                                        <br />
+                                        <asp:Label ID="lStats1" runat="server"></asp:Label>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <h5>Upcoming Bookings </h5>
+                                        <!-- Line Break -->
+                                        <br />
+                                        <asp:Label ID="lStats2" runat="server"></asp:Label>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <h5>Total Bookings </h5>
+                                        <!-- Line Break -->
+                                        <br />
+                                        <asp:Label ID="lStats3" runat="server"></asp:Label>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <h5>Registerd Customers </h5>
+                                        <!-- Line Break -->
+                                        <br />
+                                        <asp:Label ID="lStats4" runat="server"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Line Break -->
+                            <br />
 
                             <!--Todays Bookings-->
                             <h1>Todays Bookings </h1>

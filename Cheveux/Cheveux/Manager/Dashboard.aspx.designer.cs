@@ -49,6 +49,51 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Label Welcome;
         
         /// <summary>
+        /// divStats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divStats;
+        
+        /// <summary>
+        /// lStats1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lStats1;
+        
+        /// <summary>
+        /// lStats2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lStats2;
+        
+        /// <summary>
+        /// lStats3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lStats3;
+        
+        /// <summary>
+        /// lStats4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lStats4;
+        
+        /// <summary>
         /// bookingsLable control.
         /// </summary>
         /// <remarks>

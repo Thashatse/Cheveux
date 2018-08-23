@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Models\ACCESSORY.cs" />
     <Compile Include="Models\BOOKING.cs" />
+    <Compile Include="Models\BookingService.cs" />
     <Compile Include="Models\BRAID_SERVICE.cs" />
     <Compile Include="Models\BRAND.cs" />
     <Compile Include="Models\BUSINESS.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="ViewModels\SP_GetAllTreatments.cs" />
     <Compile Include="ViewModels\SP_GetBookedTimes.cs" />
     <Compile Include="ViewModels\SP_GetBookingServiceDTL.cs" />
+    <Compile Include="ViewModels\SP_GetBookingServices.cs" />
     <Compile Include="ViewModels\SP_GetEmployeeTypes.cs" />
     <Compile Include="ViewModels\SP_getInvoiceDL.cs" />
     <Compile Include="ViewModels\SP_AddUserGoogleAuth.cs" />

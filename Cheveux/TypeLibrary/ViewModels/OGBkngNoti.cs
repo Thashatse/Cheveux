@@ -20,9 +20,6 @@ namespace TypeLibrary.ViewModels
             public char PreferredCommunication { get; set; }
         public string StylistID { get; set; }
             public string stylistFirstName { get; set; }
-        public string ServiceID { get; set; }
-            public string serviceName { get; set; }
-            public decimal Price { get; set; }
         public DateTime Date { get; set; }
         public bool NotificationReminder { get; set; }
     }

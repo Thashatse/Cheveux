@@ -47,7 +47,7 @@ namespace Cheveux
                 lblDate.Text = dayDate;
 
                 cookie = Request.Cookies["CheveuxUserID"];
-                getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate));
+                getAgenda(cookie["ID"].ToString(), DateTime.Parse(bookingDate),null,null);
 
                 //if theres no booking for the day dont display the tables headings
                 if (AgendaTable.Rows.Count == 1)
@@ -64,13 +64,13 @@ namespace Cheveux
             }
         }
 
-        public void getAgenda(string id, DateTime bookingDate)
+        public void getAgenda(string id, DateTime bookingDate,string sortBy,string sortDir)
         {
             Button btn;
 
             try
             {
-                agenda = handler.BLL_GetEmpAgenda(id, bookingDate);
+                agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
 
                 AgendaTable.CssClass = "table table-light table-hover";
 
@@ -129,11 +129,11 @@ namespace Cheveux
                     AgendaTable.Rows.Add(r);
 
                     TableCell start = new TableCell();
-                    start.Text = n.StartTime.ToString();
+                    start.Text = n.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
 
                     TableCell end = new TableCell();
-                    end.Text = n.EndTime.ToString();
+                    end.Text = n.EndTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(end);
 
                     TableCell c = new TableCell();
@@ -141,10 +141,10 @@ namespace Cheveux
                                     "'>" + n.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
 
-                    TableCell s = new TableCell();
+                    /*TableCell s = new TableCell();
                     s.Text = "<a href = 'ViewProduct.aspx?ProductID=" + n.ProductID.ToString().Replace(" ", string.Empty) +
                                     "'>" + n.ServiceName.ToString() + "</a>";
-                    AgendaTable.Rows[i].Cells.Add(s);
+                    AgendaTable.Rows[i].Cells.Add(s);*/
 
                     TableCell present = new TableCell();
                     present.Text = function.GetFullArrivedStatus(n.Arrived.ToString()[0]);
@@ -179,7 +179,7 @@ namespace Cheveux
                                     cust_visit.CustomerID = Convert.ToString(n.UserID);
                                     cust_visit.Date = Convert.ToDateTime(n.Date);
                                     cust_visit.BookingID = Convert.ToString(n.BookingID);
-                                    cust_visit.Description = Convert.ToString(n.ServiceName);
+                                    //cust_visit.Description = Convert.ToString(n.ServiceName);
 
                                     if (handler.BLL_CreateCustVisit(cust_visit))
                                     {

@@ -360,6 +360,8 @@ namespace Cheveux
                     divNext.Visible = false;
                     divPassword.Visible = true;
                     divSignIn.Visible = true;
+                    lCreateAccount.Visible = false;
+                    aRestPass.Visible = true;
                     txtEmailUsername.Attributes.Add("readonly", "readonly");
                 }
                 else
