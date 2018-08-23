@@ -58,6 +58,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Label productJumbotronLable;
         
         /// <summary>
+        /// btnAddProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddProduct;
+        
+        /// <summary>
         /// tblProductTable control.
         /// </summary>
         /// <remarks>
@@ -74,5 +83,23 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LogedOut;
+        
+        /// <summary>
+        /// divNewOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divNewOrder;
+        
+        /// <summary>
+        /// NewOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table NewOrder;
     }
 }

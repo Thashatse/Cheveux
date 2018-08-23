@@ -67,6 +67,24 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Table tblBookings;
         
         /// <summary>
+        /// divOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divOrders;
+        
+        /// <summary>
+        /// productOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table productOrders;
+        
+        /// <summary>
         /// alertsContainer control.
         /// </summary>
         /// <remarks>

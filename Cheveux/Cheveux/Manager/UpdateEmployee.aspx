@@ -53,6 +53,7 @@
                     </div>
                 </div>
 
+
                 <!--Error updating user message-->
                 <div class="container row" runat="server">
                     <asp:PlaceHolder ID="phUpdateErr" runat="server" Visible="false">
@@ -65,98 +66,102 @@
 
                 <div id="empDetails" class="container">
                     <div class="row">
-                        <div class="col-md-12 form-group">
-                            <asp:Label ID="lblType" runat="server" Text="Employee Type"></asp:Label>&nbsp; &nbsp; &nbsp; &nbsp; 
-                        <asp:RadioButtonList ID="rdoType" runat="server" CellSpacing="5" RepeatDirection="Horizontal" RepeatLayout="flow">
-                            <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist" Value="R" />
-                            <asp:ListItem id="TypeOption2" runat="server" Text="Stylist" Value="S" />
-                        </asp:RadioButtonList>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:Label ID="lblType" runat="server" Text="Employee Type:"></asp:Label>
+                        </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <asp:RadioButtonList ID="rdoType" runat="server" RepeatDirection="Horizontal" RepeatLayout="flow">
+                                <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist" Value="R" />
+                                <asp:ListItem id="TypeOption2" runat="server" Text="Stylist" Value="S" />
+                            </asp:RadioButtonList>
                             <!-- RadioButtons Validation-->
                             <asp:RequiredFieldValidator ID="rdoValidator" runat="server" ErrorMessage="*Please select user type" ForeColor="Red" ControlToValidate="rdoType"></asp:RequiredFieldValidator>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 form-group">
-                            <asp:Label ID="lblBio" runat="server" Text="Bio"></asp:Label>&nbsp; &nbsp; &nbsp; 
-                            <!--Bio-->
-                            <textarea runat="server" id="txtBio" cols="45" rows="5" placeholder="Employee Bio"></textarea>
-                            <!-- Add Bio Validation-->
-                            <asp:RequiredFieldValidator ID="bioValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtBio"></asp:RequiredFieldValidator>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:Label ID="lblAddLine1" runat="server" Text="Address Line 1"></asp:Label>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 form-group">
-                            <asp:Label ID="lblAddLine1" runat="server" Text="Address Line 1"></asp:Label>&nbsp; &nbsp; &nbsp; 
-                        <asp:TextBox ID="txtAddLine1" runat="server" placeholder="Address Line 1"></asp:TextBox>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:TextBox ID="txtAddLine1" runat="server" placeholder="Address Line 1"></asp:TextBox>
                             <!-- AddressLine 1 Validation-->
                             <asp:RequiredFieldValidator ID="ad1Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine1"></asp:RequiredFieldValidator>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-md-12 form-group">
-                            <asp:Label ID="lblAddLine2" runat="server" Text="Address Line 2"></asp:Label>&nbsp; &nbsp; &nbsp; 
-                        <asp:TextBox ID="txtAddLine2" runat="server" placeholder="Address Line 2"></asp:TextBox>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:Label ID="lblAddLine2" runat="server" Text="Address Line 2"></asp:Label>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:TextBox ID="txtAddLine2" runat="server" placeholder="Address Line 2"></asp:TextBox>
                             <!-- AddressLine 2 Validation-->
                             <asp:RequiredFieldValidator ID="ad2Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine2"></asp:RequiredFieldValidator>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-md-12 form-group">
-                            <asp:Label ID="lblSuburb" runat="server" Text="Suburb"></asp:Label>&nbsp; &nbsp; &nbsp; 
-                        <asp:TextBox ID="txtSuburb" runat="server" placeholder="Suburb"></asp:TextBox>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:Label ID="lblSuburb" runat="server" Text="Suburb"></asp:Label>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:TextBox ID="txtSuburb" runat="server" placeholder="Suburb"></asp:TextBox>
                             <!-- Suburb Validation-->
                             <asp:RequiredFieldValidator ID="suburbValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtSuburb"></asp:RequiredFieldValidator>
                         </div>
                     </div>
+
                     <div class="row">
-                        <div class="col-md-12 form-group">
-                            <asp:Label ID="lblCity" runat="server" Text="City"></asp:Label>&nbsp; &nbsp; &nbsp; 
-                        <asp:TextBox ID="txtCity" runat="server" placeholder="City"></asp:TextBox>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:Label ID="lblCity" runat="server" Text="City"></asp:Label>
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:TextBox ID="txtCity" runat="server" placeholder="City"></asp:TextBox>
                             <!-- City Validation-->
                             <asp:RequiredFieldValidator ID="cityValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtCity"></asp:RequiredFieldValidator>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
-                            <asp:Button ID="btnBack" class="btn btn-primary" runat="server" Text="Back" OnClick="btnBack_Click" />&nbsp; &nbsp; &nbsp; 
-                        <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Update" OnClick="btnUpdate_Click" />
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:Button ID="btnBack" class="btn btn-primary" runat="server" Text="Back" OnClick="btnBack_Click" />
+                        </div>
+                        <div class="col-sm-12 col-md-2 col-lg-2">
+                            <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Update" OnClick="btnUpdate_Click" />
                         </div>
                     </div>
-
-
-
                 </div>
-            </asp:PlaceHolder>
+        </div>
+        </asp:PlaceHolder>
 
             <!--Error: If cant display user -->
-            <asp:PlaceHolder ID="phUsersErr" runat="server" Visible="false">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="jumbotron">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <!-- Error Image-->
-                                        <img src="https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png" alt="Error" width="100" height="100"></img>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <!--Error details placehoders-->
-                                        <asp:Label ID="errorHeader" runat="server"></asp:Label>
-                                        <br />
-                                        <asp:Label ID="errorMessage" runat="server"></asp:Label>
-                                        <asp:Label ID="errorToReport" runat="server"></asp:Label>
-                                    </div>
+        <asp:PlaceHolder ID="phUsersErr" runat="server" Visible="false">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="jumbotron">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <!-- Error Image-->
+                                    <img src="https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png" alt="Error" width="100" height="100"></img>
+                                </div>
+                                <div class="col-md-10">
+                                    <!--Error details placehoders-->
+                                    <asp:Label ID="errorHeader" runat="server"></asp:Label>
+                                    <br />
+                                    <asp:Label ID="errorMessage" runat="server"></asp:Label>
+                                    <asp:Label ID="errorToReport" runat="server"></asp:Label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </asp:PlaceHolder>
+            </div>
+        </asp:PlaceHolder>
 
-            <br />
-            <br />
+        <br />
+        <br />
         </div>
     </form>
 </asp:Content>

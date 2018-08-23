@@ -12,7 +12,7 @@ using TypeLibrary.Models;
 
 namespace Cheveux.Manager
 {
-    public partial class AddEmpolyee : System.Web.UI.Page
+    public partial class AddEmpolyee : System.Web.UI.Page 
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();

@@ -8,6 +8,8 @@ namespace TypeLibrary.ViewModels
 {
     public class SP_GetAllTreatments
     {
+        public int count;
+
         public string ProductID { get; set; }
         public string Name { get; set; }
         public string ProductDescription { get; set; }

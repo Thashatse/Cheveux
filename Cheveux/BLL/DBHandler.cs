@@ -116,7 +116,14 @@ namespace BLL
          }
 
         #endregion
-
+        /*
+#region Bookings
+        public List<BookingService> getBookingServices(string bookingID)
+        {
+            return db.getBookingServices(bookingID);
+        }
+        #endregion
+           */
         public List<SP_GetTodaysBookings> getTodaysBookings()
         {
             return db.getTodaysBookings();
@@ -429,8 +436,8 @@ namespace BLL
         {
             return db.AddService(p, s);
         }
-        */
-
+        
+            */
         public List<SP_GetWidth> BLL_GetWidths()
         {
             return db.GetWidths();
@@ -468,11 +475,11 @@ namespace BLL
         public bool addTreatments(TREATMENT t)
         {
             return db.addTreatments(t);
-        }
+        }*/
         public bool BLL_AddBraidService(BRAID_SERVICE bs)
         {
             return db.AddBraidService(bs);
         }
-        */
+        
     }
 }

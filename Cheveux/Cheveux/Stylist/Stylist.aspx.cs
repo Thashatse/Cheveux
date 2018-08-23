@@ -222,8 +222,13 @@ namespace Cheveux
                             buttonCell.Controls.Add(btn);
                         }
                         else if(cv != null)
-                        {   //if visit record already exists dont show 'create visit record' button
-                            buttonCell.Text = "<a href='#'>View Visit</a>";
+                        {   //if visit record already exists stylist should be able to update the visit
+                            buttonCell.Text =   "<button type='button' class='btn btn-primary'>"
+                                                +"<a href='../Stylist/CustomerVisit.aspx?bookingID="
+                                                +n.BookingID.ToString().Replace(" ", string.Empty)
+                                                + "&customerID="+n.UserID.ToString().Replace(" ", string.Empty)
+                                                + "' style='color:White' >Update Customer Visit Record</a>"
+                                                + "</button>";
                         }
                         
                         //add the cell to the row

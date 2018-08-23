@@ -36,9 +36,9 @@
                                         CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReport_SelectedIndexChanged1"
                                         OnTextChanged="drpReport_SelectedIndexChanged1">
 
-                                        <asp:ListItem Text="Select A Report" Value="0"></asp:ListItem>
-                                        <asp:ListItem Text="Sales" Value="1" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="Bookings By Hairstylist" Value="2"></asp:ListItem>
+                                        
+                                        <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
+                                        <asp:ListItem Text="Bookings By Hairstylist" Value="1"></asp:ListItem>
 
                                     </asp:DropDownList>
 

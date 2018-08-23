@@ -8,6 +8,9 @@ namespace TypeLibrary.ViewModels
 {
     public class SP_GetAllAccessories
     {
+        public object Item1;
+        public int count;
+
         public string ProductID { get; set; }
         public string Name { get; set; }
         public string ProductDescription { get; set; }

@@ -19,7 +19,6 @@ GO
 CREATE PROCEDURE SP_UpdateEmployee
 	@empID nchar(30),
 	@type nchar(10),
-	@bio varchar(max) = null,
 	@addLine1 varchar(max) = null,
 	@addLine2 varchar(max) = null,
 	@suburb nchar(100) = null,

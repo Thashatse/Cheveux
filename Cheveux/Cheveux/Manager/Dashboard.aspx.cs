@@ -30,7 +30,8 @@ namespace Cheveux.Manager
             if (cookie == null)
             {
                 //if the user is not loged in as a manager do not display Bussines setting
-            }else if(cookie["UT"] != "M")
+            }
+            else if(cookie["UT"] != "M")
             {
                 Response.Redirect("../Default.aspx");
             }
@@ -51,6 +52,8 @@ namespace Cheveux.Manager
                 checkForLowStock();
                 //load to days bookings 
                 loadTodaysBookings();
+                //load outstanding stook oders
+                loadOutStandOrd();
             }  
         }
 
@@ -399,6 +402,11 @@ namespace Cheveux.Manager
                 function.logAnError("unable to load topdays bookings on Manager/Dashboard.aspx: " +
                     Err);
             }
+        }
+
+        private void loadOutStandOrd()
+        {
+
         }
 
     }

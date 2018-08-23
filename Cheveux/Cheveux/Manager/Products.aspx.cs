@@ -239,7 +239,7 @@ namespace Cheveux.Manager
                                 //new stock oder
                                 newCell.Text = "<a class='btn  btn-secondary' href='Products.aspx?Action=NewOrder" +
                                             "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                                            "'>Make Oder</a>";
+                                            "'>Make Order</a>";
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
                                 /*
@@ -348,7 +348,7 @@ namespace Cheveux.Manager
                             //add stock link to be added by Sivu
                                 cellText += "<a class='btn  btn-secondary' href='Products.aspx?Action=NewOrder" +
                                             "ProductID=" + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                                            "'>Make Oder</a>";
+                                            "'>Make Order</a>";
 
                                 /*
                                 if ()
@@ -430,6 +430,16 @@ namespace Cheveux.Manager
                 result = true;
             }
             return result;
+        }
+
+        protected void btnAddProduct_Click(object sender, EventArgs e)
+        {
+
+
+
+
+
+
         }
     }
 }

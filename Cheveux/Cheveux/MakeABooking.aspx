@@ -36,26 +36,26 @@
                                         <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
                                         <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
                                         <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
-                                    </ul>
+                                    </ul> <a name="Natural"></a>
                                     <div class="row">
 
                                         <div class="col-6">
                                             <div runat="server" id="divNatural" visible="true">
-                                                <a name="Natural"></a>
+                                               
                                                 <h5>Natural</h5>
                                                 <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="cblPickAServiceN_SelectedIndexChanged">
-                                                </asp:CheckBoxList><br />
+                                                </asp:CheckBoxList><br /><a name="Application"></a>
                                             </div>
 
                                             <div runat="server" id="divApplication" visible="true">
-                                                <a name="Application"></a>
+                                                
                                                 <h5>Application</h5>
                                                 <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
-                                                </asp:RadioButtonList><br />
+                                                </asp:RadioButtonList><br /><a name="Braid"></a>
                                             </div>
 
                                             <div runat="server" id="divBraids" visible="true">
-                                                <a name="Braid"></a>
+                                                
                                                 <h5>Braids</h5>
                                                 <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
                                                 </asp:RadioButtonList>

@@ -10,6 +10,12 @@ namespace BLL
 {
     public interface IDBHandler
     {
+        /*
+        #region Bookings
+        
+        List<BookingService> getBookingServices(string BookingID);
+        #endregion
+        */
         #region Home Page Features
         List<HomePageFeatures> GetHomePageFeatures();
         #endregion
@@ -47,9 +53,9 @@ namespace BLL
         #region Products
         PRODUCT CheckForProduct(string id);
         SP_GetAllAccessories selectAccessory(string accessoryID);
-        SP_GetAllTreatments  selectTreatment(string treatmentID);
+        SP_GetAllTreatments selectTreatment(string treatmentID);
         #endregion
-        
+
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
@@ -115,7 +121,9 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getAllStylistsUpcomingBookings();
-        //bool BLL_AddService(PRODUCT p, SERVICE s);
+        /*
+        bool BLL_AddService(PRODUCT p, SERVICE s);
+        */
         List<SP_GetWidth> BLL_GetWidths();
         List<SP_GetLength> BLL_GetLengths();
         List<SP_GetStyles> BLL_GetStyles();
@@ -125,8 +133,7 @@ namespace BLL
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day);
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
-        //bool BLL_AddBraidService(BRAID_SERVICE bs);
+        bool BLL_AddBraidService(BRAID_SERVICE bs);
     }
 }
-
 

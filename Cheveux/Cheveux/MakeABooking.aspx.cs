@@ -21,10 +21,13 @@ namespace Cheveux
         List<SP_GetBookedTimes> bookedList = null;
         List<SP_GetSlotTimes> slotList = null;
         BOOKING book = null;
+        /*
+        BookingService bookService = null;
+        */
         string[,] availableTimes = new string[21,2];
-        string selectedServiceN = "";
-        string selectedServiceA = "";
-        string selectedServiceB = "";
+        List<string> pickedServiceName = null;
+        List<string> pickedServiceID = null;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -137,14 +140,7 @@ namespace Cheveux
                     rblPickAStylist.DataBind();
                 }
 
-                foreach(ListItem item in cblPickAServiceN.Items)
-                {
-                    if (item.Selected)
-                    {
-                        selectedServiceN += item.Value;
-                    }
 
-                }
                 
                 if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
                 {
@@ -186,15 +182,15 @@ namespace Cheveux
                 divDateTime.Visible = false;
                 divSummary.Visible = true;
 
-                if(selectedServiceN != null)
+                if(cblPickAServiceN.SelectedValue != null)
                 {
                     lblServices.Text = cblPickAServiceN.SelectedItem.ToString();
                 }
-                else if(selectedServiceB != null)
+                else if(rblPickAServiceB.SelectedValue != null)
                 {
                     lblServices.Text = rblPickAServiceB.SelectedItem.ToString();
                 }
-                else if(selectedServiceA != null)
+                else if(rblPickAServiceA.SelectedValue != null)
                 {
                     lblServices.Text = rblPickAServiceA.SelectedItem.ToString();
                 }
@@ -244,7 +240,8 @@ namespace Cheveux
                     if (Authcookie["UT"].ToString()[0] == 'C') {
                         //Make Booking
                         try
-                        {
+                        {   
+                            //Add to booking
                             book = new BOOKING();
                             book.BookingID = function.GenerateRandomBookingID();
                             HttpCookie bookingTime = Request.Cookies["BookTime"];
@@ -266,6 +263,13 @@ namespace Cheveux
                             book.StylistID = rblPickAStylist.SelectedValue;
                             book.Available = "N";
                             handler.BLL_AddBooking(book);
+                            /*
+                            //Add to bookingservice
+                            foreach()
+                            {
+
+                            }
+                            */
                             USER user = handler.GetUserDetails(cookie["ID"]);
                             //send an email notification
                             var body = new System.Text.StringBuilder();
@@ -905,14 +909,16 @@ namespace Cheveux
         protected void rblPickAServiceA_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            if(rblPickAServiceA.SelectedValue != "0")
-            {
+            if (rblPickAServiceA.SelectedValue != "0")
+            {             
                 rblPickAServiceB.Enabled = false;
+                pickedServiceID.Add(rblPickAServiceA.SelectedValue);
+                pickedServiceName.Add(rblPickAServiceA.Text);
+
             }
             else
             {
                 rblPickAServiceB.Enabled = true;
-                //selectedServiceB = "";
             }
             
         }
@@ -923,11 +929,12 @@ namespace Cheveux
             if (rblPickAServiceB.SelectedValue != "0")
             {
                 rblPickAServiceA.Enabled = false;
+                pickedServiceID.Add(rblPickAServiceB.SelectedValue);
+                pickedServiceName.Add(rblPickAServiceB.Text);
             }
             else
             {
                 rblPickAServiceA.Enabled = true;
-                //selectedServiceA = "";
             }
             
         }
@@ -935,6 +942,16 @@ namespace Cheveux
         protected void cblPickAServiceN_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            foreach(ListItem item in cblPickAServiceN.Items)
+               {
+                 if (item.Selected)
+                 {
+                        pickedServiceID.Add(item.Value);
+                        pickedServiceName.Add(item.Text);
+
+                 }
+
+            }
         }
     }
 }

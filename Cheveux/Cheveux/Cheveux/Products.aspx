@@ -21,6 +21,11 @@
                 <!-- VIEW ALL PRODUCTS TABLE -->
                      <header class="text-center">
                             <h1>Products</h1>
+
+
+
+
+
                         </header>
                 </div>
                 <div class="row">

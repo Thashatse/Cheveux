@@ -276,6 +276,40 @@ namespace DAL
             }
         }
 
+public List<BookingService> getBookingServices(string BookingID)
+        {
+            List<BookingService> bookingServices = new List<BookingService>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServices",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            BookingService service = new BookingService
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                ServiceID = row["ServiceID"].ToString()
+                            };
+                            bookingServices.Add(service);
+                        }
+                    }
+                    return bookingServices;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -2205,7 +2239,6 @@ namespace DAL
                 {
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
                     new SqlParameter("@type", emp.Type.ToString()),
-                    new SqlParameter("@bio",emp.Bio.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
                     new SqlParameter("@suburb", emp.Suburb.ToString()),
@@ -3032,10 +3065,16 @@ namespace DAL
 
 
         }
-      
-        
-           
-}
-
+        public bool AddBraidService(BRAID_SERVICE bs)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                    new SqlParameter("@StyleID", bs.StyleID.ToString()),
+                    new SqlParameter("@LengthID", bs.LengthID.ToString()),
+                    new SqlParameter("@WidthID", bs.WidthID.ToString())
+            };
+            return DBHelper.NonQuery("SP_AddBraidService", CommandType.StoredProcedure, pars);
+        }
+    
     }
-         
+}                  
