@@ -238,10 +238,13 @@ namespace Cheveux.Cheveux
 
         public void LoadProduct(string productID)
         {
-            //Change layout 
-
-
-            //Once you done with this start with the product images stuff 
+            /*Lachea To-do:
+             * 
+             * - Make sure the user can see the image of the product as well as the product details.
+             * - Make it so that instead of the jumbotron displaying a heading it should display the product 
+             *   instead. (lblHeader.Visible=false; and then add the productImage in that area)
+             *   
+             */
 
             tblProducts.Visible = true;
 
@@ -259,16 +262,20 @@ namespace Cheveux.Cheveux
             newHeaderCell.Width = 300;
             tblProducts.Rows[count].Cells.Add(newHeaderCell);
 
+            newRow = new TableRow();
+            tblProducts.Rows.Add(newRow);
             //create a header row and set cell widths
             newHeaderCell = new TableHeaderCell();
             newHeaderCell.Text = "Product Description: ";
             newHeaderCell.Width = 300;
-            tblProducts.Rows[count].Cells.Add(newHeaderCell);
+            tblProducts.Rows[count+1].Cells.Add(newHeaderCell);
 
+            newRow = new TableRow();
+            tblProducts.Rows.Add(newRow);
             newHeaderCell = new TableHeaderCell();
             newHeaderCell.Text = "Price: ";
             newHeaderCell.Width = 100;
-            tblProducts.Rows[count].Cells.Add(newHeaderCell);
+            tblProducts.Rows[count+2].Cells.Add(newHeaderCell);
 
             //Display specific product
             try
@@ -279,48 +286,41 @@ namespace Cheveux.Cheveux
                 //track row count & number of products count
                 if (Accessory != null)
                 {
+                    int inc = 0;
 
-                    int inc = 1;
+                    TableCell cell = new TableCell();
+                    cell.Text = Accessory.Name.ToString();
+                    tblProducts.Rows[inc].Cells.Add(cell);
+                    inc++;
 
-                        TableRow productRow = new TableRow();
-                        productRow.Height = 100;
-                        tblProducts.Rows.Add(productRow);
+                    cell = new TableCell();
+                    cell.Text = Accessory.ProductDescription.ToString();
+                    tblProducts.Rows[inc].Cells.Add(cell);
+                    inc++;
 
-                        TableCell cell = new TableCell();
-                        cell.Text = Accessory.Name.ToString();
-                        tblProducts.Rows[inc].Cells.Add(cell);
-
-                        cell = new TableCell();
-                        cell.Text = Accessory.ProductDescription.ToString();
-                        tblProducts.Rows[inc].Cells.Add(cell);
-
-                        cell = new TableCell();
-                        cell.Text = "R" + Accessory.Price.ToString();//Change to price format
-                        tblProducts.Rows[inc].Cells.Add(cell);
+                    cell = new TableCell();
+                    cell.Text = "R" + string.Format("{0:#.00}", Accessory.Price);
+                    tblProducts.Rows[inc].Cells.Add(cell);
   
                 }
                 //display accessories
                 else if (Treatment != null)
                 {
+                    int inc = 0;
 
-                    int inc = 1;
+                    TableCell cell = new TableCell();
+                    cell.Text = Treatment.Name.ToString();
+                    tblProducts.Rows[inc].Cells.Add(cell);
+                    inc++;
 
-                    TableRow row = new TableRow();
-                        row.Height = 50;
-                        tblProducts.Rows.Add(row);
+                    cell = new TableCell();
+                    cell.Text = Treatment.ProductDescription.ToString();
+                    tblProducts.Rows[inc].Cells.Add(cell);
+                    inc++;
 
-                        TableCell cell = new TableCell();
-                        cell.Text = Treatment.Name.ToString();
-                        tblProducts.Rows[inc].Cells.Add(cell);
-
-                        cell = new TableCell();
-                        cell.Text = Treatment.ProductDescription.ToString();
-                        tblProducts.Rows[inc].Cells.Add(cell);
-
-                        cell = new TableCell();
-                        cell.Text = Treatment.Price.ToString();
-                        tblProducts.Rows[inc].Cells.Add(cell);
-
+                    cell = new TableCell();
+                    cell.Text = "R" + string.Format("{0:#.00}", Treatment.Price);
+                    tblProducts.Rows[inc].Cells.Add(cell);
                     }
 
             }
