@@ -26,13 +26,12 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 	SELECT [ProductID]
-      ,[PRODUCT].[Name]
+      ,[PRODUCT].[Name] AS [ProductName]
       ,[ProductDescription]
       ,[Price]
       ,[ProductType(T/A/S)]
-      ,[ProductImage]
 	  ,BRAND.[BrandID]
-	  ,BRAND.Name
+	  ,BRAND.[Name] AS [BrandName]
 	
 	 FROM [CHEVEUX].[dbo].[PRODUCT], ACCESSORY, BRAND, Supplier s
 	WHERE ProductID = AccessoryID AND BRAND.BrandID = ACCESSORY.BrandID AND s.SupplierID = ACCESSORY.SupplierID And ProductID= @productID 
