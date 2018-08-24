@@ -360,6 +360,24 @@ namespace DAL
             }
         }
 
+        public bool deleteBookingService(string BookingID, string ServiceID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BookingID", BookingID),
+                new SqlParameter("@ServiceID", ServiceID)
+                };
+
+                return DBHelper.NonQuery("SP_DeleteBookingService", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
         {
             List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
@@ -1210,9 +1228,9 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        if (row[0].ToString() != "NULL")
+                        if (row[0].ToString() != "")
                         {
-                           // stats.sales = Convert.ToDecimal(row[0].ToString());
+                           stats.sales = Convert.ToDecimal(row[0].ToString());
                         }
                         else
                         {
@@ -1228,7 +1246,7 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        if (row != null)
+                        if (row[0].ToString() != "")
                         {
                             stats.upcomingBookings = Convert.ToInt16(row[0].ToString());
                     }
@@ -1246,7 +1264,7 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        if (row != null)
+                        if (row[0].ToString() != "")
                         {
                             stats.registeredCustomers = Convert.ToInt16(row[0].ToString());
                     }
@@ -1264,7 +1282,7 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                    if (row != null)
+                    if (row[0].ToString() != "")
                     {
                         stats.totalBookings = Convert.ToInt16(row[0].ToString());
                     }

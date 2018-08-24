@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE SP_SelectTreatment
+alter PROCEDURE SP_SelectTreatment
 	@productID nchar(10)
 	AS
 BEGIN

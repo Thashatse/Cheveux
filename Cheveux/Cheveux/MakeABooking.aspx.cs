@@ -604,7 +604,9 @@ namespace Cheveux
                         {
                             foreach (SP_GetBookedTimes checkbooked in bookedList)
                             {
-                                if (checkbooked.SlotNo == slotList[checkslotIndex].SlotNo)
+                                if (checkbooked.SlotNo == slotList[checkslotIndex].SlotNo
+                                    || (calBooking.SelectedDate.ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy") &&
+                                        times.Time.TimeOfDay < DateTime.Now.TimeOfDay))
                                 {
                                     add = false;
                                 }
@@ -775,7 +777,9 @@ namespace Cheveux
                     bool add = true;
                     for (int b = 0; b < i; b++)
                     {
-                        if (checkslotIndex + b >= 20)
+                        if (checkslotIndex + b >= 20
+                            || (calBooking.SelectedDate.ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy") &&
+                                times.Time.TimeOfDay < DateTime.Now.TimeOfDay))
                         {
                             add = false;
                         }
@@ -1425,6 +1429,10 @@ namespace Cheveux
 
         private int CalculateSlotLength(object sender, EventArgs e)
         {
+            if (pickedServiceID != null)
+            {
+                pickedServiceID.Clear();
+            }
             service = new SERVICE();
             rblPickAServiceA_SelectedIndexChanged(sender, e);
             rblPickAServiceB_SelectedIndexChanged(sender, e);

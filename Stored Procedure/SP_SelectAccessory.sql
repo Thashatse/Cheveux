@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE SP_SelectAccessory
+alter PROCEDURE SP_SelectAccessory
 	@productID nchar(10)
 AS
 BEGIN

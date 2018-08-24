@@ -175,12 +175,17 @@
                                             <!-- Service -->
                                             <!--Line Break-->
                                             <br />
-                                            <!--Lable-->
-                                            <h3>Service: </h3>
+                                            <h3>
+                                                <!--Lable-->
+                                            Remove Service: 
+                                            </h3>
+                                    <!--Line Break-->
+                                    <br />
+                                    <asp:ListBox runat="server" ID="lbServices" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
                                             <!--Line Break-->
                                             <br />
                                             <asp:Button ID="btnCancelEditService" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel_Click" />
-                                            <asp:Button ID="btnSaveEditService" runat="server" Text="Done" CssClass="btn btn-primary" OnClick="btnSaveEditService_Click" />
+                                            <asp:Button ID="btnSaveEditService" runat="server" Text="Remove" CssClass="btn btn-primary" OnClick="btnSaveEditService_Click" />
                                         </div>
 
                                         <div runat="server" id="divEditError" visible="false" class="text-center">

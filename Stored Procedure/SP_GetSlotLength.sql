@@ -29,5 +29,6 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT NoOfSlots
 	FROM SERVICE
+	where ServiceID = @ServiceID
 END
 GO

@@ -133,11 +133,16 @@ namespace BLL
         {
             return db.getBookingServices(bookingID);
         }
+
+        public bool deleteBookingService(string BookingID, string ServiceID)
+        {
+            return db.deleteBookingService(BookingID, ServiceID);
+        }
         #endregion
 
         #region Services
-        
-         public bool BLL_AddService(PRODUCT p, SERVICE s)
+
+        public bool BLL_AddService(PRODUCT p, SERVICE s)
         {
             return db.AddService(p, s);
         }
