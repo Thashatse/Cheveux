@@ -15,10 +15,11 @@
 
     <div class="row">
         <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-md-8 col-sm-10"><form runat="server">
             <!-- if the user is loged In -->
             <div runat="server" id="LogedIn" visible="false">
 
+                
                 <div class="row">
                     <%--<div class="col-lg-12 col-md-12 col-sm-12">
                         <div id="divTabs" runat="server">
@@ -44,7 +45,7 @@
                             <h1>Manage Products</h1>
                             <!-- line Break -->
                             <br />
-                            <form runat="server">
+                            
 
                                 <!-- View By Selector -->
                                 <p>View Products By: </p>
@@ -70,7 +71,6 @@
                                         <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" />
                                     </div>
                                 </div>
-                            </form>
                             <!-- line Break -->
                             <br />
                             <!--Help-->
@@ -123,6 +123,7 @@
 
                 </asp:Table>
                 </div>
+            </form>
         </div>
         <div class="col-md-2 col-sm-1"></div>
     </div>
