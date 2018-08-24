@@ -1210,7 +1210,14 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        stats.sales = Convert.ToDecimal(row[0].ToString());
+                        if (row[0].ToString() != "NULL")
+                        {
+                           // stats.sales = Convert.ToDecimal(row[0].ToString());
+                        }
+                        else
+                        {
+                            stats.sales = 0;
+                        }
                     }
                 }
 
@@ -1221,8 +1228,15 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        stats.upcomingBookings = Convert.ToInt16(row[0].ToString());
+                        if (row != null)
+                        {
+                            stats.upcomingBookings = Convert.ToInt16(row[0].ToString());
                     }
+                    else
+                    {
+                        stats.upcomingBookings = 0;
+                    }
+                }
                 }
 
                 //registered customers
@@ -1232,8 +1246,15 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
-                        stats.registeredCustomers = Convert.ToInt16(row[0].ToString());
+                        if (row != null)
+                        {
+                            stats.registeredCustomers = Convert.ToInt16(row[0].ToString());
                     }
+                    else
+                    {
+                        stats.registeredCustomers = 0;
+                    }
+                }
                 }
 
                 //tottal alltime bookings
@@ -1243,8 +1264,15 @@ namespace DAL
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
+                    if (row != null)
+                    {
                         stats.totalBookings = Convert.ToInt16(row[0].ToString());
                     }
+                    else
+                    {
+                        stats.totalBookings= 0;
+                    }
+                }
                 }
 
                 return stats;
