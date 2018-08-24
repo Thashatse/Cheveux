@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-Alter PROCEDURE SP_GetSlotLength 
+CREATE PROCEDURE SP_GetSlotLength 
 	@ServiceID nchar(10)
 AS
 BEGIN
@@ -28,7 +28,6 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT NoOfSlots
-	FROM [CHEVEUX].[dbo].[SERVICE]
-	where ServiceID = @ServiceID
+	FROM SERVICE
 END
 GO

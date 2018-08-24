@@ -406,8 +406,9 @@ namespace Cheveux
                             }
                         }
                         #endregion
+
                         #region internal Booking (Receptionist)
-                         else if (Authcookie["UT"].ToString()[0] == 'R')
+                        if (Authcookie["UT"].ToString()[0] == 'R')
                         {
                             //Make Booking
                             //Add to booking
@@ -774,15 +775,16 @@ namespace Cheveux
                     bool add = true;
                     for (int b = 0; b < i; b++)
                     {
-                                if (checkslotIndex + b >= 20)
-                                {
-                                    add = false;
-                                }
+                        if (checkslotIndex + b >= 20)
+                        {
+                            add = false;
+                        }
                         else
                         {
                             add = true;
                         }
                     }
+
                     if (add == true)
                     {
                         if (times.Time > Convert.ToDateTime("12:00"))
@@ -1423,11 +1425,7 @@ namespace Cheveux
 
         private int CalculateSlotLength(object sender, EventArgs e)
         {
-            if (pickedServiceID != null)
-            {
-                pickedServiceID.Clear();
-            }
-                service = new SERVICE();
+            service = new SERVICE();
             rblPickAServiceA_SelectedIndexChanged(sender, e);
             rblPickAServiceB_SelectedIndexChanged(sender, e);
             cblPickAServiceN_SelectedIndexChanged(sender, e);

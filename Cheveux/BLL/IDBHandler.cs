@@ -64,6 +64,10 @@ namespace BLL
         bool updateService(PRODUCT p, SERVICE s);
         #endregion
 
+        #region Manager Dash Board
+        ManagerStats GetManagerStats();
+        #endregion
+
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();

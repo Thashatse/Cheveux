@@ -102,6 +102,11 @@ namespace DAL
         SP_GetAllAccessories selectAccessory(string accessoryID);
         SP_GetAllTreatments selectTreatment(string treatmentID);
         #endregion
+
+        #region Manager Dash Board
+        ManagerStats GetManagerStats();
+        #endregion
+
         List<SP_GetEmpNames> GetEmpNames();
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);

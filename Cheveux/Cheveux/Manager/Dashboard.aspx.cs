@@ -37,6 +37,17 @@ namespace Cheveux.Manager
             }
             else if (cookie["UT"] == "M")
             {
+                #region stats 
+                //load stats
+                ManagerStats stats = handler.GetManagerStats();
+
+                //display stats
+                lStats1.Text = "R" + Math.Round(stats.sales, 2).ToString();
+                lStats2.Text = stats.upcomingBookings.ToString();
+                lStats3.Text = stats.totalBookings.ToString();
+                lStats4.Text = stats.registeredCustomers.ToString();
+                #endregion
+
                 //if the user is loged in as a manager display the dashboard
                 LogedIn.Visible = true;
                 LogedOut.Visible = false;

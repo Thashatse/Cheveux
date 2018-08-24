@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheveuxReceptionist.Master" AutoEventWireup="true" CodeBehind="Receptionist.aspx.cs" Inherits="Cheveux.Receptionist" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
-    Receptionist Dashboard - Cheveux
+    Dashboard - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -112,8 +112,8 @@
                         </asp:PlaceHolder>
                     </div>
 
-                    <div class="col-lg-3 col-md-12">
-                        <div style="border: solid #F05F40 2px;" runat="server" id="alertsContainer" visible="false">
+                    <div class="col-lg-3 col-md-12" runat="server" id="sidebar" visible="false">
+                        <div style="border: solid #F05F40 2px;" runat="server" id="alertsContainer">
                             <!--Alerts-->
                             <div class="container">
                                 <!-- Alert Table -->

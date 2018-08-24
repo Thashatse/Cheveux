@@ -1113,36 +1113,34 @@ namespace DAL
         public SP_GetAllAccessories selectAccessory(string accessoryID)
         {
             SP_GetAllAccessories accessory = null;
-            
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@productID", accessoryID.ToString())
+                new SqlParameter("@accessoryID", accessoryID)
 
             };
 
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_SelectAccessory", CommandType.StoredProcedure, parameters))
+                using (DataTable table = DBHelper.ParamSelect("SP_GetAllAccessories", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
                         accessory = new SP_GetAllAccessories();
-                        accessory.ProductID = Convert.ToString(row["ProductID"]);
-                        accessory.Name = Convert.ToString(row["ProductName"]);
+                        accessory.Name = Convert.ToString(row["Name"]);
                         accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         accessory.Price = Convert.ToInt32(row["Price"]);
-                        accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
-                        //accessory.Active = Convert.ToString(row["Active"]);
+                        accessory.ProductType = Convert.ToString(row["ProductType"]);
+                        accessory.Active = Convert.ToString(row["Active"]);
                         //accessory.ProductImage = Convert.ToByte(row["ProductImage"]);
-                        //accessory.Colour = Convert.ToString(row["Colour"]);
-                        //accessory.Qty = Convert.ToInt32("Qty");
+                        accessory.Colour = Convert.ToString(row["Colour"]);
+                        accessory.Qty = Convert.ToInt32("Qty");
                         accessory.BrandID = Convert.ToString("BrandID");
                         accessory.Brandname = Convert.ToString("BrandName");
-                        //accessory.brandType = Convert.ToString("BrandType(T/A)");
+                        accessory.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
-                    return accessory;
+
                 }
             }
             catch(Exception e)
@@ -1150,7 +1148,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
                         
-           
+            return accessory;
         }
 
         //select treatment
@@ -1159,31 +1157,30 @@ namespace DAL
             SP_GetAllTreatments treatment = null;
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@productID", treatmentID.ToString())
+                new SqlParameter("@treatmentID", treatmentID)
 
             };
 
             try
-                {  using (DataTable table = DBHelper.ParamSelect("SP_SelectTreatment", CommandType.StoredProcedure, parameters))
+                {  using (DataTable table = DBHelper.ParamSelect("SP_GetAllTreatments", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
                         DataRow row = table.Rows[0];
                         treatment = new SP_GetAllTreatments();
-                        treatment.Name = Convert.ToString(row["ProductName"]);
+                        treatment.Name = Convert.ToString(row["Name"]);
                         treatment.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         treatment.Price = Convert.ToInt32(row["Price"]);
-                        treatment.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
+                        treatment.ProductType = Convert.ToString(row["ProductType"]);
                         treatment.Active = Convert.ToString(row["Active"]);
                         //treatment.ProductImage = Convert["ProductImage"]);
-                        //treatment.Qty = Convert.ToInt32("Qty");
+                        treatment.Qty = Convert.ToInt32("Qty");
                         treatment.BrandID = Convert.ToString("BrandID");
                         treatment.Brandname = Convert.ToString("BrandName");
-                        //treatment.brandType = Convert.ToString("BrandType(T/A)");
+                        treatment.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
-                    return treatment;
-                }
+                  }
              }
 
             catch (Exception e)
@@ -1192,11 +1189,71 @@ namespace DAL
             }
 
 
-            
+            return treatment;
         }
 
 
 
+        #endregion
+
+        #region Manager Dash Board
+        public ManagerStats GetManagerStats()
+        {
+            ManagerStats stats = new ManagerStats();
+
+            try
+            {
+                //todaysSales
+                using (DataTable table = DBHelper.Select("SP_GetTodaysTotalSales",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stats.sales = Convert.ToDecimal(row[0].ToString());
+                    }
+                }
+
+                //UpcomingBookings
+                using (DataTable table = DBHelper.Select("SP_TotalUpcomingBookings",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stats.upcomingBookings = Convert.ToInt16(row[0].ToString());
+                    }
+                }
+
+                //registered customers
+                using (DataTable table = DBHelper.Select("SP_GetTotalCusts",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stats.registeredCustomers = Convert.ToInt16(row[0].ToString());
+                    }
+                }
+
+                //tottal alltime bookings
+                using (DataTable table = DBHelper.Select("SP_TotalBookings",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stats.totalBookings = Convert.ToInt16(row[0].ToString());
+                    }
+                }
+
+                return stats;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         public bool updateService(PRODUCT p, SERVICE s)

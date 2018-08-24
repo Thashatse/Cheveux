@@ -51,6 +51,7 @@ namespace Cheveux
                 viewStylistHeader.Visible = true;
                 drpEmpNames.Visible = true;
                 LoggedIn.Visible = true;
+                sidebar.Visible = true;
 
                 #region Alerts
                 //Check For Low Stock

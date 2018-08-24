@@ -164,6 +164,13 @@ namespace BLL
         }
         #endregion
 
+        #region Manager Dash Board
+        public ManagerStats GetManagerStats()
+        {
+            return db.GetManagerStats();
+        }
+        #endregion
+
         public List<SP_GetTodaysBookings> getTodaysBookings() 
         {
             return db.getTodaysBookings();

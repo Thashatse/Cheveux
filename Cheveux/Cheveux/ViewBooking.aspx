@@ -74,8 +74,21 @@
                                             <!-- Date & Time -->
                                             <!--Line Break-->
                                             <br />
-                                            <!--Lable-->
-                                            <h3>Date & Time: </h3>
+                                            <div class="row">
+                                                <div class="container">
+                                                    <h3 style="text-align: left; float: left;">
+                                                        <!--Lable-->
+                                                        Date & Time:
+                                                    </h3>
+                                                    <p style="text-align: right; float: right;">
+                                                        <!-- change stylist -->
+                                                        <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True"
+                                                            CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpEmpNames_SelectedIndexChanged">
+                                                        </asp:DropDownList>
+                                                    </p>
+
+                                                </div>
+                                            </div>
                                             <!--Line Break-->
                                             <br />
                                             <div class="row">
@@ -84,8 +97,8 @@
                                                     <asp:Calendar ID="calMAB" runat="server" CssClass="bg-secondary text-primary"
                                                         SelectedDate="<%#DateTime.Today%>" OnDayRender="calMAB_DayRender"
                                                         OnSelectionChanged="calMAB_SelectionChanged" AutoPostBack="True"></asp:Calendar>
-                                                <!--Line Break-->
-                                            <br />
+                                                    <!--Line Break-->
+                                                    <br />
                                                 </div>
                                                 <!-- Times -->
                                                 <div class="col-lg-6 col-md-12">
