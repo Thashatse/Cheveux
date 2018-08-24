@@ -1113,15 +1113,16 @@ namespace DAL
         public SP_GetAllAccessories selectAccessory(string accessoryID)
         {
             SP_GetAllAccessories accessory = null;
+            
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@accessoryID", accessoryID)
+                new SqlParameter("@productID", accessoryID.ToString())
 
             };
 
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetAllAccessories", CommandType.StoredProcedure, parameters))
+                using (DataTable table = DBHelper.ParamSelect("SP_SelectAccessory", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
@@ -1140,7 +1141,7 @@ namespace DAL
                         accessory.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
-
+                    return accessory;
                 }
             }
             catch(Exception e)
@@ -1148,7 +1149,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
                         
-            return accessory;
+           
         }
 
         //select treatment
@@ -1157,12 +1158,12 @@ namespace DAL
             SP_GetAllTreatments treatment = null;
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@treatmentID", treatmentID)
+                new SqlParameter("@productID", treatmentID.ToString())
 
             };
 
             try
-                {  using (DataTable table = DBHelper.ParamSelect("SP_GetAllTreatments", CommandType.StoredProcedure, parameters))
+                {  using (DataTable table = DBHelper.ParamSelect("SP_SelectTreatment", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
@@ -1180,7 +1181,8 @@ namespace DAL
                         treatment.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
-                  }
+                    return treatment;
+                }
              }
 
             catch (Exception e)
@@ -1189,7 +1191,7 @@ namespace DAL
             }
 
 
-            return treatment;
+            
         }
 
 

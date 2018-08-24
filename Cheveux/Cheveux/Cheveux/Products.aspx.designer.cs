@@ -22,6 +22,24 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divViewAll;
         
         /// <summary>
+        /// lblHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblHeader;
+        
+        /// <summary>
+        /// phProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phProducts;
+        
+        /// <summary>
         /// productJumbotronLable control.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,15 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.Table tblProductTable;
         
         /// <summary>
+        /// phSpecProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phSpecProduct;
+        
+        /// <summary>
         /// DisplayProduct control.
         /// </summary>
         /// <remarks>
@@ -47,15 +74,6 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DisplayProduct;
-        
-        /// <summary>
-        /// prProducts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder prProducts;
         
         /// <summary>
         /// tblProducts control.

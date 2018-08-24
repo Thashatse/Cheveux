@@ -23,8 +23,6 @@ namespace Cheveux.Cheveux
         //Creating the variable//
         SP_GetAllAccessories Accessory = null;
         SP_GetAllTreatments Treatment = null;
-        private object newRow;
-        private TableHeaderCell newHeaderCell;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,17 +32,20 @@ namespace Cheveux.Cheveux
             //load all products
             if (productID == null)
             {
-                DisplayProduct.Visible = false;
+                phProducts.Visible = true ;
                 addandedit.Visible = false;
+                phSpecProduct.Visible = false;
+                lblHeader.InnerText = "Products";
+
                 loadProductList('X');
 
             }
-            else //load specific product
+            else if(productID != null) //load specific product
             {
-                DisplayProduct.Visible = true;
+                lblHeader.InnerText = "Product"; //later make this display the specific products name or image
+                phProducts.Visible = false;
                 addandedit.Visible = false;
-                divViewAll.Visible = false;
-
+                phSpecProduct.Visible = true;
                 LoadProduct(productID);
             }
 
@@ -125,7 +126,7 @@ namespace Cheveux.Cheveux
 
                                 //Name
                                 TableCell newCell = new TableCell();
-                                newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
+                                newCell.Text = "<a class='btn btn-default' href = '../Cheveux/Products.aspx?ProductID="
                                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
                                             "'>" + Access.Name + "</a>";
                                 tblProductTable.Rows[count].Cells.Add(newCell);
@@ -184,7 +185,7 @@ namespace Cheveux.Cheveux
 
                                 //Name
                                 TableCell newCell = new TableCell();
-                                newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
+                                newCell.Text = "<a class='btn btn-default' href = '../Cheveux/Products.aspx?ProductID="
                                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
                                             "'>" + treat.Name + "</a>";
                                 tblProductTable.Rows[count].Cells.Add(newCell);
@@ -237,75 +238,92 @@ namespace Cheveux.Cheveux
 
         public void LoadProduct(string productID)
         {
+            tblProducts.Visible = true;
+
+            int count = 0;
+            //displaythe table headers
+            //create a new row in the table and set the height
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            tblProducts.Rows.Add(newRow);
+            //create a header row and set cell widths
+
+            //create a header row and set cell widths
+            TableHeaderCell newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Name: ";
+            newHeaderCell.Width = 300;
+            tblProducts.Rows[count].Cells.Add(newHeaderCell);
+
+            //create a header row and set cell widths
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Product Description: ";
+            newHeaderCell.Width = 300;
+            tblProducts.Rows[count].Cells.Add(newHeaderCell);
+
+            newHeaderCell = new TableHeaderCell();
+            newHeaderCell.Text = "Price: ";
+            newHeaderCell.Width = 100;
+            tblProducts.Rows[count].Cells.Add(newHeaderCell);
+
             //Display specific product
             try
             {
                 Accessory = handler.selectAccessory(productID);
                 Treatment = handler.selectTreatment(productID);
-                //track row count & number of products cound
-                int count = 0;
-                int accCount = 0;
-                int treatCount = 0;
 
-                if (Accessory.count == 1)
+                //track row count & number of products count
+                if (Accessory != null)
                 {
-                    if (Treatment == null)
+                    
+                    if(Treatment == null)
                     {
-                        //displaythe table headers
-                        //create a new row in the table and set the height
-                        TableRow newRow = new TableRow();
-                        newRow.Height = 50;
-                        tblProductTable.Rows.Add(newRow);
-                        //create a header row and set cell widths
-                    }
-                    //create a header row and set cell widths
-                    TableHeaderCell newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Name: ";
-                    newHeaderCell.Width = 600;
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                        //increment rowcounter
+                        count++;
 
-                    //create a header row and set cell widths
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Product Description: ";
-                    newHeaderCell.Width = 300;
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Price: ";
-                    newHeaderCell.Width = 100;
-                    tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                        TableRow productRow = new TableRow();
+                        productRow.Height = 100;
+                        tblProducts.Rows.Add(productRow);
 
-                    //increment rowcounter
-                    count++;
+                        TableCell cell = new TableCell();
+                        cell.Text = Accessory.Name.ToString();
+                        tblProducts.Rows[count].Cells.Add(cell);
+
+                        cell = new TableCell();
+                        cell.Text = Accessory.ProductDescription.ToString();
+                        tblProducts.Rows[count].Cells.Add(cell);
+
+                        cell = new TableCell();
+                        cell.Text = "R" + Accessory.Price.ToString();
+                        tblProducts.Rows[count].Cells.Add(cell);
+
+                    }   
                 }
                 //display accessories
-                else if (Treatment.count > 0)
+                else if (Treatment != null)
                 {
                    
-                    if (Accessory == null)
+                    if(Accessory == null)
                     {
-                        //
-                        TableRow newRow = new TableRow();
-                        newRow.Height = 50;
-                        tblProductTable.Rows.Add(newRow);
-                        //Product Type
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = function.GetFullProductTypeText('A') + "'s:";
-                        tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                        //increment rowcounter
+                        count++;
 
-                        //increment accessories count
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = "Product Description: ";
-                        newHeaderCell.Width = 300;
-                        tblProductTable.Rows[count].Cells.Add(newHeaderCell);
-                        newHeaderCell = new TableHeaderCell();
-                        newHeaderCell.Text = "Price: ";
-                        newHeaderCell.Width = 100;
-                        tblProductTable.Rows[count].Cells.Add(newHeaderCell);
+                        TableRow row = new TableRow();
+                        row.Height = 50;
+                        tblProducts.Rows.Add(row);
 
+                        TableCell cell = new TableCell();
+                        cell.Text = Treatment.Name.ToString();
+                        tblProducts.Rows[count].Cells.Add(cell);
 
+                        cell = new TableCell();
+                        cell.Text = Treatment.ProductDescription.ToString();
+                        tblProducts.Rows[count].Cells.Add(cell);
+
+                        cell = new TableCell();
+                        cell.Text = Treatment.Price.ToString();
+                        tblProducts.Rows[count].Cells.Add(cell);
 
                     }
+
                 }
             }
             catch (Exception Err)
