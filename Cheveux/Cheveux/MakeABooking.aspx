@@ -9,6 +9,7 @@
     <div class="bg-secondary text-white" id="Div1">
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
+        <br />
     </div>
     <br />
     <div class="row">
@@ -39,7 +40,7 @@
                                             <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
                                             <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
                                         </ul>
-                                        <a name="Natural"></a>
+                                        
                                        
                                     </div>
                         </div>
@@ -101,7 +102,7 @@
 
                                     <div style="border: solid #F05F40 2px; height: 400px; overflow-y: scroll;">
                                         <div runat="server" id="divNatural" visible="true">
-
+                                            <a name="Natural"></a>
                                             <h5>Natural</h5>
                                             <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="cblPickAServiceN_SelectedIndexChanged" AutoPostBack="true">
                                             </asp:CheckBoxList><br />

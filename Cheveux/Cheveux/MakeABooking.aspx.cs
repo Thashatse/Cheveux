@@ -406,9 +406,8 @@ namespace Cheveux
                             }
                         }
                         #endregion
-
                         #region internal Booking (Receptionist)
-                        if (Authcookie["UT"].ToString()[0] == 'R')
+                         else if (Authcookie["UT"].ToString()[0] == 'R')
                         {
                             //Make Booking
                             //Add to booking
@@ -771,153 +770,169 @@ namespace Cheveux
                 }
                 else
                 {
-                    if (times.Time > Convert.ToDateTime("12:00"))
+                    int checkslotIndex = slotIndex;
+                    bool add = true;
+                    for (int b = 0; b < i; b++)
                     {
-                        if (afternoonButtonCount == 11)
+                                if (checkslotIndex + b >= 20)
+                                {
+                                    add = false;
+                                }
+                        else
                         {
-                            btnAfternoon11.Visible = true;
-                            btnAfternoon11.Text = times.Time.ToString("HH:mm");
-                            availableTimes[11, 0] = times.SlotNo;
-                            availableTimes[11, 1] = times.Time.ToString("HH:mm");
+                            add = true;
                         }
-                        else if (afternoonButtonCount == 12)
-                        {
-                            btnAfternoon12.Visible = true;
-                            btnAfternoon12.Text = times.Time.ToString("HH:mm");
-                            availableTimes[12, 0] = times.SlotNo;
-                            availableTimes[12, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 13)
-                        {
-                            btnAfternoon13.Visible = true;
-                            btnAfternoon13.Text = times.Time.ToString("HH:mm");
-                            availableTimes[13, 0] = times.SlotNo;
-                            availableTimes[13, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 14)
-                        {
-                            btnAfternoon14.Visible = true;
-                            btnAfternoon14.Text = times.Time.ToString("HH:mm");
-                            availableTimes[14, 0] = times.SlotNo;
-                            availableTimes[14, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 15)
-                        {
-                            btnAfternoon15.Visible = true;
-                            btnAfternoon15.Text = times.Time.ToString("HH:mm");
-                            availableTimes[15, 0] = times.SlotNo;
-                            availableTimes[15, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 16)
-                        {
-                            btnAfternoon16.Visible = true;
-                            btnAfternoon16.Text = times.Time.ToString("HH:mm");
-                            availableTimes[16, 0] = times.SlotNo;
-                            availableTimes[16, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 17)
-                        {
-                            btnAfternoon17.Visible = true;
-                            btnAfternoon17.Text = times.Time.ToString("HH:mm");
-                            availableTimes[17, 0] = times.SlotNo;
-                            availableTimes[17, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 18)
-                        {
-                            btnAfternoon18.Visible = true;
-                            btnAfternoon18.Text = times.Time.ToString("HH:mm");
-                            availableTimes[18, 0] = times.SlotNo;
-                            availableTimes[18, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 19)
-                        {
-                            btnAfternoon19.Visible = true;
-                            btnAfternoon19.Text = times.Time.ToString("HH:mm");
-                            availableTimes[19, 0] = times.SlotNo;
-                            availableTimes[19, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (afternoonButtonCount == 20)
-                        {
-                            btnAfternoon20.Visible = true;
-                            btnAfternoon20.Text = times.Time.ToString("HH:mm");
-                            availableTimes[20, 0] = times.SlotNo;
-                            availableTimes[20, 1] = times.Time.ToString("HH:mm");
-                        }
-                        afternoonButtonCount++;
                     }
-                    else
+                    if (add == true)
                     {
-                        if (morningButtonCount == 1)
+                        if (times.Time > Convert.ToDateTime("12:00"))
                         {
-                            btnMorning1.Visible = true;
-                            btnMorning1.Text = times.Time.ToString("HH:mm");
-                            availableTimes[1, 0] = times.SlotNo;
-                            availableTimes[1, 1] = times.Time.ToString("HH:mm");
+                            if (afternoonButtonCount == 11)
+                            {
+                                btnAfternoon11.Visible = true;
+                                btnAfternoon11.Text = times.Time.ToString("HH:mm");
+                                availableTimes[11, 0] = times.SlotNo;
+                                availableTimes[11, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 12)
+                            {
+                                btnAfternoon12.Visible = true;
+                                btnAfternoon12.Text = times.Time.ToString("HH:mm");
+                                availableTimes[12, 0] = times.SlotNo;
+                                availableTimes[12, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 13)
+                            {
+                                btnAfternoon13.Visible = true;
+                                btnAfternoon13.Text = times.Time.ToString("HH:mm");
+                                availableTimes[13, 0] = times.SlotNo;
+                                availableTimes[13, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 14)
+                            {
+                                btnAfternoon14.Visible = true;
+                                btnAfternoon14.Text = times.Time.ToString("HH:mm");
+                                availableTimes[14, 0] = times.SlotNo;
+                                availableTimes[14, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 15)
+                            {
+                                btnAfternoon15.Visible = true;
+                                btnAfternoon15.Text = times.Time.ToString("HH:mm");
+                                availableTimes[15, 0] = times.SlotNo;
+                                availableTimes[15, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 16)
+                            {
+                                btnAfternoon16.Visible = true;
+                                btnAfternoon16.Text = times.Time.ToString("HH:mm");
+                                availableTimes[16, 0] = times.SlotNo;
+                                availableTimes[16, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 17)
+                            {
+                                btnAfternoon17.Visible = true;
+                                btnAfternoon17.Text = times.Time.ToString("HH:mm");
+                                availableTimes[17, 0] = times.SlotNo;
+                                availableTimes[17, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 18)
+                            {
+                                btnAfternoon18.Visible = true;
+                                btnAfternoon18.Text = times.Time.ToString("HH:mm");
+                                availableTimes[18, 0] = times.SlotNo;
+                                availableTimes[18, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 19)
+                            {
+                                btnAfternoon19.Visible = true;
+                                btnAfternoon19.Text = times.Time.ToString("HH:mm");
+                                availableTimes[19, 0] = times.SlotNo;
+                                availableTimes[19, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (afternoonButtonCount == 20)
+                            {
+                                btnAfternoon20.Visible = true;
+                                btnAfternoon20.Text = times.Time.ToString("HH:mm");
+                                availableTimes[20, 0] = times.SlotNo;
+                                availableTimes[20, 1] = times.Time.ToString("HH:mm");
+                            }
+                            afternoonButtonCount++;
                         }
-                        else if (morningButtonCount == 2)
+                        else
                         {
-                            btnMorning2.Visible = true;
-                            btnMorning2.Text = times.Time.ToString("HH:mm");
-                            availableTimes[2, 0] = times.SlotNo;
-                            availableTimes[2, 1] = times.Time.ToString("HH:mm");
+                            if (morningButtonCount == 1)
+                            {
+                                btnMorning1.Visible = true;
+                                btnMorning1.Text = times.Time.ToString("HH:mm");
+                                availableTimes[1, 0] = times.SlotNo;
+                                availableTimes[1, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 2)
+                            {
+                                btnMorning2.Visible = true;
+                                btnMorning2.Text = times.Time.ToString("HH:mm");
+                                availableTimes[2, 0] = times.SlotNo;
+                                availableTimes[2, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 3)
+                            {
+                                btnMorning3.Visible = true;
+                                btnMorning3.Text = times.Time.ToString("HH:mm");
+                                availableTimes[3, 0] = times.SlotNo;
+                                availableTimes[3, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 4)
+                            {
+                                btnMorning4.Visible = true;
+                                btnMorning4.Text = times.Time.ToString("HH:mm");
+                                availableTimes[4, 0] = times.SlotNo;
+                                availableTimes[4, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 5)
+                            {
+                                btnMorning5.Visible = true;
+                                btnMorning5.Text = times.Time.ToString("HH:mm");
+                                availableTimes[5, 0] = times.SlotNo;
+                                availableTimes[5, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 6)
+                            {
+                                btnMorning6.Visible = true;
+                                btnMorning6.Text = times.Time.ToString("HH:mm");
+                                availableTimes[6, 0] = times.SlotNo;
+                                availableTimes[6, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 7)
+                            {
+                                btnMorning7.Visible = true;
+                                btnMorning7.Text = times.Time.ToString("HH:mm");
+                                availableTimes[7, 0] = times.SlotNo;
+                                availableTimes[7, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 8)
+                            {
+                                btnMorning8.Visible = true;
+                                btnMorning8.Text = times.Time.ToString("HH:mm");
+                                availableTimes[8, 0] = times.SlotNo;
+                                availableTimes[8, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 9)
+                            {
+                                btnMorning9.Visible = true;
+                                btnMorning9.Text = times.Time.ToString("HH:mm");
+                                availableTimes[9, 0] = times.SlotNo;
+                                availableTimes[9, 1] = times.Time.ToString("HH:mm");
+                            }
+                            else if (morningButtonCount == 10)
+                            {
+                                btnMorning10.Visible = true;
+                                btnMorning10.Text = times.Time.ToString("HH:mm");
+                                availableTimes[10, 0] = times.SlotNo;
+                                availableTimes[10, 1] = times.Time.ToString("HH:mm");
+                            }
+                            morningButtonCount++;
                         }
-                        else if (morningButtonCount == 3)
-                        {
-                            btnMorning3.Visible = true;
-                            btnMorning3.Text = times.Time.ToString("HH:mm");
-                            availableTimes[3, 0] = times.SlotNo;
-                            availableTimes[3, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (morningButtonCount == 4)
-                        {
-                            btnMorning4.Visible = true;
-                            btnMorning4.Text = times.Time.ToString("HH:mm");
-                            availableTimes[4, 0] = times.SlotNo;
-                            availableTimes[4, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (morningButtonCount == 5)
-                        {
-                            btnMorning5.Visible = true;
-                            btnMorning5.Text = times.Time.ToString("HH:mm");
-                            availableTimes[5, 0] = times.SlotNo;
-                            availableTimes[5, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (morningButtonCount == 6)
-                        {
-                            btnMorning6.Visible = true;
-                            btnMorning6.Text = times.Time.ToString("HH:mm");
-                            availableTimes[6, 0] = times.SlotNo;
-                            availableTimes[6, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (morningButtonCount == 7)
-                        {
-                            btnMorning7.Visible = true;
-                            btnMorning7.Text = times.Time.ToString("HH:mm");
-                            availableTimes[7, 0] = times.SlotNo;
-                            availableTimes[7, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (morningButtonCount == 8)
-                        {
-                            btnMorning8.Visible = true;
-                            btnMorning8.Text = times.Time.ToString("HH:mm");
-                            availableTimes[8, 0] = times.SlotNo;
-                            availableTimes[8, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (morningButtonCount == 9)
-                        {
-                            btnMorning9.Visible = true;
-                            btnMorning9.Text = times.Time.ToString("HH:mm");
-                            availableTimes[9, 0] = times.SlotNo;
-                            availableTimes[9, 1] = times.Time.ToString("HH:mm");
-                        }
-                        else if (morningButtonCount == 10)
-                        {
-                            btnMorning10.Visible = true;
-                            btnMorning10.Text = times.Time.ToString("HH:mm");
-                            availableTimes[10, 0] = times.SlotNo;
-                            availableTimes[10, 1] = times.Time.ToString("HH:mm");
-                        }
-                        morningButtonCount++;
                     }
                 }
                 slotIndex++;
@@ -1408,7 +1423,11 @@ namespace Cheveux
 
         private int CalculateSlotLength(object sender, EventArgs e)
         {
-            service = new SERVICE();
+            if (pickedServiceID != null)
+            {
+                pickedServiceID.Clear();
+            }
+                service = new SERVICE();
             rblPickAServiceA_SelectedIndexChanged(sender, e);
             rblPickAServiceB_SelectedIndexChanged(sender, e);
             cblPickAServiceN_SelectedIndexChanged(sender, e);
