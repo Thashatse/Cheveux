@@ -23,15 +23,14 @@ CREATE PROCEDURE SP_SelectTreatment
 	AS
 BEGIN
 	  SELECT [ProductID]
-      ,Product.Name
+      ,PRODUCT.[Name] AS [ProductName]
       ,[ProductDescription]
       ,[Price]
       ,[ProductType(T/A/S)]
       ,[Active]
-      ,[ProductImage]
 	  ,[TreatmentType]
       ,BRAND.[BrandID]
-	  ,BRAND.Name
+	  ,BRAND.[Name]	AS [BrandName]
 	  
 	  
 	FROM [CHEVEUX].[dbo].[PRODUCT], TREATMENT, BRAND, Supplier s
