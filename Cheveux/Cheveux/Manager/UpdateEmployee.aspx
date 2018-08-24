@@ -72,6 +72,7 @@
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <asp:RadioButtonList ID="rdoType" runat="server" RepeatDirection="Horizontal" RepeatLayout="flow">
                                     <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist" Value="R" />
+                                    &nbsp;
                                     <asp:ListItem id="TypeOption2" runat="server" Text="Stylist" Value="S" />
                                 </asp:RadioButtonList>
                                 <!-- RadioButtons Validation-->
@@ -96,8 +97,6 @@
                             </div>
                             <div class="col-sm-12 col-md-2 col-lg-2">
                                 <asp:TextBox ID="txtAddLine2" runat="server" placeholder="AddressLine 2"></asp:TextBox>
-                                <!-- AddressLine 2 Validation-->
-                                <asp:RequiredFieldValidator ID="ad2Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine2"></asp:RequiredFieldValidator>
                             </div>
                         </div>
 
