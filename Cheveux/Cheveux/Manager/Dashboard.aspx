@@ -58,7 +58,7 @@
                                         <asp:Label ID="lStats3" runat="server"></asp:Label>
                                     </div>
                                     <div class="col-md-12 col-lg-3">
-                                        <h5>Registerd Customers </h5>
+                                        <h5>Registered Customers </h5>
                                         <!-- Line Break -->
                                         <br />
                                         <asp:Label ID="lStats4" runat="server"></asp:Label>
@@ -82,7 +82,7 @@
                             <br />
                             <div runat="server" id="divOrders">
                                 <!--Orders-->
-                                <h1>Outstanting Product Orders </h1>
+                                <h1>Outstanding Product Orders </h1>
                                 <!-- Orders Table -->
                                 <asp:Table ID="productOrders" runat="server">
                                 </asp:Table>

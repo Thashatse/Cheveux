@@ -145,7 +145,7 @@ namespace DAL
       
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
-
+        SERVICE GetSlotLength(string serviceID);
 
     }
     }

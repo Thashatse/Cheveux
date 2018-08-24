@@ -22,6 +22,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblErrorSummary;
         
         /// <summary>
+        /// divLabels control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLabels;
+        
+        /// <summary>
         /// tblBookingSummary control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblBookingSummary;
+        
+        /// <summary>
+        /// lblChoose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblChoose;
+        
+        /// <summary>
+        /// lblDateLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDateLabel;
         
         /// <summary>
         /// lblDate control.
@@ -40,6 +67,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblDate;
         
         /// <summary>
+        /// lblTimeLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTimeLabel;
+        
+        /// <summary>
         /// lblTime control.
         /// </summary>
         /// <remarks>
@@ -49,6 +85,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblTime;
         
         /// <summary>
+        /// lblStylistLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStylistLabel;
+        
+        /// <summary>
         /// lblStylist control.
         /// </summary>
         /// <remarks>
@@ -56,6 +101,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStylist;
+        
+        /// <summary>
+        /// lblServiceLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblServiceLabel;
         
         /// <summary>
         /// lblServices control.
@@ -146,15 +200,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblPickAStylist;
-        
-        /// <summary>
-        /// tblSide control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblSide;
         
         /// <summary>
         /// divDateTime control.

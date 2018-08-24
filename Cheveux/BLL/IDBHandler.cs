@@ -136,6 +136,7 @@ namespace BLL
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir);
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
+        SERVICE BLL_GetSlotLength(string serviceID);
     }
 }
 

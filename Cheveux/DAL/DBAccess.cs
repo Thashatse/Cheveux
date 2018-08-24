@@ -3154,6 +3154,35 @@ namespace DAL
             }
 
         }
+         public SERVICE GetSlotLength(string serviceID)
+        {
+            SERVICE service = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", serviceID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetSlotLength",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        service = new SERVICE
+                        {
+                            NoOfSlots = Convert.ToInt32(table.Rows[0]["NoOfSlots"].ToString())
+
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     
     }
 }                  

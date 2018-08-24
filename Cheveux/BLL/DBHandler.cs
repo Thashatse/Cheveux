@@ -505,6 +505,9 @@ namespace BLL
         {
             return db.updateService(p, s);
         }
-        
+                public SERVICE BLL_GetSlotLength(string serviceID)
+        {
+            return db.GetSlotLength(serviceID);
+        }
     }
 }
