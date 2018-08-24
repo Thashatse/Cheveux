@@ -1415,7 +1415,7 @@ namespace Cheveux
             int slotLength = 0;
             foreach (string id in pickedServiceID)
             {
-                slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id));
+                slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
 
             }
             return slotLength;
