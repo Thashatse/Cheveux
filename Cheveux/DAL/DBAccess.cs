@@ -1128,17 +1128,18 @@ namespace DAL
                     {
                         DataRow row = table.Rows[0];
                         accessory = new SP_GetAllAccessories();
-                        accessory.Name = Convert.ToString(row["Name"]);
+                        accessory.ProductID = Convert.ToString(row["ProductID"]);
+                        accessory.Name = Convert.ToString(row["ProductName"]);
                         accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         accessory.Price = Convert.ToInt32(row["Price"]);
-                        accessory.ProductType = Convert.ToString(row["ProductType"]);
-                        accessory.Active = Convert.ToString(row["Active"]);
+                        accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
+                        //accessory.Active = Convert.ToString(row["Active"]);
                         //accessory.ProductImage = Convert.ToByte(row["ProductImage"]);
-                        accessory.Colour = Convert.ToString(row["Colour"]);
-                        accessory.Qty = Convert.ToInt32("Qty");
+                        //accessory.Colour = Convert.ToString(row["Colour"]);
+                        //accessory.Qty = Convert.ToInt32("Qty");
                         accessory.BrandID = Convert.ToString("BrandID");
                         accessory.Brandname = Convert.ToString("BrandName");
-                        accessory.brandType = Convert.ToString("BrandType(T/A)");
+                        //accessory.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
                     return accessory;
@@ -1169,16 +1170,16 @@ namespace DAL
                     {
                         DataRow row = table.Rows[0];
                         treatment = new SP_GetAllTreatments();
-                        treatment.Name = Convert.ToString(row["Name"]);
+                        treatment.Name = Convert.ToString(row["ProductName"]);
                         treatment.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         treatment.Price = Convert.ToInt32(row["Price"]);
-                        treatment.ProductType = Convert.ToString(row["ProductType"]);
+                        treatment.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         treatment.Active = Convert.ToString(row["Active"]);
                         //treatment.ProductImage = Convert["ProductImage"]);
-                        treatment.Qty = Convert.ToInt32("Qty");
+                        //treatment.Qty = Convert.ToInt32("Qty");
                         treatment.BrandID = Convert.ToString("BrandID");
                         treatment.Brandname = Convert.ToString("BrandName");
-                        treatment.brandType = Convert.ToString("BrandType(T/A)");
+                        //treatment.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
                     return treatment;
