@@ -238,6 +238,11 @@ namespace Cheveux.Cheveux
 
         public void LoadProduct(string productID)
         {
+            //Change layout 
+
+
+            //Once you done with this start with the product images stuff 
+
             tblProducts.Visible = true;
 
             int count = 0;
@@ -274,11 +279,8 @@ namespace Cheveux.Cheveux
                 //track row count & number of products count
                 if (Accessory != null)
                 {
-                    
-                    if(Treatment == null)
-                    {
-                        //increment rowcounter
-                        count++;
+
+                    int inc = 1;
 
                         TableRow productRow = new TableRow();
                         productRow.Height = 100;
@@ -286,45 +288,41 @@ namespace Cheveux.Cheveux
 
                         TableCell cell = new TableCell();
                         cell.Text = Accessory.Name.ToString();
-                        tblProducts.Rows[count].Cells.Add(cell);
+                        tblProducts.Rows[inc].Cells.Add(cell);
 
                         cell = new TableCell();
                         cell.Text = Accessory.ProductDescription.ToString();
-                        tblProducts.Rows[count].Cells.Add(cell);
+                        tblProducts.Rows[inc].Cells.Add(cell);
 
                         cell = new TableCell();
-                        cell.Text = "R" + Accessory.Price.ToString();
-                        tblProducts.Rows[count].Cells.Add(cell);
-
-                    }   
+                        cell.Text = "R" + Accessory.Price.ToString();//Change to price format
+                        tblProducts.Rows[inc].Cells.Add(cell);
+  
                 }
                 //display accessories
                 else if (Treatment != null)
                 {
-                   
-                    if(Accessory == null)
-                    {
-                        count++;
 
-                        TableRow row = new TableRow();
+                    int inc = 1;
+
+                    TableRow row = new TableRow();
                         row.Height = 50;
                         tblProducts.Rows.Add(row);
 
                         TableCell cell = new TableCell();
                         cell.Text = Treatment.Name.ToString();
-                        tblProducts.Rows[count].Cells.Add(cell);
+                        tblProducts.Rows[inc].Cells.Add(cell);
 
                         cell = new TableCell();
                         cell.Text = Treatment.ProductDescription.ToString();
-                        tblProducts.Rows[count].Cells.Add(cell);
+                        tblProducts.Rows[inc].Cells.Add(cell);
 
                         cell = new TableCell();
                         cell.Text = Treatment.Price.ToString();
-                        tblProducts.Rows[count].Cells.Add(cell);
+                        tblProducts.Rows[inc].Cells.Add(cell);
 
                     }
 
-                }
             }
             catch (Exception Err)
             {
