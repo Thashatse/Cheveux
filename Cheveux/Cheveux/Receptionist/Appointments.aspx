@@ -84,7 +84,7 @@
 
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
-                                <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true">
+                                <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatLayout="flow">
                                     <asp:ListItem Text="All" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Today" Value="1"></asp:ListItem>
                                     <asp:ListItem Text="Specific Day" Value="2"></asp:ListItem>
@@ -135,8 +135,6 @@
                             </div>
                         </asp:PlaceHolder>
                     </asp:PlaceHolder>
-
-                    <br />
 
                     <!--Sorting-->
                     <asp:PlaceHolder ID="phSorting" runat="server">
