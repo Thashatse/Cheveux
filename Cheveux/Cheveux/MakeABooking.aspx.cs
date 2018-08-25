@@ -469,13 +469,6 @@ namespace Cheveux
                                 book.Available = "N";
                                 book.primaryBookingID = primaryBookingID;
                                 handler.BLL_AddBooking(book);
-
-                                foreach (string id in pickedServiceID)
-                                {
-                                    bookService.BookingID = book.BookingID;
-                                    bookService.ServiceID = id;
-                                    handler.BLL_AddToBookingService(bookService);
-                                }
                             }
                         }
 
