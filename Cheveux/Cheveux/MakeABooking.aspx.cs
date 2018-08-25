@@ -395,9 +395,9 @@ namespace Cheveux
                             book.CustomerID = cookie["ID"];
                             book.StylistID = rblPickAStylist.SelectedValue;
                             book.Available = "N";
+                            book.primaryBookingID = book.BookingID;
                             handler.BLL_AddBooking(book);
                             bookService = new BookingService();
-                            
                             foreach (string id in pickedServiceID)
                             {
                                 bookService.BookingID = book.BookingID;
@@ -422,6 +422,7 @@ namespace Cheveux
                             book.CustomerID = CustomerIDs[lbCustomers.SelectedIndex];
                             book.StylistID = rblPickAStylist.SelectedValue;
                             book.Available = "N";
+                            book.primaryBookingID = book.BookingID;
                             handler.BLL_AddBooking(book);
                             bookService = new BookingService();
                             foreach (string id in pickedServiceID)
@@ -438,11 +439,11 @@ namespace Cheveux
                         if (length > 1)
                         {
                             string primaryBookingID = book.BookingID;
-                            int bookedSlotIndex =0;
+                            int bookedSlotIndex = 0;
                             int slotIndex = 0;
                                 foreach(SP_GetSlotTimes slot in slotList)
                                 {
-                                    if(slot.SlotNo == bookingTime["TimeSlot"])
+                                    if(slot.SlotNo == book.SlotNo)
                                     {
                                         bookedSlotIndex = slotIndex;
                                     }
@@ -468,13 +469,6 @@ namespace Cheveux
                                 book.Available = "N";
                                 book.primaryBookingID = primaryBookingID;
                                 handler.BLL_AddBooking(book);
-
-                                foreach (string id in pickedServiceID)
-                                {
-                                    bookService.BookingID = book.BookingID;
-                                    bookService.ServiceID = id;
-                                    handler.BLL_AddToBookingService(bookService);
-                                }
                             }
                         }
 

@@ -19,7 +19,6 @@ namespace TypeLibrary.ViewModels
         public string slotNo { get; set; }
         public string bookingID { get; set; }
         public string CustomerID { get; set; }
-        public string serviceID { get; set; }
         public Char arrived { get; set; }
     }
 }

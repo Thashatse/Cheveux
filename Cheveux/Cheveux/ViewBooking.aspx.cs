@@ -911,7 +911,7 @@ namespace Cheveux
                 if (service == true)
                 {
                     //if changed
-                    body.AppendLine(@"The service " + lbServices.SelectedIndex.ToString() + " has been removed from your bookings.");
+                    body.AppendLine(@"The service " + lbServices.SelectedItem.Text.ToString() + " has been removed from your bookings.");
                     body.AppendLine(@"");
                 }
 

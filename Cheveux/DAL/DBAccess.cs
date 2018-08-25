@@ -378,6 +378,23 @@ namespace DAL
             }
         }
 
+        public bool deleteSecondaryBooking(string BookingID)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@PrimaryBookingID", BookingID),
+                };
+
+                return DBHelper.NonQuery("SP_DeleteSecondaryBookings", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID)
         {
             List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
@@ -508,6 +525,28 @@ namespace DAL
             }
             return null;
         }
+
+        public bool AddBooking(BOOKING addBooking)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@BookingID", addBooking.BookingID.ToString()),
+                    new SqlParameter("@Slot", addBooking.SlotNo.ToString()),
+                    new SqlParameter("@CustomerID", addBooking.CustomerID.ToString()),
+                    new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
+                    new SqlParameter("@Date", addBooking.Date.ToString()),
+                    new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
         #endregion
 
         #region CheckIN CheckOut Cust Vist
@@ -528,16 +567,12 @@ namespace DAL
                     {
                         booking = new SP_GetCustomerBooking
                         {
-                            serviceName = table.Rows[0]["Name"].ToString(),
-                            serviceDescripion = table.Rows[0]["ProductDescription"].ToString(),
-                            servicePrice = table.Rows[0]["Price"].ToString(),
                             stylistFirstName = table.Rows[0]["FirstName"].ToString(),
                             bookingDate = Convert.ToDateTime(table.Rows[0]["Date"].ToString()),
                             bookingStartTime = Convert.ToDateTime(table.Rows[0]["StartTime"].ToString()),
                             bookingID = table.Rows[0]["BookingID"].ToString(),
                             CustomerID = table.Rows[0]["CustomerID"].ToString(),
-                            CustFullName = table.Rows[0]["custFullName"].ToString(),
-                            serviceID = table.Rows[0]["ServiceID"].ToString()
+                            CustFullName = table.Rows[0]["custFullName"].ToString()
                         };
                     }
                     return booking;
@@ -559,6 +594,24 @@ namespace DAL
                 };
 
                 return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool createSalesDTLRecord(SALES_DTL detailLine)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+            new SqlParameter("@SaleID", detailLine.SaleID),
+            new SqlParameter("@ProductID", detailLine.ProductID),
+            new SqlParameter("@Qty", detailLine.Qty)
+            };
+            try
+            {
+                return DBHelper.NonQuery("SP_CreateSalesDTLRecord", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -1302,6 +1355,7 @@ namespace DAL
         }
         #endregion
 
+        #region Services
         public bool updateService(PRODUCT p, SERVICE s)
         {
             try
@@ -1320,24 +1374,196 @@ namespace DAL
             }
 
         }
-
-        public bool createSalesDTLRecord(SALES_DTL detailLine)
+        #endregion
+        
+        #region Bussines Table
+        public BUSINESS getBusinessTable()
         {
-            SqlParameter[] pars = new SqlParameter[]
-            {
-            new SqlParameter("@SaleID", detailLine.SaleID),
-            new SqlParameter("@ProductID", detailLine.ProductID),
-            new SqlParameter("@Qty", detailLine.Qty)
-            };
+            BUSINESS businessDetails = null;
+
             try
             {
-                return DBHelper.NonQuery("SP_CreateSalesDTLRecord", CommandType.StoredProcedure, pars);
+                using (DataTable table = DBHelper.Select("SP_getBusinessTable", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        businessDetails = new BUSINESS
+                        {
+                            BusinessID = row[0].ToString(),
+                            Vat = int.Parse(row[1].ToString()),
+                            VatRegNo = row[2].ToString(),
+                            AddressLine1 = row[3].ToString(),
+                            AddressLine2 = row[4].ToString(),
+                            Phone = row[5].ToString(),
+                            WeekdayStart = DateTime.Parse(row[6].ToString()),
+                            WeekdayEnd = DateTime.Parse(row[7].ToString()),
+                            WeekendStart = DateTime.Parse(row[8].ToString()),
+                            WeekendEnd = DateTime.Parse(row[9].ToString()),
+                            PublicHolEnd = DateTime.Parse(row[10].ToString()),
+                            PublicHolStart = DateTime.Parse(row[9].ToString())
+                        };
+                    }
+                    return businessDetails;
+                }
             }
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public SP_GetCurrentVATate GetVATRate()
+        {
+            SP_GetCurrentVATate VATRate = null;
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetCurrentVATRate2",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        VATRate = new SP_GetCurrentVATate
+                        {
+                            VATRate = Convert.ToChar(row[0])
+                        };
+
+                    }
+                    return VATRate;
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateVatRate(string bussinesID, int vatRate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@VatRat", vatRate),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateVateRate", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateVatRegNo(string bussinesID, string vatRegNo)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@VatRegno", vatRegNo),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateVateRegNo", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateAddress(string bussinesID, string addressLine1, string addressLine2)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@addline1", addressLine1),
+                    new SqlParameter("@addline2", addressLine2),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateAddress", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateWeekdayHours(string bussinesID, DateTime wDStart, DateTime wDEnd)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@start", wDStart.ToString("HH:mm")),
+                    new SqlParameter("@end", wDEnd.ToString("HH:mm")),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateWeekdayHours", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateWeekendHours(string bussinesID, DateTime wEStart, DateTime wEEnd)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@start", wEStart.ToString("HH:mm")),
+                    new SqlParameter("@end", wEEnd.ToString("HH:mm")),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdateWeekendHours", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@start", pHStart.ToString("HH:mm")),
+                    new SqlParameter("@end", pHEnd.ToString("HH:mm")),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdatePublicHolidayHours", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updatePhoneNumber(string bussinesID, string PhoneNumber)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@PhoneNumber", PhoneNumber),
+                    new SqlParameter("@BusinessID", bussinesID)
+                };
+                return DBHelper.NonQuery("SP_UpdatePhoneNumber", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
 
         public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
         {
@@ -1481,71 +1707,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public BUSINESS getBusinessTable()
-        {
-            BUSINESS businessDetails = null;
-
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_getBusinessTable", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        businessDetails = new BUSINESS
-                        {
-                            BusinessID = row[0].ToString(),
-                            Vat = int.Parse(row[1].ToString()),
-                            VatRegNo = row[2].ToString(),
-                            AddressLine1 = row[3].ToString(),
-                            AddressLine2 = row[4].ToString(),
-                            Phone = row[5].ToString(),
-                            WeekdayStart = DateTime.Parse(row[6].ToString()),
-                            WeekdayEnd = DateTime.Parse(row[7].ToString()),
-                            WeekendStart = DateTime.Parse(row[8].ToString()),
-                            WeekendEnd = DateTime.Parse(row[9].ToString()),
-                            PublicHolEnd = DateTime.Parse(row[10].ToString()),
-                            PublicHolStart = DateTime.Parse(row[9].ToString())
-                        };
-                    }
-                    return businessDetails;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public SP_GetCurrentVATate GetVATRate()
-        {
-            SP_GetCurrentVATate VATRate = null;
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_GetCurrentVATRate2",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        VATRate = new SP_GetCurrentVATate
-                        {
-                            VATRate = Convert.ToChar(row[0])
-                        };
-
-                    }
-                    return VATRate;
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
@@ -1719,28 +1881,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public bool AddBooking(BOOKING addBooking)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@BookingID", addBooking.BookingID.ToString()),
-                    new SqlParameter("@Slot", addBooking.SlotNo.ToString()),
-                    new SqlParameter("@CustomerID", addBooking.CustomerID.ToString()),
-                    new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
-                    new SqlParameter("@Date", addBooking.Date.ToString()),
-                };
-                return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-
-        }
-
+        
         public List<SP_GetServices> GetAllServices()
         {
             try
@@ -1860,130 +2001,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public bool updateVatRate(string bussinesID, int vatRate)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@VatRat", vatRate),
-                    new SqlParameter("@BusinessID", bussinesID)
-                };
-                return DBHelper.NonQuery("SP_UpdateVateRate", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool updateVatRegNo(string bussinesID, string vatRegNo)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@VatRegno", vatRegNo),
-                    new SqlParameter("@BusinessID", bussinesID)
-                };
-                return DBHelper.NonQuery("SP_UpdateVateRegNo", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool updateAddress(string bussinesID, string addressLine1, string addressLine2)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@addline1", addressLine1),
-                    new SqlParameter("@addline2", addressLine2),
-                    new SqlParameter("@BusinessID", bussinesID)
-                };
-                return DBHelper.NonQuery("SP_UpdateAddress", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool updateWeekdayHours(string bussinesID, DateTime wDStart, DateTime wDEnd)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@start", wDStart.ToString("HH:mm")),
-                    new SqlParameter("@end", wDEnd.ToString("HH:mm")),
-                    new SqlParameter("@BusinessID", bussinesID)
-                };
-                return DBHelper.NonQuery("SP_UpdateWeekdayHours", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool updateWeekendHours(string bussinesID, DateTime wEStart, DateTime wEEnd)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@start", wEStart.ToString("HH:mm")),
-                    new SqlParameter("@end", wEEnd.ToString("HH:mm")),
-                    new SqlParameter("@BusinessID", bussinesID)
-                };
-                return DBHelper.NonQuery("SP_UpdateWeekendHours", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool updatePublicHolidayHours(string bussinesID, DateTime pHStart, DateTime pHEnd)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@start", pHStart.ToString("HH:mm")),
-                    new SqlParameter("@end", pHEnd.ToString("HH:mm")),
-                    new SqlParameter("@BusinessID", bussinesID)
-                };
-                return DBHelper.NonQuery("SP_UpdatePublicHolidayHours", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool updatePhoneNumber(string bussinesID, string PhoneNumber)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@PhoneNumber", PhoneNumber),
-                    new SqlParameter("@BusinessID", bussinesID)
-                };
-                return DBHelper.NonQuery("SP_UpdatePhoneNumber", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
+        
         public SP_ViewEmployee viewEmployee(string empID)
         {
             SP_ViewEmployee viewEmployee = null;
