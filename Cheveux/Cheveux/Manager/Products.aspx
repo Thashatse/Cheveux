@@ -88,6 +88,7 @@
                             <div class="col-md-2">
                                 <!--add product btn -->
                                 <a class='btn btn-primary' href='../Cheveux/Products.aspx?Action=Add'>New Product </a>
+
                             </div>
                         </div>
 

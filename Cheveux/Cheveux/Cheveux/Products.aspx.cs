@@ -32,8 +32,8 @@ namespace Cheveux.Cheveux
             //load all products
             if (productID == null)
             {
-                phProducts.Visible = true ;
-                addandedit.Visible = false;
+                phProducts.Visible = false ;
+                addandedit.Visible = true;
                 phSpecProduct.Visible = false;
                 lblHeader.InnerText = "Products";
 
@@ -329,6 +329,8 @@ namespace Cheveux.Cheveux
                 function.logAnError(" An error occurred retrieving list of products external products page. Error: " + Err);
             }
             }
+
+        
 
     }
 } 
