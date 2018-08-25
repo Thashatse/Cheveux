@@ -42,7 +42,6 @@ BEGIN
 	Where  b.StylistID = @stylistID
 	AND    B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = U.UserID 
-	AND    B.ServiceID = P.ProductID 
 	AND	   B.Arrived = 'Y'
 	AND	  (B.[Date] BETWEEN @startDate AND @endDate)
 

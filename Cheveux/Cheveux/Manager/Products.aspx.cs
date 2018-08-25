@@ -435,11 +435,6 @@ namespace Cheveux.Manager
         protected void btnAddProduct_Click(object sender, EventArgs e)
         {
 
-
-
-
-
-
         }
     }
 }

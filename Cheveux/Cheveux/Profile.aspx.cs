@@ -417,7 +417,7 @@ namespace Cheveux
                         // if employee is a stylist allow manager to view schedule
                         newCell = new TableCell();
                         newCell.Text =
-                             "<a href='/Stylist/Schedule.aspx?Action=ViewSchedule&" +
+                             "<a href='/Receptionist/Appointments.aspx?Action=ViewStylistSchedule&" +
                                         "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
                                         "'> View Schedule </a>";
 

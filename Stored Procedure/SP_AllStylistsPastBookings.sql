@@ -38,7 +38,6 @@ BEGIN
 	Where  B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = U.UserID
 	AND	   B.StylistID = e.EmployeeID 	
-	AND    B.ServiceID = P.ProductID
 	AND	   B.Arrived = 'Y'
 	AND	   B.[Date] !> CAST(GETDATE() AS DATE)
 	ORDER BY 

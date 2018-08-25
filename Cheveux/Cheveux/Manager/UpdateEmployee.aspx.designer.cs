@@ -157,15 +157,6 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.TextBox txtAddLine2;
         
         /// <summary>
-        /// ad2Validation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ad2Validation;
-        
-        /// <summary>
         /// lblSuburb control.
         /// </summary>
         /// <remarks>
