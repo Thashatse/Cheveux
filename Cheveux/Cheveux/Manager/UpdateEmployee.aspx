@@ -71,9 +71,8 @@
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
                                 <asp:RadioButtonList ID="rdoType" runat="server" RepeatDirection="Horizontal" RepeatLayout="flow">
-                                    <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist" Value="R" />
-                                    &nbsp;
-                                    <asp:ListItem id="TypeOption2" runat="server" Text="Stylist" Value="S" />
+                                    <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist&nbsp;" Value="R" />
+                                    <asp:ListItem id="TypeOption2" runat="server" Text="Stylist&nbsp;" Value="S" />
                                 </asp:RadioButtonList>
                                 <!-- RadioButtons Validation-->
                                 <asp:RequiredFieldValidator ID="rdoValidator" runat="server" ErrorMessage="*Please select user type" ForeColor="Red" ControlToValidate="rdoType"></asp:RequiredFieldValidator>

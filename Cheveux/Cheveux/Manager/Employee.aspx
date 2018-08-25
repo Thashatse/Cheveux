@@ -60,6 +60,9 @@
                             <!--Help-->
                             <a href="../Help/CheveuxHelpCenter.aspx#ManageEmployee" target="_blank" title="How To Manage Employees">
                                 <span class="glyphicon">&#63; Help</span></a>
+                            <br />
+                            <!--View Schedules-->
+                            <a href="../Receptionist/Appointments.aspx?Action=ViewAllSchedules">View Schedules</a>
                         </div>
                     </div>
                 </div>

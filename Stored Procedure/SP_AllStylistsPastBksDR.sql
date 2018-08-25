@@ -40,7 +40,6 @@ BEGIN
 	From   BOOKING B, TIMESLOT TS, [User] U, PRODUCT P
 	Where  B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = U.UserID 
-	AND    B.ServiceID = P.ProductID 
 	AND    B.Arrived = 'Y' 
 	AND	  (B.[Date] BETWEEN @startDate AND @endDate)
 	AND    B.[Date] !> CAST(GETDATE() AS DATE)

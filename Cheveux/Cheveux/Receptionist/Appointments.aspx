@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/CheveuxReceptionist.Master" AutoEventWireup="true" CodeBehind="Appointments.aspx.cs" Inherits="Cheveux.Appointments" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
-    Appointments - Cheveux
+    View Schedules - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-1 col-sm-1"></div>
             <div class="col-md-10 col-sm-10">
-                <!-- If stylist is not logged in-->
+                <!-- If user is not logged in-->
                 <asp:PlaceHolder ID="phLogin" runat="server">
                     <div class="container" runat="server" id="LoggedOut">
                         <div class="jumbotron bg-dark text-white">
@@ -30,12 +30,27 @@
                     </div>
                 </asp:PlaceHolder>
 
-                <!-- If stylist is logged in -->
+                <!-- If user is logged in -->
                 <asp:PlaceHolder ID="phMain" runat="server">
 
                     <!--jumbotron page heading-->
                     <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn">
                         <asp:Label ID="Header" runat="server" Text="View Schedule" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
+
+                        <!--Placeholder: Manager View Emps Schedule -->
+                        <asp:PlaceHolder ID="managerview" runat="server" Visible="false">
+                            <div class="row">
+                                <div class="col-8">
+                                    <asp:Label ID="EmployeeHead" runat="server" Text="" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <asp:Table ID="tblEmployee" runat="server"></asp:Table>
+                                </div>
+                            </div>
+                        </asp:PlaceHolder>
+
                         <!--Line Break-->
                         <div class="container">
                             <br />
@@ -85,14 +100,23 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatLayout="flow">
-                                    <asp:ListItem Text="All" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Today" Value="1"></asp:ListItem>
-                                    <asp:ListItem Text="Specific Day" Value="2"></asp:ListItem>
-                                    <asp:ListItem Text="Date Range" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="All &nbsp;" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Today &nbsp;" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="Specific Day &nbsp;" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="Date Range &nbsp;" Value="3"></asp:ListItem>
                                 </asp:RadioButtonList>
                             </div>
                         </div>
 
+                        <!--for general errors or telling user what must happen next-->
+                        <div class="container row" runat="server">
+                            <asp:PlaceHolder ID="phBookingsErr" runat="server" Visible="false">
+                                <div class="col-sm-12 col-md-12 alert alert-primary alert-dismissible">
+                                    <asp:Label ID="lblBookingsErr" runat="server" Text="Label"></asp:Label>
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                </div>
+                            </asp:PlaceHolder>
+                        </div>
                         <br />
 
                         <!-- Specific Day -->
@@ -194,16 +218,6 @@
                         </div>
                     </div>
                 </asp:PlaceHolder>
-
-                <!--err-->
-                <div class="container row" runat="server">
-                    <asp:PlaceHolder ID="phBookingsErr" runat="server" Visible="false">
-                        <div class="col-sm-12 col-md-12 alert alert-primary alert-dismissible">
-                            <asp:Label ID="lblBookingsErr" runat="server" Text="Label"></asp:Label>
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        </div>
-                    </asp:PlaceHolder>
-                </div>
 
 
             </div>
