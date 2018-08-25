@@ -402,28 +402,35 @@ namespace Cheveux
                     newCell.Text = function.GetFullEmployeeTypeText(employee.employeeType.ToString()[0]);
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
+                    
+                    //increment rowcount
+                    rowCount++;
+
+                    //add a new row
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    profileTable.Rows.Add(newRow);
+                    //empty cell
+                    newCell = new TableCell();
+                    newCell.Width = 300;
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
                     //edit link
                     newCell = new TableCell();
+                    newCell.Width = 700;
                     newCell.Text =
-                         "<a href='/Manager/UpdateEmployee.aspx?" +
+                         "<a class='btn btn-secondary' href='/Manager/UpdateEmployee.aspx?" +
                                     "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
                                     "'> Edit Employee </a>";
 
-                    newCell.Width = 700;
-                    profileTable.Rows[rowCount].Cells.Add(newCell);
-
-                    if(employee.employeeType.Replace(" ", string.Empty) == "S")
+                    //stylist schedual
+                    if (employee.employeeType.Replace(" ", string.Empty) == "S")
                     {
-                        // if employee is a stylist allow manager to view schedule
-                        newCell = new TableCell();
-                        newCell.Text =
-                             "<a href='/Stylist/Schedule.aspx?Action=ViewSchedule&" +
+                        newCell.Text += " &nbsp; <a class='btn btn-secondary' href ='/Stylist/Schedule.aspx?Action=ViewSchedule&" +
                                         "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
                                         "'> View Schedule </a>";
-
-                        newCell.Width = 700;
-                        profileTable.Rows[rowCount].Cells.Add(newCell);
                     }
+
+                    profileTable.Rows[rowCount].Cells.Add(newCell);
 
                     //increment rowcount
                     rowCount++;

@@ -35,6 +35,11 @@
         <!--Search Results-->
         <div class="row">
                 <div class="col-xs-12 col-md-12">
+                    <!--Bookings-->
+                                        <asp:Label runat="server" ID="bookingResultLable"></asp:Label>
+                        <asp:Table id="bookingSearchResults" runat="server"></asp:Table>
+                    <!--New Line-->
+    <br /><br />
                     <!--Services-->
                                         <asp:Label runat="server" ID="serviceResultsLable"></asp:Label>
                         <asp:Table id="serviceSearchResults" runat="server"></asp:Table>

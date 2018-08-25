@@ -181,7 +181,7 @@
                         <asp:PlaceHolder runat="server" ID="phStylistImage1"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                 <div class="project-name">
+                                <div class="project-name">
                                     <asp:Label ID="lStylistHeader1" runat="server" Text="Label"></asp:Label>
                                 </div>
                                 <div class="project-category text-faded">
@@ -196,7 +196,7 @@
                         <asp:PlaceHolder runat="server" ID="phStylistImage2"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                 <div class="project-name">
+                                <div class="project-name">
                                     <asp:Label ID="lStylistHeader2" runat="server" Text="Label"></asp:Label>
                                 </div>
                                 <div class="project-category text-faded">
@@ -211,7 +211,7 @@
                         <asp:PlaceHolder runat="server" ID="phStylistImage3"></asp:PlaceHolder>
                         <div class="portfolio-box-caption">
                             <div class="portfolio-box-caption-content">
-                                 <div class="project-name">
+                                <div class="project-name">
                                     <asp:Label ID="lStylistHeader3" runat="server" Text="Label"></asp:Label>
                                 </div>
                                 <div class="project-category text-faded">
@@ -239,14 +239,62 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="section-heading">Conect With Us!</h2>
+                    <h2 class="section-heading">Were open for business!</h2>
                     <hr class="my-4">
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 ml-auto text-center">
-                    <asp:Table ID="tblContactUs" runat="server"></asp:Table>
+                <div class="col-4 text-center">
+                    <h5>Weekdays
+                    </h5>
                 </div>
+                <div class="col-4 text-center">
+                    <h5>Weekends
+                    </h5>
+                </div>
+                <div class="col-4 text-center">
+                    <h5>Public Holidays
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 text-center">
+                    <asp:Label ID="lWeekdaye" runat="server" Text="Label"></asp:Label>
+                </div>
+                <div class="col-4 text-center">
+                    <asp:Label ID="lWeekend" runat="server" Text="Label"></asp:Label>
+                </div>
+                <div class="col-4 text-center">
+                    <asp:Label ID="lPublicHol" runat="server" Text="Label"></asp:Label>
+                </div>
+            </div>
+            <!-- Line Break -->
+            <br />
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading">Conect With Us!</h2>
+                    <hr class="my-4">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8 text-center">
+                    <div class="row">
+
+                        <div class="col-4 text-center">
+                            <a href='Default.aspx?Goto=Phone' class='btn btn-primary btn-xl js-scroll-trigger'><span class='glyphicon'>&#9742;</span> Phone </a>
+                        </div>
+                        <div class="col-4 text-center">
+                            <a href='Default.aspx?Goto=Email' class='btn btn-primary btn-xl js-scroll-trigger'><span class='glyphicon'>&#128231;</span> Email </a>
+                        </div>
+                        <div class="col-4 text-center">
+                            <a href='Default.aspx?Goto=Direct' class='btn btn-primary btn-xl js-scroll-trigger'><span class='glyphicon'>&#xe062;</span> Get Directions </a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-2"></div>
             </div>
             <div class="row">
                 <div class="col-lg-12 ml-auto text-center">

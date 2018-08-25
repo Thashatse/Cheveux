@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-2">
                         <!--add employee btn -->
-                        <button type='button' class='btn btn-primary'><a class='btn btn-primary' href='../Authentication/NewAccount.aspx?Type=NewEmp'>New Employee </a></button>
+                        <a class='btn btn-primary' href='../Authentication/NewAccount.aspx?Type=NewEmp'>New Employee </a>
                     </div>
                 </div>
 

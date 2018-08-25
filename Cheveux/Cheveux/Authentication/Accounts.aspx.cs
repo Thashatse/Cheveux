@@ -362,7 +362,8 @@ namespace Cheveux
                     divSignIn.Visible = true;
                     lCreateAccount.Visible = false;
                     aRestPass.Visible = true;
-                    txtEmailUsername.Attributes.Add("readonly", "readonly");
+                    divTxtBoxEmail.Visible = false;
+                    LUsername.Text = txtEmailUsername.Text;
                 }
                 else
                 {

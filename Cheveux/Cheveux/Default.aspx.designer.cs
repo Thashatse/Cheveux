@@ -256,12 +256,57 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lStylistDescription3;
         
         /// <summary>
-        /// tblContactUs control.
+        /// lWeekdaye control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table tblContactUs;
+        protected global::System.Web.UI.WebControls.Label lWeekdaye;
+        
+        /// <summary>
+        /// lWeekend control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lWeekend;
+        
+        /// <summary>
+        /// lPublicHol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lPublicHol;
+        
+        /// <summary>
+        /// btnPhone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPhone;
+        
+        /// <summary>
+        /// btnMail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMail;
+        
+        /// <summary>
+        /// btnDirect control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDirect;
     }
 }

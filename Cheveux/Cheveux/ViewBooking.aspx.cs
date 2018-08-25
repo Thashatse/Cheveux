@@ -820,11 +820,11 @@ namespace Cheveux
             bool result = false;
             try
             {
-                #region update record
                 //get current booking details 
                 SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
                 List<SP_GetBookingServices> bookingServiceList = handler.getBookingServices(BookingID);
 
+                #region update record
                 //fill updated booking
                 BOOKING updatedBooking = new BOOKING();
                 updatedBooking.BookingID = BookingID;
@@ -875,6 +875,45 @@ namespace Cheveux
                 {
                     //commit
                     result = handler.updateBooking(updatedBooking);
+                }
+                #endregion
+
+                #region Update secondary booking
+                //remove existing secondary bookings
+                handler.deleteSecondaryBooking(BookingID);
+
+                //update booking details
+                BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
+                //get slot length
+                int length = CalculateSlotLength();
+                //get time slots
+                List<SP_GetSlotTimes> slotList = handler.BLL_GetAllTimeSlots();
+
+                if (length > 1)
+                {
+                    int bookedSlotIndex = 0;
+                    int slotIndex = 0;
+                    foreach (SP_GetSlotTimes slot in slotList)
+                    {
+                        if (slot.SlotNo == BookingDetails.slotNo)
+                        {
+                            bookedSlotIndex = slotIndex;
+                        }
+                        slotIndex++;
+                    }
+
+                    for (int i = 1; i < length; i++)
+                    {
+                        BOOKING secondaryBooking = new BOOKING();
+                        secondaryBooking.BookingID = function.GenerateRandomBookingID();
+                        bookedSlotIndex++;
+                        secondaryBooking.SlotNo = slotList[bookedSlotIndex].SlotNo;
+                        secondaryBooking.Date = BookingDetails.bookingDate;
+                        secondaryBooking.CustomerID = BookingDetails.CustomerID;
+                        secondaryBooking.StylistID = BookingDetails.stylistEmployeeID;
+                        secondaryBooking.primaryBookingID = BookingID;
+                        handler.BLL_AddBooking(secondaryBooking);
+                    }
                 }
                 #endregion
 

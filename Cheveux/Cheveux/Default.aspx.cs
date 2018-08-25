@@ -47,31 +47,31 @@ namespace Cheveux
                 {
                     if (features[0].ItemID == null)
                     {
-                        Response.Redirect("../Cheveux/Products.aspx");
+                        Response.Redirect("/Cheveux/Products.aspx");
                     }
-                    Response.Redirect("ViewProduct.aspx?ProductID=" + features[0].ItemID.ToString());
+                    Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[0].ItemID.ToString());
                 }
                 else if (goTo == "Prod2")
                 {
                     if (features[1].ItemID == null)
                     {
-                        Response.Redirect("../Cheveux/Products.aspx");
+                        Response.Redirect("/Cheveux/Products.aspx");
                     }
-                    Response.Redirect("ViewProduct.aspx?ProductID=" + features[1].ItemID.ToString());
+                    Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[1].ItemID.ToString());
                 }
                 else if (goTo == "Prod3")
                 {
                     if (features[2].ItemID == null)
                     {
-                        Response.Redirect("../Cheveux/Products.aspx");
+                        Response.Redirect("/Cheveux/Products.aspx");
                     }
-                    Response.Redirect("ViewProduct.aspx?ProductID=" + features[2].ItemID.ToString());
+                    Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[2].ItemID.ToString());
                 }
                 else if (goTo == "Sty1")
                 {
                     if (features[7].ItemID == null)
                     {
-                        Response.Redirect("../Cheveux/Stylists.aspx");
+                        Response.Redirect("/Cheveux/Stylists.aspx");
                     }
                     Response.Redirect("Profile.aspx?Action=View&empID=" + features[7].ItemID.ToString());
                 }
@@ -79,7 +79,7 @@ namespace Cheveux
                 {
                     if (features[8].ItemID == null)
                     {
-                        Response.Redirect("../Cheveux/Stylists.aspx");
+                        Response.Redirect("/Cheveux/Stylists.aspx");
                     }
                     Response.Redirect("Profile.aspx?Action=View&empID=" + features[8].ItemID.ToString());
                 }
@@ -87,9 +87,38 @@ namespace Cheveux
                 {
                     if (features[9].ItemID == null)
                     {
-                        Response.Redirect("../Cheveux/Stylists.aspx");
+                        Response.Redirect("/Cheveux/Stylists.aspx");
                     }
                     Response.Redirect("Profile.aspx?Action=View&empID=" + features[9].ItemID.ToString());
+                }
+                else if (goTo == "Phone")
+                {
+                    if (features[10].ItemID == null)
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('Error.aspx','_newtab');", true);
+                    }
+                    Response.Redirect("tel:" + features[10].contactNo.ToString());
+                }
+                else if (goTo == "Email")
+                {
+                    if (features[11].ItemID == null)
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('Error.aspx','_newtab');", true);
+                    }
+                    Response.Redirect("mailto:" + features[11].email.ToString());
+                }
+                else if (goTo == "Direct")
+                {
+                    //get the curent bussines details
+                    BusinessDetails = handler.getBusinessTable();
+                    if (BusinessDetails == null)
+                    {
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('https://www.google.com/maps/dir','_newtab');", true);
+                    }
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow",
+                        "window.open('https://www.google.com/maps/dir/?api=1&destination=" +
+                    BusinessDetails.AddressLine1.Replace(' ', '+') + "+" +
+                    BusinessDetails.AddressLine2.Replace(' ', '+')+"','_newtab');", true);
                 }
             }
 
@@ -153,8 +182,8 @@ namespace Cheveux
             #endregion
 
             #region booking Confirimation 
-                //confirm booking
-                string stylistID = Request.QueryString["Sty"];
+            //confirm booking
+            string stylistID = null;//Request.QueryString["Sty"];
                 string Date = Request.QueryString["D"];
                 string slotNo = Request.QueryString["T"];
                 DateTime Time = Convert.ToDateTime("2001/01/01");
@@ -302,89 +331,19 @@ namespace Cheveux
                 //get the operating hourse from the db
                 BUSINESS operatingHours = handler.getBusinessTable();
                 //display the opperating hours
-                //add a table row
-                TableRow newRow = new TableRow();
-                tblContactUs.Rows.Add(newRow);
-
-                TableCell newCell = new TableCell();
-                newCell.Text = "<h3> Were open for business! </h3>";
-                tblContactUs.Rows[0].Cells.Add(newCell);
-
-                //add a table row
-                newRow = new TableRow();
-                tblContactUs.Rows.Add(newRow);
 
                 //add hours - weekday
-                newCell = new TableCell();
-                newCell.ColumnSpan = 3;
-                newCell.Text = "Weekdays: "+operatingHours.WeekdayStart.ToString("hh:mm") +" - " + operatingHours.WeekdayEnd.ToString("hh:mm");
-                tblContactUs.Rows[0].Cells.Add(newCell);
-
-                //add a table row
-                newRow = new TableRow();
-                tblContactUs.Rows.Add(newRow);
-
+                lWeekdaye.Text = operatingHours.WeekdayStart.ToString("hh:mm") +" - " + operatingHours.WeekdayEnd.ToString("hh:mm");
+                
                 //add hours - weekend
-                newCell = new TableCell();
-                newCell.ColumnSpan = 3;
-                newCell.Text = "Weekends: " + operatingHours.WeekendStart.ToString("hh:mm") + " - " + operatingHours.WeekendEnd.ToString("hh:mm");
-                tblContactUs.Rows[0].Cells.Add(newCell);
-
-                //add a table row
-                newRow = new TableRow();
-                tblContactUs.Rows.Add(newRow);
-
+                lWeekend.Text = operatingHours.WeekendStart.ToString("hh:mm") + " - " + operatingHours.WeekendEnd.ToString("hh:mm");
+                
                 //add hours - public holiday
-                newCell = new TableCell();
-                newCell.ColumnSpan = 3;
-                newCell.Text = "Public Holidays: " + operatingHours.PublicHolStart.ToString("hh:mm") + " - " + operatingHours.PublicHolEnd.ToString("hh:mm");
-                tblContactUs.Rows[0].Cells.Add(newCell);
+                lPublicHol.Text = "Public Holidays: " + operatingHours.PublicHolStart.ToString("hh:mm") + " - " + operatingHours.PublicHolEnd.ToString("hh:mm");
             }
             catch (Exception err)
             {
                 function.logAnError("unable to load operating hours on default.aspx: " +
-                    err);
-            }
-            #endregion
-
-            #region Contact Us
-            try
-            {
-                //load contact us jumbotron
-                //display the contact info
-                //add a table row
-                TableRow newRow = new TableRow();
-                tblContactUs.Rows.Add(newRow);
-
-                //add the phone number
-                TableCell newCell = new TableCell();
-                newCell.Text = "<a href='tel:" + features[10].contactNo.ToString() + "'" +
-                    "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#9742;</ span >" +
-                    " Phone </a>";
-                tblContactUs.Rows[1].Cells.Add(newCell);
-
-                //add email address
-                newCell = new TableCell();
-                newCell.Text = "<a href='mailto:" + features[11].email.ToString() + "'" +
-                    "class='btn btn-primary btn-xl js-scroll-trigger'> <span class='glyphicon'>&#128231;</ span >" +
-                    " Email </a>";
-                tblContactUs.Rows[1].Cells.Add(newCell);
-
-                //add the address
-                //get the curent bussines details
-                BusinessDetails = handler.getBusinessTable();
-                newCell = new TableCell();
-                newCell.Text = "<a target='_blank' href='https://www.google.com/maps/dir/?api=1&destination=" +
-                    BusinessDetails.AddressLine1.Replace(' ', '+') + "+" +
-                    BusinessDetails.AddressLine2.Replace(' ', '+') +
-                "'class='btn btn-primary btn-xl js-scroll-trigger'>" +
-                "<span class='glyphicon'>&#xe062;</span> Get Directions</a>";
-                tblContactUs.Rows[1].Cells.Add(newCell);
-
-            }
-            catch (Exception err)
-            {
-                function.logAnError("unable to load contact info on default.aspx: " +
                     err);
             }
             #endregion
