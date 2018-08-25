@@ -138,6 +138,11 @@ namespace BLL
         {
             return db.deleteBookingService(BookingID, ServiceID);
         }
+
+        public bool deleteSecondaryBooking(string BookingID)
+        {
+            return db.deleteSecondaryBooking(BookingID);
+        }
         #endregion
 
         #region Services

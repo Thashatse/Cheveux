@@ -653,3 +653,438 @@ Error verifiying user name and password for username or email address: kbaidoo E
    at System.Web.HttpResponse.Redirect(String url)
    at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 198
    at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 423
+
+TimeStamp: 2018/08/25 11:30:35
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 434
+
+TimeStamp: 2018/08/25 11:30:49
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Invalid column name 'ServiceID'.
+Invalid column name 'ServiceID'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 37
+ClientConnectionId:71facd03-d866-4ec0-8aa8-bb331f504567
+Error Number:207,State:1,Class:16
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 563
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 587
+   at BLL.DBHandler.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 357
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1949
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:30:53
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Invalid column name 'ServiceID'.
+Invalid column name 'ServiceID'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 37
+ClientConnectionId:71facd03-d866-4ec0-8aa8-bb331f504567
+Error Number:207,State:1,Class:16
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 563
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 587
+   at BLL.DBHandler.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 357
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1949
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:31:43
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Invalid column name 'ServiceID'.
+Invalid column name 'ServiceID'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 37
+ClientConnectionId:71facd03-d866-4ec0-8aa8-bb331f504567
+Error Number:207,State:1,Class:16
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 563
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 587
+   at BLL.DBHandler.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 357
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1949
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:33:34
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 198
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 433
+
+TimeStamp: 2018/08/25 11:33:50
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Invalid column name 'ServiceID'.
+Invalid column name 'ServiceID'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlDataReader.TryConsumeMetaData()
+   at System.Data.SqlClient.SqlDataReader.get_MetaData()
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString, Boolean isInternal, Boolean forDescribeParameterEncryption, Boolean shouldCacheForAlwaysEncrypted)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReaderTds(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, Boolean async, Int32 timeout, Task& task, Boolean asyncWrite, Boolean inRetry, SqlDataReader ds, Boolean describeParameterEncryptionRequest)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean& usedCache, Boolean asyncWrite, Boolean inRetry)
+   at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior, String method)
+   at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.FillInternal(DataSet dataset, DataTable[] datatables, Int32 startRecord, Int32 maxRecords, String srcTable, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable[] dataTables, Int32 startRecord, Int32 maxRecords, IDbCommand command, CommandBehavior behavior)
+   at System.Data.Common.DbDataAdapter.Fill(DataTable dataTable)
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 37
+ClientConnectionId:b42ae510-17d3-4f8c-b69c-01bae791852b
+Error Number:207,State:1,Class:16
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 563
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 586
+   at BLL.DBHandler.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 357
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1949
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:37:06
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 198
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 433
+
+TimeStamp: 2018/08/25 11:37:13
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1986
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:37:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1986
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:38:27
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1986
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:39:53
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'Name' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 568
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 586
+   at BLL.DBHandler.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 357
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1949
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:39:56
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'Name' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 568
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 586
+   at BLL.DBHandler.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 357
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1949
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:40:36
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ArgumentException: Column 'Name' does not belong to table .
+   at System.Data.DataRow.GetDataColumn(String columnName)
+   at System.Data.DataRow.get_Item(String columnName)
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 568
+   at DAL.DBAccess.getBookingDetaisForCheckOut(String BookingID)
+   at BLL.DBHandler.getBookingDetaisForCheckOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 357
+   at Cheveux.ViewBooking.checkOut(String BookingID) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 1949
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 2018/08/25 11:44:31
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.ApplicationException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at BLL.DBHandler.BLL_AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 330
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 425
+
+TimeStamp: 2018/08/25 11:44:40
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.ApplicationException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at BLL.DBHandler.BLL_AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 330
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 425
+
+TimeStamp: 2018/08/25 11:44:42
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.ApplicationException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at BLL.DBHandler.BLL_AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 330
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 425
+
+TimeStamp: 2018/08/25 11:45:19
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.ApplicationException: System.NullReferenceException: Object reference not set to an instance of an object.
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at DAL.DBAccess.AddBooking(BOOKING addBooking)
+   at BLL.DBHandler.BLL_AddBooking(BOOKING addBooking) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 330
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 425
+
+TimeStamp: 2018/08/25 11:48:22
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 424
+
+TimeStamp: 2018/08/25 11:48:48
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 510
+
+TimeStamp: 2018/08/25 11:53:46
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 424
+
+TimeStamp: 2018/08/25 11:57:09
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 424
+
+TimeStamp: 2018/08/25 11:59:58
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 424
+
+TimeStamp: 2018/08/25 12:00:26
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 510
+
+TimeStamp: 2018/08/25 12:03:14
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 510

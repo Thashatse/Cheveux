@@ -14,6 +14,7 @@ namespace BLL
         #region Bookings
         List<SP_GetBookingServices> getBookingServices(string BookingID);
         bool deleteBookingService(string BookingID, string ServiceID);
+        bool deleteSecondaryBooking(string BookingID);
         #endregion
 
         #region Home Page Features
