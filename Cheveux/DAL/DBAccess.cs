@@ -625,10 +625,8 @@ namespace DAL
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
-                    new SqlParameter("@BookingID", booking.BookingID.ToString() ),
-                    new SqlParameter("@StylistID", booking.StylistID.ToString()),
+                    new SqlParameter("@BookingID", booking.BookingID.ToString())
                 };
-
                 return DBHelper.NonQuery("SP_CheckIn", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
@@ -1757,6 +1755,7 @@ namespace DAL
                             emp = new SP_GetEmpAgenda
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
+                                PrimaryID = Convert.ToString(row["PrimaryID"]),
                                 UserID = Convert.ToString(row["UserID"]),
                                 StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
                                 EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),

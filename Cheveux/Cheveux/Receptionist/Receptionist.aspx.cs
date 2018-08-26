@@ -91,6 +91,9 @@ namespace Cheveux
                     }
                 }
 
+                //noBookingsPH.Visible = true;
+                //lblNoBookings.Text = a.CustomerFName.ToString() + " has now been checked in.";
+
                 try
                 {
                     /*if the selected valus is not the "select employee" display the employee names
@@ -101,7 +104,7 @@ namespace Cheveux
                     {
                         getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate),null,null);
 
-                        if(AgendaTable.Rows.Count == 1)
+                        if (AgendaTable.Rows.Count == 1)
                         {
                             AgendaTable.Visible = false;
                             noBookingsPH.Visible = true;
@@ -125,14 +128,29 @@ namespace Cheveux
                                         + "Please report problem or try again later.";
                     function.logAnError(Err.ToString());
                 }
+
+                string action = Request.QueryString["Action"];
+                string custName = Request.QueryString["CustomerName"];
+                string stylistName = Request.QueryString["StylistName"];
+
+                if (action == "CheckedIn" && custName != null && stylistName != null)
+                {
+                    phCheckInSuccess.Visible = true;
+                    lblSuccess.Text = custName.ToString() + " has been checked with their booking with "
+                                    + stylistName.ToString();
+                }
+                
             }   
+        }
+        protected void drpEmpNames_Changed(object sender, EventArgs e)
+        {
+            phCheckInSuccess.Visible = false;
         }
 
         #region Agenda
         public void getAgenda(string id, DateTime bookingDate,string sortBy, string sortDir)
         {
             Button btnCheckin;
-
             try
             {
                 agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
@@ -237,7 +255,7 @@ namespace Cheveux
                     }
                     else if (bServices.Count > 2)
                     {
-                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.PrimaryID.ToString().Replace(" ", string.Empty) +
                             "'> Multiple Services </a>";
                     }
                     AgendaTable.Rows[i].Cells.Add(s);
@@ -282,22 +300,20 @@ namespace Cheveux
                                 checkIn = new BOOKING();
 
                                 checkIn.BookingID = a.BookingID.ToString();
-                                checkIn.StylistID = drpEmpNames.SelectedValue.ToString();
 
                                 if (handler.BLL_CheckIn(checkIn))
                                 {
-                                    noBookingsPH.Visible = true;
-                                    lblNoBookings.Text = a.CustomerFName.ToString() + " has now been checked in.";
                                     //if BLL_CheckIn successful and arrival status changed show user and refresh the page
-                                    //Response.Write("<script>alert('Customer has been checked-in.');location.reload(true);</script>");
+                                    //Response.Write("<script>alert('Customer has been checked-in.');location.reload();</script>");
+                                    Response.Redirect("../Receptionist/Receptionist.aspx?Action=CheckedIn&CustomerName="+
+                                                        a.CustomerFName.ToString().Replace(" ", string.Empty)
+                                                        +"&StylistName=" + drpEmpNames.SelectedItem.Text);
                                 }
                                 else
                                 {
                                     //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
-                                    //Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
-
                                     phCheckInErr.Visible = true;
-                                    lblCheckinErr.Text = "An error has occured.We are unable to check-in the customer at this point in time.<br/>"
+                                    lblCheckinErr.Text = "We are unable to check-in customer.<br/>"
                                                           + "Please report to management. Sorry for the inconvenience.";
 
                                 }

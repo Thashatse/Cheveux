@@ -35,6 +35,16 @@
                 <div class="row">
                     <div class="col-lg-9 col-md-12">
 
+                        <!--Check-In Success Message-->
+                        <div class="container row" runat="server">
+                            <asp:PlaceHolder ID="phCheckInSuccess" runat="server" Visible="false">
+                                <div class="col-sm-12 col-md-12 alert alert-success alert-dismissible">
+                                    <asp:Label ID="lblSuccess" runat="server" Text="Label"></asp:Label>
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                </div>
+                            </asp:PlaceHolder>
+                        </div>
+
                         <!--Dropdown with stylists names-->
                         <div id="viewAgenda" runat="server">
                             <div class="row">
@@ -46,7 +56,7 @@
                             <div id="empDropdown" class="row">
                                 <div class="col-xs-12 col-md-12">
                                     <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True" 
-                                        CssClass="btn btn-primary dropdown-toggle">
+                                        CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpEmpNames_Changed">
                                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
