@@ -758,12 +758,9 @@ namespace DAL
                             BookingID = Convert.ToString(row["BookingID"]),
                             CustomerID = Convert.ToString(row["CustomerID"]),
                             CustomerName = Convert.ToString(row["CustomerName"]),
-                            ServiceName = Convert.ToString(row["ServiceName"]),
-                            ServiceDescription = Convert.ToString(row["ServiceDescription"]),
-                            Price = Convert.ToString(row["Price"]),
                             Date = Convert.ToDateTime(row["Date"]),
-                            StartTime = TimeSpan.Parse((row["StartTime"]).ToString()),
-                            EndTime = TimeSpan.Parse((row["EndTime"]).ToString())
+                            StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
+                            EndTime = Convert.ToDateTime((row["EndTime"]).ToString())
                         };
 
 
@@ -1973,7 +1970,7 @@ namespace DAL
                 {
                     new SqlParameter("@CustomerID",cust_visit.CustomerID.ToString()),
                     new SqlParameter("@Date", cust_visit.Date.ToString()),
-                    new SqlParameter("@BookingID", cust_visit.BookingID.ToString()),
+                    new SqlParameter("@PrimaryBookingID", cust_visit.BookingID.ToString()),
                     new SqlParameter("@Description", cust_visit.Description.ToString()),
                 };
 

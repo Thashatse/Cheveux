@@ -23,6 +23,26 @@
                     <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                 </div>
 
+                <!--Create Visit Record Success Message-->
+                <div class="container row" runat="server">
+                    <asp:PlaceHolder ID="phVisitSuccess" runat="server" Visible="false">
+                        <div class="col-sm-12 col-md-12 alert alert-success alert-dismissible">
+                            <asp:Label ID="lblSuccess" runat="server" Text="Label"></asp:Label>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                    </asp:PlaceHolder>
+                </div>
+
+                <!--Create Visit Record Error Message-->
+                <div class="container row" runat="server">
+                    <asp:PlaceHolder ID="phRecordErr" runat="server" Visible="false">
+                        <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible">
+                            <asp:Label ID="lblRecordErr" runat="server" Text="Label"></asp:Label>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        </div>
+                    </asp:PlaceHolder>
+                </div>
+
                 <div id="Agenda">
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
