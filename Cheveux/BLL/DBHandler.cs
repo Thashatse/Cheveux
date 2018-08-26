@@ -38,6 +38,11 @@ namespace BLL
         #endregion
 
         #region Invoice/Sale
+        public SALE getSale(string SaleID)
+        {
+            return db.getSale(SaleID);
+        }
+
         public bool createProductSalesDTLRecord(SALES_DTL Sale)
         {
             return db.createProductSalesDTLRecord(Sale);

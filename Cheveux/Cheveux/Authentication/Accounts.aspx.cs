@@ -613,7 +613,7 @@ namespace Cheveux
                     {
                     //check if the credentials are correct
                     string[] result = auth.AuthenticateEmail(user.UserName.ToString().Replace(" ", string.Empty),
-                        txtExistingPassword.Text.ToString().Replace(" ", string.Empty));
+                        auth.generatePassHash(txtExistingPassword.Text.ToString().Replace(" ", string.Empty)));
 
                     /*
                          * if the user deatails are incorect let the user know

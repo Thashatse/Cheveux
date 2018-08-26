@@ -46,11 +46,11 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-5">
-                                        <asp:TextBox class="form-control" AutoPostBack="true" ID="txtProductSearchTerm" 
+                                        <asp:TextBox class="form-control" AutoPostBack="true" ID="txtProductSearchTerm"
                                             runat="server" OnTextChanged="Page_Load"></asp:TextBox>
                                     </div>
                                     <div class="col-2">
-                                        <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" 
+                                        <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server"
                                             Text="Search" />
                                     </div>
                                 </div>
@@ -97,15 +97,19 @@
             </div>
 
             <!-- if the user is loged Out -->
-            <div runat="server" id="LogedOut" jumbotron bg-dark text-white>
+            <div runat="server" id="LogedOut">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="jumbotron">
-                            <h1>Manage Employees</h1>
-                            <p>Please log-in to Manage Employees</p>
-                            <button type="button" class="btn btn-primary">
-                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Employee.aspx" id="LogedOutButton">Login</a>
-                            </button>
+                        <div class="jumbotron  bg-dark text-white">
+                            <div class="row">
+                                <div class="col-10">
+                                    <h1>Manage Employees</h1>
+                                    <p>Please log-in to Manage Employees</p>
+                                </div>
+                                <div class="col-2">
+                                    <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Employee.aspx" id="LogedOutButton">Login</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

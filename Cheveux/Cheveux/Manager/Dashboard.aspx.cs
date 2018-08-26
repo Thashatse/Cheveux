@@ -321,10 +321,50 @@ namespace Cheveux.Manager
                             newCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
                                     "&PreviousPage=Dashboard.aspx'>" + booking.CustomerFirstName + " " + booking.CustomerLastName + "</a>";
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            //Services
+                            List<SP_GetBookingServices> bookingServiceList = null;
+                            //get the booking services
+                            try
+                            {
+                                bookingServiceList = handler.getBookingServices(booking.BookingID.ToString());
+                            }
+                            catch (ApplicationException Err)
+                            {
+                                function.logAnError("Error Loading Booking Services in manager dashboadr todays bookings (Upcoming) Error:" +
+                                    Err.ToString());
+                            }
                             newCell = new TableCell();
-                            newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + booking.ServiceID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Dashboard.aspx'>"+ booking.ServiceName + " with " + 
-                                    handler.viewEmployee(booking.StylistID).firstName+"</a>";
+                            if (bookingServiceList.Count == 1)
+                            {
+                                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                                + bookingServiceList[0].ServiceName.ToString() + "</a>";
+                            }
+                            else if (bookingServiceList.Count == 2)
+                            {
+                                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + bookingServiceList[0].ServiceName.ToString() +
+                                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
+                            }
+                            else if (bookingServiceList.Count > 2)
+                            {
+                                string toolTip = "";
+                                int toolTipCount = 0;
+                                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
+                                {
+                                    if (toolTipCount == 0)
+                                    {
+                                        toolTip = toolTipDTL.ServiceName;
+                                        toolTipCount++;
+                                    }
+                                    else
+                                    {
+                                        toolTip += ", " + toolTipDTL.ServiceName;
+                                    }
+                                }
+                                newCell.Text = "<a title='" + toolTip + "'" +
+                                    "href ='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
+                                    "'> Multiple Services </a>";
+                            }
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
                             if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
@@ -365,10 +405,50 @@ namespace Cheveux.Manager
                             newCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
                                     "&PreviousPage=Dashboard.aspx'>" + booking.CustomerFirstName + " " + booking.CustomerLastName + "</a>";
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
+                            //Services
+                            List<SP_GetBookingServices> bookingServiceList = null;
+                            //get the booking services
+                            try
+                            {
+                                bookingServiceList = handler.getBookingServices(booking.BookingID.ToString());
+                            }
+                            catch (ApplicationException Err)
+                            {
+                                function.logAnError("Error Loading Booking Services in manager dashboadr todays bookings (Past) Error:" +
+                                    Err.ToString());
+                            }
                             newCell = new TableCell();
-                            newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + booking.ServiceID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Dashboard.aspx'>" + booking.ServiceName + " with " +
-                                    handler.viewEmployee(booking.StylistID).firstName + "</a>";
+                            if (bookingServiceList.Count == 1)
+                            {
+                                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                                + bookingServiceList[0].ServiceName.ToString() + "</a>";
+                            }
+                            else if (bookingServiceList.Count == 2)
+                            {
+                                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + bookingServiceList[0].ServiceName.ToString() +
+                                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
+                            }
+                            else if (bookingServiceList.Count > 2)
+                            {
+                                string toolTip = "";
+                                int toolTipCount = 0;
+                                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
+                                {
+                                    if (toolTipCount == 0)
+                                    {
+                                        toolTip = toolTipDTL.ServiceName;
+                                        toolTipCount++;
+                                    }
+                                    else
+                                    {
+                                        toolTip += ", " + toolTipDTL.ServiceName;
+                                    }
+                                }
+                                newCell.Text = "<a title='" + toolTip + "'" +
+                                    "href ='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
+                                    "'> Multiple Services </a>";
+                            }
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
                             if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
@@ -409,8 +489,8 @@ namespace Cheveux.Manager
             }
             catch (Exception Err)
             {
-                bookingsLable.Text = "An error occurred loading all bookings";
-                function.logAnError("unable to load topdays bookings on Manager/Dashboard.aspx: " +
+                bookingsLable.Text = "An error occurred loading todays bookings";
+                function.logAnError("unable to load todays bookings on Manager/Dashboard.aspx: " +
                     Err);
             }
         }
@@ -419,6 +499,5 @@ namespace Cheveux.Manager
         {
 
         }
-
     }
 }

@@ -46,6 +46,7 @@ namespace Cheveux.Manager
 
             displayUsers();
         }
+
         public void displayUsers()
         {
             Button btnAdd;

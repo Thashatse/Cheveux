@@ -28,11 +28,14 @@ namespace Cheveux
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region Error
             errorHeader.Font.Bold = true;
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
+            #endregion
 
+            #region Access Control
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
             {
@@ -52,13 +55,26 @@ namespace Cheveux
                 drpEmpNames.Visible = true;
                 LoggedIn.Visible = true;
                 sidebar.Visible = true;
+                #endregion
 
                 #region Alerts
                 //Check For Low Stock
                 checkForLowStock();
                 #endregion
 
+                #region Header
+                //date
                 lblDate.Text = dayDate;
+
+                //welcom back
+                string wB = Request.QueryString["WB"];
+                if (wB == "True")
+                {
+                    Welcome.Text = "Welcome Back " + handler.GetUserDetails(cookie["ID"]).FirstName;
+                }
+                #endregion
+
+                #region Agenda
                 list = handler.BLL_GetEmpNames();
                 if (!Page.IsPostBack)
                 {
@@ -145,6 +161,8 @@ namespace Cheveux
         protected void drpEmpNames_Changed(object sender, EventArgs e)
         {
             phCheckInSuccess.Visible = false;
+                #endregion
+            }
         }
 
         #region Agenda
@@ -224,6 +242,45 @@ namespace Cheveux
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
+                    
+                    bServices = handler.getBookingServices(a.BookingID.ToString());
+                    TableCell s = new TableCell();
+                    s.Width = 300;
+                    if (bServices.Count == 1)
+                    {
+                        s.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                        + bServices[0].ServiceName.ToString() + "</a>";
+                    }
+                    else if (bServices.Count == 2)
+                    {
+                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "'>" + bServices[0].ServiceName.ToString() +
+                            ", " + bServices[1].ServiceName.ToString() + "</a>";
+                    }
+                    else if (bServices.Count > 2)
+                    {
+                        string toolTip = "";
+                        int toolTipCount = 0;
+                        foreach (SP_GetBookingServices toolTipDTL in bServices)
+                        {
+                            if (toolTipCount == 0)
+                            {
+                                toolTip = toolTipDTL.ServiceName;
+                                toolTipCount++;
+                            }
+                            else
+                            {
+                                toolTip += ", " + toolTipDTL.ServiceName;
+                            }
+                        }
+                        s.Text = "<a title='" + toolTip + "'" +
+                            "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "'> Multiple Services </a>";
+                    }
+                    AgendaTable.Rows[i].Cells.Add(s);
+                    //addServices(a,i);
+
+                    //create arrival status cell and add to row.. cell index : 5
 
                     TableCell present = new TableCell();
                     present.Width = 100;

@@ -1389,7 +1389,22 @@ namespace Cheveux
             }
             else if (bookingServiceList.Count > 2)
             {
-                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                string toolTip = "";
+                int toolTipCount = 0;
+                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
+                {
+                    if(toolTipCount == 0)
+                    {
+                        toolTip = toolTipDTL.ServiceName;
+                        toolTipCount++;
+                    }
+                    else
+                    {
+                        toolTip += ", " + toolTipDTL.ServiceName;
+                    }
+                }
+                newCell.Text = "<a title='"+ toolTip + "'" +
+                    "href ='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "'> Multiple </a>";
             }
             upcomingBookings.Rows[rowCount].Cells.Add(newCell);
@@ -1542,7 +1557,22 @@ namespace Cheveux
             }
             else if (bookingServiceList.Count > 2)
             {
-                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                string toolTip = "";
+                int toolTipCount = 0;
+                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
+                {
+                    if (toolTipCount == 0)
+                    {
+                        toolTip = toolTipDTL.ServiceName;
+                        toolTipCount++;
+                    }
+                    else
+                    {
+                        toolTip += ", " + toolTipDTL.ServiceName;
+                    }
+                }
+                newCell.Text = "<a title='" + toolTip + "'" +
+                    "href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "&BookingType=Past'> Multiple </a>";
             }
             pastBookings.Rows[rowCount].Cells.Add(newCell);

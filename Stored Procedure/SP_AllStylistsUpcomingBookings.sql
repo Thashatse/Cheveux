@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description:	Gets all upcoming bookings for all stylists
 -- =============================================
-CREATE PROCEDURE SP_AllStylistsUpcomingBookings
+alter PROCEDURE SP_AllStylistsUpcomingBookings
 @sortBy nvarchar(max)=null,
 	@sortDir nvarchar(max)=null
 AS

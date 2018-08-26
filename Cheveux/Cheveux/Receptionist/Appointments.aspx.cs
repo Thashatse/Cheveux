@@ -21,6 +21,7 @@ namespace Cheveux
         SP_ViewEmployee viewEmp = null;
 
         string today = DateTime.Now.ToString("yyyy-MM-dd");
+
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -69,6 +70,7 @@ namespace Cheveux
                 this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
             }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             errorCssStyles();
@@ -735,6 +737,7 @@ namespace Cheveux
                 }
             }     
         }
+
         public void viewEmployee(string empID)
         {
             try
@@ -762,6 +765,7 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+
         #region Stylists bookings
 
         #region Past
@@ -2446,6 +2450,7 @@ namespace Cheveux
                 }
             }
         }
+
         protected void empSelectionType_Changed(object sender, EventArgs e)
         {
             if (empSelectionType.SelectedValue == "0")

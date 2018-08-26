@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_StylistUpcomingBookings
+alter PROCEDURE SP_StylistUpcomingBookings
 @stylistID nchar(30),
 @sortBy nvarchar(max)=null,
 	@sortDir nvarchar(max)=null
