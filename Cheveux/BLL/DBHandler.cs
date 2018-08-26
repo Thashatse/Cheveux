@@ -126,6 +126,14 @@ namespace BLL
 
          }
 
+        //addProduct
+
+        public bool AddProduct(PRODUCT addProduct)
+            {
+               return db.AddProduct(addProduct);
+            }
+
+
         #endregion
 
         #region Bookings

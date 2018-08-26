@@ -32,8 +32,8 @@ namespace Cheveux.Cheveux
             //load all products
             if (productID == null)
             {
-                phProducts.Visible = false ;
-                addandedit.Visible = true;
+                phProducts.Visible = true ;
+                addandedit.Visible = false;
                 phSpecProduct.Visible = false;
                 lblHeader.InnerText = "Products";
 

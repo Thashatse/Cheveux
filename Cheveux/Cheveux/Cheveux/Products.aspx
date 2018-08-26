@@ -26,7 +26,8 @@
                 <asp:PlaceHolder runat="server" ID="phProducts" >
                 <div class="row">
                     <div class="col-md-12">
-                        <asp:Label ID="productJumbotronLable" runat="server"></asp:Label>
+                        <asp:Label ID="productJumbotronLable" runat="server">   </asp:Label> 
+                       
                         <!-- List Product Table -->
                         <asp:Table ID="tblProductTable" runat="server">
                         </asp:Table>
