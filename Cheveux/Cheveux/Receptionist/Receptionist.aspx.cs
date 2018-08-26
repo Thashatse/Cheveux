@@ -107,9 +107,6 @@ namespace Cheveux
                     }
                 }
 
-                //noBookingsPH.Visible = true;
-                //lblNoBookings.Text = a.CustomerFName.ToString() + " has now been checked in.";
-
                 try
                 {
                     /*if the selected valus is not the "select employee" display the employee names
@@ -152,17 +149,16 @@ namespace Cheveux
                 if (action == "CheckedIn" && custName != null && stylistName != null)
                 {
                     phCheckInSuccess.Visible = true;
-                    lblSuccess.Text = custName.ToString() + " has been checked with their booking with "
+                    lblSuccess.Text = custName.ToString() + " has been checked for their booking with "
                                     + stylistName.ToString();
                 }
-                
-            }   
-        }
-        protected void drpEmpNames_Changed(object sender, EventArgs e)
-        {
-            phCheckInSuccess.Visible = false;
                 #endregion
             }
+        }
+        
+        protected void drpEmpNames_Changed(object sender, EventArgs e)
+        {
+            phCheckInSuccess.Visible = false;    
         }
 
         #region Agenda
@@ -235,52 +231,13 @@ namespace Cheveux
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
 
-                    getTimeAndServices(a.BookingID, a.PrimaryID, i, a);
-
                     TableCell c = new TableCell();
                     c.Width = 300;
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
-                    
-                    bServices = handler.getBookingServices(a.BookingID.ToString());
-                    TableCell s = new TableCell();
-                    s.Width = 300;
-                    if (bServices.Count == 1)
-                    {
-                        s.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                        + bServices[0].ServiceName.ToString() + "</a>";
-                    }
-                    else if (bServices.Count == 2)
-                    {
-                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                            "'>" + bServices[0].ServiceName.ToString() +
-                            ", " + bServices[1].ServiceName.ToString() + "</a>";
-                    }
-                    else if (bServices.Count > 2)
-                    {
-                        string toolTip = "";
-                        int toolTipCount = 0;
-                        foreach (SP_GetBookingServices toolTipDTL in bServices)
-                        {
-                            if (toolTipCount == 0)
-                            {
-                                toolTip = toolTipDTL.ServiceName;
-                                toolTipCount++;
-                            }
-                            else
-                            {
-                                toolTip += ", " + toolTipDTL.ServiceName;
-                            }
-                        }
-                        s.Text = "<a title='" + toolTip + "'" +
-                            "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                            "'> Multiple Services </a>";
-                    }
-                    AgendaTable.Rows[i].Cells.Add(s);
-                    //addServices(a,i);
 
-                    //create arrival status cell and add to row.. cell index : 5
+                    getTimeAndServices(a.BookingID, a.PrimaryID, i, a);
 
                     TableCell present = new TableCell();
                     present.Width = 100;
@@ -463,7 +420,22 @@ namespace Cheveux
             }
             else if (bServices.Count > 2)
             {
-                services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.PrimaryID.ToString().Replace(" ", string.Empty) +
+                string toolTip = "";
+                int toolTipCount = 0;
+                foreach (SP_GetBookingServices toolTipDTL in bServices)
+                {
+                    if (toolTipCount == 0)
+                    {
+                        toolTip = toolTipDTL.ServiceName;
+                        toolTipCount++;
+                    }
+                    else
+                    {
+                        toolTip += ", " + toolTipDTL.ServiceName;
+                    }
+                }
+                services.Text = "<a title='" + toolTip + "'" +
+                    "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
                     "'> Multiple Services </a>";
             }
             AgendaTable.Rows[i].Cells.Add(services);
