@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-2">
                         <!--add Service btn -->
-                        <button type='button' class='btn btn-primary'><a class='btn btn-primary' href='#'>New Service </a></button>
+                        <a class='btn btn-primary' href='../Manager/AddService.aspx'>New Service </a>
                     </div>
                 </div>
 

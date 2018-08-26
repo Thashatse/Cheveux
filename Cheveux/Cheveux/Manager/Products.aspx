@@ -21,7 +21,7 @@
 
                 
                 <div class="row">
-                    <%--<div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
                         <div id="divTabs" runat="server">
                             <!--Tabs-->
                             <ul class="nav nav-tabs" role="tablist">
@@ -30,7 +30,7 @@
                                 <li><a class="btn" href="#PastOrders" role="tab" data-toggle="tab">Past Orders</a></li>
                             </ul>
                         </div>
-                    </div>--%>
+                    </div>
                 </div>
 
                  <!-- Line Break -->
@@ -82,12 +82,13 @@
 
 
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-10">
                                 <asp:Label ID="productJumbotronLable" runat="server"></asp:Label>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <!--add product btn -->
-                                <asp:button runat="server" id ="btnAddProduct" type='button' class='btn btn-primary' OnClick="btnAddProduct_Click"><%--<a class='btn btn-primary' href='#'>New Product </a>--%></asp:button>
+                                <a class='btn btn-primary' href='../Cheveux/Products.aspx?Action=Add'>New Product </a>
+
                             </div>
                         </div>
 

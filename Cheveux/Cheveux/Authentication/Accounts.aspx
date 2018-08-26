@@ -94,9 +94,16 @@
                                         ErrorMessage="*Email or Username is required" ControlToValidate="txtEmailUsername"
                                         ForeColor="Red"></asp:RequiredFieldValidator>
 
-                                </div>
+                                </div> 
                                 <!-- email account Type login enter password -->
                                 <div class="container" runat="server" id="divPassword" visible="false">
+                                    <!-- Username Lable -->
+                                    <asp:Label ID="LUsername" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
+
+                                    <!-- Line Break -->
+                                    <br />
+                                    <br />
+
                                     <!-- Enter Password -->
                                     <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password" 
                                         CssClass="form-control"></asp:TextBox>
