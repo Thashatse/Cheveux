@@ -20,8 +20,25 @@ namespace Cheveux.Manager
         PRODUCT product = null;
         SERVICE service = null;
         BRAID_SERVICE bservice = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region Access Control
+            HttpCookie cookie = Request.Cookies["CheveuxUserID"];
+            if (cookie == null)
+            {
+                Response.Redirect("../Manager/Service.aspx");
+            }
+            else if (cookie["UT"] != "M")
+            {
+                Response.Redirect("../Default.aspx");
+            }
+            else if (cookie["UT"] == "M")
+            {
+                //manager is allowed access
+            }
+            #endregion
+
             if (!Page.IsPostBack)
             {
                 ListItem select = new ListItem(" --Select Type-- ", "0");
@@ -33,9 +50,6 @@ namespace Cheveux.Manager
                 drpType.Items.Add(application);
                 drpType.Items.Add(natural);
             }
-           
-
-            
         }
 
         protected void drpType_SelectedIndexChanged(object sender, EventArgs e)

@@ -35,7 +35,7 @@
                                 <div class="row">
                                     <div class="col-5">
                                         <asp:TextBox ID="txtProductSearchTerm" runat="server" class="form-control" AutoPostBack="true"
-                                    OnTextChanged="Page_Load"></asp:TextBox>
+                                            OnTextChanged="Page_Load"></asp:TextBox>
                                     </div>
                                     <div class="col-2">
                                         <asp:Button ID="btnProductSearch" runat="server" Text="Search" CssClass="btn btn-primary" />
@@ -69,18 +69,23 @@
                         </asp:Table>
                     </div>
                 </div>
+            </div>
 
-                <!-- if the user is loged Out -->
-                <div runat="server" id="LogedOut">
-                    <div class="jumbotron  bg-dark text-white">
-                        <h1>Manage Services</h1>
-                        <p>Please log-in to Manage Services</p>
-                        <button type="button" class="btn btn-default">
-                            <a href="../Authentication/Accounts.aspx?PreviousPage=Service.aspx" id="LogedOutButton">Login</a>
-                        </button>
+            <!-- if the user is loged Out -->
+            <div runat="server" id="LogedOut">
+                <div class="jumbotron  bg-dark text-white">
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>Manage Services</h1>
+                            <p>Please log-in to Manage Services</p>
+                        </div>
+                        <div class="col-2">
+                            <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Service.aspx" id="LogedOutButton">Login</a>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-2 col-sm-1"></div>
         </div>
 </asp:Content>

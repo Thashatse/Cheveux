@@ -15,9 +15,6 @@ namespace TypeLibrary.ViewModels
         public string CustomerID { get; set; }
         public string CustomerFirstName { get; set; }
         public string CustomerLastName { get; set; }
-        public string StylistID { get; set; }
-        public string ServiceID { get; set; }
-        public string ServiceName { get; set; }
         public DateTime Date { get; set; }
         public string Available { get; set; }
         public string Arrived { get; set; }

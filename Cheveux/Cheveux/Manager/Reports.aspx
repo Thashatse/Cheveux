@@ -36,7 +36,7 @@
                                         CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReport_SelectedIndexChanged1"
                                         OnTextChanged="drpReport_SelectedIndexChanged1">
 
-                                        
+
                                         <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
                                         <asp:ListItem Text="Bookings By Hairstylist" Value="1"></asp:ListItem>
 
@@ -95,22 +95,22 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                                <asp:Label ID="reportLable" runat="server" Font-Bold Font-Size="XX-Large"></asp:Label>
+                            <asp:Label ID="reportLable" runat="server" Font-Bold Font-Size="XX-Large"></asp:Label>
 
                         </div>
                         <div class="col-4">
-                                <asp:Label ID="reportGenerateDateLable" runat="server" Font-Bold></asp:Label>
+                            <asp:Label ID="reportGenerateDateLable" runat="server" Font-Bold></asp:Label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                                <asp:Label ID="reportByLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
+                            <asp:Label ID="reportByLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
                         </div>
                         <div class="col-4"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                                <asp:Label ID="reportDateRangeLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
+                            <asp:Label ID="reportDateRangeLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
                         </div>
                         <div class="col-4"></div>
                     </div>

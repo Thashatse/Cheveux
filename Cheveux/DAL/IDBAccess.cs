@@ -75,6 +75,8 @@ namespace DAL
         #endregion
 
         #region Invoice/Sale
+        SALE getSale(string SaleID);
+
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
 
         bool createProductSalesDTLRecord(SALES_DTL Sale);

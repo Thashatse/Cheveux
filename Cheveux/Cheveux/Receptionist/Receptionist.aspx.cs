@@ -28,11 +28,14 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region Error
             errorHeader.Font.Bold = true;
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
+            #endregion
 
+            #region Access Control
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
             {
@@ -52,13 +55,26 @@ namespace Cheveux
                 drpEmpNames.Visible = true;
                 LoggedIn.Visible = true;
                 sidebar.Visible = true;
+                #endregion
 
                 #region Alerts
                 //Check For Low Stock
                 checkForLowStock();
                 #endregion
 
+                #region Header
+                //date
                 lblDate.Text = dayDate;
+
+                //welcom back
+                string wB = Request.QueryString["WB"];
+                if (wB == "True")
+                {
+                    Welcome.Text = "Welcome Back " + handler.GetUserDetails(cookie["ID"]).FirstName;
+                }
+                #endregion
+
+                #region Agenda
                 list = handler.BLL_GetEmpNames();
                 if (!Page.IsPostBack)
                 {
@@ -125,7 +141,8 @@ namespace Cheveux
                                         + "Please report problem or try again later.";
                     function.logAnError(Err.ToString());
                 }
-            }   
+                #endregion
+            }
         }
 
         #region Agenda
@@ -237,7 +254,22 @@ namespace Cheveux
                     }
                     else if (bServices.Count > 2)
                     {
-                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        string toolTip = "";
+                        int toolTipCount = 0;
+                        foreach (SP_GetBookingServices toolTipDTL in bServices)
+                        {
+                            if (toolTipCount == 0)
+                            {
+                                toolTip = toolTipDTL.ServiceName;
+                                toolTipCount++;
+                            }
+                            else
+                            {
+                                toolTip += ", " + toolTipDTL.ServiceName;
+                            }
+                        }
+                        s.Text = "<a title='" + toolTip + "'" +
+                            "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
                             "'> Multiple Services </a>";
                     }
                     AgendaTable.Rows[i].Cells.Add(s);

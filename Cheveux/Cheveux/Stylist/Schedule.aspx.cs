@@ -213,6 +213,7 @@ namespace Cheveux
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
         }
+
         public void viewEmployee(string empID)
         {
             try
@@ -417,6 +418,7 @@ namespace Cheveux
 
         }
         #endregion
+
         #region UPCOMING
         public void getUpcomingBookings(string empID,string sortBy,string sortDir)
         {
@@ -592,6 +594,7 @@ namespace Cheveux
             }
         }
         #endregion
+
         protected void calStart_SelectionChanged(object sender,EventArgs e)
         {
             string empID = Request.QueryString["empID"];
@@ -664,6 +667,7 @@ namespace Cheveux
                 }
             }
         }
+
         protected void calEnd_SelectionChanged(object sender, EventArgs e)
         {
             string empID = Request.QueryString["empID"];
@@ -740,6 +744,7 @@ namespace Cheveux
 
             
         }
+
         protected void cal_DayRender(object sender, DayRenderEventArgs e)
         {
             if (drpViewAppt.SelectedValue == "0")

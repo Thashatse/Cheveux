@@ -11,7 +11,21 @@ namespace Cheveux.Manager
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            #region Access Control
+            HttpCookie cookie = Request.Cookies["CheveuxUserID"];
+            if (cookie == null)
+            {
+                Response.Redirect("../Manager/Service.aspx");
+            }
+            else if (cookie["UT"] != "M")
+            {
+                Response.Redirect("../Default.aspx");
+            }
+            else if (cookie["UT"] == "M")
+            {
+                //manager is allowed access
+            }
+            #endregion
         }
     }
 }

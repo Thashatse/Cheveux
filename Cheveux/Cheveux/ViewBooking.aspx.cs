@@ -556,7 +556,7 @@ namespace Cheveux
                 if (pastBooking == true)
                 {
                     //print booking summary
-                    newCell.Text = "<a class='btn btn-primary' href='#' onClick='window.print()' >Print This Page  </a>";
+                    newCell.Text = "<a class='btn btn-primary' href='PrintInvoice.aspx?SaleID="+ BookingDetails.bookingID +"' >Print Invoice  </a>";
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
                 else
@@ -2161,7 +2161,7 @@ namespace Cheveux
                     tblCheckOut.Rows[6].Cells[1].Text = "";
                     //add Print invoice button
                     tblCheckOut.Rows[7].Width = 50;
-                    tblCheckOut.Rows[7].Cells[1].Text = "<a class='btn btn-primary' href='#' onClick='window.print()' >Print Invoice  </a>";
+                    tblCheckOut.Rows[7].Cells[1].Text = "<a class='btn btn-primary' href='PrintInvoice.aspx?SaleID=" + BookingDetails.bookingID + "'>Print Invoice  </a>";
                 }
                 else
                 {
