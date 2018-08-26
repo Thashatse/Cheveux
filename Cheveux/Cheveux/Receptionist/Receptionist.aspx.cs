@@ -231,12 +231,6 @@ namespace Cheveux
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
 
-                    TableCell c = new TableCell();
-                    c.Width = 300;
-                    c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + a.CustomerFName.ToString() + "</a>";
-                    AgendaTable.Rows[i].Cells.Add(c);
-
                     getTimeAndServices(a.BookingID, a.PrimaryID, i, a);
 
                     TableCell present = new TableCell();
@@ -391,7 +385,13 @@ namespace Cheveux
             }
 
             #endregion
-
+            #region Customer
+            TableCell c = new TableCell();
+            c.Width = 300;
+            c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
+                            "'>" + a.CustomerFName.ToString() + "</a>";
+            AgendaTable.Rows[i].Cells.Add(c);
+            #endregion
             #region Services
 
             TableCell services = new TableCell();
