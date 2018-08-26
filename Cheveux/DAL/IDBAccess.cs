@@ -64,6 +64,7 @@ namespace DAL
         List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate, string sortBy, string sortDir);
         bool deleteSecondaryBooking(string BookingID);
+        SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID);
         #endregion
 
         #region search

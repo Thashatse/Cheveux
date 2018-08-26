@@ -547,6 +547,35 @@ namespace DAL
             }
 
         }
+        public SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID)
+        {
+            SP_GetMultipleServicesTime time = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@primaryBookingID", primaryBookingID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetMultipleServicesTime", 
+                                                CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        time = new SP_GetMultipleServicesTime
+                        {
+                            StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                        };
+                    }
+                }
+                return time;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region CheckIN CheckOut Cust Vist

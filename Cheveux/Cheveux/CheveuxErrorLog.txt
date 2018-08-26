@@ -1,48 +1,228 @@
 
-TimeStamp: 8/26/2018 11:52:29 AM
+TimeStamp: 8/26/2018 4:43:20 PM
 Machine Name: PRIVATE-PC
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Private
 User Domain: PRIVATE-PC
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-Error Making abooking System.Threading.ThreadAbortException: Thread was being aborted.
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.AbortCurrentThread()
-   at System.Web.HttpResponse.End()
-   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
-   at System.Web.HttpResponse.Redirect(String url)
-   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 509
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid TimeSpan.
+   at System.Globalization.TimeSpanParse.TimeSpanResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument, String failureArgumentName)
+   at System.Globalization.TimeSpanParse.TryParseTimeSpan(String input, TimeSpanStandardStyles style, IFormatProvider formatProvider, TimeSpanResult& result)
+   at System.Globalization.TimeSpanParse.Parse(String input, IFormatProvider formatProvider)
+   at System.TimeSpan.Parse(String s)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTime(String primaryBookingID, Int32 row) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 381
 
-TimeStamp: 8/26/2018 11:53:38 AM
+TimeStamp: 8/26/2018 4:43:21 PM
 Machine Name: PRIVATE-PC
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Private
 User Domain: PRIVATE-PC
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-Error Making abooking System.Threading.ThreadAbortException: Thread was being aborted.
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.AbortCurrentThread()
-   at System.Web.HttpResponse.End()
-   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
-   at System.Web.HttpResponse.Redirect(String url)
-   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 509
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid TimeSpan.
+   at System.Globalization.TimeSpanParse.TimeSpanResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument, String failureArgumentName)
+   at System.Globalization.TimeSpanParse.TryParseTimeSpan(String input, TimeSpanStandardStyles style, IFormatProvider formatProvider, TimeSpanResult& result)
+   at System.Globalization.TimeSpanParse.Parse(String input, IFormatProvider formatProvider)
+   at System.TimeSpan.Parse(String s)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTime(String primaryBookingID, Int32 row) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 381
 
-TimeStamp: 8/26/2018 11:55:05 AM
+TimeStamp: 8/26/2018 4:44:28 PM
 Machine Name: PRIVATE-PC
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Private
 User Domain: PRIVATE-PC
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-Error Making abooking System.Threading.ThreadAbortException: Thread was being aborted.
-   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.AbortCurrentThread()
-   at System.Web.HttpResponse.End()
-   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
-   at System.Web.HttpResponse.Redirect(String url)
-   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 509
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 201
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 8/26/2018 4:44:32 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 201
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 8/26/2018 4:44:32 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 201
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 8/26/2018 4:44:39 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.ViewBooking.getBookingDeatails(String BookingID, Boolean pastBooking, Boolean checkOut) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\ViewBooking.aspx.cs:line 201
+ get getBookingDeatails method in viewbooking form
+
+TimeStamp: 8/26/2018 5:16:55 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 388
+
+TimeStamp: 8/26/2018 5:16:55 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 388
+
+TimeStamp: 8/26/2018 5:22:40 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352
+
+TimeStamp: 8/26/2018 5:22:40 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352
+
+TimeStamp: 8/26/2018 5:24:50 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352
+
+TimeStamp: 8/26/2018 5:24:50 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352
+
+TimeStamp: 8/26/2018 5:24:59 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352
+
+TimeStamp: 8/26/2018 5:24:59 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352
+
+TimeStamp: 8/26/2018 5:25:04 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352
+
+TimeStamp: 8/26/2018 5:25:04 PM
+Machine Name: PRIVATE-PC
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Private
+User Domain: PRIVATE-PC
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [receptionist.aspx] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 565
+   at DAL.DBAccess.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 576
+   at BLL.DBHandler.getBookingTime(String primaryBookingID) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 148
+   at Cheveux.Receptionist.getTimeAndServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Private\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 352

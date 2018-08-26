@@ -22,10 +22,10 @@ namespace Cheveux
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
         List<SP_GetBookingServices> bServices = null;
+        SP_GetMultipleServicesTime time = null;
         BOOKING checkIn = null;
         HttpCookie cookie = null;
-        //string currentBookingStylistID = null;
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             errorHeader.Font.Bold = true;
@@ -214,54 +214,17 @@ namespace Cheveux
                 int i = 1;
                 foreach(SP_GetEmpAgenda a in agenda)
                 {
-                    
-                    //created cell for the record
                     TableRow r = new TableRow();
-                    //add row to table
                     AgendaTable.Rows.Add(r);
 
-                    //create start cell and add to row.. cell index: 0
-                    TableCell start = new TableCell();
-                    start.Width = 200;
-                    start.Text = a.StartTime.ToString("HH:mm");
-                    AgendaTable.Rows[i].Cells.Add(start);
+                    getTimeAndServices(a.BookingID, a.PrimaryID, i, a);
 
-                    //create end cell and add to row.. cell index: 1
-                    TableCell end = new TableCell();
-                    end.Width = 200;
-                    end.Text = a.EndTime.ToString("HH:mm");
-                    AgendaTable.Rows[i].Cells.Add(end);
-
-                    //created customer name cell and add to row.. cell index: 2
                     TableCell c = new TableCell();
                     c.Width = 300;
                     c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
                                     "'>" + a.CustomerFName.ToString() + "</a>";
                     AgendaTable.Rows[i].Cells.Add(c);
-                    
-                    bServices = handler.getBookingServices(a.BookingID.ToString());
-                    TableCell s = new TableCell();
-                    s.Width = 300;
-                    if (bServices.Count == 1)
-                    {
-                        s.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                        + bServices[0].ServiceName.ToString() + "</a>";
-                    }
-                    else if (bServices.Count == 2)
-                    {
-                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                            "'>" + bServices[0].ServiceName.ToString() +
-                            ", " + bServices[1].ServiceName.ToString() + "</a>";
-                    }
-                    else if (bServices.Count > 2)
-                    {
-                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.PrimaryID.ToString().Replace(" ", string.Empty) +
-                            "'> Multiple Services </a>";
-                    }
-                    AgendaTable.Rows[i].Cells.Add(s);
-                    //addServices(a,i);
 
-                    //create arrival status cell and add to row.. cell index : 5
                     TableCell present = new TableCell();
                     present.Width = 100;
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
@@ -366,6 +329,88 @@ namespace Cheveux
                                     + "Please report problem to admin or try again later.";
                 function.logAnError(E.ToString());
             }
+        }
+        public void getTimeAndServices(string aBookingID, string primaryBookingID, int i, SP_GetEmpAgenda a)
+        {
+            #region Time
+
+            TableCell start = new TableCell();
+            start.Width = 200;
+            TableCell end = new TableCell();
+            end.Width = 200;
+
+            try
+            {
+                try
+                {
+                    bServices = handler.getBookingServices(a.BookingID.ToString());
+                }
+                catch(ApplicationException serviceErr)
+                {
+                    function.logAnError("Error retreiving services [receptionist.aspx] getTimeAndServices method err:" + serviceErr.ToString());
+                }
+                time = handler.getMultipleServicesTime(primaryBookingID);
+                
+            }
+            catch (ApplicationException Err)
+            {
+                start.Text = "---";
+                end.Text = "---";
+                function.logAnError("Couldn't get the time [receptionist.aspx] error:" + Err.ToString());
+            }
+
+            if (bServices.Count < 2)
+            {
+                start.Text = a.StartTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(start);
+
+                end.Text = a.EndTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(end);
+            }
+            else if (bServices.Count >= 2)
+            {
+                start.Text = time.StartTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(start);
+
+                end.Text = time.EndTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(end);
+            }
+
+            #endregion
+
+            #region Services
+
+            TableCell services = new TableCell();
+            services.Width = 300;
+
+            try
+            {
+                bServices = handler.getBookingServices(a.BookingID.ToString());
+            }
+            catch(ApplicationException Err)
+            {
+                services.Text = "Unable to retreive data";
+                function.logAnError("Couldn't get the services [receptionist.aspx] error:" + Err.ToString());
+            }
+
+            if (bServices.Count == 1)
+            {
+                services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                + bServices[0].ServiceName.ToString() + "</a>";
+            }
+            else if (bServices.Count == 2)
+            {
+                services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                    "'>" + bServices[0].ServiceName.ToString() +
+                    ", " + bServices[1].ServiceName.ToString() + "</a>";
+            }
+            else if (bServices.Count > 2)
+            {
+                services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.PrimaryID.ToString().Replace(" ", string.Empty) +
+                    "'> Multiple Services </a>";
+            }
+            AgendaTable.Rows[i].Cells.Add(services);
+            #endregion
         }
         #endregion
 

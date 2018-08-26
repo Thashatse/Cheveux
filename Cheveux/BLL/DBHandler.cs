@@ -143,6 +143,10 @@ namespace BLL
         {
             return db.deleteSecondaryBooking(BookingID);
         }
+        public SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID)
+        {
+            return db.getMultipleServicesTime(primaryBookingID);
+        }
         #endregion
 
         #region Services
