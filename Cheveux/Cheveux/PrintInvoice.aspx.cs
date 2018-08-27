@@ -49,7 +49,6 @@ namespace Cheveux
             {
                 //get booking deatils
                 SP_GetCustomerBooking BookingDetails = handler.getCustomerPastBookingDetails(SaleID);
-                //get the invoice 
                 SALE invoice = handler.getSale(SaleID);
                 List<SP_getInvoiceDL> invoicDetailLines = handler.getInvoiceDL(SaleID);
 

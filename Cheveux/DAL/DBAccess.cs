@@ -1362,19 +1362,18 @@ namespace DAL
 
 
         //AddProduct
-         public bool addProduct(string ProductID, string Name, string ProductDescription, int price, string productType, char Active, byte productImage  )
+         public bool addProduct(PRODUCT addProduct)
         {
           try
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
-                    new SqlParameter("@ProductID", ProductID),
-                    new SqlParameter("@Name", Name),
-                    new SqlParameter("@ProductDescription", ProductDescription),
-                    new SqlParameter("@Price", Price),
-                    new SqlParameter("@productType", productType),
-                    new SqlParameter("@Active", Active),
-                    new SqlParameter("@productImage", productImage)
+                    new SqlParameter("@ProductID", addProduct.ProductID),
+                    new SqlParameter("@Name", addProduct.Name),
+                    new SqlParameter("@ProductDescription", addProduct.ProductDescription),
+                    new SqlParameter("@Price", addProduct.Price),
+                    new SqlParameter("@productType", addProduct.ProductType),
+                    new SqlParameter("@Active", addProduct.Active)
                    
                 };
                 return DBHelper.NonQuery("SP_AddProduct", CommandType.StoredProcedure, pars);

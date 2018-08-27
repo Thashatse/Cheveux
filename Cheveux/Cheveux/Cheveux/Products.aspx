@@ -80,36 +80,14 @@
                              <b>    <asp:Label ID="lblBrand" runat="server" Text="Brand">Brand</asp:Label> </b>
 
                                     <asp:DropDownList ID="drplistBrand" runat="server" AutopostBack="true" >
-                                        <asp:ListItem Enabled="true" Text="Select Brand" Value="-1"></asp:ListItem>
-                                          <asp:ListItem Text="ORS" Value="1"></asp:ListItem>
-                                          <asp:ListItem Text="X-Pression Ultra" Value="2"></asp:ListItem>
-                                         <asp:ListItem Text="Cantu" Value="3"></asp:ListItem>
-                                          <asp:ListItem Text="Joedir Nature" Value="4"></asp:ListItem>
-                                         <asp:ListItem Text="Afro Botanics" Value="5"></asp:ListItem>
-                                          <asp:ListItem Text="Darling" Value="6"></asp:ListItem>
-                                          <asp:ListItem Text="Shea Moisture" Value="7"></asp:ListItem>
-                                          <asp:ListItem Text="Dark and Lovely" Value="8"></asp:ListItem>
-                                         <asp:ListItem Text="Frika" Value="9"></asp:ListItem>
-                                          <asp:ListItem Text="Inecto" Value="10"></asp:ListItem>
-                                         <asp:ListItem Text="Aunt Jackie's" Value="11"></asp:ListItem>
-                                          <asp:ListItem Text="Long & Lasting" Value="12"></asp:ListItem>
-                                         <asp:ListItem Text="Head & Shoulders" Value="13"></asp:ListItem>
-                                          <asp:ListItem Text="Chocolate Hair" Value="14"></asp:ListItem>
-                                         <asp:ListItem Text="Vicher human Hair" Value="15"></asp:ListItem>
-                                          <asp:ListItem Text="Joedir Magic" Value="16"></asp:ListItem>
-                                         <asp:ListItem Text="New Crown" Value="17"></asp:ListItem>
-                                          <asp:ListItem Text="Hair Decoration" Value="18"></asp:ListItem>
-                                         <asp:ListItem Text="Isoplus" Value="19"></asp:ListItem>
-                                          <asp:ListItem Text="Donna" Value="20"></asp:ListItem>
-                                         <asp:ListItem Text="Nikki" Value="21"></asp:ListItem>
-                                        <asp:ListItem Text="Vicher" Value="22"></asp:ListItem>
-                                        <asp:ListItem Text="Tropic Isle Living" Value="23"></asp:ListItem>
+                                        
+                                        
                                         </asp:DropDownList>
                             <div>
                                 <b>  <asp:Label ID="lblSupplier" runat="server" Text="Supplier">Supplier</asp:Label> </b>
                                 <td>   <asp:DropDownList ID="DrpSupplier" runat ="server" AutoPostBack =" true"> 
-                                    <asp:ListItem Enabled="true" Text="Select Supplier" Value="-1"></asp:ListItem>
-                                     <asp:ListItem Text="Hair Supplies International" Value="1"></asp:ListItem>
+                                   
+
                                 </asp:DropDownList>
 
                                 </div>

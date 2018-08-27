@@ -96,6 +96,7 @@ namespace DAL
         PRODUCT CheckForProduct(string id);
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
+
         #endregion
 
         #region Services
