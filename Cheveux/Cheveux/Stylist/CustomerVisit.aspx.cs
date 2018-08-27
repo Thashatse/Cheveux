@@ -11,23 +11,17 @@ namespace Cheveux
 {
     public partial class CustomerVisit : System.Web.UI.Page
     {
-        String test = DateTime.Now.ToString("dddd d MMMM");
+        String dayDate = DateTime.Today.ToString("D");
+
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-
-        //get a descriptive detail of the booking
         SP_GetAllofBookingDTL bDTL = null;
-        
-        //get bookings service details
-        SP_GetBookingServiceDTL sDTL = null;
-
-        //bookingID is going to go in here
         string bookingID;
-        //customerID is going to go in here
         string customerID;
-
-        CUST_VISIT visit;
-        BOOKING b;
+        CUST_VISIT visit = null;
+        BOOKING b=null;
+        List<SP_GetBookingServices> bServices = null;
+        SP_GetMultipleServicesTime time = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             errorHeader.Font.Bold = true;
@@ -37,77 +31,45 @@ namespace Cheveux
 
             //access control
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
-            //send the user to the correct page based on their usertype
-            if (UserID != null)
-            {
-                string userType = UserID["UT"].ToString();
-                if ("R" == userType)
-                {
-                    //Receptionist
-                    Response.Redirect("../Receptionist/Receptionist.aspx");
-                }
-                else if (userType == "M")
-                {
-                    //Manager
-                    //allowed access to this page
-                    Response.Redirect("../Manager/Manager.aspx");
-                }
-                else if (userType == "S")
-                {
-                    //stylist
-                    //allowed access to this page
-                    //Response.Redirect("Stylist.aspx");
-                }
-                else if (userType == "C")
-                {
-                    //customer
-                    Response.Redirect("../Default.aspx");
 
+            if (UserID == null)
+            {
+                LoggedOut.Visible = true;
+                allBookingTable.Visible = false;
+                LoggedIn.Visible = false;
+            }
+            else if (UserID["UT"] != "S")
+            {
+                Response.Redirect("../Default.aspx");
+            }
+            else if (UserID["UT"] == "S")
+            {
+                LoggedOut.Visible = false;
+                LoggedIn.Visible = true;
+
+                bookingID = Request.QueryString["bookingID"];
+                customerID = Request.QueryString["customerID"];
+
+                if (bookingID != null && customerID != null)
+                {
+                    getDetailsAndCreateRecord(bookingID, customerID);
                 }
                 else
                 {
-                    function.logAnError("Unknown user type found during Loading of default.aspx: " +
-                        UserID["UT"].ToString());
-                    Response.Redirect("../Default.aspx");
+                    phBookingsErr.Visible = true;
+                    errorHeader.Text = "Fail.";
+                    errorMessage.Text = "Unable to display visit details.<br/>"
+                                        + "Rest assured, customer visit record was created.<br/>"
+                                        + "Please report this fault to the administrator so we can make your life"
+                                        + "a bit easier and fix it as soon as possible.";
                 }
             }
-            else
-            {
-                //ask the user to login first 
-
-                //temp fix redirect to home page
-                Response.Redirect("../Default.aspx");
-            }
-            
-            theDate.InnerHtml = test;
-            
-            //set bookingID param to bookingID variable so it can be used in the methods
-            bookingID = Request.QueryString["bookingID"];
-            //set customerID param to customerID variable so it can be used in the methods
-            customerID = Request.QueryString["customerID"];
-            if (bookingID != null && customerID != null)
-            {
-                DisplayBookingDetails(bookingID, customerID);
-                DisplayServiceDetails(bookingID, customerID);
-                //DisplayConfirmVisit(customerID, bookingID);
-            }
-            else
-            {
-                Response.Write("<script>alert('ID's not passed.');window.location='Stylist.aspx';</script>");
-            }
- 
         }
 
-        public void DisplayBookingDetails(string bookingID, string customerID)
+        public void getDetailsAndCreateRecord(string bookingID, string customerID)
         {
-            //hide other placeholders headings and make the appropriate placeholder heading visible
-            phServiceDetails.Visible = false;
-            phBookingDetails.Visible = true;
-            lblBookingDetailsHeading.Visible = true;
-            lblServiceHeading.Visible = false;
             try
             {
-
                 bDTL = handler.BLL_GetAllofBookingDTL(bookingID.Replace(" ", string.Empty), customerID);
 
                 //create a variablew to track the row count
@@ -122,40 +84,8 @@ namespace Cheveux
                 newCell.Text = "Customer Name:";
                 newCell.Width = 300;
                 allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = bDTL.CustomerName.ToString();
-                newCell.Width = 700;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                rCnt++;
 
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                allBookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Name:";
-                newCell.Width = 300;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = bDTL.ServiceName.ToString();
-                newCell.Width = 700;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                rCnt++;
-
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                allBookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Description:";
-                newCell.Width = 300;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = bDTL.ServiceDescription.ToString();
-                newCell.Width = 700;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                getTimeCustomerServices(bDTL.BookingID,bDTL.BookingID,rCnt,bDTL);
                 rCnt++;
 
                 newRow = new TableRow();
@@ -167,289 +97,196 @@ namespace Cheveux
                 newCell.Width = 300;
                 allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
-                newCell.Text = bDTL.Date.ToString();
-                newCell.Width = 700;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                rCnt++;
-
-
-                newRow = new TableRow();
-                newRow.Height = 50;
-                allBookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Start Time - End Time:";
+                newCell.Text = bDTL.Date.ToString("dd-MM-yyy");
                 newCell.Width = 300;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Text = bDTL.StartTime.ToString() + " - " + bDTL.EndTime.ToString();
-                newCell.Width = 700;
                 allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 rCnt++;
 
                 newRow = new TableRow();
                 newRow.Height = 50;
                 allBookingTable.Rows.Add(newRow);
-                newCell = new TableCell();
-                newCell.Width = 700;
-                Button btnUpdateVisit = new Button();
-                btnUpdateVisit.Text = "Update Visit";
-                btnUpdateVisit.CssClass = "btn btn-primary";
-                btnUpdateVisit.Click += (ss, ee) => {
-                    //hide other placeholders headings and make the appropriate placeholder heading visible
-                    //takes user to content displaying the service details
-                    phBookingDetails.Visible = false;
-                    phServiceDetails.Visible = true;
-
-                    lblBookingDetailsHeading.Visible = false;
-                    lblServiceHeading.Visible = true;
-
-                };
-                newCell.Controls.Add(btnUpdateVisit);
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-
-                TableCell noChangesCell = new TableCell();
-                newCell.Width = 700;
-                Button btnNoChanges = new Button();
-                btnNoChanges.Text = "Complete Appointment";
-                btnNoChanges.CssClass = "btn btn-primary";
-                btnNoChanges.Click += (ss, ee) => {
-                    try
-                    {
-                        /*If appointment went as scheduled and stylist does not need to update
-                         * the customer vist record.
-                         */
-
-                        visit = new CUST_VISIT();
-
-                        visit.CustomerID = Convert.ToString(customerID);
-                        visit.BookingID = Convert.ToString(bookingID);
-                        visit.Description = Convert.ToString(bDTL.ServiceDescription);
-
-                        if (handler.BLL_UpdateCustVisit(visit, b))
-                        {
-                            Response.Write("<script>alert('Create Customer Visit Record Process Successful.');</script>");
-                            Response.Redirect("../Stylist/Stylist.aspx");
-
-                            btnNoChanges.Visible = false;
-                            noChangesCell.Text = "<p><i>Appointment Completed</i></p>";
-                        }
-                        else
-                        {
-                            /*
-                             * if the update fails, display failed message
-                             * to alert that the update was not successful
-                             * (user friendly action status response)
-                             */
-                            //Response.Write("<script>alert('Error.Please Try Again.');</script>");
-                            phVisitErr.Visible = true;
-                            lblVisitErr.Text = "System is unable to create a visit record at this point in time.<br/>"
-                                                  + "Please report to management or try again later. Sorry for the inconvenience.";
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        //Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
-                        //add error to the error log and then display response tab to say that an error has occured 
-                        phVisitErr.Visible = true;
-                        lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
-                                              + "Please report to management or try again later. Sorry for the inconvenience.";
-                        function.logAnError(err.ToString());
-                    }
-                };
-                noChangesCell.Controls.Add(btnNoChanges);
-                allBookingTable.Rows[rCnt].Cells.Add(noChangesCell);
-                rCnt++;
-            }
-            catch(Exception Err)
-            {
-                phServiceDetails.Visible = false;
-                phBookingDetails.Visible = false;
-                lblBookingDetailsHeading.Visible = false;
-                lblServiceHeading.Visible = false;
-
-                phBookingsErr.Visible = true;
-                errorHeader.Text = "Error.Cannot display booking details.";
-                errorMessage.Text = "It seems there is a problem communicating with the database."
-                                    + "Please report problem to admin or try again later.";
-                //log error, display error message,redirect to the stylist page
-                function.logAnError(Err.ToString());
-            }
-        }
-        
-        public void DisplayServiceDetails(string bookingID,string customerID)
-        {
-            try
-            {
-                sDTL = handler.BLL_GetBookingServiceDTL(bookingID, customerID);
-
-                //create a variablew to track the row count
-                int rowCount = 0;
-                //create a new row in the table and set the height
-                TableRow newRow = new TableRow();
-                newRow.Height = 50;
-                serviceDetailsTable.Rows.Add(newRow);
-
-                //create a new row and add it to the table
-                newRow = new TableRow();
-                newRow.Height = 50;
-                serviceDetailsTable.Rows.Add(newRow);
-                
-                //create a cell for the service name and add it to the table
-                TableCell newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Name:";
-                newCell.Width = 300;
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-
-                //create a cell that will display the service name and add it to the row. 
-                newCell = new TableCell();
-                newCell.Text = bDTL.ServiceName.ToString();
-                newCell.Width = 700;
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowCount
-                rowCount++;
-
-                //create a new row and add it to the table
-                newRow = new TableRow();
-                newRow.Height = 50;
-                serviceDetailsTable.Rows.Add(newRow);
-
-                //create a cell for the service name and add it to the table
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Text = "Service Description:";
-                newCell.Width = 300;
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-
-                //create a cell that will display the service name and add it to the row. 
-                newCell = new TableCell();
-                newCell.Text = bDTL.ServiceDescription.ToString();
-                newCell.Width = 700;
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowCount
-                rowCount++;
-
-                //create a new row and add it to the table
-                newRow = new TableRow();
-                newRow.Height = 50;
-                serviceDetailsTable.Rows.Add(newRow);
-
-                //create a cell for the service description and add it to the row
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Booking comment:";
                 newCell.Width = 300;
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-                
-                //create a cell that will be populated by the text box
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
                 newCell = new TableCell();
-                //newCell.Text = bDTL.ServiceDescription.ToString();
-                newCell.Width = 700;
+                newCell.Width = 300;
                 TextBox descBox = new TextBox();
                 descBox.ID = "bookingComment";
                 descBox.CssClass = "form-control";
-                //add control to cell
                 newCell.Controls.Add(descBox);
-                //add cell to row
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-                //increment rowCount
-                rowCount++;
+                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
 
-                //create a new row and add it to the table
                 newRow = new TableRow();
-                newRow.Height = 250; 
-                serviceDetailsTable.Rows.Add(newRow);
-
-                //create a cell for the back button and add the button control to the cell
-                newCell = new TableCell();
-                newCell.Font.Bold = true;
-                newCell.Width = 300;
-                Button sbtnBack = new Button();
-                sbtnBack.Text = "Back";
-                sbtnBack.CssClass = "btn btn-primary";
-                sbtnBack.Click += (ss, ee) => {
-                    //hide other placeholders headings and make the appropriate placeholder heading visible
-                    //will go back to bookings details content
-                    phBookingDetails.Visible = true;
-                    phServiceDetails.Visible = false;
-                    lblBookingDetailsHeading.Visible = true;
-                    lblServiceHeading.Visible = false;
-                };
-                newCell.Controls.Add(sbtnBack);
-                //add cell to the row
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
-
-                //create a cell for the update button and add the button control to the cell 
-                newCell = new TableCell();
-                newCell.Width = 700;
-                Button sbtnUpdate = new Button();
-                sbtnUpdate.Text = "Update Visit";
-                sbtnUpdate.CssClass = "btn btn-primary";
-                sbtnUpdate.Click += (ss, ee) => {
-
-                    /* What this button does:
-                     * =====================
-                     * Updates customer visit record (service description column)
-                     */
+                allBookingTable.Rows.Add(newRow);
+                TableCell createVisit = new TableCell();
+                createVisit.Width = 300;
+                Button btnVisit = new Button();
+                btnVisit.Text = "Update";
+                btnVisit.CssClass = "btn btn-primary";
+                btnVisit.Click += (ss, ee) =>
+                {
                     try
                     {
                         visit = new CUST_VISIT();
-
-                        visit.CustomerID = Convert.ToString(customerID);
-                        visit.BookingID = Convert.ToString(bookingID);
+                        
+                        visit.CustomerID = customerID.ToString();
+                        visit.BookingID =  bookingID.ToString();
                         visit.Description = Convert.ToString(descBox.Text);
 
                         b = new BOOKING();
-                        b.Comment = Convert.ToString(descBox.Text);
+                        b.Comment =Convert.ToString( descBox.Text);
 
-                        if (handler.BLL_UpdateCustVisit(visit,b))
+                        if (handler.BLL_UpdateCustVisit(visit, b))
                         {
-                            Response.Write("<script>alert('Update Successful.');</script>");
-                            Response.Redirect("../Stylist/Stylist.aspx");
+                            Response.Redirect("../Stylist/Stylist.aspx?Action=UpdateVisitRecord&CustomerName="
+                                                +bDTL.CustomerName.ToString().Replace(" ", string.Empty));
                         }
                         else
                         {
-                            /*
-                             * if the update fails, display failed message
-                             * to alert that the update was not successful
-                             * (user friendly action status response)
-                             */
-                            //Response.Write("<script>alert('Unsuccessful. Customer visit record was not updated');</script>");
                             phVisitErr.Visible = true;
-                            lblVisitErr.Text = "System is unable to create a visit record at this point in time.<br/>"
-                                                  + "Please report to management or try again later. Sorry for the inconvenience.";
+                            lblVisitErr.Text = "Unable to update visit record.<br/>"
+                                                  + "Please report to management or try again later.";
                         }
                     }
                     catch (Exception err)
                     {
-                        //Response.Write("<script>alert('Our apologies. An error has occured. Unable to update visit record.')</script>");
                         phVisitErr.Visible = true;
-                        lblVisitErr.Text = "An error has occured.System is unable to create a visit record at this point in time.<br/>"
-                                              + "Please report to management or try again later. Sorry for the inconvenience.";
-                        //add error to the error log and then display response tab to say that an error has occured
-                        function.logAnError(err.ToString());
+                        lblVisitErr.Text = "System is unable to create a visit record.<br/>"
+                                              + "Please report to management or try again later.";
+                        function.logAnError("Error updating visit [customervisit.aspx btnVisit] err:"+err.ToString());
                     }
-                    
                 };
-                newCell.Controls.Add(sbtnUpdate);
-                //add the cell to the row
-                serviceDetailsTable.Rows[rowCount].Cells.Add(newCell);
+                createVisit.Controls.Add(btnVisit);
+                allBookingTable.Rows[rCnt].Cells.Add(createVisit);
+                rCnt++;
             }
-            catch (Exception Err)
+            catch(Exception Err)
             {
-                phServiceDetails.Visible = false;
-                phBookingDetails.Visible = false;
-                lblBookingDetailsHeading.Visible = false;
-                lblServiceHeading.Visible = false;
-
                 phBookingsErr.Visible = true;
-                errorHeader.Text = "Error.Cannot display services details.";
+                errorHeader.Text = "Error.Cannot display booking details.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
-                
+
+                function.logAnError("Couldn't display bookingDetails to create visit record"
+                                     + " [customerVisit.aspx getDetailsAndCreateRecord method ]"
+                                     +" err:"+ Err.ToString());
             }
         }
+        public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int rCnt, SP_GetAllofBookingDTL a)
+        {
+            #region Customer
+            TableCell c = new TableCell();
+            c.Width = 300;
+            c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.CustomerID.ToString().Replace(" ", string.Empty) +
+                            "'>" + a.CustomerName.ToString() + "</a>";
+            allBookingTable.Rows[rCnt].Cells.Add(c);
+            rCnt++;
+            #endregion
+            #region Services
+
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            allBookingTable.Rows.Add(newRow);
+            TableCell newCell = new TableCell();
+            newCell.Font.Bold = true;
+            newCell.Text = "Service :";
+            newCell.Width = 300;
+            allBookingTable.Rows[rCnt].Cells.Add(newCell);
+            TableCell services = new TableCell();
+            services.Width = 300;
+
+            try
+            {
+                bServices = handler.getBookingServices(a.BookingID.ToString());
+            }
+            catch (ApplicationException Err)
+            {
+                services.Text = "Unable to retreive service";
+                function.logAnError("Couldn't get the services [customervisit.aspx-getT&C&S method] error:" + Err.ToString());
+            }
+
+            if (bServices.Count == 1)
+            {
+                services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                + bServices[0].ServiceName.ToString() + "</a>";
+            }
+            else if (bServices.Count == 2)
+            {
+                services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                    "'>" + bServices[0].ServiceName.ToString() +
+                    ", " + bServices[1].ServiceName.ToString() + "</a>";
+            }
+            else if (bServices.Count > 2)
+            {
+                string toolTip = "";
+                int toolTipCount = 0;
+                foreach (SP_GetBookingServices toolTipDTL in bServices)
+                {
+                    if (toolTipCount == 0)
+                    {
+                        toolTip = toolTipDTL.ServiceName;
+                        toolTipCount++;
+                    }
+                    else
+                    {
+                        toolTip += ", " + toolTipDTL.ServiceName;
+                    }
+                }
+                services.Text = "<a title='" + toolTip + "'" +
+                    "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                    "'> Multiple Services </a>";
+            }
+            allBookingTable.Rows[rCnt].Cells.Add(services);
+            rCnt++;
+            #endregion
+            #region Time
+
+            newRow = new TableRow();
+            newRow.Height = 50;
+            allBookingTable.Rows.Add(newRow);
+            newCell = new TableCell();
+            newCell.Font.Bold = true;
+            newCell.Text = "Start Time - End Time:";
+            newCell.Width = 300;
+            allBookingTable.Rows[rCnt].Cells.Add(newCell);
+            newCell = new TableCell();
+            newCell.Width = 700;
+            try
+            {
+                try
+                {
+                    bServices = handler.getBookingServices(a.BookingID.ToString());
+                }
+                catch (ApplicationException serviceErr)
+                {
+                    function.logAnError("Error retreiving services [receptionist.aspx] getTimeAndServices method err:" + serviceErr.ToString());
+                }
+                time = handler.getMultipleServicesTime(primaryBookingID);
+
+            }
+            catch (ApplicationException Err)
+            {
+                newCell.Text = "Unable to retrieve time";
+                //start.Text = "---";
+                //end.Text = "---";
+                function.logAnError("Couldn't get the time [customerVisit.aspx, etT&C&S method] error:" + Err.ToString());
+            }
+
+            if (bServices.Count < 2)
+            {
+                newCell.Text = a.StartTime.ToString("HH:mm") + " - " + a.EndTime.ToString("HH:mm");
+            }
+            else if (bServices.Count >= 2)
+            {
+                newCell.Text = time.StartTime.ToString("HH:mm") + " - " + time.EndTime.ToString("HH:mm");
+            }
+            allBookingTable.Rows[rCnt].Cells.Add(newCell);
+            rCnt++;
+            #endregion
+        }
+
     }
 }

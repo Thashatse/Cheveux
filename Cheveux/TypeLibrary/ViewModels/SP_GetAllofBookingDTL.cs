@@ -14,8 +14,8 @@ namespace TypeLibrary.ViewModels
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
         public string Price { get; set; }
-        public Nullable<DateTime> Date { get; set; }
-        public Nullable<TimeSpan> StartTime { get; set; }
-        public Nullable<TimeSpan> EndTime { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

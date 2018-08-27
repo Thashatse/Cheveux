@@ -169,7 +169,7 @@ namespace Cheveux
             {
                 agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
 
-                AgendaTable.CssClass = "table table-light table-hover table-bordered";
+                AgendaTable.CssClass = "table table-light table-hover";
                 
                 //create row for the table 
                 TableRow row = new TableRow();
@@ -231,7 +231,7 @@ namespace Cheveux
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
 
-                    getTimeAndServices(a.BookingID, a.PrimaryID, i, a);
+                    getTimeCustomerServices(a.BookingID, a.PrimaryID, i, a);
 
                     TableCell present = new TableCell();
                     present.Width = 100;
@@ -338,7 +338,7 @@ namespace Cheveux
                 function.logAnError(E.ToString());
             }
         }
-        public void getTimeAndServices(string aBookingID, string primaryBookingID, int i, SP_GetEmpAgenda a)
+        public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int i, SP_GetEmpAgenda a)
         {
             #region Time
 
