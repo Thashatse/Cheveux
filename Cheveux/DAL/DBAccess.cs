@@ -1371,7 +1371,7 @@ namespace DAL
                     new SqlParameter("@ProductID", ProductID),
                     new SqlParameter("@Name", Name),
                     new SqlParameter("@ProductDescription", ProductDescription),
-                    new SqlParameter("@Price", Price),
+                    new SqlParameter("@Price", price),
                     new SqlParameter("@productType", productType),
                     new SqlParameter("@Active", Active),
                     new SqlParameter("@productImage", productImage)
