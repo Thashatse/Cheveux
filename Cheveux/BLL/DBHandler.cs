@@ -122,17 +122,15 @@ namespace BLL
 
         public SP_GetAllAccessories selectAccessory(string accessoryID)
         {
-                 return db.selectAccessory(accessoryID);
+            return db.selectAccessory(accessoryID);
         }
 
         public SP_GetAllTreatments selectTreatment(string treatmentID)
-         {  
-                return db.selectTreatment(treatmentID);
-
+         {
+            return db.selectTreatment(treatmentID);
          }
 
         //addProduct
-
         public bool AddProduct(PRODUCT addProduct)
             {
                return db.AddProduct(addProduct);
