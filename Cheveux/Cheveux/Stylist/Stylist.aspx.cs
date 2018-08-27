@@ -206,7 +206,7 @@ namespace Cheveux
                                     lblVisitErr.Text = "Error:System is unable to create a visit record.br/>"
                                                           + "Please report to management. Sorry for the inconvenience.";
                                     //add error to the error log and then display response tab to say that an error has occured
-                                    function.logAnError("Error creating visit record [stylist.aspx] err: " + err.ToString());
+                                    function.logAnError("Error creating visit record [stylist.aspx {btn}] err: " + err.ToString());
                                 }
 
                             };
@@ -241,7 +241,7 @@ namespace Cheveux
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
-                function.logAnError("Error with getEmpAgenda [stylist.aspx]. err: "+E.ToString());
+                function.logAnError("Error with getEmpAgenda [stylist.aspx {getAgenda}]. err: "+E.ToString());
 
             }
         }
@@ -262,35 +262,38 @@ namespace Cheveux
                 }
                 catch (ApplicationException serviceErr)
                 {
-                    function.logAnError("Error retreiving services [receptionist.aspx] getTimeAndServices method err:" + serviceErr.ToString());
+                    function.logAnError("Error retreiving services [receptionist.aspx {nested try in getTime method}] method err:" + serviceErr.ToString());
                 }
                 time = handler.getMultipleServicesTime(primaryBookingID);
+
+                if (bServices.Count < 2)
+                {
+                    start.Text = a.StartTime.ToString("HH:mm");
+                    AgendaTable.Rows[i].Cells.Add(start);
+
+                    end.Text = a.EndTime.ToString("HH:mm");
+                    AgendaTable.Rows[i].Cells.Add(end);
+                }
+                else if (bServices.Count >= 2)
+                {
+                    start.Text = time.StartTime.ToString("HH:mm");
+                    AgendaTable.Rows[i].Cells.Add(start);
+
+                    end.Text = time.EndTime.ToString("HH:mm");
+                    AgendaTable.Rows[i].Cells.Add(end);
+                }
 
             }
             catch (ApplicationException Err)
             {
+                //If time isn't retrieved (Error)
                 start.Text = "---";
+                AgendaTable.Rows[i].Cells.Add(start);
                 end.Text = "---";
-                function.logAnError("Couldn't get the time [receptionist.aspx] error:" + Err.ToString());
-            }
-
-            if (bServices.Count < 2)
-            {
-                start.Text = a.StartTime.ToString("HH:mm");
-                AgendaTable.Rows[i].Cells.Add(start);
-
-                end.Text = a.EndTime.ToString("HH:mm");
                 AgendaTable.Rows[i].Cells.Add(end);
+                function.logAnError("Couldn't get the time (check db for 2nd bkID) [stylist.aspx {getTimeCustomerServices?getTime}] error:"
+                                            + Err.ToString());
             }
-            else if (bServices.Count >= 2)
-            {
-                start.Text = time.StartTime.ToString("HH:mm");
-                AgendaTable.Rows[i].Cells.Add(start);
-
-                end.Text = time.EndTime.ToString("HH:mm");
-                AgendaTable.Rows[i].Cells.Add(end);
-            }
-
             #endregion
             #region Customer
             TableCell c = new TableCell();
@@ -307,45 +310,46 @@ namespace Cheveux
             try
             {
                 bServices = handler.getBookingServices(a.BookingID.ToString());
+                if (bServices.Count == 1)
+                {
+                    services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    + bServices[0].ServiceName.ToString() + "</a>";
+                }
+                else if (bServices.Count == 2)
+                {
+                    services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>" + bServices[0].ServiceName.ToString() +
+                        ", " + bServices[1].ServiceName.ToString() + "</a>";
+                }
+                else if (bServices.Count > 2)
+                {
+                    string toolTip = "";
+                    int toolTipCount = 0;
+                    foreach (SP_GetBookingServices toolTipDTL in bServices)
+                    {
+                        if (toolTipCount == 0)
+                        {
+                            toolTip = toolTipDTL.ServiceName;
+                            toolTipCount++;
+                        }
+                        else
+                        {
+                            toolTip += ", " + toolTipDTL.ServiceName;
+                        }
+                    }
+                    services.Text = "<a title='" + toolTip + "'" +
+                        "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'> Multiple Services </a>";
+                }
+                AgendaTable.Rows[i].Cells.Add(services);
             }
             catch (ApplicationException Err)
             {
-                services.Text = "Unable to retreive data";
-                function.logAnError("Couldn't get the services [receptionist.aspx] error:" + Err.ToString());
+                //if theres an error or cant retrieve the services from the database 
+                services.Text = "Unable to retreive services";
+                AgendaTable.Rows[i].Cells.Add(services);
+                function.logAnError("Couldn't get the services [stylis.aspx {getTimeCustomerServices?getServices}] error:" + Err.ToString());
             }
-
-            if (bServices.Count == 1)
-            {
-                services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                + bServices[0].ServiceName.ToString() + "</a>";
-            }
-            else if (bServices.Count == 2)
-            {
-                services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>" + bServices[0].ServiceName.ToString() +
-                    ", " + bServices[1].ServiceName.ToString() + "</a>";
-            }
-            else if (bServices.Count > 2)
-            {
-                string toolTip = "";
-                int toolTipCount = 0;
-                foreach (SP_GetBookingServices toolTipDTL in bServices)
-                {
-                    if (toolTipCount == 0)
-                    {
-                        toolTip = toolTipDTL.ServiceName;
-                        toolTipCount++;
-                    }
-                    else
-                    {
-                        toolTip += ", " + toolTipDTL.ServiceName;
-                    }
-                }
-                services.Text = "<a title='" + toolTip + "'" +
-                    "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'> Multiple Services </a>";
-            }
-            AgendaTable.Rows[i].Cells.Add(services);
             #endregion
         }
     }
