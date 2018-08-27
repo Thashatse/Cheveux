@@ -15,6 +15,7 @@ namespace BLL
         List<SP_GetBookingServices> getBookingServices(string BookingID);
         bool deleteBookingService(string BookingID, string ServiceID);
         bool deleteSecondaryBooking(string BookingID);
+        SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID);
         #endregion
 
         #region Home Page Features
@@ -27,6 +28,8 @@ namespace BLL
         #endregion
 
         #region Invoice/Sale
+        SALE getSale(string SaleID);
+
         List<SP_getInvoiceDL> getInvoiceDL(string BookingID);
 
         bool createProductSalesDTLRecord(SALES_DTL Sale);

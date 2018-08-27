@@ -73,6 +73,7 @@
     <Compile Include="ViewModels\SP_GetBookedTimes.cs" />
     <Compile Include="ViewModels\SP_GetBookingServiceDTL.cs" />
     <Compile Include="ViewModels\SP_GetBookingServices.cs" />
+    <Compile Include="ViewModels\SP_GetMultipleServicesTime.cs" />
     <Compile Include="ViewModels\SP_GetEmployeeTypes.cs" />
     <Compile Include="ViewModels\SP_getInvoiceDL.cs" />
     <Compile Include="ViewModels\SP_AddUserGoogleAuth.cs" />

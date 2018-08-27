@@ -30,6 +30,8 @@ namespace Cheveux.Manager
             if (cookie == null)
             {
                 //if the user is not loged in as a manager do not display Bussines setting
+                LogedIn.Visible = false;
+                LogedOut.Visible = true;
             }
             else if (cookie["UT"] != "M")
             {

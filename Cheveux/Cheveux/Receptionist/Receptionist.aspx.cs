@@ -22,17 +22,20 @@ namespace Cheveux
         List<SP_GetEmpNames> list = null;
         List<SP_GetEmpAgenda> agenda = null;
         List<SP_GetBookingServices> bServices = null;
+        SP_GetMultipleServicesTime time = null;
         BOOKING checkIn = null;
         HttpCookie cookie = null;
-        //string currentBookingStylistID = null;
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            #region Error
             errorHeader.Font.Bold = true;
             errorHeader.Font.Underline = true;
             errorHeader.Font.Size = 21;
             errorMessage.Font.Size = 14;
+            #endregion
 
+            #region Access Control
             cookie = Request.Cookies["CheveuxUserID"];
             if(cookie == null)
             {
@@ -52,13 +55,26 @@ namespace Cheveux
                 drpEmpNames.Visible = true;
                 LoggedIn.Visible = true;
                 sidebar.Visible = true;
+                #endregion
 
                 #region Alerts
                 //Check For Low Stock
                 checkForLowStock();
                 #endregion
 
+                #region Header
+                //date
                 lblDate.Text = dayDate;
+
+                //welcom back
+                string wB = Request.QueryString["WB"];
+                if (wB == "True")
+                {
+                    Welcome.Text = "Welcome Back " + handler.GetUserDetails(cookie["ID"]).FirstName;
+                }
+                #endregion
+
+                #region Agenda
                 list = handler.BLL_GetEmpNames();
                 if (!Page.IsPostBack)
                 {
@@ -101,7 +117,7 @@ namespace Cheveux
                     {
                         getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate),null,null);
 
-                        if(AgendaTable.Rows.Count == 1)
+                        if (AgendaTable.Rows.Count == 1)
                         {
                             AgendaTable.Visible = false;
                             noBookingsPH.Visible = true;
@@ -125,14 +141,30 @@ namespace Cheveux
                                         + "Please report problem or try again later.";
                     function.logAnError(Err.ToString());
                 }
-            }   
+
+                string action = Request.QueryString["Action"];
+                string custName = Request.QueryString["CustomerName"];
+                string stylistName = Request.QueryString["StylistName"];
+
+                if (action == "CheckedIn" && custName != null && stylistName != null)
+                {
+                    phCheckInSuccess.Visible = true;
+                    lblSuccess.Text = custName.ToString() + " has been checked for their booking with "
+                                    + stylistName.ToString();
+                }
+                #endregion
+            }
+        }
+        
+        protected void drpEmpNames_Changed(object sender, EventArgs e)
+        {
+            phCheckInSuccess.Visible = false;    
         }
 
         #region Agenda
         public void getAgenda(string id, DateTime bookingDate,string sortBy, string sortDir)
         {
             Button btnCheckin;
-
             try
             {
                 agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
@@ -196,54 +228,11 @@ namespace Cheveux
                 int i = 1;
                 foreach(SP_GetEmpAgenda a in agenda)
                 {
-                    
-                    //created cell for the record
                     TableRow r = new TableRow();
-                    //add row to table
                     AgendaTable.Rows.Add(r);
 
-                    //create start cell and add to row.. cell index: 0
-                    TableCell start = new TableCell();
-                    start.Width = 200;
-                    start.Text = a.StartTime.ToString("HH:mm");
-                    AgendaTable.Rows[i].Cells.Add(start);
+                    getTimeAndServices(a.BookingID, a.PrimaryID, i, a);
 
-                    //create end cell and add to row.. cell index: 1
-                    TableCell end = new TableCell();
-                    end.Width = 200;
-                    end.Text = a.EndTime.ToString("HH:mm");
-                    AgendaTable.Rows[i].Cells.Add(end);
-
-                    //created customer name cell and add to row.. cell index: 2
-                    TableCell c = new TableCell();
-                    c.Width = 300;
-                    c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + a.CustomerFName.ToString() + "</a>";
-                    AgendaTable.Rows[i].Cells.Add(c);
-                    
-                    bServices = handler.getBookingServices(a.BookingID.ToString());
-                    TableCell s = new TableCell();
-                    s.Width = 300;
-                    if (bServices.Count == 1)
-                    {
-                        s.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                        + bServices[0].ServiceName.ToString() + "</a>";
-                    }
-                    else if (bServices.Count == 2)
-                    {
-                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                            "'>" + bServices[0].ServiceName.ToString() +
-                            ", " + bServices[1].ServiceName.ToString() + "</a>";
-                    }
-                    else if (bServices.Count > 2)
-                    {
-                        s.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                            "'> Multiple Services </a>";
-                    }
-                    AgendaTable.Rows[i].Cells.Add(s);
-                    //addServices(a,i);
-
-                    //create arrival status cell and add to row.. cell index : 5
                     TableCell present = new TableCell();
                     present.Width = 100;
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
@@ -282,22 +271,20 @@ namespace Cheveux
                                 checkIn = new BOOKING();
 
                                 checkIn.BookingID = a.BookingID.ToString();
-                                checkIn.StylistID = drpEmpNames.SelectedValue.ToString();
 
                                 if (handler.BLL_CheckIn(checkIn))
                                 {
-                                    noBookingsPH.Visible = true;
-                                    lblNoBookings.Text = a.CustomerFName.ToString() + " has now been checked in.";
                                     //if BLL_CheckIn successful and arrival status changed show user and refresh the page
-                                    //Response.Write("<script>alert('Customer has been checked-in.');location.reload(true);</script>");
+                                    //Response.Write("<script>alert('Customer has been checked-in.');location.reload();</script>");
+                                    Response.Redirect("../Receptionist/Receptionist.aspx?Action=CheckedIn&CustomerName="+
+                                                        a.CustomerFName.ToString().Replace(" ", string.Empty)
+                                                        +"&StylistName=" + drpEmpNames.SelectedItem.Text);
                                 }
                                 else
                                 {
                                     //if BLL_CheckIn unsuccessful and arrival status was not changed tell the user to try again or report to admin
-                                    //Response.Write("<script>alert('Unsuccessful.Status was not changed.If problem persists report to admin.');</script>");
-
                                     phCheckInErr.Visible = true;
-                                    lblCheckinErr.Text = "An error has occured.We are unable to check-in the customer at this point in time.<br/>"
+                                    lblCheckinErr.Text = "We are unable to check-in customer.<br/>"
                                                           + "Please report to management. Sorry for the inconvenience.";
 
                                 }
@@ -350,6 +337,109 @@ namespace Cheveux
                                     + "Please report problem to admin or try again later.";
                 function.logAnError(E.ToString());
             }
+        }
+        public void getTimeAndServices(string aBookingID, string primaryBookingID, int i, SP_GetEmpAgenda a)
+        {
+            #region Time
+
+            TableCell start = new TableCell();
+            start.Width = 200;
+            TableCell end = new TableCell();
+            end.Width = 200;
+
+            try
+            {
+                try
+                {
+                    bServices = handler.getBookingServices(a.BookingID.ToString());
+                }
+                catch(ApplicationException serviceErr)
+                {
+                    function.logAnError("Error retreiving services [receptionist.aspx] getTimeAndServices method err:" + serviceErr.ToString());
+                }
+                time = handler.getMultipleServicesTime(primaryBookingID);
+                
+            }
+            catch (ApplicationException Err)
+            {
+                start.Text = "---";
+                end.Text = "---";
+                function.logAnError("Couldn't get the time [receptionist.aspx] error:" + Err.ToString());
+            }
+
+            if (bServices.Count < 2)
+            {
+                start.Text = a.StartTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(start);
+
+                end.Text = a.EndTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(end);
+            }
+            else if (bServices.Count >= 2)
+            {
+                start.Text = time.StartTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(start);
+
+                end.Text = time.EndTime.ToString("HH:mm");
+                AgendaTable.Rows[i].Cells.Add(end);
+            }
+
+            #endregion
+            #region Customer
+            TableCell c = new TableCell();
+            c.Width = 300;
+            c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.UserID.ToString().Replace(" ", string.Empty) +
+                            "'>" + a.CustomerFName.ToString() + "</a>";
+            AgendaTable.Rows[i].Cells.Add(c);
+            #endregion
+            #region Services
+
+            TableCell services = new TableCell();
+            services.Width = 300;
+
+            try
+            {
+                bServices = handler.getBookingServices(a.BookingID.ToString());
+            }
+            catch(ApplicationException Err)
+            {
+                services.Text = "Unable to retreive data";
+                function.logAnError("Couldn't get the services [receptionist.aspx] error:" + Err.ToString());
+            }
+
+            if (bServices.Count == 1)
+            {
+                services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                + bServices[0].ServiceName.ToString() + "</a>";
+            }
+            else if (bServices.Count == 2)
+            {
+                services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                    "'>" + bServices[0].ServiceName.ToString() +
+                    ", " + bServices[1].ServiceName.ToString() + "</a>";
+            }
+            else if (bServices.Count > 2)
+            {
+                string toolTip = "";
+                int toolTipCount = 0;
+                foreach (SP_GetBookingServices toolTipDTL in bServices)
+                {
+                    if (toolTipCount == 0)
+                    {
+                        toolTip = toolTipDTL.ServiceName;
+                        toolTipCount++;
+                    }
+                    else
+                    {
+                        toolTip += ", " + toolTipDTL.ServiceName;
+                    }
+                }
+                services.Text = "<a title='" + toolTip + "'" +
+                    "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                    "'> Multiple Services </a>";
+            }
+            AgendaTable.Rows[i].Cells.Add(services);
+            #endregion
         }
         #endregion
 

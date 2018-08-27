@@ -60,9 +60,15 @@
 
                             <!-- Line Break -->
                             <br />
-
-                            <!--Todays Bookings-->
-                            <h1>Todays Bookings </h1>
+                            <p style="text-align: left; float: left;">
+                                <!--Todays Bookings-->
+                                <h1>Todays Bookings </h1>
+                            </p>
+                            <p style="text-align: right; float: right;">
+                                <a href="../Receptionist/Appointments.aspx?Action=ViewAllSchedules">View Booking Schedual </a>
+                            </p>
+                            <!-- Line Break -->
+                            <br />
                             <!-- Bookings Count lable -->
                             <asp:Label ID="bookingsLable" runat="server"></asp:Label>
 
@@ -97,12 +103,19 @@
                 <!-- if the user is loged Out -->
                 <div class="container" runat="server" id="LogedOut">
                     <div class="jumbotron bg-dark text-white">
-                        <h1>Dashboard</h1>
-                        <p>Please log-in to view your Dashboard</p>
-                        <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Manager.aspx" id="LogedOutButton">Login</a>
+                        <div class="row">
+                            <div class="col-10">
+                                <h1>Dashboard</h1>
+                                <p>Please log-in to view your Dashboard</p>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Manager.aspx" id="LogedOutButton">Login</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2 col-sm-1"></div>
         </div>
+        <div class="col-md-2 col-sm-1"></div>
+    </div>
 </asp:Content>

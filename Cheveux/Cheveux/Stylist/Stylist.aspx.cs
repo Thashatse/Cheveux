@@ -18,8 +18,8 @@ namespace Cheveux
         HttpCookie cookie = null;
         SP_ViewCustVisit cv = null;
         List<SP_GetEmpAgenda> agenda = null;
-
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
+
         protected void Page_Load(object sender, EventArgs e)
         {
             errorHeader.Font.Bold = true;

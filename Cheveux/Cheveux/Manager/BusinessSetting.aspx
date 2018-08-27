@@ -237,11 +237,15 @@
             <!-- if the user is loged Out -->
             <div runat="server" id="LogedOut">
                 <div class="bg-dark text-white jumbotron">
-                    <h1>Settings</h1>
-                    <p>Please log-in to view Settings</p>
-                    <button type="button" class="btn btn-Primary">
-                        <a href="../Authentication/Accounts.aspx?PreviousPage=BusinessSetting.aspx" id="LogedOutButton">Login</a>
-                    </button>
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>Settings</h1>
+                            <p>Please log-in to view Settings</p>
+                        </div>
+                        <div class="col-2">
+                            <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=BusinessSetting.aspx" id="LogedOutButton">Login</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

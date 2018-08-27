@@ -434,11 +434,12 @@ namespace Cheveux
                         }
                         #endregion
 
+                        #region Multislot
                         length = CalculateSlotLength(sender, e);
-                        
+                        string primaryBookingID = book.BookingID;
+
                         if (length > 1)
                         {
-                            string primaryBookingID = book.BookingID;
                             int bookedSlotIndex = 0;
                             int slotIndex = 0;
                                 foreach(SP_GetSlotTimes slot in slotList)
@@ -471,26 +472,51 @@ namespace Cheveux
                                 handler.BLL_AddBooking(book);
                             }
                         }
+                        #endregion
 
                         #region Email Notification
-                        USER user = handler.GetUserDetails(cookie["ID"]);
-                        //send an email notification
-                        var body = new System.Text.StringBuilder();
-                        body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"Your booking is with " + rblPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
-                        body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
-                        body.AppendLine(@"");
-                        body.AppendLine(@"Regards,");
-                        body.AppendLine(@"");
-                        body.AppendLine(@"The Cheveux Team");
-                        function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
-                            "Booking Confirmation",
-                            body.ToString(),
-                            "Bookings Cheveux");
+                        if (Authcookie["UT"].ToString()[0] == 'C')
+                        {
+                            USER user = handler.GetUserDetails(cookie["ID"]);
+                            //send an email notification
+                            var body = new System.Text.StringBuilder();
+                            body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"Your booking is with " + rblPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
+                            body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                            body.AppendLine(@"");
+                            body.AppendLine(@"Regards,");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"The Cheveux Team");
+                            function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                                "Booking Confirmation",
+                                body.ToString(),
+                                "Bookings Cheveux");
+                        }
+                        else
+                        {
+                            USER user = handler.GetUserDetails(handler.getCustomerUpcomingBookingDetails(book.BookingID).CustomerID);
+                            //send an email notification
+                            var body = new System.Text.StringBuilder();
+                            body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"Your booking is with " + rblPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
+                            body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                            body.AppendLine(@"");
+                            body.AppendLine(@"Regards,");
+                            body.AppendLine(@"");
+                            body.AppendLine(@"The Cheveux Team");
+                            function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                                "Booking Confirmation",
+                                body.ToString(),
+                                "Bookings Cheveux");
+                        }
                         #endregion
 
                         #region Redirect
@@ -506,7 +532,7 @@ namespace Cheveux
                         {
                             //if internal booking
                             //redirect to booking summary
-                            Response.Redirect("ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                            Response.Redirect("ViewBooking.aspx?BookingID=" + primaryBookingID);
                         }
                         #endregion
                     }

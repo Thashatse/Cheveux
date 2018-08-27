@@ -171,6 +171,39 @@ namespace DAL
             }
         }
 
+        public SALE getSale(string SaleID)
+        {
+            SALE sale = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@saleID", SaleID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetSale",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                            sale = new SALE
+                            {
+                                SaleID = table.Rows[0][0].ToString(),
+                                Date = Convert.ToDateTime(table.Rows[0][1].ToString()),
+                                CustID = table.Rows[0][2].ToString(),
+                                PaymentType = table.Rows[0][3].ToString(),
+                                BookingID = table.Rows[0][4].ToString(),
+                            };
+                    }
+                    return sale;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public bool createProductSalesDTLRecord(SALES_DTL Sale)
         {
             try
@@ -547,6 +580,75 @@ namespace DAL
             }
 
         }
+
+        public List<SP_GetTodaysBookings> getTodaysBookings()
+        {
+            SP_GetTodaysBookings booking = null;
+            List<SP_GetTodaysBookings> bookings = new List<SP_GetTodaysBookings>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetTodaysBookings",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            booking = new SP_GetTodaysBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                SlotNo = row["SlotNo"].ToString(),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                CustomerID = row["CustomerID"].ToString(),
+                                CustomerFirstName = row["FirstName"].ToString(),
+                                CustomerLastName = row["LastName"].ToString(),
+                                Date = Convert.ToDateTime(row["Date"].ToString()),
+                                Available = row["Available"].ToString(),
+                                Arrived = row["Arrived"].ToString(),
+                                Comment = row["Comment"].ToString()
+                            };
+                            bookings.Add(booking);
+                        }
+                    }
+                    return bookings;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+        public SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID)
+        {
+            SP_GetMultipleServicesTime time = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@primaryBookingID", primaryBookingID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetMultipleServicesTime", 
+                                                CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        time = new SP_GetMultipleServicesTime
+                        {
+                            StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                        };
+                    }
+                }
+                return time;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region CheckIN CheckOut Cust Vist
@@ -625,10 +727,8 @@ namespace DAL
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
-                    new SqlParameter("@BookingID", booking.BookingID.ToString() ),
-                    new SqlParameter("@StylistID", booking.StylistID.ToString()),
+                    new SqlParameter("@BookingID", booking.BookingID.ToString())
                 };
-
                 return DBHelper.NonQuery("SP_CheckIn", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
@@ -1590,6 +1690,7 @@ namespace DAL
         }
         #endregion
 
+        #region Search
         public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
         {
             List<SP_ProductSearchByTerm> ProductSearchResults = new List<SP_ProductSearchByTerm>();
@@ -1732,7 +1833,8 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+        #endregion
+
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
@@ -1782,6 +1884,7 @@ namespace DAL
                             emp = new SP_GetEmpAgenda
                             {
                                 BookingID = Convert.ToString(row["BookingID"]),
+                                PrimaryID = Convert.ToString(row["PrimaryID"]),
                                 UserID = Convert.ToString(row["UserID"]),
                                 StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
                                 EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
@@ -2281,50 +2384,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public List<SP_GetTodaysBookings> getTodaysBookings()
-        {
-            SP_GetTodaysBookings booking = null;
-            List<SP_GetTodaysBookings> bookings = new List<SP_GetTodaysBookings>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_GetTodaysBookings",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            booking = new SP_GetTodaysBookings
-                            {
-                                BookingID = row[0].ToString(),
-                                SlotNo = row[1].ToString(),
-                                StartTime = Convert.ToDateTime(row[2].ToString()),
-                                EndTime = Convert.ToDateTime(row[3].ToString()),
-                                CustomerID = row[4].ToString(),
-                                CustomerFirstName = row[5].ToString(),
-                                CustomerLastName = row[6].ToString(),
-                                StylistID = row[7].ToString(),
-                                ServiceID = row[8].ToString(),
-                                ServiceName = row[9].ToString(),
-                                Date = Convert.ToDateTime(row[10].ToString()),
-                                Available = row[11].ToString(),
-                                Arrived = row[12].ToString(),
-                                Comment = row[13].ToString()
-                            };
-                            bookings.Add(booking);
-                        }
-                    }
-                    return bookings;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-
-        }
-
+        
         public USER checkForAccountTypeEmail(string identifier)
         {
             USER AT = null;

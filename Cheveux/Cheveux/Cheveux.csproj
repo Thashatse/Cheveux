@@ -127,6 +127,7 @@
     <Content Include="AddProduct.aspx" />
     <Content Include="Manager\AddService.aspx" />
     <Content Include="Manager\UpdateService.aspx" />
+    <Content Include="PrintInvoice.aspx" />
     <Content Include="Receptionist\Appointments.aspx" />
     <Content Include="Authentication\Accounts.aspx" />
     <Content Include="Cheveux\Products.aspx" />
@@ -300,6 +301,13 @@
     </Compile>
     <Compile Include="Manager\UpdateService.aspx.designer.cs">
       <DependentUpon>UpdateService.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrintInvoice.aspx.cs">
+      <DependentUpon>PrintInvoice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintInvoice.aspx.designer.cs">
+      <DependentUpon>PrintInvoice.aspx</DependentUpon>
     </Compile>
     <Compile Include="Receptionist\Appointments.aspx.cs">
       <DependentUpon>Appointments.aspx</DependentUpon>

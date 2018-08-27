@@ -9,6 +9,7 @@ namespace TypeLibrary.ViewModels
     public class SP_GetEmpAgenda
     {
         public string BookingID { get; set; }
+        public string PrimaryID { get; set;}
         public string UserID { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
