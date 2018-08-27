@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	get Sale Details
 -- =============================================
-CREATE PROCEDURE SP_GetSale
+alter PROCEDURE SP_GetSale
 	@saleID nchar(10)
 AS
 BEGIN

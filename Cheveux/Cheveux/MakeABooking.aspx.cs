@@ -383,6 +383,7 @@ namespace Cheveux
                     HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
                     if (Authcookie != null)
                     {
+
                         #region external Booking (Customer)
                         if (Authcookie["UT"].ToString()[0] == 'C')
                         {

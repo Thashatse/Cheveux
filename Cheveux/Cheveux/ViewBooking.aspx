@@ -177,11 +177,11 @@
                                             <br />
                                             <h3>
                                                 <!--Lable-->
-                                            Remove Service: 
+                                                Remove Service: 
                                             </h3>
-                                    <!--Line Break-->
-                                    <br />
-                                    <asp:ListBox runat="server" ID="lbServices" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
+                                            <!--Line Break-->
+                                            <br />
+                                            <asp:ListBox runat="server" ID="lbServices" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
                                             <!--Line Break-->
                                             <br />
                                             <asp:Button ID="btnCancelEditService" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancel_Click" />
