@@ -94,10 +94,9 @@ namespace DAL
 
         #region Products
         PRODUCT CheckForProduct(string id);
-        bool AddProduct(PRODUCT addProduct);
+        bool addProduct(PRODUCT addProduct);
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
-
         #endregion
 
         #region Services
@@ -160,4 +159,4 @@ namespace DAL
         SERVICE GetSlotLength(string serviceID);
 
     }
-    }
+}

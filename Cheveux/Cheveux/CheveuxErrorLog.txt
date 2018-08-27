@@ -225,3 +225,335 @@ Error Number:8146,State:2,Class:16
    at DAL.DBAccess.selectAccessory(String accessoryID) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1219
    at BLL.DBHandler.selectAccessory(String accessoryID) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 120
    at Cheveux.Cheveux.Products.LoadProduct(String productID) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Cheveux\Products.aspx.cs:line 283
+
+TimeStamp: 8/27/2018 1:34:38 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/27/2018 1:34:38 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured hairstyls on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 239
+
+TimeStamp: 8/27/2018 1:34:38 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured products on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 274
+
+TimeStamp: 8/27/2018 1:34:38 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 303
+
+TimeStamp: 8/27/2018 1:34:38 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load operating hours on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1505
+   at DAL.DBAccess.getBusinessTable() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1531
+   at BLL.DBHandler.getBusinessTable() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 215
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 332
+
+TimeStamp: 8/27/2018 1:35:07 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load featurd items from the DB on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.InvalidOperationException: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetHomePageFeatures() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 23
+   at DAL.DBAccess.GetHomePageFeatures() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 69
+   at BLL.DBHandler.GetHomePageFeatures() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 24
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 228
+
+TimeStamp: 8/27/2018 1:35:07 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured hairstyls on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 239
+
+TimeStamp: 8/27/2018 1:35:08 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured products on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 274
+
+TimeStamp: 8/27/2018 1:35:08 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 303
+
+TimeStamp: 8/27/2018 1:35:09 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load operating hours on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1505
+   at DAL.DBAccess.getBusinessTable() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1531
+   at BLL.DBHandler.getBusinessTable() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 215
+   at Cheveux.Default2.loadHomePage() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Default.aspx.cs:line 332
+
+TimeStamp: 8/27/2018 1:35:10 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+ An error occurred retrieving list of products external products page. Error: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1209
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1276
+   at BLL.DBHandler.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 250
+   at Cheveux.Cheveux.Products.loadProductList(Char productType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Cheveux\Products.aspx.cs:line 59
+
+TimeStamp: 8/27/2018 1:40:32 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+ An error occurred retrieving list of products external products page. Error: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1209
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1276
+   at BLL.DBHandler.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 250
+   at Cheveux.Cheveux.Products.loadProductList(Char productType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Cheveux\Products.aspx.cs:line 59
+
+TimeStamp: 8/27/2018 1:45:31 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+ An error occurred retrieving list of products external products page. Error: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1209
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1276
+   at BLL.DBHandler.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 250
+   at Cheveux.Cheveux.Products.loadProductList(Char productType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Cheveux\Products.aspx.cs:line 59
+
+TimeStamp: 8/27/2018 1:45:50 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+ An error occurred retrieving list of products external products page. Error: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 26 - Error Locating Server/Instance Specified)
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:-1,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1209
+   at DAL.DBAccess.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 1276
+   at BLL.DBHandler.getAllProductsAndDetails() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 250
+   at Cheveux.Cheveux.Products.loadProductList(Char productType) in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\Cheveux\Cheveux\Products.aspx.cs:line 59
+
+TimeStamp: 8/27/2018 1:56:44 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/27/2018 1:56:52 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/27/2018 1:57:01 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 8/27/2018 1:57:05 PM
+Machine Name: DESKTOP-NJP3MP6
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: lache_19g9o6a
+User Domain: DESKTOP-NJP3MP6
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in C:\Users\lache_19g9o6a\Source\Repos\Cheveux2\Cheveux\BLL\Functions.cs:line 285

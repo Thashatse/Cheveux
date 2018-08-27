@@ -28,25 +28,35 @@ namespace Cheveux.Cheveux
         {
             //check query string
             string productID = Request.QueryString["ProductID"];
+            string action = Request.QueryString["Action"];
 
             //load all products
-            if (productID == null)
+            if (action == null)
             {
-                phProducts.Visible = true ;
-                addandedit.Visible = false;
-                phSpecProduct.Visible = false;
-                lblHeader.InnerText = "Products";
+                if (productID == null)
+                {
+                    phProducts.Visible = true;
+                    addandedit.Visible = false;
+                    phSpecProduct.Visible = false;
+                    lblHeader.InnerText = "Products";
 
-                loadProductList('X');
+                    loadProductList('X');
 
+                }
+                else if (productID != null) //load specific product
+                {
+                    lblHeader.InnerText = "Product"; //later make this display the specific products name or image
+                    phProducts.Visible = false;
+                    addandedit.Visible = false;
+                    phSpecProduct.Visible = true;
+                    LoadProduct(productID);
+                }
             }
-            else if(productID != null) //load specific product
+            else if(action == "Add")
             {
-                lblHeader.InnerText = "Product"; //later make this display the specific products name or image
                 phProducts.Visible = false;
-                addandedit.Visible = false;
-                phSpecProduct.Visible = true;
-                LoadProduct(productID);
+                addandedit.Visible = true;
+                phSpecProduct.Visible = false;
             }
 
         }
@@ -330,8 +340,21 @@ namespace Cheveux.Cheveux
             }
             }
 
-        
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            //create a product object 
+            PRODUCT newProduct = new PRODUCT();
+            newProduct.Name = TxtName.Text; 
 
+            if(drpListProductType.SelectedIndex == 0)
+            {
+                //create access
+            }
+            else if (drpListProductType.SelectedIndex == 1)
+            {
+                //create treat
+            }
+        }
     }
 } 
 

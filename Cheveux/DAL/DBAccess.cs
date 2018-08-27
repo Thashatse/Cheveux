@@ -1360,10 +1360,9 @@ namespace DAL
             return treatment;
         }
 
-
         //AddProduct
          public bool addProduct(PRODUCT addProduct)
-        {
+        { 
           try
             {
                 SqlParameter[] pars = new SqlParameter[]
@@ -1385,7 +1384,6 @@ namespace DAL
 
 
         }
-
         #endregion
 
         #region Manager Dash Board

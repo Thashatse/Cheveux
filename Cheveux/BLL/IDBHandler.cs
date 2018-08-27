@@ -58,7 +58,7 @@ namespace BLL
         PRODUCT CheckForProduct(string id);
         SP_GetAllAccessories selectAccessory(string accessoryID);
         SP_GetAllTreatments selectTreatment(string treatmentID);
-        bool AddProduct(PRODUCT addProduct);
+        bool addProduct(PRODUCT addProduct);
         #endregion
 
         #region Services

@@ -131,11 +131,10 @@ namespace BLL
          }
 
         //addProduct
-        public bool AddProduct(PRODUCT addProduct)
-            {
-               return db.AddProduct(addProduct);
-            }
-
+        public bool addProduct(PRODUCT addProduct)
+        {
+            return db.addProduct(addProduct);
+        }
 
         #endregion
 
