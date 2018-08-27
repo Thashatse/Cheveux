@@ -73,7 +73,7 @@
                     </asp:DropDownList>
                     <asp:Label ID="LblColour" runat="server" Text="Colour">Colour</asp:Label>
                     <asp:TextBox ID="txtColour" runat="server"></asp:TextBox>
-                    <asp:Button ID="Button1" runat="server" Text="Add " OnClick="Button1_Click"\/>
+                    <asp:Button ID="Button1" runat="server" Text="Add " OnClick="Button1_Click"/>
                 </form>
             </div>
     </div>
