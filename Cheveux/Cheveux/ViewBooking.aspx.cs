@@ -643,7 +643,7 @@ namespace Cheveux
                 //increment Row Count 
                 rowCount++;
 
-                if (cookie["UT"].ToString()[0] == 'R')
+                if (cookie["UT"].ToString()[0] == 'R' || cookie["UT"].ToString()[0] == 'S')
                 {
                     newRow = new TableRow();
                     newRow.Height = 50;
@@ -653,7 +653,9 @@ namespace Cheveux
                     newCell.Text = "Customer:";
                     tblEditSummary.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = BookingDetails.CustFullName.ToString();
+                    newCell.Text = "<a href='Profile.aspx?Action=View&UserID=" + BookingDetails.CustomerID + "'> " +
+                        BookingDetails.CustFullName.ToString()
+                        + " </a>";
                     tblEditSummary.Rows[rowCount].Cells.Add(newCell);
 
                     //increment row count 
@@ -665,19 +667,34 @@ namespace Cheveux
                 newRow.Height = 50;
                 tblEditSummary.Rows.Add(newRow);
 
-                //stylist
-                newCell = new TableCell();
-                newCell.Width = 150;
-                newCell.Font.Bold = true;
-                newCell.Text = "Stylist";
-                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
-                newCell = new TableCell();
-                newCell.Width = 150;
-                newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Stylist'> " + 
-                    BookingDetails.stylistFirstName.ToString()
-                +" </a>";
-                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
-
+                if (cookie["UT"].ToString()[0] != 'S')
+                {
+                    //stylist
+                    newCell = new TableCell();
+                    newCell.Width = 150;
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Stylist";
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Width = 150;
+                    newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Stylist'> " +
+                        BookingDetails.stylistFirstName.ToString()
+                    + " </a>";
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                }
+                else
+                {
+                    //stylist
+                    newCell = new TableCell();
+                    newCell.Width = 150;
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Stylist";
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Width = 150;
+                    newCell.Text = BookingDetails.stylistFirstName.ToString();
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                }
                 //increment Row Count 
                 rowCount++;
 
@@ -1180,7 +1197,7 @@ namespace Cheveux
                 Response.Cookies.Add(bookingTime);
                 //load booking detais
                 SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
-                
+
                 //set button counters
                 int morningButtonCount = 1;
                 int afternoonButtonCount = 11;
@@ -1517,9 +1534,14 @@ namespace Cheveux
             }
             catch (Exception err)
             {
-                function.logAnError("Error loading Date Time Selector in loadEditStylist() in viewbooking for edit. BookingID: "+BookingID+" | "
+                function.logAnError("Error loading Date Time Selector in loadEditStylist() in viewbooking for edit. BookingID: " + BookingID + " | "
                     + err);
                 loadEditError();
+            }
+
+            if (cookie["UT"].ToString()[0] == 'S')
+            {
+                drpEmpNames.Visible = false;
             }
         }
 
