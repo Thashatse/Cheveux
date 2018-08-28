@@ -58,8 +58,14 @@
                                 </div>
                             </div>
 
-                            <!-- Line Break -->
-                            <br />
+                            <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                             <p style="text-align: left; float: left;">
                                 <!--Todays Bookings-->
                                 <h1>Todays Bookings </h1>
@@ -76,8 +82,14 @@
                             <asp:Table ID="tblBookings" runat="server">
                             </asp:Table>
 
-                            <!-- Line Break -->
-                            <br />
+                            <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                             <div runat="server" id="divOrders">
                                 <!--Orders-->
                                 <h1>Outstanding Product Orders </h1>
