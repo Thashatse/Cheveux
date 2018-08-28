@@ -330,7 +330,7 @@ namespace Cheveux.Manager
                             }
                             catch (ApplicationException Err)
                             {
-                                function.logAnError("Error Loading Booking Services in manager dashboadr todays bookings (Upcoming) Error:" +
+                                function.logAnError("Error Loading Booking Services in manager dashboard todays bookings (Upcoming) Error:" +
                                     Err.ToString());
                             }
                             newCell = new TableCell();
@@ -369,11 +369,11 @@ namespace Cheveux.Manager
                             newCell = new TableCell();
                             if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
                             {
-                                newCell.Text = "Customer Has Not Arived";
+                                newCell.Text = "Not Arrived";
                             }
                             else if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "Yes")
                             {
-                                newCell.Text = "Customer Has Arived";
+                                newCell.Text = "Arrived";
                             }
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
@@ -453,11 +453,11 @@ namespace Cheveux.Manager
                             newCell = new TableCell();
                             if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
                             {
-                                newCell.Text = "Customer Has Not Arived";
+                                newCell.Text = "Not Arrived";
                             }
                             else if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "Yes")
                             {
-                                newCell.Text = "Customer Has Arived";
+                                newCell.Text = "Arrived";
                             }
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
