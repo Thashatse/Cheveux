@@ -50,7 +50,7 @@
                             <div style="border: solid #F05F40 2px; height: 400px; overflow-y: scroll;">
                                 <div class="container">
                                     <asp:Table ID="tblBookingSummary" runat="server">
-                                        <asp:TableHeaderRow>
+                                        <asp:TableHeaderRow ColumnSpan="2">
                                             <asp:TableCell>
                                                 <asp:Label runat="server" ID="lblChoose"></asp:Label>
                                             </asp:TableCell>
@@ -107,7 +107,7 @@
                                         <div runat="server" id="divNatural" visible="true">
                                             <a name="Natural"></a>
                                             <h5>Natural</h5>
-                                            <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="cblPickAServiceN_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:CheckBoxList runat="server" ID="cblPickAServiceN" OnSelectedIndexChanged="LoadSummary" AutoPostBack="true">
                                             </asp:CheckBoxList><br />
                                             <a name="Application"></a>
                                         </div>
@@ -115,7 +115,7 @@
                                         <div runat="server" id="divApplication" visible="true">
 
                                             <h5>Application</h5>
-                                            <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="rblPickAServiceA_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:RadioButtonList runat="server" ID="rblPickAServiceA" OnSelectedIndexChanged="LoadSummary" AutoPostBack="true">
                                             </asp:RadioButtonList><br />
                                             <a name="Braid"></a>
                                         </div>
@@ -123,7 +123,7 @@
                                         <div runat="server" id="divBraids" visible="true">
 
                                             <h5>Braids</h5>
-                                            <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="rblPickAServiceB_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="LoadSummary" AutoPostBack="true">
                                             </asp:RadioButtonList>
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                                         <div style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-y: scroll;">
                                             <h3>Choose A Hairstylist</h3>
                                             <br />
-                                    <asp:ListBox runat="server" ID="lbPickAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300" OnSelectionChanged="lbPickAStylist_SelectionChanged"></asp:ListBox>
+                                    <asp:ListBox runat="server" ID="lbPickAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300" OnSelectedIndexChanged="lbPickAStylist_SelectionIndexChanged" AutoPostBack="true"></asp:ListBox>
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                                     <div class="row">
 
                                         <div class="col-6">
-                                            <asp:Calendar runat="server" ID="calBooking" Width="300" Height="150" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged"></asp:Calendar>
+                                            <asp:Calendar runat="server" ID="calBooking" Width="300" Height="150" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged" ></asp:Calendar>
                                         </div>
                                         <div class="col-6">
                                             <div class="row">

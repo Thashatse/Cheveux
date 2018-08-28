@@ -118,7 +118,7 @@ namespace Cheveux
             #endregion
 
             bookingTime = new HttpCookie("BookTime");
-            lblChoose.Text = "Choose A Service to begin booking process...";
+            lblChoose.Text = "Booking Summary...";
             lblChoose.Font.Size = 18;
             lblChoose.ForeColor = Color.Gray;
             //Check if the user is logged 
@@ -197,6 +197,7 @@ namespace Cheveux
 
                 if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
                 {
+                    
                     lblErrorSummary.Visible = true;
                     lblErrorSummary.Text = "Please select a service(s) before moving to the next step!";
                     divServices.Visible = true;
@@ -226,6 +227,7 @@ namespace Cheveux
                     lblErrorSummary.Visible = false;
                     divStylist.Visible = false;
                     divDateTime.Visible = true;
+                    calBooking.TodayDayStyle.BackColor = Color.OrangeRed;
                     btnPrevious.Visible = true;
                     btnPrevious.Text = "Choose Hairstylist";
                     //load booking type 
@@ -553,6 +555,7 @@ namespace Cheveux
         {
             if (btnPrevious.Text == "Choose Service(s)")
             {
+               
                 divServices.Visible = true;
                 divStylist.Visible = false;
                 btnPrevious.Visible = false;
@@ -605,7 +608,7 @@ namespace Cheveux
         #region Date
         protected void calBooking_SelectionChanged(object sender, EventArgs e)
         {
-            FillSummary(sender, e);
+            LoadSummary(sender, e);
             //get slot length
             int i = CalculateSlotLength(sender, e);
             //slotList Index
@@ -972,7 +975,9 @@ namespace Cheveux
             if (e.Day.Date.CompareTo(DateTime.Today) < 0)
             {
                 e.Day.IsSelectable = false;
+                e.Cell.BackColor = Color.LightGray;
             }
+
         }
         #endregion
 
@@ -1027,62 +1032,74 @@ namespace Cheveux
 
         protected void btnAfternoon11_Click(object sender, EventArgs e)
         {
+
             calBooking_SelectionChanged(sender, e);
             bookingTime["TimeSlot"] = availableTimes[11, 0];
             bookingTime["Time"] = availableTimes[11, 1];
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon11.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning1_Click(object sender, EventArgs e)
         {
+
             calBooking_SelectionChanged(sender, e);
             bookingTime["TimeSlot"] = availableTimes[1, 0];
             bookingTime["Time"] = availableTimes[1, 1];
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning1.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning2_Click(object sender, EventArgs e)
         {
+
             calBooking_SelectionChanged(sender, e);
             bookingTime["TimeSlot"] = availableTimes[2, 0];
             bookingTime["Time"] = availableTimes[2, 1];
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning2.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning3_Click(object sender, EventArgs e)
         {
+
             calBooking_SelectionChanged(sender, e);
             bookingTime["TimeSlot"] = availableTimes[3, 0];
             bookingTime["Time"] = availableTimes[3, 1];
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning3.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning4_Click(object sender, EventArgs e)
         {
+
             calBooking_SelectionChanged(sender, e);
             bookingTime["TimeSlot"] = availableTimes[4, 0];
             bookingTime["Time"] = availableTimes[4, 1];
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning4.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning5_Click(object sender, EventArgs e)
         {
+
             calBooking_SelectionChanged(sender, e);
             bookingTime["TimeSlot"] = availableTimes[5, 0];
             bookingTime["Time"] = availableTimes[5, 1];
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning5.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning6_Click(object sender, EventArgs e)
@@ -1093,6 +1110,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning6.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning7_Click(object sender, EventArgs e)
@@ -1103,6 +1121,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning7.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning8_Click(object sender, EventArgs e)
@@ -1113,6 +1132,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning8.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning9_Click(object sender, EventArgs e)
@@ -1123,6 +1143,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning9.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnMorning10_Click(object sender, EventArgs e)
@@ -1133,6 +1154,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnMorning10.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon12_Click(object sender, EventArgs e)
@@ -1143,6 +1165,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon12.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon13_Click(object sender, EventArgs e)
@@ -1153,6 +1176,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon13.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon14_Click(object sender, EventArgs e)
@@ -1163,6 +1187,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon14.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon15_Click(object sender, EventArgs e)
@@ -1173,6 +1198,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon15.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon16_Click(object sender, EventArgs e)
@@ -1183,6 +1209,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon16.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon17_Click(object sender, EventArgs e)
@@ -1193,6 +1220,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon17.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon18_Click(object sender, EventArgs e)
@@ -1203,6 +1231,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon18.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon19_Click(object sender, EventArgs e)
@@ -1213,6 +1242,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon19.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
 
         protected void btnAfternoon20_Click(object sender, EventArgs e)
@@ -1223,6 +1253,7 @@ namespace Cheveux
             Response.Cookies.Add(bookingTime);
             deselectButton();
             btnAfternoon20.CssClass = "btn btn-primary";
+            LoadSummary(sender, e);
         }
         #endregion
 
@@ -1250,7 +1281,7 @@ namespace Cheveux
                     pickedServiceName.Add(rblPickAServiceA.SelectedItem.Text);
                     count++;
                 }
-                FillSummary(sender, e);
+
                 rblPickAServiceB.Enabled = false;
 
             }
@@ -1259,10 +1290,15 @@ namespace Cheveux
                 rblPickAServiceB.Enabled = true;
             }
 
+
+
+
         }
 
         protected void rblPickAServiceB_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
             if (rblPickAServiceB.SelectedValue != "0")
             {
                 if (pickedServiceID == null)
@@ -1283,7 +1319,7 @@ namespace Cheveux
                     pickedServiceName.Add(rblPickAServiceB.SelectedItem.Text);
                     count++;
                 }
-                FillSummary(sender, e);
+
                 rblPickAServiceA.Enabled = false;
 
             }
@@ -1291,6 +1327,7 @@ namespace Cheveux
             {
                 rblPickAServiceA.Enabled = true;
             }
+
 
         }
 
@@ -1300,7 +1337,6 @@ namespace Cheveux
             {
                 if (item.Selected)
                 {
-                    FillSummary(sender, e);
                     if (pickedServiceID == null)
                     {
                         if (pickedServiceName == null)
@@ -1322,15 +1358,11 @@ namespace Cheveux
 
 
                 }
+                
 
             }
         }
         #endregion
-
-        protected void lbPickAStylist_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillSummary(sender, e);
-        }
 
         #region Internal Bookings
         #region Customer list box & IDs
@@ -1424,6 +1456,10 @@ namespace Cheveux
         }
         #endregion
         #endregion
+        protected void lbPickAStylist_SelectionIndexChanged(object sender, EventArgs e)
+        {
+            LoadSummary(sender, e);
+        }
 
         private int CalculateSlotLength(object sender, EventArgs e)
         {
@@ -1445,10 +1481,8 @@ namespace Cheveux
         }
         private void FillSummary(object sender, EventArgs e)
         {
-            lblChoose.Text = "";
             lblServiceLabel.Text = "";
             lblServices.Text = "";
-            lblChoose.Text = "";
             lblStylistLabel.Text = "";
             lblStylist.Text = "";
             lblDateLabel.Text = "";
@@ -1460,109 +1494,90 @@ namespace Cheveux
             //Fill Services
             try
             {
-                if (pickedServiceID != null)
+                if(pickedServiceID.Count ==1)
                 {
-                    if (rblPickAServiceA.SelectedValue != "0")
+                    lblServiceLabel.Text = "Service(s): ";
+                    if(rblPickAServiceA.SelectedValue != "0")
                     {
-                        lblServiceLabel.Text = "You have chosen: ";
-                        if (lblServices.Text == "")
-                        {
-                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
-                        }
-                        else
-                        {
-                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
-                        }
+                        lblServices.Text = rblPickAServiceA.SelectedItem.Text;
                     }
-                    else if (rblPickAServiceB.SelectedValue != "0")
+                    if (rblPickAServiceB.SelectedValue != "0")
                     {
-                        lblServiceLabel.Text = "You have chosen: ";
-                        if (lblServices.Text == "")
-                        {
-                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
-                        }
-                        else
-                        {
-                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
-                        }
+                        lblServices.Text = rblPickAServiceB.SelectedItem.Text;
                     }
-                    else if (cblPickAServiceN.SelectedValue != "0")
+                    if (cblPickAServiceN.SelectedValue != "0")
                     {
+
                         foreach (ListItem item in cblPickAServiceN.Items)
                         {
                             if (item.Selected)
                             {
-                                lblServiceLabel.Text = "You have chosen: ";
-                                if (lblServices.Text == "")
-                                {
                                     lblServices.Text = item.Text;
-                                }
-                                else
-                                {
-                                    lblServices.Text += ", " + item.Text;
-                                }
+
                             }
                         }
                     }
-                    else
-                    {
-                        lblChoose.Text = "Choose A Service to begin booking process...";
-                        lblChoose.Font.Size = 18;
-                        lblChoose.ForeColor = Color.Gray;
-                    }
+                    
+                   
                 }
-                else
+                else if(pickedServiceID.Count > 1)
                 {
+                    int count = 0;
+                    lblServiceLabel.Text = "Service(s): ";
+
                     if (rblPickAServiceA.SelectedValue != "0")
                     {
-                        lblServiceLabel.Text = "You have chosen: ";
-                        if (lblServices.Text == "")
+                        if (count == 0)
                         {
                             lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                            count++;
                         }
                         else
                         {
-                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
+                           lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
                         }
+         
                     }
-                    else if (rblPickAServiceB.SelectedValue != "0")
+                    if (rblPickAServiceB.SelectedValue != "0")
                     {
-                        lblServiceLabel.Text = "You have chosen: ";
-                        if (lblServices.Text == "")
+                        if(count == 0)
                         {
-                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                            lblServices.Text = rblPickAServiceB.SelectedItem.Text;
+                            count++;
                         }
                         else
                         {
-                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
+                            lblServices.Text += ", " + rblPickAServiceB.SelectedItem.Text;
                         }
                     }
-                    else if (cblPickAServiceN.SelectedValue != "0")
+                    if (cblPickAServiceN.SelectedValue != "0")
                     {
+
                         foreach (ListItem item in cblPickAServiceN.Items)
                         {
                             if (item.Selected)
-                            {
-                                lblServiceLabel.Text = "You have chosen: ";
-                                if (lblServices.Text == "")
+                            {                             
+                                if(count == 0)
                                 {
                                     lblServices.Text = item.Text;
+                                    count++;
                                 }
                                 else
-                                {
-                                    lblServices.Text = ", " + item.Text;
+                                {lblServices.Text += ", " + item.Text;
+
                                 }
+                                                           
                             }
                         }
                     }
+
                 }
 
-
-
+              
                 //Fill Stylist
                 if (lbPickAStylist.SelectedValue.ToString() != "")
                 {
-                    lblStylistLabel.Text = "With: ";
+                    lblStylistLabel.Text = "Stylist: ";
                     lblStylist.Text = lbPickAStylist.SelectedItem.Text;
                 }
                 else
@@ -1576,7 +1591,7 @@ namespace Cheveux
                 //Fill Date and Time
                 if (calBooking.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
-                    lblDateLabel.Text = "On: ";
+                    lblDateLabel.Text = "Date: ";
                     lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
                 }
                 else
@@ -1587,7 +1602,7 @@ namespace Cheveux
                 
                 if(bookingTime != null)
                 {
-                    lblTimeLabel.Text = "At: ";
+                    lblTimeLabel.Text = "Time: ";
                     lblTime.Text = bookingTime["Time"];
                 }
                 else
@@ -1604,6 +1619,16 @@ namespace Cheveux
                     error);
                 lblErrorSummary.Text = "An error occurred while filling the summary";
             }
+        }
+        protected void LoadSummary(object sender, EventArgs e)
+        {
+            pickedServiceName = new List<string>();
+            pickedServiceID = new List<string>();
+            rblPickAServiceB_SelectedIndexChanged(sender, e);
+            rblPickAServiceA_SelectedIndexChanged(sender, e);
+            cblPickAServiceN_SelectedIndexChanged(sender, e);
+
+            FillSummary(sender, e);
         }
     }
 }
