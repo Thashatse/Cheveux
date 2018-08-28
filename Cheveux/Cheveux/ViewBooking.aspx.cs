@@ -643,6 +643,23 @@ namespace Cheveux
                 //increment Row Count 
                 rowCount++;
 
+                if (cookie["UT"].ToString()[0] == 'R')
+                {
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblEditSummary.Rows.Add(newRow);
+                    newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "Customer:";
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = BookingDetails.CustFullName.ToString();
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+                }
+
                 //new row
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -737,7 +754,7 @@ namespace Cheveux
                     //increment row count 
                     rowCount++;
                 }
-
+                
                 //cancel booking BTN
                 newRow = new TableRow();
                 newRow.Height = 50;
