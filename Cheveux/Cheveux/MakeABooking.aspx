@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="MakeABooking.aspx.cs" Inherits="Cheveux.MakeABooking" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
+<asp:content id="Content1" contentplaceholderid="PageTitle" runat="server">
     Make A Booking - Cheveux
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+</asp:content>
+<asp:content id="Content2" contentplaceholderid="head" runat="server">
+</asp:content>
+<asp:content id="Content3" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <div class="bg-secondary text-white" id="Div1">
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
@@ -137,8 +137,7 @@
                                         <div style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-y: scroll;">
                                             <h3>Choose A Hairstylist</h3>
                                             <br />
-                                            <asp:RadioButtonList runat="server" ID="rblPickAStylist">
-                                            </asp:RadioButtonList>
+                                    <asp:ListBox runat="server" ID="lbPickAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300"></asp:ListBox>
                                         </div>
                                     </div>
                                 </div>
@@ -268,4 +267,4 @@
     </div>
     <div class="col-md-2 col-sm-1"></div>
     </div>
-</asp:Content>
+</asp:content>

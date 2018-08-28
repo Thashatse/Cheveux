@@ -183,7 +183,7 @@ namespace Cheveux
 
             #region booking Confirimation 
             //confirm booking
-            string stylistID = null;//Request.QueryString["Sty"];
+            string stylistID = Request.QueryString["Sty"];
                 string Date = Request.QueryString["D"];
                 string slotNo = Request.QueryString["T"];
                 DateTime Time = Convert.ToDateTime("2001/01/01");
