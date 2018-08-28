@@ -551,15 +551,15 @@ namespace Cheveux
                 //check for reivious page
                 if (PreviousPageAdress == null)
                 { PreviousPageAdress = "Bookings.aspx"; }
-                
+
                 //display the buttons bassed on if this is a past booking or not
-                if (pastBooking == true)
+                    if (pastBooking == true && BookingDetails.arrived.ToString()[0] != 'N')
                 {
                     //print booking summary
                     newCell.Text = "<a class='btn btn-primary' href='PrintInvoice.aspx?SaleID="+ BookingDetails.bookingID + "' target='_blank'>Print Invoice  </a>";
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
-                else
+                else if (pastBooking != true)
                 {
                     newCell.Text = "<a href = 'ViewBooking.aspx?Action=Cancel&BookingID=" +
                     BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +

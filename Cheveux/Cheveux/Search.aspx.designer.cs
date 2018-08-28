@@ -22,6 +22,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label JumbotronSearchBox;
         
         /// <summary>
+        /// SearchBookings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm SearchBookings;
+        
+        /// <summary>
         /// bookingResultLable control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label bookingResultLable;
+        
+        /// <summary>
+        /// FillterBookingResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button FillterBookingResults;
+        
+        /// <summary>
+        /// divBookingSearchFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBookingSearchFilter;
         
         /// <summary>
         /// bookingSearchResults control.

@@ -13,7 +13,7 @@ namespace Cheveux
 {
     public partial class Accounts : System.Web.UI.Page
     {
-        Authentication auth = new Authentication();
+        BLL.Authentication auth = new BLL.Authentication();
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         USER restPassAccount;
@@ -203,9 +203,13 @@ namespace Cheveux
             }
             else if (PreviousPage == "MakeABooking")
             {
-                String x = "<script type='text/javascript'>window.close();return false;</script>";
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "script", x, false);
+                Response.Redirect("CloseWindow.aspx");
             }
+            else if (PreviousPage == "NewInternalBooking")
+            {
+                Response.Redirect("../MakeABooking.aspx?Type=Internal");
+            }
+
         }
 
         #region Google Auth

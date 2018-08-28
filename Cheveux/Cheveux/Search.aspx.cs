@@ -232,7 +232,7 @@ namespace Cheveux
                             }
 
                             //sort the list by date
-                            bookingsList = bookingsList.OrderBy(o => o.bookingDate).ToList();
+                            bookingsList.Sort((x, y) => y.bookingDate.CompareTo(x.bookingDate));
 
                             if (bookingsList.Count != 0)
                             {
@@ -262,6 +262,7 @@ namespace Cheveux
                                         if(bookingCount == 0)
                                         {
                                             createBookingTableHeader();
+                                            FillterBookingResults.Visible = true;
                                         }
                                         bookingCount++;
                                         // create a new row in the results table and set the height
@@ -303,7 +304,7 @@ namespace Cheveux
                                         newCell.Text = "<button type = 'button' class='btn btn-default'>" +
                                             "<a href = '../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                                             "&BookingType=Past'" +
-                                            ">View Bookings</a></button>";
+                                            ">View Booking</a></button>";
                                         bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
                                     }
                                 }
@@ -339,7 +340,7 @@ namespace Cheveux
                     StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
                 }
                 //no results
-                if(stylistRowCount == 0 && serviceCount == 0 && productCount == 0)
+                if(stylistRowCount == 0 && serviceCount == 0 && productCount == 0 && bookingCount == 0)
                 {
                     bookingResultLable.Text = "<h2> 0 Search Results For '" + searchTerm + "' </h2>";
                 }
@@ -430,5 +431,17 @@ namespace Cheveux
             bookingSearchResults.Rows[0].Cells.Add(newHeaderCell);
         }
         #endregion
+
+        public void filterBooking(object sender, EventArgs e)
+        {
+            if (divBookingSearchFilter.Visible == true)
+            {
+                divBookingSearchFilter.Visible = false;
+            }
+            else
+            {
+                divBookingSearchFilter.Visible = true;
+            }
+        }
     }
 }

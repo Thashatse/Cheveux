@@ -12,10 +12,10 @@ namespace Cheveux
 {
     public partial class NewAccount : System.Web.UI.Page
     {
-        Authentication auth = new Authentication();
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        
+        BLL.Authentication auth = new BLL.Authentication();
+
         private string getRegCookie()
         {
             //get the user data from the cookie
