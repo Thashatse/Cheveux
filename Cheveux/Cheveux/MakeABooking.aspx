@@ -137,8 +137,7 @@
                                         <div style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-y: scroll;">
                                             <h3>Choose A Hairstylist</h3>
                                             <br />
-                                            <asp:RadioButtonList runat="server" ID="rblPickAStylist">
-                                            </asp:RadioButtonList>
+                                    <asp:ListBox runat="server" ID="lbPickAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300"></asp:ListBox>
                                         </div>
                                     </div>
                                 </div>
