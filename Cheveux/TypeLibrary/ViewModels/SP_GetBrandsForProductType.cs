@@ -10,7 +10,7 @@ namespace TypeLibrary.ViewModels
     {
         public string BrandID { get; set; }
         public string Name { get; set; }
-        public char Type{ get; set; } 
+        public string Type{ get; set; } 
     }
 }
 
