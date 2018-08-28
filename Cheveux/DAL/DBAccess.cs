@@ -1381,9 +1381,43 @@ namespace DAL
             {
                 throw new ApplicationException(E.ToString());
             }
+        }
+
+        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
+        {
+            List<SP_GetBrandsForProductType> list = new List<SP_GetBrandsForProductType>();
+            SP_GetBrandsForProductType b = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                //parameter
+            };
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetBrandsForProductType", CommandType.StoredProcedure))
+                {
+                     if(table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            b = new SP_GetBrandsForProductType();
+                            b.BrandID = row["BrandID"].ToString();
+                            b.Name = row["Name"].ToString();
+                            b.Type = row["Type(T/A)"].ToString();
+                            list.Add(b);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+
 
 
         }
+
         #endregion
 
         #region Manager Dash Board
