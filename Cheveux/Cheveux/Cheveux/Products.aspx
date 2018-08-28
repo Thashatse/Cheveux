@@ -1,4 +1,4 @@
-﻿<%--<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="Cheveux.Cheveux.Products" %>--%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="Cheveux.Cheveux.Products" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
     Products - Cheveux
@@ -72,7 +72,7 @@
                          <asp:TableRow>
                           <asp:TableCell Text="Product Type:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                             <asp:TableCell >
-                                     <asp:DropDownList runat="server" ID="drpProductType" OnSelectedIndexChanged="drpType_SelectedIndexChanged" AutoPostBack="true">
+                                     <asp:DropDownList runat="server" ID="drpProductType" AutoPostBack="true">
                                      </asp:DropDownList>
                                             <br /><br />
                                         </asp:TableCell>
@@ -91,14 +91,6 @@
                                             <br />
                                         </asp:TableCell>
                                     </asp:TableRow>
-                                       
-                                     <asp:TableRow>
-                                        <asp:TableCell Text="Name: " Width="150px"></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
-                                            <br />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
                                      <asp:TableRow>
                                         <asp:TableCell Text="Price: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
@@ -107,7 +99,7 @@
                                      <asp:TableRow>
                                     <asp:TableCell Text="Brand:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                             <asp:TableCell >
-                                     <asp:DropDownList runat="server" ID="drpBrandList" OnSelectedIndexChanged="drpType_SelectedIndexChanged" AutoPostBack="true">
+                                     <asp:DropDownList runat="server" ID="drpBrandList" AutoPostBack="true">
                                      </asp:DropDownList>
                                             <br /><br />
                                         </asp:TableCell>
@@ -117,7 +109,7 @@
                                 <asp:TableRow>
                                     <asp:TableCell Text="Supplier:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                             <asp:TableCell >
-                                     <asp:DropDownList runat="server" ID="drpListSupplier" OnSelectedIndexChanged="drpType_SelectedIndexChanged" AutoPostBack="true">
+                                     <asp:DropDownList runat="server" ID="drpListSupplier" AutoPostBack="true">
                                      </asp:DropDownList>
                                             <br />
                                         </asp:TableCell>
@@ -129,7 +121,7 @@
 
                               </form>
             </div>
-    </div>
+    
         <div class="col-md-2 col-sm-1"></div>
     </div>
 </asp:Content>
