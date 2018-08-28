@@ -1300,6 +1300,7 @@ namespace Cheveux
             {
                 if (item.Selected)
                 {
+                    FillSummary(sender, e);
                     if (pickedServiceID == null)
                     {
                         if (pickedServiceName == null)
@@ -1318,13 +1319,18 @@ namespace Cheveux
                         pickedServiceName.Add(item.Text);
                         count++;
                     }
-                    FillSummary(sender, e);
+
 
                 }
 
             }
         }
         #endregion
+
+        protected void lbPickAStylist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillSummary(sender, e);
+        }
 
         #region Internal Bookings
         #region Customer list box & IDs
@@ -1440,125 +1446,163 @@ namespace Cheveux
         private void FillSummary(object sender, EventArgs e)
         {
             lblChoose.Text = "";
+            lblServiceLabel.Text = "";
+            lblServices.Text = "";
+            lblChoose.Text = "";
+            lblStylistLabel.Text = "";
+            lblStylist.Text = "";
+            lblDateLabel.Text = "";
+            lblDate.Text = "";
+            lblTimeLabel.Text = "";
+            lblTime.Text = "";
+            HttpCookie bookingTime = Request.Cookies["BookTime"];
+
             //Fill Services
-            if(pickedServiceID != null)
+            try
             {
-                if (rblPickAServiceA.SelectedValue != "0")
+                if (pickedServiceID != null)
                 {
-                    lblServiceLabel.Text = "You have chosen: ";
-                    if (lblServices.Text == "")
+                    if (rblPickAServiceA.SelectedValue != "0")
                     {
-                        lblServices.Text = rblPickAServiceA.SelectedItem.Text;
-                    }
-                    else
-                    {
-                        lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
-                    }
-                }
-                else if (rblPickAServiceB.SelectedValue != "0")
-                {
-                    lblServiceLabel.Text = "You have chosen: ";
-                    if (lblServices.Text == "")
-                    {
-                        lblServices.Text = rblPickAServiceA.SelectedItem.Text;
-                    }
-                    else
-                    {
-                        lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
-                    }
-                }
-                else if (cblPickAServiceN.SelectedValue != "0")
-                {
-                    foreach (ListItem item in cblPickAServiceN.Items)
-                    {
-                        if (item.Selected)
+                        lblServiceLabel.Text = "You have chosen: ";
+                        if (lblServices.Text == "")
                         {
-                            lblServiceLabel.Text = "You have chosen: ";
-                            if (lblServices.Text == "")
+                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                        }
+                        else
+                        {
+                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
+                        }
+                    }
+                    else if (rblPickAServiceB.SelectedValue != "0")
+                    {
+                        lblServiceLabel.Text = "You have chosen: ";
+                        if (lblServices.Text == "")
+                        {
+                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                        }
+                        else
+                        {
+                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
+                        }
+                    }
+                    else if (cblPickAServiceN.SelectedValue != "0")
+                    {
+                        foreach (ListItem item in cblPickAServiceN.Items)
+                        {
+                            if (item.Selected)
                             {
-                                lblServices.Text = item.Text;
-                            }
-                            else
-                            {
-                                lblServices.Text = ", " + item.Text;
+                                lblServiceLabel.Text = "You have chosen: ";
+                                if (lblServices.Text == "")
+                                {
+                                    lblServices.Text = item.Text;
+                                }
+                                else
+                                {
+                                    lblServices.Text += ", " + item.Text;
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        lblChoose.Text = "Choose A Service to begin booking process...";
+                        lblChoose.Font.Size = 18;
+                        lblChoose.ForeColor = Color.Gray;
                     }
                 }
                 else
                 {
-                    lblChoose.Text = "Choose A Service to begin booking process...";
-                    lblChoose.Font.Size = 18;
-                    lblChoose.ForeColor = Color.Gray;
-                }
-            }
-            else
-            {
-                if (rblPickAServiceA.SelectedValue != "0")
-                {
-                    lblServiceLabel.Text = "You have chosen: ";
-                    if (lblServices.Text == "")
+                    if (rblPickAServiceA.SelectedValue != "0")
                     {
-                        lblServices.Text = rblPickAServiceA.SelectedItem.Text;
-                    }
-                    else
-                    {
-                        lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
-                    }
-                }
-                else if (rblPickAServiceB.SelectedValue != "0")
-                {
-                    lblServiceLabel.Text = "You have chosen: ";
-                    if (lblServices.Text == "")
-                    {
-                        lblServices.Text = rblPickAServiceA.SelectedItem.Text;
-                    }
-                    else
-                    {
-                        lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
-                    }
-                }
-                else if (cblPickAServiceN.SelectedValue != "0")
-                {
-                    foreach (ListItem item in cblPickAServiceN.Items)
-                    {
-                        if (item.Selected)
+                        lblServiceLabel.Text = "You have chosen: ";
+                        if (lblServices.Text == "")
                         {
-                            lblServiceLabel.Text = "You have chosen: ";
-                            if (lblServices.Text == "")
+                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                        }
+                        else
+                        {
+                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
+                        }
+                    }
+                    else if (rblPickAServiceB.SelectedValue != "0")
+                    {
+                        lblServiceLabel.Text = "You have chosen: ";
+                        if (lblServices.Text == "")
+                        {
+                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                        }
+                        else
+                        {
+                            lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
+                        }
+                    }
+                    else if (cblPickAServiceN.SelectedValue != "0")
+                    {
+                        foreach (ListItem item in cblPickAServiceN.Items)
+                        {
+                            if (item.Selected)
                             {
-                                lblServices.Text = item.Text;
-                            }
-                            else
-                            {
-                                lblServices.Text = ", " + item.Text;
+                                lblServiceLabel.Text = "You have chosen: ";
+                                if (lblServices.Text == "")
+                                {
+                                    lblServices.Text = item.Text;
+                                }
+                                else
+                                {
+                                    lblServices.Text = ", " + item.Text;
+                                }
                             }
                         }
                     }
                 }
+
+
+
+                //Fill Stylist
+                if (lbPickAStylist.SelectedValue.ToString() != "")
+                {
+                    lblStylistLabel.Text = "With: ";
+                    lblStylist.Text = lbPickAStylist.SelectedItem.Text;
+                }
+                else
+                {
+                    lblStylistLabel.Text = "";
+                    lblStylist.Text = "";
+
+                }
+
+
+                //Fill Date and Time
+                if (calBooking.SelectedDate.ToString() != "0001/01/01 00:00:00")
+                {
+                    lblDateLabel.Text = "On: ";
+                    lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
+                }
+                else
+                {
+                    lblDateLabel.Text = "";
+                    lblDate.Text = "";
+                }
+                
+                if(bookingTime != null)
+                {
+                    lblTimeLabel.Text = "At: ";
+                    lblTime.Text = bookingTime["Time"];
+                }
+                else
+                {
+                    lblTimeLabel.Text = "";
+                    lblTime.Text = "";
+                }
+
+                
             }
-           
-            //Fill Stylist
-            if(lbPickAStylist.SelectedValue != "0")
+            catch (Exception error)
             {
-                lblStylistLabel.Text = "With: ";
-                lblStylist.Text = lbPickAStylist.SelectedItem.Text;
-            }
-            else
-            {
-                lblStylistLabel.Text = "";
-                lblStylist.Text = "";
-            }
-            //Fill Date and Time
-            if(calBooking.SelectedDate.ToString() != "0001/01/01 00:00:00")
-            {
-                lblDateLabel.Text = "On:";
-                lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
-            }
-            else
-            {
-                lblDateLabel.Text = "";
-                lblDate.Text = "";
+                function.logAnError("An error occurred while filling the summary: " +
+                    error);
+                lblErrorSummary.Text = "An error occurred while filling the summary";
             }
         }
     }

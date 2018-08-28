@@ -56,35 +56,38 @@
                                             </asp:TableCell>
                                         </asp:TableHeaderRow>
                                         <asp:TableRow>
+                                            <asp:TableCell >
+                                                <asp:Label runat="server" ID="lblServiceLabel"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblServices" ></asp:Label>
+                                            </asp:TableCell>
+                                            
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                            <asp:TableCell>
+                                            <asp:Label runat="server" ID="lblStylistLabel"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblStylist"></asp:Label>
+                                            </asp:TableCell>
+                                            
+                                        </asp:TableRow>
+                                        <asp:TableRow>
                                             <asp:TableCell>
                                                 <asp:Label runat="server" ID="lblDateLabel"></asp:Label>
                                             </asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:Label runat="server" ID="lblDate"></asp:Label>
                                             </asp:TableCell>
+                                                
                                         </asp:TableRow>
-                                        <asp:TableRow>
+                                        <asp:TableRow >
                                             <asp:TableCell >
                                                 <asp:Label runat="server" ID="lblTimeLabel"></asp:Label>
                                             </asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:Label runat="server" ID="lblTime"></asp:Label>
-                                            </asp:TableCell>
-                                        </asp:TableRow>
-                                        <asp:TableRow>
-                                            <asp:TableCell >
-                                                <asp:Label runat="server" ID="lblStylistLabel"></asp:Label>
-                                            </asp:TableCell>
-                                            <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblStylist"></asp:Label>
-                                            </asp:TableCell>
-                                        </asp:TableRow>
-                                        <asp:TableRow >
-                                            <asp:TableCell >
-                                                <asp:Label runat="server" ID="lblServiceLabel"></asp:Label>
-                                            </asp:TableCell>
-                                            <asp:TableCell>
-                                                <asp:Label runat="server" ID="lblServices" ></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
 
@@ -137,7 +140,7 @@
                                         <div style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-y: scroll;">
                                             <h3>Choose A Hairstylist</h3>
                                             <br />
-                                    <asp:ListBox runat="server" ID="lbPickAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300"></asp:ListBox>
+                                    <asp:ListBox runat="server" ID="lbPickAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300" OnSelectionChanged="lbPickAStylist_SelectionChanged"></asp:ListBox>
                                         </div>
                                     </div>
                                 </div>
