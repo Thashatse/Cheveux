@@ -126,9 +126,9 @@ namespace BLL
         }
 
         public SP_GetAllTreatments selectTreatment(string treatmentID)
-         {
+        {
             return db.selectTreatment(treatmentID);
-         }
+        }
 
         //addProduct
         public bool addProduct(PRODUCT addProduct)
@@ -136,6 +136,10 @@ namespace BLL
             return db.addProduct(addProduct);
         }
 
+        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
+        {
+            return db.getBrandsForProductType(type);
+        }
         #endregion
 
         #region Bookings
