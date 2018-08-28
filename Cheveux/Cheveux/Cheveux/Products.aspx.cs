@@ -24,6 +24,8 @@ namespace Cheveux.Cheveux
         SP_GetAllAccessories Accessory = null;
         SP_GetAllTreatments Treatment = null;
 
+        //create list var that the brands will go into 
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //check query string
@@ -52,13 +54,40 @@ namespace Cheveux.Cheveux
                     LoadProduct(productID);
                 }
             }
-            else if(action == "Add")
+            else if(action == "add")
             {
                 phProducts.Visible = false;
                 addandedit.Visible = true;
                 phSpecProduct.Visible = false;
-            }
 
+                if (!IsPostBack)
+                {
+                    productTypes = handler.getProductTypes();
+                    foreach (SP_GetProductTypes pType in productTypes)
+                    {
+                        if (pType.type != 'S')
+                        {
+                            drpProductType.Items.Add(new ListItem(
+                            function.GetFullProductTypeText(pType.type.ToString()[0]),
+                            pType.type.ToString()));
+                        }
+                    }
+
+                    //load brands in dropdownlist
+                }
+
+            }
+        }
+        protected void drpProductType_Change(object sender, EventArgs e)
+        {
+            if (drpProductType.SelectedItem.Text == "Application Service")
+            {
+                productLabel.Text = "Colour";        
+            }
+            else if (drpProductType.SelectedItem.Text == "Treatment")
+            {
+                productLabel.Text = "Treatment Type";
+            }
         }
 
         public void loadProductList(char productType)

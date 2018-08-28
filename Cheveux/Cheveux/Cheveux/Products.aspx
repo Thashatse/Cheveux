@@ -53,75 +53,73 @@
                 </asp:PlaceHolder>
             </div>
 
-             <div class="row">
-             <div class="col-md-2 col-sm-1"> </div>
-             <div class="col-md-8 col-sm-10">
-             <div runat="server" id="addandedit" visible="true">
-                <form id="formAddEditProduct" runat="server">
-                
-                <!-- ADD EDIT PRODUCTS FORM -->
-                <div class="jumbotron bg-dark text-white">
-                <br />
-                <div class="row">
-                <div class="col-12">
-                <header>
-                <h1>Add Product </h1>
-                </header>
-                <br />
-                  <asp:Table runat="server" ID="tblProductDetails">
-                         <asp:TableRow>
-                          <asp:TableCell Text="Product Type:" Width="150px" VerticalAlign="Top"></asp:TableCell>
-                            <asp:TableCell >
-                                     <asp:DropDownList runat="server" ID="drpProductType" AutoPostBack="true">
-                                     </asp:DropDownList>
-                                            <br /><br />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                 <asp:TableRow>
-                                        <asp:TableCell Text="Name: " Width="150px"></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
-                                            <br />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                     <asp:TableRow>
-                                        <asp:TableCell Text="Product Description: " Width="150px"></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="txtProductDescription"></asp:TextBox>
-                                            <br />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                     <asp:TableRow>
-                                        <asp:TableCell Text="Price: " Width="150px"></asp:TableCell>
-                                        <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
-                                            <br />
-                                     <asp:TableRow>
-                                    <asp:TableCell Text="Brand:" Width="150px" VerticalAlign="Top"></asp:TableCell>
-                            <asp:TableCell >
-                                     <asp:DropDownList runat="server" ID="drpBrandList" AutoPostBack="true">
-                                     </asp:DropDownList>
-                                            <br /><br />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                <asp:TableRow>
-                                    <asp:TableCell Text="Supplier:" Width="150px" VerticalAlign="Top"></asp:TableCell>
-                            <asp:TableCell >
-                                     <asp:DropDownList runat="server" ID="drpListSupplier" AutoPostBack="true">
-                                     </asp:DropDownList>
-                                            <br />
-                                        </asp:TableCell>
-                                    </asp:TableRow>
-                                     
-                                   
+            <div class="row">
+                <div class="col-md-2 col-sm-1"></div>
+                <div class="col-md-8 col-sm-10">
+                    <div runat="server" id="addandedit" visible="true">
+                        <form id="formAddEditProduct" runat="server">
 
-                                   </asp:Table>
+                            <!-- ADD EDIT PRODUCTS FORM -->
+                            <div class="jumbotron bg-dark text-white">
+                                <br />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <header>
+                                            <h1>Add Product </h1>
+                                        </header>
+                                        <br />
+                                        <asp:Table runat="server" ID="tblProductDetails">
+                                            <asp:TableRow>
+                                                <asp:TableCell Text="Product Type:" Width="150px" VerticalAlign="Top"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:DropDownList runat="server" ID="drpProductType" AutoPostBack="true" OnSelectedIndexChanged="drpProductType_Change">
+                                                    </asp:DropDownList>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow>
+                                                <asp:TableCell Text="Name: " Width="150px"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow>
+                                                <asp:TableCell Text="Product Description: " Width="150px"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:TextBox runat="server" ID="txtProductDescription"></asp:TextBox>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow>
+                                                <asp:TableCell Text="Price: " Width="150px"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow>
+                                                <asp:TableCell Text="Brand:" Width="150px" VerticalAlign="Top"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:DropDownList runat="server" ID="drpBrandList" AutoPostBack="true">
+                                                    </asp:DropDownList>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow>
+                                                <asp:TableCell Text="Supplier:" Width="150px" VerticalAlign="Top"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:DropDownList runat="server" ID="drpListSupplier" AutoPostBack="true">
+                                                    </asp:DropDownList>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
+                                            <asp:TableRow>
+                                                <asp:TableCell Width="150px" runat="server" ID="productLabel" Text="Colour"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:TextBox runat="server" ID="productTextBox"></asp:TextBox>
+                                                </asp:TableCell>
+                                            </asp:TableRow>
 
-                              </form>
-            </div>
-    
-        <div class="col-md-2 col-sm-1"></div>
-    </div>
+
+                                        </asp:Table>
+                        </form>
+                    </div>
+
+                    <div class="col-md-2 col-sm-1"></div>
+                </div>
 </asp:Content>
