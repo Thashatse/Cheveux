@@ -107,7 +107,6 @@ namespace Cheveux.Manager
             product.Name = txtName.Text;
             product.ProductDescription = txtDescription.Text;
             product.Price = Convert.ToDecimal(txtPrice.Text);
-            product.ProductType = "S";
 
             service.NoOfSlots = int.Parse(txtNoOfSlots.Text);
             service.Type = drpType.SelectedValue.ToString();
@@ -131,6 +130,8 @@ namespace Cheveux.Manager
                 handler.BLL_AddService(product, service);
             }
 
+            //redirect to previous page
+            Response.Redirect("Service.aspx");
 
         }
     }
