@@ -97,6 +97,9 @@ namespace DAL
         bool addProduct(PRODUCT addProduct);
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
+
+        List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+
         #endregion
 
         #region Services
