@@ -23,8 +23,7 @@ namespace Cheveux.Cheveux
         //Creating the variable//
         SP_GetAllAccessories Accessory = null;
         SP_GetAllTreatments Treatment = null;
-
-        //create list var that the brands will go into 
+        List<SP_GetBrandsForProductType> brandList = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -72,14 +71,37 @@ namespace Cheveux.Cheveux
                             pType.type.ToString()));
                         }
                     }
-
-                    //load brands in dropdownlist
+                    brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
+                    foreach (SP_GetBrandsForProductType brand in brandList)
+                    {
+                        drpBrandList.DataSource = brandList;
+                        drpBrandList.DataTextField = "Name";
+                        drpBrandList.DataValueField = "BrandID";
+                        drpBrandList.DataBind();
+                    }
                 }
 
             }
         }
         protected void drpProductType_Change(object sender, EventArgs e)
         {
+            try
+            {
+                brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
+            }
+            catch(ApplicationException err)
+            {
+                drpBrandList.Text = "-------";
+                function.logAnError("Error getting product type and brand [drpProductType_change]"+err.ToString());
+            }
+            foreach (SP_GetBrandsForProductType brand in brandList)
+            {
+                drpBrandList.DataSource = brandList;
+                drpBrandList.DataTextField = "Name";
+                drpBrandList.DataValueField = "BrandID";
+                drpBrandList.DataBind();
+            }
+
             if (drpProductType.SelectedItem.Text == "Application Service")
             {
                 productLabel.Text = "Colour";        
@@ -88,6 +110,7 @@ namespace Cheveux.Cheveux
             {
                 productLabel.Text = "Treatment Type";
             }
+
         }
 
         public void loadProductList(char productType)
