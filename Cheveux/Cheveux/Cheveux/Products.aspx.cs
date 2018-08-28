@@ -35,8 +35,8 @@ namespace Cheveux.Cheveux
             {
                 if (productID == null)
                 {
-                    phProducts.Visible = true;
-                    addandedit.Visible = false;
+                    phProducts.Visible = false;
+                    addandedit.Visible = true;
                     phSpecProduct.Visible = false;
                     lblHeader.InnerText = "Products";
 
@@ -344,15 +344,34 @@ namespace Cheveux.Cheveux
         {
             //create a product object 
             PRODUCT newProduct = new PRODUCT();
-            newProduct.Name = TxtName.Text; 
+          
+            newProduct.Name = TxtName.Text;
+            newProduct.ProductDescription = txtPrice.Text;
+            
 
             if(drpListProductType.SelectedIndex == 0)
+
             {
                 //create access
+                ACCESSORY newAccessory = new ACCESSORY();
+                newAccessory.Colour = txtColour.Text;
+                /*
+                newAccessory.Qty = txtQty.Text;
+                */
+                //get the brand id from the drplistBrand.SelectedValue
+                
+
             }
             else if (drpListProductType.SelectedIndex == 1)
             {
                 //create treat
+                TREATMENT newTreatment = new TREATMENT();
+                /*
+                newTreatment.Qty = txtQty.Text;
+                newTreatment.TreatmentType = txtTreatmentType.Text;
+
+    */
+                //get the brand id from the drplistBrand.SelectedValue
             }
         }
     }
