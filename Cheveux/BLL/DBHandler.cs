@@ -548,5 +548,13 @@ namespace BLL
         {
             return db.GetSlotLength(serviceID);
         }
+                public SP_GetService BLL_GetServiceFromID(string serviceID)
+        {
+            return db.GetServiceFromID(serviceID);
+        }
+        public SP_GetBraidService BLL_GetBraidServiceFromeID(string serviceID)
+        {
+            return db.GetBraidServiceFromID(serviceID);
+        }
     }
 }
