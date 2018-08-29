@@ -75,9 +75,35 @@ namespace Cheveux
         protected void Page_Load(object sender, EventArgs e)
         {
             #region access control
+            //load booking type 
+            bookingType = Request.QueryString["Type"];
+            //load user
             HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
             //access control
-            if (Authcookie != null)
+            if (bookingType == "Internal")
+            {
+                if (Authcookie != null)
+                {
+                    if (Authcookie["UT"].ToString()[0] == 'R')
+                    {
+                        //Redirect is aloud to make booings
+                    }
+                    else if (Authcookie["UT"].ToString()[0] == 'C')
+                    {
+                        //customer is aloud on mage
+                        Response.Redirect("MakeABooking.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("Error.aspx?Error=Only customers and receptionist can make bookings, Login as a customer or receptionist and try again.");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("/Authentication/Accounts.aspx?PreviousPage=NewInternalBooking");
+                }
+            }
+            else if (Authcookie != null)
             {
                 if (Authcookie["UT"].ToString()[0] == 'C')
                 {
@@ -85,7 +111,8 @@ namespace Cheveux
                 }
                 else if (Authcookie["UT"].ToString()[0] == 'R')
                 {
-                    //Redirect is aloud to make booings
+                    //Redirect to internal bookings
+                    Response.Redirect("MakeABooking.aspx?Type=Internal");
                 }
                 //if stylist
                 else if (Authcookie["UT"].ToString()[0] == 'S')
@@ -109,8 +136,6 @@ namespace Cheveux
             #endregion
 
             #region Internal Booking
-            //load booking type 
-            bookingType = Request.QueryString["Type"];
             if (!Page.IsPostBack)
             {
                 loadCustomerList();
@@ -1030,6 +1055,25 @@ namespace Cheveux
             btnMorning10.CssClass = "btn btn-light";
         }
 
+        private int CalculateSlotLength(object sender, EventArgs e)
+        {
+            if (pickedServiceID != null)
+            {
+                pickedServiceID.Clear();
+            }
+            service = new SERVICE();
+            rblPickAServiceA_SelectedIndexChanged(sender, e);
+            rblPickAServiceB_SelectedIndexChanged(sender, e);
+            cblPickAServiceN_SelectedIndexChanged(sender, e);
+            int slotLength = 0;
+            foreach (string id in pickedServiceID)
+            {
+                slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
+
+            }
+            return slotLength;
+        }
+
         protected void btnAfternoon11_Click(object sender, EventArgs e)
         {
 
@@ -1456,29 +1500,8 @@ namespace Cheveux
         }
         #endregion
         #endregion
-        protected void lbPickAStylist_SelectionIndexChanged(object sender, EventArgs e)
-        {
-            LoadSummary(sender, e);
-        }
-
-        private int CalculateSlotLength(object sender, EventArgs e)
-        {
-            if (pickedServiceID != null)
-            {
-                pickedServiceID.Clear();
-            }
-            service = new SERVICE();
-            rblPickAServiceA_SelectedIndexChanged(sender, e);
-            rblPickAServiceB_SelectedIndexChanged(sender, e);
-            cblPickAServiceN_SelectedIndexChanged(sender, e);
-            int slotLength = 0;
-            foreach (string id in pickedServiceID)
-            {
-                slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
-
-            }
-            return slotLength;
-        }
+        
+        #region Summary
         private void FillSummary(object sender, EventArgs e)
         {
             lblServiceLabel.Text = "";
@@ -1491,9 +1514,10 @@ namespace Cheveux
             lblTime.Text = "";
             HttpCookie bookingTime = Request.Cookies["BookTime"];
 
-            //Fill Services
+            
             try
             {
+                #region Fill Services
                 if(pickedServiceID.Count ==1)
                 {
                     lblServiceLabel.Text = "Service(s): ";
@@ -1572,9 +1596,9 @@ namespace Cheveux
                     }
 
                 }
+                #endregion
 
-              
-                //Fill Stylist
+                #region  Fill Stylist
                 if (lbPickAStylist.SelectedValue.ToString() != "")
                 {
                     lblStylistLabel.Text = "Stylist: ";
@@ -1586,9 +1610,9 @@ namespace Cheveux
                     lblStylist.Text = "";
 
                 }
+                #endregion
 
-
-                //Fill Date and Time
+                #region Fill Date and Time
                 if (calBooking.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
                     lblDateLabel.Text = "Date: ";
@@ -1610,8 +1634,20 @@ namespace Cheveux
                     lblTimeLabel.Text = "";
                     lblTime.Text = "";
                 }
+                #endregion
 
-                
+                #region Customer
+                if (lbCustomers.SelectedValue.ToString() != "")
+                {
+                    lCustomerLabel.Text = "Customer: ";
+                    lCustomer.Text = lbCustomers.SelectedItem.Text;
+                }
+                else
+                {
+                    lCustomerLabel.Text = "";
+                    lCustomer.Text = "";
+                }
+                #endregion
             }
             catch (Exception error)
             {
@@ -1620,6 +1656,7 @@ namespace Cheveux
                 lblErrorSummary.Text = "An error occurred while filling the summary";
             }
         }
+
         protected void LoadSummary(object sender, EventArgs e)
         {
             pickedServiceName = new List<string>();
@@ -1630,5 +1667,11 @@ namespace Cheveux
 
             FillSummary(sender, e);
         }
+
+        protected void lbPickAStylist_SelectionIndexChanged(object sender, EventArgs e)
+        {
+            LoadSummary(sender, e);
+        }
+        #endregion
     }
 }

@@ -62,8 +62,18 @@
                                             <asp:TableCell>
                                                 <asp:Label runat="server" ID="lblServices" ></asp:Label>
                                             </asp:TableCell>
-                                            
+</asp:TableRow>
+
+                                            <asp:TableRow >
+                                            <asp:TableCell >
+                                                <asp:Label runat="server" ID="lCustomerLabel"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lCustomer"></asp:Label>
+                                            </asp:TableCell>
                                         </asp:TableRow>
+
+                                        
                                         <asp:TableRow>
                                             <asp:TableCell>
                                             <asp:Label runat="server" ID="lblStylistLabel"></asp:Label>
@@ -211,7 +221,7 @@
                             </div>
 
                             <div runat="server" id="divSelectUser" visible="false" 
-                                style="border: solid #F05F40 2px; width: 575px; height: 450px;">
+                                style="border: solid #F05F40 2px; height: 400px;">
                                 <!--User-->
                                 <div class="container">
                                     <!--Line Break-->
@@ -224,7 +234,8 @@
                                     </p>
                                     <!--Line Break-->
                                     <br />
-                                    <asp:ListBox runat="server" ID="lbCustomers" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
+                                    <asp:ListBox runat="server" ID="lbCustomers" CssClass="form-control" DataTextField="Name" DataValueField="ID" 
+                                        Height="250" OnSelectedIndexChanged="lbPickAStylist_SelectionIndexChanged"></asp:ListBox>
                                     <!--Line Break-->
                                     <br />
                                     <p style="text-align: right; float: right;">

@@ -19,7 +19,7 @@ namespace Cheveux
         SP_ViewStylistSpecialisationAndBio specialisationAndBio = null;
         string userType;
         HttpCookie cookie = null;
-        Authentication auth = new Authentication();
+        BLL.Authentication auth = new BLL.Authentication();
         List<SP_GetCustomerBooking> bookingsList = null;
         List<SP_GetBookingServices> bookingServiceList = null;
 
@@ -1551,7 +1551,7 @@ namespace Cheveux
             }
             else if (bookingServiceList.Count == 2)
             {
-                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                newCell.Text = "<a href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "'>" + bookingServiceList[0].ServiceName.ToString() +
                     ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
             }
@@ -1572,7 +1572,7 @@ namespace Cheveux
                     }
                 }
                 newCell.Text = "<a title='" + toolTip + "'" +
-                    "href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                    "href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "&BookingType=Past'> Multiple </a>";
             }
             pastBookings.Rows[rowCount].Cells.Add(newCell);

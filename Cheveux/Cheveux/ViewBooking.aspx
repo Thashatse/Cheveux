@@ -288,6 +288,9 @@
                                                         <asp:ListItem> Cash </asp:ListItem>
                                                         <asp:ListItem> Credit </asp:ListItem>
                                                     </asp:RadioButtonList>
+                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorPaymentType" runat="server"
+                                                        ControlToValidate="PaymentType" ErrorMessage="Payment Type Required">
+                                                    </asp:RequiredFieldValidator>
                                                 </asp:TableCell>
                                                 <asp:TableCell Width="100">
                                                     <!--Save Payment Type-->
