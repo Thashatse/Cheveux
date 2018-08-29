@@ -147,11 +147,9 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir);
-        //bool addAccessories(ACCESSORY a);
-        //bool addTreatments(TREATMENT t);
+        bool addAccessories(ACCESSORY a, PRODUCT p );
+        bool addTreatments(TREATMENT t, PRODUCT p);
         SERVICE BLL_GetSlotLength(string serviceID);
-                SP_GetService BLL_GetServiceFromID(string serviceID);
-        SP_GetBraidService BLL_GetBraidServiceFromeID(string serviceID);
     }
 }
 

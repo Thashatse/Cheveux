@@ -109,16 +109,16 @@ namespace BLL
             return db.CheckForProduct(id);
         }
 
-        /*
-        public bool addAccessories(ACCESSORY a)
+       
+        public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
-            return db.addAccessories(a);
+            return db.addAccessories(a,p);
         }
 
-        public bool addTreatments(TREATMENT t)
+        public bool addTreatments(TREATMENT t, PRODUCT p)
         {
-            return db.addTreatments(t);
-        }*/
+            return db.addTreatments(t, p);
+        }
 
         public SP_GetAllAccessories selectAccessory(string accessoryID)
         {
@@ -547,14 +547,6 @@ namespace BLL
                 public SERVICE BLL_GetSlotLength(string serviceID)
         {
             return db.GetSlotLength(serviceID);
-        }
-                public SP_GetService BLL_GetServiceFromID(string serviceID)
-        {
-            return db.GetServiceFromID(serviceID);
-        }
-        public SP_GetBraidService BLL_GetBraidServiceFromeID(string serviceID)
-        {
-            return db.GetBraidServiceFromID(serviceID);
         }
     }
 }
