@@ -19,7 +19,7 @@ namespace Cheveux.Cheveux
         List<SP_GetProductTypes> productTypes = null;
         int treatCount = 0;
         int accCount = 0;
-
+        
         //Creating the variable//
         SP_GetAllAccessories Accessory = null;
         SP_GetAllTreatments Treatment = null;
@@ -392,39 +392,70 @@ namespace Cheveux.Cheveux
             }
             }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btnAddProduct_Click(object sender, EventArgs e)
         {
             //create a product object 
             PRODUCT newProduct = new PRODUCT();
           
             newProduct.Name = txtName.Text;
             newProduct.ProductDescription = txtPrice.Text;
+
+
+            if (drpProductType.SelectedItem.Text == "Application Service")
+            {
+                PRODUCT p = new PRODUCT();
+                ACCESSORY a = new ACCESSORY();
+
+                string ID = function.GenerateRandomProductID();
             
-
-            if(drpProductType.SelectedIndex == 0)
-
-            {
-                //create access
-                ACCESSORY newAccessory = new ACCESSORY();
-                //newAccessory.Colour = txtColour.Text;
-                
-
-                                
-
-                //get the brand id from the drplistBrand.SelectedValue
-                
-
+                a.TreatmentID = ID;
+                a.Colour = productTextBox.Text;
+                a.Qty = int.Parse(txtQty.Text);
+                a.BrandID = drpBrandList.SelectedValue.ToString();
+                p.Name = txtName.Text;
+                p.ProductDescription = txtProductDescription.Text;
+                p.Price = Convert.ToDecimal(txtPrice.Text);
+                p.ProductType = drpProductType.SelectedValue.ToString();
+                a.supplierID = drpListSupplier.SelectedValue.ToString();
+                //if (call method and if true  redirect)
+                //{
+                //    //if successful redirect to a different page
+                //}
+                //else
+                //{
+                //    //if not successful display an error
+                //}
             }
-            else if (drpProductType.SelectedIndex == 1)
+            else if (drpProductType.SelectedItem.Text == "Treatment")
             {
-                //create treat
-                TREATMENT newTreatment = new TREATMENT();
-                
-                
-                
-                    
-   
-                //get the brand id from the drplistBrand.SelectedValue
+                PRODUCT p = new PRODUCT();
+                TREATMENT t = new TREATMENT();
+
+                string prodID = function.GenerateRandomProductID();
+
+                t.TreatmentID = prodID;
+                t.Qty = int.Parse(txtQty.Text);
+                t.supplierID = drpBrandList.SelectedValue.ToString();
+                t.BrandID = drpBrandList.SelectedValue.ToString();
+               
+
+                /*
+                 * create product and treatment object
+                 * set their variables
+                 *call add methods 
+                 * if successful redirect to a different page
+                 * if not successful display an error
+                 */
+
+
+                //if (call method and if true  redirect)
+                //{
+                //    //if successful redirect to a different page
+                //}
+                //else
+                //{
+                //    //if not successful display an error
+                //}
             }
         }
     }

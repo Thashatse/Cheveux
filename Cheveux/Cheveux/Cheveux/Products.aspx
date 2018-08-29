@@ -95,6 +95,12 @@
                                                 </asp:TableCell>
                                             </asp:TableRow>
                                             <asp:TableRow>
+                                             <asp:TableCell Width="150px" runat="server" ID="QtyLabel" Text="Qty"></asp:TableCell>
+                                                <asp:TableCell>
+                                                    <asp:TextBox runat="server" ID="txtQty"></asp:TextBox>
+                                                </asp:TableCell>
+                                                 </asp:TableRow>
+                                            <asp:TableRow>
                                                 <asp:TableCell Text="Brand:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                                 <asp:TableCell>
                                                     <asp:DropDownList runat="server" ID="drpBrandList" AutoPostBack="true">
@@ -113,10 +119,10 @@
                                                 <asp:TableCell>
                                                     <asp:TextBox runat="server" ID="productTextBox"></asp:TextBox>
                                                 </asp:TableCell>
-                                            </asp:TableRow>
-
-
+                                               
+                                            </asp:TableRow>  
                                         </asp:Table>
+                                        <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" />
                         </form>
                     </div>
 
