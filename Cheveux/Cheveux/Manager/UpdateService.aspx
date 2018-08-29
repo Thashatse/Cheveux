@@ -34,7 +34,18 @@
                 <asp:TableRow>
                     <asp:TableCell Text="No of Slots: " Width="150px"></asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox runat="server" ID="txtNoOfSlots"></asp:TextBox>
+                         <asp:DropDownList runat="server" ID="drpNoOfSlots" AutoPostBack="true">
+                                                <asp:ListItem Text="1" Value="0"></asp:ListItem>
+                                                <asp:ListItem Text="2" Value="1"></asp:ListItem>
+                                                <asp:ListItem Text="3" Value="2"></asp:ListItem>
+                                                <asp:ListItem Text="4" Value="3"></asp:ListItem>
+                                                <asp:ListItem Text="5" Value="4"></asp:ListItem>
+                                                <asp:ListItem Text="6" Value="5"></asp:ListItem>
+                                                <asp:ListItem Text="7" Value="6"></asp:ListItem>
+                                                <asp:ListItem Text="8" Value="7"></asp:ListItem>
+                                                <asp:ListItem Text="9" Value="8"></asp:ListItem>
+                                                <asp:ListItem Text="10" Value="9"></asp:ListItem>
+                                            </asp:DropDownList>
                         <br />
                     </asp:TableCell>
                 </asp:TableRow>
@@ -96,7 +107,7 @@
 
             <div class="col-2 text-right">
 
-                <asp:Button class='btn btn-primary' runat="server" ID="btnUpdate" Visible="true" Text="Add Service" OnClick="btnUpdate_Click" />
+                <asp:Button class='btn btn-primary' runat="server" ID="btnUpdate" Visible="true" Text="Update" OnClick="btnUpdate_Click" />
 
             </div>
         </div>

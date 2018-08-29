@@ -58,13 +58,13 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Label lblName;
         
         /// <summary>
-        /// txtNoOfSlots control.
+        /// drpNoOfSlots control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNoOfSlots;
+        protected global::System.Web.UI.WebControls.DropDownList drpNoOfSlots;
         
         /// <summary>
         /// txtPrice control.
