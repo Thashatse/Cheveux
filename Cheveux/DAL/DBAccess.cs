@@ -1283,7 +1283,7 @@ namespace DAL
             SP_GetAllAccessories accessory = null;
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@accessoryID", accessoryID)
+                new SqlParameter("@ProductID", accessoryID)
 
             };
 
@@ -1325,7 +1325,7 @@ namespace DAL
             SP_GetAllTreatments treatment = null;
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@treatmentID", treatmentID)
+                new SqlParameter("@ProductID", treatmentID)
 
             };
 
