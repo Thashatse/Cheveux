@@ -150,6 +150,8 @@ namespace BLL
         //bool addAccessories(ACCESSORY a);
         //bool addTreatments(TREATMENT t);
         SERVICE BLL_GetSlotLength(string serviceID);
+                SP_GetService BLL_GetServiceFromID(string serviceID);
+        SP_GetBraidService BLL_GetBraidServiceFromeID(string serviceID);
     }
 }
 
