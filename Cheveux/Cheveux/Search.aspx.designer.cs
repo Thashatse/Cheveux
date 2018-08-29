@@ -58,6 +58,24 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divBookingSearchFilter;
         
         /// <summary>
+        /// CalendarDateStrart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar CalendarDateStrart;
+        
+        /// <summary>
+        /// CalendarDateEnd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar CalendarDateEnd;
+        
+        /// <summary>
         /// bookingSearchResults control.
         /// </summary>
         /// <remarks>
