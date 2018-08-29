@@ -285,10 +285,10 @@
                                 <div class="col-5">
                                     <!--Validation-->
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtPassword" runat="server" ErrorMessage="*Password is Required" ControlToValidate="txtPassword" ForeColor="Red"></asp:RequiredFieldValidator>
-
+                                    
                                 </div>
                                 <div class="col-5">
-
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtConfirmPassword" runat="server" ErrorMessage="*Password Confirmation is Required" ControlToValidate="txtConfirmPassword" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <!--Validation (Done in code Behind-->
                                     &ensp;&ensp;&ensp;&ensp;<asp:CompareValidator ID="CompareValidatorPassword" runat="server" ControlToCompare="txtPassword" ControlToValidate="txtConfirmPassword" ErrorMessage="Passwords do not match" ForeColor="Red"></asp:CompareValidator>
                                     <asp:Label runat="server" ID="lConfirmPassword" ForeColor="Red"></asp:Label>

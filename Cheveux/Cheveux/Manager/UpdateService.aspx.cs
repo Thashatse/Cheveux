@@ -36,8 +36,9 @@ namespace Cheveux.Manager
             }
             #endregion
             string serviceID = Request.QueryString["ProductID"];
-            service = handler.BLL_GetServiceFromID(serviceID);
-            bservice = handler.BLL_GetBraidServiceFromeID(serviceID);
+            //BLL_GetServiceFromID & BLL_GetBraidServiceFromeID could not be found
+            //service = handler.BLL_GetServiceFromID(serviceID);
+            ///bservice = handler.BLL_GetBraidServiceFromeID(serviceID);
 
             lblName.Text = service.ServiceName;
             drpNoOfSlots.SelectedItem.Text = Convert.ToString(service.NoOfSlots);

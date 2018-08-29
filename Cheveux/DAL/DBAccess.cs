@@ -1861,6 +1861,48 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate)
+        {
+            List<SP_GetCustomerBooking> bookings = new List<SP_GetCustomerBooking>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_SearchBookings",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
+                            {
+                                stylistFirstName = row["StylistFirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                bookingID = row["BookingID"].ToString(),
+                                arrived = row["Arrived"].ToString()[0],
+                                stylistEmployeeID = row["StylistID"].ToString(),
+                                BookingComment = row["Comment"].ToString(),
+                                CustFullName = row["CustFirstName"].ToString(),
+                                CustomerID = row["CustomerID"].ToString()
+                            };
+                            bookings.Add(booking);
+                        }
+                    }
+                    return bookings;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         public List<SP_GetEmpNames> GetEmpNames()

@@ -46,7 +46,7 @@ namespace Cheveux
                 try
                 {
                     string reg = getRegCookie();
-                    almostThere.Text = "Hey " + reg.Split('|')[2] + " you are new here, just one more step to complete your registration";
+                    almostThere.Text = "Hey " + reg.Split('|')[2] + ", you are new here, just one more step to complete your registration";
                     userName.Attributes.Add("placeholder", (reg.Split('|')[1]).Split('@')[0]);
                     RegisterGoogleUser.Visible = true;
                 }
@@ -180,7 +180,7 @@ namespace Cheveux
                     var body = new System.Text.StringBuilder();
                     body.AppendFormat("Hello, "+ User.FirstName+",");
                     body.AppendLine(@"");
-                    body.AppendLine(@"You have successfuly registerd with cheveux, Using the google account: " + User.Email.ToString()+",");
+                    body.AppendLine(@"You have successfully registered with Cheveux, Using the Google account: " + User.Email.ToString()+",");
                     body.AppendLine(@"");
                     body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
                     body.AppendLine(@"");
@@ -316,7 +316,7 @@ namespace Cheveux
                         var body = new System.Text.StringBuilder();
                         body.AppendFormat("Hello, " + User.FirstName);
                         body.AppendLine(@"");
-                        body.AppendLine(@"You have successfuly registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
+                        body.AppendLine(@"You have successfully registered with Cheveux, Using the email address: " + User.Email.ToString() + ".");
                         body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
                         body.AppendLine(@"");
                         body.AppendLine(@"Make Your First Booking Now: http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx");
@@ -335,7 +335,7 @@ namespace Cheveux
                         var body = new System.Text.StringBuilder();
                         body.AppendFormat("Hello, " + User.FirstName);
                         body.AppendLine(@"");
-                        body.AppendLine(@"You have successfuly been registerd with cheveux by your manager, Using the email address: " + User.Email.ToString() + ".");
+                        body.AppendLine(@"You have successfully been registered with Cheveux by your manager, Using the email address: " + User.Email.ToString() + ".");
                         body.AppendLine(@"");
                         body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
                         body.AppendLine(@"Your password is: " + tempPassword + "");
@@ -442,7 +442,7 @@ namespace Cheveux
             {
                 //if the account exists tell the user to try a difreting username
                 LEmailExists.Visible = true;
-                LEmailExists.Text = "This email address is already registerd, <a href='../Authentication/Accounts.aspx'>Try Loging in?</a>";
+                LEmailExists.Text = "This email address is already registered, <a href='../Authentication/Accounts.aspx'>Try Logging in?</a>";
             }
             else
             {

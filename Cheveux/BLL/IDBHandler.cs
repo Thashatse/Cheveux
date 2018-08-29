@@ -75,11 +75,14 @@ namespace BLL
         ManagerStats GetManagerStats();
         #endregion
 
+        #region search
+        List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
+        #endregion
+
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
-
         SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID);
         List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);

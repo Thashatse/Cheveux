@@ -49,20 +49,20 @@
                         <asp:Button runat="server" Text="Fillter" id="FillterBookingResults" cssClass="btn btn-default" Visible="false" onclick="showFilterBooking"></asp:Button>
                         </div>
                         </div>
-                    <div id="divBookingSearchFilter" Visible="false" runat="server" class="col-12">
-                        <!--New Line-->
-                        <br />
-                        filter by date
-                        <!--New Line-->
-                        <br />
-                        <div class="col-lg-5">
+                    <div id="divBookingSearchFilter" Visible="false" runat="server" class="col-12" style="border: solid #F05F40 2px;">
+                        <h4>Filter by date</h4>
+                        <div class="row">
+                        <div class="col-5">
                                             <p>Start Date: </p>
                                             <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateStrart" runat="server" OnSelectionChanged="searchBookings"></asp:Calendar>
                                         </div>
-                                        <div class="col-lg-5">
+                                        <div class="col-5">
                                             <p>End Date: </p>
                                             <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateEnd" runat="server" OnSelectionChanged="searchBookings"></asp:Calendar>
                                         </div>
+                    </div>
+                        <!--New Line-->
+                        <br />
                     </div>
                     <div class="col-12">
                         <asp:Table id="bookingSearchResults" runat="server"></asp:Table>

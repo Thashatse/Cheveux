@@ -231,7 +231,7 @@
                             <br />
                             <!--Help-->
                             <a href="../Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank" title="Sign in with your Google account">
-                                <span class="glyphicon">Help &#63;</span>
+                                <span class="glyphicon">Help&#63;</span>
                             </a>
                         </div>
                     </div>

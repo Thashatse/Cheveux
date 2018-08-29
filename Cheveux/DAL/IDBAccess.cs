@@ -70,6 +70,7 @@ namespace DAL
 
         #region search
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
+        List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate);
         #endregion
 
         #region Functions

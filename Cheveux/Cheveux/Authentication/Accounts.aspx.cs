@@ -32,7 +32,7 @@ namespace Cheveux
             {
                 lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email&PreviousPage=" + PreviousPage;
             }
-            lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Acount</a>";
+            lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Account</a>";
             //check if the user has requested a logout or login
             String action = Request.QueryString["action"];
             //login

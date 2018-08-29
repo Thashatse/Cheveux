@@ -32,8 +32,9 @@ namespace Cheveux.Cheveux
         }
         public void LoadService(string serviceID)
         {
-            service = handler.BLL_GetServiceFromID(serviceID);
-            bservice = handler.BLL_GetBraidServiceFromeID(serviceID);
+            //BLL_GetServiceFromID & BLL_GetBraidServiceFromeID could not be found
+            //service = handler.BLL_GetServiceFromID(serviceID);
+            //bservice = handler.BLL_GetBraidServiceFromeID(serviceID);
 
             lblName.Text = service.ServiceName;
             lblNoOfSlots.Text = Convert.ToString(service.NoOfSlots);

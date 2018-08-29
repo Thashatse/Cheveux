@@ -326,10 +326,36 @@ namespace Cheveux
             newHeaderCell.Text = "Service";
             newHeaderCell.Width = 600;
             bookingSearchResults.Rows[0].Cells.Add(newHeaderCell);
-            newHeaderCell = new TableHeaderCell();
+            
+            //if customer show stylist
+            if (cookie["UT"].ToString()[0] == 'C')
+            {
+                newHeaderCell = new TableHeaderCell();
             newHeaderCell.Text = "Stylist";
             newHeaderCell.Width = 750;
             bookingSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            }
+            //if stylist show customer
+            else if (cookie["UT"].ToString()[0] == 'S')
+            {
+                newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Customer";
+                newHeaderCell.Width = 750;
+                bookingSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            }
+            //if receptionist or manager customer and stylist
+            else if (cookie["UT"].ToString()[0] == 'R'
+                || cookie["UT"].ToString()[0] == 'M')
+            {
+                newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Customer";
+                newHeaderCell.Width = 750;
+                bookingSearchResults.Rows[0].Cells.Add(newHeaderCell);
+                newHeaderCell = new TableHeaderCell();
+                newHeaderCell.Text = "Stylist";
+                newHeaderCell.Width = 750;
+                bookingSearchResults.Rows[0].Cells.Add(newHeaderCell);
+            }
             newHeaderCell = new TableHeaderCell();
             newHeaderCell.Width = 300;
             bookingSearchResults.Rows[0].Cells.Add(newHeaderCell);
@@ -353,12 +379,17 @@ namespace Cheveux
                     || cookie["UT"].ToString()[0] == 'M')
                 {
                     searchBooking = true;
+                    if (!Page.IsPostBack)
+                    {
+                        CalendarDateStrart.SelectedDate = Convert.ToDateTime("1/1/1753");
+                        CalendarDateEnd.SelectedDate = Convert.ToDateTime("12/31/9999");
+                    }
                 }
 
                 if (searchBooking == true)
                 {
                     //add booking to list
-                    foreach (SP_GetCustomerBooking book in handler.getCustomerPastBookings(cookie["ID"].ToString()))
+                    foreach (SP_GetCustomerBooking book in handler.searchBookings(CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate))
                     {
                         bookingsList.Add(book);
                     }
@@ -374,7 +405,7 @@ namespace Cheveux
 
                             //if customer show only their bookings
                             if (cookie["UT"].ToString()[0] == 'C' 
-                                && booking.CustomerID == cookie["ID"].ToString().Replace(" ", string.Empty))
+                                && booking.CustomerID.ToString().Replace(" ", string.Empty) == cookie["ID"].ToString().Replace(" ", string.Empty))
                             {
                                 if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
                                        function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
@@ -397,7 +428,7 @@ namespace Cheveux
                             }
                             //if stylist show only their bookings
                             else if (cookie["UT"].ToString()[0] == 'S'
-                                && booking.stylistEmployeeID == cookie["ID"].ToString().Replace(" ", string.Empty))
+                                && booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) == cookie["ID"].ToString().Replace(" ", string.Empty))
                             {
                                 if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
                                        function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
@@ -479,12 +510,46 @@ namespace Cheveux
                                         "&BookingType=Past'> Multiple </a>";
                                 }
                                 bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
-                                //Stylist
-                                newCell = new TableCell();
-                                newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
-                                "'>" + booking.stylistFirstName.ToString() + "</a>";
-                                bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                
+                                //if customer show stylist
+                                if (cookie["UT"].ToString()[0] == 'C')
+                                {
+                                    //Stylist
+                                    newCell = new TableCell();
+                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                    "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + booking.stylistFirstName.ToString() + "</a>";
+                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                }
+                                //if stylist show customer
+                                else if (cookie["UT"].ToString()[0] == 'S')
+                                {
+                                    //Customer
+                                    newCell = new TableCell();
+                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                    "&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + booking.CustFullName.ToString() + "</a>";
+                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                }
+                                //if receptionist or manager customer and stylist
+                                else if (cookie["UT"].ToString()[0] == 'R'
+                                    || cookie["UT"].ToString()[0] == 'M')
+                                {
+                                    //Customer
+                                    newCell = new TableCell();
+                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                    "&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + booking.CustFullName.ToString() + "</a>";
+                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+
+                                    //Stylist
+                                    newCell = new TableCell();
+                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                    "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + booking.stylistFirstName.ToString() + "</a>";
+                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                }
+
                                 //BTN
                                 newCell = new TableCell();
                                 newCell.Text = "<button type = 'button' class='btn btn-default'>" +

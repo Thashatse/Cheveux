@@ -130,7 +130,7 @@
                         </li>
                         <li class="nav-item">
                             <!--Text Box-->
-                            <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search"  onblur="search()">
+                            <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
                         </li>
                         <li class="nav-item">
                             <!--Search Button-->
