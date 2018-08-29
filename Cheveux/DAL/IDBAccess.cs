@@ -154,12 +154,13 @@ namespace DAL
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_AboutStylist> aboutStylist();
-       
-        //bool addAccessories(ACCESSORY a);
-        //bool addTreatments(TREATMENT t);
+        /*
+        bool AddService(PRODUCT p, SERVICE s);
+        */
+      
+        bool addAccessories(ACCESSORY a, PRODUCT p);
+        bool addTreatments(TREATMENT t, PRODUCT p);
         SERVICE GetSlotLength(string serviceID);
-                SP_GetService GetServiceFromID(string serviceID);
-        SP_GetBraidService GetBraidServiceFromID(string serviceID);
 
     }
 }

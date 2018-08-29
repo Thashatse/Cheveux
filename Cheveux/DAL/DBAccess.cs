@@ -1389,11 +1389,11 @@ namespace DAL
             SP_GetBrandsForProductType b = null;
             SqlParameter[] pars = new SqlParameter[]
             {
-                //parameter
+                new SqlParameter("@productType",type)
             };
             try
             {
-                using (DataTable table = DBHelper.Select("SP_GetBrandsForProductType", CommandType.StoredProcedure))
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure,pars))
                 {
                      if(table.Rows.Count > 0)
                     {
@@ -2287,19 +2287,23 @@ namespace DAL
         }
 
 
-        public bool AddAccessories(ACCESSORY a)
+        public bool addAccessories(ACCESSORY a,PRODUCT p)
         {
             try
             {
                 SqlParameter[] pars = new SqlParameter[]
                     {
-
+                        new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
                     new SqlParameter("@colour", a.Colour.ToString()),
                     new SqlParameter("@qty", a.Qty.ToString()),
-                    new SqlParameter("@brandID", a.BrandID.ToString())
-
+                    new SqlParameter("@brandID", a.BrandID.ToString()),
+                    new SqlParameter("@productID",a.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString())
                     };
-                return DBHelper.NonQuery("SP_AddAcessories", CommandType.StoredProcedure, pars.ToArray());
+                return DBHelper.NonQuery("SP_AddAccessory", CommandType.StoredProcedure, pars.ToArray());
             }
             catch (Exception e)
             {
@@ -2308,7 +2312,7 @@ namespace DAL
 
         }
         //addTreatments
-        public bool AddTreatments(TREATMENT t)
+        public bool addTreatments(TREATMENT t,PRODUCT p)
         {
             try
             {
@@ -2317,10 +2321,14 @@ namespace DAL
                     new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
                     new SqlParameter("@qty", t.Qty.ToString()),
                     new SqlParameter("@qty", t.TreatmentType.ToString()),
-                    new SqlParameter("@brandID", t.BrandID.ToString())
-
+                    new SqlParameter("@brandID", t.BrandID.ToString()),
+                    new SqlParameter("@productID",t.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString())
                     };
-                return DBHelper.NonQuery("SP_AddTreaments", CommandType.StoredProcedure, pars.ToArray());
+                return DBHelper.NonQuery("SP_AddTreatment", CommandType.StoredProcedure, pars.ToArray());
             }
             catch (Exception e)
             {
@@ -3472,70 +3480,6 @@ namespace DAL
                         };
                     }
                     return service;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-         public SP_GetService GetServiceFromID(string serviceID)
-        {
-            SP_GetService service = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@ServiceID", serviceID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetService",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        service = new SP_GetService
-                        {
-                            ServiceName = Convert.ToString(table.Rows[0]["Name"].ToString()),
-                            Description = Convert.ToString(table.Rows[0]["ServiceDescription"].ToString()),
-                            NoOfSlots = Convert.ToInt32(table.Rows[0]["NoOfSlots"].ToString()),
-                            Price = Convert.ToDecimal(table.Rows[0]["Price"].ToString()),
-                            ServiceType = Convert.ToChar(table.Rows[0]["ServiceType"].ToString())
-
-                        };
-                    }
-                    return service;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        public SP_GetBraidService GetBraidServiceFromID(string serviceID)
-        {
-            SP_GetBraidService bservice = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@ServiceID", serviceID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBraidService",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        bservice = new SP_GetBraidService
-                        {
-                            StyleDesc = Convert.ToString(table.Rows[0]["styleDesc"].ToString()),
-                            WidthDesc = Convert.ToString(table.Rows[0]["widthDesc"].ToString()),
-                            LengthDesc = Convert.ToString(table.Rows[0]["lengthDesc"].ToString())
-
-                        };
-                    }
-                    return bservice;
                 }
             }
             catch (Exception e)
