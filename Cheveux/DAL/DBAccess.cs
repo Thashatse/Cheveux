@@ -3479,6 +3479,70 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+         public SP_GetService GetServiceFromID(string serviceID)
+        {
+            SP_GetService service = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", serviceID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        service = new SP_GetService
+                        {
+                            ServiceName = Convert.ToString(table.Rows[0]["Name"].ToString()),
+                            Description = Convert.ToString(table.Rows[0]["ServiceDescription"].ToString()),
+                            NoOfSlots = Convert.ToInt32(table.Rows[0]["NoOfSlots"].ToString()),
+                            Price = Convert.ToDecimal(table.Rows[0]["Price"].ToString()),
+                            ServiceType = Convert.ToChar(table.Rows[0]["ServiceType"].ToString())
+
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public SP_GetBraidService GetBraidServiceFromID(string serviceID)
+        {
+            SP_GetBraidService bservice = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", serviceID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBraidService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        bservice = new SP_GetBraidService
+                        {
+                            StyleDesc = Convert.ToString(table.Rows[0]["styleDesc"].ToString()),
+                            WidthDesc = Convert.ToString(table.Rows[0]["widthDesc"].ToString()),
+                            LengthDesc = Convert.ToString(table.Rows[0]["lengthDesc"].ToString())
+
+                        };
+                    }
+                    return bservice;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     
     }
 }                  
