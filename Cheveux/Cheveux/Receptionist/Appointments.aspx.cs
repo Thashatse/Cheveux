@@ -15,11 +15,12 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
-        List<SP_GetEmpAgenda> agenda = null;
+        //List<SP_GetEmpAgenda> agenda = null;
         List<SP_GetStylistBookings> bList = null;
         List<SP_GetEmpNames> list = null;
         SP_ViewEmployee viewEmp = null;
-
+        List<SP_GetBookingServices> bServices = null;
+        SP_GetMultipleServicesTime time = null;
         string today = DateTime.Now.ToString("yyyy-MM-dd");
 
         protected void Page_PreInit(Object sender, EventArgs e)
@@ -765,7 +766,6 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-
         #region Stylists bookings
 
         #region Past
@@ -777,7 +777,7 @@ namespace Cheveux
                 bList = handler.getStylistPastBookings(empID,sortBy,sortDir);
 
                 ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -789,7 +789,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -821,19 +827,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -862,7 +856,7 @@ namespace Cheveux
                 bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate,sortBy,sortDir);
 
                 ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -874,7 +868,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -906,19 +906,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -947,7 +935,7 @@ namespace Cheveux
                 bList = handler.getStylistPastBksForDate(empID, day,sortBy,sortDir);
 
                 ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -959,7 +947,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -991,19 +985,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -1038,7 +1020,7 @@ namespace Cheveux
                 bList = handler.getStylistUpcomingBookings(empID,sortBy,sortDir);
 
                 tblSchedule.Visible = true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1050,7 +1032,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1086,19 +1074,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     //edit
                     TableCell buttonCell = new TableCell();
@@ -1134,9 +1110,9 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             try
             {
-                agenda = handler.BLL_GetEmpAgenda(id, bookingDate,sortBy,sortDir);
+                bList = handler.getStylistUpcomingBkForDate(id, bookingDate,sortBy,sortDir);
 
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 //create row for the table 
                 TableRow row = new TableRow();
@@ -1152,7 +1128,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1174,7 +1156,7 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
-                foreach (SP_GetEmpAgenda b in agenda)
+                foreach (SP_GetStylistBookings b in bList)
                 {
 
                     TableRow r = new TableRow();
@@ -1182,22 +1164,10 @@ namespace Cheveux
                     tblSchedule.Rows.Add(r);
 
                     TableCell dateCell = new TableCell();
-                    dateCell.Text = b.Date.ToString("dd-MM-yyyy");
+                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.UserID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + b.CustomerFName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    /*TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ProductID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);*/
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     //edit
                     TableCell buttonCell = new TableCell();
@@ -1237,7 +1207,7 @@ namespace Cheveux
                 bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate,sortBy,sortDir);
 
                 ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1249,7 +1219,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1286,19 +1262,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     //edit
                     TableCell buttonCell = new TableCell();
@@ -1332,7 +1296,7 @@ namespace Cheveux
 
         #endregion
 
-        #region All Stylists 
+        #region All Stylists Bookings 
 
         #region Upcoming
         public void getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
@@ -1343,7 +1307,7 @@ namespace Cheveux
                 bList = handler.getAllStylistsUpcomingBksForDate(bookingDate,sortBy,sortDir);
 
                 ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1355,7 +1319,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1397,24 +1367,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell empCell = new TableCell();
-                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.StylistName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(empCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     //edit
                     TableCell buttonCell = new TableCell();
@@ -1453,7 +1406,7 @@ namespace Cheveux
                 bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate, sortBy, sortDir);
 
                 ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1465,7 +1418,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1503,24 +1462,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell empCell = new TableCell();
-                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.StylistName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(empCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     //edit
                     TableCell buttonCell = new TableCell();
@@ -1558,7 +1500,7 @@ namespace Cheveux
                 bList = handler.getAllStylistsUpcomingBookings(sortBy, sortDir);
 
                 ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1570,7 +1512,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1612,24 +1560,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell empCell = new TableCell();
-                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.StylistName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(empCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     //edit
                     TableCell buttonCell = new TableCell();
@@ -1670,7 +1601,7 @@ namespace Cheveux
                 bList = handler.getAllStylistsPastBookings(sortBy,sortDir);
 
                 //phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1682,7 +1613,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(date);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1720,24 +1657,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell empCell = new TableCell();
-                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.StylistName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(empCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -1766,7 +1686,7 @@ namespace Cheveux
                 bList = handler.getAllStylistsPastBksForDate(date, sortBy, sortDir);
 
                 //phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1778,7 +1698,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(dateC);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1816,24 +1742,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell empCell = new TableCell();
-                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.StylistName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(empCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -1863,7 +1772,7 @@ namespace Cheveux
                 bList = handler.getAllStylistsPastBookingsDateRange(startDate,endDate, sortBy, sortDir);
 
                 //phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover table-bordered";
+                tblSchedule.CssClass = "table table-light table-hover";
 
                 TableRow row = new TableRow();
                 tblSchedule.Rows.Add(row);
@@ -1875,7 +1784,13 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(dateC);
 
                 TableCell time = new TableCell();
-                time.Text = "Time";
+                time.Text = "Start Time";
+                time.Width = 90;
+                time.Font.Bold = true;
+                tblSchedule.Rows[0].Cells.Add(time);
+
+                time = new TableCell();
+                time.Text = "End Time";
                 time.Width = 90;
                 time.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(time);
@@ -1913,24 +1828,7 @@ namespace Cheveux
                     dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                     tblSchedule.Rows[rowCount].Cells.Add(dateCell);
 
-                    TableCell timeCell = new TableCell();
-                    timeCell.Text = b.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[rowCount].Cells.Add(timeCell);
-
-                    TableCell empCell = new TableCell();
-                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.StylistName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(empCell);
-
-                    TableCell customerCell = new TableCell();
-                    customerCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.CustomerID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + b.FullName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(customerCell);
-
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblSchedule.Rows[rowCount].Cells.Add(servNameCell);
+                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -1955,7 +1853,145 @@ namespace Cheveux
         #endregion
 
         #endregion
+        public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int i, SP_GetStylistBookings a)
+        {
+            #region Time
 
+            TableCell start = new TableCell();
+            start.Width = 200;
+            TableCell end = new TableCell();
+            end.Width = 200;
+
+            try
+            {
+                try
+                {
+                    bServices = handler.getBookingServices(a.BookingID.ToString());
+                }
+                catch (ApplicationException serviceErr)
+                {
+                    function.logAnError("Error getting services [appointments.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
+                }
+                time = handler.getMultipleServicesTime(primaryBookingID);
+
+                if (bServices.Count < 2)
+                {
+                    start.Text = a.StartTime.ToString("HH:mm");
+                    tblSchedule.Rows[i].Cells.Add(start);
+
+                    end.Text = a.EndTime.ToString("HH:mm");
+                    tblSchedule.Rows[i].Cells.Add(end);
+                }
+                else if (bServices.Count >= 2)
+                {
+                    start.Text = time.StartTime.ToString("HH:mm");
+                    tblSchedule.Rows[i].Cells.Add(start);
+
+                    end.Text = time.EndTime.ToString("HH:mm");
+                    tblSchedule.Rows[i].Cells.Add(end);
+                }
+
+            }
+            catch (ApplicationException Err)
+            {
+                //If time isn't retrieved (Error)
+                start.Text = "---";
+                tblSchedule.Rows[i].Cells.Add(start);
+                end.Text = "---";
+                tblSchedule.Rows[i].Cells.Add(end);
+                function.logAnError("Couldn't get the time (check db for 2nd bkID) [appointments.aspx "
+                    +"{getTimeCustomerServices?getTime}] error:"
+                                            + Err.ToString());
+            }
+            #endregion
+            #region Stylist
+            if (empSelectionType.SelectedValue == "0")
+            {
+                TableCell empCell = new TableCell();
+                try
+                {
+                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.StylistID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + a.StylistName.ToString() + "</a>";
+                    tblSchedule.Rows[i].Cells.Add(empCell);
+                }
+                catch(ApplicationException Err)
+                {
+                    empCell.Text = "-------";
+                    tblSchedule.Rows[i].Cells.Add(empCell);
+                    function.logAnError("Couldnt get stylist name[appointments.aspx {getT/c/s method}]err:"+Err.ToString());
+                }
+            }
+            #endregion
+            #region Customer
+            TableCell c = new TableCell();
+            try
+            {
+                c.Width = 300;
+                c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.CustomerID.ToString().Replace(" ", string.Empty) +
+                                "'>" + a.FullName.ToString() + "</a>";
+                tblSchedule.Rows[i].Cells.Add(c);
+            }
+            catch(ApplicationException Err)
+            {
+                c.Width = 300;
+                c.Text = "----------";
+                tblSchedule.Rows[i].Cells.Add(c);
+                function.logAnError("Couldnt get customer name[appointments.aspx {getT/c/s method}]err:" + Err.ToString());
+            }
+            #endregion
+            #region Services
+
+            TableCell services = new TableCell();
+            services.Width = 300;
+
+            try
+            {
+                bServices = handler.getBookingServices(a.BookingID.ToString());
+                if (bServices.Count == 1)
+                {
+                    services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    + bServices[0].ServiceName.ToString() + "</a>";
+                }
+                else if (bServices.Count == 2)
+                {
+                    services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>" + bServices[0].ServiceName.ToString() +
+                        ", " + bServices[1].ServiceName.ToString() + "</a>";
+                }
+                else if (bServices.Count > 2)
+                {
+                    string toolTip = "";
+                    int toolTipCount = 0;
+                    foreach (SP_GetBookingServices toolTipDTL in bServices)
+                    {
+                        if (toolTipCount == 0)
+                        {
+                            toolTip = toolTipDTL.ServiceName;
+                            toolTipCount++;
+                        }
+                        else
+                        {
+                            toolTip += ", " + toolTipDTL.ServiceName;
+                        }
+                    }
+                    services.Text = "<a title='" + toolTip + "'" +
+                        "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'> Multiple Services </a>";
+                }
+                tblSchedule.Rows[i].Cells.Add(services);
+            }
+            catch (ApplicationException Err)
+            {
+                //if theres an error or cant retrieve the services from the database 
+                services.Text = "Unable to retreive services";
+                tblSchedule.Rows[i].Cells.Add(services);
+                function.logAnError("Couldn't get the services [appointments.aspx "
+                    +"{getTimeCustomerServices?getServices} ] error:" + Err.ToString());
+            }
+
+
+            #endregion
+        }
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
             lblDay.Text = calDay.SelectedDate.ToString("dd-MM-yyyy");

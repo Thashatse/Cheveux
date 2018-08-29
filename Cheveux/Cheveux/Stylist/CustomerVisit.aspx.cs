@@ -75,7 +75,6 @@ namespace Cheveux
                 //create a variablew to track the row count
                 int rCnt = 0;
 
-                //create a new row in the table and set the height
                 TableRow newRow = new TableRow();
                 newRow.Height = 50;
                 allBookingTable.Rows.Add(newRow);
@@ -85,8 +84,7 @@ namespace Cheveux
                 newCell.Width = 300;
                 allBookingTable.Rows[rCnt].Cells.Add(newCell);
 
-                getTimeCustomerServices(bDTL.BookingID,bDTL.BookingID,rCnt,bDTL);
-                rCnt++;
+                getTimeCustomerServices(bDTL.BookingID, bDTL.BookingID, rCnt, bDTL);
 
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -253,7 +251,7 @@ namespace Cheveux
             newCell.Width = 300;
             allBookingTable.Rows[rCnt].Cells.Add(newCell);
             newCell = new TableCell();
-            newCell.Width = 700;
+            newCell.Width = 300;
             try
             {
                 try

@@ -532,6 +532,10 @@ namespace BLL
         {
             return db.getStylistPastBksForDate(empID, day,sortBy,sortDir);
         }
+        public List<SP_GetStylistBookings> getStylistUpcomingBkForDate(string empID, DateTime day, string sortBy, string sortDir)
+        {
+            return db.getStylistUpcomingBkForDate(empID, day, sortBy, sortDir);
+        }
         public bool BLL_AddToBookingService(BookingService bs)
         {
             return db.AddToBookingService(bs);

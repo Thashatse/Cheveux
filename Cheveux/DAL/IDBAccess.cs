@@ -54,6 +54,7 @@ namespace DAL
         bool CreateCustVisit(CUST_VISIT cust_visit);
         List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistUpcomingBkForDate(string empID, DateTime day, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);

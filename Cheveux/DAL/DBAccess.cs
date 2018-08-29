@@ -1888,55 +1888,6 @@ namespace DAL
             }
             return list;
         }
-
-        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir)
-        {
-            SP_GetEmpAgenda emp = null;
-            List<SP_GetEmpAgenda> agenda = new List<SP_GetEmpAgenda>();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@EmployeeID", employeeID),
-                new SqlParameter("@Date", bookingDate),
-                new SqlParameter("@sortBy", sortBy),
-                new SqlParameter("@sortDir", sortDir)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetEmpAgenda",
-                                            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            emp = new SP_GetEmpAgenda
-                            {
-                                BookingID = Convert.ToString(row["BookingID"]),
-                                PrimaryID = Convert.ToString(row["PrimaryID"]),
-                                UserID = Convert.ToString(row["UserID"]),
-                                StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
-                                EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
-                                CustomerFName = Convert.ToString(row["CustomerFName"]),
-                                EmpFName = Convert.ToString(row["EmpFName"]),
-                                //ServiceName = Convert.ToString(row["ServiceName"]),
-                                //ServiceDesc = Convert.ToString(row["ProductDescription"]),
-                                Arrived = Convert.ToString(row["Arrived"]),
-                                Date = Convert.ToDateTime(row["Date"]),
-                                //ProductID = Convert.ToString(row["ProductID"]),
-                                empID = Convert.ToString(row["EmpID"])
-                            };
-                            agenda.Add(emp);
-                        }
-                    }
-                }
-                return agenda;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
         public EMPLOYEE getEmployeeType(string EmployeeID)
         {
             EMPLOYEE Emp = null;
@@ -2696,6 +2647,101 @@ namespace DAL
 
             }
         }
+        #region Schedule
+        #region Specific Stylist
+        public List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir)
+        {
+            SP_GetEmpAgenda emp = null;
+            List<SP_GetEmpAgenda> agenda = new List<SP_GetEmpAgenda>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", employeeID),
+                new SqlParameter("@Date", bookingDate),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetEmpAgenda",
+                                            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            emp = new SP_GetEmpAgenda
+                            {
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                PrimaryID = Convert.ToString(row["PrimaryID"]),
+                                UserID = Convert.ToString(row["UserID"]),
+                                StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
+                                EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
+                                CustomerFName = Convert.ToString(row["CustomerFName"]),
+                                EmpFName = Convert.ToString(row["EmpFName"]),
+                                //ServiceName = Convert.ToString(row["ServiceName"]),
+                                //ServiceDesc = Convert.ToString(row["ProductDescription"]),
+                                Arrived = Convert.ToString(row["Arrived"]),
+                                Date = Convert.ToDateTime(row["Date"]),
+                                //ProductID = Convert.ToString(row["ProductID"]),
+                                empID = Convert.ToString(row["EmpID"])
+                            };
+                            agenda.Add(emp);
+                        }
+                    }
+                }
+                return agenda;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetStylistBookings> getStylistUpcomingBkForDate(string empID, DateTime day, string sortBy, string sortDir)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", empID),
+                new SqlParameter("@day", day),
+                new SqlParameter("@sortBy", sortBy),
+                new SqlParameter("@sortDir", sortDir)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_StylistUpcomingBkForDate", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                FullName = row["FullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         public List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
@@ -2717,17 +2763,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -2763,17 +2810,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -2807,17 +2855,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -2853,17 +2902,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -2876,6 +2926,8 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        #endregion
+        #region All Stylists
         public List<SP_GetStylistBookings> getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
             SP_GetStylistBookings s = null;
@@ -2897,17 +2949,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -2942,17 +2995,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -2987,17 +3041,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -3030,17 +3085,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -3073,17 +3129,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -3118,17 +3175,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -3164,17 +3222,18 @@ namespace DAL
                             s = new SP_GetStylistBookings
                             {
                                 BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
                                 StylistID = row["StylistID"].ToString(),
                                 CustomerID = row["CustomerID"].ToString(),
                                 StylistName = row["StylistName"].ToString(),
                                 FullName = row["FullName"].ToString(),
                                 BookingDate = Convert.ToDateTime(row["Date"]),
                                 StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                ServiceID = row["ProductID"].ToString(),
-                                ServiceName = row["Name"].ToString(),
-                                ServiceDescription = row["ProductDescription"].ToString(),
-                                Arrived = row["Arrived"].ToString(),
-                                Price = row["Price"].ToString()
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                //ServiceID = row["ProductID"].ToString(),
+                                //ServiceName = row["Name"].ToString(),
+                                //ServiceDescription = row["ProductDescription"].ToString(),
+                                Arrived = row["Arrived"].ToString()
                             };
                             bookings.Add(s);
                         }
@@ -3187,6 +3246,8 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        #endregion
+        #endregion
         public List<SP_AboutStylist> aboutStylist()
         {
             SP_AboutStylist s = null;
