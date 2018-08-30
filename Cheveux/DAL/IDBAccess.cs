@@ -54,6 +54,7 @@ namespace DAL
         bool CreateCustVisit(CUST_VISIT cust_visit);
         List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistUpcomingBkForDate(string empID, DateTime day, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
@@ -69,6 +70,7 @@ namespace DAL
 
         #region search
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
+        List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate);
         #endregion
 
         #region Functions
@@ -157,8 +159,8 @@ namespace DAL
         bool AddService(PRODUCT p, SERVICE s);
         */
       
-        //bool addAccessories(ACCESSORY a);
-        //bool addTreatments(TREATMENT t);
+        bool addAccessories(ACCESSORY a, PRODUCT p);
+        bool addTreatments(TREATMENT t, PRODUCT p);
         SERVICE GetSlotLength(string serviceID);
 
     }

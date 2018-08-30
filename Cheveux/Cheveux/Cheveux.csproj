@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddProduct.aspx" />
+    <Content Include="Authentication\CloseWindow.aspx" />
     <Content Include="Manager\AddService.aspx" />
     <Content Include="Manager\UpdateService.aspx" />
     <Content Include="PrintInvoice.aspx" />
@@ -287,6 +288,13 @@
     </Compile>
     <Compile Include="AddProduct.aspx.designer.cs">
       <DependentUpon>AddProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Authentication\CloseWindow.aspx.cs">
+      <DependentUpon>CloseWindow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Authentication\CloseWindow.aspx.designer.cs">
+      <DependentUpon>CloseWindow.aspx</DependentUpon>
     </Compile>
     <Compile Include="Manager\AddService.aspx.cs">
       <DependentUpon>AddService.aspx</DependentUpon>

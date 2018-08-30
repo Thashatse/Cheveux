@@ -17,5 +17,6 @@ namespace TypeLibrary.ViewModels
         public string bookingID { get; set; }
         public string CustomerID { get; set; }
         public Char arrived { get; set; }
+        public string BookingComment { get; set; }
     }
 }

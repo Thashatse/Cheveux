@@ -306,10 +306,10 @@ namespace Cheveux
                                     "'>" + b.FullName.ToString() + "</a>";
                     tblPast.Rows[rowCount].Cells.Add(customerCell);
 
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceName.ToString() + "</a>";
-                    tblPast.Rows[rowCount].Cells.Add(servNameCell);
+                //    TableCell servNameCell = new TableCell();
+                //    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
+                //+ b.ServiceName.ToString() + "</a>";
+                //    tblPast.Rows[rowCount].Cells.Add(servNameCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -390,10 +390,10 @@ namespace Cheveux
                                         "'>" + b.FullName.ToString() + "</a>";
                     tblPast.Rows[rowCount].Cells.Add(customerCell);
 
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblPast.Rows[rowCount].Cells.Add(servNameCell);
+                    //TableCell servNameCell = new TableCell();
+                    //servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
+                    //                    + b.ServiceName.ToString() + "</a>";
+                    //tblPast.Rows[rowCount].Cells.Add(servNameCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -482,10 +482,10 @@ namespace Cheveux
                                     "'>" + b.FullName.ToString() + "</a>";
                     tblUpcoming.Rows[rowCount].Cells.Add(customerCell);
 
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                + b.ServiceName.ToString() + "</a>";
-                    tblUpcoming.Rows[rowCount].Cells.Add(servNameCell);
+                //    TableCell servNameCell = new TableCell();
+                //    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
+                //+ b.ServiceName.ToString() + "</a>";
+                //    tblUpcoming.Rows[rowCount].Cells.Add(servNameCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =
@@ -569,10 +569,10 @@ namespace Cheveux
                                         "'>" + b.FullName.ToString() + "</a>";
                     tblUpcoming.Rows[rowCount].Cells.Add(customerCell);
 
-                    TableCell servNameCell = new TableCell();
-                    servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
-                                        + b.ServiceName.ToString() + "</a>";
-                    tblUpcoming.Rows[rowCount].Cells.Add(servNameCell);
+                    //TableCell servNameCell = new TableCell();
+                    //servNameCell.Text = "<a href='ViewProduct.aspx?ProductID=" + b.ServiceID.Replace(" ", string.Empty) + "'>"
+                    //                    + b.ServiceName.ToString() + "</a>";
+                    //tblUpcoming.Rows[rowCount].Cells.Add(servNameCell);
 
                     TableCell buttonCell = new TableCell();
                     buttonCell.Text =

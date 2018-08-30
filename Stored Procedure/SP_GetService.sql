@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE SP_GetService
+alter PROCEDURE SP_GetService
 	@ServiceID nchar(10)
 AS
 BEGIN

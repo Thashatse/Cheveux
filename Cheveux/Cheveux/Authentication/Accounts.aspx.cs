@@ -13,7 +13,7 @@ namespace Cheveux
 {
     public partial class Accounts : System.Web.UI.Page
     {
-        Authentication auth = new Authentication();
+        BLL.Authentication auth = new BLL.Authentication();
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         USER restPassAccount;
@@ -32,7 +32,7 @@ namespace Cheveux
             {
                 lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email&PreviousPage=" + PreviousPage;
             }
-            lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Acount</a>";
+            lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Account</a>";
             //check if the user has requested a logout or login
             String action = Request.QueryString["action"];
             //login
@@ -203,9 +203,22 @@ namespace Cheveux
             }
             else if (PreviousPage == "MakeABooking")
             {
-                String x = "<script type='text/javascript'>window.close();return false;</script>";
-                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "script", x, false);
+                Response.Write("<script language='javascript'> { window.close(); }</script>");
+
+                this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
+
+                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
+
+                string jScript = "<script>window.close();</script>";
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "keyClientBlock", jScript);
+
+                Response.Redirect("CloseWindow.aspx");
             }
+            else if (PreviousPage == "NewInternalBooking")
+            {
+                Response.Redirect("../MakeABooking.aspx?Type=Internal");
+            }
+
         }
 
         #region Google Auth
@@ -569,7 +582,7 @@ namespace Cheveux
                         var body = new System.Text.StringBuilder();
                         body.AppendFormat("Hello User,");
                         body.AppendLine(@"");
-                        body.AppendLine(@"Your Password Was Succesfuly Rest.");
+                        body.AppendLine(@"Your Password Was Successfully Rest.");
                         body.AppendLine(@"");
                         body.AppendLine(@"Make a Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
                         body.AppendLine(@"");
@@ -592,6 +605,7 @@ namespace Cheveux
                         lPaswordResetUsernameLable.Visible = true;
                         lPaswordResetUsernameLable.Text = "An error occurred, Please try again later.";
                         divResetPaswordtxtPass.Visible = false;
+                        
                         btnChangePass.Text = "Done";
                     }
                     }
@@ -599,6 +613,8 @@ namespace Cheveux
                     {
                         //let the use know an erorr ocoured
                         lPaswordResetUsernameLable.Visible = true;
+                    divResetPaswordtxtPass.Visible = false;
+                    btnChangePass.Visible = false;
                         lPaswordResetUsernameLable.Text = "An error occurred communicating with the Cheveux Server, Please try again later.";
                         function.logAnError("Error reseting password on accounts page for reset code: " + code +
                             Err.ToString());
@@ -637,7 +653,7 @@ namespace Cheveux
                             var body = new System.Text.StringBuilder();
                             body.AppendFormat("Hello " + user.FirstName+",");
                             body.AppendLine(@"");
-                            body.AppendLine(@"Your Password Was Succesfuly Changed.");
+                            body.AppendLine(@"Your Password Was Successfully Changed.");
                             body.AppendLine(@"");
                             body.AppendLine(@"Make a Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
                             body.AppendLine(@"");

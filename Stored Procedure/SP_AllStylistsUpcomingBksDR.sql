@@ -25,19 +25,19 @@ alter PROCEDURE SP_AllStylistsUpcomingBksDR
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT BookingID,B.StylistID,B.CustomerID,
+		SELECT BookingID,b.primaryBookingID AS [PrimaryID],B.StylistID,B.CustomerID,
 			
-		   (SELECT (u.FirstName + ' ' + u.LastName)as[stylist]
-		   FROM [USER] u 
-		   WHERE u.UserID=B.StylistID)AS[StylistName],
+		   (SELECT (u.FirstName + ' ' + u.LastName)as[StylistName]
+		   FROM [USER] u
+		   WHERE u.UserID = B.StylistID)AS[StylistName],
 
 		   (SELECT (u.FirstName+' '+u.LastName)as[CustomerName]
 		   FROM [USER] u
 		   WHERE u.UserID=B.CustomerID)AS[FullName],
 
-		   B.[Date],TS.StartTime,P.ProductID,P.[Name],P.ProductDescription,B.Arrived,P.Price
+		   B.[Date],TS.StartTime,TS.EndTime,B.Arrived
 
-	From   BOOKING B, TIMESLOT TS, [User] U, PRODUCT P
+	From   BOOKING B, TIMESLOT TS, [User] U
 	Where  B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = U.UserID 
 	AND    B.Arrived = 'N' 

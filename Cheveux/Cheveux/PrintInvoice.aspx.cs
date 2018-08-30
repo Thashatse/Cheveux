@@ -100,6 +100,7 @@ namespace Cheveux
                     newCell = new TableCell();
                     newCell.Text = bUSINESS.AddressLine1 + "<br/>"+bUSINESS.AddressLine2;
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
+
                     #region EmptyCells
                     newCell = new TableCell();
                     newCell.Text = "";
@@ -108,6 +109,7 @@ namespace Cheveux
                     newCell.Text = "";
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
                     #endregion
+
                     #region  date
                     newCell = new TableCell();
                     newCell.Text = invoice.Date.ToString("HH:mm dd MMM yyyy");

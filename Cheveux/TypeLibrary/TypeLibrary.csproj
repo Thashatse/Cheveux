@@ -73,6 +73,8 @@
     <Compile Include="ViewModels\SP_GetBookedTimes.cs" />
     <Compile Include="ViewModels\SP_GetBookingServiceDTL.cs" />
     <Compile Include="ViewModels\SP_GetBookingServices.cs" />
+    <Compile Include="ViewModels\SP_GetBraidService.cs" />
+    <Compile Include="ViewModels\SP_GetBrandsForProductType.cs" />
     <Compile Include="ViewModels\SP_GetMultipleServicesTime.cs" />
     <Compile Include="ViewModels\SP_GetEmployeeTypes.cs" />
     <Compile Include="ViewModels\SP_getInvoiceDL.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="ViewModels\SP_GetLength.cs" />
     <Compile Include="ViewModels\SP_GetMyNextCustomer.cs" />
     <Compile Include="ViewModels\SP_GetProductTypes.cs" />
+    <Compile Include="ViewModels\SP_GetService.cs" />
     <Compile Include="ViewModels\SP_GetServices.cs" />
     <Compile Include="ViewModels\SP_GetSlotTimes.cs" />
     <Compile Include="ViewModels\SP_GetStyles.cs" />

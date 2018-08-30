@@ -168,11 +168,6 @@
                                         <asp:TableCell>
                                             <!--Bio-->
                                             <textarea runat="server" id="txtBio" cols="45" rows="5" placeholder="Placecholder"></textarea>
-                                            <!--Help-->
-                                            <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank"
-                                                title="Stylist Bio">
-                                                <span class="glyphicon">&#63;</span>
-                                            </a>
                                           </asp:TableCell>
                                     </asp:TableRow>
 

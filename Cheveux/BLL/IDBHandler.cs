@@ -75,7 +75,11 @@ namespace BLL
         ManagerStats GetManagerStats();
         #endregion
 
+        #region search
+        List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
+        #endregion
+
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);
@@ -83,6 +87,7 @@ namespace BLL
         List<SP_GetStylistBookings> getStylistPastBookings(string empID, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistUpcomingBookings(string empID, string sortBy, string sortDir);
+        List<SP_GetStylistBookings> getStylistUpcomingBkForDate(string empID, DateTime day, string sortBy, string sortDir);
         bool deleteBooking(string BookingID);
         List<SP_GetCustomerBooking> getCustomerPastBookings(string CustomerID);
         SP_GetCustomerBooking getCustomerPastBookingDetails(string BookingID);
@@ -145,8 +150,8 @@ namespace BLL
         List<SP_GetStylistBookings> getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir);
-        bool addAccessories(ACCESSORY a);
-        bool addTreatments(TREATMENT t);
+        bool addAccessories(ACCESSORY a, PRODUCT p );
+        bool addTreatments(TREATMENT t, PRODUCT p);
         SERVICE BLL_GetSlotLength(string serviceID);
     }
 }

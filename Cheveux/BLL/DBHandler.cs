@@ -109,15 +109,15 @@ namespace BLL
             return db.CheckForProduct(id);
         }
 
-        
-        public bool addAccessories(ACCESSORY a)
+       
+        public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
-            return db.addAccessories(a);
+            return db.addAccessories(a,p);
         }
 
-        public bool addTreatments(TREATMENT t)
+        public bool addTreatments(TREATMENT t, PRODUCT p)
         {
-            return db.addTreatments(t);
+            return db.addTreatments(t, p);
         }
 
         public SP_GetAllAccessories selectAccessory(string accessoryID)
@@ -201,6 +201,18 @@ namespace BLL
         }
         #endregion
 
+        #region search
+        public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
+        {
+            return db.UniversalSearch(searchTerm);
+        }
+
+        public List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate)
+        {
+            return db.searchBookings(startDate, endDate);
+        }
+        #endregion
+
         public List<SP_GetTodaysBookings> getTodaysBookings() 
         {
             return db.getTodaysBookings();
@@ -244,11 +256,6 @@ namespace BLL
         public SP_AddUser BLL_AddUser(USER user)
         {
             return db.AddUser(user);
-        }
-
-        public Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm)
-        {
-            return db.UniversalSearch(searchTerm);
         }
 
         public Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails()
@@ -533,6 +540,10 @@ namespace BLL
         public List<SP_GetStylistBookings> getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
             return db.getStylistPastBksForDate(empID, day,sortBy,sortDir);
+        }
+        public List<SP_GetStylistBookings> getStylistUpcomingBkForDate(string empID, DateTime day, string sortBy, string sortDir)
+        {
+            return db.getStylistUpcomingBkForDate(empID, day, sortBy, sortDir);
         }
         public bool BLL_AddToBookingService(BookingService bs)
         {

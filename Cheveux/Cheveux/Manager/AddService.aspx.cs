@@ -108,7 +108,7 @@ namespace Cheveux.Manager
             product.ProductDescription = txtDescription.Text;
             product.Price = Convert.ToDecimal(txtPrice.Text);
 
-            service.NoOfSlots = int.Parse(txtNoOfSlots.Text);
+            service.NoOfSlots = int.Parse(drpNoOfSlots.SelectedValue);
             service.Type = drpType.SelectedValue.ToString();
 
             bservice.ProductID = product.ProductID;

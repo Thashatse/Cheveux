@@ -70,7 +70,19 @@
                                     <asp:TableRow>
                                         <asp:TableCell Text="No of Slots: " Width="150px"></asp:TableCell>
                                         <asp:TableCell>
-                                            <asp:TextBox runat="server" ID="txtNoOfSlots"></asp:TextBox>
+                                            <asp:DropDownList runat="server" ID="drpNoOfSlots" AutoPostBack="true">
+                                                <asp:ListItem Text="" Value="0" Selected="True"></asp:ListItem>
+                                                <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                                <asp:ListItem Text="2" Value="2"></asp:ListItem>
+                                                <asp:ListItem Text="3" Value="3"></asp:ListItem>
+                                                <asp:ListItem Text="4" Value="4"></asp:ListItem>
+                                                <asp:ListItem Text="5" Value="5"></asp:ListItem>
+                                                <asp:ListItem Text="6" Value="6"></asp:ListItem>
+                                                <asp:ListItem Text="7" Value="7"></asp:ListItem>
+                                                <asp:ListItem Text="8" Value="8"></asp:ListItem>
+                                                <asp:ListItem Text="9" Value="9"></asp:ListItem>
+                                                <asp:ListItem Text="10" Value="10"></asp:ListItem>
+                                            </asp:DropDownList>
                                             <br />
                                         </asp:TableCell>
                                     </asp:TableRow>

@@ -19,7 +19,7 @@ namespace Cheveux
         SP_ViewStylistSpecialisationAndBio specialisationAndBio = null;
         string userType;
         HttpCookie cookie = null;
-        Authentication auth = new Authentication();
+        BLL.Authentication auth = new BLL.Authentication();
         List<SP_GetCustomerBooking> bookingsList = null;
         List<SP_GetBookingServices> bookingServiceList = null;
 
@@ -827,7 +827,8 @@ namespace Cheveux
                             rowCount++;
 
                             //display bio if employee & is a stylist
-                            if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S')
+                            if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S'
+                                && specialisationAndBio != null)
                             {
                                 //Stylist Bio
                                 editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Bio:";
@@ -896,7 +897,8 @@ namespace Cheveux
                         rowCount++;
 
                         //display bio if employee & is a stylist
-                        if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S')
+                        if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S'
+                            && specialisationAndBio != null)
                         {
                             //Stylist Bio
                             editEmailProfileTable.Rows[rowCount].Cells[0].Text = "Bio:";
@@ -1551,7 +1553,7 @@ namespace Cheveux
             }
             else if (bookingServiceList.Count == 2)
             {
-                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                newCell.Text = "<a href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "'>" + bookingServiceList[0].ServiceName.ToString() +
                     ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
             }
@@ -1572,7 +1574,7 @@ namespace Cheveux
                     }
                 }
                 newCell.Text = "<a title='" + toolTip + "'" +
-                    "href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                    "href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
                     "&BookingType=Past'> Multiple </a>";
             }
             pastBookings.Rows[rowCount].Cells.Add(newCell);
