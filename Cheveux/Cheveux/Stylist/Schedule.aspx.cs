@@ -120,7 +120,7 @@ namespace Cheveux
                         }
                     }
                 }
-                catch (ApplicationException Err)
+                catch (Exception Err)
                 {
                     phScheduleErr.Visible = true;
                     errorHeader.Text = "Error";
@@ -179,7 +179,7 @@ namespace Cheveux
                                 }
                             }
                         }
-                        catch (ApplicationException Err)
+                        catch (Exception Err)
                         {
                             phScheduleErr.Visible = true;
                             errorHeader.Text = "Error";
@@ -321,7 +321,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting past bookings.";
@@ -405,7 +405,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting past bookings within required date range.";
@@ -498,7 +498,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting upcoming bookings";
@@ -584,7 +584,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting upcoming bookings for stylist for required date range.";

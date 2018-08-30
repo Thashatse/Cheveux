@@ -241,7 +241,7 @@ namespace Cheveux
                         {
                             VATRate = handler.GetVATRate().VATRate;
                         }
-                        catch (ApplicationException Err)
+                        catch (Exception Err)
                         {
                             function.logAnError(Err.ToString());
                         }

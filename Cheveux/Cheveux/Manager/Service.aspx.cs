@@ -110,13 +110,13 @@ namespace Cheveux.Manager
 
                             //Name
                             newCell = new TableCell();
-                            newCell.Text = "<a class='btn btn-default' href ='../ViewProduct.aspx?ProductID="
+                            newCell.Text = "<a class='btn btn-default' href ='../cheveux/services.aspx?ProductID="
                                         + prod.ProductID.ToString().Replace(" ", string.Empty)+"'>" + prod.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
                             //Description
                             newCell = new TableCell();
-                            newCell.Text = "<a class='btn btn-default' href ='../ViewProduct.aspx?ProductID="
+                            newCell.Text = "<a class='btn btn-default' href ='../cheveux/services.aspx?ProductID="
                                         + prod.ProductID.ToString().Replace(" ", string.Empty) + "'>" + prod.ProductDescription + "</a> ";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 

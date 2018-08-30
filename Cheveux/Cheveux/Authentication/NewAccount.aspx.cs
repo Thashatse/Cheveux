@@ -171,7 +171,7 @@ namespace Cheveux
                 {
                     result = auth.NewUser(User);
                 }
-                catch (ApplicationException err)
+                catch (Exception err)
                 {
                     Response.Redirect("../Error.aspx?Error='" + err + "'");
                 }
@@ -304,7 +304,7 @@ namespace Cheveux
                                             User.ContactNo, User.Password, User.UserImage, User.PassRestCode);   
                     }
                 }
-                catch (ApplicationException err)
+                catch (Exception err)
                 {
                     Response.Redirect("../Error.aspx?Error='" + err + "'");
                 }

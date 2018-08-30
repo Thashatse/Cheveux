@@ -168,6 +168,11 @@ namespace Cheveux
                         handler.getCustomerUpcomingBookingDetails(BookingID);
                     //get the services
                     bookingServiceList = handler.getBookingServices(BookingID);
+                    //if past booking
+                    if (BookingDetails == null)
+                    {
+                        Response.Redirect("ViewBooking.aspx?BookingID=" + BookingID + "&BookingType=Past");
+                    }
                 }
                 else if (pastBooking == true)
                 {
@@ -180,7 +185,7 @@ namespace Cheveux
                     //get the review
 
                 }
-
+                
                 #region Heading
                 if (bookingServiceList.Count == 1)
                 {
@@ -227,7 +232,7 @@ namespace Cheveux
                 if (bookingServiceList.Count == 1)
                 {
                     newCell = new TableCell();
-                    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
                     + bookingServiceList[0].ServiceName.ToString() + "</a>";
                     newCell.Width = 700;
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
@@ -251,7 +256,7 @@ namespace Cheveux
                         }
 
                         newCell = new TableCell();
-                        newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                        newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
                         + service.ServiceName.ToString() + "</a>";
                         newCell.Width = 700;
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
@@ -272,7 +277,7 @@ namespace Cheveux
                     newCell.Text = "Service Description:";
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>" +
+                    newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>" +
                     bookingServiceList[0].serviceDescripion.ToString() + "</a>";
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
 
@@ -486,7 +491,7 @@ namespace Cheveux
                         {
                             VATRate = handler.GetVATRate().VATRate;
                         }
-                        catch (ApplicationException Err)
+                        catch (Exception Err)
                         {
                             function.logAnError(Err.ToString());
                         }
@@ -560,6 +565,7 @@ namespace Cheveux
                     BookingTable.Rows[rowCount].Cells.Add(newCell);
                 }
                 else if (pastBooking != true)
+                    
                 {
                     newCell.Text = "<a href = 'ViewBooking.aspx?Action=Cancel&BookingID=" +
                     BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
@@ -592,7 +598,20 @@ namespace Cheveux
             {
                 SP_GetCustomerBooking BookingDetails = handler.getCustomerUpcomingBookingDetails(BookingID);
                 List<SP_GetBookingServices> bookingServiceList = handler.getBookingServices(BookingID);
-                
+
+                //if booking is past do not alow editing
+                if(BookingDetails == null)
+                {
+                    Response.Redirect("ViewBooking.aspx?BookingID=" + BookingID + "&BookingType=Past");
+                }
+                else if(BookingDetails.arrived == 'Y'
+                    || BookingDetails.bookingDate < DateTime.Today
+                    || (BookingDetails.bookingDate.Date == DateTime.Now.Date
+                        && BookingDetails.bookingStartTime.TimeOfDay <= DateTime.Now.TimeOfDay))
+                {
+                    Response.Redirect("ViewBooking.aspx?BookingID="+ BookingID + "&BookingType=Past");
+                }
+
                 #region Heading
                 if (bookingServiceList.Count == 1)
                 {
@@ -837,7 +856,7 @@ namespace Cheveux
                 }
                 #endregion
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString() + "\n edit booking method in viewbooking form");
                 BookingLable.Text =
@@ -961,15 +980,43 @@ namespace Cheveux
                 body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
                 body.AppendLine(@"");
                 body.AppendLine(@"");
-                if (dateAndTime == true)
+                if (cookie["UT"].ToString()[0] == 'C')
                 {
-                    //if changed
-                    body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " has been updated.");
+                    if (dateAndTime == true)
+                    {
+                        //if changed
+                        body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " has been updated.");
+                    }
+                    else
+                    {
+                        body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " has been updated.");
+                    }
                 }
-                else
+                else if(cookie["UT"].ToString()[0] == 'S')
                 {
-                    body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " has been updated.");
+                    if (dateAndTime == true)
+                    {
+                        //if changed
+                        body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " has been updated, by the stylist.");
+                    }
+                    else
+                    {
+                        body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " has been updated, by the stylist.");
+                    }
                 }
+                else if (cookie["UT"].ToString()[0] == 'R')
+                {
+                    if (dateAndTime == true)
+                    {
+                        //if changed
+                        body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " has been updated, by the receptionist.");
+                    }
+                    else
+                    {
+                        body.AppendLine(@"Your booking with " + handler.GetUserDetails(BookingDetails.stylistEmployeeID).FirstName + " on " + BookingDetails.bookingDate.ToString("dd MMM yyyy") + " has been updated, by the receptionist.");
+                    }
+                }
+
                 body.AppendLine(@"");
                 //date and time
                 if (dateAndTime == true)
@@ -995,7 +1042,7 @@ namespace Cheveux
                     body.AppendLine(@"Your new stylist is " + BookingDetails.stylistFirstName);
                     body.AppendLine(@"");
                 }
-                else if (stylist == true && dateAndTime == true)
+                else if (stylist == true && dateAndTime == true && cookie["UT"].ToString()[0] != 'S')
                 {
                     //if changed
                     body.AppendLine(@"Your new stylist is " + drpEmpNames.SelectedItem.Text);
@@ -1561,7 +1608,7 @@ namespace Cheveux
         //remove dates befor today
         protected void calMAB_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (e.Day.Date <= DateTime.Now.AddDays(1))
+            if (e.Day.Date <= DateTime.Now)
             {
                 e.Cell.BackColor = ColorTranslator.FromHtml("#a9a9a9");
                 e.Day.IsSelectable = false;
@@ -1939,7 +1986,7 @@ namespace Cheveux
 
                 #region  display a Confirmation
                 BookingLable.Text =
-                    "<h1> Are you sure you want to cancel booking, </h1> " +
+                    "<h1> Are you sure you want to cancel the booking, </h1> " +
                     " <p>" + bookedServcices +
                     " with " + BookingDetails.stylistFirstName.ToString() +
                     " on " + BookingDetails.bookingDate.ToString("dd-MM-yyyy") +
@@ -1999,7 +2046,7 @@ namespace Cheveux
                             "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString() + "\n an error occured deleting a booking from the database");
                 BookingLable.Text =
@@ -2153,7 +2200,7 @@ namespace Cheveux
                 {
                     VATRate = handler.GetVATRate().VATRate;
                 }
-                catch (ApplicationException Err)
+                catch (Exception Err)
                 {
                     function.logAnError(Err.ToString());
                 }

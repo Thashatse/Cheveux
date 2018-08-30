@@ -140,7 +140,7 @@ namespace Cheveux
                             userDetails = handler.GetUserDetails(cookie["ID"].ToString());
                             commitEdit(sender, e);
                         }
-                        catch (ApplicationException Err)
+                        catch (Exception Err)
                         {
                             function.logAnError(Err.ToString()
                                 + " An error occurred retrieving user details form DB needed to commit edit for user id: " 
@@ -460,7 +460,7 @@ namespace Cheveux
                     userDetails = handler.GetUserDetails(cookie["ID"].ToString());
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString()
                     + " An error occurred retrieving your user details for user id: "+ cookie["ID"].ToString());
@@ -758,7 +758,7 @@ namespace Cheveux
                     specialisationAndBio = handler.viewStylistSpecialisationAndBio(cookie["ID"].ToString());
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString()
                     + " An error occurred retrieving your user details for user id: " + cookie["ID"].ToString());
@@ -1004,7 +1004,7 @@ namespace Cheveux
                             check = handler.updateStylistBio(bioUpdate);
                         }
                 }
-                catch (ApplicationException Err)
+                catch (Exception Err)
                 {
                     function.logAnError(Err.ToString()
                         + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
@@ -1128,7 +1128,7 @@ namespace Cheveux
                             check = handler.updateStylistBio(bioUpdate);
                         }
                     }
-                    catch (ApplicationException Err)
+                    catch (Exception Err)
                     {
                         function.logAnError(Err.ToString()
                             + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
@@ -1186,7 +1186,7 @@ namespace Cheveux
                     //sign the user out and return them to the home page
                     Response.Redirect("/Authentication/Accounts.aspx?action=Logout");
                 }
-                catch (ApplicationException err)
+                catch (Exception err)
                 {
                     function.logAnError("An Error Occouer Deleting user profile ID:"+ cookie["ID"].ToString()+" | "+err);
                     Response.Redirect("Error.aspx?Error=An error occurred deleting your profile'");
@@ -1268,7 +1268,7 @@ namespace Cheveux
             {
                 bookingsList = handler.getCustomerUpcomingBookings(cookie["ID"].ToString());
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString());
                 upcomingBookingsLable.Text =
@@ -1355,7 +1355,7 @@ namespace Cheveux
             {
                 bookingServiceList = handler.getBookingServices(booking.bookingID.ToString());
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError("Error Loading Booking Services in Profile.aspx addUpcomingBookingToTable Error:"+
                     Err.ToString());
@@ -1380,7 +1380,7 @@ namespace Cheveux
             newCell = new TableCell();
             if(bookingServiceList.Count == 1)
             {
-                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
                 + bookingServiceList[0].ServiceName.ToString() + "</a>";
             }
             else if (bookingServiceList.Count == 2)
@@ -1443,7 +1443,7 @@ namespace Cheveux
             {
                 bookingsList = handler.getCustomerPastBookings(cookie["ID"].ToString());
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError(Err.ToString() + "\n Getting Past Booking ob Bookings Page");
                 pastBookingsLable.Text =
@@ -1524,7 +1524,7 @@ namespace Cheveux
             {
                 bookingServiceList = handler.getBookingServices(booking.bookingID.ToString());
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError("Error Loading Booking Services in Profile.aspx addUpcomingBookingToTable Error:" +
                     Err.ToString());
@@ -1548,7 +1548,7 @@ namespace Cheveux
             newCell = new TableCell();
             if (bookingServiceList.Count == 1)
             {
-                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
                 + bookingServiceList[0].ServiceName.ToString() + "</a>";
             }
             else if (bookingServiceList.Count == 2)

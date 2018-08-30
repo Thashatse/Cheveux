@@ -71,7 +71,7 @@ namespace Cheveux.Manager
                             ddlReportFor.Items.Insert(0, new ListItem("Select Stylist", "-1"));
                         }
                     }
-                    catch (ApplicationException Err)
+                    catch (Exception Err)
                     {
                         function.logAnError(Err.ToString());
                         reportLable.Text = ("An error occurred communicating with the database. Please Try Again Later");
@@ -124,7 +124,7 @@ namespace Cheveux.Manager
                             ddlReportFor.Items.Insert(0, new ListItem("Select Stylist", "-1"));
                         }
                     }
-                    catch (ApplicationException Err)
+                    catch (Exception Err)
                     {
                         function.logAnError(Err.ToString());
                         reportLable.Text = ("An error occurred communicating with the database. Please Try Again Later");
@@ -296,7 +296,7 @@ namespace Cheveux.Manager
                         {
                             VATRate = handler.GetVATRate().VATRate;
                         }
-                        catch (ApplicationException Err)
+                        catch (Exception Err)
                         {
                             function.logAnError(Err.ToString());
                         }
@@ -348,7 +348,7 @@ namespace Cheveux.Manager
 
 
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError("Error getting Sales Report " + Err.ToString());
                 divReport.Visible = false;
@@ -443,7 +443,7 @@ namespace Cheveux.Manager
                     }
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 function.logAnError("Error getting Booking for hairstylist Report Date Range " + Err.ToString());
                 divReport.Visible = false;

@@ -34,9 +34,7 @@ namespace Cheveux
 
             if (UserID == null)
             {
-                LoggedOut.Visible = true;
-                allBookingTable.Visible = false;
-                LoggedIn.Visible = false;
+                Response.Redirect("../Stylist/Stylist.aspx");
             }
             else if (UserID["UT"] != "S")
             {
@@ -200,7 +198,7 @@ namespace Cheveux
             {
                 bServices = handler.getBookingServices(a.BookingID.ToString());
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 services.Text = "Unable to retreive service";
                 function.logAnError("Couldn't get the services [customervisit.aspx-getT&C&S method] error:" + Err.ToString());
@@ -258,14 +256,14 @@ namespace Cheveux
                 {
                     bServices = handler.getBookingServices(a.BookingID.ToString());
                 }
-                catch (ApplicationException serviceErr)
+                catch (Exception serviceErr)
                 {
                     function.logAnError("Error retreiving services [receptionist.aspx] getTimeAndServices method err:" + serviceErr.ToString());
                 }
                 time = handler.getMultipleServicesTime(primaryBookingID);
 
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 newCell.Text = "Unable to retrieve time";
                 //start.Text = "---";

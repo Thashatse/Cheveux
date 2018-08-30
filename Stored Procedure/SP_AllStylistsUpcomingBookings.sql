@@ -17,13 +17,13 @@ GO
 -- Author:		S.Maqabangqa
 -- Description:	Gets all upcoming bookings for all stylists
 -- =============================================
-alter PROCEDURE SP_AllStylistsUpcomingBookings
+alter PROCEDURE SP_AllStylistsUpcomingBookings 
 @sortBy nvarchar(max)=null,
 	@sortDir nvarchar(max)=null
 AS
 BEGIN
 	SET NOCOUNT ON;
-		SELECT BookingID,b.primaryBookingID AS [PrimaryID],B.StylistID,B.CustomerID,
+		SELECT BookingID,B.primaryBookingID AS [PrimaryID],B.StylistID,B.CustomerID,
 			
 		   (SELECT (u.FirstName + ' ' + u.LastName)as[StylistName]
 		   FROM [USER] u
