@@ -50,6 +50,7 @@ namespace Cheveux.Cheveux
                     phProducts.Visible = false;
                     addandedit.Visible = false;
                     phSpecProduct.Visible = true;
+                    DisplayProduct.Visible = true;
                     LoadProduct(productID);
                 }
             }
@@ -394,7 +395,7 @@ namespace Cheveux.Cheveux
 
         protected void btnAddProduct_Click(object sender, EventArgs e)
         {
-            //create a product object 
+          //create a product object 
             PRODUCT newProduct = new PRODUCT();
           
             newProduct.Name = txtName.Text;

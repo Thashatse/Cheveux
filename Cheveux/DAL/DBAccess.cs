@@ -1289,7 +1289,7 @@ namespace DAL
 
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetAllAccessories", CommandType.StoredProcedure, parameters))
+                using (DataTable table = DBHelper.ParamSelect("SP_SelectAccessory", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
@@ -1298,14 +1298,14 @@ namespace DAL
                         accessory.Name = Convert.ToString(row["Name"]);
                         accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         accessory.Price = Convert.ToInt32(row["Price"]);
-                        accessory.ProductType = Convert.ToString(row["ProductType"]);
-                        accessory.Active = Convert.ToString(row["Active"]);
+                        accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
+                        //accessory.Active = Convert.ToString(row["Active"]);
                         //accessory.ProductImage = Convert.ToByte(row["ProductImage"]);
-                        accessory.Colour = Convert.ToString(row["Colour"]);
-                        accessory.Qty = Convert.ToInt32("Qty");
+                        //accessory.Colour = Convert.ToString(row["Colour"]);
+                        //accessory.Qty = Convert.ToInt32(row["Qty"]);
                         accessory.BrandID = Convert.ToString("BrandID");
                         accessory.Brandname = Convert.ToString("BrandName");
-                        accessory.brandType = Convert.ToString("BrandType(T/A)");
+                        //accessory.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
 
@@ -1330,7 +1330,7 @@ namespace DAL
             };
 
             try
-                {  using (DataTable table = DBHelper.ParamSelect("SP_GetAllTreatments", CommandType.StoredProcedure, parameters))
+                {  using (DataTable table = DBHelper.ParamSelect("SP_SelectTreatment", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
@@ -1339,13 +1339,13 @@ namespace DAL
                         treatment.Name = Convert.ToString(row["Name"]);
                         treatment.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         treatment.Price = Convert.ToInt32(row["Price"]);
-                        treatment.ProductType = Convert.ToString(row["ProductType"]);
+                        treatment.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         treatment.Active = Convert.ToString(row["Active"]);
                         //treatment.ProductImage = Convert["ProductImage"]);
-                        treatment.Qty = Convert.ToInt32("Qty");
+                        //treatment.Qty = Convert.ToInt32(row["Qty"]);
                         treatment.BrandID = Convert.ToString("BrandID");
                         treatment.Brandname = Convert.ToString("BrandName");
-                        treatment.brandType = Convert.ToString("BrandType(T/A)");
+                        //treatment.brandType = Convert.ToString("BrandType(T/A)");
 
                      }
                   }
@@ -1416,7 +1416,7 @@ namespace DAL
 
            }
 
-           public List<SP_GetSupplier> getSupplier()
+          // public List<SP_GetSupplier> getSupplier()
 
 
 
