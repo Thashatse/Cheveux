@@ -827,7 +827,8 @@ namespace Cheveux
                             rowCount++;
 
                             //display bio if employee & is a stylist
-                            if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S')
+                            if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S'
+                                && specialisationAndBio != null)
                             {
                                 //Stylist Bio
                                 editGoogleProfileTable.Rows[rowCount].Cells[0].Text = "Bio:";
@@ -896,7 +897,8 @@ namespace Cheveux
                         rowCount++;
 
                         //display bio if employee & is a stylist
-                        if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S')
+                        if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString()[0] == 'S'
+                            && specialisationAndBio != null)
                         {
                             //Stylist Bio
                             editEmailProfileTable.Rows[rowCount].Cells[0].Text = "Bio:";

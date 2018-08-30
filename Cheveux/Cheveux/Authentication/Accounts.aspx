@@ -68,13 +68,13 @@
                                 <br />
                                 <br />
                                 <div class="row">
-                                        <div class="col-lg-4 col-md-0"></div>
-                                    <div class="col-lg-4 col-md-12" align="center">
-                                <!--sign in with google buton-->
-                                <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
-                                        </div>
                                     <div class="col-lg-4 col-md-0"></div>
+                                    <div class="col-lg-4 col-md-12" align="center">
+                                        <!--sign in with google buton-->
+                                        <div class="g-signin2" data-onsuccess="onSignIn" runat="server"></div>
                                     </div>
+                                    <div class="col-lg-4 col-md-0"></div>
+                                </div>
                             </div>
 
                             <!-- email account Type login -->
@@ -86,7 +86,7 @@
                                     <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
 
                                     <!-- Enter Email -->
-                                    <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username" 
+                                    <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username"
                                         CssClass="form-control"></asp:TextBox>
 
                                     <!--Email / User Name Validation-->
@@ -94,7 +94,7 @@
                                         ErrorMessage="*Email or Username is required" ControlToValidate="txtEmailUsername"
                                         ForeColor="Red"></asp:RequiredFieldValidator>
 
-                                </div> 
+                                </div>
                                 <!-- email account Type login enter password -->
                                 <div class="container" runat="server" id="divPassword" visible="false">
                                     <!-- Username Lable -->
@@ -105,7 +105,7 @@
                                     <br />
 
                                     <!-- Enter Password -->
-                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password" 
+                                    <asp:TextBox ID="txtPassword" runat="server" placeholder="Password" TextMode="password"
                                         CssClass="form-control"></asp:TextBox>
 
                                     <!--Password Validation-->
@@ -126,7 +126,7 @@
                                     <asp:Button class='btn btn-primary' ID="btnSignIn" runat="server" Text="Sign In" OnClick="signIn" Font-Bold="true" Width="150" Height="50" />
                                 </div>
 
-<!--line break-->
+                                <!--line break-->
                                 <br />
                                 <!--rest Button -->
                                 <a href="Accounts.aspx?action=Reset" runat="server" id="aRestPass" visible="false">Forgot Password?</a>
@@ -141,7 +141,7 @@
                             <div class="container" runat="server" id="divGetRestCode" visible="false">
                                 <!-- Feedback -->
                                 <asp:Label ID="lPaswordRestCodeFeedback" runat="server" Text="test" Visible="false"></asp:Label>
-                                <div class="container"  runat="server" id="divGetEmailToReset" visible="false">
+                                <div class="container" runat="server" id="divGetEmailToReset" visible="false">
                                     <div class="row">
                                         <div class="col-12">
                                             <!-- Txt email -->
@@ -154,18 +154,20 @@
                                         <div class="col-12">
                                             <!-- Txt email validation -->
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtEmailToReset" runat="server" ErrorMessage="*Email is Required" ControlToValidate="txtEmailToReset" ForeColor="Red"></asp:RequiredFieldValidator>
-                                        &ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtEmailAddress" runat="server" ErrorMessage="Sorry, please enter a valid email address"
-                                        ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
-                                        ControlToValidate="txtEmailToReset" ForeColor="Red"></asp:RegularExpressionValidator>
+                                            &ensp;<asp:RegularExpressionValidator ID="RegularExpressionValidatortxtEmailAddress" runat="server" ErrorMessage="Sorry, please enter a valid email address"
+                                                ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+                                                ControlToValidate="txtEmailToReset" ForeColor="Red"></asp:RegularExpressionValidator>
                                         </div>
                                     </div>
                                 </div>
-<div class="row">
-                                        <div class="col-12">
-                                            <!-- reset Pasword -->
-                                            <asp:Button ID="btnRestPassword" runat="server" Text="Reset Password" CssClass="btn btn-primary" OnClick="btnRestPassword_Click" />
-                                        </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!--line break-->
+                                        <br />
+                                        <!-- reset Pasword -->
+                                        <asp:Button ID="btnRestPassword" runat="server" Text="Reset Password" CssClass="btn btn-primary" OnClick="btnRestPassword_Click" />
                                     </div>
+                                </div>
                             </div>
 
                             <!-- reset Password -->
@@ -173,7 +175,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <!-- Username -->
-                                        <asp:Label ID="lPaswordResetUsernameLable" runat="server"></asp:Label>
+                                        <asp:Label ID="lPaswordResetUsernameLable" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
                                         <!--line break-->
                                         <br />
                                         <br />
@@ -193,7 +195,7 @@
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Password is Required" ControlToValidate="txtExistingPassword" ForeColor="Red"></asp:RequiredFieldValidator>
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
                                 <div runat="server" id="divResetPaswordtxtPass" visible="false">
                                     <div class="row">
                                         <div class="col-12">
@@ -216,16 +218,17 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <!-- Txt Pasword confirmation validation -->
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtConfirmNewPassword" runat="server" ErrorMessage="*Password Confirmation is Required" ControlToValidate="txtConfirmNewPassword" ForeColor="Red"></asp:RequiredFieldValidator>
                                             <asp:CompareValidator ID="CompareValidatorPassword" runat="server" ControlToCompare="txtNewPasword" ControlToValidate="txtConfirmNewPassword" ErrorMessage="Passwords do not match" ForeColor="Red"></asp:CompareValidator>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                        <div class="col-12">
-                                            <!-- reset Pasword -->
-                                            <asp:Button ID="btnChangePass" runat="server" Text="Change Pasword" CssClass="btn btn-primary" OnClick="btnChangePass_Click" />
-                                        </div>
+                                    <div class="col-12">
+                                        <!-- reset Pasword -->
+                                        <asp:Button ID="btnChangePass" runat="server" Text="Change Pasword" CssClass="btn btn-primary" OnClick="btnChangePass_Click" />
                                     </div>
+                                </div>
                             </div>
                             <!--line break-->
                             <br />

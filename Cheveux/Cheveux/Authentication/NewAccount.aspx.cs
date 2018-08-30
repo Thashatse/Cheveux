@@ -123,6 +123,8 @@ namespace Cheveux
 
                 string jScript = "<script>window.close();</script>";
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "keyClientBlock", jScript);
+
+                Response.Redirect("CloseWindow.aspx");
             }
         }
 
@@ -354,7 +356,7 @@ namespace Cheveux
                         var body = new System.Text.StringBuilder();
                         body.AppendFormat("Hello, " + User.FirstName);
                         body.AppendLine(@"");
-                        body.AppendLine(@"You have successfuly been registerd with cheveux, Using the email address: " + User.Email.ToString() + ".");
+                        body.AppendLine(@"You have successfully been registered with Cheveux, Using the email address: " + User.Email.ToString() + ".");
                         body.AppendLine(@"");
                         body.AppendLine(@"Your username is: " + User.UserName.ToString() + "");
                         body.AppendLine(@"Your password is: " + tempPassword + "");
