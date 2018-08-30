@@ -407,7 +407,7 @@ namespace Cheveux.Cheveux
                 //create access
                 ACCESSORY newAccessory = new ACCESSORY();
                 //newAccessory.Colour = txtColour.Text;
-                
+                newAccessory.Colour = txtColour.Text;
 
                                 
 

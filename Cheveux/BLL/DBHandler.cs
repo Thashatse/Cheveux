@@ -109,7 +109,7 @@ namespace BLL
             return db.CheckForProduct(id);
         }
 
-        /*
+        
         public bool addAccessories(ACCESSORY a)
         {
             return db.addAccessories(a);
@@ -118,7 +118,7 @@ namespace BLL
         public bool addTreatments(TREATMENT t)
         {
             return db.addTreatments(t);
-        }*/
+        }
 
         public SP_GetAllAccessories selectAccessory(string accessoryID)
         {
@@ -140,6 +140,8 @@ namespace BLL
         {
             return db.getBrandsForProductType(type);
         }
+
+
         #endregion
 
         #region Bookings

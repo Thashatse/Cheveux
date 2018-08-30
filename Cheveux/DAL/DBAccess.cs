@@ -1283,7 +1283,7 @@ namespace DAL
             SP_GetAllAccessories accessory = null;
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@accessoryID", accessoryID)
+                new SqlParameter("@ProductID", accessoryID)
 
             };
 
@@ -1325,7 +1325,7 @@ namespace DAL
             SP_GetAllTreatments treatment = null;
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@treatmentID", treatmentID)
+                new SqlParameter("@ProductID", treatmentID)
 
             };
 
@@ -1389,8 +1389,10 @@ namespace DAL
             SP_GetBrandsForProductType b = null;
             SqlParameter[] pars = new SqlParameter[]
             {
+                new SqlParameter("type", type) 
                 //parameter
-            };
+            }; 
+
             try
             {
                 using (DataTable table = DBHelper.Select("SP_GetBrandsForProductType", CommandType.StoredProcedure))
@@ -1414,9 +1416,11 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
 
+           }
+
+           public List<SP_GetSupplier> getSupplier()
 
 
-        }
 
         #endregion
 
