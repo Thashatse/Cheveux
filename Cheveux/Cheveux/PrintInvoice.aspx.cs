@@ -163,19 +163,43 @@ namespace Cheveux
                         rowCount++;
                     }
                     #endregion
-
-                    #region empty Row
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    tblInvoice.Rows.Add(newRow);
-
-                    rowCount++;
-                    #endregion
+                    
 
                     //calculate total price
                     double total = 0.0;
 
                     #region Items
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblInvoice.Rows.Add(newRow);
+
+                    #region header
+                    //fill in the item
+                    newCell = new TableCell();
+                    newCell.Text = "Qty";
+                    newCell.Font.Bold = true;
+                    tblInvoice.Rows[rowCount].Cells.Add(newCell);
+
+                    newCell = new TableCell();
+                    newCell.Text = "Item";
+                    newCell.Font.Bold = true;
+                    tblInvoice.Rows[rowCount].Cells.Add(newCell);
+
+                    newCell = new TableCell();
+                    newCell.Text = "Unit Price";
+                    newCell.Font.Bold = true;
+                    tblInvoice.Rows[rowCount].Cells.Add(newCell);
+
+                    //fill in the Qty, unit price & TotalPrice
+                    newCell = new TableCell();
+                    newCell.Text = "Total";
+                    newCell.Font.Bold = true;
+                    tblInvoice.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+                    #endregion
+
                     foreach (SP_getInvoiceDL item in invoicDetailLines)
                         {
                             newRow = new TableRow();
@@ -184,7 +208,7 @@ namespace Cheveux
 
                             //fill in the item
                             newCell = new TableCell();
-                            newCell.Text = "Qty: "+item.Qty.ToString();
+                            newCell.Text = item.Qty.ToString();
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                         newCell = new TableCell();
@@ -192,7 +216,7 @@ namespace Cheveux
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                         newCell = new TableCell();
-                        newCell.Text = " @ R" + string.Format("{0:#.00}", item.price);
+                        newCell.Text = "R" + string.Format("{0:#.00}", item.price);
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                         //fill in the Qty, unit price & TotalPrice
