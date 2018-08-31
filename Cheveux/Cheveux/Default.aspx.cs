@@ -197,7 +197,7 @@ namespace Cheveux
                     List<SP_GetSlotTimes> TSL = handler.BLL_GetAllTimeSlots();
                     foreach (SP_GetSlotTimes TS in TSL)
                     {
-                        if (TS.SlotNo == slotNo.Replace(" ", string.Empty))
+                        if (TS.SlotNo.Replace(" ", string.Empty) == slotNo.Replace(" ", string.Empty))
                         {
                             Time = TS.Time;
                         }
@@ -333,13 +333,13 @@ namespace Cheveux
                 //display the opperating hours
 
                 //add hours - weekday
-                lWeekdaye.Text = operatingHours.WeekdayStart.ToString("hh:mm") +" - " + operatingHours.WeekdayEnd.ToString("hh:mm");
+                lWeekdaye.Text = operatingHours.WeekdayStart.ToString("HH:mm") +" - " + operatingHours.WeekdayEnd.ToString("HH:mm");
                 
                 //add hours - weekend
-                lWeekend.Text = operatingHours.WeekendStart.ToString("hh:mm") + " - " + operatingHours.WeekendEnd.ToString("hh:mm");
+                lWeekend.Text = operatingHours.WeekendStart.ToString("HH:mm") + " - " + operatingHours.WeekendEnd.ToString("HH:mm");
                 
                 //add hours - public holiday
-                lPublicHol.Text = "Public Holidays: " + operatingHours.PublicHolStart.ToString("hh:mm") + " - " + operatingHours.PublicHolEnd.ToString("hh:mm");
+                lPublicHol.Text = operatingHours.PublicHolStart.ToString("HH:mm") + " - " + operatingHours.PublicHolEnd.ToString("HH:mm");
             }
             catch (Exception err)
             {
