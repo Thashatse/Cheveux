@@ -95,9 +95,15 @@
                     <!-- if the user is loged Out -->
                     <div runat="server" id="JumbotronLogedOut">
                         <div class="jumbotron bg-dark text-white">
-                            <h1>Profile</h1>
-                            <p>Please log-in</p>
-                            <a class="btn btn-primary" href="Authentication/Accounts.aspx?PreviousPage=Profile.aspx" id="LogedOut">Login</a>
+                            <div class="row">
+                            <div class="col-10">
+                                <h1>Profile</h1>
+                            <p>Please login</p>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-primary" href="Authentication/Accounts.aspx?PreviousPage=Profile.aspx" id="LogedOut">Login</a>
+                            </div>
+                                </div>
                         </div>
                     </div>
                     <!-- if the user is loged in -->
@@ -168,11 +174,6 @@
                                         <asp:TableCell>
                                             <!--Bio-->
                                             <textarea runat="server" id="txtBio" cols="45" rows="5" placeholder="Placecholder"></textarea>
-                                            <!--Help-->
-                                            <a href="/Help/CheveuxHelpCenter.aspx#UserAccounts" target="_blank"
-                                                title="Stylist Bio">
-                                                <span class="glyphicon">&#63;</span>
-                                            </a>
                                           </asp:TableCell>
                                     </asp:TableRow>
 

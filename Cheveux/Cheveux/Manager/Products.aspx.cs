@@ -221,7 +221,7 @@ namespace Cheveux.Manager
                             //Edit product link to be added by Lachea
                             //view Product link to be added by Lachea
                             newCell = new TableCell();
-                            newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
+                            newCell.Text = "<a class='btn btn-default' href = '../cheveux/products.aspx?ProductID="
                                         + Access.ProductID.ToString().Replace(" ", string.Empty) +
                                         "'>"+ Access.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
@@ -327,7 +327,7 @@ namespace Cheveux.Manager
 
                             //Name
                             newCell = new TableCell();
-                            newCell.Text = "<a class='btn btn-default' href = '../ViewProduct.aspx?ProductID="
+                            newCell.Text = "<a class='btn btn-default' href = '../cheveux/products.aspx?ProductID="
                                         + treat.ProductID.ToString().Replace(" ", string.Empty) +
                                         "'>" + treat.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);

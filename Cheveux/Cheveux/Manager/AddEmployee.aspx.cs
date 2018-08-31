@@ -201,7 +201,7 @@ namespace Cheveux.Manager
                     i++;
                 }
             }
-            catch (ApplicationException E)
+            catch (Exception E)
             {
                 phUsersErr.Visible = true;
                 errorHeader.Text = "Error displaying users";

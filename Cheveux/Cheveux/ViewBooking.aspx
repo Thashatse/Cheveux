@@ -285,12 +285,9 @@
                                                 <asp:TableCell Width="250">
                                                     <!--Payment Type-->
                                                     <asp:RadioButtonList ID="PaymentType" runat="server" AutoPostBack="true" OnSelectedIndexChanged="PaymentType_SelectedIndexChanged">
-                                                        <asp:ListItem> Cash </asp:ListItem>
+                                                        <asp:ListItem Selected ="True"> Cash </asp:ListItem>
                                                         <asp:ListItem> Credit </asp:ListItem>
                                                     </asp:RadioButtonList>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorPaymentType" runat="server"
-                                                        ControlToValidate="PaymentType" ErrorMessage="Payment Type Required">
-                                                    </asp:RequiredFieldValidator>
                                                 </asp:TableCell>
                                                 <asp:TableCell Width="100">
                                                     <!--Save Payment Type-->

@@ -15,8 +15,8 @@
     </div> 
     <br />
     <div class="row">
-        <div class="col-md-1 col-sm-1"></div>
-        <div class="col-md-10 col-sm-10">
+        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-8 col-sm-10">
             <form runat="server">
                 <!--If the user is logged in-->
                 <!--jumbotron page heading-->
@@ -159,16 +159,19 @@
                     </div>
                 </div>
 
-                <div class="container" runat="server" id="LoggedOut" visible="true">
-                    <div class="jumbotron bg-dark text-white">
-                        <h1>Please Log-in to proceed</h1>
-                        <button type="button" class="btn btn-default">
-                            <a href="../Authentication/Accounts.aspx?PreviousPage=Receptionist.aspx" id="LogedOutButton">Login</a>
-                        </button>
+                <div class="jumbotron bg-dark text-white" runat="server" id="LoggedOut" visible="true">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                <h1>Dashboard</h1>
+                                <p>Please Login</p>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-2">
+                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Receptionist.aspx" id="LogedOutButton">Login</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </form>
         </div>
-        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-2 col-sm-1"></div>
     </div>
 </asp:Content>

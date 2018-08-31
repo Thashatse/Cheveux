@@ -140,6 +140,8 @@ namespace BLL
         {
             return db.getBrandsForProductType(type);
         }
+
+
         #endregion
 
         #region Bookings

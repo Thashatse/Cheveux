@@ -251,7 +251,7 @@ namespace Cheveux
                 }
                 #endregion
 
-                catch (ApplicationException Err)
+                catch (Exception Err)
                 {
                     function.logAnError(Err.ToString());
                     serviceResultsLable.Text = "An Error Occurred Getting Search Results From The Server, Try Again Later";

@@ -346,22 +346,13 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtConfirmPassword;
         
         /// <summary>
-        /// CompareValidatorPassword control.
+        /// CompareValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidatorPassword;
-        
-        /// <summary>
-        /// lConfirmPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lConfirmPassword;
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
         
         /// <summary>
         /// RegularExpressionValidatortxtPassword control.
