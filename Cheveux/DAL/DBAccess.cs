@@ -570,7 +570,8 @@ namespace DAL
                     new SqlParameter("@CustomerID", addBooking.CustomerID.ToString()),
                     new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
                     new SqlParameter("@Date", addBooking.Date.ToString()),
-                    new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString())
+                    new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString()),
+                    new SqlParameter("@Comment", addBooking.Comment.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
             }
