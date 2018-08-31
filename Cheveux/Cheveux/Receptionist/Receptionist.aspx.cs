@@ -360,10 +360,9 @@ namespace Cheveux
                 catch(Exception serviceErr)
                 {
                     function.logAnError("Error getting services [receptionist.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
-                }
-                time = handler.getMultipleServicesTime(primaryBookingID);
+                }    
 
-                if (bServices.Count < 2)
+                if (bServices.Count == 1)
                 {
                     start.Text = a.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
@@ -373,6 +372,8 @@ namespace Cheveux
                 }
                 else if (bServices.Count >= 2)
                 {
+                    time = handler.getMultipleServicesTime(primaryBookingID);
+
                     start.Text = time.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
 
