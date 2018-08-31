@@ -35,7 +35,7 @@ BEGIN
 
 		   B.[Date],TS.StartTime,TS.EndTime,B.Arrived
 
-	From   BOOKING B, TIMESLOT TS, [User] U, EMPLOYEE e
+	From   [CHEVEUX].[dbo].[BOOKING] B, TIMESLOT TS, [User] U, EMPLOYEE e
 	Where  b.StylistID = @stylistID
 	AND		b.StylistID = e. EmployeeID
 	AND    B.SlotNo = TS.SlotNo 

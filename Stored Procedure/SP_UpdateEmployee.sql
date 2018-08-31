@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_UpdateEmployee
+alter PROCEDURE SP_UpdateEmployee
 	@empID nchar(30),
 	@type nchar(10),
 	@bio varchar(max) = null,
@@ -29,13 +29,13 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION
 			
-			UPDATE EMPLOYEE
-			SET [Type]=@type,
-				Bio=@bio,
-				AddressLine1=@addLine1,
-				AddressLine2=@addLine2,
-				Suburb=@suburb,
-				City=@city
+			UPDATE [CHEVEUX].[dbo].[EMPLOYEE]
+			SET [CHEVEUX].[dbo].[EMPLOYEE].[Type]=@type,
+				[CHEVEUX].[dbo].[EMPLOYEE].Bio=@bio,
+				[CHEVEUX].[dbo].[EMPLOYEE].AddressLine1=@addLine1,
+				[CHEVEUX].[dbo].[EMPLOYEE].AddressLine2=@addLine2,
+				[CHEVEUX].[dbo].[EMPLOYEE].Suburb=@suburb,
+				[CHEVEUX].[dbo].[EMPLOYEE].City=@city
 			WHERE EmployeeID=@empID
 
 		COMMIT TRANSACTION 

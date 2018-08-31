@@ -126,6 +126,11 @@ namespace Cheveux
 
                 Response.Redirect("CloseWindow.aspx");
             }
+            else if (PreviousPage == "NewInternalBooking")
+            {
+                Response.Redirect("../MakeABooking.aspx?Type=Internal");
+            }
+
         }
 
         #region Google Accounts
@@ -201,10 +206,7 @@ namespace Cheveux
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
                     //go back to the previous page or the home page by default
-                    if (PreviousPage != null)
-                    {
-                        goToPreviousPage();
-                    }
+                    goToPreviousPage();
                     //tell the user the registration was a success on the home page
                     Response.Redirect("../Default.aspx?" + "NU=" + reg.Split('|')[2]);
                 }
@@ -258,7 +260,7 @@ namespace Cheveux
                 else
                 {
                     //if they did'nt enter contact no
-                    User.ContactNo = null;
+                    User.ContactNo = "";
                 }
                 User.AccountType = "Email";
                 
@@ -306,7 +308,8 @@ namespace Cheveux
                 }
                 catch (Exception err)
                 {
-                    Response.Redirect("../Error.aspx?Error='" + err + "'");
+                    function.logAnError("Error Adding Employee | Error: " + err);
+                    Response.Redirect("../Error.aspx?Error=Error Adding Employee, Please Try Again Later");
                 }
 
                 if (result == true)
@@ -382,10 +385,7 @@ namespace Cheveux
                         // Add it to the current web response.
                         Response.Cookies.Add(cookie);
                         //go back to the previous page or the home page by default
-                        if (PreviousPage != null)
-                        {
-                            goToPreviousPage();
-                        }
+                        goToPreviousPage();
                         //tell the user the registration was a success on the home page
                         Response.Redirect("../Default.aspx?" + "NU=" + txtFirstName.Text.ToString().Replace(" ", string.Empty));
                     }

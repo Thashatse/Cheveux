@@ -51,6 +51,7 @@
                         </div>
                     <div id="divBookingSearchFilter" Visible="false" runat="server" class="col-12" style="border: solid #F05F40 2px;">
                         <h4>Filter by date</h4>
+                        <asp:Label runat="server" id="lCalBookingError" Visible="false"></asp:Label>
                         <div class="row">
                         <div class="col-5">
                                             <p>Start Date: </p>

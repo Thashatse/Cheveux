@@ -565,7 +565,7 @@ namespace Cheveux
                 
                 //check for reivious page
                 if (PreviousPageAdress == null)
-                { PreviousPageAdress = "Bookings.aspx"; }
+                { PreviousPageAdress = "Default.aspx"; }
 
                 //display the buttons bassed on if this is a past booking or not
                     if (pastBooking == true && BookingDetails.arrived.ToString()[0] != 'N')

@@ -119,6 +119,7 @@ namespace Cheveux
 
                     #region  date
                     newCell = new TableCell();
+
                     newCell.Text = invoice.Date.ToString("HH:mm dd MMM yyyy");
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
                     #endregion
@@ -188,12 +189,14 @@ namespace Cheveux
                     newCell = new TableCell();
                     newCell.Text = "Unit Price";
                     newCell.Font.Bold = true;
+                    newCell.HorizontalAlign = HorizontalAlign.Right;
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                     //fill in the Qty, unit price & TotalPrice
                     newCell = new TableCell();
                     newCell.Text = "Total";
                     newCell.Font.Bold = true;
+                    newCell.HorizontalAlign = HorizontalAlign.Right;
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                     //increment row count 
@@ -216,12 +219,13 @@ namespace Cheveux
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                         newCell = new TableCell();
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
                         newCell.Text = "R" + string.Format("{0:#.00}", item.price);
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                         //fill in the Qty, unit price & TotalPrice
                         newCell = new TableCell();
-                            newCell.HorizontalAlign = HorizontalAlign.Left;
+                            newCell.HorizontalAlign = HorizontalAlign.Right;
                             newCell.Text = "R" + string.Format("{0:#.00}", item.Qty * item.price);
                             tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
@@ -257,7 +261,7 @@ namespace Cheveux
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
                         //fill in total ExcludingVAT
                         newCell = new TableCell();
-                        newCell.HorizontalAlign = HorizontalAlign.Left;
+                        newCell.HorizontalAlign = HorizontalAlign.Right;
                         newCell.Text = " <br/> R " + string.Format("{0:#.00}", vatInfo.Item1, 2);
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
@@ -296,7 +300,7 @@ namespace Cheveux
                     newCell.Font.Bold = true;
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.HorizontalAlign = HorizontalAlign.Left;
+                    newCell.HorizontalAlign = HorizontalAlign.Right;
                         newCell.Text = "R " + string.Format("{0:#.00}", vatInfo.Item2, 2).ToString();
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
@@ -325,7 +329,7 @@ namespace Cheveux
                     newCell.Font.Bold = true;
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.HorizontalAlign = HorizontalAlign.Left;
+                    newCell.HorizontalAlign = HorizontalAlign.Right;
                         newCell.Text = "<br/> R " + string.Format("{0:#.00}", total).ToString();
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
                     #endregion
