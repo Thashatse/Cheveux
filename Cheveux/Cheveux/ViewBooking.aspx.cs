@@ -19,7 +19,8 @@ namespace Cheveux
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
         string PreviousPageAdress = "";
-        string BookingID;
+        string BookingID = null;
+        string action = null;
         List<string> productIDs = new List<string>();
         List<int> productSaleQty = new List<int>();
         
@@ -97,7 +98,7 @@ namespace Cheveux
                     LogedOut.Visible = false;
 
                     //check the action
-                    string action = Request.QueryString["Action"];
+                    action = Request.QueryString["Action"];
                     if (action == null)
                     {
                         //check if its a past booking
@@ -148,6 +149,15 @@ namespace Cheveux
                 //display an appropriate error if booking id not found
                 BookingLable.Text = "<h2> An Error Occurred Retrieving Booking Details </h2>";
                 function.logAnError("An Error Occurred Retrieving User ID Cookie on Bookings Details Page");
+            }
+
+
+            //if no action or booking hass been sent in the querystring
+            if(cookie != null 
+                && BookingID == null
+                && action == null)
+            {
+                Response.Redirect("default.aspx");
             }
         }
 
@@ -474,9 +484,9 @@ namespace Cheveux
                         BookingTable.Rows.Add(newRow);
                         newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Right;
-                        newCell.Text = "<br/> Total Ecluding VAT: &nbsp; ";
+                        newCell.Text = "<br/> Total ExcludingVAT: &nbsp; ";
                         BookingTable.Rows[rowCount].Cells.Add(newCell);
-                        //fill in total Ecluding VAT
+                        //fill in total ExcludingVAT
                         newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Left;
                         newCell.Text = " <br/> R " + string.Format("{0:#.00}", vatInfo.Item1, 2);
@@ -2187,9 +2197,9 @@ namespace Cheveux
                 //new row
                 tblInvoice += "<tr>";
 
-                tblInvoice += "<td align='right'> <br/> Total Ecluding VAT: &nbsp; </td>";
+                tblInvoice += "<td align='right'> <br/> Total ExcludingVAT: &nbsp; </td>";
 
-                //fill in total Ecluding VAT
+                //fill in total ExcludingVAT
 
                 tblInvoice += "<td align='left'> <br/> R" + Math.Round(vatInfo.Item1, 2).ToString() + "</td>";
                 tblInvoice += "</tr>";

@@ -38,6 +38,13 @@ namespace Cheveux
                     ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
                 }
             }
+
+            //if the user is loged in and there is no sale id redirect
+            if(cookie != null
+                && SaleID == null)
+            {
+                Response.Redirect("Default.aspx");
+            }
         }
 
         private void loadInvoice()
@@ -221,10 +228,10 @@ namespace Cheveux
 
                     newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Right;
-                        newCell.Text = "<br/> Ecluding VAT: &nbsp; ";
+                        newCell.Text = "<br/> Excluding VAT: &nbsp; ";
                     newCell.Font.Bold = true;
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
-                        //fill in total Ecluding VAT
+                        //fill in total ExcludingVAT
                         newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Left;
                         newCell.Text = " <br/> R " + string.Format("{0:#.00}", vatInfo.Item1, 2);
