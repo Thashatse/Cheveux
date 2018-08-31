@@ -345,11 +345,12 @@ namespace Cheveux
                             lblErrorSummary.Visible = true;
                             lblErrorSummary.Text = "There was trouble retrieving the services";
                         }
-
+                        txtComment.Visible = true;
                         lblStylist.Text = lbPickAStylist.SelectedItem.Text;
                         lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
                         HttpCookie time = Request.Cookies["BookTime"];
                         lblTime.Text = time["Time"];
+                        lblCommentLabel.Text = "Comment: ";
                         btnPrevious.Visible = true;
 
 
@@ -424,6 +425,7 @@ namespace Cheveux
                             book.StylistID = lbPickAStylist.SelectedValue;
                             book.Available = "N";
                             book.primaryBookingID = book.BookingID;
+                            book.Comment = txtComment.Text;
                             handler.BLL_AddBooking(book);
                             bookService = new BookingService();
                             foreach (string id in pickedServiceID)
@@ -1512,6 +1514,8 @@ namespace Cheveux
             lblDate.Text = "";
             lblTimeLabel.Text = "";
             lblTime.Text = "";
+            lblCommentLabel.Text = "";
+            txtComment.Visible = false;
             HttpCookie bookingTime = Request.Cookies["BookTime"];
 
             

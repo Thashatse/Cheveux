@@ -100,7 +100,14 @@
                                                 <asp:Label runat="server" ID="lblTime"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
-
+                                        <asp:TableRow>
+                                            <asp:TableCell >
+                                                <asp:Label runat="server" ID="lblCommentLabel"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:TextBox runat="server" ID="txtComment"></asp:TextBox>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
 
                                     </asp:Table>
                                 </div>
