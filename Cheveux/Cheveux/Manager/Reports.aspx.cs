@@ -279,9 +279,9 @@ namespace Cheveux.Manager
                         newCell = new TableCell();
                         newRow.Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.Text = "Total Ecluding VAT: ";
+                        newCell.Text = "Total ExcludingVAT: ";
                         tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                        //fill in total Ecluding VAT
+                        //fill in total ExcludingVAT
                         newCell = new TableCell();
                         newCell.HorizontalAlign = HorizontalAlign.Right;
                         newCell.Text = "R " + string.Format("{0:#.00}", vatInfo.Item1, 2);
