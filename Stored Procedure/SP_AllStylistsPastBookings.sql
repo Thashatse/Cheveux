@@ -37,8 +37,7 @@ BEGIN
 
 	From   BOOKING B, TIMESLOT TS, [User] U
 	Where  B.SlotNo = TS.SlotNo 
-	AND    B.StylistID = U.UserID
-	AND	   B.StylistID = e.EmployeeID 	
+	AND    B.StylistID = U.UserID	
 	AND	   B.Arrived = 'Y'
 	AND	   B.[Date] !> CAST(GETDATE() AS DATE)
 	ORDER BY 
