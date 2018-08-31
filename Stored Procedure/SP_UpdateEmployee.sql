@@ -19,10 +19,11 @@ GO
 CREATE PROCEDURE SP_UpdateEmployee
 	@empID nchar(30),
 	@type nchar(10),
-	@addLine1 varchar(max) = null,
-	@addLine2 varchar(max) = null,
-	@suburb nchar(100) = null,
-	@city nchar(100) = null
+	@bio varchar(max) = null,
+	@addLine1 varchar(max),
+	@addLine2 varchar(max) null,
+	@suburb varchar(max),
+	@city varchar(max)
 AS
 BEGIN
 	BEGIN TRY
@@ -30,6 +31,7 @@ BEGIN
 			
 			UPDATE EMPLOYEE
 			SET [Type]=@type,
+				Bio=@bio,
 				AddressLine1=@addLine1,
 				AddressLine2=@addLine2,
 				Suburb=@suburb,
@@ -41,6 +43,6 @@ BEGIN
 	BEGIN CATCH 
 		IF @@TRANCOUNT > 0 
 			ROLLBACK TRANSACTION
-	END CATCH  
+	END CATCH   
 END
 GO

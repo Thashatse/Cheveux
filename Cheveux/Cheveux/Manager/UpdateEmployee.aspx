@@ -8,15 +8,15 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <form runat="server">
-        
-            <div class="bg-secondary text-white" id="Div1">
-                <!-- Top Margin & Nav Bar Back Color -->
-                <br />
-                <br />
-            </div>
-            <br />
 
-            <asp:PlaceHolder ID="phLogIn" runat="server">
+        <div class="bg-secondary text-white" id="Div1">
+            <!-- Top Margin & Nav Bar Back Color -->
+            <br />
+            <br />
+        </div>
+        <br />
+
+        <asp:placeholder id="phLogIn" runat="server">
                 <div class="container" runat="server" id="LoggedOut" visible="true">
                     <div class="jumbotron bg-dark text-white">
                         <h1>Please Log-in to proceed</h1>
@@ -25,9 +25,9 @@
                         </button>
                     </div>
                 </div>
-            </asp:PlaceHolder>
+            </asp:placeholder>
 
-            <asp:PlaceHolder runat="server" ID="phMain">
+        <asp:placeholder runat="server" id="phMain">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-2 col-sm-1"></div>
@@ -70,12 +70,21 @@
                                 <asp:Label ID="lblType" runat="server" Text="Employee Type:"></asp:Label>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
-                                <asp:RadioButtonList ID="rdoType" runat="server" RepeatDirection="Horizontal" RepeatLayout="flow">
-                                    <asp:ListItem id="TypeOption1" runat="server" Text="Receptionist&nbsp;" Value="R" />
-                                    <asp:ListItem id="TypeOption2" runat="server" Text="Stylist&nbsp;" Value="S" />
+                                <asp:RadioButtonList ID="rdoType" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatLayout="flow">
+                                    <asp:ListItem Text="Receptionist&nbsp;" Value="R"/>
+                                    <asp:ListItem  Text="Stylist&nbsp;" Value="S"/>
                                 </asp:RadioButtonList>
                                 <!-- RadioButtons Validation-->
                                 <asp:RequiredFieldValidator ID="rdoValidator" runat="server" ErrorMessage="*Please select user type" ForeColor="Red" ControlToValidate="rdoType"></asp:RequiredFieldValidator>
+                            </div>
+                        </div>
+
+                        <div class="row" id="divBio" runat="server" visible="false">
+                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                <asp:Label runat="server" ID="lblBio" Text="Bio"></asp:Label>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-6">
+                                <textarea runat="server" id="txtBio" cols="45" rows="5" placeholder="Bio"></textarea>
                             </div>
                         </div>
 
@@ -83,7 +92,7 @@
                             <div class="col-sm-12 col-md-2 col-lg-2">
                                 <asp:Label ID="lblAddLine1" runat="server" Text="Address Line 1"></asp:Label>
                             </div>
-                            <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
                                 <asp:TextBox ID="txtAddLine1" runat="server" placeholder="AddressLine 1"></asp:TextBox>
                                 <!-- AddressLine 1 Validation-->
                                 <asp:RequiredFieldValidator ID="ad1Validation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtAddLine1"></asp:RequiredFieldValidator>
@@ -94,7 +103,7 @@
                             <div class="col-sm-12 col-md-2 col-lg-2">
                                 <asp:Label ID="lblAddLine2" runat="server" Text="Address Line 2"></asp:Label>
                             </div>
-                            <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
                                 <asp:TextBox ID="txtAddLine2" runat="server" placeholder="AddressLine 2"></asp:TextBox>
                             </div>
                         </div>
@@ -103,7 +112,7 @@
                             <div class="col-sm-12 col-md-2 col-lg-2">
                                 <asp:Label ID="lblSuburb" runat="server" Text="Suburb"></asp:Label>
                             </div>
-                            <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
                                 <asp:TextBox ID="txtSuburb" runat="server" placeholder="Suburb"></asp:TextBox>
                                 <!-- Suburb Validation-->
                                 <asp:RequiredFieldValidator ID="suburbValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtSuburb"></asp:RequiredFieldValidator>
@@ -114,7 +123,7 @@
                             <div class="col-sm-12 col-md-2 col-lg-2">
                                 <asp:Label ID="lblCity" runat="server" Text="City"></asp:Label>
                             </div>
-                            <div class="col-sm-12 col-md-2 col-lg-2">
+                            <div class="col-sm-12 col-md-4 col-lg-4">
                                 <asp:TextBox ID="txtCity" runat="server" placeholder="City"></asp:TextBox>
                                 <!-- City Validation-->
                                 <asp:RequiredFieldValidator ID="cityValidation" runat="server" ErrorMessage="*Required" ForeColor="Red" ControlToValidate="txtCity"></asp:RequiredFieldValidator>
@@ -123,7 +132,11 @@
 
                         <div class="row">
                             <div class="col-sm-12 col-md-2 col-lg-2">
-                                <asp:Button ID="btnBack" class="btn btn-primary" runat="server" Text="Back" OnClick="btnBack_Click" />
+                                <button class="btn btn-primary">
+                                    <a href="../Manager/Employee.aspx" style="color:white;text-decoration:none;">
+                                        Cancel
+                                    </a>
+                                </button>
                             </div>
                             <div class="col-sm-12 col-md-2 col-lg-2">
                                 <asp:Button ID="btnUpdate" class="btn btn-primary" runat="server" Text="Update" OnClick="btnUpdate_Click" />
@@ -131,10 +144,10 @@
                         </div>
                     </div>
            
-        </asp:PlaceHolder>
+        </asp:placeholder>
 
-            <!--Error: If cant display user -->
-        <asp:PlaceHolder ID="phUsersErr" runat="server" Visible="false">
+        <!--Error: If cant display user -->
+        <asp:placeholder id="phUsersErr" runat="server" visible="false">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -156,7 +169,7 @@
                     </div>
                 </div>
             </div>
-        </asp:PlaceHolder>
+        </asp:placeholder>
 
         <br />
         <br />

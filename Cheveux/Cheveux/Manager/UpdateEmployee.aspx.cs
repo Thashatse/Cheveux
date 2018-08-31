@@ -12,7 +12,6 @@ namespace Cheveux.Manager
 {
     public partial class UpdateEmployee : System.Web.UI.Page
     {
-        
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         SP_ViewEmployee view = null;
@@ -43,13 +42,19 @@ namespace Cheveux.Manager
                 phMain.Visible = true;
                 phLogIn.Visible = false;
             }
-
             userID = Request.QueryString["empID"];
             if(userID != null)
             {
                 getUser(userID);
             }
-            
+            if (rdoType.SelectedValue == "R")
+            {
+                divBio.Visible = false;
+            }
+            else if(rdoType.SelectedValue == "S")
+            {
+                divBio.Visible = true;
+            }
         }
         public void getUser(string userID)
         {
@@ -69,6 +74,12 @@ namespace Cheveux.Manager
                 username.Text = "<p style='font-size:2em !important;'>" + view.userName.ToString() + "</p>";
                 username.Font.Bold = true;
                 tblUserImage.Rows[1].Cells.Add(username);
+
+                if(view.employeeType.Replace(" ", string.Empty) == "S")
+                {
+                    txtBio.InnerText = view.bio.ToString();   
+                }
+                
             }
             catch (Exception Err)
             {
@@ -86,16 +97,37 @@ namespace Cheveux.Manager
        
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
+            string ad2;
             try
             {
                 emp = new EMPLOYEE();
 
                 emp.EmployeeID = userID;
                 emp.Type = rdoType.SelectedValue.ToString();
-                emp.AddressLine1 = txtAddLine1.Text.ToString();
-                emp.AddressLine2 = txtAddLine2.Text.ToString();
-                emp.Suburb = txtSuburb.Text.ToString();
-                emp.City = txtCity.Text.ToString();
+
+                if(emp.Type.Replace(" ", string.Empty) == "R")
+                {
+                    emp.Bio = "";
+                }
+                else
+                {
+                    emp.Bio = txtBio.InnerText.ToString();
+                }
+
+                emp.AddressLine1 = txtAddLine1.Text;
+
+                if (txtAddLine2.Text == null)
+                {
+                    ad2 = "";
+                }
+                else
+                {
+                    ad2 = txtAddLine2.Text;
+                }
+                emp.AddressLine2 = ad2;
+                emp.Suburb = txtSuburb.Text;
+                emp.City = txtCity.Text;
+
                 if (handler.updateEmployee(emp))
                 {
                     Response.Redirect("../Manager/Employee.aspx?EmployeeID="+emp.EmployeeID.ToString().Replace(" ",string.Empty),false);
@@ -103,7 +135,7 @@ namespace Cheveux.Manager
                 else
                 {
                     phUpdateErr.Visible = true;
-                    lblUpdateErr.Text = "An error has occured.We are unable to update the employees details at this point in time.<br/>"
+                    lblUpdateErr.Text = "Unable to update the employees details.<br/>"
                                           + "Sorry for the inconvenience." +
                                           "<br/>Please report to management or the administrator.";
                 }
@@ -117,11 +149,6 @@ namespace Cheveux.Manager
                 function.logAnError(Err.ToString());
             }
 
-        }
-
-        protected void btnBack_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("../Manager/Employee.aspx");
         }
     }
 }

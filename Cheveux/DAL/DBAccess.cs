@@ -2180,7 +2180,8 @@ namespace DAL
                             addLine1 = Convert.ToString(row["AddressLine1"]),
                             addLine2 = Convert.ToString(row["AddressLine2"]),
                             suburb = Convert.ToString(row["Suburb"]),
-                            city = Convert.ToString(row["City"])
+                            city = Convert.ToString(row["City"]),
+                            bio = Convert.ToString(row["Bio"])
                         };
                     }
                     return viewEmployee;
@@ -2485,6 +2486,7 @@ namespace DAL
                 {
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
                     new SqlParameter("@type", emp.Type.ToString()),
+                    new SqlParameter("@bio",emp.Bio.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
                     new SqlParameter("@suburb", emp.Suburb.ToString()),

@@ -315,7 +315,7 @@ namespace Cheveux
                 if (userType == "M")
                 {
                     if (employee.addLine1 != ""
-                        && employee.addLine2 != "")
+                        || employee.addLine2 != "")
                     {
                         //add a new row
                         newRow = new TableRow();
@@ -425,7 +425,7 @@ namespace Cheveux
                     //stylist schedual
                     if (employee.employeeType.Replace(" ", string.Empty) == "S")
                     {
-                        newCell.Text += " &nbsp; <a class='btn btn-secondary' href ='/Stylist/Schedule.aspx?Action=ViewSchedule&" +
+                        newCell.Text += " &nbsp; <a class='btn btn-secondary' href ='/Receptionist/Appointments.aspx?Action=ViewStylistSchedule&" +
                                         "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
                                         "'> View Schedule </a>";
                     }
