@@ -13,9 +13,10 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-md-10 col-sm-10">
             <form id="MakeABooking" runat="server">
+                
                 <div class="container-fluid">
                     <div class="row">
 
@@ -23,11 +24,37 @@
 
                             <div class="jumbotron  bg-dark text-white">
                                 <h1>Make A Booking</h1>
-                                <br />
                                 <asp:Label runat="server" ID="lblErrorSummary" Visible="false"></asp:Label>
                               </div>
                         </div>
                     </div>
+
+                     
+
+                    <div class="row">
+
+                    <div class="col-2 text-left">
+
+                        <asp:Button class='btn btn-basic' runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click" />
+
+                    </div>
+
+                    <div class="col-8 text-center">
+                        <asp:label runat="server" ID="lblGoService" Text="Service"></asp:label>&nbsp;-&nbsp;
+                           <asp:label runat="server" ID="lblGoStylist"  Text="Hairstylist  "></asp:label>&nbsp;-&nbsp;
+                           <asp:label runat="server" ID="lblGoDateTime" Text="Date & Time  "></asp:label>&nbsp;-&nbsp;
+                           <asp:label runat="server" ID="lblGoSummary" Text="Summary"></asp:label>
+                    </div>
+
+                    <div class="col-2 text-right">
+
+                        <asp:Button class='btn btn-primary' runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
+
+                    </div>
+                </div>
+                    <!-- Line Break-->
+                <br />
+
                     <div class="row">
                        <div class="col-md-12 col-lg-5"></div>
                         <div class="col-md-12 col-lg-7">
@@ -59,7 +86,7 @@
                                             <asp:TableCell >
                                                 <asp:Label runat="server" ID="lblServiceLabel"></asp:Label>
                                             </asp:TableCell>
-                                            <asp:TableCell>
+                                            <asp:TableCell width="170px">
                                                 <asp:Label runat="server" ID="lblServices" ></asp:Label>
                                             </asp:TableCell>
 </asp:TableRow>
@@ -98,6 +125,15 @@
                                             </asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:Label runat="server" ID="lblTime"></asp:Label>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+
+                                        <asp:TableRow>
+                                                                                        <asp:TableCell >
+                                                <asp:Label runat="server" ID="lblTotalCostLabel"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblTotalCost"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
@@ -149,12 +185,10 @@
                                 </div>
                             </div>
 
-
-
                             <div runat="server" id="divStylist" visible="false">
                                 <div class="container">
                                     <div class="row">
-                                        <div style="border: solid #F05F40 2px; width: 700px; height: 400px; overflow-y: scroll;">
+                                        <div style="border: solid #F05F40 2px; width: 900px;  height: 400px;">
                                             <h3>Choose A Hairstylist</h3>
                                             <br />
                                     <asp:ListBox runat="server" ID="lbPickAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300" OnSelectedIndexChanged="lbPickAStylist_SelectionIndexChanged" AutoPostBack="true"></asp:ListBox>
@@ -169,10 +203,11 @@
                                     <br />
                                     <div class="row">
 
-                                        <div class="col-6">
+                                        <div class="col-lg-6  col-md-12">
                                             <asp:Calendar runat="server" ID="calBooking" Width="300" Height="150" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged" ></asp:Calendar>
+                                            <br />
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-lg-6 col-md-12">
                                             <div class="row">
 
                                                 <div class="col-6">
@@ -256,36 +291,8 @@
 
                     </div>
                 </div>
-
-                <!-- Line Break-->
-                <br />
-
-                <div class="row">
-
-                    <div class="col-2 text-left">
-
-                        <asp:Button class='btn btn-basic' runat="server" ID="btnPrevious" Visible="false" Text="Choose Service(s)" OnClick="btnPrevious_Click" />
-
-                    </div>
-
-                    <div class="col-8"></div>
-
-                    <div class="col-2 text-right">
-
-                        <asp:Button class='btn btn-primary' runat="server" ID="btnNext" OnClick="btnNext_Click" Text="Choose Hairstylist" />
-
-                    </div>
-                </div>
-        </div>
-
-
-
-        <!-- Line Break-->
-        <br />
-        <br />
-
         </form>
-    </div>
-    <div class="col-md-2 col-sm-1"></div>
+        </div>
+        <div class="col-md-1 col-sm-1"></div>
     </div>
 </asp:content>
