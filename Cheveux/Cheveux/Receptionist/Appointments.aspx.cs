@@ -491,6 +491,9 @@ namespace Cheveux
             {
                 phCalendars.Visible = true;
 
+                drpSortBy.Items.RemoveAt(1);
+                drpSortBy.Items.Add(new ListItem("Customer", "1"));
+
                 if (drpViewAppt.SelectedValue == "0")//upcoming
                 {
                     if (rdoDate.SelectedValue == "0")
@@ -1872,9 +1875,8 @@ namespace Cheveux
                 {
                     function.logAnError("Error getting services [appointments.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
                 }
-                time = handler.getMultipleServicesTime(primaryBookingID);
 
-                if (bServices.Count < 2)
+                if (bServices.Count == 1)
                 {
                     start.Text = a.StartTime.ToString("HH:mm");
                     tblSchedule.Rows[i].Cells.Add(start);
@@ -1884,6 +1886,8 @@ namespace Cheveux
                 }
                 else if (bServices.Count >= 2)
                 {
+                    time = handler.getMultipleServicesTime(primaryBookingID);
+
                     start.Text = time.StartTime.ToString("HH:mm");
                     tblSchedule.Rows[i].Cells.Add(start);
 
