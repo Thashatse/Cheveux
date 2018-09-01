@@ -124,6 +124,7 @@ namespace Cheveux
                         //edit the booking
                         editBooking(BookingID);
                     }
+
                     #region Cancel Booking
                     else if (action == "Cancel")
                     {
@@ -732,7 +733,7 @@ namespace Cheveux
                 newRow.Height = 50;
                 tblEditSummary.Rows.Add(newRow);
 
-                //services
+                #region services
                 newCell = new TableCell();
                 newCell.Width = 300;
                 newCell.Font.Bold = true;
@@ -800,7 +801,35 @@ namespace Cheveux
                     //increment row count 
                     rowCount++;
                 }
-                
+                #endregion
+
+                #region Comment
+                newRow = new TableRow();
+                newRow.Height = 50;
+                tblEditSummary.Rows.Add(newRow);
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "Comment:";
+                tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+                newCell = new TableCell();
+
+                if (BookingDetails.BookingComment == null
+                    || BookingDetails.BookingComment == "")
+                {
+                    newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Comment'>Add comment</a>";
+                }
+                else
+                {
+                    newCell.Text = "<a href='ViewBooking.aspx?Action=Edit&BookingID=" + BookingDetails.bookingID + "&EditType=Comment'> " +
+                        BookingDetails.BookingComment.ToString() + "</a>";
+                }
+
+                    tblEditSummary.Rows[rowCount].Cells.Add(newCell);
+
+                    //increment row count 
+                    rowCount++;
+                #endregion 
+
                 //cancel booking BTN
                 newRow = new TableRow();
                 newRow.Height = 50;
@@ -864,6 +893,14 @@ namespace Cheveux
                     }
                     divEditService.Visible = true;
                 }
+                else if (editType == "Comment")
+                {
+                    if (!Page.IsPostBack)
+                    {
+                        txaUpdateBookingComment.Value = BookingDetails.BookingComment;
+                    }
+                    divEditComment.Visible = true;
+                }
                 #endregion
             }
             catch (Exception Err)
@@ -878,7 +915,7 @@ namespace Cheveux
         HttpCookie bookingTime = new HttpCookie("BookTime");
         #endregion
 
-        public bool saveEdit(bool stylist, bool dateAndTime, bool service)
+        public bool saveEdit(bool stylist, bool dateAndTime, bool service, bool comment)
         {
             bool result = false;
             try
@@ -933,7 +970,18 @@ namespace Cheveux
                     //if changed
                     updatedBooking.StylistID = drpEmpNames.SelectedValue;
                 }
-
+                //Comment
+                if (comment == false)
+                {
+                    //if unchanged
+                    updatedBooking.Comment = BookingDetails.BookingComment;
+                }
+                else
+                {
+                    //if changed
+                    updatedBooking.Comment = txaUpdateBookingComment.Value.ToString();
+                }
+                //service
                 if (service == false)
                 {
                     //commit
@@ -975,6 +1023,7 @@ namespace Cheveux
                         secondaryBooking.CustomerID = BookingDetails.CustomerID;
                         secondaryBooking.StylistID = BookingDetails.stylistEmployeeID;
                         secondaryBooking.primaryBookingID = BookingID;
+                        secondaryBooking.Comment = "";
                         handler.BLL_AddBooking(secondaryBooking);
                     }
                 }
@@ -1888,7 +1937,7 @@ namespace Cheveux
             if (SlotNo != "")
             {
                 //save edit
-                bool result = saveEdit(true, true, false);
+                bool result = saveEdit(true, true, false, false);
 
                 if (result == true)
                 {
@@ -1925,7 +1974,7 @@ namespace Cheveux
                 && rblPickAStylist.SelectedValue != "")
             {
                 //save edit
-                bool result = saveEdit(true, false, false);
+                bool result = saveEdit(true, false, false, false);
 
                 if (result == true)
                 {
@@ -1949,7 +1998,25 @@ namespace Cheveux
         protected void btnSaveEditService_Click(object sender, EventArgs e)
         {
             //save edit
-            bool result = saveEdit(false, false, true);
+            bool result = saveEdit(false, false, true, false);
+
+            if (result == true)
+            {
+                //return to edit page
+                btnCancel_Click(sender, e);
+            }
+            else
+            {
+                loadEditError();
+            }
+        }
+        #endregion
+
+        #region Comment
+        protected void btnSaveEditComment_Click(object sender, EventArgs e)
+        {
+            //save edit
+            bool result = saveEdit(false, false, false, true);
 
             if (result == true)
             {

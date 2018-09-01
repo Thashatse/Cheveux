@@ -326,7 +326,8 @@ namespace DAL
                             slotNo = row["SlotNo"].ToString(),
                             bookingID = row["BookingID"].ToString(),
                             CustFullName = row["CustFullName"].ToString(),
-                            CustomerID = row["CustomerID"].ToString()
+                            CustomerID = row["CustomerID"].ToString(),
+                            BookingComment = row["Comment"].ToString()
                         };
                     }
 
@@ -512,7 +513,8 @@ namespace DAL
                 new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
                 new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
                 new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
-                new SqlParameter("@Date", bookingUpdate.Date)
+                new SqlParameter("@Date", bookingUpdate.Date),
+                new SqlParameter("@Comment", bookingUpdate.Comment.ToString())
                 };
 
                 return DBHelper.NonQuery("SP_UpdateBooking", CommandType.StoredProcedure, pars);
@@ -621,6 +623,7 @@ namespace DAL
             }
 
         }
+
         public SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID)
         {
             SP_GetMultipleServicesTime time = null;
@@ -1556,8 +1559,8 @@ namespace DAL
                             WeekdayEnd = DateTime.Parse(row[7].ToString()),
                             WeekendStart = DateTime.Parse(row[8].ToString()),
                             WeekendEnd = DateTime.Parse(row[9].ToString()),
-                            PublicHolEnd = DateTime.Parse(row[10].ToString()),
-                            PublicHolStart = DateTime.Parse(row[9].ToString())
+                            PublicHolEnd = DateTime.Parse(row[9].ToString()),
+                            PublicHolStart = DateTime.Parse(row[10].ToString())
                         };
                     }
                     return businessDetails;
@@ -1933,6 +1936,7 @@ namespace DAL
             }
             return list;
         }
+
         public EMPLOYEE getEmployeeType(string EmployeeID)
         {
             EMPLOYEE Emp = null;

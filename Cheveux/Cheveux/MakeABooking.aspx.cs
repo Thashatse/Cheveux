@@ -503,6 +503,8 @@ namespace Cheveux
                         #region Multislot
                         length = CalculateSlotLength(sender, e);
                         string primaryBookingID = book.BookingID;
+                        //for booking confirmation
+                        string primaryBookingSlot = book.SlotNo;
 
                         if (length > 1)
                         {
@@ -592,7 +594,7 @@ namespace Cheveux
                         {
                             //if external booking
                             //redirect and confirm booking
-                            Response.Redirect("Default.aspx?BS=True&Sty=" + book.StylistID + "&D=" + book.Date + "&T=" + book.SlotNo);
+                            Response.Redirect("Default.aspx?BS=True&Sty=" + book.StylistID + "&D=" + book.Date + "&T=" + primaryBookingSlot);
                         }
                         else
                         {
