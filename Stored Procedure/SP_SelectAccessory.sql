@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-alter PROCEDURE SP_SelectAccessory
+create PROCEDURE SP_SelectAccessory
 	@productID nchar(10)
 AS
 BEGIN
@@ -33,8 +33,8 @@ BEGIN
 	  ,BRAND.[BrandID]
 	  ,BRAND.[Name] AS [BrandName]
 	
-	 FROM [CHEVEUX].[dbo].[PRODUCT], ACCESSORY, BRAND, Supplier s
-	WHERE ProductID = AccessoryID AND BRAND.BrandID = ACCESSORY.BrandID AND s.SupplierID = ACCESSORY.SupplierID And ProductID= @productID 
+	 FROM [CHEVEUX].[dbo].[PRODUCT], [CHEVEUX].[dbo].[ACCESSORY], BRAND, [CHEVEUX].[dbo].[Supplier]
+	WHERE ProductID = AccessoryID AND BRAND.BrandID = ACCESSORY.BrandID AND [CHEVEUX].[dbo].[Supplier].[SupplierID] = [CHEVEUX].[dbo].[ACCESSORY].SupplierID And ProductID= @productID 
 	order by [ProductType(T/A/S)]
 END
 GO

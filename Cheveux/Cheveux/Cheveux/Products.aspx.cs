@@ -90,7 +90,7 @@ namespace Cheveux.Cheveux
             {
                 brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
             }
-            catch(ApplicationException err)
+            catch(Exception err)
             {
                 drpBrandList.Text = "-------";
                 function.logAnError("Error getting product type and brand [drpProductType_change]"+err.ToString());

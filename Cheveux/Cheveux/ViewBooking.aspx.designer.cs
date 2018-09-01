@@ -373,6 +373,42 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button btnSaveEditService;
         
         /// <summary>
+        /// divEditComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEditComment;
+        
+        /// <summary>
+        /// txaUpdateBookingComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txaUpdateBookingComment;
+        
+        /// <summary>
+        /// btnCancelEditComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelEditComment;
+        
+        /// <summary>
+        /// btnSaveEditComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSaveEditComment;
+        
+        /// <summary>
         /// divEditError control.
         /// </summary>
         /// <remarks>
@@ -461,15 +497,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList PaymentType;
-        
-        /// <summary>
-        /// RequiredFieldValidatorPaymentType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorPaymentType;
         
         /// <summary>
         /// btnSavePaymentType control.

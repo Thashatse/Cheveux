@@ -15,6 +15,7 @@ namespace TypeLibrary.ViewModels
         public string email { get; set; }
         public string phoneNumber { get; set; }
         public string employeeType { get; set; }
+        public string bio { get; set; }
         public string empImage { get; set; }
         public char active { get; set; }
         public string addLine1 { get; set; }

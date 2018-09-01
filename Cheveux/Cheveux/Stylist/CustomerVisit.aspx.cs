@@ -34,9 +34,7 @@ namespace Cheveux
 
             if (UserID == null)
             {
-                LoggedOut.Visible = true;
-                allBookingTable.Visible = false;
-                LoggedIn.Visible = false;
+                Response.Redirect("../Stylist/Stylist.aspx");
             }
             else if (UserID["UT"] != "S")
             {
@@ -119,6 +117,15 @@ namespace Cheveux
 
                 newRow = new TableRow();
                 allBookingTable.Rows.Add(newRow);
+                TableCell val = new TableCell();
+                val.Text = "*Please enter comment";
+                val.ForeColor = System.Drawing.Color.Red;
+                val.Visible = false;
+                allBookingTable.Rows[rCnt].Cells.Add(val);
+                rCnt++;
+
+                newRow = new TableRow();
+                allBookingTable.Rows.Add(newRow);
                 TableCell createVisit = new TableCell();
                 createVisit.Width = 300;
                 Button btnVisit = new Button();
@@ -137,17 +144,25 @@ namespace Cheveux
                         b = new BOOKING();
                         b.Comment =Convert.ToString( descBox.Text);
 
-                        if (handler.BLL_UpdateCustVisit(visit, b))
+                        if (b.Comment == string.Empty || b.Comment == null)
                         {
-                            Response.Redirect("../Stylist/Stylist.aspx?Action=UpdateVisitRecord&CustomerName="
-                                                +bDTL.CustomerName.ToString().Replace(" ", string.Empty));
+                            val.Visible = true;
                         }
                         else
                         {
-                            phVisitErr.Visible = true;
-                            lblVisitErr.Text = "Unable to update visit record.<br/>"
-                                                  + "Please report to management or try again later.";
+                            if (handler.BLL_UpdateCustVisit(visit, b))
+                            {
+                                Response.Redirect("../Stylist/Stylist.aspx?Action=UpdateVisitRecord&CustomerName="
+                                                    + bDTL.CustomerName.ToString().Replace(" ", string.Empty));
+                            }
+                            else
+                            {
+                                phVisitErr.Visible = true;
+                                lblVisitErr.Text = "Unable to update visit record.<br/>"
+                                                      + "Please report to management or try again later.";
+                            }
                         }
+
                     }
                     catch (Exception err)
                     {
@@ -200,7 +215,7 @@ namespace Cheveux
             {
                 bServices = handler.getBookingServices(a.BookingID.ToString());
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 services.Text = "Unable to retreive service";
                 function.logAnError("Couldn't get the services [customervisit.aspx-getT&C&S method] error:" + Err.ToString());
@@ -258,14 +273,14 @@ namespace Cheveux
                 {
                     bServices = handler.getBookingServices(a.BookingID.ToString());
                 }
-                catch (ApplicationException serviceErr)
+                catch (Exception serviceErr)
                 {
                     function.logAnError("Error retreiving services [receptionist.aspx] getTimeAndServices method err:" + serviceErr.ToString());
                 }
                 time = handler.getMultipleServicesTime(primaryBookingID);
 
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 newCell.Text = "Unable to retrieve time";
                 //start.Text = "---";

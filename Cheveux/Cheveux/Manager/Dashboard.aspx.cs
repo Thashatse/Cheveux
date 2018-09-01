@@ -328,7 +328,7 @@ namespace Cheveux.Manager
                             {
                                 bookingServiceList = handler.getBookingServices(booking.BookingID.ToString());
                             }
-                            catch (ApplicationException Err)
+                            catch (Exception Err)
                             {
                                 function.logAnError("Error Loading Booking Services in manager dashboard todays bookings (Upcoming) Error:" +
                                     Err.ToString());
@@ -412,7 +412,7 @@ namespace Cheveux.Manager
                             {
                                 bookingServiceList = handler.getBookingServices(booking.BookingID.ToString());
                             }
-                            catch (ApplicationException Err)
+                            catch (Exception Err)
                             {
                                 function.logAnError("Error Loading Booking Services in manager dashboadr todays bookings (Past) Error:" +
                                     Err.ToString());

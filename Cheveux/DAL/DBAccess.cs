@@ -326,7 +326,8 @@ namespace DAL
                             slotNo = row["SlotNo"].ToString(),
                             bookingID = row["BookingID"].ToString(),
                             CustFullName = row["CustFullName"].ToString(),
-                            CustomerID = row["CustomerID"].ToString()
+                            CustomerID = row["CustomerID"].ToString(),
+                            BookingComment = row["Comment"].ToString()
                         };
                     }
 
@@ -512,7 +513,8 @@ namespace DAL
                 new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
                 new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
                 new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
-                new SqlParameter("@Date", bookingUpdate.Date)
+                new SqlParameter("@Date", bookingUpdate.Date),
+                new SqlParameter("@Comment", bookingUpdate.Comment.ToString())
                 };
 
                 return DBHelper.NonQuery("SP_UpdateBooking", CommandType.StoredProcedure, pars);
@@ -570,7 +572,8 @@ namespace DAL
                     new SqlParameter("@CustomerID", addBooking.CustomerID.ToString()),
                     new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
                     new SqlParameter("@Date", addBooking.Date.ToString()),
-                    new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString())
+                    new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString()),
+                    new SqlParameter("@Comment", addBooking.Comment.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -620,6 +623,7 @@ namespace DAL
             }
 
         }
+
         public SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID)
         {
             SP_GetMultipleServicesTime time = null;
@@ -1572,8 +1576,8 @@ namespace DAL
                             WeekdayEnd = DateTime.Parse(row[7].ToString()),
                             WeekendStart = DateTime.Parse(row[8].ToString()),
                             WeekendEnd = DateTime.Parse(row[9].ToString()),
-                            PublicHolEnd = DateTime.Parse(row[10].ToString()),
-                            PublicHolStart = DateTime.Parse(row[9].ToString())
+                            PublicHolEnd = DateTime.Parse(row[9].ToString()),
+                            PublicHolStart = DateTime.Parse(row[10].ToString())
                         };
                     }
                     return businessDetails;
@@ -1949,6 +1953,7 @@ namespace DAL
             }
             return list;
         }
+
         public EMPLOYEE getEmployeeType(string EmployeeID)
         {
             EMPLOYEE Emp = null;
@@ -2504,6 +2509,7 @@ namespace DAL
                 {
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
                     new SqlParameter("@type", emp.Type.ToString()),
+                    new SqlParameter("@bio",emp.Bio.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
                     new SqlParameter("@suburb", emp.Suburb.ToString()),

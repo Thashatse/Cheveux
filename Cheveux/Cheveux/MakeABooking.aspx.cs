@@ -29,6 +29,7 @@ namespace Cheveux
         List<string> pickedServiceName;
         List<string> pickedServiceID;
         string bookingType;
+        decimal totalPrice = 0;
         //internal booking variable
         List<string> CustomerIDs = new List<string>();
 
@@ -146,6 +147,16 @@ namespace Cheveux
             lblChoose.Text = "Booking Summary...";
             lblChoose.Font.Size = 18;
             lblChoose.ForeColor = Color.Gray;
+            txtComment.Visible = false;
+
+            if (!Page.IsPostBack)
+            {
+                lblGoService.ForeColor = Color.FromArgb(240, 95, 64);
+                lblGoService.Font.Bold = true;
+                lblGoStylist.ForeColor = Color.Gray;
+                lblGoDateTime.ForeColor = Color.Gray;
+                lblGoSummary.ForeColor = Color.Gray;
+            }
             //Check if the user is logged 
             try
             {
@@ -179,19 +190,19 @@ namespace Cheveux
                         if (services.ServiceType == 'N')
                         {
                             ListItem item;
-                            item = new ListItem(services.Name, services.ServiceID);
+                            item = new ListItem(services.Name + " - R" + services.Price.ToString("0.00"), services.ServiceID);
                             cblPickAServiceN.Items.Add(item);
                         }
                         else if (services.ServiceType == 'A')
                         {
                             ListItem item;
-                            item = new ListItem(services.Name, services.ServiceID);
+                            item = new ListItem(services.Name + " - R" + services.Price.ToString("0.00"), services.ServiceID);
                             rblPickAServiceA.Items.Add(item);
                         }
                         else if (services.ServiceType == 'B')
                         {
                             ListItem item;
-                            item = new ListItem(services.Name, services.ServiceID);
+                            item = new ListItem(services.Name + " - R" + services.Price.ToString("0.00"), services.ServiceID);
                             rblPickAServiceB.Items.Add(item);
                         }
 
@@ -236,6 +247,14 @@ namespace Cheveux
                     btnPrevious.Visible = true;
                     btnPrevious.Text = "Choose Service(s)";
                     btnNext.Text = "Choose Date & Time";
+                    lblGoService.ForeColor = Color.Gray;
+                    lblGoService.Font.Bold = false;
+
+                    lblGoStylist.ForeColor = Color.FromArgb(240, 95, 64);
+                    lblGoStylist.Font.Bold = true;
+                    lblGoDateTime.ForeColor = Color.Gray;
+
+                    lblGoSummary.ForeColor = Color.Gray;
                 }
             }
             else if (btnNext.Text == "Choose Date & Time")
@@ -266,7 +285,15 @@ namespace Cheveux
                     {
                         //if external booking
                         btnNext.Text = "Booking Summary";
+                        lblGoService.ForeColor = Color.Gray;
+                        lblGoService.Font.Bold = false;
+                        lblGoStylist.ForeColor = Color.Gray;
+                        lblGoStylist.Font.Bold = false;
+                        lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
+                        lblGoDateTime.Font.Bold = true;
+                        lblGoSummary.ForeColor = Color.Gray;
                     }
+
                 }
 
             }
@@ -345,11 +372,12 @@ namespace Cheveux
                             lblErrorSummary.Visible = true;
                             lblErrorSummary.Text = "There was trouble retrieving the services";
                         }
-
+                        txtComment.Visible = true;
                         lblStylist.Text = lbPickAStylist.SelectedItem.Text;
                         lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
                         HttpCookie time = Request.Cookies["BookTime"];
                         lblTime.Text = time["Time"];
+                        lblCommentLabel.Text = "Comment: ";
                         btnPrevious.Visible = true;
 
 
@@ -360,6 +388,15 @@ namespace Cheveux
                         else
                         {
                             btnPrevious.Text = "Choose Date & Time";
+                            lblGoService.ForeColor = Color.Gray;
+                            lblGoService.Font.Bold = false;
+
+                            lblGoStylist.ForeColor = Color.Gray;
+                            lblGoStylist.Font.Bold = false;
+                            lblGoDateTime.ForeColor = Color.Gray;
+                            lblGoDateTime.Font.Bold = false;
+                            lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                            lblGoSummary.Font.Bold = true;
                         }
 
                         #region access control
@@ -424,6 +461,7 @@ namespace Cheveux
                             book.StylistID = lbPickAStylist.SelectedValue;
                             book.Available = "N";
                             book.primaryBookingID = book.BookingID;
+                            book.Comment = txtComment.Text;
                             handler.BLL_AddBooking(book);
                             bookService = new BookingService();
                             foreach (string id in pickedServiceID)
@@ -465,6 +503,8 @@ namespace Cheveux
                         #region Multislot
                         length = CalculateSlotLength(sender, e);
                         string primaryBookingID = book.BookingID;
+                        //for booking confirmation
+                        string primaryBookingSlot = book.SlotNo;
 
                         if (length > 1)
                         {
@@ -554,7 +594,7 @@ namespace Cheveux
                         {
                             //if external booking
                             //redirect and confirm booking
-                            Response.Redirect("Default.aspx?BS=True&Sty=" + book.StylistID + "&D=" + book.Date + "&T=" + book.SlotNo);
+                            Response.Redirect("Default.aspx?BS=True&Sty=" + book.StylistID + "&D=" + book.Date + "&T=" + primaryBookingSlot);
                         }
                         else
                         {
@@ -582,6 +622,11 @@ namespace Cheveux
             {
                
                 divServices.Visible = true;
+                lblGoService.ForeColor = Color.FromArgb(240, 95, 64);
+                lblGoService.Font.Bold = true;
+                lblGoStylist.ForeColor = Color.Gray;
+                lblGoDateTime.ForeColor = Color.Gray;
+                lblGoSummary.ForeColor = Color.Gray;
                 divStylist.Visible = false;
                 btnPrevious.Visible = false;
                 btnNext.Text = "Choose Hairstylist";
@@ -589,8 +634,14 @@ namespace Cheveux
             else if (btnPrevious.Text == "Choose Hairstylist")
             {
                 divStylist.Visible = true;
-                divDateTime.Visible = false;
+                lblGoService.ForeColor = Color.Gray;
+                lblGoService.Font.Bold = false;
+                lblGoStylist.ForeColor = Color.FromArgb(240, 95, 64);
+                lblGoStylist.Font.Bold = true;
+                lblGoDateTime.ForeColor = Color.Gray;
+                lblGoSummary.ForeColor = Color.Gray;
 
+                divDateTime.Visible = false;
                 btnPrevious.Visible = true;
                 btnPrevious.Text = "Choose Service(s)";
                 btnNext.Text = "Choose Date & Time";
@@ -612,6 +663,13 @@ namespace Cheveux
                 {
                     //if external booking
                     btnNext.Text = "Booking Summary";
+                    lblGoService.ForeColor = Color.Gray;
+                    lblGoService.Font.Bold = false;
+                    lblGoStylist.ForeColor = Color.Gray;
+                    lblGoStylist.Font.Bold = false;
+                    lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
+                    lblGoDateTime.Font.Bold = true;
+                    lblGoSummary.ForeColor = Color.Gray;
                 }
             }
             #region Internal Booking
@@ -1512,6 +1570,10 @@ namespace Cheveux
             lblDate.Text = "";
             lblTimeLabel.Text = "";
             lblTime.Text = "";
+            lblTotalCostLabel.Text = "";
+            lblTotalCost.Text = "";
+            lblCommentLabel.Text = "";
+            txtComment.Visible = false;
             HttpCookie bookingTime = Request.Cookies["BookTime"];
 
             

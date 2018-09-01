@@ -141,7 +141,7 @@ namespace Cheveux
                     {
                         cv = handler.BLL_ViewCustVisit(a.UserID, a.BookingID);
                     }
-                    catch(ApplicationException err)
+                    catch(Exception err)
                     {
                         function.logAnError("Unable to check if visit record exists[stylist.aspx] err:" + err.ToString());
                     }
@@ -199,7 +199,7 @@ namespace Cheveux
                                         lblRecordErr.Text = "Error creating record<br/>Please try again later or report to admin.";
                                     }
                                 }
-                                catch (ApplicationException err)
+                                catch (Exception err)
                                 {
                                     phVisitSuccess.Visible = false;
                                     phVisitErr.Visible = true;
@@ -233,7 +233,7 @@ namespace Cheveux
                     i++;
                 }
             }
-            catch (ApplicationException E)
+            catch (Exception E)
             {
                 phVisitSuccess.Visible = false;
                 phBookingsErr.Visible = true;
@@ -260,7 +260,7 @@ namespace Cheveux
                 {
                     bServices = handler.getBookingServices(a.BookingID.ToString());
                 }
-                catch (ApplicationException serviceErr)
+                catch (Exception serviceErr)
                 {
                     function.logAnError("Error retreiving services [receptionist.aspx {nested try in getTime method}] method err:" + serviceErr.ToString());
                 }
@@ -284,7 +284,7 @@ namespace Cheveux
                 }
 
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 //If time isn't retrieved (Error)
                 start.Text = "---";
@@ -343,7 +343,7 @@ namespace Cheveux
                 }
                 AgendaTable.Rows[i].Cells.Add(services);
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 //if theres an error or cant retrieve the services from the database 
                 services.Text = "Unable to retreive services";

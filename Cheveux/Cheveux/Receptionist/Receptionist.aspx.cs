@@ -96,7 +96,7 @@ namespace Cheveux
                             drpEmpNames.Items.Insert(0, new ListItem("--Select Employee--", "-1"));
                         }
                     }
-                    catch (ApplicationException Err)
+                    catch (Exception Err)
                     {
                         drpEmpNames.Items.Insert(0, new ListItem("Error"));
                         phBookingsErr.Visible = true;
@@ -132,7 +132,7 @@ namespace Cheveux
                         
                     }
                 }
-                catch (ApplicationException Err)
+                catch (Exception Err)
                 {
                     AgendaTable.Visible = false;
                     phBookingsErr.Visible = true;
@@ -241,13 +241,16 @@ namespace Cheveux
                     //check in BTN
                     if (function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "No")
                     {
-                        //edit
                         TableCell buttonCell = new TableCell();
-                        buttonCell.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                        "&Action=Edit'>Edit Booking</a></button>";
-                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+                        if ((a.StartTime.TimeOfDay >= DateTime.Now.TimeOfDay))
+                        {
+                            //edit
+                            buttonCell.Text =
+                                "<button type = 'button' class='btn btn-default'>" +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                            "&Action=Edit'>Edit Booking</a></button>";
+                            AgendaTable.Rows[i].Cells.Add(buttonCell);
+                        }
 
                         //create cell that will be populated by the button and add to row.. cell index: 6
                         buttonCell = new TableCell();
@@ -290,7 +293,7 @@ namespace Cheveux
                                 }
 
                             }
-                            catch (ApplicationException err)
+                            catch (Exception err)
                             {
                                 //Error handling
                                 //Response.Write("<script>alert('Our apologies. An error has occured. Please report to the administrator or try again later.')</script>");
@@ -328,7 +331,7 @@ namespace Cheveux
                     i++;
                 }
             }
-            catch(ApplicationException E)
+            catch(Exception E)
             {
                 //Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
                 phBookingsErr.Visible = true;
@@ -338,6 +341,7 @@ namespace Cheveux
                 function.logAnError(E.ToString());
             }
         }
+
         public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int i, SP_GetEmpAgenda a)
         {
             #region Time
@@ -353,13 +357,12 @@ namespace Cheveux
                 {
                     bServices = handler.getBookingServices(a.BookingID.ToString());
                 }
-                catch(ApplicationException serviceErr)
+                catch(Exception serviceErr)
                 {
                     function.logAnError("Error getting services [receptionist.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
-                }
-                time = handler.getMultipleServicesTime(primaryBookingID);
+                }    
 
-                if (bServices.Count < 2)
+                if (bServices.Count == 1)
                 {
                     start.Text = a.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
@@ -369,6 +372,8 @@ namespace Cheveux
                 }
                 else if (bServices.Count >= 2)
                 {
+                    time = handler.getMultipleServicesTime(primaryBookingID);
+
                     start.Text = time.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
 
@@ -377,7 +382,7 @@ namespace Cheveux
                 }
 
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 //If time isn't retrieved (Error)
                 start.Text = "---";
@@ -436,7 +441,7 @@ namespace Cheveux
                 }
                 AgendaTable.Rows[i].Cells.Add(services);
             }
-            catch(ApplicationException Err)
+            catch(Exception Err)
             {
                 //if theres an error or cant retrieve the services from the database 
                 services.Text = "Unable to retreive services";

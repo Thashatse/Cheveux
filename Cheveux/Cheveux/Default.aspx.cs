@@ -197,14 +197,14 @@ namespace Cheveux
                     List<SP_GetSlotTimes> TSL = handler.BLL_GetAllTimeSlots();
                     foreach (SP_GetSlotTimes TS in TSL)
                     {
-                        if (TS.SlotNo == slotNo.Replace(" ", string.Empty))
+                        if (TS.SlotNo.Replace(" ", string.Empty) == slotNo.Replace(" ", string.Empty))
                         {
                             Time = TS.Time;
                         }
                     }
                     Welcome.Text = "You are now booked to see "
                         + handler.viewEmployee(stylistID.Replace(" ", string.Empty)).firstName
-                        + " at " + Time.ToString("hh:mm")
+                        + " at " + Time.ToString("HH:mm")
                         + " on the " + Convert.ToDateTime(Date).ToString("dd MMM yyyy");
                 }
             }
@@ -236,25 +236,25 @@ namespace Cheveux
             #region Featured hairstyles
             try
             {
-                LService1Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
+                LService1Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
                     features[3].FeatureID.ToString()
                     + "'>" + features[3].Name.ToString() + "</a></font>";
                 LService1Description.Text = features[3].description.ToString()
                 + " from R" + features[3].price.ToString();
 
-                LService2Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
+                LService2Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
                     features[4].FeatureID.ToString()
                     + "'>" + features[4].Name.ToString() + "</a></font>";
                 LService2Description.Text = features[4].description.ToString()
                 + " from R" + features[4].price.ToString();
 
-                LService3Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
+                LService3Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
                     features[5].FeatureID.ToString()
                     + "'>" + features[5].Name.ToString() + "</a></font>";
                 LService3Description.Text = features[5].description.ToString()
                 + " from R" + features[5].price.ToString();
 
-                LService4Header.Text = "<a class='btn btn-light' href='ViewProduct.aspx?ProductID=" +
+                LService4Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
                     features[6].FeatureID.ToString()
                     + "'>" + features[6].Name.ToString() + "</a>";
                 LService4Description.Text = features[6].description.ToString()
@@ -333,13 +333,13 @@ namespace Cheveux
                 //display the opperating hours
 
                 //add hours - weekday
-                lWeekdaye.Text = operatingHours.WeekdayStart.ToString("hh:mm") +" - " + operatingHours.WeekdayEnd.ToString("hh:mm");
+                lWeekdaye.Text = operatingHours.WeekdayStart.ToString("HH:mm") +" - " + operatingHours.WeekdayEnd.ToString("HH:mm");
                 
                 //add hours - weekend
-                lWeekend.Text = operatingHours.WeekendStart.ToString("hh:mm") + " - " + operatingHours.WeekendEnd.ToString("hh:mm");
+                lWeekend.Text = operatingHours.WeekendStart.ToString("HH:mm") + " - " + operatingHours.WeekendEnd.ToString("HH:mm");
                 
                 //add hours - public holiday
-                lPublicHol.Text = "Public Holidays: " + operatingHours.PublicHolStart.ToString("hh:mm") + " - " + operatingHours.PublicHolEnd.ToString("hh:mm");
+                lPublicHol.Text = operatingHours.PublicHolStart.ToString("HH:mm") + " - " + operatingHours.PublicHolEnd.ToString("HH:mm");
             }
             catch (Exception err)
             {

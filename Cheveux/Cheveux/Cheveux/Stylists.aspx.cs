@@ -70,7 +70,7 @@ namespace Cheveux.Cheveux
                     count++;
                 }
             }
-            catch (ApplicationException E)
+            catch (Exception E)
             {
                 phStylistsErr.Visible = true;
                 errorHeader.Text = "Error displaying stylists.";

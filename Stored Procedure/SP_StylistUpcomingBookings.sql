@@ -35,12 +35,14 @@ BEGIN
 
 		   B.[Date],TS.StartTime,TS.EndTime,B.Arrived
 
-	From   BOOKING B, TIMESLOT TS, [User] U
+	From   [CHEVEUX].[dbo].[BOOKING] B, TIMESLOT TS, [User] U, EMPLOYEE e
 	Where  b.StylistID = @stylistID
+	AND		b.StylistID = e. EmployeeID
 	AND    B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = U.UserID 
 	AND    B.Arrived = 'N'
 	AND    B.[Date] !< CAST(GETDATE() AS DATE)
+	and b.BookingID=b.primaryBookingID
 	ORDER BY
 	(CASE 
 		 WHEN @sortBy='Stylist' AND @sortDir='Descending'

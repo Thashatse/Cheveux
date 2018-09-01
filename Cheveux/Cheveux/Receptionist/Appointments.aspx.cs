@@ -104,7 +104,7 @@ namespace Cheveux
                             drpStylistNames.DataBind();
                         }
                     }
-                    catch (ApplicationException Err)
+                    catch (Exception Err)
                     {
                         drpStylistNames.Text = "Cannot retrieve names";
                         phScheduleErr.Visible = true;
@@ -178,7 +178,7 @@ namespace Cheveux
                                 drpStylistNames.DataBind();
                             }
                         }
-                        catch (ApplicationException Err)
+                        catch (Exception Err)
                         {
                             drpStylistNames.Text = "Cannot retrieve names";
                             phScheduleErr.Visible = true;
@@ -490,6 +490,9 @@ namespace Cheveux
             else if (userType == "S")
             {
                 phCalendars.Visible = true;
+
+                drpSortBy.Items.RemoveAt(1);
+                drpSortBy.Items.Add(new ListItem("Customer", "1"));
 
                 if (drpViewAppt.SelectedValue == "0")//upcoming
                 {
@@ -839,7 +842,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting past bookings for stylist.";
@@ -918,7 +921,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting past bookings within required date range for stylist.";
@@ -998,7 +1001,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting past bookings for stylist for required day.";
@@ -1095,7 +1098,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting upcoming bookings for stylist.";
@@ -1188,7 +1191,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException E)
+            catch (Exception E)
             {
                 //Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
                 phScheduleErr.Visible = true;
@@ -1283,7 +1286,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting upcoming bookings for stylist for required date range.";
@@ -1388,7 +1391,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting upcoming bookings for required day.";
@@ -1482,7 +1485,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting all stylists upcoming bookings for date range.";
@@ -1581,7 +1584,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting all stylists upcoming bookings.";
@@ -1669,7 +1672,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting all stylists past bookings";
@@ -1755,7 +1758,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting all past bookings for required day.";
@@ -1841,7 +1844,7 @@ namespace Cheveux
                     rowCount++;
                 }
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 phScheduleErr.Visible = true;
                 errorHeader.Text = "Error getting all past bookings for date range";
@@ -1868,13 +1871,12 @@ namespace Cheveux
                 {
                     bServices = handler.getBookingServices(a.BookingID.ToString());
                 }
-                catch (ApplicationException serviceErr)
+                catch (Exception serviceErr)
                 {
                     function.logAnError("Error getting services [appointments.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
                 }
-                time = handler.getMultipleServicesTime(primaryBookingID);
 
-                if (bServices.Count < 2)
+                if (bServices.Count == 1)
                 {
                     start.Text = a.StartTime.ToString("HH:mm");
                     tblSchedule.Rows[i].Cells.Add(start);
@@ -1884,6 +1886,8 @@ namespace Cheveux
                 }
                 else if (bServices.Count >= 2)
                 {
+                    time = handler.getMultipleServicesTime(primaryBookingID);
+
                     start.Text = time.StartTime.ToString("HH:mm");
                     tblSchedule.Rows[i].Cells.Add(start);
 
@@ -1892,7 +1896,7 @@ namespace Cheveux
                 }
 
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 //If time isn't retrieved (Error)
                 start.Text = "---";
@@ -1914,7 +1918,7 @@ namespace Cheveux
                                     "'>" + a.StylistName.ToString() + "</a>";
                     tblSchedule.Rows[i].Cells.Add(empCell);
                 }
-                catch(ApplicationException Err)
+                catch(Exception Err)
                 {
                     empCell.Text = "-------";
                     tblSchedule.Rows[i].Cells.Add(empCell);
@@ -1931,7 +1935,7 @@ namespace Cheveux
                                 "'>" + a.FullName.ToString() + "</a>";
                 tblSchedule.Rows[i].Cells.Add(c);
             }
-            catch(ApplicationException Err)
+            catch(Exception Err)
             {
                 c.Width = 300;
                 c.Text = "----------";
@@ -1980,7 +1984,7 @@ namespace Cheveux
                 }
                 tblSchedule.Rows[i].Cells.Add(services);
             }
-            catch (ApplicationException Err)
+            catch (Exception Err)
             {
                 //if theres an error or cant retrieve the services from the database 
                 services.Text = "Unable to retreive services";

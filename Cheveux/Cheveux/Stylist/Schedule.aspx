@@ -14,16 +14,19 @@
         </div>
         <br />
         <div class="row">
-            <div class="col-md-1 col-sm-1"></div>
-            <div class="col-md-10 col-sm-10">
+            <div class="col-md-2 col-sm-1"></div>
+            <div class="col-md-8 col-sm-10">
                 <!-- If stylist is not logged in-->
                 <asp:PlaceHolder ID="phLogIn" runat="server">
-                    <div class="container" runat="server" id="LoggedOut">
-                        <div class="jumbotron bg-dark text-white">
-                            <h1>Please Log-in to proceed</h1>
-                            <button type="button" class="btn btn-default">
-                                <a href="../Authentication/Accounts.aspx?PreviousPage=Schedule.aspx" id="LogedOutButton">Login</a>
-                            </button>
+                    <div class="jumbotron bg-dark text-white" runat="server" id="LoggedOut">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                <h1>Schedule</h1>
+                                <p>Please Login</p>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-2">
+                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Schedule.aspx" id="LogedOutButton">Login</a>
+                            </div>
                         </div>
                     </div>
                 </asp:PlaceHolder>
@@ -177,6 +180,7 @@
                     </asp:PlaceHolder>
                 </div>
             </div>
+            <div class="col-md-2 col-sm-1"></div>
         </div>
     </form>
 </asp:Content>
