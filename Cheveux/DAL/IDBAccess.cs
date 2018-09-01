@@ -97,11 +97,11 @@ namespace DAL
         #region Products
         PRODUCT CheckForProduct(string id);
         bool addProduct(PRODUCT addProduct);
-        //bool addAccessories(ACCESSORY a);
-        //bool addTreatments(TREATMENT t);
+        bool addAccessories(ACCESSORY a, PRODUCT p);
+        bool addTreatments(TREATMENT t, PRODUCT p);
 
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
-
+        List<SP_GetSupplier> getSupplier();
         #endregion
 
         #region Services
@@ -158,10 +158,7 @@ namespace DAL
         /*
         bool AddService(PRODUCT p, SERVICE s);
         */
-      
-        bool addAccessories(ACCESSORY a, PRODUCT p);
-        bool addTreatments(TREATMENT t, PRODUCT p);
-        SERVICE GetSlotLength(string serviceID);
+       SERVICE GetSlotLength(string serviceID);
 
     }
 }

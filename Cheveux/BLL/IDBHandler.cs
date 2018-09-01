@@ -60,6 +60,9 @@ namespace BLL
         SP_GetAllTreatments selectTreatment(string treatmentID);
         bool addProduct(PRODUCT addProduct);
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+        List<SP_GetSupplier> getSupplier();
+        
+
         #endregion
 
         #region Services
