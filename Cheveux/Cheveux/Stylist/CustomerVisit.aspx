@@ -80,7 +80,7 @@
                          <div class="container" runat="server" id="LoggedOut" visible="true">
                     <div class="jumbotron bg-dark text-white">
                         <h1>Please Log-in to proceed</h1>
-                        <button type="button" class="btn btn-default">
+                        <button type="button" class="btn btn-primary">
                             <a href="../Authentication/Accounts.aspx?PreviousPage=Stylist.aspx" id="LogedOutButton">Login</a>
                         </button>
                     </div>

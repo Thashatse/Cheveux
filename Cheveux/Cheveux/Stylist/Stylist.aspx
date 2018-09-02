@@ -98,15 +98,15 @@
 
                 <div class="jumbotron bg-dark text-white" runat="server" id="LoggedOut" visible="true">
                     <div class="row">
-                            <div class="col-lg-9 col-md-12 col-sm-12">
-                                <h1>Dashboard</h1>
-                                <p>Please Login</p>
-                            </div>
-                            <div class="col-lg-3 col-md-2 col-sm-2">
-                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Stylist.aspx" id="LogedOutButton">Login</a>
-                            </div>
+                        <div class="col-lg-9 col-md-12 col-sm-12">
+                            <h1>Dashboard</h1>
+                            <p>Please Login</p>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-2">
+                            <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Stylist.aspx" id="LogedOutButton">Login</a>
                         </div>
                     </div>
+                </div>
                 <!--Line Break-->
                 <div class="container">
                     <br />

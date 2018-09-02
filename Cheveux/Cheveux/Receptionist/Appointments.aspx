@@ -103,10 +103,10 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatLayout="flow">
-                                    <asp:ListItem Text="All &nbsp;" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Today &nbsp;" Value="1"></asp:ListItem>
-                                    <asp:ListItem Text="Specific Day &nbsp;" Value="2"></asp:ListItem>
-                                    <asp:ListItem Text="Date Range &nbsp;" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="All &nbsp;" Value="0" ></asp:ListItem>
+                                    <asp:ListItem Text="Today &nbsp;" Value="1" ></asp:ListItem>
+                                    <asp:ListItem Text="Specific Day &nbsp;" Value="2" ></asp:ListItem>
+                                    <asp:ListItem Text="Date Range &nbsp;" Value="3" ></asp:ListItem>
                                 </asp:RadioButtonList>
                             </div>
                         </div>

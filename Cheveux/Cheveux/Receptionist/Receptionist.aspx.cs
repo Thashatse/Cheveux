@@ -121,8 +121,9 @@ namespace Cheveux
                         {
                             AgendaTable.Visible = false;
                             noBookingsPH.Visible = true;
-                            lblNoBookings.Text = drpEmpNames.SelectedItem.Text + " has not been appointed to any bookings today."
-                                                + "<br/>Refresh to check for updated stylists bookings appointments.";
+                            lblNoBookings.Text = drpEmpNames.SelectedItem.Text +
+                                                " has not been appointed to any bookings today."
+                                                + "<br/>Refresh for updated stylists appointments.";
                         }
                         else if(AgendaTable.Rows.Count > 1)
                         {
@@ -282,6 +283,7 @@ namespace Cheveux
                                     Response.Redirect("../Receptionist/Receptionist.aspx?Action=CheckedIn&CustomerName="+
                                                         a.CustomerFName.ToString().Replace(" ", string.Empty)
                                                         +"&StylistName=" + drpEmpNames.SelectedItem.Text);
+
                                 }
                                 else
                                 {

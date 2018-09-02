@@ -2754,12 +2754,10 @@ namespace DAL
                                 EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
                                 CustomerFName = Convert.ToString(row["CustomerFName"]),
                                 EmpFName = Convert.ToString(row["EmpFName"]),
-                                //ServiceName = Convert.ToString(row["ServiceName"]),
-                                //ServiceDesc = Convert.ToString(row["ProductDescription"]),
                                 Arrived = Convert.ToString(row["Arrived"]),
                                 Date = Convert.ToDateTime(row["Date"]),
-                                //ProductID = Convert.ToString(row["ProductID"]),
-                                empID = Convert.ToString(row["EmpID"])
+                                empID = Convert.ToString(row["EmpID"]),
+                                Comment = Convert.ToString(row["Comment"])
                             };
                             agenda.Add(emp);
                         }
