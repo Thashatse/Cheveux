@@ -420,6 +420,7 @@ namespace Cheveux.Cheveux
                 p.Price = Convert.ToDecimal(txtPrice.Text);
                 p.ProductType = drpProductType.SelectedValue.ToString();
                 a.supplierID = drpListSupplier.SelectedValue.ToString();
+                /*
                 if (function.GenerateRandomProductID() == true)
                 {
                          Response.Redirect("../Manager/Products.aspx");
@@ -429,6 +430,7 @@ namespace Cheveux.Cheveux
                 {
                    Response.Redirect("Error.aspx");
                 }
+                */
             }
             else if (drpProductType.SelectedItem.Text == "Treatment")
             {
@@ -441,7 +443,7 @@ namespace Cheveux.Cheveux
                 t.Qty = int.Parse(txtQty.Text);
                 t.supplierID = drpBrandList.SelectedValue.ToString();
                 t.BrandID = drpBrandList.SelectedValue.ToString();
-
+                /*
                 if (function.GenerateRandomProductID() == true)
                 {
                     Response.Redirect("../Manager/Products.aspx");
@@ -451,6 +453,7 @@ namespace Cheveux.Cheveux
                 {
                     Response.Redirect("Error.aspx");
                 }
+                */
                 /*
                  * create product and treatment object
                  * set their variables

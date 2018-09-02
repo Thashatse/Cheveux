@@ -1414,6 +1414,7 @@ namespace DAL
 
         }
 
+        /*
            public List<SP_GetSupplier> getSupplier()
         {
             List<SP_GetSupplier> list = new List<SP_GetSupplier>();
@@ -1439,8 +1440,7 @@ namespace DAL
                     }
                  }
               }
-
-
+              */
         #endregion
 
         #region Manager Dash Board
