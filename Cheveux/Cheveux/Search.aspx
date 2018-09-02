@@ -20,6 +20,7 @@
     <div class="row">
         <div class="col-md-2 col-sm-1"></div>
         <div class="col-md-8 col-sm-10">
+            <form id="Search" runat="server">
 <div class="jumbotron bg-dark text-white">
   <h1>Search</h1>
     <!--Search Box-->
@@ -36,7 +37,7 @@
         <!--Search Results-->
         <div class="row">
                 <div class="col-xs-12 col-md-12">
-                    <form id="SearchBookings" runat="server">
+                    
                     <div class="row">
                     <!--Bookings-->
                         <div class="col-12">
@@ -44,7 +45,7 @@
                             <asp:Label runat="server" ID="bookingResultLable"></asp:Label>
                             </div>
                     <div style="text-align: right; float: right;">
-                        <asp:Button runat="server" Text="Fillter" id="FillterBookingResults" cssClass="btn btn-default" onclick="showFilterBooking"></asp:Button>
+                        <asp:Button runat="server" Text="Fillter" id="FillterBookingResults" cssClass="btn btn-default" Visible="false" onclick="showFilterBooking"></asp:Button>
                        <asp:Button runat="server" Text="Hide" id="btnShowBoings" cssClass="btn btn-default" Visible="false" onclick="showBookings"></asp:Button>
                         </div>
                         </div>
@@ -70,7 +71,6 @@
                     
                     </div>
 
-                    </form>
                     <!--New Line-->
                         <br /><br />
                     
@@ -81,7 +81,7 @@
                     <asp:Label runat="server" ID="serviceResultsLable"></asp:Label>
                                 </div>
                             <div style="text-align: right; float: right;">
-                        <asp:Button runat="server" Text="Hide" id="btnHideServices" cssClass="btn btn-default" onclick="showServices"></asp:Button>
+                        <asp:Button runat="server" Text="Hide" id="btnHideServices" cssClass="btn btn-default" Visible="false" onclick="showServices"></asp:Button>
                         </div>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                     <asp:Label runat="server" ID="ProductResultsLable"></asp:Label>
                                 </div>
                             <div style="text-align: right; float: right;">
-                        <asp:Button runat="server" Text="Hide" id="btnHideProducts" cssClass="btn btn-default" onclick="showroducts"></asp:Button>
+                        <asp:Button runat="server" Text="Hide" id="btnHideProducts" cssClass="btn btn-default" Visible="false" onclick="showroducts"></asp:Button>
                         </div>
                             </div>
                         </div>
@@ -109,13 +109,15 @@
                     <asp:Label runat="server" ID="StylistResultsLable"></asp:Label>
                                 </div>
                             <div style="text-align: right; float: right;">
-                        <asp:Button runat="server" Text="Hide" id="btnHideStylists" cssClass="btn btn-default" onclick="showStylist"></asp:Button>
+                        <asp:Button runat="server" Text="Hide" id="btnHideStylists" cssClass="btn btn-default" Visible="false" onclick="showStylist"></asp:Button>
                         </div>
                             </div>
                         </div>
                     <asp:Table id="StylistSearchResults" runat="server"></asp:Table>
                     </div>
             </div>
+            
+                    </form>
     </div>
                 <div class="col-md-2 col-sm-1"></div>
     </div>

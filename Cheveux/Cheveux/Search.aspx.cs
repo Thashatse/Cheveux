@@ -224,24 +224,28 @@ namespace Cheveux
                     {
                         //set the product search results heading
                         bookingResultLable.Text = "<h2> " + bookingCount + " Booking Search Results For '" + searchTerm + "' </h2>";
+                        btnShowBoings.Visible = true;
                     }
                     //products heading
                     if (productCount != 0)
                     {
                         //set the product search results heading
                         ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
+                        btnHideProducts.Visible = true;
                     }
                     //service heading
                     if (serviceCount != 0)
                     {
                         //set the product search results heading
                         serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
+                        btnHideServices.Visible = true;
                     }
                     //Stylist Heading
                     if (stylistRowCount != 0)
                     {
                         //set the stylist search results heading
                         StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
+                        btnHideStylists.Visible = true;
                     }
                     //no results
                     if (stylistRowCount == 0 && serviceCount == 0 && productCount == 0 && bookingCount == 0)
@@ -654,13 +658,14 @@ namespace Cheveux
             if (btnShowBoings.Text == "Hide")
             {
                 bookingSearchResults.Visible = false;
-                btnShowBoings.Visible = false;
+                FillterBookingResults.Visible = false;
+                divBookingSearchFilter.Visible = false;
                 btnShowBoings.Text = "Show";
             }
             else if (btnShowBoings.Text == "Show")
             {
                 bookingSearchResults.Visible = true;
-                btnShowBoings.Visible = true;
+                FillterBookingResults.Visible = true;
                 btnShowBoings.Text = "Hide";
             }
         }

@@ -33,7 +33,6 @@ namespace Cheveux
                 {
                     profile.Controls.Add(new LiteralControl
                         ("<img src=" + UserDetails.UserImage + "" +
-                        " alt='" + UserDetails.UserName.ToString() +
                         " Profile Image' width='35' height='35'/>" +
                         "   <a href='../Profile.aspx'>" + UserDetails.UserName.ToString() + "</a> &nbsp; &nbsp;"));
                 }
