@@ -36,6 +36,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
+                        <a class='navbar-brand js-scroll-trigger' href='../Default.aspx'>Cheveux Home</a>
+                        <!-- Lin Break -->
+                        <br />
                         <!--Jumbotron Header-->
                         <div class="jumbotron bg-dark text-white">
                             <a href="../Default.aspx">
@@ -47,16 +50,19 @@
 
                         <!--Nav Pills for external system-->
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="../Default.aspx">Cheveux Home &nbsp;&nbsp;</a></li>
                             <li><a href="#UserAccounts">User Accounts &nbsp; &nbsp;</a></li>
                             <li><a href="#Bookings">Bookings  &nbsp; &nbsp;</a></li>
-                            <li><a href="#InternalHelp">Internal System &nbsp; &nbsp;</a></li>
+                            <li runat="server" id="liInternalHelp" visible="false"><a href="#InternalHelp">Internal System &nbsp; &nbsp;</a></li>
                         </ul>
                     </div>
                 </div>
-                <!--line Break-->
-                <br />
-                <br />
+                <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
 
                 <!--Help Section Template -->
                 <div class="row">
@@ -64,7 +70,28 @@
                         <a name="UserAccounts"></a>
                         <!--Header-->
                         <h2>User Accounts </h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#00-1">Login with Email &nbsp; &nbsp;</a></li>
+                            <li><a href="#001">Login with Google &nbsp; &nbsp;</a></li>
+                            <li><a href="#002">Usernames  &nbsp; &nbsp;</a></li>
+                            <li><a href="#003">Celphone Numbers &nbsp; &nbsp;</a></li>
+                            <li><a href="#004">Logging out &nbsp; &nbsp;</a></li>
+                        </ul>
                         <!--Content-->
+                         <!--Login with EMAIL-->
+                        <a name="00-1"></a>
+                        <!--Login with google-->
+                        <h4>Login with email</h4>
+                        <ul>
+                            <img src="Helpimages/Login-SignUp.png" alt="sign in with Google" />
+                                <li>1) Select Login/Sign up in the navigation bar</li>
+                            <img src="Helpimages/EmailSignin.png" alt="sign in with Google" />
+                                <li>2) Select the ‘sign in with email’ button</li>
+
+                            <img src="Helpimages/Signedinwithgoogle.png" alt="sign in with Google" />
+                                <li>You are now signed in.</li>
+                        </ul>
+                        <a name="001"></a>
                         <!--Login with google-->
                         <h4>Login with google</h4>
                         <ul>
@@ -81,31 +108,42 @@
                                 <li>You are now signed in. if you are new to Cheveux you will have to complete the registration process entering a username and contact number.</li>
                             </ul>
                         </ul>
+                        <a name="002"></a>
                         <!--Usernames-->
                         <h4>Usernames</h4>
                         <ul>
                             <li>A user name is a unique way to identify you on the Cheveux platform</li>
                         </ul>
+                        <a name="003"></a>
+                        
                         <!--Cellphone Numbers-->
                         <h4>Celphone Numbers</h4>
                         <ul>
                             <li>We require your 10-digit South African cell phone number</li>
                             <li>We Use your contact number to send you conformation and reminders of booking, invoices and promotions.</li>
                         </ul>
+<a name="004"></a>
                         <!--Loggin Out-->
                         <h4>Logging Out Of Cheveux</h4>
                         <ul>
+                            <img src="Helpimages/Signedinwithgoogle.png" alt="sign in with Google" />
+                                <li>1) Select your profile in the navigation bar</li>
                             <img src="Helpimages/LogOut.png" alt="Logging Out Of Cheveux" />
-                            <li>1) Select 'Log Out' in the navigation bar</li>
+                            <li>2) Select 'Log Out' in the top right</li>
                             <img src="Helpimages/LogedOut.png" alt="Logged Out Of Cheveux" />
                             <li>You are now logged out of Cheveux</li>
                         </ul>
                     </div>
                 </div>
 
-                <!--line Break-->
-                <br />
-                <br />
+                <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                 <!--New Section-->
                 <div class="row">
                     <div class="col-xs-12 col-md-12">
@@ -143,9 +181,18 @@
                     </div>
                 </div>
 
-                <!--line Break-->
-                <br />
-                <br />
+                <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+                <!-- Internal Help displayed if user is logged in-->
+                    <div class="container" runat="server" id="LogedIn" visible="false">
+                <a class='navbar-brand js-scroll-trigger' href='../Default.aspx'>Cheveux Home</a>
+                        <!-- Lin Break -->
+                        <br />
                 <!-- Internal Help displayed if user is logged in-->
                 <div class="row">
                     <div class="col-md-12">
@@ -153,28 +200,15 @@
                         <a name="InternalHelp"></a>
                         <div class="jumbotron bg-dark text-white">
                             <h1>Internal Help</h1>
-                            <div class="container" runat="server" id="JumbotronLogedOut">
-                                <div class="row">
-                                    <div class="col-10">
-                                        <h3>Please log-in</h3>
-                                        <p>You must bee loged in as Receptionist, Stylist or Manager to view this section</p>
-                                    </div>
-                                    <div class="col-2">
-                                        <button type="button" class="btn btn-primary"><a class="btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Help/CheveuxHelpCenter.aspx#InternalHelp" id="LogedOut">Login</a></button>
-                                    </div>
-                                </div>
-                            </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Internal Help displayed if user is logged in-->
-                    <div class="container" runat="server" id="LogedIn" visible="false">
+                    
                         <div class="row">
                             <div class="col-md-12">
                                 <!--Nav Pills for internal system-->
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li class="active"><a href="../Default.aspx">Cheveux Home &nbsp;&nbsp;</a></li>
                                     <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In &nbsp; &nbsp;</a></li>
                                     <li><a href="#StylistCustomerVisit">Stylist Customer Visit &nbsp; &nbsp;</a></li>
                                     <li><a href="#ManageProducts">Manage Products &nbsp; &nbsp;</a></li>
@@ -185,9 +219,14 @@
                             </div>
                         </div>
 
-                        <!--line Break-->
-                        <br />
-                        <br />
+                        <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                         <!--New Section-->
                         <!--Help Section Template 3-->
                         <div class="row">
@@ -217,9 +256,14 @@
                         </div>
 
 
-                        <!--line Break-->
-                        <br />
-                        <br />
+                        <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                         <!--New Section-->
                         <!--Help Section Template 4-->
                         <div class="row">
@@ -246,9 +290,14 @@
                             </div>
                         </div>
 
-                        <!--line Break-->
-                        <br />
-                        <br />
+                        <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                         <!--New Section-->
                         <!--Manage Products-->
                         <div class="row">
@@ -310,9 +359,14 @@
                             </div>
                         </div>
 
-                        <!--line Break-->
-                        <br />
-                        <br />
+                        <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                         <!--New Section-->
                         <!--Manage Services-->
                         <div class="row">
@@ -362,9 +416,14 @@
                             </div>
                         </div>
 
-                        <!--line Break-->
-                        <br />
-                        <br />
+                        <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                         <!--New Section-->
                         <!--Manage Employees-->
                         <div class="row">
@@ -437,9 +496,14 @@
                             </div>
                         </div>
 
-                        <!--line Break-->
-                        <br />
-                        <br />
+                        <div class="col-12 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <hr class="my-4">
+                                <!-- Line Break -->
+                                <br />
+                            </div>
+
                         <!--New Section-->
                         <!--Business settings-->
                         <div class="row">

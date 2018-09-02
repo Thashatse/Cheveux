@@ -22,13 +22,13 @@ namespace Cheveux.Help {
         protected global::System.Web.UI.HtmlControls.HtmlForm HelpForm;
         
         /// <summary>
-        /// JumbotronLogedOut control.
+        /// liInternalHelp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl JumbotronLogedOut;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liInternalHelp;
         
         /// <summary>
         /// LogedIn control.

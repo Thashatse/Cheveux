@@ -87,7 +87,9 @@ namespace Cheveux
                 {
                     if (Authcookie["UT"].ToString()[0] == 'R')
                     {
-                        //Redirect is aloud to make booings
+                        //is aloud to make booings
+                        lblGoCustomer.Visible = true;
+                        lblGoSummary.ForeColor = Color.Gray;
                     }
                     else if (Authcookie["UT"].ToString()[0] == 'C')
                     {
@@ -109,6 +111,7 @@ namespace Cheveux
                 if (Authcookie["UT"].ToString()[0] == 'C')
                 {
                     //customer is aloud on mage
+                    lblGoCustomer.Visible = false;
                 }
                 else if (Authcookie["UT"].ToString()[0] == 'R')
                 {
@@ -280,19 +283,22 @@ namespace Cheveux
                     {
                         //if internal booking
                         btnNext.Text = "Select Customer";
+                        lblGoCustomer.ForeColor = Color.Gray;
+                        lblGoCustomer.Font.Bold = true;
                     }
                     else
                     {
                         //if external booking
                         btnNext.Text = "Booking Summary";
-                        lblGoService.ForeColor = Color.Gray;
-                        lblGoService.Font.Bold = false;
-                        lblGoStylist.ForeColor = Color.Gray;
-                        lblGoStylist.Font.Bold = false;
-                        lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
-                        lblGoDateTime.Font.Bold = true;
-                        lblGoSummary.ForeColor = Color.Gray;
                     }
+                    lblGoService.ForeColor = Color.Gray;
+                    lblGoService.Font.Bold = false;
+                    lblGoStylist.ForeColor = Color.Gray;
+                    lblGoStylist.Font.Bold = false;
+                    lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
+                    lblGoDateTime.Font.Bold = true;
+                    lblGoSummary.ForeColor = Color.Gray;
+                    lblGoCustomer.Font.Bold = false;
 
                 }
 
@@ -302,12 +308,23 @@ namespace Cheveux
             {
                 loadCustomerList();
                 //if the booking is being made internaly i.e: by Receptionist
-                #region set the buttons
+                #region set the buttons & lables
                 btnPrevious.Text = "Choose Date & Time";
                 btnNext.Text = "Booking Summary";
                 divDateTime.Visible = false;
                 divSelectUser.Visible = true;
                 btnPrevious.Visible = true;
+                
+                lblGoService.ForeColor = Color.Gray;
+                lblGoService.Font.Bold = false;
+                lblGoStylist.ForeColor = Color.Gray;
+                lblGoStylist.Font.Bold = false;
+                lblGoDateTime.ForeColor = Color.Gray;
+                lblGoDateTime.Font.Bold = false;
+                lblGoSummary.ForeColor = Color.Gray;
+                lblGoSummary.Font.Bold = false;
+                lblGoCustomer.ForeColor = Color.FromArgb(240, 95, 64);
+                lblGoCustomer.Font.Bold = true;
                 #endregion
             }
             #endregion
@@ -388,48 +405,23 @@ namespace Cheveux
                         else
                         {
                             btnPrevious.Text = "Choose Date & Time";
-                            lblGoService.ForeColor = Color.Gray;
-                            lblGoService.Font.Bold = false;
-
-                            lblGoStylist.ForeColor = Color.Gray;
-                            lblGoStylist.Font.Bold = false;
-                            lblGoDateTime.ForeColor = Color.Gray;
-                            lblGoDateTime.Font.Bold = false;
-                            lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
-                            lblGoSummary.Font.Bold = true;
                         }
-
-                        #region access control
-                        HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
-                        if (Authcookie != null)
-                        {
-                            if (Authcookie["UT"].ToString()[0] == 'C' || Authcookie["UT"].ToString()[0] == 'R')
-                            {
-                                btnNext.Text = "Submit";
-                            }
-                            else
-                            {
-                                btnNext.Text = "Login";
-                            }
-                        }
-                        else
-                        {
-                            btnNext.Text = "Login";
-                        }
-                        #endregion
+                        lblGoService.ForeColor = Color.Gray;
+                        lblGoService.Font.Bold = false;
+                        lblGoCustomer.ForeColor = Color.Gray;
+                        lblGoCustomer.Font.Bold = false;
+                        lblGoStylist.ForeColor = Color.Gray;
+                        lblGoStylist.Font.Bold = false;
+                        lblGoDateTime.ForeColor = Color.Gray;
+                        lblGoDateTime.Font.Bold = false;
+                        lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                        lblGoSummary.Font.Bold = true;
+                        btnNext.Text = "Submit";
                     }
 
 
                 }
             }
-            #region access control
-            else if (btnNext.Text == "Login")
-            {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
-                btnPrevious.Text = "Choose Date & Time";
-                btnNext.Text = "Submit";
-            }
-            #endregion
             else if (btnNext.Text == "Submit")
             {
                 try
@@ -474,7 +466,7 @@ namespace Cheveux
                         #endregion
 
                         #region internal Booking (Receptionist)
-                        if (Authcookie["UT"].ToString()[0] == 'R')
+                        else if (Authcookie["UT"].ToString()[0] == 'R')
                         {
                             //Make Booking
                             //Add to booking
@@ -489,6 +481,7 @@ namespace Cheveux
                             book.StylistID = lbPickAStylist.SelectedValue;
                             book.Available = "N";
                             book.primaryBookingID = book.BookingID;
+                            book.Comment = txtComment.Text;
                             handler.BLL_AddBooking(book);
                             bookService = new BookingService();
                             foreach (string id in pickedServiceID)
@@ -658,19 +651,22 @@ namespace Cheveux
                 {
                     //if internal booking
                     btnNext.Text = "Select Customer";
+                    lblGoCustomer.ForeColor = Color.Gray;
+                    lblGoCustomer.Font.Bold = true;
                 }
                 else
                 {
                     //if external booking
                     btnNext.Text = "Booking Summary";
-                    lblGoService.ForeColor = Color.Gray;
-                    lblGoService.Font.Bold = false;
-                    lblGoStylist.ForeColor = Color.Gray;
-                    lblGoStylist.Font.Bold = false;
-                    lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
-                    lblGoDateTime.Font.Bold = true;
-                    lblGoSummary.ForeColor = Color.Gray;
                 }
+                lblGoService.ForeColor = Color.Gray;
+                lblGoService.Font.Bold = false;
+                lblGoStylist.ForeColor = Color.Gray;
+                lblGoStylist.Font.Bold = false;
+                lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
+                lblGoDateTime.Font.Bold = true;
+                lblGoCustomer.Font.Bold = true;
+                lblGoSummary.ForeColor = Color.Gray;
             }
             #region Internal Booking
             else if (btnPrevious.Text == "Select Customer")
@@ -682,6 +678,16 @@ namespace Cheveux
                 btnNext.Text = "Booking Summary";
                 divSelectUser.Visible = true;
                 btnPrevious.Visible = true;
+                lblGoService.ForeColor = Color.Gray;
+                lblGoService.Font.Bold = false;
+                lblGoStylist.ForeColor = Color.Gray;
+                lblGoStylist.Font.Bold = false;
+                lblGoDateTime.ForeColor = Color.Gray;
+                lblGoDateTime.Font.Bold = false;
+                lblGoSummary.ForeColor = Color.Gray;
+                lblGoSummary.Font.Bold = true;
+                lblGoCustomer.ForeColor = Color.FromArgb(240, 95, 64);
+                lblGoCustomer.Font.Bold = true;
                 #endregion
             }
             #endregion
