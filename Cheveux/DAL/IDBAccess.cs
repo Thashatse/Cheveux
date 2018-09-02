@@ -158,8 +158,6 @@ namespace DAL
         bool AddService(PRODUCT p, SERVICE s);
         */
       
-        bool addAccessories(ACCESSORY a, PRODUCT p);
-        bool addTreatments(TREATMENT t, PRODUCT p);
         SERVICE GetSlotLength(string serviceID);
         SP_GetEmployee_S_ getEmployee_S (string stylistID);
         bool addSpecialisation(STYLIST_SERVICE ss);
