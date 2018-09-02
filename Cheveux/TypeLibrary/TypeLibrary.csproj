@@ -94,6 +94,7 @@
     <Compile Include="ViewModels\SP_GetStyles.cs" />
     <Compile Include="ViewModels\SP_GetStylistBookings.cs" />
     <Compile Include="ViewModels\SP_GetStylists.cs" />
+    <Compile Include="ViewModels\SP_GetSupplier.cs" />
     <Compile Include="ViewModels\SP_GetTodaysBookings.cs" />
     <Compile Include="ViewModels\SP_GetWidth.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />

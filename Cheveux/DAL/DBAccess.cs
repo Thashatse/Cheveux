@@ -186,14 +186,14 @@ namespace DAL
                 {
                     if (table.Rows.Count == 1)
                     {
-                            sale = new SALE
-                            {
-                                SaleID = table.Rows[0][0].ToString(),
-                                Date = Convert.ToDateTime(table.Rows[0][1].ToString()),
-                                CustID = table.Rows[0][2].ToString(),
-                                PaymentType = table.Rows[0][3].ToString(),
-                                BookingID = table.Rows[0][4].ToString(),
-                            };
+                        sale = new SALE
+                        {
+                            SaleID = table.Rows[0][0].ToString(),
+                            Date = Convert.ToDateTime(table.Rows[0][1].ToString()),
+                            CustID = table.Rows[0][2].ToString(),
+                            PaymentType = table.Rows[0][3].ToString(),
+                            BookingID = table.Rows[0][4].ToString(),
+                        };
                     }
                     return sale;
                 }
@@ -300,7 +300,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -633,7 +633,7 @@ namespace DAL
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetMultipleServicesTime", 
+                using (DataTable table = DBHelper.ParamSelect("SP_GetMultipleServicesTime",
                                                 CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count == 1)
@@ -1303,23 +1303,19 @@ namespace DAL
                         accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         accessory.Price = Convert.ToInt32(row["Price"]);
                         accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
-                        //accessory.Active = Convert.ToString(row["Active"]);
-                        //accessory.ProductImage = Convert.ToByte(row["ProductImage"]);
-                        //accessory.Colour = Convert.ToString(row["Colour"]);
-                        //accessory.Qty = Convert.ToInt32(row["Qty"]);
                         accessory.BrandID = Convert.ToString("BrandID");
                         accessory.Brandname = Convert.ToString("BrandName");
-                        //accessory.brandType = Convert.ToString("BrandType(T/A)");
+                       
 
-                     }
+                    }
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-                        
+
             return accessory;
         }
 
@@ -1334,7 +1330,7 @@ namespace DAL
             };
 
             try
-                {  using (DataTable table = DBHelper.ParamSelect("SP_SelectTreatment", CommandType.StoredProcedure, parameters))
+            { using (DataTable table = DBHelper.ParamSelect("SP_SelectTreatment", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
@@ -1345,19 +1341,17 @@ namespace DAL
                         treatment.Price = Convert.ToInt32(row["Price"]);
                         treatment.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         treatment.Active = Convert.ToString(row["Active"]);
-                        //treatment.ProductImage = Convert["ProductImage"]);
-                        //treatment.Qty = Convert.ToInt32(row["Qty"]);
                         treatment.BrandID = Convert.ToString("BrandID");
                         treatment.Brandname = Convert.ToString("BrandName");
-                        //treatment.brandType = Convert.ToString("BrandType(T/A)");
+                        
 
-                     }
-                  }
-             }
+                    }
+                }
+            }
 
             catch (Exception e)
             {
-                 throw new ApplicationException(e.ToString());
+                throw new ApplicationException(e.ToString());
             }
 
 
@@ -1365,9 +1359,9 @@ namespace DAL
         }
 
         //AddProduct
-         public bool addProduct(PRODUCT addProduct)
-        { 
-          try
+        public bool addProduct(PRODUCT addProduct)
+        {
+            try
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
@@ -1377,7 +1371,7 @@ namespace DAL
                     new SqlParameter("@Price", addProduct.Price),
                     new SqlParameter("@productType", addProduct.ProductType),
                     new SqlParameter("@Active", addProduct.Active)
-                   
+
                 };
                 return DBHelper.NonQuery("SP_AddProduct", CommandType.StoredProcedure, pars);
             }
@@ -1397,9 +1391,9 @@ namespace DAL
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure,pars))
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure, pars))
                 {
-                     if(table.Rows.Count > 0)
+                    if (table.Rows.Count > 0)
                     {
                         foreach (DataRow row in table.Rows)
                         {
@@ -1418,12 +1412,35 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
 
-           }
+        }
 
-          // public List<SP_GetSupplier> getSupplier()
-
-
-
+        /*
+           public List<SP_GetSupplier> getSupplier()
+        {
+            List<SP_GetSupplier> list = new List<SP_GetSupplier>();
+            try 
+            {
+               using (DataTable table = DBHelper.Select("SP_GetSupplier", CommandType.StoredProcedure))
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetSupplier supplier = new SP_GetSupplier();
+                            supplier.SupplierID = row["SupplierID"].ToString();
+                            supplier.SupplierName = row["SupplierName"].ToString();
+                            supplier.ContactName = row["ContactName"].ToString();
+                            supplier.ContactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.ContactEmail = row["ContactEmail"].ToString();
+                            list.Add(supplier);
+                        }
+                    }
+                 }
+              }
+              */
         #endregion
 
         #region Manager Dash Board

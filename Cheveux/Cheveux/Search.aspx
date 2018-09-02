@@ -38,15 +38,14 @@
                 <div class="col-xs-12 col-md-12">
                     <form id="SearchBookings" runat="server">
                     <div class="row">
-                        
-                    
                     <!--Bookings-->
                         <div class="col-12">
                         <div style="text-align: left; float: left;">
                             <asp:Label runat="server" ID="bookingResultLable"></asp:Label>
                             </div>
                     <div style="text-align: right; float: right;">
-                        <asp:Button runat="server" Text="Fillter" id="FillterBookingResults" cssClass="btn btn-default" Visible="false" onclick="showFilterBooking"></asp:Button>
+                        <asp:Button runat="server" Text="Fillter" id="FillterBookingResults" cssClass="btn btn-default" onclick="showFilterBooking"></asp:Button>
+                       <asp:Button runat="server" Text="Hide" id="btnShowBoings" cssClass="btn btn-default" Visible="false" onclick="showBookings"></asp:Button>
                         </div>
                         </div>
                     <div id="divBookingSearchFilter" Visible="false" runat="server" class="col-12" style="border: solid #F05F40 2px;">
@@ -76,17 +75,44 @@
                         <br /><br />
                     
                     <!--Services-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div style="text-align: left; float: left;">
                     <asp:Label runat="server" ID="serviceResultsLable"></asp:Label>
+                                </div>
+                            <div style="text-align: right; float: right;">
+                        <asp:Button runat="server" Text="Hide" id="btnHideServices" cssClass="btn btn-default" onclick="showServices"></asp:Button>
+                        </div>
+                            </div>
+                        </div>
                     <asp:Table id="serviceSearchResults" runat="server"></asp:Table>
                     <!--New Line-->
                     <br /><br />
                     <!--Products-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div style="text-align: left; float: left;">
                     <asp:Label runat="server" ID="ProductResultsLable"></asp:Label>
+                                </div>
+                            <div style="text-align: right; float: right;">
+                        <asp:Button runat="server" Text="Hide" id="btnHideProducts" cssClass="btn btn-default" onclick="showroducts"></asp:Button>
+                        </div>
+                            </div>
+                        </div>
                     <asp:Table id="ProductSearchResults" runat="server"></asp:Table>
                     <!--New Line-->
                     <br /><br />
                     <!--Stylist-->
+                    <div class="row">
+                        <div class="col-12">
+                            <div style="text-align: left; float: left;">
                     <asp:Label runat="server" ID="StylistResultsLable"></asp:Label>
+                                </div>
+                            <div style="text-align: right; float: right;">
+                        <asp:Button runat="server" Text="Hide" id="btnHideStylists" cssClass="btn btn-default" onclick="showStylist"></asp:Button>
+                        </div>
+                            </div>
+                        </div>
                     <asp:Table id="StylistSearchResults" runat="server"></asp:Table>
                     </div>
             </div>
