@@ -414,22 +414,33 @@ namespace Cheveux
                     newCell = new TableCell();
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //edit link
-                    newCell = new TableCell();
-                    newCell.Width = 700;
-                    newCell.Text =
-                         "<a class='btn btn-secondary' href='/Manager/UpdateEmployee.aspx?" +
-                                    "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                    "'> Edit Employee </a>";
-
-                    //stylist schedual
-                    if (employee.employeeType.Replace(" ", string.Empty) == "S")
+                    if(employee.employeeType.Replace(" ", string.Empty) == "S")
                     {
-                        newCell.Text += " &nbsp; <a class='btn btn-secondary' href ='/Receptionist/Appointments.aspx?Action=ViewStylistSchedule&" +
+                        //edit link
+                        newCell = new TableCell();
+                        newCell.Width = 700;
+                        newCell.Text =
+                             "<a class='btn btn-secondary' href='/Manager/UpdateEmployee.aspx?Action=UpdateStylist&" +
                                         "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                        "'> View Schedule </a>";
+                                        "'> Edit Employee </a>";
+                        //stylist schedual
+                        if (employee.employeeType.Replace(" ", string.Empty) == "S")
+                        {
+                            newCell.Text += " &nbsp; <a class='btn btn-secondary' href ='/Receptionist/Appointments.aspx?Action=ViewStylistSchedule&" +
+                                            "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                            "'> View Schedule </a>";
+                        }
                     }
-
+                    else if(employee.employeeType.Replace(" ", string.Empty) == "R")
+                    {
+                        //edit link
+                        newCell = new TableCell();
+                        newCell.Width = 700;
+                        newCell.Text =
+                             "<a class='btn btn-secondary' href='/Manager/UpdateEmployee.aspx?Action=UpdateReceptionist&" +
+                                        "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                        "'> Edit Employee </a>";
+                    }
                     profileTable.Rows[rowCount].Cells.Add(newCell);
 
                     //increment rowcount

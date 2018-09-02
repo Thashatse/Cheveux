@@ -20,6 +20,7 @@ alter PROCEDURE SP_UpdateEmployee
 	@empID nchar(30),
 	@type nchar(10),
 	@bio varchar(max) = null,
+	@Specialisation nchar(10),
 	@addLine1 varchar(max),
 	@addLine2 varchar(max) null,
 	@suburb varchar(max),
@@ -38,11 +39,26 @@ BEGIN
 				[CHEVEUX].[dbo].[EMPLOYEE].City=@city
 			WHERE EmployeeID=@empID
 
+			
+
 		COMMIT TRANSACTION 
 	END TRY 
 	BEGIN CATCH 
 		IF @@TRANCOUNT > 0 
 			ROLLBACK TRANSACTION
-	END CATCH   
+	END CATCH
+
+		BEGIN TRY
+		BEGIN TRANSACTION
+			
+			UPDATE STYLIST_SERVICE
+			SET ServiceID = @Specialisation
+			WHERE EmployeeID=@empID
+					COMMIT TRANSACTION 
+		END TRY 
+		BEGIN CATCH 
+			IF @@TRANCOUNT > 0 
+				ROLLBACK TRANSACTION
+		END CATCH  
 END
 GO

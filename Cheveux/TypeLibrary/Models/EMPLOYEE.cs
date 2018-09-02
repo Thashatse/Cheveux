@@ -25,5 +25,6 @@ namespace TypeLibrary.Models
         public string City { get; set; }
         public string UserImage { get; set; }
         public string PassReset { get; set; }
+        public string Specialisation { get; set; }
     }
 }

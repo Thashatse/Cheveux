@@ -553,9 +553,21 @@ namespace BLL
         {
             return db.updateService(p, s);
         }
-                public SERVICE BLL_GetSlotLength(string serviceID)
+        public SERVICE BLL_GetSlotLength(string serviceID)
         {
             return db.GetSlotLength(serviceID);
+        }
+        public SP_GetEmployee_S_ getEmployee_S(string stylistID)
+        {
+            return db.getEmployee_S(stylistID);
+        }
+        public bool addSpecialisation(STYLIST_SERVICE ss)
+        {
+            return db.addSpecialisation(ss);
+        }
+        public SP_GetEmployee_S_ getBio(string id)
+        {
+            return db.getBio(id);
         }
     }
 }

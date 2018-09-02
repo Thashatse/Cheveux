@@ -101,7 +101,7 @@
                         <br />
 
                         <div class="row">
-                            <div class="col-xs-12 col-md-4">
+                            <div class="col-xs-12 col-md-6">
                                 <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatLayout="flow">
                                     <asp:ListItem Text="All &nbsp;" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Today &nbsp;" Value="1"></asp:ListItem>

@@ -75,6 +75,7 @@
     <Compile Include="ViewModels\SP_GetBookingServices.cs" />
     <Compile Include="ViewModels\SP_GetBraidService.cs" />
     <Compile Include="ViewModels\SP_GetBrandsForProductType.cs" />
+    <Compile Include="ViewModels\SP_GetEmployee%28S%29.cs" />
     <Compile Include="ViewModels\SP_GetMultipleServicesTime.cs" />
     <Compile Include="ViewModels\SP_GetEmployeeTypes.cs" />
     <Compile Include="ViewModels\SP_getInvoiceDL.cs" />
