@@ -75,8 +75,12 @@ namespace Cheveux.Manager
                         emp = handler.viewEmployee(employeeID);
                         phNotif.Visible = true;
                         lblNotif.Text = "Update successful for "
-                                        +emp.firstName.ToString() + ' '
-                                        +emp.lastName.ToString();
+                                        + "<a href='../Profile.aspx?Action=View&empID="
+                                        + emp.UserID.ToString().Replace(" ", string.Empty)
+                                        + "'>"
+                                        + emp.firstName.ToString() + ' '
+                                        +emp.lastName.ToString()
+                                         + "</a>";
                     }
                     catch (Exception Err)
                     {

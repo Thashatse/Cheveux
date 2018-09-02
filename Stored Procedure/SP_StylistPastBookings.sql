@@ -40,8 +40,8 @@ BEGIN
 	AND		b.StylistID = e. EmployeeID
 	AND    B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = U.UserID 
-	AND    B.Arrived = 'N'
-	AND    B.[Date] !< CAST(GETDATE() AS DATE)
+	AND	   B.Arrived = 'Y'
+	AND	   B.[Date] !> CAST(GETDATE() AS DATE)
 	and b.BookingID=b.primaryBookingID
 	ORDER BY
 	(CASE 

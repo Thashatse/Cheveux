@@ -41,8 +41,9 @@ BEGIN
 	Where  B.SlotNo = TS.SlotNo 
 	AND    B.StylistID = e.EmployeeID
 	AND	   B.CustomerID = U.UserID
-	AND    B.Arrived = 'N' 
-	AND    B.[Date] !< CAST(GETDATE() AS DATE)
+	AND    B.Arrived = 'Y' 
+	AND	  (B.[Date] BETWEEN @startDate AND @endDate)
+	AND    B.[Date] !> CAST(GETDATE() AS DATE)
 	AND		B.BookingID = B.primaryBookingID
 	ORDER BY 
 		(CASE 

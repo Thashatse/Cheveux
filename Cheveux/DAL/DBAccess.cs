@@ -2510,6 +2510,7 @@ namespace DAL
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
                     new SqlParameter("@type", emp.Type.ToString()),
                     new SqlParameter("@bio",emp.Bio.ToString()),
+                    new SqlParameter("@Specialisation", emp.Specialisation.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
                     new SqlParameter("@suburb", emp.Suburb.ToString()),
@@ -3554,6 +3555,95 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-    
+        public SP_GetEmployee_S_ getEmployee_S(string stylistID)
+        {
+            SP_GetEmployee_S_ stylist = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", stylistID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetEmployee(S)",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stylist = new SP_GetEmployee_S_
+                        {
+                            UserImage = Convert.ToString(row["UserImage"]),
+                            StylistID = Convert.ToString(row["UserID"]),
+                            FirstName = Convert.ToString(row["FirstName"]),
+                            LastName = Convert.ToString(row["LastName"]),
+                            Username = Convert.ToString(row["UserName"]),
+                            Email = Convert.ToString(row["Email"]),
+                            ContactNo = Convert.ToString(row["ContactNo"]),
+                            Type = Convert.ToString(row["Type"]),
+                            Active = Convert.ToString(row["Active"]),
+                            ad1 = Convert.ToString(row["AddressLine1"]),
+                            ad2 = Convert.ToString(row["AddressLine2"]),
+                            Suburb = Convert.ToString(row["Suburb"]),
+                            City = Convert.ToString(row["City"]),
+                            Bio = row["Bio"].ToString(),
+                            ServiceID = row["ServiceID"].ToString(),
+                            Specialisation = row["Specialisation"].ToString(),
+                            SpecDesc = row["SpecialisationDescription"].ToString(),
+                            
+                        };
+                    }
+                    return stylist;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool addSpecialisation(STYLIST_SERVICE ss)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@employeeID", ss.EmployeeID.ToString()),
+                    new SqlParameter("@serviceID", ss.ServiceID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddSpecialisation", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
+        public SP_GetEmployee_S_ getBio(string id)
+        {
+            SP_GetEmployee_S_ stylist = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBio",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stylist = new SP_GetEmployee_S_
+                        {
+                            Bio = row["Bio"].ToString(),
+                        };
+                    }
+                    return stylist;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }                  

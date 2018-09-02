@@ -157,7 +157,10 @@ namespace DAL
         /*
         bool AddService(PRODUCT p, SERVICE s);
         */
-       SERVICE GetSlotLength(string serviceID);
-
+      
+        SERVICE GetSlotLength(string serviceID);
+        SP_GetEmployee_S_ getEmployee_S (string stylistID);
+        bool addSpecialisation(STYLIST_SERVICE ss);
+        SP_GetEmployee_S_ getBio(string id);
     }
 }

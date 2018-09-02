@@ -15,10 +15,13 @@ namespace Cheveux.Manager
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         SP_ViewEmployee view = null;
+        SP_GetEmployee_S_ s,bio = null;
         EMPLOYEE emp = null;
-        string userID;
         HttpCookie cookie = null;
-
+        List<SP_GetServices> specs = null;
+        string userID;
+        SP_ViewStylistSpecialisationAndBio viewSpec = null;
+        STYLIST_SERVICE stylistService = null;
         protected void Page_Load(object sender, EventArgs e)
         {
             errorHeader.Font.Bold = true;
@@ -41,20 +44,111 @@ namespace Cheveux.Manager
             {
                 phMain.Visible = true;
                 phLogIn.Visible = false;
+
+                userID = Request.QueryString["empID"];
+                string type = Request.QueryString["Type"];
+                string action = Request.QueryString["Action"];
+
+                if(action== "UpdateStylist")
+                {
+                    if (userID != null)
+                    {
+                        getStylist(userID);
+                    }
+                }
+                else if(action == "UpdateReceptionist")
+                {
+                    if(userID != null)
+                    {
+                        getUser(userID);
+                    }
+                }
+
+                if(type == "NewEmp")
+                {
+                    getUser(userID);
+                }
             }
-            userID = Request.QueryString["empID"];
-            if(userID != null)
+            
+        }
+        public void getStylist(string stylistID)
+        {
+            try
+            {
+                s = handler.getEmployee_S(stylistID);
+                TableRow row = new TableRow();
+                tblUserImage.Rows.Add(row);
+                TableCell userImage = new TableCell();
+                userImage.Text = "<img src=" + s.UserImage
+                                  + " alt='" + s.FirstName + " " + s.LastName +
+                                 " Profile Image' width='125' height='125'/>";
+                tblUserImage.Rows[0].Cells.Add(userImage);
+                TableRow newRow = new TableRow();
+                tblUserImage.Rows.Add(newRow);
+                TableCell username = new TableCell();
+                username.Text = "<p style='font-size:2em !important;'>" + s.Username.ToString() + "</p>";
+                username.Font.Bold = true;
+                tblUserImage.Rows[1].Cells.Add(username);
+
+                if (!IsPostBack)
+                {
+                    try
+                    {
+                        specs = handler.BLL_GetAllServices();
+
+                        foreach (SP_GetServices s in specs)
+                        {
+                            drpSpecs.DataSource = specs;
+                            drpSpecs.DataTextField = "Name";
+                            drpSpecs.DataValueField = "ServiceID";
+                            drpSpecs.DataBind();
+                        }
+                        if (s.Specialisation != string.Empty || s.Specialisation != null)
+                        {
+                            drpSpecs.SelectedValue = s.ServiceID.ToString();
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        drpSpecs.Text = "Services Unavailable";
+                        function.logAnError("Error getting services for spec dropdown in updateEmp.aspx error:"
+                                            + err.ToString());
+                    }
+
+                    if (s.Bio != string.Empty || s.Bio != null)
+                    {
+                        txtBio.InnerText = s.Bio.ToString();
+                    }
+                    if (s.ad1 != string.Empty || s.ad1 != null)
+                    {
+                        txtAddLine1.Text = s.ad1.ToString();
+                    }
+                    if (s.ad2 != string.Empty || s.ad2 != null)
+                    {
+                        txtAddLine2.Text = s.ad2.ToString();
+                    }
+                    if (s.Suburb != string.Empty || s.Suburb != null)
+                    {
+                        txtSuburb.Text = s.Suburb.ToString();
+                    }
+                    if (s.City != string.Empty || s.City != null)
+                    {
+                        txtCity.Text = s.City.ToString();
+                    }
+                }
+
+            }
+            catch (Exception Err)
             {
                 getUser(userID);
+                //phUsersErr.Visible = true;
+                //phMain.Visible = false;
+                //errorHeader.Text = "Error displaying user details.";
+                //errorMessage.Text = "It seems there is a problem communicating with the database."
+                //                    + "Please report problem to admin or try again later.";
+                function.logAnError("Error get stylist details (the specialisation problem) [update.aspx {getStylist}] err:"+Err.ToString());
             }
-            if (rdoType.SelectedValue == "R")
-            {
-                divBio.Visible = false;
-            }
-            else if(rdoType.SelectedValue == "S")
-            {
-                divBio.Visible = true;
-            }
+
         }
         public void getUser(string userID)
         {
@@ -75,11 +169,57 @@ namespace Cheveux.Manager
                 username.Font.Bold = true;
                 tblUserImage.Rows[1].Cells.Add(username);
 
-                if(view.employeeType.Replace(" ", string.Empty) == "S")
+                if (!Page.IsPostBack)
                 {
-                    txtBio.InnerText = view.bio.ToString();   
+                    try
+                    {
+                        specs = handler.BLL_GetAllServices();
+
+                        foreach (SP_GetServices s in specs)
+                        {
+                            drpSpecs.DataSource = specs;
+                            drpSpecs.DataTextField = "Name";
+                            drpSpecs.DataValueField = "ServiceID";
+                            drpSpecs.DataBind();
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        drpSpecs.Text = "Services Unavailable";
+                        function.logAnError("Error getting services for spec dropdown in updateEmp.aspx error:"
+                                            + err.ToString());
+                    }
+                    try
+                    {
+                        bio = handler.getBio(userID);
+                        if (bio.Bio != string.Empty || bio.Bio != null)
+                        {
+                            txtBio.InnerText = bio.Bio.ToString();
+                        }
+                    }
+                    catch(Exception err)
+                    {
+                        txtBio.Attributes.Add("placeholder", "Enter Employee Bio");
+                        function.logAnError("couldn't get bio[getBio()] err: " + err.ToString());
+                    }
+
+                    if (view.addLine1 != string.Empty || view.addLine1 != null)
+                    {
+                        txtAddLine1.Text = view.addLine1.ToString();
+                    }
+                    if (view.addLine2 != string.Empty || view.addLine2 != null)
+                    {
+                        txtAddLine2.Text = view.addLine2.ToString();
+                    }
+                    if (view.suburb != string.Empty || view.suburb != null)
+                    {
+                        txtSuburb.Text = view.suburb.ToString();
+                    }
+                    if (view.city != string.Empty || view.city != null)
+                    {
+                        txtCity.Text = view.city.ToString();
+                    }
                 }
-                
             }
             catch (Exception Err)
             {
@@ -88,16 +228,24 @@ namespace Cheveux.Manager
                 errorHeader.Text = "Error displaying user details.";
                 errorMessage.Text = "It seems there is a problem communicating with the database."
                                     + "Please report problem to admin or try again later.";
-                errorToReport.Text = "Error To report:" + Err.ToString();
-
-                function.logAnError(Err.ToString());
+                function.logAnError("Error getting user details [update.aspx {getuser()}] err:" + Err.ToString());
             }
-
         }
-       
+        protected void rdoType_Change(object sender, EventArgs e)
+        {
+            if(rdoType.SelectedValue == "R")
+            {
+                phStylist.Visible = false;
+            }
+            else if(rdoType.SelectedValue == "S")
+            {
+                phStylist.Visible = true;
+            }
+        }
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
             string ad2;
+
             try
             {
                 emp = new EMPLOYEE();
@@ -105,13 +253,33 @@ namespace Cheveux.Manager
                 emp.EmployeeID = userID;
                 emp.Type = rdoType.SelectedValue.ToString();
 
-                if(emp.Type.Replace(" ", string.Empty) == "R")
+                emp.Bio = txtBio.InnerText.ToString();
+
+                try
                 {
-                    emp.Bio = "";
+                    viewSpec = handler.viewStylistSpecialisationAndBio(emp.EmployeeID);
+                }
+                catch(Exception Err)
+                {
+                    function.logAnError("Could not view stylist specialisation[btnUpdate of updateEmp] error:" +
+                                          Err.ToString());
+                }
+
+                if(rdoType.SelectedValue == "S")
+                {
+                    if (viewSpec == null)
+                    {
+                        stylistService = new STYLIST_SERVICE();
+                        stylistService.EmployeeID = userID;
+                        stylistService.ServiceID = drpSpecs.SelectedValue;
+                        handler.addSpecialisation(stylistService);
+                    }
+
+                    emp.Specialisation = drpSpecs.SelectedValue;
                 }
                 else
                 {
-                    emp.Bio = txtBio.InnerText.ToString();
+                    emp.Specialisation = drpSpecs.Text;
                 }
 
                 emp.AddressLine1 = txtAddLine1.Text;
@@ -135,18 +303,16 @@ namespace Cheveux.Manager
                 else
                 {
                     phUpdateErr.Visible = true;
-                    lblUpdateErr.Text = "Unable to update the employees details.<br/>"
-                                          + "Sorry for the inconvenience." +
-                                          "<br/>Please report to management or the administrator.";
+                    lblUpdateErr.Text = "Unable to update the employees details.<br/>"+
+                                         "<br/>Please report to management or the administrator.";
                 }
             }
             catch (Exception Err)
             {
                 phUpdateErr.Visible = true;
                 lblUpdateErr.Text = "An error has occured.We are unable to update the employees details at this point in time.<br/>"
-                                      + "Sorry for the inconvenience.Please report to management or the administrator."
-                                      + "<br/>Error: " + Err.ToString();
-                function.logAnError(Err.ToString());
+                                      + "Please report to management or the administrator.";
+                function.logAnError("btnUpdateEmployee err:"+Err.ToString());
             }
 
         }
