@@ -1,0 +1,142 @@
+
+TimeStamp: 2018/09/02 14:04:46
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:04:50
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:04:53
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:04:53
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:04:56
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:04:59
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:04:59
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:05:01
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:05:03
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at System.String.get_Chars(Int32 index)
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 88
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/02 14:05:04
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 452

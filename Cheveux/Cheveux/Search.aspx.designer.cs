@@ -49,6 +49,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Button FillterBookingResults;
         
         /// <summary>
+        /// btnShowBoings control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShowBoings;
+        
+        /// <summary>
         /// divBookingSearchFilter control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label serviceResultsLable;
         
         /// <summary>
+        /// btnHideServices control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHideServices;
+        
+        /// <summary>
         /// serviceSearchResults control.
         /// </summary>
         /// <remarks>
@@ -121,6 +139,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label ProductResultsLable;
         
         /// <summary>
+        /// btnHideProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHideProducts;
+        
+        /// <summary>
         /// ProductSearchResults control.
         /// </summary>
         /// <remarks>
@@ -137,6 +164,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label StylistResultsLable;
+        
+        /// <summary>
+        /// btnHideStylists control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHideStylists;
         
         /// <summary>
         /// StylistSearchResults control.

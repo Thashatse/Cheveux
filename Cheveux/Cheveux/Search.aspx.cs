@@ -605,5 +605,65 @@ namespace Cheveux
             }
         }
         #endregion
+
+        #region Show/Hide BTN
+        public void showServices(object sender, EventArgs e)
+        {
+            if(btnHideServices.Text == "Hide")
+            {
+                serviceSearchResults.Visible = false;
+                btnHideServices.Text = "Show";
+            }
+            else if (btnHideServices.Text == "Show")
+            {
+                serviceSearchResults.Visible = true;
+                btnHideServices.Text = "Hide";
+            }
+        }
+
+        public void showroducts(object sender, EventArgs e)
+        {
+            if (btnHideProducts.Text == "Hide")
+            {
+                ProductSearchResults.Visible = false;
+                btnHideProducts.Text = "Show";
+            }
+            else if (btnHideProducts.Text == "Show")
+            {
+                ProductSearchResults.Visible = true;
+                btnHideProducts.Text = "Hide";
+            }
+        }
+
+        public void showStylist(object sender, EventArgs e)
+        {
+            if (btnHideStylists.Text == "Hide")
+            {
+                StylistSearchResults.Visible = false;
+                btnHideStylists.Text = "Show";
+            }
+            else if (btnHideStylists.Text == "Show")
+            {
+                StylistSearchResults.Visible = true;
+                btnHideStylists.Text = "Hide";
+            }
+        }
+
+        public void showBookings(object sender, EventArgs e)
+        {
+            if (btnShowBoings.Text == "Hide")
+            {
+                bookingSearchResults.Visible = false;
+                btnShowBoings.Visible = false;
+                btnShowBoings.Text = "Show";
+            }
+            else if (btnShowBoings.Text == "Show")
+            {
+                bookingSearchResults.Visible = true;
+                btnShowBoings.Visible = true;
+                btnShowBoings.Text = "Hide";
+            }
+        }
+        #endregion
     }
 }
