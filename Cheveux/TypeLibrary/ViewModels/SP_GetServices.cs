@@ -12,5 +12,7 @@ namespace TypeLibrary.ViewModels
         public string Name { get; set; }
         public char ServiceType { get; set; }
         public decimal Price { get; set; }
+        public string Description { get; set; }
+        public char Active { get; set; }
     }
 }
