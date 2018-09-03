@@ -1636,6 +1636,7 @@ namespace Cheveux
                             }
                         }
                     }
+                    slotIndex++;
                 }
             }
             catch (Exception err)
