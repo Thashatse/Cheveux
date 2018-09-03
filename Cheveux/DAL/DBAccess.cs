@@ -3562,7 +3562,7 @@ namespace DAL
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetEmployee(S)",
+                using (DataTable table = DBHelper.ParamSelect("SP_GetEmployee_S_",
             CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count == 1)
