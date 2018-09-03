@@ -490,7 +490,7 @@ namespace Cheveux
             else if (userType == "S")
             {
                 phCalendars.Visible = true;
-
+                empSelectionType.SelectedValue = "1";
                 drpSortBy.Items.RemoveAt(1);
                 drpSortBy.Items.Add(new ListItem("Customer", "1"));
 
