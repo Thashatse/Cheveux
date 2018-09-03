@@ -1304,17 +1304,13 @@ namespace DAL
                         accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         accessory.BrandID = Convert.ToString("BrandID");
                         accessory.Brandname = Convert.ToString("BrandName");
-                       
-
                     }
-
                 }
             }
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-
             return accessory;
         }
 
@@ -1342,18 +1338,13 @@ namespace DAL
                         treatment.Active = Convert.ToString(row["Active"]);
                         treatment.BrandID = Convert.ToString("BrandID");
                         treatment.Brandname = Convert.ToString("BrandName");
-                        
-
                     }
                 }
             }
-
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-
-
             return treatment;
         }
 

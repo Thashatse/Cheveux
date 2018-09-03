@@ -41,13 +41,7 @@
                                         <asp:Button ID="btnProductSearch" runat="server" Text="Search" CssClass="btn btn-primary" />
                                     </div>
                                 </div>
-
                             </form>
-                            <!-- line Break -->
-                            <br />
-                            <!--Help-->
-                            <a href="../Help/CheveuxHelpCenter.aspx#ManageServices" target="_blank" title="How To Manage Products">
-                                <span class="glyphicon">&#63; Help</span></a>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-create PROCEDURE SP_SelectAccessory
+alter PROCEDURE SP_SelectAccessory
 	@productID nchar(10)
 AS
 BEGIN
@@ -26,7 +26,7 @@ BEGIN
 	-- interfering with SELECT statements.
 	SET NOCOUNT ON;
 	SELECT [ProductID]
-      ,[PRODUCT].[Name] AS [ProductName]
+      ,[PRODUCT].[Name]
       ,[ProductDescription]
       ,[Price]
       ,[ProductType(T/A/S)]

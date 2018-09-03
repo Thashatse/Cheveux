@@ -159,6 +159,7 @@ namespace Cheveux
                 lblGoStylist.ForeColor = Color.Gray;
                 lblGoDateTime.ForeColor = Color.Gray;
                 lblGoSummary.ForeColor = Color.Gray;
+                lblGoCustomer.ForeColor = Color.Gray;
             }
             //Check if the user is logged 
             try
@@ -692,7 +693,7 @@ namespace Cheveux
                     lblGoStylist.Font.Bold = false;
                     lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
                     lblGoDateTime.Font.Bold = true;
-                    lblGoCustomer.Font.Bold = true;
+                    lblGoCustomer.Font.Bold = false;
                     lblGoSummary.ForeColor = Color.Gray;
                 }
                 #region Internal Booking

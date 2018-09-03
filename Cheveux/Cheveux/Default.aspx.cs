@@ -15,7 +15,7 @@ namespace Cheveux
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        BUSINESS BusinessDetails = null;
+        //BUSINESS BusinessDetails = null;
         List<HomePageFeatures> features = null;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -45,80 +45,93 @@ namespace Cheveux
 
                 if (goTo == "Prod1")
                 {
-                    if (features[0].ItemID == null)
+                    if (features == null)
                     {
                         Response.Redirect("/Cheveux/Products.aspx");
                     }
-                    Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[0].ItemID.ToString());
+                    else
+                    {
+                        Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[0].ItemID.ToString());
+                    }
                 }
                 else if (goTo == "Prod2")
                 {
-                    if (features[1].ItemID == null)
+                    if (features == null)
                     {
                         Response.Redirect("/Cheveux/Products.aspx");
                     }
-                    Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[1].ItemID.ToString());
+                    else
+                    {
+                        Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[1].ItemID.ToString());
+                    }
                 }
                 else if (goTo == "Prod3")
                 {
-                    if (features[2].ItemID == null)
+                    if (features == null)
                     {
                         Response.Redirect("/Cheveux/Products.aspx");
                     }
-                    Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[2].ItemID.ToString());
+                    else
+                    {
+                        Response.Redirect("/Cheveux/Products.aspx?ProductID=" + features[2].ItemID.ToString());
+                    }
                 }
                 else if (goTo == "Sty1")
                 {
-                    if (features[7].ItemID == null)
+                    if (features == null)
                     {
                         Response.Redirect("/Cheveux/Stylists.aspx");
                     }
-                    Response.Redirect("Profile.aspx?Action=View&empID=" + features[7].ItemID.ToString());
+                    else
+                    {
+                        Response.Redirect("Profile.aspx?Action=View&empID=" + features[7].ItemID.ToString());
+                    }
                 }
                 else if (goTo == "Sty2")
                 {
-                    if (features[8].ItemID == null)
+                    if (features == null)
                     {
                         Response.Redirect("/Cheveux/Stylists.aspx");
                     }
-                    Response.Redirect("Profile.aspx?Action=View&empID=" + features[8].ItemID.ToString());
+                    else
+                    {
+                        Response.Redirect("Profile.aspx?Action=View&empID=" + features[8].ItemID.ToString());
+                    }
                 }
                 else if (goTo == "Sty3")
                 {
-                    if (features[9].ItemID == null)
+                    if (features == null)
                     {
                         Response.Redirect("/Cheveux/Stylists.aspx");
                     }
-                    Response.Redirect("Profile.aspx?Action=View&empID=" + features[9].ItemID.ToString());
+                    else
+                    {
+                        Response.Redirect("Profile.aspx?Action=View&empID=" + features[9].ItemID.ToString());
+                    }
                 }
                 else if (goTo == "Phone")
                 {
-                    if (features[10].ItemID == null)
+                    if (features == null)
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('Error.aspx','_newtab');", true);
+                        Response.Redirect("Error.aspx");
                     }
-                    Response.Redirect("tel:" + features[10].contactNo.ToString());
+                    else
+                    {
+                        Response.Redirect("tel:" + features[10].contactNo.ToString());
+                    }
                 }
                 else if (goTo == "Email")
                 {
-                    if (features[11].ItemID == null)
+                    if (features == null)
                     {
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('Error.aspx','_newtab');", true);
+                        Response.Redirect("Error.aspx");
                     }
-                    Response.Redirect("mailto:" + features[11].email.ToString());
-                }
-                else if (goTo == "Direct")
-                {
-                    //get the curent bussines details
-                    BusinessDetails = handler.getBusinessTable();
-                    if (BusinessDetails == null)
+                    else
                     {
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('https://www.google.com/maps/dir','_newtab');", true);
+                        Response.Redirect("mailto:" + features[11].email.ToString());
                     }
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow",
-                        "window.open('https://www.google.com/maps/dir/?api=1&destination=" +
-                    BusinessDetails.AddressLine1.Replace(' ', '+') + "+" +
-                    BusinessDetails.AddressLine2.Replace(' ', '+')+"','_newtab');", true);
                 }
             }
 
