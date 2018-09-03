@@ -1,10 +1,9 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BLL;
 using TypeLibrary.Models;
 using TypeLibrary.ViewModels;
 
@@ -154,7 +153,7 @@ namespace Cheveux
                         tblInvoice.Rows.Add(newRow);
                         newCell = new TableCell();
                         newCell.Font.Bold = true;
-                        newCell.Text = "Services Renderd By";
+                        newCell.Text = "Services Renderd By:";
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
                         newCell.Text = BookingDetails.stylistFirstName;
@@ -165,7 +164,6 @@ namespace Cheveux
                     }
                     #endregion
                     
-
                     //calculate total price
                     double total = 0.0;
 
