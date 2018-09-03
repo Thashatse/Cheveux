@@ -76,6 +76,24 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Table allBookingTable;
         
         /// <summary>
+        /// phOther control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phOther;
+        
+        /// <summary>
+        /// tblOther control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblOther;
+        
+        /// <summary>
         /// phBookingsErr control.
         /// </summary>
         /// <remarks>

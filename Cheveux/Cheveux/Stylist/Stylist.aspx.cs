@@ -158,7 +158,7 @@ namespace Cheveux
                     getTimeCustomerServices(a.BookingID, a.PrimaryID, i, a);
 
                     TableCell c = new TableCell();
-                    c.Text = "<a href='#'>" + a.Comment.ToString() + "</a>";
+                    c.Text = a.Comment.ToString();
                     AgendaTable.Rows[i].Cells.Add(c);
 
                     TableCell present = new TableCell();

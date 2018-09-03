@@ -47,6 +47,14 @@
                             </asp:PlaceHolder>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <asp:PlaceHolder  ID="phOther" runat="server">
+                                <asp:Table runat="server" ID="tblOther">
+                                </asp:Table>
+                            </asp:PlaceHolder>
+                        </div>
+                    </div>
                 </div>
 
                 <!--Error: If details cant be displayed-->
