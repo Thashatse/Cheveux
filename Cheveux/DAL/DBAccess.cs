@@ -2069,7 +2069,10 @@ namespace DAL
                             {
                                 ServiceID = Convert.ToString(row["ProductID"]),
                                 Name = Convert.ToString(row["Name"]),
-                                ServiceType = Convert.ToChar(row["ServiceType"])
+                                ServiceType = Convert.ToChar(row["ServiceType"]),
+                                Price = Convert.ToDecimal(row["Price"]),
+                                Description = Convert.ToString(row["ProductDescription"]),
+                                Active = Convert.ToChar(row["Active"])
                             };
                             serviceList.Add(services);
                         }
@@ -3641,6 +3644,69 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
+        }
+         public SP_GetService GetServiceFromID(string id)
+        {
+            SP_GetService service = null;
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        service = new SP_GetService
+                        {
+                            ServiceName = row["Name"].ToString(),
+                            Description = row["ProductDescription"].ToString()
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+        public SP_GetBraidService GetBraidServiceFromID(string id)
+        {
+            SP_GetBraidService service = null;
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBraidService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        service = new SP_GetBraidService
+                        {
+                            StyleDesc = row["styleDesc"].ToString(),
+                            LengthDesc = row["lengthDesc"].ToString(),
+                            WidthDesc = row["widthDesc"].ToString()
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
         }
     }
 }                  
