@@ -15,7 +15,7 @@ AS
 BEGIN
 	begin try
 		begin transaction
-			UPDATE BOOKING
+			UPDATE [CHEVEUX].[dbo].[BOOKING]
 			SET SlotNo = @SlotNo, 
 				StylistID = @StylistID,
 				[Date] = @Date,

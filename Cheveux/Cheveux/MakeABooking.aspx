@@ -44,7 +44,7 @@
                         <asp:label runat="server" ID="lblGoService" Text="Service"></asp:label>&nbsp;-&nbsp;
                            <asp:label runat="server" ID="lblGoStylist"  Text="Hairstylist  "></asp:label>&nbsp;-&nbsp;
                            <asp:label runat="server" ID="lblGoDateTime" Text="Date & Time  "></asp:label>&nbsp;-&nbsp;
-                        <asp:label runat="server" ID="lblGoCustomer" visible="false" Text="Customer  &nbsp;-&nbsp;"></asp:label>
+                        <asp:label runat="server" ID="lblGoCustomer"  visible="false" Text="Customer  &nbsp;-&nbsp;"></asp:label>
                            <asp:label runat="server" ID="lblGoSummary" Text="Summary"></asp:label>
                     </div>
 

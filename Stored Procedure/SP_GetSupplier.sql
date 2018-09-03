@@ -1,5 +1,5 @@
 
-CREATE PROCEDURE SP_Get_Supplier
+alter PROCEDURE SP_Get_Supplier
 	@supplierID nchar(10)
 
 
