@@ -246,7 +246,7 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                    newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
                         "'>" + specialisationAndBio.serviceName + "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
@@ -264,7 +264,7 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                    newCell.Text = "<a href = '../cheveux/services.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
                         "'>"+specialisationAndBio.serviceDescription+ "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
