@@ -16,9 +16,44 @@
     <div class="row">
         <div class="col-md-2 col-sm-1"></div>
         <div class="col-md-8 col-sm-10">
-            Services Page
-            <div runat="server" id="divCustomerView" visible="true"></div>
+            <div runat="server" id="divCustomerView" visible="true">
+                  <div class="jumbotron  bg-dark text-white">
+                            <h1>Services</h1>
+                            <!-- line Break -->
+                            <br />
+                            <asp:Label runat="server" ID="lblErrorSummary" Visible="false"></asp:Label>
+                            <form runat="server">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- View By search tearm -->
+                                        <p>View Services By Search Term: </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <asp:TextBox ID="txtProductSearchTerm" runat="server" class="form-control" AutoPostBack="true"
+                                            OnTextChanged="Page_Load"></asp:TextBox>
+                                    </div>
+                                    <div class="col-2">
+                                        <asp:Button ID="btnProductSearch" runat="server" Text="Search" CssClass="btn btn-primary" />
+                                    </div>
+                                </div>
+
+                            </form>
+                  </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- List Service Table -->
+                        <asp:Table ID="tblServicesTable" runat="server">
+                        </asp:Table>
+                    </div>
+                </div>
+            </div>
             <div runat="server" id="divViewService" visible="false">
+                                  <div class="jumbotron  bg-dark text-white">
+                            <h1>View Service</h1>
+
+                                  </div>
                 <div runat="server" id="divServiceTable">
                     <asp:Table runat="server" ID="tblServiceDetails2" Visible="true" VerticalAlign="Top">
                         <asp:TableRow>
@@ -81,22 +116,7 @@
                     </asp:Table>
                 </div>
 
-                <div class="row">
 
-                    <div class="col-2 text-left">
-
-                        <asp:Button class='btn btn-basic' runat="server" ID="btnCancel" Visible="true" Text="Cancel" OnClick="btnCancel_Click" />
-
-                    </div>
-
-                    <div class="col-8"></div>
-
-                    <div class="col-2 text-right">
-
-                        <asp:Button class='btn btn-primary' runat="server" ID="btnUpdate" Visible="true" Text="Edit Service" OnClick="btnUpdate_Click" />
-
-                    </div>
-                </div>
             </div>
         </div>
         <div class="col-md-2 col-sm-1"></div>
