@@ -193,19 +193,19 @@ namespace Cheveux
                         if (services.ServiceType == 'N')
                         {
                             ListItem item;
-                            item = new ListItem(services.Name + " - R" + services.Price.ToString("0.00"), services.ServiceID);
+                            item = new ListItem(services.Name + " - R" + string.Format("{0:#.00}", services.Price).ToString(), services.ServiceID);
                             cblPickAServiceN.Items.Add(item);
                         }
                         else if (services.ServiceType == 'A')
                         {
                             ListItem item;
-                            item = new ListItem(services.Name + " - R" + services.Price.ToString("0.00"), services.ServiceID);
+                            item = new ListItem(services.Name + " - R" + string.Format("{0:#.00}", services.Price).ToString(), services.ServiceID);
                             rblPickAServiceA.Items.Add(item);
                         }
                         else if (services.ServiceType == 'B')
                         {
                             ListItem item;
-                            item = new ListItem(services.Name + " - R" + services.Price.ToString("0.00"), services.ServiceID);
+                            item = new ListItem(services.Name + " - R" + string.Format("{0:#.00}", services.Price).ToString(), services.ServiceID);
                             rblPickAServiceB.Items.Add(item);
                         }
 
@@ -225,56 +225,450 @@ namespace Cheveux
         #region View
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            if (btnNext.Text == "Choose Hairstylist")
+            try
             {
-                lbPickAStylist.Items.Clear();
-                foreach (SP_GetStylists stylists in stylistList)
+                if (btnNext.Text == "Choose Hairstylist")
                 {
-                    ListItem item = new ListItem(stylists.FirstName + " - Specializes in " + stylists.ServiceName, stylists.UserID);
-                    lbPickAStylist.Items.Add(item);
-                }
+                    lbPickAStylist.Items.Clear();
+                    foreach (SP_GetStylists stylists in stylistList)
+                    {
+                        ListItem item = new ListItem(stylists.FirstName + " - Specializes in " + stylists.ServiceName, stylists.UserID);
+                        lbPickAStylist.Items.Add(item);
+                    }
 
-                if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
-                {
-                    
-                    lblErrorSummary.Visible = true;
-                    lblErrorSummary.Text = "Please select a service(s) before moving to the next step!";
-                    divServices.Visible = true;
+                    if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
+                    {
+
+                        lblErrorSummary.Visible = true;
+                        lblErrorSummary.Text = "Please select a service(s) before moving to the next step!";
+                        divServices.Visible = true;
+                    }
+                    else
+                    {
+                        lblErrorSummary.Visible = false;
+                        divServices.Visible = false;
+                        divLabels.Visible = false;
+                        divStylist.Visible = true;
+                        btnPrevious.Visible = true;
+                        btnPrevious.Text = "Choose Service(s)";
+                        btnNext.Text = "Choose Date & Time";
+                        lblGoService.ForeColor = Color.Gray;
+                        lblGoService.Font.Bold = false;
+
+                        lblGoStylist.ForeColor = Color.FromArgb(240, 95, 64);
+                        lblGoStylist.Font.Bold = true;
+                        lblGoDateTime.ForeColor = Color.Gray;
+
+                        lblGoSummary.ForeColor = Color.Gray;
+                    }
                 }
-                else
+                else if (btnNext.Text == "Choose Date & Time")
                 {
-                    lblErrorSummary.Visible = false;
-                    divServices.Visible = false;
                     divLabels.Visible = false;
-                    divStylist.Visible = true;
+                    if (lbPickAStylist.SelectedValue.ToString() == "")
+                    {
+                        lblErrorSummary.Visible = true;
+                        lblErrorSummary.Text = "Please select a hairstylist before moving to the next step!";
+                        divStylist.Visible = true;
+                    }
+                    else
+                    {
+                        lblErrorSummary.Visible = false;
+                        divStylist.Visible = false;
+                        divDateTime.Visible = true;
+                        calBooking.TodayDayStyle.BackColor = Color.OrangeRed;
+                        btnPrevious.Visible = true;
+                        btnPrevious.Text = "Choose Hairstylist";
+                        //load booking type 
+                        bookingType = Request.QueryString["Type"];
+                        if (bookingType == "Internal")
+                        {
+                            //if internal booking
+                            btnNext.Text = "Select Customer";
+                            lblGoCustomer.ForeColor = Color.Gray;
+                            lblGoCustomer.Font.Bold = true;
+                        }
+                        else
+                        {
+                            //if external booking
+                            btnNext.Text = "Booking Summary";
+                        }
+                        lblGoService.ForeColor = Color.Gray;
+                        lblGoService.Font.Bold = false;
+                        lblGoStylist.ForeColor = Color.Gray;
+                        lblGoStylist.Font.Bold = false;
+                        lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
+                        lblGoDateTime.Font.Bold = true;
+                        lblGoSummary.ForeColor = Color.Gray;
+                        lblGoCustomer.Font.Bold = false;
+
+                    }
+
+                }
+                #region Internal Booking
+                else if (btnNext.Text == "Select Customer")
+                {
+                    loadCustomerList();
+                    //if the booking is being made internaly i.e: by Receptionist
+                    #region set the buttons & lables
+                    btnPrevious.Text = "Choose Date & Time";
+                    btnNext.Text = "Booking Summary";
+                    divDateTime.Visible = false;
+                    divSelectUser.Visible = true;
                     btnPrevious.Visible = true;
-                    btnPrevious.Text = "Choose Service(s)";
-                    btnNext.Text = "Choose Date & Time";
+
                     lblGoService.ForeColor = Color.Gray;
                     lblGoService.Font.Bold = false;
+                    lblGoStylist.ForeColor = Color.Gray;
+                    lblGoStylist.Font.Bold = false;
+                    lblGoDateTime.ForeColor = Color.Gray;
+                    lblGoDateTime.Font.Bold = false;
+                    lblGoSummary.ForeColor = Color.Gray;
+                    lblGoSummary.Font.Bold = false;
+                    lblGoCustomer.ForeColor = Color.FromArgb(240, 95, 64);
+                    lblGoCustomer.Font.Bold = true;
+                    #endregion
+                }
+                #endregion
+                else if (btnNext.Text == "Booking Summary")
+                {
+                    divLabels.Visible = false;
+                    #region Internal Booking
+                    //load booking type 
+                    bookingType = Request.QueryString["Type"];
+                    if (lbCustomers.SelectedIndex == -1 && bookingType == "Internal")
+                    {
+                        lblErrorSummary.Visible = true;
+                        lblErrorSummary.Text = "Please select a customer before moving to the next step!";
+                        divSelectUser.Visible = true;
+                    }
+                    #endregion
+                    else
+                    {
 
+                        //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
+                        rblPickAServiceA_SelectedIndexChanged(sender, e);
+                        rblPickAServiceB_SelectedIndexChanged(sender, e);
+                        cblPickAServiceN_SelectedIndexChanged(sender, e);
+                        HttpCookie bookingTime = Request.Cookies["BookTime"];
+                        if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                        {
+                            lblErrorSummary.Visible = true;
+                            lblErrorSummary.Text = "Please select a date before moving to the next step!";
+                            divDateTime.Visible = true;
+                        }
+                        else if (bookingTime == null)
+                        {
+                            lblErrorSummary.Visible = true;
+                            lblErrorSummary.Text = "Please select a time before moving to the next step!";
+                            divDateTime.Visible = true;
+                        }
+                        else
+                        {
+                            divDateTime.Visible = false;
+                            divSelectUser.Visible = false;
+                            lblErrorSummary.Visible = false;
+
+                            if (pickedServiceID != null)
+                            {
+                                foreach (string id in pickedServiceID)
+                                {
+                                    foreach (SP_GetServices services in serviceList)
+                                    {
+                                        if (id == services.ServiceID)
+                                        {
+                                            totalPrice += services.Price;
+                                        }
+                                    }
+                                }
+                                int serviceCount = 0;
+                                foreach (string name in pickedServiceName)
+                                {
+                                    if (serviceCount == 0)
+                                    {
+                                        lblServices.Text = name;
+                                        serviceCount++;
+                                    }
+                                    else
+                                    {
+                                        lblServices.Text += ", " + name;
+                                    }
+
+                                }
+                            }
+                            else
+                            {
+                                lblErrorSummary.Visible = true;
+                                lblErrorSummary.Text = "There was trouble retrieving the services";
+                            }
+                            txtComment.Visible = true;
+                            lblStylist.Text = lbPickAStylist.SelectedItem.Text;
+                            lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
+                            HttpCookie time = Request.Cookies["BookTime"];
+                            lblTime.Text = time["Time"];
+                            lblTotalCostLabel.Text = "Booking Total: ";
+                            lblTotalCost.Text = "R " + string.Format("{0:#.00}", totalPrice).ToString();
+                            lblCommentLabel.Text = "Comment: ";
+                            btnPrevious.Visible = true;
+
+
+                            if (bookingType == "Internal")
+                            {
+                                btnPrevious.Text = "Select Customer";
+                            }
+                            else
+                            {
+                                btnPrevious.Text = "Choose Date & Time";
+                            }
+                            lblGoService.ForeColor = Color.Gray;
+                            lblGoService.Font.Bold = false;
+                            lblGoCustomer.ForeColor = Color.Gray;
+                            lblGoCustomer.Font.Bold = false;
+                            lblGoStylist.ForeColor = Color.Gray;
+                            lblGoStylist.Font.Bold = false;
+                            lblGoDateTime.ForeColor = Color.Gray;
+                            lblGoDateTime.Font.Bold = false;
+                            lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                            lblGoSummary.Font.Bold = true;
+                            btnNext.Text = "Submit";
+                            btnNext.Visible = false;
+                            divSummaryPic.Visible = true;
+                        }
+
+
+                    }
+                }
+                else if (btnNext.Text == "Submit")
+                {
+                    try
+                    {
+
+                        btnPrevious.Visible = true;
+                        //initialize booking variable
+                        book = new BOOKING();
+                        //build service list
+                        rblPickAServiceA_SelectedIndexChanged(sender, e);
+                        rblPickAServiceB_SelectedIndexChanged(sender, e);
+                        cblPickAServiceN_SelectedIndexChanged(sender, e);
+                        int length;
+
+                        //access control
+                        HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
+                        if (Authcookie != null)
+                        {
+
+                            #region external Booking (Customer)
+                            if (Authcookie["UT"].ToString()[0] == 'C')
+                            {
+                                //Make Booking
+                                //Add to booking
+                                book.BookingID = function.GenerateRandomBookingID();
+                                HttpCookie bookingTime = Request.Cookies["BookTime"];
+                                book.SlotNo = bookingTime["TimeSlot"];
+                                book.Date = calBooking.SelectedDate;
+                                book.CustomerID = cookie["ID"];
+                                book.StylistID = lbPickAStylist.SelectedValue;
+                                book.Available = "N";
+                                book.primaryBookingID = book.BookingID;
+                                book.Comment = txtComment.Text;
+                                handler.BLL_AddBooking(book);
+                                bookService = new BookingService();
+                                foreach (string id in pickedServiceID)
+                                {
+                                    bookService.BookingID = book.BookingID;
+                                    bookService.ServiceID = id;
+                                    handler.BLL_AddToBookingService(bookService);
+                                }
+                            }
+                            #endregion
+
+                            #region internal Booking (Receptionist)
+                            else if (Authcookie["UT"].ToString()[0] == 'R')
+                            {
+                                //Make Booking
+                                //Add to booking
+                                book.BookingID = function.GenerateRandomBookingID();
+                                HttpCookie bookingTime = Request.Cookies["BookTime"];
+                                book.SlotNo = bookingTime["TimeSlot"];
+                                book.Date = calBooking.SelectedDate;
+                                //load customer IDs 
+                                loadCustomerID();
+                                //add customer id to booking
+                                book.CustomerID = CustomerIDs[lbCustomers.SelectedIndex];
+                                book.StylistID = lbPickAStylist.SelectedValue;
+                                book.Available = "N";
+                                book.primaryBookingID = book.BookingID;
+                                book.Comment = txtComment.Text;
+                                handler.BLL_AddBooking(book);
+                                bookService = new BookingService();
+                                foreach (string id in pickedServiceID)
+                                {
+                                    bookService.BookingID = book.BookingID;
+                                    bookService.ServiceID = id;
+                                    handler.BLL_AddToBookingService(bookService);
+                                }
+                            }
+                            #endregion
+
+                            #region Multislot
+                            length = CalculateSlotLength(sender, e);
+                            string primaryBookingID = book.BookingID;
+                            //for booking confirmation
+                            string primaryBookingSlot = book.SlotNo;
+
+                            if (length > 1)
+                            {
+                                int bookedSlotIndex = 0;
+                                int slotIndex = 0;
+                                foreach (SP_GetSlotTimes slot in slotList)
+                                {
+                                    if (slot.SlotNo == book.SlotNo)
+                                    {
+                                        bookedSlotIndex = slotIndex;
+                                    }
+                                    slotIndex++;
+                                }
+
+                                for (int i = 1; i < length; i++)
+                                {
+                                    book.BookingID = function.GenerateRandomBookingID();
+                                    HttpCookie bookingTime = Request.Cookies["BookTime"];
+                                    bookedSlotIndex++;
+                                    book.SlotNo = slotList[bookedSlotIndex].SlotNo;
+                                    book.Date = calBooking.SelectedDate;
+                                    if (Authcookie["UT"].ToString()[0] == 'C')
+                                    {
+                                        book.CustomerID = cookie["ID"];
+                                    }
+                                    else if (Authcookie["UT"].ToString()[0] == 'R')
+                                    {
+                                        book.CustomerID = CustomerIDs[lbCustomers.SelectedIndex];
+                                    }
+                                    book.StylistID = lbPickAStylist.SelectedValue;
+                                    book.Available = "N";
+                                    book.primaryBookingID = primaryBookingID;
+                                    handler.BLL_AddBooking(book);
+                                }
+                            }
+                            #endregion
+
+                            #region Email Notification
+                            if (Authcookie["UT"].ToString()[0] == 'C')
+                            {
+                                USER user = handler.GetUserDetails(cookie["ID"]);
+                                //send an email notification
+                                var body = new System.Text.StringBuilder();
+                                body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
+                                body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                                body.AppendLine(@"");
+                                body.AppendLine(@"Regards,");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"The Cheveux Team");
+                                function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                                    "Booking Confirmation",
+                                    body.ToString(),
+                                    "Bookings Cheveux");
+                            }
+                            else
+                            {
+                                USER user = handler.GetUserDetails(handler.getCustomerUpcomingBookingDetails(book.BookingID).CustomerID);
+                                //send an email notification
+                                var body = new System.Text.StringBuilder();
+                                body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
+                                body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                                body.AppendLine(@"");
+                                body.AppendLine(@"Regards,");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"The Cheveux Team");
+                                function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                                    "Booking Confirmation",
+                                    body.ToString(),
+                                    "Bookings Cheveux");
+                            }
+                            #endregion
+
+                            #region Redirect
+                            //load booking type 
+                            bookingType = Request.QueryString["Type"];
+                            if (bookingType == null)
+                            {
+                                //if external booking
+                                //redirect and confirm booking
+                                Response.Redirect("Default.aspx?BS=True&Sty=" + book.StylistID + "&D=" + book.Date + "&T=" + primaryBookingSlot);
+                            }
+                            else
+                            {
+                                //if internal booking
+                                //redirect to booking summary
+                                Response.Redirect("ViewBooking.aspx?BookingID=" + primaryBookingID);
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        function.logAnError("Error Making abooking " + err.ToString());
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("unable to comunicate with the database on Make A Booking page: " +
+    err);
+                lblErrorSummary.Text = "Database connection failed. Please contact admin and try again later";
+            }
+        }
+
+        protected void btnPrevious_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (btnPrevious.Text == "Choose Service(s)")
+                {
+
+                    divServices.Visible = true;
+                    lblGoService.ForeColor = Color.FromArgb(240, 95, 64);
+                    lblGoService.Font.Bold = true;
+                    lblGoStylist.ForeColor = Color.Gray;
+                    lblGoDateTime.ForeColor = Color.Gray;
+                    lblGoSummary.ForeColor = Color.Gray;
+                    divStylist.Visible = false;
+                    btnPrevious.Visible = false;
+                    btnNext.Text = "Choose Hairstylist";
+                }
+                else if (btnPrevious.Text == "Choose Hairstylist")
+                {
+                    divStylist.Visible = true;
+                    lblGoService.ForeColor = Color.Gray;
+                    lblGoService.Font.Bold = false;
                     lblGoStylist.ForeColor = Color.FromArgb(240, 95, 64);
                     lblGoStylist.Font.Bold = true;
                     lblGoDateTime.ForeColor = Color.Gray;
-
                     lblGoSummary.ForeColor = Color.Gray;
+
+                    divDateTime.Visible = false;
+                    btnPrevious.Visible = true;
+                    btnPrevious.Text = "Choose Service(s)";
+                    btnNext.Text = "Choose Date & Time";
                 }
-            }
-            else if (btnNext.Text == "Choose Date & Time")
-            {
-                divLabels.Visible = false;
-                if (lbPickAStylist.SelectedValue.ToString() == "")
+                else if (btnPrevious.Text == "Choose Date & Time")
                 {
-                    lblErrorSummary.Visible = true;
-                    lblErrorSummary.Text = "Please select a hairstylist before moving to the next step!";
-                    divStylist.Visible = true;
-                }
-                else
-                {
-                    lblErrorSummary.Visible = false;
-                    divStylist.Visible = false;
+                    divSelectUser.Visible = false;
                     divDateTime.Visible = true;
-                    calBooking.TodayDayStyle.BackColor = Color.OrangeRed;
                     btnPrevious.Visible = true;
                     btnPrevious.Text = "Choose Hairstylist";
                     //load booking type 
@@ -291,771 +685,420 @@ namespace Cheveux
                         //if external booking
                         btnNext.Text = "Booking Summary";
                     }
+                    btnNext.Visible = true;
                     lblGoService.ForeColor = Color.Gray;
                     lblGoService.Font.Bold = false;
                     lblGoStylist.ForeColor = Color.Gray;
                     lblGoStylist.Font.Bold = false;
                     lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
                     lblGoDateTime.Font.Bold = true;
-                    lblGoSummary.ForeColor = Color.Gray;
-                    lblGoCustomer.Font.Bold = false;
-
-                }
-
-            }
-            #region Internal Booking
-            else if (btnNext.Text == "Select Customer")
-            {
-                loadCustomerList();
-                //if the booking is being made internaly i.e: by Receptionist
-                #region set the buttons & lables
-                btnPrevious.Text = "Choose Date & Time";
-                btnNext.Text = "Booking Summary";
-                divDateTime.Visible = false;
-                divSelectUser.Visible = true;
-                btnPrevious.Visible = true;
-                
-                lblGoService.ForeColor = Color.Gray;
-                lblGoService.Font.Bold = false;
-                lblGoStylist.ForeColor = Color.Gray;
-                lblGoStylist.Font.Bold = false;
-                lblGoDateTime.ForeColor = Color.Gray;
-                lblGoDateTime.Font.Bold = false;
-                lblGoSummary.ForeColor = Color.Gray;
-                lblGoSummary.Font.Bold = false;
-                lblGoCustomer.ForeColor = Color.FromArgb(240, 95, 64);
-                lblGoCustomer.Font.Bold = true;
-                #endregion
-            }
-            #endregion
-            else if (btnNext.Text == "Booking Summary")
-            {
-                divLabels.Visible = false;
-                #region Internal Booking
-                //load booking type 
-                bookingType = Request.QueryString["Type"];
-                if (lbCustomers.SelectedIndex == -1 && bookingType == "Internal")
-                {
-                    lblErrorSummary.Visible = true;
-                    lblErrorSummary.Text = "Please select a customer before moving to the next step!";
-                    divSelectUser.Visible = true;
-                }
-                #endregion
-                else
-                {
-
-                    //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
-                    rblPickAServiceA_SelectedIndexChanged(sender, e);
-                    rblPickAServiceB_SelectedIndexChanged(sender, e);
-                    cblPickAServiceN_SelectedIndexChanged(sender, e);
-                    HttpCookie bookingTime = Request.Cookies["BookTime"];
-                    if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00")
-                    {
-                        lblErrorSummary.Visible = true;
-                        lblErrorSummary.Text = "Please select a date before moving to the next step!";
-                        divDateTime.Visible = true;
-                    }
-                    else if (bookingTime == null)
-                    {
-                        lblErrorSummary.Visible = true;
-                        lblErrorSummary.Text = "Please select a time before moving to the next step!";
-                        divDateTime.Visible = true;
-                    }
-                    else
-                    {
-                        divDateTime.Visible = false;
-                        divSelectUser.Visible = false;
-                        lblErrorSummary.Visible = false;
-
-                        if (pickedServiceID != null)
-                        {
-                            int serviceCount = 0;
-                            foreach (string name in pickedServiceName)
-                            {
-                                if (serviceCount == 0)
-                                {
-                                    lblServices.Text = name;
-                                    serviceCount++;
-                                }
-                                else
-                                {
-                                    lblServices.Text += ", " + name;
-                                }
-
-                            }
-                        }
-                        else
-                        {
-                            lblErrorSummary.Visible = true;
-                            lblErrorSummary.Text = "There was trouble retrieving the services";
-                        }
-                        txtComment.Visible = true;
-                        lblStylist.Text = lbPickAStylist.SelectedItem.Text;
-                        lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
-                        HttpCookie time = Request.Cookies["BookTime"];
-                        lblTime.Text = time["Time"];
-                        lblCommentLabel.Text = "Comment: ";
-                        btnPrevious.Visible = true;
-
-
-                        if (bookingType == "Internal")
-                        {
-                            btnPrevious.Text = "Select Customer";
-                        }
-                        else
-                        {
-                            btnPrevious.Text = "Choose Date & Time";
-                        }
-                        lblGoService.ForeColor = Color.Gray;
-                        lblGoService.Font.Bold = false;
-                        lblGoCustomer.ForeColor = Color.Gray;
-                        lblGoCustomer.Font.Bold = false;
-                        lblGoStylist.ForeColor = Color.Gray;
-                        lblGoStylist.Font.Bold = false;
-                        lblGoDateTime.ForeColor = Color.Gray;
-                        lblGoDateTime.Font.Bold = false;
-                        lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
-                        lblGoSummary.Font.Bold = true;
-                        btnNext.Text = "Submit";
-                    }
-
-
-                }
-            }
-            else if (btnNext.Text == "Submit")
-            {
-                try
-                {
-                    btnPrevious.Visible = true;
-                    //initialize booking variable
-                    book = new BOOKING();
-                    //build service list
-                    rblPickAServiceA_SelectedIndexChanged(sender, e);
-                    rblPickAServiceB_SelectedIndexChanged(sender, e);
-                    cblPickAServiceN_SelectedIndexChanged(sender, e);
-                    int length;
-
-                    //access control
-                    HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
-                    if (Authcookie != null)
-                    {
-
-                        #region external Booking (Customer)
-                        if (Authcookie["UT"].ToString()[0] == 'C')
-                        {
-                            //Make Booking
-                            //Add to booking
-                            book.BookingID = function.GenerateRandomBookingID();
-                            HttpCookie bookingTime = Request.Cookies["BookTime"];
-                            book.SlotNo = bookingTime["TimeSlot"];
-                            book.Date = calBooking.SelectedDate;
-                            book.CustomerID = cookie["ID"];
-                            book.StylistID = lbPickAStylist.SelectedValue;
-                            book.Available = "N";
-                            book.primaryBookingID = book.BookingID;
-                            book.Comment = txtComment.Text;
-                            handler.BLL_AddBooking(book);
-                            bookService = new BookingService();
-                            foreach (string id in pickedServiceID)
-                            {
-                                bookService.BookingID = book.BookingID;
-                                bookService.ServiceID = id;
-                                handler.BLL_AddToBookingService(bookService);
-                            }
-                        }
-                        #endregion
-
-                        #region internal Booking (Receptionist)
-                        else if (Authcookie["UT"].ToString()[0] == 'R')
-                        {
-                            //Make Booking
-                            //Add to booking
-                            book.BookingID = function.GenerateRandomBookingID();
-                            HttpCookie bookingTime = Request.Cookies["BookTime"];
-                            book.SlotNo = bookingTime["TimeSlot"];
-                            book.Date = calBooking.SelectedDate;
-                            //load customer IDs 
-                            loadCustomerID();
-                            //add customer id to booking
-                            book.CustomerID = CustomerIDs[lbCustomers.SelectedIndex];
-                            book.StylistID = lbPickAStylist.SelectedValue;
-                            book.Available = "N";
-                            book.primaryBookingID = book.BookingID;
-                            book.Comment = txtComment.Text;
-                            handler.BLL_AddBooking(book);
-                            bookService = new BookingService();
-                            foreach (string id in pickedServiceID)
-                            {
-                                bookService.BookingID = book.BookingID;
-                                bookService.ServiceID = id;
-                                handler.BLL_AddToBookingService(bookService);
-                            }
-                        }
-                        #endregion
-
-                        #region Multislot
-                        length = CalculateSlotLength(sender, e);
-                        string primaryBookingID = book.BookingID;
-                        //for booking confirmation
-                        string primaryBookingSlot = book.SlotNo;
-
-                        if (length > 1)
-                        {
-                            int bookedSlotIndex = 0;
-                            int slotIndex = 0;
-                            foreach (SP_GetSlotTimes slot in slotList)
-                            {
-                                if (slot.SlotNo == book.SlotNo)
-                                {
-                                    bookedSlotIndex = slotIndex;
-                                }
-                                slotIndex++;
-                            }
-
-                            for (int i = 1; i < length; i++)
-                            {
-                                book.BookingID = function.GenerateRandomBookingID();
-                                HttpCookie bookingTime = Request.Cookies["BookTime"];
-                                bookedSlotIndex++;
-                                book.SlotNo = slotList[bookedSlotIndex].SlotNo;
-                                book.Date = calBooking.SelectedDate;
-                                if (Authcookie["UT"].ToString()[0] == 'C')
-                                {
-                                    book.CustomerID = cookie["ID"];
-                                }
-                                else if (Authcookie["UT"].ToString()[0] == 'R')
-                                {
-                                    book.CustomerID = CustomerIDs[lbCustomers.SelectedIndex];
-                                }
-                                book.StylistID = lbPickAStylist.SelectedValue;
-                                book.Available = "N";
-                                book.primaryBookingID = primaryBookingID;
-                                handler.BLL_AddBooking(book);
-                            }
-                        }
-                        #endregion
-
-                        #region Email Notification
-                        if (Authcookie["UT"].ToString()[0] == 'C')
-                        {
-                            USER user = handler.GetUserDetails(cookie["ID"]);
-                            //send an email notification
-                            var body = new System.Text.StringBuilder();
-                            body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
-                            body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Regards,");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"The Cheveux Team");
-                            function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
-                                "Booking Confirmation",
-                                body.ToString(),
-                                "Bookings Cheveux");
-                        }
-                        else
-                        {
-                            USER user = handler.GetUserDetails(handler.getCustomerUpcomingBookingDetails(book.BookingID).CustomerID);
-                            //send an email notification
-                            var body = new System.Text.StringBuilder();
-                            body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
-                            body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
-                            body.AppendLine(@"");
-                            body.AppendLine(@"Regards,");
-                            body.AppendLine(@"");
-                            body.AppendLine(@"The Cheveux Team");
-                            function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
-                                "Booking Confirmation",
-                                body.ToString(),
-                                "Bookings Cheveux");
-                        }
-                        #endregion
-
-                        #region Redirect
-                        //load booking type 
-                        bookingType = Request.QueryString["Type"];
-                        if (bookingType == null)
-                        {
-                            //if external booking
-                            //redirect and confirm booking
-                            Response.Redirect("Default.aspx?BS=True&Sty=" + book.StylistID + "&D=" + book.Date + "&T=" + primaryBookingSlot);
-                        }
-                        else
-                        {
-                            //if internal booking
-                            //redirect to booking summary
-                            Response.Redirect("ViewBooking.aspx?BookingID=" + primaryBookingID);
-                        }
-                        #endregion
-                    }
-                    else
-                    {
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
-                    }
-                }
-                catch (Exception err)
-                {
-                    function.logAnError("Error Making abooking " + err.ToString());
-                }
-            }
-        }
-
-        protected void btnPrevious_Click(object sender, EventArgs e)
-        {
-            if (btnPrevious.Text == "Choose Service(s)")
-            {
-               
-                divServices.Visible = true;
-                lblGoService.ForeColor = Color.FromArgb(240, 95, 64);
-                lblGoService.Font.Bold = true;
-                lblGoStylist.ForeColor = Color.Gray;
-                lblGoDateTime.ForeColor = Color.Gray;
-                lblGoSummary.ForeColor = Color.Gray;
-                divStylist.Visible = false;
-                btnPrevious.Visible = false;
-                btnNext.Text = "Choose Hairstylist";
-            }
-            else if (btnPrevious.Text == "Choose Hairstylist")
-            {
-                divStylist.Visible = true;
-                lblGoService.ForeColor = Color.Gray;
-                lblGoService.Font.Bold = false;
-                lblGoStylist.ForeColor = Color.FromArgb(240, 95, 64);
-                lblGoStylist.Font.Bold = true;
-                lblGoDateTime.ForeColor = Color.Gray;
-                lblGoSummary.ForeColor = Color.Gray;
-
-                divDateTime.Visible = false;
-                btnPrevious.Visible = true;
-                btnPrevious.Text = "Choose Service(s)";
-                btnNext.Text = "Choose Date & Time";
-            }
-            else if (btnPrevious.Text == "Choose Date & Time")
-            {
-                divSelectUser.Visible = false;
-                divDateTime.Visible = true;
-                btnPrevious.Visible = true;
-                btnPrevious.Text = "Choose Hairstylist";
-                //load booking type 
-                bookingType = Request.QueryString["Type"];
-                if (bookingType == "Internal")
-                {
-                    //if internal booking
-                    btnNext.Text = "Select Customer";
-                    lblGoCustomer.ForeColor = Color.Gray;
                     lblGoCustomer.Font.Bold = true;
+                    lblGoSummary.ForeColor = Color.Gray;
                 }
-                else
+                #region Internal Booking
+                else if (btnPrevious.Text == "Select Customer")
                 {
-                    //if external booking
+                    loadCustomerList();
+                    //if the booking is being made internaly i.e: by Receptionist
+                    #region set the buttons
+                    btnPrevious.Text = "Choose Date & Time";
                     btnNext.Text = "Booking Summary";
+                    divSelectUser.Visible = true;
+                    btnPrevious.Visible = true;
+                    lblGoService.ForeColor = Color.Gray;
+                    lblGoService.Font.Bold = false;
+                    lblGoStylist.ForeColor = Color.Gray;
+                    lblGoStylist.Font.Bold = false;
+                    lblGoDateTime.ForeColor = Color.Gray;
+                    lblGoDateTime.Font.Bold = false;
+                    lblGoSummary.ForeColor = Color.Gray;
+                    lblGoSummary.Font.Bold = true;
+                    lblGoCustomer.ForeColor = Color.FromArgb(240, 95, 64);
+                    lblGoCustomer.Font.Bold = true;
+                    #endregion
                 }
-                lblGoService.ForeColor = Color.Gray;
-                lblGoService.Font.Bold = false;
-                lblGoStylist.ForeColor = Color.Gray;
-                lblGoStylist.Font.Bold = false;
-                lblGoDateTime.ForeColor = Color.FromArgb(240, 95, 64);
-                lblGoDateTime.Font.Bold = true;
-                lblGoCustomer.Font.Bold = true;
-                lblGoSummary.ForeColor = Color.Gray;
-            }
-            #region Internal Booking
-            else if (btnPrevious.Text == "Select Customer")
-            {
-                loadCustomerList();
-                //if the booking is being made internaly i.e: by Receptionist
-                #region set the buttons
-                btnPrevious.Text = "Choose Date & Time";
-                btnNext.Text = "Booking Summary";
-                divSelectUser.Visible = true;
-                btnPrevious.Visible = true;
-                lblGoService.ForeColor = Color.Gray;
-                lblGoService.Font.Bold = false;
-                lblGoStylist.ForeColor = Color.Gray;
-                lblGoStylist.Font.Bold = false;
-                lblGoDateTime.ForeColor = Color.Gray;
-                lblGoDateTime.Font.Bold = false;
-                lblGoSummary.ForeColor = Color.Gray;
-                lblGoSummary.Font.Bold = true;
-                lblGoCustomer.ForeColor = Color.FromArgb(240, 95, 64);
-                lblGoCustomer.Font.Bold = true;
-                #endregion
             }
             #endregion
+            catch (Exception err)
+            {
+                function.logAnError("unable to comunicate with the database on Make A Booking page: " +
+    err);
+                lblErrorSummary.Text = "Database connection failed. Please contact admin and try again later";
+            }
         }
         #endregion
 
         #region Date
         protected void calBooking_SelectionChanged(object sender, EventArgs e)
         {
-            LoadSummary(sender, e);
-            //get slot length
-            int i = CalculateSlotLength(sender, e);
-            //slotList Index
-            int slotIndex = 0;
-            int morningButtonCount = 1;
-            int afternoonButtonCount = 11;
-            bookedList = handler.BLL_GetBookedStylistTimes(lbPickAStylist.SelectedValue.ToString(), calBooking.SelectedDate);
-            HideButtons();
-            foreach (SP_GetSlotTimes times in slotList)
+            try
             {
-                if (bookedList.Count != 0)
+                LoadSummary(sender, e);
+                //get slot length
+                int i = CalculateSlotLength(sender, e);
+                //slotList Index
+                int slotIndex = 0;
+                int morningButtonCount = 1;
+                int afternoonButtonCount = 11;
+                bookedList = handler.BLL_GetBookedStylistTimes(lbPickAStylist.SelectedValue.ToString(), calBooking.SelectedDate);
+                HideButtons();
+                foreach (SP_GetSlotTimes times in slotList)
                 {
-                    int checkslotIndex = slotIndex;
-                    bool add = true;
-                    for (int b = 0; b < i; b++)
+                    if (bookedList.Count != 0)
                     {
-                        if (checkslotIndex < 20)
+                        int checkslotIndex = slotIndex;
+                        bool add = true;
+                        for (int b = 0; b < i; b++)
                         {
-                            foreach (SP_GetBookedTimes checkbooked in bookedList)
+                            if (checkslotIndex < 20)
                             {
-                                if (checkbooked.SlotNo == slotList[checkslotIndex].SlotNo
-                                    || (calBooking.SelectedDate.ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy") &&
-                                        times.Time.TimeOfDay < DateTime.Now.TimeOfDay))
+                                foreach (SP_GetBookedTimes checkbooked in bookedList)
                                 {
-                                    add = false;
+                                    if (checkbooked.SlotNo == slotList[checkslotIndex].SlotNo
+                                        || (calBooking.SelectedDate.ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy") &&
+                                            times.Time.TimeOfDay < DateTime.Now.TimeOfDay))
+                                    {
+                                        add = false;
+                                    }
                                 }
                             }
+                            else
+                            {
+                                add = false;
+                            }
+                            checkslotIndex++;
                         }
-                        else
-                        {
-                            add = false;
-                        }
-                        checkslotIndex++;
-                    }
 
-                    if (add == true)
-                    {
-                        if (times.Time > Convert.ToDateTime("12:00"))
+                        if (add == true)
                         {
-                            if (afternoonButtonCount == 11)
+                            if (times.Time > Convert.ToDateTime("12:00"))
                             {
-                                btnAfternoon11.Visible = true;
-                                btnAfternoon11.Text = times.Time.ToString("HH:mm");
-                                availableTimes[11, 0] = times.SlotNo;
-                                availableTimes[11, 1] = times.Time.ToString("HH:mm");
+                                if (afternoonButtonCount == 11)
+                                {
+                                    btnAfternoon11.Visible = true;
+                                    btnAfternoon11.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[11, 0] = times.SlotNo;
+                                    availableTimes[11, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 12)
+                                {
+                                    btnAfternoon12.Visible = true;
+                                    btnAfternoon12.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[12, 0] = times.SlotNo;
+                                    availableTimes[12, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 13)
+                                {
+                                    btnAfternoon13.Visible = true;
+                                    btnAfternoon13.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[13, 0] = times.SlotNo;
+                                    availableTimes[13, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 14)
+                                {
+                                    btnAfternoon14.Visible = true;
+                                    btnAfternoon14.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[14, 0] = times.SlotNo;
+                                    availableTimes[14, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 15)
+                                {
+                                    btnAfternoon15.Visible = true;
+                                    btnAfternoon15.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[15, 0] = times.SlotNo;
+                                    availableTimes[15, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 16)
+                                {
+                                    btnAfternoon16.Visible = true;
+                                    btnAfternoon16.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[16, 0] = times.SlotNo;
+                                    availableTimes[16, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 17)
+                                {
+                                    btnAfternoon17.Visible = true;
+                                    btnAfternoon17.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[17, 0] = times.SlotNo;
+                                    availableTimes[17, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 18)
+                                {
+                                    btnAfternoon18.Visible = true;
+                                    btnAfternoon18.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[18, 0] = times.SlotNo;
+                                    availableTimes[18, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 19)
+                                {
+                                    btnAfternoon19.Visible = true;
+                                    btnAfternoon19.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[19, 0] = times.SlotNo;
+                                    availableTimes[19, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 20)
+                                {
+                                    btnAfternoon20.Visible = true;
+                                    btnAfternoon20.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[20, 0] = times.SlotNo;
+                                    availableTimes[20, 1] = times.Time.ToString("HH:mm");
+                                }
+                                afternoonButtonCount++;
                             }
-                            else if (afternoonButtonCount == 12)
+                            else
                             {
-                                btnAfternoon12.Visible = true;
-                                btnAfternoon12.Text = times.Time.ToString("HH:mm");
-                                availableTimes[12, 0] = times.SlotNo;
-                                availableTimes[12, 1] = times.Time.ToString("HH:mm");
+                                if (morningButtonCount == 1)
+                                {
+                                    btnMorning1.Visible = true;
+                                    btnMorning1.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[1, 0] = times.SlotNo;
+                                    availableTimes[1, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 2)
+                                {
+                                    btnMorning2.Visible = true;
+                                    btnMorning2.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[2, 0] = times.SlotNo;
+                                    availableTimes[2, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 3)
+                                {
+                                    btnMorning3.Visible = true;
+                                    btnMorning3.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[3, 0] = times.SlotNo;
+                                    availableTimes[3, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 4)
+                                {
+                                    btnMorning4.Visible = true;
+                                    btnMorning4.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[4, 0] = times.SlotNo;
+                                    availableTimes[4, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 5)
+                                {
+                                    btnMorning5.Visible = true;
+                                    btnMorning5.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[5, 0] = times.SlotNo;
+                                    availableTimes[5, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 6)
+                                {
+                                    btnMorning6.Visible = true;
+                                    btnMorning6.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[6, 0] = times.SlotNo;
+                                    availableTimes[6, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 7)
+                                {
+                                    btnMorning7.Visible = true;
+                                    btnMorning7.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[7, 0] = times.SlotNo;
+                                    availableTimes[7, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 8)
+                                {
+                                    btnMorning8.Visible = true;
+                                    btnMorning8.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[8, 0] = times.SlotNo;
+                                    availableTimes[8, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 9)
+                                {
+                                    btnMorning9.Visible = true;
+                                    btnMorning9.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[9, 0] = times.SlotNo;
+                                    availableTimes[9, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 10)
+                                {
+                                    btnMorning10.Visible = true;
+                                    btnMorning10.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[10, 0] = times.SlotNo;
+                                    availableTimes[10, 1] = times.Time.ToString("HH:mm");
+                                }
+                                morningButtonCount++;
                             }
-                            else if (afternoonButtonCount == 13)
-                            {
-                                btnAfternoon13.Visible = true;
-                                btnAfternoon13.Text = times.Time.ToString("HH:mm");
-                                availableTimes[13, 0] = times.SlotNo;
-                                availableTimes[13, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 14)
-                            {
-                                btnAfternoon14.Visible = true;
-                                btnAfternoon14.Text = times.Time.ToString("HH:mm");
-                                availableTimes[14, 0] = times.SlotNo;
-                                availableTimes[14, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 15)
-                            {
-                                btnAfternoon15.Visible = true;
-                                btnAfternoon15.Text = times.Time.ToString("HH:mm");
-                                availableTimes[15, 0] = times.SlotNo;
-                                availableTimes[15, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 16)
-                            {
-                                btnAfternoon16.Visible = true;
-                                btnAfternoon16.Text = times.Time.ToString("HH:mm");
-                                availableTimes[16, 0] = times.SlotNo;
-                                availableTimes[16, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 17)
-                            {
-                                btnAfternoon17.Visible = true;
-                                btnAfternoon17.Text = times.Time.ToString("HH:mm");
-                                availableTimes[17, 0] = times.SlotNo;
-                                availableTimes[17, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 18)
-                            {
-                                btnAfternoon18.Visible = true;
-                                btnAfternoon18.Text = times.Time.ToString("HH:mm");
-                                availableTimes[18, 0] = times.SlotNo;
-                                availableTimes[18, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 19)
-                            {
-                                btnAfternoon19.Visible = true;
-                                btnAfternoon19.Text = times.Time.ToString("HH:mm");
-                                availableTimes[19, 0] = times.SlotNo;
-                                availableTimes[19, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 20)
-                            {
-                                btnAfternoon20.Visible = true;
-                                btnAfternoon20.Text = times.Time.ToString("HH:mm");
-                                availableTimes[20, 0] = times.SlotNo;
-                                availableTimes[20, 1] = times.Time.ToString("HH:mm");
-                            }
-                            afternoonButtonCount++;
-                        }
-                        else
-                        {
-                            if (morningButtonCount == 1)
-                            {
-                                btnMorning1.Visible = true;
-                                btnMorning1.Text = times.Time.ToString("HH:mm");
-                                availableTimes[1, 0] = times.SlotNo;
-                                availableTimes[1, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 2)
-                            {
-                                btnMorning2.Visible = true;
-                                btnMorning2.Text = times.Time.ToString("HH:mm");
-                                availableTimes[2, 0] = times.SlotNo;
-                                availableTimes[2, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 3)
-                            {
-                                btnMorning3.Visible = true;
-                                btnMorning3.Text = times.Time.ToString("HH:mm");
-                                availableTimes[3, 0] = times.SlotNo;
-                                availableTimes[3, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 4)
-                            {
-                                btnMorning4.Visible = true;
-                                btnMorning4.Text = times.Time.ToString("HH:mm");
-                                availableTimes[4, 0] = times.SlotNo;
-                                availableTimes[4, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 5)
-                            {
-                                btnMorning5.Visible = true;
-                                btnMorning5.Text = times.Time.ToString("HH:mm");
-                                availableTimes[5, 0] = times.SlotNo;
-                                availableTimes[5, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 6)
-                            {
-                                btnMorning6.Visible = true;
-                                btnMorning6.Text = times.Time.ToString("HH:mm");
-                                availableTimes[6, 0] = times.SlotNo;
-                                availableTimes[6, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 7)
-                            {
-                                btnMorning7.Visible = true;
-                                btnMorning7.Text = times.Time.ToString("HH:mm");
-                                availableTimes[7, 0] = times.SlotNo;
-                                availableTimes[7, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 8)
-                            {
-                                btnMorning8.Visible = true;
-                                btnMorning8.Text = times.Time.ToString("HH:mm");
-                                availableTimes[8, 0] = times.SlotNo;
-                                availableTimes[8, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 9)
-                            {
-                                btnMorning9.Visible = true;
-                                btnMorning9.Text = times.Time.ToString("HH:mm");
-                                availableTimes[9, 0] = times.SlotNo;
-                                availableTimes[9, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 10)
-                            {
-                                btnMorning10.Visible = true;
-                                btnMorning10.Text = times.Time.ToString("HH:mm");
-                                availableTimes[10, 0] = times.SlotNo;
-                                availableTimes[10, 1] = times.Time.ToString("HH:mm");
-                            }
-                            morningButtonCount++;
-                        }
-                    }
-                }
-                else
-                {
-                    int checkslotIndex = slotIndex;
-                    bool add = true;
-                    for (int b = 0; b < i; b++)
-                    {
-                        if (checkslotIndex + b >= 20
-                            || (calBooking.SelectedDate.ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy") &&
-                                times.Time.TimeOfDay < DateTime.Now.TimeOfDay))
-                        {
-                            add = false;
-                        }
-                        else
-                        {
-                            add = true;
                         }
                     }
+                    else
+                    {
+                        int checkslotIndex = slotIndex;
+                        bool add = true;
+                        for (int b = 0; b < i; b++)
+                        {
+                            if (checkslotIndex + b >= 20
+                                || (calBooking.SelectedDate.ToString("dd/MM/yyyy") == DateTime.Now.ToString("dd/MM/yyyy") &&
+                                    times.Time.TimeOfDay < DateTime.Now.TimeOfDay))
+                            {
+                                add = false;
+                            }
+                            else
+                            {
+                                add = true;
+                            }
+                        }
 
-                    if (add == true)
-                    {
-                        if (times.Time > Convert.ToDateTime("12:00"))
+                        if (add == true)
                         {
-                            if (afternoonButtonCount == 11)
+                            if (times.Time > Convert.ToDateTime("12:00"))
                             {
-                                btnAfternoon11.Visible = true;
-                                btnAfternoon11.Text = times.Time.ToString("HH:mm");
-                                availableTimes[11, 0] = times.SlotNo;
-                                availableTimes[11, 1] = times.Time.ToString("HH:mm");
+                                if (afternoonButtonCount == 11)
+                                {
+                                    btnAfternoon11.Visible = true;
+                                    btnAfternoon11.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[11, 0] = times.SlotNo;
+                                    availableTimes[11, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 12)
+                                {
+                                    btnAfternoon12.Visible = true;
+                                    btnAfternoon12.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[12, 0] = times.SlotNo;
+                                    availableTimes[12, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 13)
+                                {
+                                    btnAfternoon13.Visible = true;
+                                    btnAfternoon13.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[13, 0] = times.SlotNo;
+                                    availableTimes[13, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 14)
+                                {
+                                    btnAfternoon14.Visible = true;
+                                    btnAfternoon14.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[14, 0] = times.SlotNo;
+                                    availableTimes[14, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 15)
+                                {
+                                    btnAfternoon15.Visible = true;
+                                    btnAfternoon15.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[15, 0] = times.SlotNo;
+                                    availableTimes[15, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 16)
+                                {
+                                    btnAfternoon16.Visible = true;
+                                    btnAfternoon16.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[16, 0] = times.SlotNo;
+                                    availableTimes[16, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 17)
+                                {
+                                    btnAfternoon17.Visible = true;
+                                    btnAfternoon17.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[17, 0] = times.SlotNo;
+                                    availableTimes[17, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 18)
+                                {
+                                    btnAfternoon18.Visible = true;
+                                    btnAfternoon18.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[18, 0] = times.SlotNo;
+                                    availableTimes[18, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 19)
+                                {
+                                    btnAfternoon19.Visible = true;
+                                    btnAfternoon19.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[19, 0] = times.SlotNo;
+                                    availableTimes[19, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (afternoonButtonCount == 20)
+                                {
+                                    btnAfternoon20.Visible = true;
+                                    btnAfternoon20.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[20, 0] = times.SlotNo;
+                                    availableTimes[20, 1] = times.Time.ToString("HH:mm");
+                                }
+                                afternoonButtonCount++;
                             }
-                            else if (afternoonButtonCount == 12)
+                            else
                             {
-                                btnAfternoon12.Visible = true;
-                                btnAfternoon12.Text = times.Time.ToString("HH:mm");
-                                availableTimes[12, 0] = times.SlotNo;
-                                availableTimes[12, 1] = times.Time.ToString("HH:mm");
+                                if (morningButtonCount == 1)
+                                {
+                                    btnMorning1.Visible = true;
+                                    btnMorning1.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[1, 0] = times.SlotNo;
+                                    availableTimes[1, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 2)
+                                {
+                                    btnMorning2.Visible = true;
+                                    btnMorning2.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[2, 0] = times.SlotNo;
+                                    availableTimes[2, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 3)
+                                {
+                                    btnMorning3.Visible = true;
+                                    btnMorning3.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[3, 0] = times.SlotNo;
+                                    availableTimes[3, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 4)
+                                {
+                                    btnMorning4.Visible = true;
+                                    btnMorning4.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[4, 0] = times.SlotNo;
+                                    availableTimes[4, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 5)
+                                {
+                                    btnMorning5.Visible = true;
+                                    btnMorning5.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[5, 0] = times.SlotNo;
+                                    availableTimes[5, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 6)
+                                {
+                                    btnMorning6.Visible = true;
+                                    btnMorning6.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[6, 0] = times.SlotNo;
+                                    availableTimes[6, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 7)
+                                {
+                                    btnMorning7.Visible = true;
+                                    btnMorning7.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[7, 0] = times.SlotNo;
+                                    availableTimes[7, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 8)
+                                {
+                                    btnMorning8.Visible = true;
+                                    btnMorning8.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[8, 0] = times.SlotNo;
+                                    availableTimes[8, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 9)
+                                {
+                                    btnMorning9.Visible = true;
+                                    btnMorning9.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[9, 0] = times.SlotNo;
+                                    availableTimes[9, 1] = times.Time.ToString("HH:mm");
+                                }
+                                else if (morningButtonCount == 10)
+                                {
+                                    btnMorning10.Visible = true;
+                                    btnMorning10.Text = times.Time.ToString("HH:mm");
+                                    availableTimes[10, 0] = times.SlotNo;
+                                    availableTimes[10, 1] = times.Time.ToString("HH:mm");
+                                }
+                                morningButtonCount++;
                             }
-                            else if (afternoonButtonCount == 13)
-                            {
-                                btnAfternoon13.Visible = true;
-                                btnAfternoon13.Text = times.Time.ToString("HH:mm");
-                                availableTimes[13, 0] = times.SlotNo;
-                                availableTimes[13, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 14)
-                            {
-                                btnAfternoon14.Visible = true;
-                                btnAfternoon14.Text = times.Time.ToString("HH:mm");
-                                availableTimes[14, 0] = times.SlotNo;
-                                availableTimes[14, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 15)
-                            {
-                                btnAfternoon15.Visible = true;
-                                btnAfternoon15.Text = times.Time.ToString("HH:mm");
-                                availableTimes[15, 0] = times.SlotNo;
-                                availableTimes[15, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 16)
-                            {
-                                btnAfternoon16.Visible = true;
-                                btnAfternoon16.Text = times.Time.ToString("HH:mm");
-                                availableTimes[16, 0] = times.SlotNo;
-                                availableTimes[16, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 17)
-                            {
-                                btnAfternoon17.Visible = true;
-                                btnAfternoon17.Text = times.Time.ToString("HH:mm");
-                                availableTimes[17, 0] = times.SlotNo;
-                                availableTimes[17, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 18)
-                            {
-                                btnAfternoon18.Visible = true;
-                                btnAfternoon18.Text = times.Time.ToString("HH:mm");
-                                availableTimes[18, 0] = times.SlotNo;
-                                availableTimes[18, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 19)
-                            {
-                                btnAfternoon19.Visible = true;
-                                btnAfternoon19.Text = times.Time.ToString("HH:mm");
-                                availableTimes[19, 0] = times.SlotNo;
-                                availableTimes[19, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (afternoonButtonCount == 20)
-                            {
-                                btnAfternoon20.Visible = true;
-                                btnAfternoon20.Text = times.Time.ToString("HH:mm");
-                                availableTimes[20, 0] = times.SlotNo;
-                                availableTimes[20, 1] = times.Time.ToString("HH:mm");
-                            }
-                            afternoonButtonCount++;
-                        }
-                        else
-                        {
-                            if (morningButtonCount == 1)
-                            {
-                                btnMorning1.Visible = true;
-                                btnMorning1.Text = times.Time.ToString("HH:mm");
-                                availableTimes[1, 0] = times.SlotNo;
-                                availableTimes[1, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 2)
-                            {
-                                btnMorning2.Visible = true;
-                                btnMorning2.Text = times.Time.ToString("HH:mm");
-                                availableTimes[2, 0] = times.SlotNo;
-                                availableTimes[2, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 3)
-                            {
-                                btnMorning3.Visible = true;
-                                btnMorning3.Text = times.Time.ToString("HH:mm");
-                                availableTimes[3, 0] = times.SlotNo;
-                                availableTimes[3, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 4)
-                            {
-                                btnMorning4.Visible = true;
-                                btnMorning4.Text = times.Time.ToString("HH:mm");
-                                availableTimes[4, 0] = times.SlotNo;
-                                availableTimes[4, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 5)
-                            {
-                                btnMorning5.Visible = true;
-                                btnMorning5.Text = times.Time.ToString("HH:mm");
-                                availableTimes[5, 0] = times.SlotNo;
-                                availableTimes[5, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 6)
-                            {
-                                btnMorning6.Visible = true;
-                                btnMorning6.Text = times.Time.ToString("HH:mm");
-                                availableTimes[6, 0] = times.SlotNo;
-                                availableTimes[6, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 7)
-                            {
-                                btnMorning7.Visible = true;
-                                btnMorning7.Text = times.Time.ToString("HH:mm");
-                                availableTimes[7, 0] = times.SlotNo;
-                                availableTimes[7, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 8)
-                            {
-                                btnMorning8.Visible = true;
-                                btnMorning8.Text = times.Time.ToString("HH:mm");
-                                availableTimes[8, 0] = times.SlotNo;
-                                availableTimes[8, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 9)
-                            {
-                                btnMorning9.Visible = true;
-                                btnMorning9.Text = times.Time.ToString("HH:mm");
-                                availableTimes[9, 0] = times.SlotNo;
-                                availableTimes[9, 1] = times.Time.ToString("HH:mm");
-                            }
-                            else if (morningButtonCount == 10)
-                            {
-                                btnMorning10.Visible = true;
-                                btnMorning10.Text = times.Time.ToString("HH:mm");
-                                availableTimes[10, 0] = times.SlotNo;
-                                availableTimes[10, 1] = times.Time.ToString("HH:mm");
-                            }
-                            morningButtonCount++;
                         }
                     }
+                    slotIndex++;
                 }
-                slotIndex++;
+            }
+            catch(Exception err)
+            {
+                function.logAnError("unable to comunicate with the database on Make A Booking page: " +
+    err);
+                lblErrorSummary.Text = "An error occured communicating with the database. Please try again later";
             }
         }
 
@@ -1576,11 +1619,14 @@ namespace Cheveux
             lblDate.Text = "";
             lblTimeLabel.Text = "";
             lblTime.Text = "";
+            lblNoOfHoursLabel.Text = "";
+            lblNoOfHours.Text = "";
             lblTotalCostLabel.Text = "";
             lblTotalCost.Text = "";
             lblCommentLabel.Text = "";
             txtComment.Visible = false;
             HttpCookie bookingTime = Request.Cookies["BookTime"];
+            double hours = CalculateSlotLength(sender, e) / 2.0;
 
             
             try
@@ -1696,6 +1742,8 @@ namespace Cheveux
                 {
                     lblTimeLabel.Text = "Time: ";
                     lblTime.Text = bookingTime["Time"];
+                    lblNoOfHoursLabel.Text = "No. of Hours: ";
+                    lblNoOfHours.Text = hours.ToString() + "hr(s)";
                 }
                 else
                 {
@@ -1741,5 +1789,6 @@ namespace Cheveux
             LoadSummary(sender, e);
         }
         #endregion
+
     }
 }
