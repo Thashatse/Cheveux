@@ -156,7 +156,8 @@ namespace Cheveux
                     divConfirm.Visible = true;
                     deleteUser();
                 }
-            } else if (cookie == null)
+            }
+            else if (cookie == null)
             {
                 //if the user is requesting to see a stylis profile
                 string action = Request.QueryString["Action"];
@@ -245,7 +246,7 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                    newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
                         "'>" + specialisationAndBio.serviceName + "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
@@ -263,7 +264,7 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                    newCell.Text = "<a href = '../cheveux/services.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
                         "'>"+specialisationAndBio.serviceDescription+ "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
@@ -414,22 +415,33 @@ namespace Cheveux
                     newCell = new TableCell();
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
-                    //edit link
-                    newCell = new TableCell();
-                    newCell.Width = 700;
-                    newCell.Text =
-                         "<a class='btn btn-secondary' href='/Manager/UpdateEmployee.aspx?" +
-                                    "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                    "'> Edit Employee </a>";
-
-                    //stylist schedual
-                    if (employee.employeeType.Replace(" ", string.Empty) == "S")
+                    if(employee.employeeType.Replace(" ", string.Empty) == "S")
                     {
-                        newCell.Text += " &nbsp; <a class='btn btn-secondary' href ='/Receptionist/Appointments.aspx?Action=ViewStylistSchedule&" +
+                        //edit link
+                        newCell = new TableCell();
+                        newCell.Width = 700;
+                        newCell.Text =
+                             "<a class='btn btn-secondary' href='/Manager/UpdateEmployee.aspx?Action=UpdateStylist&" +
                                         "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
-                                        "'> View Schedule </a>";
+                                        "'> Edit Employee </a>";
+                        //stylist schedual
+                        if (employee.employeeType.Replace(" ", string.Empty) == "S")
+                        {
+                            newCell.Text += " &nbsp; <a class='btn btn-secondary' href ='/Receptionist/Appointments.aspx?Action=ViewStylistSchedule&" +
+                                            "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                            "'> View Schedule </a>";
+                        }
                     }
-
+                    else if(employee.employeeType.Replace(" ", string.Empty) == "R")
+                    {
+                        //edit link
+                        newCell = new TableCell();
+                        newCell.Width = 700;
+                        newCell.Text =
+                             "<a class='btn btn-secondary' href='/Manager/UpdateEmployee.aspx?Action=UpdateReceptionist&" +
+                                        "empID=" + employee.UserID.ToString().Replace(" ", string.Empty) +
+                                        "'> Edit Employee </a>";
+                    }
                     profileTable.Rows[rowCount].Cells.Add(newCell);
 
                     //increment rowcount
@@ -1495,6 +1507,7 @@ namespace Cheveux
                         rowCount++;
                     }
                 }
+
                 if (rowCount == 1)
                 {
                     // if there aren't let the user know
@@ -1545,6 +1558,7 @@ namespace Cheveux
                             "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
                             "'>" + booking.stylistFirstName.ToString() + "</a>";
             pastBookings.Rows[rowCount].Cells.Add(newCell);
+
             newCell = new TableCell();
             if (bookingServiceList.Count == 1)
             {
@@ -1575,9 +1589,10 @@ namespace Cheveux
                 }
                 newCell.Text = "<a title='" + toolTip + "'" +
                     "href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past'> Multiple </a>";
+                    "'> Multiple </a>";
             }
             pastBookings.Rows[rowCount].Cells.Add(newCell);
+
             if (booking.arrived.ToString()[0] != 'N')
             {
                 newCell = new TableCell();

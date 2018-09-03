@@ -9,7 +9,7 @@ using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
 namespace Cheveux.Cheveux
 {
-    public partial class Products : System.Web.UI.Page
+    public partial class Products : System.Web.UI.Page 
     {
 
         Functions function = new Functions();
@@ -111,6 +111,8 @@ namespace Cheveux.Cheveux
             {
                 productLabel.Text = "Treatment Type";
             }
+
+
 
         }
 
@@ -418,14 +420,17 @@ namespace Cheveux.Cheveux
                 p.Price = Convert.ToDecimal(txtPrice.Text);
                 p.ProductType = drpProductType.SelectedValue.ToString();
                 a.supplierID = drpListSupplier.SelectedValue.ToString();
-                //if (call method and if true  redirect)
-                //{
-                //    //if successful redirect to a different page
-                //}
-                //else
-                //{
-                //    //if not successful display an error
-                //}
+                /*
+                if (function.GenerateRandomProductID() == true)
+                {
+                         Response.Redirect("../Manager/Products.aspx");
+                
+                }
+                else
+                {
+                   Response.Redirect("Error.aspx");
+                }
+                */
             }
             else if (drpProductType.SelectedItem.Text == "Treatment")
             {
@@ -438,8 +443,17 @@ namespace Cheveux.Cheveux
                 t.Qty = int.Parse(txtQty.Text);
                 t.supplierID = drpBrandList.SelectedValue.ToString();
                 t.BrandID = drpBrandList.SelectedValue.ToString();
-               
+                /*
+                if (function.GenerateRandomProductID() == true)
+                {
+                    Response.Redirect("../Manager/Products.aspx");
 
+                }
+                else
+                {
+                    Response.Redirect("Error.aspx");
+                }
+                */
                 /*
                  * create product and treatment object
                  * set their variables
@@ -458,6 +472,8 @@ namespace Cheveux.Cheveux
                 //    //if not successful display an error
                 //}
             }
+
+
         }
     }
 } 

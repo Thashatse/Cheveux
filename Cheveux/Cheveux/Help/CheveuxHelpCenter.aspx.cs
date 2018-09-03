@@ -21,7 +21,7 @@ namespace Cheveux.Help
                 if("R" == userType || "M" == userType || "S" == userType)
                 {
                     LogedIn.Visible = true;
-                    JumbotronLogedOut.Visible = false;
+                    liInternalHelp.Visible = true;
                 }
             }
         }

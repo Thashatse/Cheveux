@@ -90,7 +90,7 @@
                                 <br />
                             </div>
 
-                            <div runat="server" id="divOrders">
+                            <div runat="server" id="divOrders" visible="false">
                                 <!--Orders-->
                                 <h1>Outstanding Product Orders </h1>
                                 <!-- Orders Table -->

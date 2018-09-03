@@ -204,7 +204,7 @@ namespace Cheveux
                     }
                     Welcome.Text = "You are now booked to see "
                         + handler.viewEmployee(stylistID.Replace(" ", string.Empty)).firstName
-                        + " at " + Time.ToString("hh:mm")
+                        + " at " + Time.ToString("HH:mm")
                         + " on the " + Convert.ToDateTime(Date).ToString("dd MMM yyyy");
                 }
             }

@@ -30,7 +30,7 @@ namespace Cheveux
                 //store the user Type in a variable and display the appropriate master page for the user
                 userType = cookie["UT"].ToString()[0];
                 //if customer
-                if(userType == 'C')
+                if (userType == 'C')
                 {
                     //set the master page
                     this.MasterPageFile = "~/MasterPages/Cheveux.Master";
@@ -118,11 +118,11 @@ namespace Cheveux
                                 serviceSearchResults.Rows.Add(newRow);
                                 //fill the row with the data from the product results object
                                 TableCell newCell = new TableCell();
-                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
-                                    result.Name.ToString()+"</a>";
+                                newCell.Text = "<a class='btn btn-default' href='/cheveux/services.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
+                                    result.Name.ToString() + "</a>";
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
+                                newCell.Text = "<a class='btn btn-default' href='/cheveux/services.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
                                     result.ProductDescription.ToString() + "</a>";
                                 serviceSearchResults.Rows[serviceCount].Cells.Add(newCell);
                                 newCell = new TableCell();
@@ -145,15 +145,15 @@ namespace Cheveux
                                 ProductSearchResults.Rows.Add(newRow);
                                 //fill the row with the data from the product results object
                                 TableCell newCell = new TableCell();
-                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" + 
+                                newCell.Text = "<a class='btn btn-default' href='/cheveux/Products.aspx??ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
                                     result.Name.ToString() + "</a>";
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" + 
+                                newCell.Text = "<a class='btn btn-default' href='/cheveux/Products.aspx??ProductID=" + result.ProductID.ToString().Replace(" ", string.Empty) + "'>" +
                                     result.ProductDescription.ToString() + "</a>";
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                                 newCell = new TableCell();
-                                newCell.Text = "R "+result.Price;
+                                newCell.Text = "R " + result.Price;
                                 ProductSearchResults.Rows[productCount].Cells.Add(newCell);
                             }
                             //error
@@ -169,19 +169,19 @@ namespace Cheveux
                     #region Stylist
                     //check if the are Stylist Results or not
                     if (results.Item2.Count != 0)
-                        {
+                    {
                         //create a new row in the results table and set the height
                         TableRow newRow = new TableRow();
-                            newRow.Height = 50;
-                            StylistSearchResults.Rows.Add(newRow);
+                        newRow.Height = 50;
+                        StylistSearchResults.Rows.Add(newRow);
                         //create a header row and set cell withs
                         TableHeaderCell newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Width = 150;
-                            StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
-                            newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Text = "Stylist Name";
-                            newHeaderCell.Width = 750;
-                            StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
+                        newHeaderCell.Width = 150;
+                        StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
+                        newHeaderCell = new TableHeaderCell();
+                        newHeaderCell.Text = "Stylist Name";
+                        newHeaderCell.Width = 750;
+                        StylistSearchResults.Rows[0].Cells.Add(newHeaderCell);
                         newHeaderCell = new TableHeaderCell();
                         newHeaderCell.Text = "Stylist Specialization";
                         newHeaderCell.Width = 750;
@@ -189,28 +189,28 @@ namespace Cheveux
 
                         //create a loop to display each result
                         foreach (SP_SearchStylistsBySearchTerm result in results.Item2)
-                            {
-                                stylistRowCount++;
-                                // create a new row in the results table and set the height
-                                newRow = new TableRow();
-                                newRow.Height = 50;
-                                StylistSearchResults.Rows.Add(newRow);
-                                //fill the row with the data from the results object
-                                TableCell newCell = new TableCell();
-                                newCell.Text = "<img src=" + result.StylistImage
-                                    + " alt='" + result.StylistFName + " " + result.StylistLName +
-                                    " Profile Image' width='75' height='75'/>";
-                                StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
-                                newCell = new TableCell();
-                                newCell.Text = "<a class='btn btn-default' href='Profile.aspx?Action=View&empID=" + result.StylistID.ToString().Replace(" ", string.Empty) + "'>"+ 
-                                    result.StylistFName + " " + result.StylistLName+ "</a>";
-                                StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
+                        {
+                            stylistRowCount++;
+                            // create a new row in the results table and set the height
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            StylistSearchResults.Rows.Add(newRow);
+                            //fill the row with the data from the results object
+                            TableCell newCell = new TableCell();
+                            newCell.Text = "<img src=" + result.StylistImage
+                                + " alt='" + result.StylistFName + " " + result.StylistLName +
+                                " Profile Image' width='75' height='75'/>";
+                            StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                             newCell = new TableCell();
-                            newCell.Text = "<a class='btn btn-default' href='ViewProduct.aspx?ProductID=" + handler.viewStylistSpecialisationAndBio(result.StylistID.ToString()).serviceID.ToString().Replace(" ", string.Empty) + "'>" +
+                            newCell.Text = "<a class='btn btn-default' href='Profile.aspx?Action=View&empID=" + result.StylistID.ToString().Replace(" ", string.Empty) + "'>" +
+                                result.StylistFName + " " + result.StylistLName + "</a>";
+                            StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            newCell.Text = "<a class='btn btn-default' href='/cheveux/services.aspx?ProductID=" + handler.viewStylistSpecialisationAndBio(result.StylistID.ToString()).serviceID.ToString().Replace(" ", string.Empty) + "'>" +
                                 handler.viewStylistSpecialisationAndBio(result.StylistID.ToString()).serviceName.ToString() + "</a>";
                             StylistSearchResults.Rows[stylistRowCount].Cells.Add(newCell);
                         }
-                        }
+                    }
                     #endregion
 
                     #region Bookings
@@ -224,30 +224,34 @@ namespace Cheveux
                     {
                         //set the product search results heading
                         bookingResultLable.Text = "<h2> " + bookingCount + " Booking Search Results For '" + searchTerm + "' </h2>";
+                        btnShowBoings.Visible = true;
                     }
                     //products heading
                     if (productCount != 0)
-                {
-                    //set the product search results heading
-                    ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
-                }
-                //service heading
-                if (serviceCount != 0)
-                {
-                    //set the product search results heading
-                    serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
-                }
-                //Stylist Heading
-                if (stylistRowCount != 0)
-                {
-                    //set the stylist search results heading
-                    StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
-                }
-                //no results
-                if(stylistRowCount == 0 && serviceCount == 0 && productCount == 0 && bookingCount == 0)
-                {
-                    bookingResultLable.Text = "<h2> 0 Search Results For '" + searchTerm + "' </h2>";
-                }
+                    {
+                        //set the product search results heading
+                        ProductResultsLable.Text = "<h2> " + productCount + " Product Search Results For '" + searchTerm + "' </h2>";
+                        btnHideProducts.Visible = true;
+                    }
+                    //service heading
+                    if (serviceCount != 0)
+                    {
+                        //set the product search results heading
+                        serviceResultsLable.Text = "<h2> " + serviceCount + " Service Search Results For '" + searchTerm + "' </h2>";
+                        btnHideServices.Visible = true;
+                    }
+                    //Stylist Heading
+                    if (stylistRowCount != 0)
+                    {
+                        //set the stylist search results heading
+                        StylistResultsLable.Text = "<h2> " + stylistRowCount + " Stylist Search Results For '" + searchTerm + "' </h2>";
+                        btnHideStylists.Visible = true;
+                    }
+                    //no results
+                    if (stylistRowCount == 0 && serviceCount == 0 && productCount == 0 && bookingCount == 0)
+                    {
+                        bookingResultLable.Text = "<h2> 0 Search Results For '" + searchTerm + "' </h2>";
+                    }
                 }
                 #endregion
 
@@ -260,6 +264,18 @@ namespace Cheveux
 
             }
         }
+
+        #region update booking headings
+        public void updateBookingHeadings() {
+            //set the headings based on the search results
+            if (CalendarDateStrart.SelectedDate != Convert.ToDateTime("1/1/1753")
+            && CalendarDateEnd.SelectedDate != Convert.ToDateTime("12/31/9999"))
+            {
+                //set the booking search results heading
+                bookingResultLable.Text = "<h2> " + bookingCount + " Booking Search Results For '" + searchTerm + "' </h2>";
+            }
+        }
+                #endregion
 
         #region Table Headers
         //create the product table header
@@ -368,6 +384,8 @@ namespace Cheveux
             List<SP_GetCustomerBooking> bookingsList = new List<SP_GetCustomerBooking>();
             List<SP_GetBookingServices> bookingServiceList = null;
             bool searchBooking = false;
+            bookingCount = 0;
+            bookingSearchResults.Rows.Clear();
             //get the search term form the querystring
             searchTerm = Request.QueryString["ST"];
 
@@ -385,183 +403,198 @@ namespace Cheveux
                         CalendarDateEnd.SelectedDate = Convert.ToDateTime("12/31/9999");
                     }
                 }
-
-                if (searchBooking == true)
-                {
-                    //add booking to list
-                    foreach (SP_GetCustomerBooking book in handler.searchBookings(CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate))
+                
+                    if (searchBooking == true)
                     {
-                        bookingsList.Add(book);
-                    }
-
-                    //sort the list by date
-                    bookingsList.Sort((x, y) => y.bookingDate.CompareTo(x.bookingDate));
-
-                    if (bookingsList.Count != 0)
+                    if (CalendarDateStrart.SelectedDate < CalendarDateEnd.SelectedDate)
                     {
-                        foreach (SP_GetCustomerBooking booking in bookingsList)
+                        lCalBookingError.Visible = false;
+                        //add booking to list
+                        foreach (SP_GetCustomerBooking book in handler.searchBookings(CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate))
                         {
-                            bool addBooking = false;
+                            bookingsList.Add(book);
+                        }
 
-                            //if customer show only their bookings
-                            if (cookie["UT"].ToString()[0] == 'C' 
-                                && booking.CustomerID.ToString().Replace(" ", string.Empty) == cookie["ID"].ToString().Replace(" ", string.Empty))
+                        //sort the list by date
+                        bookingsList.Sort((x, y) => y.bookingDate.CompareTo(x.bookingDate));
+
+                        if (bookingsList.Count != 0)
+                        {
+                            foreach (SP_GetCustomerBooking booking in bookingsList)
                             {
-                                if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.stylistFirstName.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(function.GetFullArrivedStatus(booking.arrived), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.BookingComment.ToString(), searchTerm) == true)
-                                {
-                                    addBooking = true;
-                                }
+                                bool addBooking = false;
 
-                                bookingServiceList = handler.getBookingServices(booking.bookingID);
-                                foreach (SP_GetBookingServices bookingService in bookingServiceList)
+                                //if customer show only their bookings
+                                if (cookie["UT"].ToString()[0] == 'C'
+                                    && booking.CustomerID.ToString().Replace(" ", string.Empty) == cookie["ID"].ToString().Replace(" ", string.Empty))
                                 {
-                                    if (function.compareToSearchTerm(bookingService.ServiceName.ToString(), searchTerm) == true ||
-                                        function.compareToSearchTerm(bookingService.serviceDescripion.ToString(), searchTerm) == true)
+                                    if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.stylistFirstName.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(function.GetFullArrivedStatus(booking.arrived), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.BookingComment.ToString(), searchTerm) == true)
                                     {
                                         addBooking = true;
                                     }
-                                }
-                            }
-                            //if stylist show only their bookings
-                            else if (cookie["UT"].ToString()[0] == 'S'
-                                && booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) == cookie["ID"].ToString().Replace(" ", string.Empty))
-                            {
-                                if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.CustFullName.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.BookingComment.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(function.GetFullArrivedStatus(booking.arrived), searchTerm) == true)
-                                {
-                                    addBooking = true;
-                                }
 
-                                bookingServiceList = handler.getBookingServices(booking.bookingID);
-                                foreach (SP_GetBookingServices bookingService in bookingServiceList)
+                                    bookingServiceList = handler.getBookingServices(booking.bookingID);
+                                    foreach (SP_GetBookingServices bookingService in bookingServiceList)
+                                    {
+                                        if (function.compareToSearchTerm(bookingService.ServiceName.ToString(), searchTerm) == true ||
+                                            function.compareToSearchTerm(bookingService.serviceDescripion.ToString(), searchTerm) == true)
+                                        {
+                                            addBooking = true;
+                                        }
+                                    }
+                                }
+                                //if stylist show only their bookings
+                                else if (cookie["UT"].ToString()[0] == 'S'
+                                    && booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) == cookie["ID"].ToString().Replace(" ", string.Empty))
                                 {
-                                    if (function.compareToSearchTerm(bookingService.ServiceName.ToString(), searchTerm) == true ||
-                                        function.compareToSearchTerm(bookingService.serviceDescripion.ToString(), searchTerm) == true)
+                                    if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.CustFullName.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.BookingComment.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(function.GetFullArrivedStatus(booking.arrived), searchTerm) == true)
                                     {
                                         addBooking = true;
                                     }
-                                }
-                            }
-                            //if receptionist or manager show only their bookings
-                            else if (cookie["UT"].ToString()[0] == 'R'
-                                || cookie["UT"].ToString()[0] == 'M')
-                            {
-                                if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.stylistFirstName.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.CustFullName.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(booking.BookingComment.ToString(), searchTerm) == true ||
-                                       function.compareToSearchTerm(function.GetFullArrivedStatus(booking.arrived), searchTerm) == true)
-                                {
-                                    addBooking = true;
-                                }
 
-                                bookingServiceList = handler.getBookingServices(booking.bookingID);
-                                foreach (SP_GetBookingServices bookingService in bookingServiceList)
-                                {
-                                    if (function.compareToSearchTerm(bookingService.ServiceName.ToString(), searchTerm) == true ||
-                                        function.compareToSearchTerm(bookingService.serviceDescripion.ToString(), searchTerm) == true)
+                                    bookingServiceList = handler.getBookingServices(booking.bookingID);
+                                    foreach (SP_GetBookingServices bookingService in bookingServiceList)
                                     {
-                                        addBooking = true;
+                                        if (function.compareToSearchTerm(bookingService.ServiceName.ToString(), searchTerm) == true ||
+                                            function.compareToSearchTerm(bookingService.serviceDescripion.ToString(), searchTerm) == true)
+                                        {
+                                            addBooking = true;
+                                        }
                                     }
                                 }
-                            }
-
-                            if (addBooking == true)
-                            {
-                                if (bookingCount == 0)
-                                {
-                                    createBookingTableHeader();
-                                    FillterBookingResults.Visible = true;
-                                }
-                                bookingCount++;
-                                // create a new row in the results table and set the height
-                                TableRow newRow = new TableRow();
-                                newRow.Height = 50;
-                                bookingSearchResults.Rows.Add(newRow);
-                                //fill the row with the data from the results object
-                                //Date
-                                TableCell newCell = new TableCell();
-                                newCell.Text = booking.bookingDate.ToString("dd-MM-yyyy");
-                                bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
-                                //Services
-                                newCell = new TableCell();
-                                if (bookingServiceList.Count == 1)
-                                {
-                                    newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                                    + bookingServiceList[0].ServiceName.ToString() + "</a>";
-                                }
-                                else if (bookingServiceList.Count == 2)
-                                {
-                                    newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                                        "'>" + bookingServiceList[0].ServiceName.ToString() +
-                                        ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
-                                }
-                                else if (bookingServiceList.Count > 2)
-                                {
-                                    newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                                        "&BookingType=Past'> Multiple </a>";
-                                }
-                                bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
-                                
-                                //if customer show stylist
-                                if (cookie["UT"].ToString()[0] == 'C')
-                                {
-                                    //Stylist
-                                    newCell = new TableCell();
-                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                    "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + booking.stylistFirstName.ToString() + "</a>";
-                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
-                                }
-                                //if stylist show customer
-                                else if (cookie["UT"].ToString()[0] == 'S')
-                                {
-                                    //Customer
-                                    newCell = new TableCell();
-                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                    "&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + booking.CustFullName.ToString() + "</a>";
-                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
-                                }
-                                //if receptionist or manager customer and stylist
+                                //if receptionist or manager show only their bookings
                                 else if (cookie["UT"].ToString()[0] == 'R'
                                     || cookie["UT"].ToString()[0] == 'M')
                                 {
-                                    //Customer
-                                    newCell = new TableCell();
-                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                    "&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + booking.CustFullName.ToString() + "</a>";
-                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                    if (function.compareToSearchTerm(booking.bookingDate.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.bookingStartTime.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.stylistFirstName.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.CustFullName.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(booking.BookingComment.ToString(), searchTerm) == true ||
+                                           function.compareToSearchTerm(function.GetFullArrivedStatus(booking.arrived), searchTerm) == true)
+                                    {
+                                        addBooking = true;
+                                    }
 
-                                    //Stylist
-                                    newCell = new TableCell();
-                                    newCell.Text = "<a href='Profile.aspx?Action=View" +
-                                    "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + booking.stylistFirstName.ToString() + "</a>";
-                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                    bookingServiceList = handler.getBookingServices(booking.bookingID);
+                                    foreach (SP_GetBookingServices bookingService in bookingServiceList)
+                                    {
+                                        if (function.compareToSearchTerm(bookingService.ServiceName.ToString(), searchTerm) == true ||
+                                            function.compareToSearchTerm(bookingService.serviceDescripion.ToString(), searchTerm) == true)
+                                        {
+                                            addBooking = true;
+                                        }
+                                    }
                                 }
 
-                                //BTN
-                                newCell = new TableCell();
-                                newCell.Text = "<button type = 'button' class='btn btn-default'>" +
-                                    "<a href = '../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                                    "&BookingType=Past'" +
-                                    ">View Booking</a></button>";
-                                bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                if (addBooking == true)
+                                {
+                                    if (bookingCount == 0)
+                                    {
+                                        createBookingTableHeader();
+                                        FillterBookingResults.Visible = true;
+                                    }
+                                    bookingCount++;
+                                    // create a new row in the results table and set the height
+                                    TableRow newRow = new TableRow();
+                                    newRow.Height = 50;
+                                    bookingSearchResults.Rows.Add(newRow);
+                                    //fill the row with the data from the results object
+                                    //Date
+                                    TableCell newCell = new TableCell();
+                                    newCell.Text = booking.bookingDate.ToString("dd-MM-yyyy");
+                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                    //Services
+                                    newCell = new TableCell();
+                                    if (bookingServiceList.Count == 1)
+                                    {
+                                        newCell.Text = "<a href='/cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                                        + bookingServiceList[0].ServiceName.ToString() + "</a>";
+                                    }
+                                    else if (bookingServiceList.Count == 2)
+                                    {
+                                        newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                                            "'>" + bookingServiceList[0].ServiceName.ToString() +
+                                            ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
+                                    }
+                                    else if (bookingServiceList.Count > 2)
+                                    {
+                                        newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                                            "&BookingType=Past'> Multiple </a>";
+                                    }
+                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+
+                                    //if customer show stylist
+                                    if (cookie["UT"].ToString()[0] == 'C')
+                                    {
+                                        //Stylist
+                                        newCell = new TableCell();
+                                        newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                        "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + booking.stylistFirstName.ToString() + "</a>";
+                                        bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                    }
+                                    //if stylist show customer
+                                    else if (cookie["UT"].ToString()[0] == 'S')
+                                    {
+                                        //Customer
+                                        newCell = new TableCell();
+                                        newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                        "&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + booking.CustFullName.ToString() + "</a>";
+                                        bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                    }
+                                    //if receptionist or manager customer and stylist
+                                    else if (cookie["UT"].ToString()[0] == 'R'
+                                        || cookie["UT"].ToString()[0] == 'M')
+                                    {
+                                        //Customer
+                                        newCell = new TableCell();
+                                        newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                        "&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + booking.CustFullName.ToString() + "</a>";
+                                        bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+
+                                        //Stylist
+                                        newCell = new TableCell();
+                                        newCell.Text = "<a href='Profile.aspx?Action=View" +
+                                        "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + booking.stylistFirstName.ToString() + "</a>";
+                                        bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                    }
+
+                                    //BTN
+                                    newCell = new TableCell();
+                                    newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                                        "<a href = '../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
+                                        "&BookingType=Past'" +
+                                        ">View Booking</a></button>";
+                                    bookingSearchResults.Rows[bookingCount].Cells.Add(newCell);
+                                }
                             }
                         }
+                        
                     }
+                    else
+                    {
+                        lCalBookingError.Text = "Start date must be before end date";
+                        lCalBookingError.ForeColor = System.Drawing.Color.Red;
+                        lCalBookingError.Visible = true;
+                    }
+                    updateBookingHeadings();
                 }
+                
+
             }
+            
         }
 
         public void showFilterBooking(object sender, EventArgs e)
@@ -573,6 +606,67 @@ namespace Cheveux
             else
             {
                 divBookingSearchFilter.Visible = true;
+            }
+        }
+        #endregion
+
+        #region Show/Hide BTN
+        public void showServices(object sender, EventArgs e)
+        {
+            if(btnHideServices.Text == "Hide")
+            {
+                serviceSearchResults.Visible = false;
+                btnHideServices.Text = "Show";
+            }
+            else if (btnHideServices.Text == "Show")
+            {
+                serviceSearchResults.Visible = true;
+                btnHideServices.Text = "Hide";
+            }
+        }
+
+        public void showroducts(object sender, EventArgs e)
+        {
+            if (btnHideProducts.Text == "Hide")
+            {
+                ProductSearchResults.Visible = false;
+                btnHideProducts.Text = "Show";
+            }
+            else if (btnHideProducts.Text == "Show")
+            {
+                ProductSearchResults.Visible = true;
+                btnHideProducts.Text = "Hide";
+            }
+        }
+
+        public void showStylist(object sender, EventArgs e)
+        {
+            if (btnHideStylists.Text == "Hide")
+            {
+                StylistSearchResults.Visible = false;
+                btnHideStylists.Text = "Show";
+            }
+            else if (btnHideStylists.Text == "Show")
+            {
+                StylistSearchResults.Visible = true;
+                btnHideStylists.Text = "Hide";
+            }
+        }
+
+        public void showBookings(object sender, EventArgs e)
+        {
+            if (btnShowBoings.Text == "Hide")
+            {
+                bookingSearchResults.Visible = false;
+                FillterBookingResults.Visible = false;
+                divBookingSearchFilter.Visible = false;
+                btnShowBoings.Text = "Show";
+            }
+            else if (btnShowBoings.Text == "Show")
+            {
+                bookingSearchResults.Visible = true;
+                FillterBookingResults.Visible = true;
+                btnShowBoings.Text = "Hide";
             }
         }
         #endregion

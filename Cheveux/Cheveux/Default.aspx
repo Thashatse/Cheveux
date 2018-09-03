@@ -282,15 +282,14 @@
                 <div class="col-8 text-center">
                     <div class="row">
 
+                        <div class="col-2 text-center"></div>
                         <div class="col-4 text-center">
                             <a href='Default.aspx?Goto=Phone' class='btn btn-primary btn-xl js-scroll-trigger'><span class='glyphicon'>&#9742;</span> Phone </a>
                         </div>
                         <div class="col-4 text-center">
                             <a href='Default.aspx?Goto=Email' class='btn btn-primary btn-xl js-scroll-trigger'><span class='glyphicon'>&#128231;</span> Email </a>
                         </div>
-                        <div class="col-4 text-center">
-                            <a href='Default.aspx?Goto=Direct' class='btn btn-primary btn-xl js-scroll-trigger'><span class='glyphicon'>&#xe062;</span> Get Directions </a>
-                        </div>
+                        <div class="col-2 text-center"></div>
 
                     </div>
                 </div>

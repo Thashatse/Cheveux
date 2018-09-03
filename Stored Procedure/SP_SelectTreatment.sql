@@ -33,8 +33,8 @@ BEGIN
 	  ,BRAND.[Name]	AS [BrandName]
 	  
 	  
-	FROM [CHEVEUX].[dbo].[PRODUCT], TREATMENT, BRAND, Supplier s
-	WHERE ProductID = TreatmentID AND BRAND.BrandID = TREATMENT.BrandID AND s.SupplierID = TREATMENT.SupplierID AND ProductID = @productID
+	FROM [CHEVEUX].[dbo].[PRODUCT], [CHEVEUX].[dbo].[TREATMENT], BRAND, [CHEVEUX].[dbo].Supplier
+	WHERE ProductID = TreatmentID AND BRAND.BrandID = TREATMENT.BrandID AND [CHEVEUX].[dbo].[Supplier].[SupplierID] = [CHEVEUX].[dbo].[TREATMENT].[SupplierID] AND ProductID = @productID
 	order by [ProductType(T/A/S)]
 END
 GO

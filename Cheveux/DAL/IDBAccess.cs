@@ -97,11 +97,10 @@ namespace DAL
         #region Products
         PRODUCT CheckForProduct(string id);
         bool addProduct(PRODUCT addProduct);
-        //bool addAccessories(ACCESSORY a);
-        //bool addTreatments(TREATMENT t);
-
+        bool addAccessories(ACCESSORY a, PRODUCT p);
+        bool addTreatments(TREATMENT t, PRODUCT p);
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
-
+        //List<SP_GetSupplier> getSupplier();
         #endregion
 
         #region Services
@@ -155,13 +154,12 @@ namespace DAL
         List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID, DateTime startDate, DateTime endDate);
         List<SP_AboutStylist> aboutStylist();
-        /*
-        bool AddService(PRODUCT p, SERVICE s);
-        */
+        SP_GetService GetServiceFromID(string serviceID);
+        SP_GetBraidService GetBraidServiceFromID(string serviceID);
       
-        bool addAccessories(ACCESSORY a, PRODUCT p);
-        bool addTreatments(TREATMENT t, PRODUCT p);
         SERVICE GetSlotLength(string serviceID);
-
+        SP_GetEmployee_S_ getEmployee_S (string stylistID);
+        bool addSpecialisation(STYLIST_SERVICE ss);
+        SP_GetEmployee_S_ getBio(string id);
     }
 }

@@ -45,7 +45,6 @@ namespace Cheveux
             {
                 LoggedOut.Visible = false;
                 LoggedIn.Visible = true;
-
                 lblDate.Text = dayDate;
 
                 cookie = Request.Cookies["CheveuxUserID"];
@@ -123,6 +122,12 @@ namespace Cheveux
                 service.Width = 350;
                 AgendaTable.Rows[0].Cells.Add(service);
 
+                TableCell comment = new TableCell();
+                comment.Text = "Comment";
+                comment.Font.Bold = true;
+                comment.Width = 350;
+                AgendaTable.Rows[0].Cells.Add(comment);
+
                 TableCell arrived = new TableCell();
                 arrived.Text = "Arrived";
                 arrived.Font.Bold = true;
@@ -151,6 +156,10 @@ namespace Cheveux
                     AgendaTable.Rows.Add(r);
 
                     getTimeCustomerServices(a.BookingID, a.PrimaryID, i, a);
+
+                    TableCell c = new TableCell();
+                    c.Text = "<a href='#'>" + a.Comment.ToString() + "</a>";
+                    AgendaTable.Rows[i].Cells.Add(c);
 
                     TableCell present = new TableCell();
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
@@ -262,11 +271,10 @@ namespace Cheveux
                 }
                 catch (Exception serviceErr)
                 {
-                    function.logAnError("Error retreiving services [receptionist.aspx {nested try in getTime method}] method err:" + serviceErr.ToString());
+                    function.logAnError("Error retreiving services [stylist.aspx {nested try in getTime method}] method err:" + serviceErr.ToString());
                 }
-                time = handler.getMultipleServicesTime(primaryBookingID);
 
-                if (bServices.Count < 2)
+                if (bServices.Count == 1)
                 {
                     start.Text = a.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
@@ -276,6 +284,8 @@ namespace Cheveux
                 }
                 else if (bServices.Count >= 2)
                 {
+                    time = handler.getMultipleServicesTime(primaryBookingID);
+
                     start.Text = time.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
 

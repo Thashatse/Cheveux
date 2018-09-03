@@ -60,6 +60,7 @@ namespace BLL
         SP_GetAllTreatments selectTreatment(string treatmentID);
         bool addProduct(PRODUCT addProduct);
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+        //List<SP_GetSupplier> getSupplier();
         #endregion
 
         #region Services
@@ -69,6 +70,8 @@ namespace BLL
         List<SP_GetStyles> BLL_GetStyles();
         bool BLL_AddBraidService(BRAID_SERVICE bs);
         bool updateService(PRODUCT p, SERVICE s);
+                SP_GetService BLL_GetServiceFromID(string serviceID);
+        SP_GetBraidService BLL_GetBraidServiceFromID(string serviceID);
         #endregion
 
         #region Manager Dash Board
@@ -153,6 +156,9 @@ namespace BLL
         bool addAccessories(ACCESSORY a, PRODUCT p );
         bool addTreatments(TREATMENT t, PRODUCT p);
         SERVICE BLL_GetSlotLength(string serviceID);
+        SP_GetEmployee_S_ getEmployee_S(string stylistID);
+        bool addSpecialisation(STYLIST_SERVICE ss);
+        SP_GetEmployee_S_ getBio(string id);
     }
 }
 

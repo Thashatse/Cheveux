@@ -27,12 +27,16 @@ namespace Cheveux
         private void loadPage()
         {
             lHeader.Text = "<h2>Get started with<b> Cheveux</b></h2>";
+            string PreviousPage = Request.QueryString["PreviousPage"];
             //set the create acount URL
             if (PreviousPage != null)
             {
-                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email&PreviousPage=" + PreviousPage;
+                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email&PreviousPage=" + PreviousPage + "'>Create Account</a>";
             }
-            lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Account</a>";
+            else
+            {
+                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Account</a>";
+            }
             //check if the user has requested a logout or login
             String action = Request.QueryString["action"];
             //login

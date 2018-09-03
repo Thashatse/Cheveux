@@ -265,7 +265,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -332,7 +332,7 @@ namespace Cheveux
                                 {
                                     phBookingsErr.Visible = true;
                                     lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                        + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                        + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                                 }
                                 else
                                 {
@@ -405,7 +405,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -474,7 +474,7 @@ namespace Cheveux
                                 {
                                     phBookingsErr.Visible = true;
                                     lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                        + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                        + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                                 }
                                 else
                                 {
@@ -490,7 +490,7 @@ namespace Cheveux
             else if (userType == "S")
             {
                 phCalendars.Visible = true;
-
+                empSelectionType.SelectedValue = "1";
                 drpSortBy.Items.RemoveAt(1);
                 drpSortBy.Items.Add(new ListItem("Customer", "1"));
 
@@ -543,7 +543,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -603,7 +603,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -669,7 +669,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -729,7 +729,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -1015,6 +1015,8 @@ namespace Cheveux
         #region Upcoming
         public void getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             tblSchedule.Rows.Clear();
             try
             {
@@ -1058,11 +1060,14 @@ namespace Cheveux
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
-                TableCell empty = new TableCell();
-                empty.Width = 200;
-                tblSchedule.Rows[0].Cells.Add(empty);
+                if (cookie["UT"] != "S")
+                {
+                    TableCell edit = new TableCell();
+                    edit.Width = 200;
+                    tblSchedule.Rows[0].Cells.Add(edit);
+                }
 
-                empty = new TableCell();
+                TableCell empty = new TableCell();
                 empty.Width = 200;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
@@ -1079,16 +1084,19 @@ namespace Cheveux
 
                     getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text = 
-                        "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    if (cookie["UT"] != "S")
+                    {
+                        //edit
+                        TableCell editButton = new TableCell();
+                        editButton.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                    }
 
                     //view booking
-                    buttonCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
@@ -1110,6 +1118,8 @@ namespace Cheveux
 
         public void getStylistUpcomingBksForDate(string id, DateTime bookingDate, string sortBy, string sortDir)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             tblSchedule.Rows.Clear();
             try
             {
@@ -1154,6 +1164,13 @@ namespace Cheveux
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
+                if (cookie["UT"] != "S")
+                {
+                    TableCell edit = new TableCell();
+                    edit.Width = 200;
+                    tblSchedule.Rows[0].Cells.Add(edit);
+                }
+
                 TableCell empty = new TableCell();
                 empty.Width = 200;
                 tblSchedule.Rows[0].Cells.Add(empty);
@@ -1172,16 +1189,20 @@ namespace Cheveux
 
                     getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    if (cookie["UT"] != "S")
+                    {
+                        //edit
+                        TableCell editButton = new TableCell();
+                        editButton.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                    }
 
                     //view booking
-                    buttonCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
@@ -1204,6 +1225,8 @@ namespace Cheveux
 
         public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             tblSchedule.Rows.Clear();
             try
             {
@@ -1246,11 +1269,14 @@ namespace Cheveux
                 tblSchedule.Rows[0].Cells.Add(svName);
 
 
-                TableCell empty = new TableCell();
-                empty.Width = 200;
-                tblSchedule.Rows[0].Cells.Add(empty);
+                if (cookie["UT"] != "S")
+                {
+                    TableCell edit = new TableCell();
+                    edit.Width = 200;
+                    tblSchedule.Rows[0].Cells.Add(edit);
+                }
 
-                empty = new TableCell();
+                TableCell empty = new TableCell();
                 empty.Width = 200;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
@@ -1267,16 +1293,19 @@ namespace Cheveux
 
                     getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    if (cookie["UT"] != "S")
+                    {
+                        //edit
+                        TableCell editButton = new TableCell();
+                        editButton.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                    }
 
                     //view booking
-                    buttonCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
@@ -2148,7 +2177,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2166,7 +2195,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2188,7 +2217,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2206,7 +2235,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2230,7 +2259,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2248,7 +2277,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2270,7 +2299,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2288,7 +2317,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2320,7 +2349,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2338,7 +2367,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2360,7 +2389,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2378,7 +2407,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2402,7 +2431,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2420,7 +2449,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2442,7 +2471,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2460,7 +2489,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {

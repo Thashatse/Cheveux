@@ -110,9 +110,23 @@ namespace Cheveux
                 newCell.Width = 300;
                 TextBox descBox = new TextBox();
                 descBox.ID = "bookingComment";
+                if(bDTL.Comment != string.Empty)
+                {
+                    descBox.Text =bDTL.Comment.ToString();
+                }
                 descBox.CssClass = "form-control";
+                //descBox.MaxLength = 50;
                 newCell.Controls.Add(descBox);
                 allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                rCnt++;
+
+                newRow = new TableRow();
+                allBookingTable.Rows.Add(newRow);
+                TableCell len = new TableCell();
+                len.Text = "*Please keep the comment short and descriptive";
+                len.ForeColor = System.Drawing.Color.Red;
+                len.Visible = false;
+                allBookingTable.Rows[rCnt].Cells.Add(len);
                 rCnt++;
 
                 newRow = new TableRow();
@@ -147,6 +161,10 @@ namespace Cheveux
                         if (b.Comment == string.Empty || b.Comment == null)
                         {
                             val.Visible = true;
+                        }
+                        if(b.Comment.Length > 50)
+                        {
+                            len.Visible = true;   
                         }
                         else
                         {

@@ -79,11 +79,11 @@
 
                             <!-- email account Type login -->
                             <div class="container" runat="server" id="divEmailAcount" visible="false">
+                                <!-- Error Lable -->
+                                <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
 
                                 <!-- Email Text Box & Validation-->
                                 <div class="container" runat="server" id="divTxtBoxEmail">
-                                    <!-- Error Lable -->
-                                    <asp:Label ID="lError" runat="server" Text="Label" ForeColor="Red" Visible="false"></asp:Label>
 
                                     <!-- Enter Email -->
                                     <asp:TextBox ID="txtEmailUsername" runat="server" placeholder="Email or Username"

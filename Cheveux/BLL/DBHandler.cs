@@ -109,10 +109,10 @@ namespace BLL
             return db.CheckForProduct(id);
         }
 
-       
+
         public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
-            return db.addAccessories(a,p);
+            return db.addAccessories(a, p);
         }
 
         public bool addTreatments(TREATMENT t, PRODUCT p)
@@ -141,7 +141,12 @@ namespace BLL
             return db.getBrandsForProductType(type);
         }
 
-
+        /*
+        public List<SP_GetSupplier> getSupplier();
+        {
+            return db.getSupplier();
+        }
+        */
         #endregion
 
         #region Bookings
@@ -192,6 +197,14 @@ namespace BLL
         {
             return db.AddBraidService(bs);
         }
+       public SP_GetBraidService BLL_GetBraidServiceFromID(string serviceID)
+        {
+            return db.GetBraidServiceFromID(serviceID);
+        }
+        public SP_GetService BLL_GetServiceFromID(string serviceID)
+        {
+            return db.GetServiceFromID(serviceID);
+        } 
         #endregion
 
         #region Manager Dash Board
@@ -553,9 +566,21 @@ namespace BLL
         {
             return db.updateService(p, s);
         }
-                public SERVICE BLL_GetSlotLength(string serviceID)
+        public SERVICE BLL_GetSlotLength(string serviceID)
         {
             return db.GetSlotLength(serviceID);
+        }
+        public SP_GetEmployee_S_ getEmployee_S(string stylistID)
+        {
+            return db.getEmployee_S(stylistID);
+        }
+        public bool addSpecialisation(STYLIST_SERVICE ss)
+        {
+            return db.addSpecialisation(ss);
+        }
+        public SP_GetEmployee_S_ getBio(string id)
+        {
+            return db.getBio(id);
         }
     }
 }

@@ -186,14 +186,14 @@ namespace DAL
                 {
                     if (table.Rows.Count == 1)
                     {
-                            sale = new SALE
-                            {
-                                SaleID = table.Rows[0][0].ToString(),
-                                Date = Convert.ToDateTime(table.Rows[0][1].ToString()),
-                                CustID = table.Rows[0][2].ToString(),
-                                PaymentType = table.Rows[0][3].ToString(),
-                                BookingID = table.Rows[0][4].ToString(),
-                            };
+                        sale = new SALE
+                        {
+                            SaleID = table.Rows[0][0].ToString(),
+                            Date = Convert.ToDateTime(table.Rows[0][1].ToString()),
+                            CustID = table.Rows[0][2].ToString(),
+                            PaymentType = table.Rows[0][3].ToString(),
+                            BookingID = table.Rows[0][4].ToString(),
+                        };
                     }
                     return sale;
                 }
@@ -300,7 +300,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
         public SP_GetCustomerBooking getCustomerUpcomingBookingDetails(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -326,7 +326,8 @@ namespace DAL
                             slotNo = row["SlotNo"].ToString(),
                             bookingID = row["BookingID"].ToString(),
                             CustFullName = row["CustFullName"].ToString(),
-                            CustomerID = row["CustomerID"].ToString()
+                            CustomerID = row["CustomerID"].ToString(),
+                            BookingComment = row["Comment"].ToString()
                         };
                     }
 
@@ -512,7 +513,8 @@ namespace DAL
                 new SqlParameter("@BookingID", bookingUpdate.BookingID.ToString()),
                 new SqlParameter("@SlotNO", bookingUpdate.SlotNo.ToString()),
                 new SqlParameter("@StylistID", bookingUpdate.StylistID.ToString()),
-                new SqlParameter("@Date", bookingUpdate.Date)
+                new SqlParameter("@Date", bookingUpdate.Date),
+                new SqlParameter("@Comment", bookingUpdate.Comment.ToString())
                 };
 
                 return DBHelper.NonQuery("SP_UpdateBooking", CommandType.StoredProcedure, pars);
@@ -570,7 +572,8 @@ namespace DAL
                     new SqlParameter("@CustomerID", addBooking.CustomerID.ToString()),
                     new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
                     new SqlParameter("@Date", addBooking.Date.ToString()),
-                    new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString())
+                    new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString()),
+                    new SqlParameter("@Comment", addBooking.Comment.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -620,6 +623,7 @@ namespace DAL
             }
 
         }
+
         public SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID)
         {
             SP_GetMultipleServicesTime time = null;
@@ -629,7 +633,7 @@ namespace DAL
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetMultipleServicesTime", 
+                using (DataTable table = DBHelper.ParamSelect("SP_GetMultipleServicesTime",
                                                 CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count == 1)
@@ -760,10 +764,9 @@ namespace DAL
                             CustomerName = Convert.ToString(row["CustomerName"]),
                             Date = Convert.ToDateTime(row["Date"]),
                             StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
-                            EndTime = Convert.ToDateTime((row["EndTime"]).ToString())
+                            EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
+                            Comment = Convert.ToString(row["Comment"])
                         };
-
-
                     }
                     return bookingDTL;
                 }
@@ -1299,23 +1302,19 @@ namespace DAL
                         accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         accessory.Price = Convert.ToInt32(row["Price"]);
                         accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
-                        //accessory.Active = Convert.ToString(row["Active"]);
-                        //accessory.ProductImage = Convert.ToByte(row["ProductImage"]);
-                        //accessory.Colour = Convert.ToString(row["Colour"]);
-                        //accessory.Qty = Convert.ToInt32(row["Qty"]);
                         accessory.BrandID = Convert.ToString("BrandID");
                         accessory.Brandname = Convert.ToString("BrandName");
-                        //accessory.brandType = Convert.ToString("BrandType(T/A)");
+                       
 
-                     }
+                    }
 
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-                        
+
             return accessory;
         }
 
@@ -1330,7 +1329,7 @@ namespace DAL
             };
 
             try
-                {  using (DataTable table = DBHelper.ParamSelect("SP_SelectTreatment", CommandType.StoredProcedure, parameters))
+            { using (DataTable table = DBHelper.ParamSelect("SP_SelectTreatment", CommandType.StoredProcedure, parameters))
                 {
                     if (table.Rows.Count == 1)
                     {
@@ -1341,19 +1340,17 @@ namespace DAL
                         treatment.Price = Convert.ToInt32(row["Price"]);
                         treatment.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         treatment.Active = Convert.ToString(row["Active"]);
-                        //treatment.ProductImage = Convert["ProductImage"]);
-                        //treatment.Qty = Convert.ToInt32(row["Qty"]);
                         treatment.BrandID = Convert.ToString("BrandID");
                         treatment.Brandname = Convert.ToString("BrandName");
-                        //treatment.brandType = Convert.ToString("BrandType(T/A)");
+                        
 
-                     }
-                  }
-             }
+                    }
+                }
+            }
 
             catch (Exception e)
             {
-                 throw new ApplicationException(e.ToString());
+                throw new ApplicationException(e.ToString());
             }
 
 
@@ -1361,9 +1358,9 @@ namespace DAL
         }
 
         //AddProduct
-         public bool addProduct(PRODUCT addProduct)
-        { 
-          try
+        public bool addProduct(PRODUCT addProduct)
+        {
+            try
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
@@ -1373,7 +1370,7 @@ namespace DAL
                     new SqlParameter("@Price", addProduct.Price),
                     new SqlParameter("@productType", addProduct.ProductType),
                     new SqlParameter("@Active", addProduct.Active)
-                   
+
                 };
                 return DBHelper.NonQuery("SP_AddProduct", CommandType.StoredProcedure, pars);
             }
@@ -1393,9 +1390,9 @@ namespace DAL
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure,pars))
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure, pars))
                 {
-                     if(table.Rows.Count > 0)
+                    if (table.Rows.Count > 0)
                     {
                         foreach (DataRow row in table.Rows)
                         {
@@ -1414,12 +1411,35 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
 
-           }
+        }
 
-          // public List<SP_GetSupplier> getSupplier()
-
-
-
+        /*
+           public List<SP_GetSupplier> getSupplier()
+        {
+            List<SP_GetSupplier> list = new List<SP_GetSupplier>();
+            try 
+            {
+               using (DataTable table = DBHelper.Select("SP_GetSupplier", CommandType.StoredProcedure))
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetSupplier supplier = new SP_GetSupplier();
+                            supplier.SupplierID = row["SupplierID"].ToString();
+                            supplier.SupplierName = row["SupplierName"].ToString();
+                            supplier.ContactName = row["ContactName"].ToString();
+                            supplier.ContactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.ContactEmail = row["ContactEmail"].ToString();
+                            list.Add(supplier);
+                        }
+                    }
+                 }
+              }
+              */
         #endregion
 
         #region Manager Dash Board
@@ -1555,8 +1575,8 @@ namespace DAL
                             WeekdayEnd = DateTime.Parse(row[7].ToString()),
                             WeekendStart = DateTime.Parse(row[8].ToString()),
                             WeekendEnd = DateTime.Parse(row[9].ToString()),
-                            PublicHolEnd = DateTime.Parse(row[10].ToString()),
-                            PublicHolStart = DateTime.Parse(row[9].ToString())
+                            PublicHolEnd = DateTime.Parse(row[9].ToString()),
+                            PublicHolStart = DateTime.Parse(row[10].ToString())
                         };
                     }
                     return businessDetails;
@@ -1932,6 +1952,7 @@ namespace DAL
             }
             return list;
         }
+
         public EMPLOYEE getEmployeeType(string EmployeeID)
         {
             EMPLOYEE Emp = null;
@@ -2048,7 +2069,10 @@ namespace DAL
                             {
                                 ServiceID = Convert.ToString(row["ProductID"]),
                                 Name = Convert.ToString(row["Name"]),
-                                ServiceType = Convert.ToChar(row["ServiceType"])
+                                ServiceType = Convert.ToChar(row["ServiceType"]),
+                                Price = Convert.ToDecimal(row["Price"]),
+                                Description = Convert.ToString(row["ProductDescription"]),
+                                Active = Convert.ToChar(row["Active"])
                             };
                             serviceList.Add(services);
                         }
@@ -2488,6 +2512,7 @@ namespace DAL
                     new SqlParameter("@empID", emp.EmployeeID.ToString()),
                     new SqlParameter("@type", emp.Type.ToString()),
                     new SqlParameter("@bio",emp.Bio.ToString()),
+                    new SqlParameter("@Specialisation", emp.Specialisation.ToString()),
                     new SqlParameter("@addLine1", emp.AddressLine1.ToString()),
                     new SqlParameter("@addLine2", emp.AddressLine2.ToString()),
                     new SqlParameter("@suburb", emp.Suburb.ToString()),
@@ -2731,12 +2756,10 @@ namespace DAL
                                 EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
                                 CustomerFName = Convert.ToString(row["CustomerFName"]),
                                 EmpFName = Convert.ToString(row["EmpFName"]),
-                                //ServiceName = Convert.ToString(row["ServiceName"]),
-                                //ServiceDesc = Convert.ToString(row["ProductDescription"]),
                                 Arrived = Convert.ToString(row["Arrived"]),
                                 Date = Convert.ToDateTime(row["Date"]),
-                                //ProductID = Convert.ToString(row["ProductID"]),
-                                empID = Convert.ToString(row["EmpID"])
+                                empID = Convert.ToString(row["EmpID"]),
+                                Comment = Convert.ToString(row["Comment"])
                             };
                             agenda.Add(emp);
                         }
@@ -3532,6 +3555,158 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-    
+        public SP_GetEmployee_S_ getEmployee_S(string stylistID)
+        {
+            SP_GetEmployee_S_ stylist = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", stylistID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetEmployee_S_",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stylist = new SP_GetEmployee_S_
+                        {
+                            UserImage = Convert.ToString(row["UserImage"]),
+                            StylistID = Convert.ToString(row["UserID"]),
+                            FirstName = Convert.ToString(row["FirstName"]),
+                            LastName = Convert.ToString(row["LastName"]),
+                            Username = Convert.ToString(row["UserName"]),
+                            Email = Convert.ToString(row["Email"]),
+                            ContactNo = Convert.ToString(row["ContactNo"]),
+                            Type = Convert.ToString(row["Type"]),
+                            Active = Convert.ToString(row["Active"]),
+                            ad1 = Convert.ToString(row["AddressLine1"]),
+                            ad2 = Convert.ToString(row["AddressLine2"]),
+                            Suburb = Convert.ToString(row["Suburb"]),
+                            City = Convert.ToString(row["City"]),
+                            Bio = row["Bio"].ToString(),
+                            ServiceID = row["ServiceID"].ToString(),
+                            Specialisation = row["Specialisation"].ToString(),
+                            SpecDesc = row["SpecialisationDescription"].ToString(),
+                            
+                        };
+                    }
+                    return stylist;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool addSpecialisation(STYLIST_SERVICE ss)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@employeeID", ss.EmployeeID.ToString()),
+                    new SqlParameter("@serviceID", ss.ServiceID.ToString())
+                };
+                return DBHelper.NonQuery("SP_AddSpecialisation", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
+        public SP_GetEmployee_S_ getBio(string id)
+        {
+            SP_GetEmployee_S_ stylist = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBio",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        stylist = new SP_GetEmployee_S_
+                        {
+                            Bio = row["Bio"].ToString(),
+                        };
+                    }
+                    return stylist;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+         public SP_GetService GetServiceFromID(string id)
+        {
+            SP_GetService service = null;
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        service = new SP_GetService
+                        {
+                            ServiceName = row["Name"].ToString(),
+                            Description = row["ProductDescription"].ToString()
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+        public SP_GetBraidService GetBraidServiceFromID(string id)
+        {
+            SP_GetBraidService service = null;
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBraidService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        service = new SP_GetBraidService
+                        {
+                            StyleDesc = row["styleDesc"].ToString(),
+                            LengthDesc = row["lengthDesc"].ToString(),
+                            WidthDesc = row["widthDesc"].ToString()
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
     }
 }                  
