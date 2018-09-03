@@ -197,6 +197,14 @@ namespace BLL
         {
             return db.AddBraidService(bs);
         }
+       public SP_GetBraidService BLL_GetBraidServiceFromID(string serviceID)
+        {
+            return db.GetBraidServiceFromID(serviceID);
+        }
+        public SP_GetService BLL_GetServiceFromID(string serviceID)
+        {
+            return db.GetServiceFromID(serviceID);
+        } 
         #endregion
 
         #region Manager Dash Board
