@@ -764,10 +764,9 @@ namespace DAL
                             CustomerName = Convert.ToString(row["CustomerName"]),
                             Date = Convert.ToDateTime(row["Date"]),
                             StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
-                            EndTime = Convert.ToDateTime((row["EndTime"]).ToString())
+                            EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
+                            Comment = Convert.ToString(row["Comment"])
                         };
-
-
                     }
                     return bookingDTL;
                 }
