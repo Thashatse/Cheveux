@@ -497,3 +497,76 @@ Couldn't get the time [customerVisit.aspx, etT&C&S method] error:System.Applicat
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
    at Cheveux.CustomerVisit.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 rCnt, SP_GetAllofBookingDTL a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist\CustomerVisit.aspx.cs:line 293
+
+TimeStamp: 2018/09/04 16:29:58
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 182
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 451
+
+TimeStamp: 2018/09/04 16:30:06
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Receptionist.<>c__DisplayClass12_0.<getAgenda>b__0(Object ss, EventArgs ee) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 278
+
+TimeStamp: 2018/09/04 16:53:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268
+
+TimeStamp: 2018/09/04 16:53:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268
+
+TimeStamp: 2018/09/04 16:53:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268
+
+TimeStamp: 2018/09/04 16:54:16
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268

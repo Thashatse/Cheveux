@@ -40,15 +40,6 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.DropDownList drpReport;
         
         /// <summary>
-        /// drpType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpType;
-        
-        /// <summary>
         /// reportByContainer control.
         /// </summary>
         /// <remarks>
@@ -65,6 +56,24 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlReportFor;
+        
+        /// <summary>
+        /// salesPaymentType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl salesPaymentType;
+        
+        /// <summary>
+        /// drpPaymentType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpPaymentType;
         
         /// <summary>
         /// reportDateRangeContainer control.
@@ -103,6 +112,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Button btnRefresh;
         
         /// <summary>
+        /// btnPrint control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPrint;
+        
+        /// <summary>
         /// lError control.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,24 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lError;
+        
+        /// <summary>
+        /// divPrintHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPrintHeader;
+        
+        /// <summary>
+        /// tblLogo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblLogo;
         
         /// <summary>
         /// divReport control.
