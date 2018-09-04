@@ -6,6 +6,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <form runat="server" id="ViewService">
+
     <div class="bg-secondary text-white" id="Div1">
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
@@ -22,7 +24,6 @@
                             <!-- line Break -->
                             <br />
                             <asp:Label runat="server" ID="lblErrorSummary" Visible="false"></asp:Label>
-                            <form runat="server">
                                 <div class="row">
                                     <div class="col-12">
                                         <!-- View By search tearm -->
@@ -39,7 +40,6 @@
                                     </div>
                                 </div>
 
-                            </form>
                   </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -116,9 +116,9 @@
                     </asp:Table>
                 </div>
 
-
             </div>
         </div>
         <div class="col-md-2 col-sm-1"></div>
     </div>
+        </form>
 </asp:Content>

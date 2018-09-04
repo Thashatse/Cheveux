@@ -13,6 +13,15 @@ namespace Cheveux.Cheveux {
     public partial class Services {
         
         /// <summary>
+        /// ViewService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm ViewService;
+        
+        /// <summary>
         /// divCustomerView control.
         /// </summary>
         /// <remarks>

@@ -17,6 +17,55 @@ namespace Cheveux.Cheveux
         SP_GetService service = null;
         SP_GetBraidService bservice = null;
         List<SP_GetServices> allservices = null;
+        HttpCookie cookie = null;
+        protected void Page_PreInit(Object sender, EventArgs e)
+        {
+            //check the cheveux user id cookie for the user
+            HttpCookie cookie = Request.Cookies["CheveuxUserID"];
+            char userType;
+            //check if the cookie is empty or not
+            if (cookie != null)
+            {
+                //store the user Type in a variable and display the appropriate master page for the user
+                userType = cookie["UT"].ToString()[0];
+                //if customer
+                if (userType == 'C')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/Cheveux.Master";
+                }
+                //if receptionist
+                else if (userType == 'R')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxReceptionist.Master";
+                }
+                //if stylist
+                else if (userType == 'S')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxStylist.Master";
+                }
+                //if Manager
+                else if (userType == 'M')
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                }
+                //default
+                else
+                {
+                    //set the master page
+                    this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                }
+            }
+            //set the default master page if the cookie is empty
+            else
+            {
+                //set the master page
+                this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             string serviceID = Request.QueryString["ProductID"];
@@ -51,6 +100,27 @@ namespace Cheveux.Cheveux
                 lblNoOfSlots.Text = Convert.ToString(service.NoOfSlots);
                 lblPrice.Text = "R " + string.Format("{0:#.00}", service.Price).ToString();
                 lblDescription.Text = service.Description;
+                //check if the user is logged in
+                cookie = Request.Cookies["CheveuxUserID"];
+                if (cookie["UT"] == "M")
+                {
+                    //add a new row
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblDesc.Rows.Add(newRow);
+                    //Address
+                    TableCell newCell = new TableCell();
+                    newCell.Font.Bold = true;
+                    newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
+                                "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
+                                "' >Cancel</a>";
+                    tblDesc.Rows[1].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
+                                "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
+                                "' >Edit Service</a>";
+                    tblDesc.Rows[1].Cells.Add(newCell);
+                }
 
             }
             else
