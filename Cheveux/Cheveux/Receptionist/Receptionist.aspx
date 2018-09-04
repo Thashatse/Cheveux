@@ -57,7 +57,6 @@
                                 <div class="col-xs-12 col-md-12">
                                     <asp:DropDownList ID="drpEmpNames" runat="server" AutoPostBack="True" 
                                         CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpEmpNames_Changed">
-                                        <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
                                     &nbsp&nbsp<i class="fa fa-refresh" onClick="history.go(0)"></i>
                                 </div>
