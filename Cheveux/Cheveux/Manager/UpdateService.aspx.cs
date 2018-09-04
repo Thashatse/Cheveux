@@ -35,22 +35,23 @@ namespace Cheveux.Manager
                 //manager is allowed access
             }
             #endregion
-            string serviceID = Request.QueryString["ProductID"];
-            //BLL_GetServiceFromID & BLL_GetBraidServiceFromeID could not be found
-            //service = handler.BLL_GetServiceFromID(serviceID);
-            ///bservice = handler.BLL_GetBraidServiceFromeID(serviceID);
-
-            lblName.Text = service.ServiceName;
-            drpNoOfSlots.SelectedItem.Text = Convert.ToString(service.NoOfSlots);
-            txtPrice.Text = Convert.ToString(service.Price);
-            lblDescription.Text = service.Description;
+            string serviceID = Request.QueryString["ServiceID"];
+            service = handler.BLL_GetServiceFromID(serviceID);
+            bservice = handler.BLL_GetBraidServiceFromID(serviceID);
 
             if (service.ServiceType == 'B')
             {
+                divBraidDetails.Visible = true;
                 lblStyle.Text = bservice.StyleDesc;
                 lblLength.Text = bservice.LengthDesc;
                 lblWidth.Text = bservice.WidthDesc;
             }
+            lblName.Text = service.ServiceName;
+            drpNoOfSlots.SelectedItem.Text = Convert.ToString(service.NoOfSlots);
+            txtPrice.Text = "R " + string.Format("{0:#.00}", service.Price).ToString();
+            lblDescription.Text = service.Description;
+
+
         }
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
@@ -67,7 +68,7 @@ namespace Cheveux.Manager
         }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("../Manager/Service.aspx");
         }
     }
 }

@@ -7,13 +7,15 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server" id="UpdateService">
-
-        <div class="bg-secondary text-white" id="divUpdateService">
-            <!-- Top Margin & Nav Bar Back Color -->
-            <br />
-            <br />
-        </div>
+<div class="bg-secondary text-white" id="Div1">
+        <!-- Top Margin & Nav Bar Back Color -->
         <br />
+        <br />
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-md-8 col-sm-10">
 
         <asp:PlaceHolder ID="phLogIn" runat="server">
             <div class="container" runat="server" id="LoggedOut" visible="true">
@@ -34,7 +36,7 @@
                 <asp:TableRow>
                     <asp:TableCell Text="No of Slots: " Width="150px"></asp:TableCell>
                     <asp:TableCell>
-                         <asp:DropDownList runat="server" ID="drpNoOfSlots" AutoPostBack="true">
+                         <asp:DropDownList runat="server" ID="drpNoOfSlots" AutoPostBack="true" CssClass="btn btn-primary dropdown-toggle">
                                                 <asp:ListItem Text="1" Value="0"></asp:ListItem>
                                                 <asp:ListItem Text="2" Value="1"></asp:ListItem>
                                                 <asp:ListItem Text="3" Value="2"></asp:ListItem>
@@ -45,6 +47,16 @@
                                                 <asp:ListItem Text="8" Value="7"></asp:ListItem>
                                                 <asp:ListItem Text="9" Value="8"></asp:ListItem>
                                                 <asp:ListItem Text="10" Value="9"></asp:ListItem>
+                                                <asp:ListItem Text="11" Value="10"></asp:ListItem>
+                                                <asp:ListItem Text="12" Value="11"></asp:ListItem>
+                                                <asp:ListItem Text="13" Value="12"></asp:ListItem>
+                                                <asp:ListItem Text="14" Value="13"></asp:ListItem>
+                                                <asp:ListItem Text="15" Value="14"></asp:ListItem>
+                                                <asp:ListItem Text="16" Value="15"></asp:ListItem>
+                                                <asp:ListItem Text="17" Value="16"></asp:ListItem>
+                                                <asp:ListItem Text="18" Value="17"></asp:ListItem>
+                                                <asp:ListItem Text="19" Value="18"></asp:ListItem>
+                                                <asp:ListItem Text="20" Value="19"></asp:ListItem>
                                             </asp:DropDownList>
                         <br />
                     </asp:TableCell>
@@ -52,7 +64,7 @@
                 <asp:TableRow>
                     <asp:TableCell Text="Price: " Width="150px"></asp:TableCell>
                     <asp:TableCell>
-                        <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="txtPrice" CssClass="form-control"></asp:TextBox>
                         <br />
                     </asp:TableCell>
                 </asp:TableRow>
@@ -83,7 +95,7 @@
                 </asp:TableRow>
             </asp:Table>
         </div>
-        <div runat="server" id="divTableDesc" visible="false">
+        <div runat="server" id="divTableDesc" visible="true">
             <asp:Table runat="server" ID="tblDesc">
                 <asp:TableRow>
                     <asp:TableCell Text="Description: " Width="150px"></asp:TableCell>
@@ -94,63 +106,26 @@
                 </asp:TableRow>
             </asp:Table>
         </div>
+            <br />
 
         <div class="row">
 
-            <div class="col-2 text-left">
+            <div class="col-sm-12 col-md-2 col-lg-2">
 
                 <asp:Button class='btn btn-basic' runat="server" ID="btnCancel" Visible="true" Text="Cancel" OnClick="btnCancel_Click" />
 
             </div>
-
-            <div class="col-8"></div>
-
-            <div class="col-2 text-right">
+              
+            <div class="col-sm-12 col-md-2 col-lg-2">
 
                 <asp:Button class='btn btn-primary' runat="server" ID="btnUpdate" Visible="true" Text="Update" OnClick="btnUpdate_Click" />
 
             </div>
         </div>
-
+            </div>
+ <div class="col-md-2 col-sm-1"></div>
+    </div>
     </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </asp:Content>
