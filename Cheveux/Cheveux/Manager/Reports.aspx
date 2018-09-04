@@ -81,6 +81,9 @@
                                 <!-- line Break -->
                                 <br />
                                 <asp:Label ID="lError" runat="server" Text="Label" Visible="false"></asp:Label>
+                                <p style="text-align: left; float: left;">
+                                    <a href="../Receptionist/Appointments.aspx?Action=ViewAllSchedules">View Booking Schedules </a>
+                                </p>
                             </div>
                         </div>
                     </div>
