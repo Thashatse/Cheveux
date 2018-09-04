@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-alter PROCEDURE SP_AddSpecialisation 
+CREATE PROCEDURE SP_AddSpecialisation 
 	@employeeID nchar(30), 
 	@serviceID nchar(10)
 AS
