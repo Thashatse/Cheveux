@@ -71,7 +71,7 @@
                                 <h1>Todays Bookings </h1>
                             </p>
                             <p style="text-align: right; float: right;">
-                                <a href="../Receptionist/Appointments.aspx?Action=ViewAllSchedules">View Booking Schedual </a>
+                                <a href="../Receptionist/Appointments.aspx?Action=ViewAllSchedules">View Booking Schedules </a>
                             </p>
                             <!-- Line Break -->
                             <br />
