@@ -2163,7 +2163,12 @@ namespace Cheveux
         protected void calStart_SelectionChanged(object sender, EventArgs e)
         {
             lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
+
             string action = Request.QueryString["Action"];
+
+            checkValidDate(calStart.SelectedDate, calEnd.SelectedDate);
+
+
             if (cookie["UT"] == "R" || (cookie["UT"] == "M" && action == "ViewAllSchedules"))
             {
                 if (drpViewAppt.SelectedValue == "0")//upcoming bookings
@@ -2334,8 +2339,10 @@ namespace Cheveux
         protected void calEnd_SelectionChanged(object sender, EventArgs e)
         {
             lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
+
             string action = Request.QueryString["Action"];
 
+            Page.MaintainScrollPositionOnPostBack = true;
             if (cookie["UT"] == "R" || (cookie["UT"] == "M" && action == "ViewAllSchedules"))
             {
                 if (drpViewAppt.SelectedValue == "0")//upcoming bookings
@@ -2530,6 +2537,29 @@ namespace Cheveux
             {
                 drpSortBy.Items.RemoveAt(1);
                 drpSortBy.Items.Add("Customer");
+            }
+        }
+        public void checkValidDate(DateTime date1, DateTime date2)
+        {
+            if( date1 == null || date2 == null)
+            {
+                valDate.Visible = false;
+            }
+            else if(date1 > date2)
+            {
+                valDate.ForeColor = System.Drawing.Color.Red;
+                valDate.Text = "*Please ensure that Start Date is smaller than End Date";
+                valDate.Visible = true;
+            }
+            else if(date1 == date2)
+            {
+                valDate.ForeColor = System.Drawing.Color.Red;
+                valDate.Visible = true;
+                valDate.Text = "(Tip: In the future select 'Specific day' radio button for bookings of a specific days bookings)";
+            }
+            else
+            {
+                valDate.Visible = false;
             }
         }
     }

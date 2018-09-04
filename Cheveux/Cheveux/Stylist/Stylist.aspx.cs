@@ -150,7 +150,6 @@ namespace Cheveux
                     {
                         function.logAnError("Unable to check if visit record exists[stylist.aspx] err:" + err.ToString());
                     }
-
                     //create row 
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
@@ -217,7 +216,6 @@ namespace Cheveux
                                     //add error to the error log and then display response tab to say that an error has occured
                                     function.logAnError("Error creating visit record [stylist.aspx {btn}] err: " + err.ToString());
                                 }
-
                             };
                             //add button control to the cell
                             buttonCell.Controls.Add(btn);
@@ -235,9 +233,7 @@ namespace Cheveux
                         
                         //add the cell to the row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
-                        
                     }
-
                     //increment i 
                     i++;
                 }
@@ -251,7 +247,6 @@ namespace Cheveux
                                     + "Please report problem to admin or try again later.";
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
                 function.logAnError("Error with getEmpAgenda [stylist.aspx {getAgenda}]. err: "+E.ToString());
-
             }
         }
         public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int i, SP_GetEmpAgenda a)

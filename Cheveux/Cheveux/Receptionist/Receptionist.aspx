@@ -59,7 +59,7 @@
                                         CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpEmpNames_Changed">
                                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
-                                    <i class="fa fa-refresh" onClick="history.go(0)"></i>
+                                    &nbsp&nbsp<i class="fa fa-refresh" onClick="history.go(0)"></i>
                                 </div>
                             </div>
                         </div>

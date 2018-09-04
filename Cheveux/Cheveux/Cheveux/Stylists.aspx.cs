@@ -54,7 +54,6 @@ namespace Cheveux.Cheveux
 
                     TableCell newCell = new TableCell();
                     newCell.Text =  "<h4>" 
-                                  + "Name: "
                                   + u.StylistName.ToString() + "</h4>"
                                   + "<br/>"
                                   + "<h5>Specialisation: "

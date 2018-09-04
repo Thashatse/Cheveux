@@ -54,6 +54,11 @@ namespace Cheveux.Manager
                     if (userID != null)
                     {
                         getStylist(userID);
+                        if (!Page.IsPostBack)
+                        {
+                            rdoType.SelectedValue = "S";
+                            phStylist.Visible = true;
+                        }
                     }
                 }
                 else if(action == "UpdateReceptionist")
@@ -61,6 +66,11 @@ namespace Cheveux.Manager
                     if(userID != null)
                     {
                         getUser(userID);
+                        if (!Page.IsPostBack)
+                        {
+                            rdoType.SelectedValue = "R";
+
+                        }
                     }
                 }
 

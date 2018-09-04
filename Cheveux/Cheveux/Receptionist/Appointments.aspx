@@ -21,9 +21,9 @@
                 <!-- If user is not logged in-->
                 <asp:PlaceHolder ID="phLogin" runat="server">
                     <div class="jumbotron bg-dark text-white" runat="server" id="LoggedOut">
-                            <div class="row">
+                        <div class="row">
                             <div class="col-lg-9 col-md-12 col-sm-12">
-                                <h1>Appointmets</h1>
+                                <h1>View Schedules</h1>
                                 <p>Please Login</p>
                             </div>
                             <div class="col-lg-3 col-md-2 col-sm-2">
@@ -103,10 +103,10 @@
                         <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <asp:RadioButtonList ID="rdoDate" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatLayout="flow">
-                                    <asp:ListItem Text="All &nbsp;" Value="0" ></asp:ListItem>
-                                    <asp:ListItem Text="Today &nbsp;" Value="1" ></asp:ListItem>
-                                    <asp:ListItem Text="Specific Day &nbsp;" Value="2" ></asp:ListItem>
-                                    <asp:ListItem Text="Date Range &nbsp;" Value="3" ></asp:ListItem>
+                                    <asp:ListItem Text="All &nbsp;" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Today &nbsp;" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="Specific Day &nbsp;" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="Date Range &nbsp;" Value="3"></asp:ListItem>
                                 </asp:RadioButtonList>
                             </div>
                         </div>
@@ -131,8 +131,6 @@
                                 </div>
                             </div>
                         </asp:PlaceHolder>
-
-                        <br />
 
                         <!--Date Range -->
                         <asp:PlaceHolder ID="phDateRange" runat="server" Visible="false">
@@ -160,8 +158,15 @@
                                     <asp:Label ID="lblEnd" runat="server" Text="" Visible="false"></asp:Label>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4 col-lg-6">
+                                    <asp:Label ID="valDate" runat="server" Text="" Visible="false"></asp:Label>
+                                </div>
+                            </div>
                         </asp:PlaceHolder>
                     </asp:PlaceHolder>
+
+                    <br />
 
                     <!--Sorting-->
                     <asp:PlaceHolder ID="phSorting" runat="server">
@@ -169,8 +174,8 @@
                             <div class="col-xs-12 col-md-4 col-lg-4">
                                 Direction : 
                                 <asp:DropDownList ID="drpSortDir" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                                    <asp:ListItem Text="Ascending" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Descending" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="Descending" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Ascending" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="col-xs-12 col-md-4 col-lg-4">
