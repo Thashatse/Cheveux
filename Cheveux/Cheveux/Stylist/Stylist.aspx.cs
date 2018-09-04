@@ -45,7 +45,6 @@ namespace Cheveux
             {
                 LoggedOut.Visible = false;
                 LoggedIn.Visible = true;
-
                 lblDate.Text = dayDate;
 
                 cookie = Request.Cookies["CheveuxUserID"];
@@ -123,6 +122,12 @@ namespace Cheveux
                 service.Width = 350;
                 AgendaTable.Rows[0].Cells.Add(service);
 
+                TableCell comment = new TableCell();
+                comment.Text = "Comment";
+                comment.Font.Bold = true;
+                comment.Width = 350;
+                AgendaTable.Rows[0].Cells.Add(comment);
+
                 TableCell arrived = new TableCell();
                 arrived.Text = "Arrived";
                 arrived.Font.Bold = true;
@@ -145,12 +150,15 @@ namespace Cheveux
                     {
                         function.logAnError("Unable to check if visit record exists[stylist.aspx] err:" + err.ToString());
                     }
-
                     //create row 
                     TableRow r = new TableRow();
                     AgendaTable.Rows.Add(r);
 
                     getTimeCustomerServices(a.BookingID, a.PrimaryID, i, a);
+
+                    TableCell c = new TableCell();
+                    c.Text = a.Comment.ToString();
+                    AgendaTable.Rows[i].Cells.Add(c);
 
                     TableCell present = new TableCell();
                     present.Text = function.GetFullArrivedStatus(a.Arrived.ToString()[0]);
@@ -208,7 +216,6 @@ namespace Cheveux
                                     //add error to the error log and then display response tab to say that an error has occured
                                     function.logAnError("Error creating visit record [stylist.aspx {btn}] err: " + err.ToString());
                                 }
-
                             };
                             //add button control to the cell
                             buttonCell.Controls.Add(btn);
@@ -226,9 +233,7 @@ namespace Cheveux
                         
                         //add the cell to the row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
-                        
                     }
-
                     //increment i 
                     i++;
                 }
@@ -242,7 +247,6 @@ namespace Cheveux
                                     + "Please report problem to admin or try again later.";
                 //log error, display error message,redirect to the error which then takes user to the home page if they would like to
                 function.logAnError("Error with getEmpAgenda [stylist.aspx {getAgenda}]. err: "+E.ToString());
-
             }
         }
         public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int i, SP_GetEmpAgenda a)
@@ -262,11 +266,10 @@ namespace Cheveux
                 }
                 catch (Exception serviceErr)
                 {
-                    function.logAnError("Error retreiving services [receptionist.aspx {nested try in getTime method}] method err:" + serviceErr.ToString());
+                    function.logAnError("Error retreiving services [stylist.aspx {nested try in getTime method}] method err:" + serviceErr.ToString());
                 }
-                time = handler.getMultipleServicesTime(primaryBookingID);
 
-                if (bServices.Count < 2)
+                if (bServices.Count == 1)
                 {
                     start.Text = a.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
@@ -276,6 +279,8 @@ namespace Cheveux
                 }
                 else if (bServices.Count >= 2)
                 {
+                    time = handler.getMultipleServicesTime(primaryBookingID);
+
                     start.Text = time.StartTime.ToString("HH:mm");
                     AgendaTable.Rows[i].Cells.Add(start);
 

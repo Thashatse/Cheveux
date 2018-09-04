@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description:	Gets stylists past bookings for a specific date
 -- =============================================
-alter PROCEDURE SP_StylistPastBksForDate
+create PROCEDURE SP_StylistPastBksForDate
 	@stylistID nchar(30),
 	@day datetime,
 	@sortBy nvarchar(max)=null,
@@ -41,7 +41,7 @@ BEGIN
 	Where  b.StylistID = @stylistID
 	AND		b.StylistID = e. EmployeeID
 	AND    B.SlotNo = TS.SlotNo 
-	AND    B.StylistID = U.UserID 
+	AND    B.CustomerID = U.UserID 
 	AND	   B.Arrived = 'Y'
 	AND    B.[Date] = @day
 	AND	   B.[Date] !> CAST(GETDATE() AS DATE)

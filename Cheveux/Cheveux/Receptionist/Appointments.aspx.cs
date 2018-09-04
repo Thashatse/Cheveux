@@ -265,7 +265,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -332,7 +332,7 @@ namespace Cheveux
                                 {
                                     phBookingsErr.Visible = true;
                                     lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                        + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                        + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                                 }
                                 else
                                 {
@@ -405,7 +405,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -474,7 +474,7 @@ namespace Cheveux
                                 {
                                     phBookingsErr.Visible = true;
                                     lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                        + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                        + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                                 }
                                 else
                                 {
@@ -490,7 +490,7 @@ namespace Cheveux
             else if (userType == "S")
             {
                 phCalendars.Visible = true;
-
+                empSelectionType.SelectedValue = "1";
                 drpSortBy.Items.RemoveAt(1);
                 drpSortBy.Items.Add(new ListItem("Customer", "1"));
 
@@ -543,7 +543,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -603,7 +603,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -669,7 +669,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -729,7 +729,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -756,17 +756,16 @@ namespace Cheveux
                 tblEmployee.Rows[0].Cells.Add(userImage);
                 TableRow newRow = new TableRow();
                 tblEmployee.Rows.Add(newRow);
-                //TableCell username = new TableCell();
-                //username.Text = "<p style='font-size:2em !important;'>" + viewEmp.userName.ToString() + "</p>";
-                //username.Font.Bold = true;
-                //tblEmployee.Rows[1].Cells.Add(username);
             }
             catch (Exception Err)
             {
-                phScheduleErr.Visible = true;
-                phMain.Visible = false;
-                errorHeader.Text = "Error displaying User Image.";
-                function.logAnError(Err.ToString());
+                TableRow row = new TableRow();
+                tblEmployee.Rows.Add(row);
+                TableCell userImage = new TableCell();
+                userImage.Text = "Error displaying user image";
+                tblEmployee.Rows[0].Cells.Add(userImage);
+
+                function.logAnError("Couldn't display user image in apts.aspx err:"+Err.ToString());
             }
         }
         #region Stylists bookings
@@ -786,8 +785,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -805,18 +804,18 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -865,8 +864,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -884,18 +883,18 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -944,8 +943,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -963,18 +962,18 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1015,6 +1014,8 @@ namespace Cheveux
         #region Upcoming
         public void getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             tblSchedule.Rows.Clear();
             try
             {
@@ -1029,8 +1030,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1048,22 +1049,25 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
-                TableCell empty = new TableCell();
-                empty.Width = 200;
-                tblSchedule.Rows[0].Cells.Add(empty);
+                if (cookie["UT"] != "S")
+                {
+                    TableCell edit = new TableCell();
+                    edit.Width = 200;
+                    tblSchedule.Rows[0].Cells.Add(edit);
+                }
 
-                empty = new TableCell();
-                empty.Width = 200;
+                TableCell empty = new TableCell();
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1079,16 +1083,19 @@ namespace Cheveux
 
                     getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text = 
-                        "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    if (cookie["UT"] != "S")
+                    {
+                        //edit
+                        TableCell editButton = new TableCell();
+                        editButton.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                    }
 
                     //view booking
-                    buttonCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
@@ -1110,6 +1117,8 @@ namespace Cheveux
 
         public void getStylistUpcomingBksForDate(string id, DateTime bookingDate, string sortBy, string sortDir)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             tblSchedule.Rows.Clear();
             try
             {
@@ -1125,8 +1134,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1144,18 +1153,25 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
+                if (cookie["UT"] != "S")
+                {
+                    TableCell edit = new TableCell();
+                    edit.Width = 200;
+                    tblSchedule.Rows[0].Cells.Add(edit);
+                }
+
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1172,16 +1188,20 @@ namespace Cheveux
 
                     getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                    if (cookie["UT"] != "S")
+                    {
+                        //edit
+                        TableCell editButton = new TableCell();
+                        editButton.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                    }
 
                     //view booking
-                    buttonCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
@@ -1204,6 +1224,8 @@ namespace Cheveux
 
         public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             tblSchedule.Rows.Clear();
             try
             {
@@ -1216,8 +1238,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1235,23 +1257,26 @@ namespace Cheveux
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
 
-                TableCell empty = new TableCell();
-                empty.Width = 200;
-                tblSchedule.Rows[0].Cells.Add(empty);
+                if (cookie["UT"] != "S")
+                {
+                    TableCell edit = new TableCell();
+                    edit.Width = 200;
+                    tblSchedule.Rows[0].Cells.Add(edit);
+                }
 
-                empty = new TableCell();
-                empty.Width = 200;
+                TableCell empty = new TableCell();
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1267,16 +1292,19 @@ namespace Cheveux
 
                     getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                        "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    if (cookie["UT"] != "S")
+                    {
+                        //edit
+                        TableCell editButton = new TableCell();
+                        editButton.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                    }
 
                     //view booking
-                    buttonCell = new TableCell();
+                    TableCell buttonCell = new TableCell();
                     buttonCell.Text =
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
@@ -1316,8 +1344,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1335,28 +1363,28 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 240;
+                emp.Width = 280;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1415,8 +1443,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1434,24 +1462,24 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 240;
+                emp.Width = 280;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1509,8 +1537,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y)";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1528,28 +1556,28 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 240;
+                emp.Width = 280;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1610,8 +1638,8 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell date = new TableCell();
-                date.Text = "Date";
-                date.Width = 240;
+                date.Text = "Date<br/>(d/M/Y) ";
+                date.Width = 300;
                 date.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(date);
 
@@ -1629,24 +1657,24 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 240;
+                emp.Width = 280;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1695,7 +1723,7 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell dateC = new TableCell();
-                dateC.Text = "Date";
+                dateC.Text = "Date<br/>(d/M/Y)";
                 dateC.Width = 240;
                 dateC.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(dateC);
@@ -1714,24 +1742,24 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 240;
+                emp.Width = 280;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -1781,7 +1809,7 @@ namespace Cheveux
                 tblSchedule.Rows.Add(row);
 
                 TableCell dateC = new TableCell();
-                dateC.Text = "Date";
+                dateC.Text = "Date<br/>(d/M/Y)";
                 dateC.Width = 240;
                 dateC.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(dateC);
@@ -1800,24 +1828,24 @@ namespace Cheveux
 
                 TableCell emp = new TableCell();
                 emp.Text = "Employee";
-                emp.Width = 240;
+                emp.Width = 280;
                 emp.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(emp);
 
                 TableCell customer = new TableCell();
                 customer.Text = "Customer";
-                customer.Width = 240;
+                customer.Width = 300;
                 customer.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(customer);
 
                 TableCell svName = new TableCell();
                 svName.Text = "Service";
-                svName.Width = 240;
+                svName.Width = 300;
                 svName.Font.Bold = true;
                 tblSchedule.Rows[0].Cells.Add(svName);
 
                 TableCell empty = new TableCell();
-                empty.Width = 200;
+                empty.Width = 150;
                 tblSchedule.Rows[0].Cells.Add(empty);
 
                 int rowCount = 1;
@@ -2135,7 +2163,12 @@ namespace Cheveux
         protected void calStart_SelectionChanged(object sender, EventArgs e)
         {
             lblStart.Text = calStart.SelectedDate.ToString("dd-MM-yyyy");
+
             string action = Request.QueryString["Action"];
+
+            checkValidDate(calStart.SelectedDate, calEnd.SelectedDate);
+
+
             if (cookie["UT"] == "R" || (cookie["UT"] == "M" && action == "ViewAllSchedules"))
             {
                 if (drpViewAppt.SelectedValue == "0")//upcoming bookings
@@ -2148,7 +2181,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2166,7 +2199,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2188,7 +2221,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2206,7 +2239,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2230,7 +2263,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2248,7 +2281,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2270,7 +2303,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2288,7 +2321,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2306,7 +2339,10 @@ namespace Cheveux
         protected void calEnd_SelectionChanged(object sender, EventArgs e)
         {
             lblEnd.Text = calEnd.SelectedDate.ToString("dd-MM-yyyy");
+
             string action = Request.QueryString["Action"];
+
+            checkValidDate(calStart.SelectedDate,calEnd.SelectedDate);
 
             if (cookie["UT"] == "R" || (cookie["UT"] == "M" && action == "ViewAllSchedules"))
             {
@@ -2320,7 +2356,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2338,7 +2374,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2360,7 +2396,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2378,7 +2414,7 @@ namespace Cheveux
                             {
                                 phBookingsErr.Visible = true;
                                 lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                    + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                    + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                             }
                             else
                             {
@@ -2402,7 +2438,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2420,7 +2456,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2442,7 +2478,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2460,7 +2496,7 @@ namespace Cheveux
                         {
                             phBookingsErr.Visible = true;
                             lblBookingsErr.Text = "Please select a start and end date.<br/>"
-                                                + "Hint: View bookings between 1/1/19(start date) and 12/06/19(end date)";
+                                                + "e.g. View bookings between 1/1/19(start date) and 12/06/19(end date)";
                         }
                         else
                         {
@@ -2502,6 +2538,29 @@ namespace Cheveux
             {
                 drpSortBy.Items.RemoveAt(1);
                 drpSortBy.Items.Add("Customer");
+            }
+        }
+        public void checkValidDate(DateTime date1, DateTime date2)
+        {
+            if( date1 == null || date2 == null)
+            {
+                valDate.Visible = false;
+            }
+            else if(date1 > date2)
+            {
+                valDate.ForeColor = System.Drawing.Color.Red;
+                valDate.Text = "*Please ensure that Start Date is smaller than End Date";
+                valDate.Visible = true;
+            }
+            else if(date1 == date2)
+            {
+                valDate.ForeColor = System.Drawing.Color.Red;
+                valDate.Visible = true;
+                valDate.Text = "(Tip: In the future select 'Specific day' radio button for bookings of a specific days bookings)";
+            }
+            else
+            {
+                valDate.Visible = false;
             }
         }
     }

@@ -16,14 +16,14 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_GetEmployee(S)
+Create PROCEDURE SP_GetEmployee
 @EmployeeID nchar(30)
 AS
 BEGIN
 	Select u.UserImage,u.UserID, u.FirstName, u.LastName, u.UserName, u.Email, u.ContactNo, e.[Type], u.UserImage, 
 		   u.Active, e.AddressLine1, e.AddressLine2, e.Suburb, e.City,e.Bio, ss.ServiceID,
 		   p.[Name]AS[Specialisation], (p.ProductDescription)AS[SpecialisationDescription]
-	From [USER] u, EMPLOYEE e, STYLIST_SERVICE ss,PRODUCT p
+	From [USER] u, [CHEVEUX].[dbo].[EMPLOYEE] e, STYLIST_SERVICE ss,PRODUCT p
 	Where u.UserID = @EmployeeID
 		AND u.UserID = e.EmployeeID
 		AND e.EmployeeID=@EmployeeID

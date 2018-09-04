@@ -122,7 +122,8 @@
                                                
                                             </asp:TableRow>  
                                         </asp:Table>
-                                        <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" />
+                                        <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" /> 
+                                        <asp:Button ID="btnUpdateProduct" runat="server" Text="Update Product"/>
                         </form>
                     </div>
 

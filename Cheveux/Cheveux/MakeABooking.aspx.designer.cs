@@ -202,6 +202,24 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblTime;
         
         /// <summary>
+        /// lblNoOfHoursLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoOfHoursLabel;
+        
+        /// <summary>
+        /// lblNoOfHours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNoOfHours;
+        
+        /// <summary>
         /// lblTotalCostLabel control.
         /// </summary>
         /// <remarks>
@@ -515,6 +533,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAfternoon20;
+        
+        /// <summary>
+        /// divSummaryPic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSummaryPic;
+        
+        /// <summary>
+        /// btnMakeBooking control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMakeBooking;
         
         /// <summary>
         /// divSelectUser control.

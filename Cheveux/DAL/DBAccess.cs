@@ -764,10 +764,9 @@ namespace DAL
                             CustomerName = Convert.ToString(row["CustomerName"]),
                             Date = Convert.ToDateTime(row["Date"]),
                             StartTime = Convert.ToDateTime((row["StartTime"]).ToString()),
-                            EndTime = Convert.ToDateTime((row["EndTime"]).ToString())
+                            EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
+                            Comment = Convert.ToString(row["Comment"])
                         };
-
-
                     }
                     return bookingDTL;
                 }
@@ -1305,17 +1304,13 @@ namespace DAL
                         accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         accessory.BrandID = Convert.ToString("BrandID");
                         accessory.Brandname = Convert.ToString("BrandName");
-                       
-
                     }
-
                 }
             }
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-
             return accessory;
         }
 
@@ -1343,18 +1338,13 @@ namespace DAL
                         treatment.Active = Convert.ToString(row["Active"]);
                         treatment.BrandID = Convert.ToString("BrandID");
                         treatment.Brandname = Convert.ToString("BrandName");
-                        
-
                     }
                 }
             }
-
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }
-
-
             return treatment;
         }
 
@@ -2070,7 +2060,10 @@ namespace DAL
                             {
                                 ServiceID = Convert.ToString(row["ProductID"]),
                                 Name = Convert.ToString(row["Name"]),
-                                ServiceType = Convert.ToChar(row["ServiceType"])
+                                ServiceType = Convert.ToChar(row["ServiceType"]),
+                                Price = Convert.ToDecimal(row["Price"]),
+                                Description = Convert.ToString(row["ProductDescription"]),
+                                Active = Convert.ToChar(row["Active"])
                             };
                             serviceList.Add(services);
                         }
@@ -2754,12 +2747,10 @@ namespace DAL
                                 EndTime = Convert.ToDateTime((row["EndTime"]).ToString()),
                                 CustomerFName = Convert.ToString(row["CustomerFName"]),
                                 EmpFName = Convert.ToString(row["EmpFName"]),
-                                //ServiceName = Convert.ToString(row["ServiceName"]),
-                                //ServiceDesc = Convert.ToString(row["ProductDescription"]),
                                 Arrived = Convert.ToString(row["Arrived"]),
                                 Date = Convert.ToDateTime(row["Date"]),
-                                //ProductID = Convert.ToString(row["ProductID"]),
-                                empID = Convert.ToString(row["EmpID"])
+                                empID = Convert.ToString(row["EmpID"]),
+                                Comment = Convert.ToString(row["Comment"])
                             };
                             agenda.Add(emp);
                         }
@@ -3564,7 +3555,7 @@ namespace DAL
             };
             try
             {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetEmployee(S)",
+                using (DataTable table = DBHelper.ParamSelect("SP_GetEmployee",
             CommandType.StoredProcedure, pars))
                 {
                     if (table.Rows.Count == 1)
@@ -3644,6 +3635,69 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
             }
+        }
+         public SP_GetService GetServiceFromID(string id)
+        {
+            SP_GetService service = null;
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        service = new SP_GetService
+                        {
+                            ServiceName = row["Name"].ToString(),
+                            Description = row["ProductDescription"].ToString()
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+        public SP_GetBraidService GetBraidServiceFromID(string id)
+        {
+            SP_GetBraidService service = null;
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@ServiceID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBraidService",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        service = new SP_GetBraidService
+                        {
+                            StyleDesc = row["styleDesc"].ToString(),
+                            LengthDesc = row["lengthDesc"].ToString(),
+                            WidthDesc = row["widthDesc"].ToString()
+                        };
+                    }
+                    return service;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
         }
     }
 }                  

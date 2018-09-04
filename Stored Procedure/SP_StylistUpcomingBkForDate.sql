@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-alter PROCEDURE SP_StylistUpcomingBkForDate
+create PROCEDURE SP_StylistUpcomingBkForDate
 	@stylistID nchar(30),
 	@day datetime,
 	@sortBy nvarchar(max)=null,
@@ -40,7 +40,7 @@ BEGIN
 	Where  b.StylistID = @stylistID
 	AND		b.StylistID = e. EmployeeID
 	AND    B.SlotNo = TS.SlotNo 
-	AND    B.StylistID = U.UserID 
+	AND    B.CustomerID = U.UserID 
 	AND    B.Arrived = 'N'
 	AND    B.[Date] = @day
 	AND    B.[Date] !< CAST(GETDATE() AS DATE)

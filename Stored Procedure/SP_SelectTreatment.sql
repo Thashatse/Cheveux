@@ -23,7 +23,7 @@ alter PROCEDURE SP_SelectTreatment
 	AS
 BEGIN
 	  SELECT [ProductID]
-      ,PRODUCT.[Name] AS [ProductName]
+      ,PRODUCT.[Name]
       ,[ProductDescription]
       ,[Price]
       ,[ProductType(T/A/S)]

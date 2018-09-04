@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description: Gets stylists past bookings depending on the date range given.
 -- =============================================
-alter PROCEDURE SP_StylistPastBookingsDateRange
+create PROCEDURE SP_StylistPastBookingsDateRange
 	@stylistID nchar(30),
 	@startDate datetime,
 	@endDate datetime,
@@ -42,7 +42,7 @@ BEGIN
 	Where  b.StylistID = @stylistID
 	AND		b.StylistID = e. EmployeeID
 	AND    B.SlotNo = TS.SlotNo 
-	AND    B.StylistID = U.UserID 
+	AND    B.CustomerID = U.UserID 
 		AND	   B.Arrived = 'Y'
 	AND	  (B.[Date] BETWEEN @startDate AND @endDate)
 	and b.BookingID=b.primaryBookingID

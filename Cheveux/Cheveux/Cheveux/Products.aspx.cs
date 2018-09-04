@@ -420,32 +420,45 @@ namespace Cheveux.Cheveux
                 p.Price = Convert.ToDecimal(txtPrice.Text);
                 p.ProductType = drpProductType.SelectedValue.ToString();
                 a.supplierID = drpListSupplier.SelectedValue.ToString();
-                /*
-                if (function.GenerateRandomProductID() == true)
+
+                bool result;
+                result = handler.addAccessories(a, p);
+               
+                if (result == true)
                 {
+                        
                          Response.Redirect("../Manager/Products.aspx");
-                
+                         
                 }
                 else
                 {
                    Response.Redirect("Error.aspx");
                 }
-                */
+                
             }
             else if (drpProductType.SelectedItem.Text == "Treatment")
             {
                 PRODUCT p = new PRODUCT();
                 TREATMENT t = new TREATMENT();
 
+
                 string prodID = function.GenerateRandomProductID();
 
                 t.TreatmentID = prodID;
                 t.Qty = int.Parse(txtQty.Text);
-                t.supplierID = drpBrandList.SelectedValue.ToString();
                 t.BrandID = drpBrandList.SelectedValue.ToString();
-                /*
-                if (function.GenerateRandomProductID() == true)
+                p.Name = txtName.Text;
+                p.ProductDescription = txtProductDescription.Text;
+                p.Price = Convert.ToDecimal(txtPrice.Text);
+                p.ProductType = drpProductType.SelectedValue.ToString();
+                t.supplierID = drpListSupplier.SelectedValue.ToString();
+                t.TreatmentType = productTextBox.Text;
+                bool result;
+                result = handler.addTreatments(t, p);
+
+                if (result == true)
                 {
+
                     Response.Redirect("../Manager/Products.aspx");
 
                 }
@@ -453,24 +466,8 @@ namespace Cheveux.Cheveux
                 {
                     Response.Redirect("Error.aspx");
                 }
-                */
-                /*
-                 * create product and treatment object
-                 * set their variables
-                 *call add methods 
-                 * if successful redirect to a different page
-                 * if not successful display an error
-                 */
 
 
-                //if (call method and if true  redirect)
-                //{
-                //    //if successful redirect to a different page
-                //}
-                //else
-                //{
-                //    //if not successful display an error
-                //}
             }
 
 

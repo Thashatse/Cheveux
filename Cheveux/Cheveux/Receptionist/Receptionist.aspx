@@ -22,7 +22,7 @@
                 <!--jumbotron page heading-->
                 <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
                     <!--Date-->
-                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
+                    <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                     <br />
                     <!--Welcome-->
                     <asp:Label ID="Welcome" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
@@ -59,6 +59,7 @@
                                         CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpEmpNames_Changed">
                                         <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                                     </asp:DropDownList>
+                                    &nbsp&nbsp<i class="fa fa-refresh" onClick="history.go(0)"></i>
                                 </div>
                             </div>
                         </div>

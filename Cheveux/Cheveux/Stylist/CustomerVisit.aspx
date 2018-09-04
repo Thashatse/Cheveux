@@ -47,6 +47,14 @@
                             </asp:PlaceHolder>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <asp:PlaceHolder  ID="phOther" runat="server">
+                                <asp:Table runat="server" ID="tblOther">
+                                </asp:Table>
+                            </asp:PlaceHolder>
+                        </div>
+                    </div>
                 </div>
 
                 <!--Error: If details cant be displayed-->
@@ -80,7 +88,7 @@
                          <div class="container" runat="server" id="LoggedOut" visible="true">
                     <div class="jumbotron bg-dark text-white">
                         <h1>Please Log-in to proceed</h1>
-                        <button type="button" class="btn btn-default">
+                        <button type="button" class="btn btn-primary">
                             <a href="../Authentication/Accounts.aspx?PreviousPage=Stylist.aspx" id="LogedOutButton">Login</a>
                         </button>
                     </div>

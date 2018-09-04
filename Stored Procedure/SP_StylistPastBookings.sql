@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-alter PROCEDURE SP_StylistPastBookings 
+create PROCEDURE SP_StylistPastBookings 
 	@stylistID nchar(30),
 	@sortBy nvarchar(max)=null,
 	@sortDir nvarchar(max)=null
@@ -39,7 +39,7 @@ BEGIN
 	Where  b.StylistID = @stylistID
 	AND		b.StylistID = e. EmployeeID
 	AND    B.SlotNo = TS.SlotNo 
-	AND    B.StylistID = U.UserID 
+	AND    B.CustomerID = U.UserID 
 	AND	   B.Arrived = 'Y'
 	AND	   B.[Date] !> CAST(GETDATE() AS DATE)
 	and b.BookingID=b.primaryBookingID

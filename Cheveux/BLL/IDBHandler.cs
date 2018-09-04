@@ -70,6 +70,8 @@ namespace BLL
         List<SP_GetStyles> BLL_GetStyles();
         bool BLL_AddBraidService(BRAID_SERVICE bs);
         bool updateService(PRODUCT p, SERVICE s);
+                SP_GetService BLL_GetServiceFromID(string serviceID);
+        SP_GetBraidService BLL_GetBraidServiceFromID(string serviceID);
         #endregion
 
         #region Manager Dash Board

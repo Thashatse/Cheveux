@@ -156,7 +156,8 @@ namespace Cheveux
                     divConfirm.Visible = true;
                     deleteUser();
                 }
-            } else if (cookie == null)
+            }
+            else if (cookie == null)
             {
                 //if the user is requesting to see a stylis profile
                 string action = Request.QueryString["Action"];
@@ -245,7 +246,7 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                    newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
                         "'>" + specialisationAndBio.serviceName + "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
@@ -263,7 +264,7 @@ namespace Cheveux
                     newCell.Width = 300;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href = 'ViewProduct.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
+                    newCell.Text = "<a href = '../cheveux/services.aspx?ProductID=" + specialisationAndBio.serviceID.ToString().Replace(" ", string.Empty) +
                         "'>"+specialisationAndBio.serviceDescription+ "</a>";
                     newCell.Width = 700;
                     profileTable.Rows[rowCount].Cells.Add(newCell);
@@ -1506,6 +1507,7 @@ namespace Cheveux
                         rowCount++;
                     }
                 }
+
                 if (rowCount == 1)
                 {
                     // if there aren't let the user know
@@ -1556,6 +1558,7 @@ namespace Cheveux
                             "&empID=" + booking.stylistEmployeeID.ToString().Replace(" ", string.Empty) +
                             "'>" + booking.stylistFirstName.ToString() + "</a>";
             pastBookings.Rows[rowCount].Cells.Add(newCell);
+
             newCell = new TableCell();
             if (bookingServiceList.Count == 1)
             {
@@ -1586,9 +1589,10 @@ namespace Cheveux
                 }
                 newCell.Text = "<a title='" + toolTip + "'" +
                     "href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past'> Multiple </a>";
+                    "'> Multiple </a>";
             }
             pastBookings.Rows[rowCount].Cells.Add(newCell);
+
             if (booking.arrived.ToString()[0] != 'N')
             {
                 newCell = new TableCell();

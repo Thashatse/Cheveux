@@ -4,6 +4,7 @@
     Make A Booking - Cheveux
 </asp:content>
 <asp:content id="Content2" contentplaceholderid="head" runat="server">
+    </script>
 </asp:content>
 <asp:content id="Content3" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <div class="bg-secondary text-white" id="Div1">
@@ -43,7 +44,7 @@
                         <asp:label runat="server" ID="lblGoService" Text="Service"></asp:label>&nbsp;-&nbsp;
                            <asp:label runat="server" ID="lblGoStylist"  Text="Hairstylist  "></asp:label>&nbsp;-&nbsp;
                            <asp:label runat="server" ID="lblGoDateTime" Text="Date & Time  "></asp:label>&nbsp;-&nbsp;
-                        <asp:label runat="server" ID="lblGoCustomer" visible="false" Text="Customer  &nbsp;-&nbsp;"></asp:label>
+                        <asp:label runat="server" ID="lblGoCustomer"  visible="false" Text="Customer  &nbsp;-&nbsp;"></asp:label>
                            <asp:label runat="server" ID="lblGoSummary" Text="Summary"></asp:label>
                     </div>
 
@@ -128,15 +129,23 @@
                                                 <asp:Label runat="server" ID="lblTime"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
-
                                         <asp:TableRow>
-                                                                                        <asp:TableCell >
-                                                <asp:Label runat="server" ID="lblTotalCostLabel"></asp:Label>
+                                            <asp:TableCell >
+                                                <asp:Label runat="server" ID="lblNoOfHoursLabel"></asp:Label>
                                             </asp:TableCell>
                                             <asp:TableCell>
+                                                <asp:Label runat="server" ID="lblNoOfHours"></asp:Label>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                        <asp:TableRow>
+                                                <asp:TableCell >
+                                                <asp:Label runat="server" ID="lblTotalCostLabel"></asp:Label>
+                                            </asp:TableCell>
+                                            <asp:TableCell >
                                                 <asp:Label runat="server" ID="lblTotalCost"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
+                                        
                                         <asp:TableRow>
                                             <asp:TableCell >
                                                 <asp:Label runat="server" ID="lblCommentLabel"></asp:Label>
@@ -262,7 +271,14 @@
                                     </div>
                                 </div>
                             </div>
-
+                             <div runat="server" id="divSummaryPic" visible="false" style="height: 400px; " class="text-center">
+                                 <br />
+                                        <img src="/Theam/img/checkbox.png" alt="Edit" width="300"
+                                                height="200" class="img-fluid" />
+                                 <br />
+                                 <br />
+                                     <asp:Button runat="server" Text="Submit" id="btnMakeBooking" onclick="btnNext_Click" class='btn btn-primary'></asp:Button>
+                              </div>
                             <div runat="server" id="divSelectUser" visible="false" 
                                 style="border: solid #F05F40 2px; height: 400px;">
                                 <!--User-->
@@ -296,4 +312,5 @@
         </div>
         <div class="col-md-1 col-sm-1"></div>
     </div>
+    
 </asp:content>

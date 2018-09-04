@@ -86,46 +86,56 @@ namespace Cheveux
 
                 newRow = new TableRow();
                 newRow.Height = 50;
-                allBookingTable.Rows.Add(newRow);
+                tblOther.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Date:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                tblOther.Rows[0].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Text = bDTL.Date.ToString("dd-MM-yyy");
                 newCell.Width = 300;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                rCnt++;
+                tblOther.Rows[0].Cells.Add(newCell);
 
                 newRow = new TableRow();
                 newRow.Height = 50;
-                allBookingTable.Rows.Add(newRow);
+                tblOther.Rows.Add(newRow);
                 newCell = new TableCell();
                 newCell.Font.Bold = true;
                 newCell.Text = "Booking comment:";
                 newCell.Width = 300;
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                tblOther.Rows[1].Cells.Add(newCell);
                 newCell = new TableCell();
                 newCell.Width = 300;
                 TextBox descBox = new TextBox();
                 descBox.ID = "bookingComment";
+                if(bDTL.Comment != string.Empty)
+                {
+                    descBox.Text =bDTL.Comment.ToString();
+                }
                 descBox.CssClass = "form-control";
+                //descBox.MaxLength = 50;
                 newCell.Controls.Add(descBox);
-                allBookingTable.Rows[rCnt].Cells.Add(newCell);
-                rCnt++;
+                tblOther.Rows[1].Cells.Add(newCell);
 
                 newRow = new TableRow();
-                allBookingTable.Rows.Add(newRow);
+                tblOther.Rows.Add(newRow);
+                TableCell len = new TableCell();
+                len.Text = "*Please keep the comment short and descriptive";
+                len.ForeColor = System.Drawing.Color.Red;
+                len.Visible = false;
+                tblOther.Rows[2].Cells.Add(len);
+
+                newRow = new TableRow();
+                tblOther.Rows.Add(newRow);
                 TableCell val = new TableCell();
                 val.Text = "*Please enter comment";
                 val.ForeColor = System.Drawing.Color.Red;
                 val.Visible = false;
-                allBookingTable.Rows[rCnt].Cells.Add(val);
-                rCnt++;
+                tblOther.Rows[3].Cells.Add(val);
 
                 newRow = new TableRow();
-                allBookingTable.Rows.Add(newRow);
+                tblOther.Rows.Add(newRow);
                 TableCell createVisit = new TableCell();
                 createVisit.Width = 300;
                 Button btnVisit = new Button();
@@ -147,6 +157,10 @@ namespace Cheveux
                         if (b.Comment == string.Empty || b.Comment == null)
                         {
                             val.Visible = true;
+                        }
+                        if(b.Comment.Length > 50)
+                        {
+                            len.Visible = true;   
                         }
                         else
                         {
@@ -173,8 +187,7 @@ namespace Cheveux
                     }
                 };
                 createVisit.Controls.Add(btnVisit);
-                allBookingTable.Rows[rCnt].Cells.Add(createVisit);
-                rCnt++;
+                tblOther.Rows[4].Cells.Add(createVisit);
             }
             catch(Exception Err)
             {
