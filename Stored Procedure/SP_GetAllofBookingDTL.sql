@@ -21,7 +21,7 @@ GO
 -- Create date: 04.06.2018
 -- Description:	Gets all details of booking
 -- =============================================
-Create PROCEDURE SP_GetAllofBookingDTL
+alter PROCEDURE SP_GetAllofBookingDTL
 	@BookingID nchar(10),
 	@CustomerID nchar(30) null
 AS

@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	gets all treatments and thier details from the product, treatment and brand tables
 -- =============================================
-create PROCEDURE SP_GetAllTreatments
+alter  PROCEDURE SP_GetAllTreatments
 AS
 BEGIN
 	SELECT [ProductID]

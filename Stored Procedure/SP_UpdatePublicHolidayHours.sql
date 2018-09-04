@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	updates the public holiday hours in the Bussiness Table
 -- =============================================
-create PROCEDURE SP_UpdatePublicHolidayHours
+alter PROCEDURE SP_UpdatePublicHolidayHours
 	@start time(7),
 	@end time(7),
 	@BusinessID nchar(10)

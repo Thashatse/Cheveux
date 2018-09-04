@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-Create PROCEDURE SP_getInvoiceDL 
+alter PROCEDURE SP_getInvoiceDL 
 	@BookingID nchar(10)
 AS
 BEGIN

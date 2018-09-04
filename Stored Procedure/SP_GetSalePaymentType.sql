@@ -11,7 +11,7 @@ GO
 -- =============================================
 -- Description:	given sale id returns the payment type
 -- =============================================
-CREATE PROCEDURE SP_GetSalePaymentType 
+alter PROCEDURE SP_GetSalePaymentType 
 	@SaleID nchar(10)
 AS
 BEGIN

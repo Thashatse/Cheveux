@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Returnst the password for the user account matching the username or emailaddress
 -- =============================================
-CREATE PROCEDURE SP_GetPasHash
+alter  PROCEDURE SP_GetPasHash
 	@identifier nvarchar(50)
 AS
 BEGIN

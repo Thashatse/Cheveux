@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Add reset code to user account withh matching email address or username
 -- =============================================
-CREATE PROCEDURE SP_CreateRestCode
+alter PROCEDURE SP_CreateRestCode
 	-- Add the parameters for the stored procedure here
 	@restCode nchar(30),
 	@Email varchar(50)

@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROCEDURE SP_SearchByTermAndType
+alter PROCEDURE SP_SearchByTermAndType
 	@SearchTerm nchar(50),
 	@ProdType char(1)
 AS

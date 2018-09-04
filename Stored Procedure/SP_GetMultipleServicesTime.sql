@@ -21,7 +21,7 @@ GO
 -- Description: Gets the start time and the end time for the bookings 
 --              which have multiple services (service > 1 ) 
 -- =============================================
-create PROCEDURE SP_GetMultipleServicesTime
+alter PROCEDURE SP_GetMultipleServicesTime
 	@primaryBookingID nchar(10)
 AS
 BEGIN

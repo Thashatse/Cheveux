@@ -21,7 +21,7 @@ GO
 -- Create date: 04.06.2018
 -- Description:	Updates Existing Customer Visit.
 -- =============================================
-create PROCEDURE SP_UpdateCustVisit
+alter PROCEDURE SP_UpdateCustVisit
 	@CustomerID nchar(30),
 	@BookingID nchar(10),
 	@Description varchar(max)

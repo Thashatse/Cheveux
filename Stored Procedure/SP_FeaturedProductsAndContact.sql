@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Get the features stylists and contact us info
 -- =============================================
-CREATE PROCEDURE SP_FeaturedProductsAndContact 
+alter  PROCEDURE SP_FeaturedProductsAndContact 
 AS
 BEGIN
 	SELECT [FeatureID], [ItemID], [ImageURL], [USER].FirstName, [USER].ContactNo, [USER].Email

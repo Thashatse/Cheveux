@@ -10,7 +10,7 @@ GO
 -- Create date: 24.05.2018
 -- Description:	Gets names of active employees.
 -- =============================================
-create PROCEDURE [dbo].[SP_GetEmpNames]
+alter PROCEDURE [dbo].[SP_GetEmpNames]
 AS
 BEGIN 
 	SET NOCOUNT ON;

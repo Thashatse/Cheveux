@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description:	Gets bookings for all stylists for a specific day
 -- =============================================
-CREATE PROCEDURE SP_AllStylistsUpcomingBksForDate
+alter PROCEDURE SP_AllStylistsUpcomingBksForDate
 @bookingDate datetime,
 @sortBy nvarchar(max)=null,
 	@sortDir nvarchar(max)=null

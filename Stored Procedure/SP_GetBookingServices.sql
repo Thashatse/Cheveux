@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Returns services for a specific booking
 -- =============================================
-CREATE PROCEDURE SP_GetBookingServices
+alter  PROCEDURE SP_GetBookingServices
 	@BookingID nchar(10)
 AS
 BEGIN

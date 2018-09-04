@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	adds payment type to existing sales record
 -- =============================================
-CREATE PROCEDURE SP_AddPaymentTypeToSalesRecord
+alter  PROCEDURE SP_AddPaymentTypeToSalesRecord
 	@PaymentType nchar(10),
 	@SaleD nchar(10)
 AS

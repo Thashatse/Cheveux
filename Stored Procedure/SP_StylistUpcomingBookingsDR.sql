@@ -20,7 +20,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description: Get upcoming bookings for a specific stylist according to date range.
 -- =============================================
-create PROCEDURE [dbo].[SP_StylistUpcomingBookingsDR]
+alter PROCEDURE [dbo].[SP_StylistUpcomingBookingsDR]
 	@stylistID nchar(30),
 	@startDate datetime,
 	@endDate datetime,

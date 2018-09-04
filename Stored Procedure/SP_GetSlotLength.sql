@@ -18,7 +18,7 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE SP_GetSlotLength 
+alter PROCEDURE SP_GetSlotLength 
 	@ServiceID nchar(10)
 AS
 BEGIN

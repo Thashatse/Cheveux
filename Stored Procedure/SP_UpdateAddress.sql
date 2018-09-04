@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	updates the addres in the Bussiness Table
 -- =============================================
-create PROCEDURE SP_UpdateAddress
+alter PROCEDURE SP_UpdateAddress
 	@addline1 varchar(max),
 	@addline2 varchar(max),
 	@BusinessID nchar(10)

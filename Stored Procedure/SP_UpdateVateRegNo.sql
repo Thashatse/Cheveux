@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	updates the Vate reg no in the Bussiness Table
 -- =============================================
-create PROCEDURE SP_UpdateVateRegNo 
+alter PROCEDURE SP_UpdateVateRegNo 
 	@VatRegno nchar(10),
 	@BusinessID nchar(10)
 AS

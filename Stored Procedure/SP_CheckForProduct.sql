@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	check for a matching exisiting Product with given ID
 -- =============================================
-CREATE PROCEDURE SP_CheckForProduct 
+alter  PROCEDURE SP_CheckForProduct 
 	@ProductID nchar(10)
 AS
 BEGIN
