@@ -2342,7 +2342,8 @@ namespace Cheveux
 
             string action = Request.QueryString["Action"];
 
-            Page.MaintainScrollPositionOnPostBack = true;
+            checkValidDate(calStart.SelectedDate,calEnd.SelectedDate);
+
             if (cookie["UT"] == "R" || (cookie["UT"] == "M" && action == "ViewAllSchedules"))
             {
                 if (drpViewAppt.SelectedValue == "0")//upcoming bookings
