@@ -99,23 +99,32 @@ namespace Cheveux
                         function.logAnError(Err.ToString());
                     }
                 }
+
                 try
                 {
                     /*if the selected valus is not the "select employee" display the employee names
                      * if the selected value is the "select employee" nothing will be displayed or added to the table
                      * getAgenda method will not run
                      */
-                    if (drpEmpNames.SelectedValue != "-1")
-                    {
+
                         getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate),null,null);
 
                         if (AgendaTable.Rows.Count == 1)
                         {
+                            
+                            if (drpEmpNames.Text== "Stylist names unavailable")
+                            {
+                            AgendaTable.Visible = false;
+                            noBookingsPH.Visible = false;
+                            }
+                            else
+                            {
                             AgendaTable.Visible = false;
                             noBookingsPH.Visible = true;
                             lblNoBookings.Text = drpEmpNames.SelectedItem.Text +
-                                                " has not been appointed to any bookings today."
-                                                + "<br/>Refresh for updated stylists appointments.";
+                                                                                " has not been appointed to any bookings today."
+                                                                                + "<br/>Refresh for updated stylists appointments.";
+                            }
                         }
                         else if(AgendaTable.Rows.Count > 1)
                         {
@@ -123,7 +132,6 @@ namespace Cheveux
                             AgendaTable.Visible = true;
                         }
                         
-                    }
                 }
                 catch (Exception Err)
                 {
