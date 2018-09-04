@@ -147,6 +147,11 @@ namespace Cheveux
             #endregion
 
             bookingTime = new HttpCookie("BookTime");
+            if(bookingTime != null)
+            {
+                bookingTime.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(bookingTime);
+            }
             lblChoose.Text = "Booking Summary...";
             lblChoose.Font.Size = 18;
             lblChoose.ForeColor = Color.Gray;
@@ -387,12 +392,12 @@ namespace Cheveux
                                 {
                                     if (serviceCount == 0)
                                     {
-                                        lblServices.Text = name;
+                                        tblBookingSummary.Rows[1].Cells[1].Text = name;
                                         serviceCount++;
                                     }
                                     else
                                     {
-                                        lblServices.Text += ", " + name;
+                                        tblBookingSummary.Rows[1].Cells[1].Text += ", " + name;
                                     }
 
                                 }
@@ -563,7 +568,7 @@ namespace Cheveux
                                 body.AppendLine(@"");
                                 body.AppendLine(@"");
                                 body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
-                                body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
+                                body.AppendLine(@"Your booking is for " + tblBookingSummary.Rows[1].Cells[1].Text.ToString() + ".");
                                 body.AppendLine(@"");
                                 body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
                                 body.AppendLine(@"");
@@ -584,7 +589,7 @@ namespace Cheveux
                                 body.AppendLine(@"");
                                 body.AppendLine(@"");
                                 body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
-                                body.AppendLine(@"Your booking is for " + lblServices.Text.ToString() + ".");
+                                body.AppendLine(@"Your booking is for " + tblBookingSummary.Rows[1].Cells[1].Text.ToString() + ".");
                                 body.AppendLine(@"");
                                 body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
                                 body.AppendLine(@"");
@@ -640,7 +645,7 @@ namespace Cheveux
             {
                 if (btnPrevious.Text == "Choose Service(s)")
                 {
-
+                    divSummaryPic.Visible = false;
                     divServices.Visible = true;
                     lblGoService.ForeColor = Color.FromArgb(240, 95, 64);
                     lblGoService.Font.Bold = true;
@@ -653,6 +658,7 @@ namespace Cheveux
                 }
                 else if (btnPrevious.Text == "Choose Hairstylist")
                 {
+                    divSummaryPic.Visible = false;
                     divStylist.Visible = true;
                     lblGoService.ForeColor = Color.Gray;
                     lblGoService.Font.Bold = false;
@@ -669,6 +675,7 @@ namespace Cheveux
                 else if (btnPrevious.Text == "Choose Date & Time")
                 {
                     divSelectUser.Visible = false;
+                    divSummaryPic.Visible = false;
                     divDateTime.Visible = true;
                     btnPrevious.Visible = true;
                     btnPrevious.Text = "Choose Hairstylist";
@@ -1613,7 +1620,6 @@ namespace Cheveux
         private void FillSummary(object sender, EventArgs e)
         {
             lblServiceLabel.Text = "";
-            lblServices.Text = "";
             lblStylistLabel.Text = "";
             lblStylist.Text = "";
             lblDateLabel.Text = "";
@@ -1627,7 +1633,16 @@ namespace Cheveux
             lblCommentLabel.Text = "";
             txtComment.Visible = false;
             HttpCookie bookingTime = Request.Cookies["BookTime"];
-            double hours = CalculateSlotLength(sender, e) / 2.0;
+            int hours = CalculateSlotLength(sender, e) / 2;
+            int minutes;
+            if((CalculateSlotLength(sender, e)%2) == 1)
+            {
+                minutes = 30;
+            }
+            else
+            {
+                minutes = 00;
+            }
 
             
             try
@@ -1638,11 +1653,11 @@ namespace Cheveux
                     lblServiceLabel.Text = "Service(s): ";
                     if(rblPickAServiceA.SelectedValue != "0")
                     {
-                        lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                        tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceA.SelectedItem.Text;
                     }
                     if (rblPickAServiceB.SelectedValue != "0")
                     {
-                        lblServices.Text = rblPickAServiceB.SelectedItem.Text;
+                        tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceB.SelectedItem.Text;
                     }
                     if (cblPickAServiceN.SelectedValue != "0")
                     {
@@ -1651,13 +1666,29 @@ namespace Cheveux
                         {
                             if (item.Selected)
                             {
-                                    lblServices.Text = item.Text;
+                                tblBookingSummary.Rows[1].Cells[1].Text = item.Text;
 
                             }
                         }
                     }
-                    
-                   
+                    if(hours == 0 && minutes == 30)
+                    {
+                        lblNoOfHoursLabel.Text = "No. of Hours: ";
+                        lblNoOfHours.Text = minutes.ToString() + "min(s)";
+                    }
+                    else if(hours > 0 && minutes == 00)
+                    {
+                        lblNoOfHoursLabel.Text = "No. of Hours: ";
+                        lblNoOfHours.Text = hours.ToString() + "hr(s) ";
+                    }
+                    else if(hours > 0 && minutes == 30)
+                    {
+                        lblNoOfHoursLabel.Text = "No. of Hours: ";
+                        lblNoOfHours.Text = hours.ToString() + "hr(s) " + minutes.ToString() + "min(s)";
+                    }
+                  
+
+
                 }
                 else if(pickedServiceID.Count > 1)
                 {
@@ -1668,12 +1699,12 @@ namespace Cheveux
                     {
                         if (count == 0)
                         {
-                            lblServices.Text = rblPickAServiceA.SelectedItem.Text;
+                            tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceA.SelectedItem.Text;
                             count++;
                         }
                         else
                         {
-                           lblServices.Text += ", " + rblPickAServiceA.SelectedItem.Text;
+                            tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceA.SelectedItem.Text;
                         }
          
                     }
@@ -1681,12 +1712,12 @@ namespace Cheveux
                     {
                         if(count == 0)
                         {
-                            lblServices.Text = rblPickAServiceB.SelectedItem.Text;
+                            tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceB.SelectedItem.Text;
                             count++;
                         }
                         else
                         {
-                            lblServices.Text += ", " + rblPickAServiceB.SelectedItem.Text;
+                            tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceB.SelectedItem.Text;
                         }
                     }
                     if (cblPickAServiceN.SelectedValue != "0")
@@ -1698,16 +1729,31 @@ namespace Cheveux
                             {                             
                                 if(count == 0)
                                 {
-                                    lblServices.Text = item.Text;
+                                    tblBookingSummary.Rows[1].Cells[1].Text = item.Text;
                                     count++;
                                 }
                                 else
-                                {lblServices.Text += ", " + item.Text;
-
+                                {
+                                    tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + item.Text;
                                 }
                                                            
                             }
                         }
+                    }
+                    if (hours == 0 && minutes == 30)
+                    {
+                        lblNoOfHoursLabel.Text = "No. of Hours: ";
+                        lblNoOfHours.Text = minutes.ToString() + "min(s)";
+                    }
+                    else if (hours > 0 && minutes == 00)
+                    {
+                        lblNoOfHoursLabel.Text = "No. of Hours: ";
+                        lblNoOfHours.Text = hours.ToString() + "hr(s) ";
+                    }
+                    else if (hours > 0 && minutes == 30)
+                    {
+                        lblNoOfHoursLabel.Text = "No. of Hours: ";
+                        lblNoOfHours.Text = hours.ToString() + "hr(s) " + minutes.ToString() + "min(s)";
                     }
 
                 }
@@ -1739,12 +1785,11 @@ namespace Cheveux
                     lblDate.Text = "";
                 }
                 
-                if(bookingTime != null)
+                if(bookingTime != null && bookingTime.Value != null)
                 {
                     lblTimeLabel.Text = "Time: ";
                     lblTime.Text = bookingTime["Time"];
-                    lblNoOfHoursLabel.Text = "No. of Hours: ";
-                    lblNoOfHours.Text = hours.ToString() + "hr(s)";
+     
                 }
                 else
                 {
@@ -1787,6 +1832,12 @@ namespace Cheveux
 
         protected void lbPickAStylist_SelectionIndexChanged(object sender, EventArgs e)
         {
+            HideButtons();
+            if (bookingTime != null)
+            {
+                bookingTime.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(bookingTime);
+            }
             LoadSummary(sender, e);
         }
         #endregion

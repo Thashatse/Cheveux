@@ -89,7 +89,6 @@
                                                 <asp:Label runat="server" ID="lblServiceLabel"></asp:Label>
                                             </asp:TableCell>
                                             <asp:TableCell width="170px">
-                                                <asp:Label runat="server" ID="lblServices" ></asp:Label>
                                             </asp:TableCell>
 </asp:TableRow>
 
