@@ -176,12 +176,8 @@ namespace Cheveux
                         }
                         catch (Exception Err)
                         {
-                            drpStylistNames.Text = "Cannot retrieve names";
-                            phScheduleErr.Visible = true;
-                            errorHeader.Text = "Error retrieving employee names";
-                            errorMessage.Text = "It seems there is a problem retrieving data from the database"
-                                                + "Please report problem or try again later.";
-                            function.logAnError(Err.ToString());
+                           drpStylistNames.Items.Add("Stylist names unavailable");
+                           function.logAnError(Err.ToString());
                         }
                     }
                     DropDownChanges(cookie["UT"].ToString());
