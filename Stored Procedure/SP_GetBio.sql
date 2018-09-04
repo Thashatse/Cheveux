@@ -15,7 +15,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- =============================================
-alter PROCEDURE SP_GetBio
+CREATE PROCEDURE SP_GetBio
 	@EmployeeID nchar(30)
 AS
 BEGIN
