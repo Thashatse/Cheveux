@@ -55,7 +55,7 @@ namespace Cheveux
                 {
                     AgendaTable.Visible = false;
                     noBookingsPH.Visible = true;
-                    lblNoBookings.Text = "You have no bookings for the day.<br/> Refresh page for update";
+                    lblNoBookings.Text = "You have no bookings for the day.<br/> Refresh page for update  <i class='fa fa-refresh' onClick='history.go(0)'></i>";
                 }
                 else
                 {
