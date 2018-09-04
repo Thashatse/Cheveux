@@ -96,34 +96,7 @@ namespace Cheveux.Manager
             }
             else if (drpReport.SelectedIndex == 1)
             {
-                reportByContainer.Visible = true;
-                if (ddlReportFor.SelectedIndex == -1)
-                {
-                    if (ddlReportFor.SelectedIndex == -1)
-                    {
-                        Response.Redirect("../Receptionist/Appointments.aspx?Action=ViewAllSchedules");
-                    }
-                }
-
-                if (ddlReportFor.SelectedValue != "-1"
-                    && CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
-                    && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
-                {
-                    reportDateRangeContainer.Visible = true;
-                    divReport.Visible = true;
-                    //display the bookings report
-                    getBookingForHairstylistDateRange(true);
-                }
-
-                if (ddlReportFor.SelectedValue != "-1" 
-                    && CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00" 
-                    && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
-                {
-                    divReport.Visible = true;
-                    //display the bookings report
-                    getBookingForHairstylistDateRange(false);
-                }
-
+                Response.Redirect("../Receptionist/Appointments.aspx?Action=ViewAllSchedules");
             }
         }
 
