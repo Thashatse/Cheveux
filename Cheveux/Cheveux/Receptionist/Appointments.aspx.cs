@@ -74,6 +74,7 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnPrint.Visible = false;
             errorCssStyles();
             cookie = Request.Cookies["CheveuxUserID"];
 
@@ -760,6 +761,7 @@ namespace Cheveux
                 function.logAnError("Couldn't display user image in apts.aspx err:"+Err.ToString());
             }
         }
+
         #region Stylists bookings
 
         #region Past
@@ -832,6 +834,7 @@ namespace Cheveux
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -920,6 +923,7 @@ namespace Cheveux
                                     + "Please report problem to admin or try again later.";
                 function.logAnError(Err.ToString());
             }
+            btnPrint.Visible = true;
         }
         public void getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
@@ -991,6 +995,7 @@ namespace Cheveux
 
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1096,6 +1101,7 @@ namespace Cheveux
                     
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1202,6 +1208,7 @@ namespace Cheveux
 
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception E)
             {
@@ -1305,6 +1312,7 @@ namespace Cheveux
 
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1410,6 +1418,7 @@ namespace Cheveux
 
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1504,6 +1513,7 @@ namespace Cheveux
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1603,6 +1613,7 @@ namespace Cheveux
 
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1691,6 +1702,7 @@ namespace Cheveux
                     tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1777,6 +1789,7 @@ namespace Cheveux
 
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1863,6 +1876,7 @@ namespace Cheveux
 
                     rowCount++;
                 }
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -1876,6 +1890,7 @@ namespace Cheveux
         #endregion
 
         #endregion
+
         public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int i, SP_GetStylistBookings a)
         {
             #region Time
@@ -1914,7 +1929,7 @@ namespace Cheveux
                     end.Text = time.EndTime.ToString("HH:mm");
                     tblSchedule.Rows[i].Cells.Add(end);
                 }
-
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -2003,6 +2018,7 @@ namespace Cheveux
                         "'> Multiple Services </a>";
                 }
                 tblSchedule.Rows[i].Cells.Add(services);
+                btnPrint.Visible = true;
             }
             catch (Exception Err)
             {
@@ -2016,6 +2032,7 @@ namespace Cheveux
 
             #endregion
         }
+
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
             lblDay.Text = calDay.SelectedDate.ToString("dd-MM-yyyy");
@@ -2532,6 +2549,7 @@ namespace Cheveux
                 drpSortBy.Items.Add("Customer");
             }
         }
+
         public void checkValidDate(DateTime date1, DateTime date2)
         {
             if( date1 == null || date2 == null)
@@ -2554,6 +2572,29 @@ namespace Cheveux
             {
                 valDate.Visible = false;
             }
+        }
+
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+            divPrintHeader.Visible = true;
+
+            phLogin.Visible = false;
+            dontPrint.Visible = false;
+            phScheduleErr.Visible = false;
+
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            tblLogo.Rows.Add(newRow);
+            TableCell newCell = new TableCell();
+            newCell.Font.Bold = true;
+            newCell.Font.Bold = true;
+            newCell.Text = "<a class='navbar-brand js-scroll-trigger' href='#' onClick='window.print()'>Cheveux </a>";
+            tblLogo.Rows[0].Cells.Add(newCell);
+
+            //print the report
+            ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
+
+            divPrintHeader.Visible = true;
         }
     }
 }

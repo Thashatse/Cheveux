@@ -18,6 +18,8 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            btnPrint.Visible = false;
+
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
 
