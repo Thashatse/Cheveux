@@ -13,6 +13,24 @@ namespace Cheveux.Manager {
     public partial class AddService {
         
         /// <summary>
+        /// phLogIn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phLogIn;
+        
+        /// <summary>
+        /// LoggedOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggedOut;
+        
+        /// <summary>
         /// divServiceDetails control.
         /// </summary>
         /// <remarks>
