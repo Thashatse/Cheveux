@@ -46,11 +46,20 @@
                                     <br />
                                     <br />
 
+                                    <div class="container">
+                                        Payment Type: <asp:DropDownList ID="drpType" runat="server" CssClass="btn btn-secondary dropdown-toggle" AutoPostBack="True">
+                                            <asp:ListItem Text="All" Value="0"></asp:ListItem>
+                                            <asp:ListItem Text="Cash" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Credit" Value="2"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+
                                     <div class="container" runat="server" id="reportByContainer" visible="False">
                                         <p>Report By: </p>
                                         <asp:DropDownList ID="ddlReportFor" runat="server" AutoPostBack="True" CssClass="btn btn-secondary dropdown-toggle">
                                         </asp:DropDownList>
                                     </div>
+
 
                                     <!-- line Break  -->
                                     <br />
