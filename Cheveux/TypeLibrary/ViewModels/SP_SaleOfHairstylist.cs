@@ -13,6 +13,6 @@ namespace TypeLibrary.ViewModels
         public string CustomerID { get; set; }
         public string FullName { get; set; }
         public string BookingID { get; set; }
-        
+        public string PaymentType { get; set; }
     }
 }
