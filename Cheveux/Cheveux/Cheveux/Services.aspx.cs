@@ -63,6 +63,7 @@ namespace Cheveux.Cheveux
         {
             try
             {
+                tblServicesTable.Rows.Clear();
                 //load a list of all products
                 allservices = handler.BLL_GetAllServices();
                 //track row count & number of products cound
@@ -76,12 +77,8 @@ namespace Cheveux.Cheveux
                     newRow.Height = 50;
                     tblServicesTable.Rows.Add(newRow);
                     //create a header row and set cell withs
-                    //Product image row
-                    TableHeaderCell newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 100;
-                    tblServicesTable.Rows[count].Cells.Add(newHeaderCell);
                     //create a header row and set cell withs
-                    newHeaderCell = new TableHeaderCell();
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Name: ";
                     newHeaderCell.Width = 300;
                     tblServicesTable.Rows[count].Cells.Add(newHeaderCell);
@@ -89,9 +86,6 @@ namespace Cheveux.Cheveux
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Description: ";
                     newHeaderCell.Width = 500;
-                    tblServicesTable.Rows[count].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 100;
                     tblServicesTable.Rows[count].Cells.Add(newHeaderCell);
                     //create a header row and set cell withs
                     newHeaderCell = new TableHeaderCell();
@@ -105,7 +99,8 @@ namespace Cheveux.Cheveux
                     {
                         //if the product maches the selected type
                         //if product matches the tearm
-                        if (function.compareToSearchTerm(txtProductSearchTerm.Text,serv.Name) || function.compareToSearchTerm(txtProductSearchTerm.Text, serv.Description))
+                        if ((function.compareToSearchTerm(serv.Name, txtProductSearchTerm.Text)== true
+                            || function.compareToSearchTerm(serv.Description, txtProductSearchTerm.Text) == true))
                         {
                             //diplay the product details
                             //add a new row to the table
@@ -113,16 +108,8 @@ namespace Cheveux.Cheveux
                             newRow.Height = 50;
                             tblServicesTable.Rows.Add(newRow);
 
-                            //image
-                            TableCell newCell = new TableCell();
-                            //image display to be added here
-                            tblServicesTable.Rows[count].Cells.Add(newCell);
-
-                            //Edit service link to be added by Sivu
-                            //view service link to be added by Lachea
-
                             //Name
-                            newCell = new TableCell();
+                            TableCell newCell = new TableCell();
                             newCell.Text = "<a class='btn btn-default' href ='../cheveux/services.aspx?ProductID="
                                         + serv.ServiceID.ToString().Replace(" ", string.Empty) + "'>" + serv.Name + "</a>";
                             tblServicesTable.Rows[count].Cells.Add(newCell);
@@ -137,68 +124,7 @@ namespace Cheveux.Cheveux
                             newCell = new TableCell();
                             newCell.Text = "R" + string.Format("{0:#.00}", serv.Price);
                             tblServicesTable.Rows[count].Cells.Add(newCell);
-                            newCell.HorizontalAlign = HorizontalAlign.Right;
-
-
-                            if (serv.Active == 'Y')
-                            {
-                                newCell = new TableCell();
-                                tblServicesTable.Rows[count].Cells.Add(newCell);
-                            }
-                            else
-                            {
-                                newCell = new TableCell();
-                                newCell.Text = "Inactive Service";
-                                tblServicesTable.Rows[count].Cells.Add(newCell);
-                            }
-
-                            //increment counter
-                            count++;
-                        }
-                        else
-                        {
-                            newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblServicesTable.Rows.Add(newRow);
-
-                            //image
-                            TableCell newCell = new TableCell();
-                            //image display to be added here
-                            tblServicesTable.Rows[count].Cells.Add(newCell);
-
-                            //Edit service link to be added by Sivu
-                            //view service link to be added by Lachea
-
-                            //Name
-                            newCell = new TableCell();
-                            newCell.Text = "<a class='btn btn-default' href ='../cheveux/services.aspx?ProductID="
-                                        + serv.ServiceID.ToString().Replace(" ", string.Empty) + "'>" + serv.Name + "</a>";
-                            tblServicesTable.Rows[count].Cells.Add(newCell);
-
-                            //Description
-                            newCell = new TableCell();
-                            newCell.Text = serv.Description;
-                            tblServicesTable.Rows[count].Cells.Add(newCell);
-
-                            //Price
-                            newCell = new TableCell();
-                            newCell.Text = "R" + string.Format("{0:#.00}", serv.Price);
-                            newCell.HorizontalAlign = HorizontalAlign.Right;
-                            tblServicesTable.Rows[count].Cells.Add(newCell);
-
-
-                            if (serv.Active == 'Y')
-                            {
-                                newCell = new TableCell();
-                                tblServicesTable.Rows[count].Cells.Add(newCell);
-                            }
-                            else
-                            {
-                                newCell = new TableCell();
-                                newCell.Text = "Inactive Service";
-                                tblServicesTable.Rows[count].Cells.Add(newCell);
-                            }
-
+                            
                             //increment counter
                             count++;
                         }
