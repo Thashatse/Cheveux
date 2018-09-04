@@ -2642,8 +2642,8 @@ namespace DAL
                                 date = Convert.ToDateTime(row["Date"]),
                                 CustomerID = Convert.ToString(row["CustomerID"]),
                                 FullName = Convert.ToString(row["FullName"]),
-                                BookingID = Convert.ToString(row["BookingID"])
-
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                PaymentType = Convert.ToString(row["PaymentType"])
                             };
                             list.Add(saleOfHairstylistrecord);
 
