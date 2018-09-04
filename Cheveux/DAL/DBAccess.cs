@@ -3655,7 +3655,10 @@ namespace DAL
                         service = new SP_GetService
                         {
                             ServiceName = row["Name"].ToString(),
-                            Description = row["ProductDescription"].ToString()
+                            Description = row["ProductDescription"].ToString(),
+                            Price = Convert.ToDecimal(row["Price"].ToString()),
+                            NoOfSlots = Convert.ToInt32(row["NoOfSlots"].ToString()),
+                            ServiceType = Convert.ToChar(row["ServiceType"].ToString())
                         };
                     }
                     return service;
