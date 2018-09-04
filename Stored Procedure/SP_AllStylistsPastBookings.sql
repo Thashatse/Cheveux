@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description:	Gets all stylists past bookings
 -- =============================================
-alter PROCEDURE SP_AllStylistsPastBookings
+CREATE PROCEDURE SP_AllStylistsPastBookings
 @sortBy nvarchar(max)=null,
 	@sortDir nvarchar(max)=null
 AS
