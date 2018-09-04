@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_GetEmployee
+alter PROCEDURE SP_GetEmployee
 @EmployeeID nchar(30)
 AS
 BEGIN
