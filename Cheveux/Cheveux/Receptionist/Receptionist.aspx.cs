@@ -102,11 +102,6 @@ namespace Cheveux
 
                 try
                 {
-                    /*if the selected valus is not the "select employee" display the employee names
-                     * if the selected value is the "select employee" nothing will be displayed or added to the table
-                     * getAgenda method will not run
-                     */
-
                         getAgenda(drpEmpNames.SelectedValue, DateTime.Parse(bookingDate),null,null);
 
                         if (AgendaTable.Rows.Count == 1)
