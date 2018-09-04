@@ -15,7 +15,7 @@ AS
 
 BEGIN
 
-Select s.SaleID, s.[Date],(u.FirstName + ' ' + u.LastName) AS[FullName], s.CustomerID, s.BookingID
+Select s.SaleID, s.[Date],(u.FirstName + ' ' + u.LastName) AS[FullName], s.CustomerID, s.BookingID, s.PaymentType
 From SALE s, [USER] u, BOOKING b
 where b.BookingID = s.BookingID
 	AND b.CustomerID = s.CustomerID
