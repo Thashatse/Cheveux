@@ -99,29 +99,9 @@ namespace Cheveux.Manager
                 reportByContainer.Visible = true;
                 if (ddlReportFor.SelectedIndex == -1)
                 {
-                    try
+                    if (ddlReportFor.SelectedIndex == -1)
                     {
-                        List<SP_GetEmpNames> list = handler.BLL_GetEmpNames();
-                        foreach (SP_GetEmpNames emps in list)
-                        {
-                            //Load employee names into dropdownlist
-                            ddlReportFor.DataSource = list;
-                            //set the coloumn that will be displayed to the user
-                            ddlReportFor.DataTextField = "Name";
-                            //set the coloumn that will be used for the valuefield
-                            ddlReportFor.DataValueField = "EmployeeID";
-                            //bind the data
-                            ddlReportFor.DataBind();
-                            /*set the default (text (dropdownlist index[0]) that will first be displayed to the user.
-                             * in this case the "instruction" to select the employee
-                            */
-                            ddlReportFor.Items.Insert(0, new ListItem("Select Stylist", "-1"));
-                        }
-                    }
-                    catch (Exception Err)
-                    {
-                        function.logAnError(Err.ToString());
-                        reportLable.Text = ("An error occurred communicating with the database. Please Try Again Later");
+                        Response.Redirect("../Receptionist/Appointments.aspx?Action=ViewAllSchedules");
                     }
                 }
 
