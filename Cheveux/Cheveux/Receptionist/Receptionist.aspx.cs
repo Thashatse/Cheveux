@@ -80,6 +80,7 @@ namespace Cheveux
                 {
                     try
                     {
+                        list = handler.BLL_GetEmpNames();
                         foreach (SP_GetEmpNames emps in list)
                         {
                             //Load employee names into dropdownlist
@@ -90,23 +91,14 @@ namespace Cheveux
                             drpEmpNames.DataValueField = "EmployeeID";
                             //bind the data
                             drpEmpNames.DataBind();
-                            /*set the default (text (dropdownlist index[0]) that will first be displayed to the user.
-                             * in this case the "instruction" to select the employee
-                            */
-                            drpEmpNames.Items.Insert(0, new ListItem("--Select Employee--", "-1"));
                         }
                     }
                     catch (Exception Err)
                     {
-                        drpEmpNames.Items.Insert(0, new ListItem("Error"));
-                        phBookingsErr.Visible = true;
-                        errorHeader.Text = "Error retrieving employee names";
-                        errorMessage.Text = "It seems there is a problem retrieving data from the database"
-                                            + "Please report problem or try again later.";
+                        drpEmpNames.Items.Add("Stylist names unavailable");
                         function.logAnError(Err.ToString());
                     }
                 }
-
                 try
                 {
                     /*if the selected valus is not the "select employee" display the employee names
