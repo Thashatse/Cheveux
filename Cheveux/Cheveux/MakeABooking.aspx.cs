@@ -149,11 +149,9 @@ namespace Cheveux
             lblChoose.Text = "Booking Summary...";
             lblChoose.Font.Size = 18;
             lblChoose.ForeColor = Color.Gray;
-            txtComment.Visible = false;
-
+            bookingTime = new HttpCookie("BookTime");
             if (!Page.IsPostBack)
             {
-                bookingTime = new HttpCookie("BookTime");
                 if (bookingTime != null)
                 {
                     bookingTime.Expires = DateTime.Now.AddDays(-1d);
@@ -165,6 +163,7 @@ namespace Cheveux
                 lblGoDateTime.ForeColor = Color.Gray;
                 lblGoSummary.ForeColor = Color.Gray;
                 lblGoCustomer.ForeColor = Color.Gray;
+                txtComment.Visible = false;
             }
             //Check if the user is logged 
             try
@@ -628,6 +627,8 @@ namespace Cheveux
                     catch (Exception err)
                     {
                         function.logAnError("Error Making abooking " + err.ToString());
+                        lblErrorSummary.Visible = true;
+                        lblErrorSummary.Text = "Database connection failed. Please contact admin and try again later";
                     }
                 }
             }
@@ -635,6 +636,7 @@ namespace Cheveux
             {
                 function.logAnError("unable to comunicate with the database on Make A Booking page: " +
     err);
+                lblErrorSummary.Visible = true;
                 lblErrorSummary.Text = "Database connection failed. Please contact admin and try again later";
             }
         }
@@ -654,7 +656,9 @@ namespace Cheveux
                     lblGoSummary.ForeColor = Color.Gray;
                     divStylist.Visible = false;
                     btnPrevious.Visible = false;
+                    lblCommentLabel.Text = "";
                     btnNext.Text = "Choose Hairstylist";
+                    txtComment.Visible = false;
                 }
                 else if (btnPrevious.Text == "Choose Hairstylist")
                 {
@@ -666,9 +670,10 @@ namespace Cheveux
                     lblGoStylist.Font.Bold = true;
                     lblGoDateTime.ForeColor = Color.Gray;
                     lblGoSummary.ForeColor = Color.Gray;
-
+                    lblCommentLabel.Text = "";
                     divDateTime.Visible = false;
                     btnPrevious.Visible = true;
+                    txtComment.Visible = false;
                     btnPrevious.Text = "Choose Service(s)";
                     btnNext.Text = "Choose Date & Time";
                 }
@@ -702,6 +707,8 @@ namespace Cheveux
                     lblGoDateTime.Font.Bold = true;
                     lblGoCustomer.Font.Bold = false;
                     lblGoSummary.ForeColor = Color.Gray;
+                    lblCommentLabel.Text = "";
+                    txtComment.Visible = false;
                 }
                 #region Internal Booking
                 else if (btnPrevious.Text == "Select Customer")
@@ -1106,6 +1113,7 @@ namespace Cheveux
             {
                 function.logAnError("unable to comunicate with the database on Make A Booking page: " +
     err);
+                lblErrorSummary.Visible = true;
                 lblErrorSummary.Text = "An error occured communicating with the database. Please try again later";
             }
         }
@@ -1815,6 +1823,7 @@ namespace Cheveux
             {
                 function.logAnError("An error occurred while filling the summary: " +
                     error);
+                lblErrorSummary.Visible = true;
                 lblErrorSummary.Text = "An error occurred while filling the summary";
             }
         }
@@ -1833,11 +1842,11 @@ namespace Cheveux
         protected void lbPickAStylist_SelectionIndexChanged(object sender, EventArgs e)
         {
             HideButtons();
-            if (bookingTime != null)
-            {
-                bookingTime.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(bookingTime);
-            }
+            deselectButton();
+            calBooking.SelectedDate = DateTime.Parse("0001/01/01 00:00:00");
+            bookingTime.Expires = DateTime.Now.AddDays(-1d);
+            Response.Cookies.Add(bookingTime);
+            
             LoadSummary(sender, e);
         }
         #endregion
