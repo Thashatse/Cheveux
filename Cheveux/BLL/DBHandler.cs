@@ -582,5 +582,9 @@ namespace BLL
         {
             return db.getBio(id);
         }
+         public List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate)
+        {
+            return db.getTopCustomerByBookings(startDate, endDate);
+        }
     }
 }
