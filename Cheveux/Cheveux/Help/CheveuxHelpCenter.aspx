@@ -42,7 +42,7 @@
                         <!--Jumbotron Header-->
                         <div class="jumbotron bg-dark text-white">
                             <a href="../Default.aspx">
-                                <img src="/IMG_0715.png" alt="logo" width="150" height="150" />
+                                <img src="http://sict-iis.nmmu.ac.za/beauxdebut/IMG_0715.png" alt="logo" width="150" height="150" />
                             </a>
                             <h1>Help Center</h1>
                             <p>Welcome to the Cheveux Help Center</p>
