@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Returns acount details for the account matchingf the reset code
 -- =============================================
-CREATE PROCEDURE SP_GetAccountForRestCode 
+alter  PROCEDURE SP_GetAccountForRestCode 
 	@Code nchar(30)
 AS
 BEGIN

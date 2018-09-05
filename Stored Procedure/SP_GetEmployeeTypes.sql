@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Returns all emplyee types in database
 -- =============================================
-CREATE PROCEDURE SP_GetEmployeeTypes
+alter PROCEDURE SP_GetEmployeeTypes
 AS
 BEGIN
 	Select DISTINCT [Type]

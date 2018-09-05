@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description: Gives customer intro about the stylists that work for the salon. 
 -- =============================================
-CREATE PROCEDURE SP_AboutStylist
+alter  PROCEDURE SP_AboutStylist
 AS
 BEGIN
 	SET NOCOUNT ON;

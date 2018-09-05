@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Gets the Featured Products and hairstyles
 -- =============================================
-CREATE PROCEDURE SP_FeaturedProductsAndHairStyles 
+alter PROCEDURE SP_FeaturedProductsAndHairStyles 
 AS
 BEGIN
 	SELECT [FeatureID], [ItemID], [ImageURL], PRODUCT.Name, PRODUCT.ProductDescription, PRODUCT.Price

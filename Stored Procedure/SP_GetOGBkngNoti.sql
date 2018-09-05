@@ -12,7 +12,8 @@ GO
 -- =============================================
 -- Description: Get Out Going Booking Notifications: gets the details nessasry to send booking notifications for bookint taking place tommorow
 -- =============================================
-create PROCEDURE SP_GetOGBkngNoti
+alter 
+ PROCEDURE SP_GetOGBkngNoti
 AS
 BEGIN
 	SELECT BookingID

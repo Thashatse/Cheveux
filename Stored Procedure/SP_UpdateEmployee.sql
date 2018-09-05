@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-create PROCEDURE SP_UpdateEmployee
+alter PROCEDURE SP_UpdateEmployee
 	@empID nchar(30),
 	@type nchar(10),
 	@bio varchar(max) = null,

@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Set the active colum of a user acount to false
 -- =============================================
-CREATE PROCEDURE SP_DeactivateUser 
+alter  PROCEDURE SP_DeactivateUser 
 	@UserID nchar(30)
 AS
 BEGIN

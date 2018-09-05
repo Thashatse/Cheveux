@@ -4,7 +4,8 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO 
-create PROCEDURE SP_UpdateProductSalesDTLRecordQty
+alter 
+ PROCEDURE SP_UpdateProductSalesDTLRecordQty
 	@SaleID nchar(10), 
 	@ProductID nchar(10),
 	@Qty int

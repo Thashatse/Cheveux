@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE SP_UpdateService 
+alter  PROCEDURE SP_UpdateService 
 	@ServiceID nchar(10),
 	@Price money,
 	@Slots int

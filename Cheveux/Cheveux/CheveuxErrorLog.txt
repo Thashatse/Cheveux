@@ -1,20 +1,21 @@
 
-TimeStamp: 9/5/2018 10:07:59 AM
+TimeStamp: 9/3/2018 8:23:50 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
 User Domain: JAEGAR
 Curent Directory: C:\Program Files (x86)\IIS Express
 Error: 
-Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
-   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
-   at System.Convert.ToDateTime(String value)
-   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
-   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
-   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+Error verifiying user name and password for username or email address: maryjofficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 452
 
-TimeStamp: 9/5/2018 10:07:59 AM
+TimeStamp: 9/3/2018 8:38:45 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -27,9 +28,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:07:59 AM
+TimeStamp: 9/3/2018 8:38:45 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -42,9 +43,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:07:59 AM
+TimeStamp: 9/3/2018 8:39:56 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -57,9 +58,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:08:00 AM
+TimeStamp: 9/3/2018 8:39:56 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -72,9 +73,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:08:00 AM
+TimeStamp: 9/3/2018 8:41:16 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -87,9 +88,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:08:00 AM
+TimeStamp: 9/3/2018 8:41:16 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -102,9 +103,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:08:01 AM
+TimeStamp: 9/3/2018 8:41:21 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -117,9 +118,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:08:01 AM
+TimeStamp: 9/3/2018 8:41:21 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -132,9 +133,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:08:01 AM
+TimeStamp: 9/3/2018 8:41:22 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -147,9 +148,9 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
 
-TimeStamp: 9/5/2018 10:08:02 AM
+TimeStamp: 9/3/2018 8:41:22 PM
 Machine Name: JAEGAR
 OS Version: Microsoft Windows NT 10.0.17134.0
 Curent User: Sisikelelwe
@@ -162,4 +163,527 @@ Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustome
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
    at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
    at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
-   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2120
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:41:36 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:41:36 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:41:45 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:41:45 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:42:09 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:42:09 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:42:09 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:42:09 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 8:42:09 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 1918
+
+TimeStamp: 9/3/2018 9:37:31 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: keepitonthelolo Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 467
+
+TimeStamp: 9/3/2018 9:38:03 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: maryjofficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 452
+
+TimeStamp: 9/3/2018 9:40:55 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making abooking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 614
+
+TimeStamp: 9/3/2018 9:40:55 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 626
+
+TimeStamp: 9/3/2018 9:43:38 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Receptionist.<>c__DisplayClass12_0.<getAgenda>b__0(Object ss, EventArgs ee) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 283
+
+TimeStamp: 9/3/2018 9:44:31 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: keepitonthelolo Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 467
+
+TimeStamp: 9/3/2018 9:44:37 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error creating visit record [stylist.aspx {btn}] err: System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Stylist.<>c__DisplayClass11_0.<getAgenda>b__0(Object ss, EventArgs ee) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist\Stylist.aspx.cs:line 200
+
+TimeStamp: 9/3/2018 9:44:38 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [customerVisit.aspx, etT&C&S method] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.CustomerVisit.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 rCnt, SP_GetAllofBookingDTL a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist\CustomerVisit.aspx.cs:line 293
+
+TimeStamp: 9/3/2018 9:44:52 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [customerVisit.aspx, etT&C&S method] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.CustomerVisit.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 rCnt, SP_GetAllofBookingDTL a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist\CustomerVisit.aspx.cs:line 293
+
+TimeStamp: 9/3/2018 9:45:01 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [customerVisit.aspx, etT&C&S method] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.CustomerVisit.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 rCnt, SP_GetAllofBookingDTL a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist\CustomerVisit.aspx.cs:line 293
+
+TimeStamp: 9/3/2018 9:45:02 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error updating visit [customervisit.aspx btnVisit] err:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.CustomerVisit.<>c__DisplayClass11_1.<getDetailsAndCreateRecord>b__0(Object ss, EventArgs ee) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist\CustomerVisit.aspx.cs:line 169
+
+TimeStamp: 9/3/2018 9:53:23 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: keepitonthelolo Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 467
+
+TimeStamp: 9/3/2018 9:53:55 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time [customerVisit.aspx, etT&C&S method] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 642
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 653
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 169
+   at Cheveux.CustomerVisit.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 rCnt, SP_GetAllofBookingDTL a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Stylist\CustomerVisit.aspx.cs:line 293
+
+TimeStamp: 2018/09/04 16:29:58
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 182
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 451
+
+TimeStamp: 2018/09/04 16:30:06
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Receptionist.<>c__DisplayClass12_0.<getAgenda>b__0(Object ss, EventArgs ee) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 278
+
+TimeStamp: 2018/09/04 16:53:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268
+
+TimeStamp: 2018/09/04 16:53:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268
+
+TimeStamp: 2018/09/04 16:53:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268
+
+TimeStamp: 2018/09/04 16:54:16
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting Sales Report System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Manager.Reports.getTopCustomerReport(Boolean defaultDateRange) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\Reports.aspx.cs:line 268
+
+TimeStamp: 2018/09/04 18:06:44
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 442
+
+TimeStamp: 2018/09/04 18:08:31
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 202
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 441
+
+TimeStamp: 2018/09/04 18:10:43
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 202
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 441
+
+TimeStamp: 2018/09/04 18:11:33
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 202
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 441
+
+TimeStamp: 2018/09/04 18:15:34
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 202
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 441
+
+TimeStamp: 2018/09/04 18:16:30
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 202
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 441
+
+TimeStamp: 2018/09/04 18:18:53
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 442

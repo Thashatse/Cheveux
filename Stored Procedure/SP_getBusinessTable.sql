@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	returns the business table
 -- =============================================
-CREATE PROCEDURE SP_getBusinessTable
+alter PROCEDURE SP_getBusinessTable
 AS
 BEGIN
 	Select *

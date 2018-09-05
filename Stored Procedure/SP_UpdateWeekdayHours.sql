@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	updates the Weekday hours in the Bussiness Table
 -- =============================================
-create PROCEDURE SP_UpdateWeekdayHours
+alter PROCEDURE SP_UpdateWeekdayHours
 	@start time(7),
 	@end time(7),
 	@BusinessID nchar(10)

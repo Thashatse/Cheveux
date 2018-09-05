@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description:	Gets all stylists past bookings for a specific date
 -- =============================================
-CREATE PROCEDURE SP_AllStylistPastBksForDate
+alter PROCEDURE SP_AllStylistPastBksForDate
 @day datetime,
 @sortBy nvarchar(max)=null,
 	@sortDir nvarchar(max)=null

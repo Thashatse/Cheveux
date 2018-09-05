@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_AddEmployee
+alter  PROCEDURE SP_AddEmployee
 	@employeeID nchar(30),
 	@bio varchar(max) = null,
 	@AddressLine1 varchar(max) = null,

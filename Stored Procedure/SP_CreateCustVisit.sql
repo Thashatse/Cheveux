@@ -22,7 +22,7 @@ GO
 -- Description:	Add Customer Visit
 -- =============================================
 
-create PROCEDURE [dbo].[SP_CreateCustVisit]
+alter PROCEDURE [dbo].[SP_CreateCustVisit]
 	@CustomerID nchar(30),
 	@Date datetime,
 	@PrimaryBookingID nchar(10),

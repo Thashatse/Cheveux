@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Given a bookingID Creates a sales record
 -- =============================================
-create PROCEDURE SP_CreateSalesRecord 
+alter ROCEDURE SP_CreateSalesRecord 
 	@BookingID nchar(10)
 AS
 BEGIN

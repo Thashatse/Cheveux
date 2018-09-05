@@ -10,7 +10,7 @@ GO
 -- Create date: 27.05.2018
 -- Description:	Gets a specific employees bookings for the day.
 -- =============================================
-create PROCEDURE [dbo].[SP_GetEmpAgenda]
+alter PROCEDURE [dbo].[SP_GetEmpAgenda]
 	@EmployeeID nchar(30),
 	@Date datetime = null,
 	@sortBy nvarchar(max)=null,

@@ -38,7 +38,8 @@
 
 
                                         <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="Bookings By Hairstylist" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Bookings" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
 
                                     </asp:DropDownList>
 
@@ -46,20 +47,23 @@
                                     <br />
                                     <br />
 
-                                    <div class="container">
-                                        Payment Type: <asp:DropDownList ID="drpType" runat="server" CssClass="btn btn-secondary dropdown-toggle" AutoPostBack="True">
-                                            <asp:ListItem Text="All" Value="0"></asp:ListItem>
-                                            <asp:ListItem Text="Cash" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="Credit" Value="2"></asp:ListItem>
-                                        </asp:DropDownList>
-                                    </div>
-
                                     <div class="container" runat="server" id="reportByContainer" visible="False">
                                         <p>Report By: </p>
                                         <asp:DropDownList ID="ddlReportFor" runat="server" AutoPostBack="True" CssClass="btn btn-secondary dropdown-toggle">
                                         </asp:DropDownList>
                                     </div>
 
+                                    <!-- line Break  -->
+                                    <br />
+                                    <br />
+
+                                    <div class="container" runat="server" id="salesPaymentType" visible="False">
+                                        Payment Type: <asp:DropDownList ID="drpPaymentType" runat="server" CssClass="btn btn-secondary dropdown-toggle" AutoPostBack="True">
+                                            <asp:ListItem Text="All" Value="0" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text="Cash" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Credit" Value="2"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
 
                                     <!-- line Break  -->
                                     <br />
@@ -81,19 +85,26 @@
                                     <br />
 
                                     <div class="row">
-                                        <div class="col-10"></div>
-                                        <div class="col-2">
+                                        <div class="col-8"></div>
+                                        <div class="col-4">
                                             <asp:Button ID="btnRefresh" runat="server" Text="Refresh" OnClick="btnRefresh_Click" CssClass="btn btn-secondary" />
+                                            <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" Visible="false" CssClass="btn btn-secondary" />
                                         </div>
                                     </div>
                                 </form>
                                 <!-- line Break -->
                                 <br />
                                 <asp:Label ID="lError" runat="server" Text="Label" Visible="false"></asp:Label>
-                                <p style="text-align: left; float: left;">
-                                    <a href="../Receptionist/Appointments.aspx?Action=ViewAllSchedules">View Booking Schedules </a>
-                                </p>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div runat="server" id="divPrintHeader" visible="false">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Logo -->
+                            <asp:Table ID="tblLogo" runat="server"></asp:Table>
                         </div>
                     </div>
                 </div>
@@ -150,8 +161,6 @@
                         </div>
                         <div class="col-4"></div>
                     </div>
-                    <!--Print-->
-                    <a href='#' onclick='window.print()'>Print Report  </a>
                 </div>
             </div>
 

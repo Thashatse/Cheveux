@@ -35,7 +35,7 @@
 
                 <!-- If user is logged in -->
                 <asp:PlaceHolder ID="phMain" runat="server">
-
+                    <div runat="server" id="dontPrint">
                     <!--jumbotron page heading-->
                     <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn">
                         <asp:Label ID="Header" runat="server" Text="View Schedule" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
@@ -231,10 +231,24 @@
                                     <asp:ListItem Text="Stylist" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
+                            <div class="col-xs-12 col-md-4 col-lg-4">
+                            <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" Visible="false" CssClass="btn btn-secondary" />
                         </div>
+                            </div>
                     </asp:PlaceHolder>
 
                     <br />
+                        
+                    </div>
+
+                    <div runat="server" id="divPrintHeader" visible="false">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Logo -->
+                            <asp:Table ID="tblLogo" runat="server"></asp:Table>
+                        </div>
+                    </div>
+                </div>
 
                     <!-- Table displaying stylist bookings -->
                     <asp:PlaceHolder ID="phTable" runat="server">

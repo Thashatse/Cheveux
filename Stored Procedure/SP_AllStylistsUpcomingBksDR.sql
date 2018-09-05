@@ -17,7 +17,7 @@ GO
 -- Author:		S.Maqabangqa
 -- Description:	Gets all stylists upcoming bookings according to a date range.
 -- =============================================
-CREATE PROCEDURE SP_AllStylistsUpcomingBksDR
+alter PROCEDURE SP_AllStylistsUpcomingBksDR
 @startDate datetime,
 @endDate datetime,
 @sortBy nvarchar(max)=null,

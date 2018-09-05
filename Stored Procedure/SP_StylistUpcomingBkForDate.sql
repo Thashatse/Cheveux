@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-create PROCEDURE SP_StylistUpcomingBkForDate
+alter PROCEDURE SP_StylistUpcomingBkForDate
 	@stylistID nchar(30),
 	@day datetime,
 	@sortBy nvarchar(max)=null,

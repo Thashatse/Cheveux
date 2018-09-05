@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE SP_AddBraidService
+alter PROCEDURE SP_AddBraidService
 	@ProductID nchar(10),		
 	@LengthID nchar(10),
 	@StyleID nchar(10),

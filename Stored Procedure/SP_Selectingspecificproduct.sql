@@ -1,6 +1,7 @@
 
 
-CREATE PROCEDURE SP_Products
+alter 
+ PROCEDURE SP_Products
 
 @productID nchar(10)
 

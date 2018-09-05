@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Removes Booking Records and Booking Service matchin the BookingID or primaryBookingID
 -- =============================================
-Create PROCEDURE SP_DeleteBookingService 
+alter PROCEDURE SP_DeleteBookingService 
 	@BookingID nchar(10),
 	@ServiceID nchar(10)
 AS

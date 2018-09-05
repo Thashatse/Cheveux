@@ -21,7 +21,7 @@ GO
 -- Create date: 03.06.2018
 -- Description:	Updates booking arrived to "Y (YES)".
 -- =============================================
-CREATE PROCEDURE [dbo].[SP_CheckIn]
+alter PROCEDURE [dbo].[SP_CheckIn]
 	@BookingID nchar(10)
 AS
 BEGIN

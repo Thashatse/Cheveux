@@ -7,7 +7,7 @@ GO
 -- =============================================
 -- Description:	Given a SaleID, ProductID & Qty is Creates a salesDTL record
 -- =============================================
-Create PROCEDURE [dbo].[SP_CreateSalesDTLRecord]
+alter  PROCEDURE [dbo].[SP_CreateSalesDTLRecord]
 	@SaleID nchar(10), 
 	@ProductID nchar(10),
 	@Qty int

@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE SP_AddToBookingService
+alter  PROCEDURE SP_AddToBookingService
 	@BookingID nchar(10),
 	@ServiceID nchar(10)
 AS

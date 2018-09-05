@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	updates the phone number in the Bussiness Table
 -- =============================================
-create PROCEDURE SP_UpdatePhoneNumber
+alter PROCEDURE SP_UpdatePhoneNumber
 	@PhoneNumber nchar(10),
 	@BusinessID nchar(10)
 AS

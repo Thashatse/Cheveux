@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	gets all accessories in the database with details from the product Table
 -- =============================================
-create PROCEDURE SP_GetAllAccessories
+alter  PROCEDURE SP_GetAllAccessories
 AS
 BEGIN
 	SELECT [ProductID]
