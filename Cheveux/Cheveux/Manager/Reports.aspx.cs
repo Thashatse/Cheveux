@@ -104,10 +104,11 @@ namespace Cheveux.Manager
             }
             else if (drpReport.SelectedIndex == 2)
             {
+                reportDateRangeContainer.Visible = true;
                 if (CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
-                    reportDateRangeContainer.Visible = true;
+                   
                     divReport.Visible = true;
                     //display the top customer report
                     getTopCustomerReport(true);
@@ -115,7 +116,6 @@ namespace Cheveux.Manager
                 else if (CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
-                    reportByContainer.Visible = true;
                     divReport.Visible = true;
                     //display the top customer report
                     getTopCustomerReport(false);
@@ -240,15 +240,21 @@ namespace Cheveux.Manager
             reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
             try
             {
+
+                List<SP_GetTopCustomerbyBooking> report = null;
                 /****
                  * Create the View Model Object
                  * E.g: List<SP_SaleOfHairstylist> report = null;
                  ****/
-                List<SP_SaleOfHairstylist> report = null;
+                
+
+
                 /****** Remove the above line ******/
 
                 if (defaultDateRange == true)
                 {
+                    report = handler.getTopCustomerByBookings(new DateTime(DateTime.Now.Year, 1, 1),
+                        DateTime.Today);
                     reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
                         DateTime.Today.ToString("dd MMM yyyy");
                     /****
@@ -258,6 +264,8 @@ namespace Cheveux.Manager
                 }
                 else if (defaultDateRange == false)
                 {
+                    report = handler.getTopCustomerByBookings(CalendarDateStrart.SelectedDate,
+                        CalendarDateEnd.SelectedDate);
                     reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
                         CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
                     /****
@@ -274,7 +282,7 @@ namespace Cheveux.Manager
                     
                     //display each record
                     /******* Change the foreach to use the view model yopu have just created ******/
-                    foreach (SP_SaleOfHairstylist cust in report)
+                    foreach (SP_GetTopCustomerbyBooking cust in report)
                     {
                             // create a new row in the results table and set the height
                             TableRow newRow = new TableRow();
@@ -297,12 +305,17 @@ namespace Cheveux.Manager
                             tblReport.Rows.Add(newRow);
                             //fill the row with the data from the product results object
                             TableCell newCell = new TableCell();
+
+                        newCell.Text = cust.CustomerName;
                         /*********
                          * Enter the name of the customer here
                          * E.g: newCell.Text = Sales.date.ToString("dd MMM yyy");
                          * ******/
                         tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
                             newCell = new TableCell();
+                        newCell.Text = cust.noOfBookings.ToString();
+                       
                         /*********
                          * Enter the No. Of bookings here 
                          * E.g: newCell.Text = Sales.FullName.ToString();
