@@ -161,5 +161,6 @@ namespace DAL
         SP_GetEmployee_S_ getEmployee_S (string stylistID);
         bool addSpecialisation(STYLIST_SERVICE ss);
         SP_GetEmployee_S_ getBio(string id);
+        List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate);
     }
 }
