@@ -3471,7 +3471,7 @@ namespace DAL
             {
                 SqlParameter[] pars = new SqlParameter[]
                 {
-                    new SqlParameter("@ProductID", bs.ProductId.ToString()),
+                    new SqlParameter("@ProductID", bs.ProductID.ToString()),
                     new SqlParameter("@StyleID", bs.StyleID.ToString()),
                     new SqlParameter("@LengthID", bs.LengthID.ToString()),
                     new SqlParameter("@WidthID", bs.WidthID.ToString())
@@ -3712,7 +3712,6 @@ namespace DAL
             SqlParameter[] pars = new SqlParameter[]
 
             {
-               
                 new SqlParameter("@startDate", startDate),
                 new SqlParameter("@endDate", endDate)
             };
@@ -3734,11 +3733,8 @@ namespace DAL
                             };
                             list.Add(customer);
                         }
-
                     }
-
                 }
-
                 return list;
             }
             catch (Exception e)
@@ -3746,8 +3742,6 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
 
             }
-    
         }
-        
     }
 }                  

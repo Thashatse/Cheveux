@@ -1,0 +1,188 @@
+master
+
+<!-- Published 
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="../Default.aspx#page-top">Cheveux
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Default.aspx#Service" style="text-decoration: none;">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Default.aspx#Products" style="text-decoration: none;">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Default.aspx#Hairstylist" style="text-decoration: none;">Stylists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Default.aspx#ContactUs" style="text-decoration: none;">Connect</a>
+                    </li>
+                    <li class="nav-item">
+                        <asp:PlaceHolder runat="server" ID="LogedOut">
+                            <a class="nav-link" href="http://sict-iis.nmmu.ac.za/beauxdebut/Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
+                        </asp:PlaceHolder>
+                    </li>
+                    <li class="nav-item">
+                        <asp:PlaceHolder runat="server" ID="PlaceHolder1">
+                            <asp:PlaceHolder runat="server" ID="PlaceHolder2"></asp:PlaceHolder>
+                        </asp:PlaceHolder>
+                    </li>
+                    <li class="nav-item">
+                        <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    -->
+
+Manger
+<!-- Published 
+         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Dashboard.aspx#page-top">Cheveux
+            </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Reports.aspx">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Service.aspx">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Employee.aspx">Employees</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Manager/BusinessSetting.aspx">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <asp:PlaceHolder runat="server" ID="LogedOut">
+                            <a class="nav-link" href="http://sict-iis.nmmu.ac.za/beauxdebut/Authentication/Accounts.aspx" style="text-decoration: none;">Login</a>
+                        </asp:PlaceHolder>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <asp:PlaceHolder runat="server" ID="LogedIn">
+                            <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
+                        </asp:PlaceHolder>
+                    </li>
+                    <li class="nav-item">
+                        <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+        -->
+
+receptionist
+<!-- Published 
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                 <a class="navbar-brand js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Receptionist/Receptionist.aspx#page-top">Cheveux
+                 </a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Receptionist/Appointments.aspx" style="text-decoration:none;">Schedules</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx" style="text-decoration:none;">Products</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                        <asp:PlaceHolder runat="server" ID="LogedOut">
+                            <a class="nav-link" href="http://sict-iis.nmmu.ac.za/beauxdebut/Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
+                        </asp:PlaceHolder>
+                        </li>
+                        <li class="nav-item">
+                            <asp:PlaceHolder runat="server" ID="LogedIn">
+                                <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
+                            </asp:PlaceHolder>
+                        </li>
+                        <li class="nav-item">
+                            <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    -->
+
+stylist
+<!-- Published 
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut//Stylist/Stylist.aspx#page-top">Cheveux
+                </a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut//Receptionist/Appointments.aspx"  style="text-decoration:none;">Schedule</a>
+                        </li>
+                        <li class="nav-item">
+                        <asp:PlaceHolder runat="server" ID="LogedOut">
+                            <a class="nav-link" href="http://sict-iis.nmmu.ac.za/beauxdebut//Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
+                        </asp:PlaceHolder>
+                        </li>
+                        <li class="nav-item">
+                            <asp:PlaceHolder runat="server" ID="LogedIn">
+                                <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
+                            </asp:PlaceHolder>
+                        </li>
+                        <li class="nav-item">
+                            <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="http://sict-iis.nmmu.ac.za/beauxdebut/Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
+                        </li>
+                     </ul>
+               </div>
+            </div>
+        </nav>
+-->
+

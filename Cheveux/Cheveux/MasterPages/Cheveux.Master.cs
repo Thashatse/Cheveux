@@ -28,7 +28,15 @@ namespace Cheveux
             {
                 // display the user profile & hide the sign in button
                 //get the user details to display the username & image on the profile button
-                USER UserDetails = handler.GetUserDetails(UserID["ID"]);
+                USER UserDetails = null;
+                try
+                { 
+                    UserDetails = handler.GetUserDetails(UserID["ID"]);
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error geting user details for profile buton in master page Error: " + err);
+                }
                 if (UserDetails != null)
                 {
                     profile.Controls.Add(new LiteralControl

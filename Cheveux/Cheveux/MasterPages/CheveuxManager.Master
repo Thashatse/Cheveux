@@ -91,12 +91,16 @@
         Loading, Please wait.
         <br />
         <br />
-        <img src="../Theam/loader.gif" alt="Loading" />
+        <!-- Unpblished 
+        <img src="../Theam/loader.gif" alt="Loading" /> -->
+        <!-- Published -->
+        <img src="http://sict-iis.nmmu.ac.za/beauxdebut/Theam/loader.gif" alt="Loading" />
     </div>
     <!-- End Loading Wheel -->
 </head>
 <body id="page-top">
-
+    
+    <!-- Unpblished -->
     <!--Nav Bar-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">

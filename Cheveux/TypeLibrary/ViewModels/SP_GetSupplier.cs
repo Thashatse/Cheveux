@@ -8,8 +8,7 @@ namespace TypeLibrary.ViewModels
 {
     class SP_GetSupplier
     {
-
-        public string supplierID;
+        /*public string supplierID;
         public string supplierName;
         public string contactName;
         public int contactNo;
@@ -18,8 +17,6 @@ namespace TypeLibrary.ViewModels
         public string suburb;
         public string city;
         public string contactEmail;
-
-
- }
-
+        */
+    }
 }

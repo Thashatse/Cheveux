@@ -104,6 +104,7 @@ namespace Cheveux.Manager
             }
             else if (drpReport.SelectedIndex == 2)
             {
+                reportByContainer.Visible = false;
                 reportDateRangeContainer.Visible = true;
                 if (CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")

@@ -6,14 +6,12 @@ GO
 SET QUOTED_IDENTIFIER ON
  
 GO
-CREATE PROCEDURE SP_GetTopCustomers
-	
-	@customerID nchar(30),
+alter PROCEDURE SP_GetTopCustomers
 	@startDate datetime,
 	@endDate datetime
 AS
 BEGIN
-select COUNT(CustomerID), CustomerID,
+select COUNT(CustomerID) as BookCount, CustomerID,
 		(Select [USER].FirstName + ' '+ [USER].LastName 
 		from [USER] 
 		where [USER].UserID =  BOOKING.CustomerID) as custFullName
@@ -21,6 +19,6 @@ from BOOKING
 where BOOKING.BookingID = BOOKING.primaryBookingID
 AND   BOOKING.Date BETWEEN @startDate and @endDate
 group by CustomerID
-
+order by BookCount desc
 END
 GO

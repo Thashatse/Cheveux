@@ -79,7 +79,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <hr class="my-4">
-                    <a class="btn btn-light btn-xl js-scroll-trigger" href="../Cheveux/Services.aspx">View All Services</a>
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href="Cheveux/Services.aspx">View All Services</a>
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="../Cheveux/Products.aspx">View All Products</a>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="Cheveux/Products.aspx">View All Products</a>
                 </div>
             </div>
         </div>
@@ -228,7 +228,7 @@
         <br />
         <div class="row">
             <div class="col-lg-8 mx-auto text-center">
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="../Cheveux/Stylists.aspx">View All Stylists</a>
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="Cheveux/Stylists.aspx">View All Stylists</a>
             </div>
         </div>
     </section>
