@@ -210,6 +210,7 @@
                                 <!--Nav Pills for internal system-->
                                 <ul class="nav nav-pills nav-stacked">
                                     <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In &nbsp; &nbsp;</a></li>
+                                    <li><a href="#ReceptionistCheckOut">Receptionist Customer Check-Out&nbsp; &nbsp;</a></li>
                                     <li><a href="#StylistCustomerVisit">Stylist Customer Visit &nbsp; &nbsp;</a></li>
                                     <li><a href="#ManageProducts">Manage Products &nbsp; &nbsp;</a></li>
                                     <li><a href="#ManageServices">Manage Services &nbsp; &nbsp;</a></li>
@@ -255,6 +256,48 @@
                             </div>
                         </div>
 
+                        <!--New Section-->
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <a name="ReceptionistCheckOut"></a>
+                                <!--Header-->
+                                <h2>Receptionist Check-Out</h2>
+                                <!--Content-->
+                                <p>
+                                    <ul>
+                                        <li>Step 1) Log In</li>
+                                        <img src="Helpimages/Login-SignUp.png" alt="Login" />
+                                        <li>Step 2)Select dropdown list to select employee's schedule you would like to view 
+                                            and click 'Check-out' button</li>
+                                        <img src="Helpimages/checkOut_new.png" alt="Dropdown, agenda, checkout" />
+                                        <li>The page will be redirected to the booking invoice page</li>
+                                        <li>From there you will then be able to add products if the customer wishes and print the invoice
+                                            for the customer
+                                        </li>
+                                        <li>Step 3)If the customer would like to add a product, click
+                                           'Add product' button
+                                        </li>
+                                        <img src="Helpimages/checkoutInvoice.png" alt="Checkout invoice" />
+                                        <li>Step 4)Enter product name in the 'search' text box and press enter</li>
+                                        <img src="Helpimages/searchProduct.png" alt="Search product" />
+                                        <li>List of products matching the term you entered will be displayed</li>
+                                        <li>Step 5)Select your product by clicking on the product
+                                        </li>
+                                        <img src="Helpimages/selectAndAddProduct.png" alt="Select product" />
+                                        <li>Step 6)Select the quantity and click on the 'add product' button</li>
+                                        <img src="Helpimages/addProduct.png" alt="Add product" />
+                                        <li>To remove a product after it has been added:
+                                            Select the product in the list and click the 'Remove product' button
+                                        </li>
+                                        <img src="Helpimages/removeProduc.png" alt="Remove product" />
+                                        <li>Step 7)Select Payment type and then click 'save' button</li>
+                                        <img src="Helpimages/selectPaymentTypeAndSave.png" alt="Select payment type and save" />
+                                        <li>Step 8)Print invoice by clicking the 'Print invoice' button</li>
+                                        <img src="Helpimages/printInvoice.png" alt="Print invoice" />
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
 
                         <div class="col-12 text-center">
                                 <!-- Line Break -->
