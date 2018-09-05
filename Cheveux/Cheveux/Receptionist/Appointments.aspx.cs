@@ -2800,19 +2800,7 @@ namespace Cheveux
                                    (int)System.DateTime.Now.DayOfWeek);
         }
         #endregion
-        protected void empSelectionType_Changed(object sender, EventArgs e)
-        {
-            if (empSelectionType.SelectedValue == "0")
-            {
-                drpSortBy.Items.RemoveAt(1);
-                drpSortBy.Items.Add("Stylist");
-            }
-            else if (empSelectionType.SelectedValue == "1")
-            {
-                drpSortBy.Items.RemoveAt(1);
-                drpSortBy.Items.Add("Customer");
-            }
-        }
+        
 
         protected void drpViewAppt_SelectedIndexChanged(object sender, EventArgs e)
         {
