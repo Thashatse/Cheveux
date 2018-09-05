@@ -102,7 +102,7 @@ namespace Cheveux.Manager
             product = new PRODUCT();
             service = new SERVICE();
             bservice = new BRAID_SERVICE();
-
+            string price = String.Format("{0:N2}", txtPrice.Text);
             product.ProductID = function.GenerateRandomProductID();
             product.Name = txtName.Text;
             product.ProductDescription = txtDescription.Text;

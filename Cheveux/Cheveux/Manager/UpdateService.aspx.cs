@@ -38,24 +38,25 @@ namespace Cheveux.Manager
             string serviceID = Request.QueryString["ServiceID"];
             service = handler.BLL_GetServiceFromID(serviceID);
             bservice = handler.BLL_GetBraidServiceFromID(serviceID);
-
-            if (service.ServiceType == 'B')
+            if (!Page.IsPostBack)
             {
-                divBraidDetails.Visible = true;
-                lblStyle.Text = bservice.StyleDesc;
-                lblLength.Text = bservice.LengthDesc;
-                lblWidth.Text = bservice.WidthDesc;
+                if (service.ServiceType == 'B')
+                {
+                    divBraidDetails.Visible = true;
+                    lblStyle.Text = bservice.StyleDesc;
+                    lblLength.Text = bservice.LengthDesc;
+                    lblWidth.Text = bservice.WidthDesc;
+                }
+                lblName.Text = service.ServiceName;
+                drpNoOfSlots.SelectedItem.Text = Convert.ToString(service.NoOfSlots);
+                txtPrice.Text = string.Format("{0:#.00}", service.Price).ToString();
+                lblDescription.Text = service.Description;
             }
-            lblName.Text = service.ServiceName;
-            drpNoOfSlots.SelectedItem.Text = Convert.ToString(service.NoOfSlots);
-            txtPrice.Text = "R " + string.Format("{0:#.00}", service.Price).ToString();
-            lblDescription.Text = service.Description;
-
 
         }
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            string serviceID = Request.QueryString["ProductID"];
+            string serviceID = Request.QueryString["ServiceID"];
             product = new PRODUCT();
             services = new SERVICE();
 
@@ -64,7 +65,8 @@ namespace Cheveux.Manager
             services.NoOfSlots = Convert.ToInt32(drpNoOfSlots.SelectedItem.Text);
 
             handler.updateService(product, services);
-           
+            Response.Redirect("../Cheveux/Services.aspx?ProductID="+serviceID);
+
         }
         protected void btnCancel_Click(object sender, EventArgs e)
         {
