@@ -146,12 +146,6 @@ namespace Cheveux
             }
             #endregion
 
-            bookingTime = new HttpCookie("BookTime");
-            if(bookingTime != null)
-            {
-                bookingTime.Expires = DateTime.Now.AddDays(-1d);
-                Response.Cookies.Add(bookingTime);
-            }
             lblChoose.Text = "Booking Summary...";
             lblChoose.Font.Size = 18;
             lblChoose.ForeColor = Color.Gray;
@@ -159,6 +153,12 @@ namespace Cheveux
 
             if (!Page.IsPostBack)
             {
+                bookingTime = new HttpCookie("BookTime");
+                if (bookingTime != null)
+                {
+                    bookingTime.Expires = DateTime.Now.AddDays(-1d);
+                    Response.Cookies.Add(bookingTime);
+                }
                 lblGoService.ForeColor = Color.FromArgb(240, 95, 64);
                 lblGoService.Font.Bold = true;
                 lblGoStylist.ForeColor = Color.Gray;
