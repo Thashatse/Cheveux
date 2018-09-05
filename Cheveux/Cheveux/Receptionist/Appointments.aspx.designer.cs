@@ -175,6 +175,51 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblBookingsErr;
         
         /// <summary>
+        /// phMY control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phMY;
+        
+        /// <summary>
+        /// lblStartM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStartM;
+        
+        /// <summary>
+        /// drpStartMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpStartMonth;
+        
+        /// <summary>
+        /// lblEndM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEndM;
+        
+        /// <summary>
+        /// drpEndMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpEndMonth;
+        
+        /// <summary>
         /// phDay control.
         /// </summary>
         /// <remarks>

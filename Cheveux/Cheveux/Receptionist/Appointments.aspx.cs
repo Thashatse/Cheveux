@@ -22,7 +22,7 @@ namespace Cheveux
         List<SP_GetBookingServices> bServices = null;
         SP_GetMultipleServicesTime time = null;
         string today = DateTime.Now.ToString("yyyy-MM-dd");
-
+        
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -74,7 +74,20 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            filterMonths();
+
             errorCssStyles();
+            DateTime d = DateTime.Today;
+            //set default selected date for calendars (calDay and calStart)
+            if (!Page.IsPostBack)
+            {
+                calStart.TodaysDate = d;
+                calStart.SelectedDate = calStart.TodaysDate;
+                calDay.TodaysDate = d;
+                calDay.SelectedDate = calDay.TodaysDate;
+            }
+
+
             cookie = Request.Cookies["CheveuxUserID"];
 
             if (cookie == null)
@@ -185,6 +198,67 @@ namespace Cheveux
             }
         }
 
+        public void filterMonths()
+        {
+            DateTime now = DateTime.Now;
+            int currentMonth = now.Month;
+            if (drpViewAppt.SelectedValue == "0")//upcoming
+            {
+                foreach (ListItem li in drpStartMonth.Items)
+                {
+                    if (int.Parse(li.Value) < currentMonth)
+                    {
+                        li.Enabled = false;
+                    }
+                    else
+                    {
+                        li.Enabled = true;
+                    }
+                }
+
+                foreach(ListItem li in drpEndMonth.Items)
+                {
+                    if (int.Parse(li.Value) < currentMonth)
+                    {
+                        li.Enabled = false;
+                    }
+                    else
+                    {
+                        li.Enabled = true;
+                    }
+                }
+                drpStartMonth.SelectedValue = currentMonth.ToString();
+                drpEndMonth.SelectedValue = "12";
+            }
+            else if (drpViewAppt.SelectedValue == "1")//past
+            {
+                foreach(ListItem li in drpStartMonth.Items)
+                {
+                    if(int.Parse(li.Value) > currentMonth)
+                    {
+                        li.Enabled = false;
+                    }
+                    else
+                    {
+                        li.Enabled = true;
+                    }
+                }
+
+                foreach (ListItem li in drpEndMonth.Items)
+                {
+                    if (int.Parse(li.Value) > currentMonth)
+                    {
+                        li.Enabled = false;
+                    }
+                    else
+                    {
+                        li.Enabled = true;
+                    }
+                }
+                drpStartMonth.SelectedValue = "1";
+                drpEndMonth.SelectedValue = currentMonth.ToString();
+            }
+        }
         public void errorCssStyles()
         {
             errorHeader.Font.Bold = true;
@@ -218,6 +292,11 @@ namespace Cheveux
                             phBookingsErr.Visible = false;
                             phDateRange.Visible = false;
                             phDay.Visible = false;
+                            drpStartMonth.Visible = false;
+                            drpEndMonth.Visible = false;
+                            lblStartM.Visible = false;
+                            lblEndM.Visible = false;
+
                             getAllStylistsUpcomingBookings(drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
                         else if (rdoDate.SelectedValue == "1")
@@ -226,6 +305,11 @@ namespace Cheveux
                             phBookingsErr.Visible = false;
                             phDay.Visible = false;
                             phDateRange.Visible = false;
+                            drpStartMonth.Visible = false;
+                            drpEndMonth.Visible = false;
+                            lblStartM.Visible = false;
+                            lblEndM.Visible = false;
+
                             getAllStylistsUpcomingBksForDate(DateTime.Parse(today), drpSortBy.SelectedItem.Text,
                                                             drpSortDir.SelectedItem.Text);
                         }
@@ -234,6 +318,10 @@ namespace Cheveux
                             //specific day
                             phDay.Visible = true;
                             phDateRange.Visible = false;
+                            drpStartMonth.Visible = true;
+                            drpEndMonth.Visible = false;
+                            lblStartM.Visible = true;
+                            lblEndM.Visible = false;
 
                             if (lblDay.Text == "Label1")
                             {
@@ -252,6 +340,10 @@ namespace Cheveux
                             //date range
                             phDay.Visible = false;
                             phDateRange.Visible = true;
+                            drpEndMonth.Visible = true;
+                            drpStartMonth.Visible = true;
+                            lblStartM.Visible = true;
+                            lblEnd.Visible = true;
 
                             if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                             {
@@ -283,6 +375,11 @@ namespace Cheveux
                                 phBookingsErr.Visible = false;
                                 phDateRange.Visible = false;
                                 phDay.Visible = false;
+                                drpStartMonth.Visible = false;
+                                drpEndMonth.Visible = false;
+                                lblStartM.Visible = false;
+                                lblEndM.Visible = false;
+
                                 getStylistUpcomingBookings(drpStylistNames.SelectedValue, drpSortBy.SelectedItem.Text,
                                                             drpSortDir.SelectedItem.Text);
                             }
@@ -292,6 +389,11 @@ namespace Cheveux
                                 phBookingsErr.Visible = false;
                                 phDateRange.Visible = false;
                                 phDay.Visible = false;
+                                drpStartMonth.Visible = false;
+                                drpEndMonth.Visible = false;
+                                lblStartM.Visible = false;
+                                lblEndM.Visible = false;
+
                                 getStylistUpcomingBksForDate(drpStylistNames.SelectedValue, DateTime.Parse(today),
                                                             drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                             }
@@ -300,6 +402,10 @@ namespace Cheveux
                                 //specific day 
                                 phDay.Visible = true;
                                 phDateRange.Visible = false;
+                                drpStartMonth.Visible = true;
+                                drpEndMonth.Visible = false;
+                                lblStartM.Visible = true;
+                                lblEnd.Visible = false;
 
                                 if (lblDay.Text == "Label1")
                                 {
@@ -319,6 +425,10 @@ namespace Cheveux
                                 //date range
                                 phDay.Visible = false;
                                 phDateRange.Visible = true;
+                                drpStartMonth.Visible = true;
+                                drpEndMonth.Visible = true;
+                                lblStartM.Visible = true;
+                                lblEndM.Visible = true;
 
                                 if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                                 {
@@ -348,6 +458,8 @@ namespace Cheveux
                         phCalendars.Visible = true;
                         phDay.Visible = false;
                         phDateRange.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
 
                         if (rdoDate.SelectedValue == "0")
                         {
@@ -355,6 +467,8 @@ namespace Cheveux
                             phBookingsErr.Visible = false;
                             phDateRange.Visible = false;
                             phDay.Visible = false;
+                            lblStartM.Visible = false;
+                            lblEndM.Visible = false;
 
                             getAllStylistsPastBookings(drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                         }
@@ -364,6 +478,10 @@ namespace Cheveux
                             phBookingsErr.Visible = false;
                             phDay.Visible = false;
                             phDateRange.Visible = false;
+                            drpStartMonth.Visible = false;
+                            drpEndMonth.Visible = false;
+                            lblStartM.Visible = false;
+                            lblEndM.Visible = false;
 
                             getAllStylistsPastBksForDate(DateTime.Parse(today)
                                                         , drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
@@ -373,6 +491,10 @@ namespace Cheveux
                             //Specific Day
                             phDay.Visible = true;
                             phDateRange.Visible = false;
+                            drpStartMonth.Visible = true;
+                            drpEndMonth.Visible = false;
+                            lblStartM.Visible = true;
+                            lblEndM.Visible = false;
 
                             if (lblDay.Text == "Label1")
                             {
@@ -392,6 +514,10 @@ namespace Cheveux
                             //Date Range
                             phDay.Visible = false;
                             phDateRange.Visible = true;
+                            drpStartMonth.Visible = true;
+                            drpEndMonth.Visible = true;
+                            lblStartM.Visible = true;
+                            lblEndM.Visible = true;
 
                             if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                             {
@@ -420,10 +546,14 @@ namespace Cheveux
                             phCalendars.Visible = true;
                             if (rdoDate.SelectedValue == "0")
                             {
-                                //today
+                                //all
                                 phBookingsErr.Visible = false;
                                 phDateRange.Visible = false;
                                 phDay.Visible = false;
+                                drpStartMonth.Visible = false;
+                                drpEndMonth.Visible = false;
+                                lblStartM.Visible = false;
+                                lblEndM.Visible = false;
 
                                 getStylistPastBookings(drpStylistNames.SelectedValue, drpSortBy.SelectedItem.Text,
                                                                     drpSortDir.SelectedItem.Text);
@@ -434,6 +564,10 @@ namespace Cheveux
                                 phBookingsErr.Visible = false;
                                 phDay.Visible = false;
                                 phDateRange.Visible = false;
+                                drpStartMonth.Visible = false;
+                                drpEndMonth.Visible = false;
+                                lblStartM.Visible = false;
+                                lblEndM.Visible = false;
 
                                 getStylistPastBksForDate(drpStylistNames.SelectedValue, DateTime.Parse(today)
                                                         , drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
@@ -443,6 +577,10 @@ namespace Cheveux
                                 //Specific day
                                 phDay.Visible = true;
                                 phDateRange.Visible = false;
+                                drpStartMonth.Visible = true;
+                                drpEndMonth.Visible = false;
+                                lblStartM.Visible = true;
+                                lblEndM.Visible = false;
 
                                 if (lblDay.Text == "Label1")
                                 {
@@ -461,6 +599,10 @@ namespace Cheveux
                                 //date range
                                 phDay.Visible = false;
                                 phDateRange.Visible = true;
+                                drpStartMonth.Visible = true;
+                                drpEndMonth.Visible = true;
+                                lblStartM.Visible = true;
+                                lblEndM.Visible = true;
 
                                 if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                                 {
@@ -490,19 +632,29 @@ namespace Cheveux
                 {
                     if (rdoDate.SelectedValue == "0")
                     {
-                        //all upcoming bookings
+                        //all
                         phBookingsErr.Visible = false;
                         phDateRange.Visible = false;
                         phDay.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
+
                         getStylistUpcomingBookings(cookie["ID"].ToString(), drpSortBy.SelectedItem.Text,
                                                     drpSortDir.SelectedItem.Text);
                     }
                     else if (rdoDate.SelectedValue == "1")
                     {
-                        //upcoming bookings for today 
+                        //today 
                         phBookingsErr.Visible = false;
                         phDateRange.Visible = false;
                         phDay.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
+
                         getStylistUpcomingBksForDate(cookie["ID"].ToString(), DateTime.Parse(today),
                                                     drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
@@ -511,6 +663,10 @@ namespace Cheveux
                         //upcoming bookings for a specific day 
                         phDay.Visible = true;
                         phDateRange.Visible = false;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = false;
 
                         if (lblDay.Text == "Label1")
                         {
@@ -530,6 +686,10 @@ namespace Cheveux
                         //upcoming bookings for a date range 
                         phDay.Visible = false;
                         phDateRange.Visible = true;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = true;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = true;
 
                         if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
@@ -553,6 +713,10 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDateRange.Visible = false;
                         phDay.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
 
                         getStylistPastBookings(cookie["ID"].ToString(), drpSortBy.SelectedItem.Text,
                                                             drpSortDir.SelectedItem.Text);
@@ -563,6 +727,10 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDay.Visible = false;
                         phDateRange.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
 
                         getStylistPastBksForDate(cookie["ID"].ToString(), DateTime.Parse(today)
                                                 , drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
@@ -572,6 +740,10 @@ namespace Cheveux
                         //Past bookings for a Specific day
                         phDay.Visible = true;
                         phDateRange.Visible = false;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = false;
 
                         if (lblDay.Text == "Label1")
                         {
@@ -590,6 +762,10 @@ namespace Cheveux
                         //Past bookings for a date range
                         phDay.Visible = false;
                         phDateRange.Visible = true;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = true;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = true;
 
                         if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
@@ -620,6 +796,11 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDateRange.Visible = false;
                         phDay.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
+
                         getStylistUpcomingBookings(stylistID, drpSortBy.SelectedItem.Text,
                                                     drpSortDir.SelectedItem.Text);
                     }
@@ -629,6 +810,11 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDateRange.Visible = false;
                         phDay.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
+
                         getStylistUpcomingBksForDate(stylistID, DateTime.Parse(today),
                                                     drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
                     }
@@ -637,6 +823,10 @@ namespace Cheveux
                         //upcoming bookings for a specific day 
                         phDay.Visible = true;
                         phDateRange.Visible = false;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = false;
 
                         if (lblDay.Text == "Label1")
                         {
@@ -656,6 +846,10 @@ namespace Cheveux
                         //upcoming bookings for a date range 
                         phDay.Visible = false;
                         phDateRange.Visible = true;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = true;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = true;
 
                         if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
@@ -679,6 +873,10 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDateRange.Visible = false;
                         phDay.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
 
                         getStylistPastBookings(stylistID, drpSortBy.SelectedItem.Text,
                                                             drpSortDir.SelectedItem.Text);
@@ -689,6 +887,10 @@ namespace Cheveux
                         phBookingsErr.Visible = false;
                         phDay.Visible = false;
                         phDateRange.Visible = false;
+                        drpStartMonth.Visible = false;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = false;
+                        lblEndM.Visible = false;
 
                         getStylistPastBksForDate(stylistID, DateTime.Parse(today)
                                                 , drpSortBy.SelectedItem.Text, drpSortDir.SelectedItem.Text);
@@ -698,6 +900,10 @@ namespace Cheveux
                         //Past bookings for a Specific day
                         phDay.Visible = true;
                         phDateRange.Visible = false;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = false;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = false;
 
                         if (lblDay.Text == "Label1")
                         {
@@ -716,6 +922,10 @@ namespace Cheveux
                         //Past bookings for a date range
                         phDay.Visible = false;
                         phDateRange.Visible = true;
+                        drpStartMonth.Visible = true;
+                        drpEndMonth.Visible = true;
+                        lblStartM.Visible = true;
+                        lblEndM.Visible = true;
 
                         if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                         {
@@ -1319,6 +1529,7 @@ namespace Cheveux
 
         #endregion
 
+        
         #region All Stylists Bookings 
 
         #region Upcoming
@@ -2016,6 +2227,7 @@ namespace Cheveux
 
             #endregion
         }
+        #region Calendars
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
             lblDay.Text = calDay.SelectedDate.ToString("dd-MM-yyyy");
@@ -2519,6 +2731,45 @@ namespace Cheveux
             }
         }
 
+        public void checkValidDate(DateTime date1, DateTime date2)
+        {
+            if (date1 == null || date2 == null)
+            {
+                valDate.Visible = false;
+            }
+            else if (date1 > date2)
+            {
+                valDate.ForeColor = System.Drawing.Color.Red;
+                valDate.Text = "*Please ensure that Start Date is smaller than End Date";
+                valDate.Visible = true;
+            }
+            else if (date1 == date2)
+            {
+                valDate.ForeColor = System.Drawing.Color.Red;
+                valDate.Visible = true;
+                valDate.Text = "(Tip: In the future select 'Specific day' radio button for bookings of a specific days bookings)";
+            }
+            else
+            {
+                valDate.Visible = false;
+            }
+        }
+        protected void drpStartMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            calStart.VisibleDate = new DateTime(2018,
+                                    int.Parse(drpStartMonth.SelectedValue),
+                                    (int)System.DateTime.Now.DayOfWeek);
+
+            calDay.VisibleDate = new DateTime(2018, int.Parse(drpStartMonth.SelectedValue),
+                                    (int)System.DateTime.Now.DayOfWeek);
+        }
+        protected void drpEndMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            calEnd.VisibleDate = new DateTime(2018,
+                                    int.Parse(drpEndMonth.SelectedValue),
+                                   (int)System.DateTime.Now.DayOfWeek);
+        }
+        #endregion
         protected void empSelectionType_Changed(object sender, EventArgs e)
         {
             if (empSelectionType.SelectedValue == "0")
@@ -2532,28 +2783,10 @@ namespace Cheveux
                 drpSortBy.Items.Add("Customer");
             }
         }
-        public void checkValidDate(DateTime date1, DateTime date2)
+
+        protected void drpViewAppt_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if( date1 == null || date2 == null)
-            {
-                valDate.Visible = false;
-            }
-            else if(date1 > date2)
-            {
-                valDate.ForeColor = System.Drawing.Color.Red;
-                valDate.Text = "*Please ensure that Start Date is smaller than End Date";
-                valDate.Visible = true;
-            }
-            else if(date1 == date2)
-            {
-                valDate.ForeColor = System.Drawing.Color.Red;
-                valDate.Visible = true;
-                valDate.Text = "(Tip: In the future select 'Specific day' radio button for bookings of a specific days bookings)";
-            }
-            else
-            {
-                valDate.Visible = false;
-            }
+            filterMonths();
         }
     }
 }

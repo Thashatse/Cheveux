@@ -67,7 +67,8 @@
                         <!-- Past/Upcoming Dropdownlist -->
                         <asp:PlaceHolder ID="phWhen" runat="server">
                             <div class="col-xs-12 col-md-4">
-                                <asp:DropDownList ID="drpViewAppt" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                <asp:DropDownList ID="drpViewAppt" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" 
+                                                OnSelectedIndexChanged="drpViewAppt_SelectedIndexChanged">
                                     <asp:ListItem Text="Upcoming Bookings" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Past Bookings" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
@@ -77,7 +78,8 @@
                         <!-- For Stylist/For All Stylist Dropdown -->
                         <asp:PlaceHolder ID="phStylists" runat="server">
                             <div class="col-xs-12 col-md-4">
-                                <asp:DropDownList ID="empSelectionType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="empSelectionType_Changed">
+                                <asp:DropDownList ID="empSelectionType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" 
+                                                OnSelectedIndexChanged="empSelectionType_Changed">
                                     <asp:ListItem Text="All Stylists" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Specific Stylist" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
@@ -120,6 +122,50 @@
                                 </div>
                             </asp:PlaceHolder>
                         </div>
+                        <br />
+
+                        <!--Dropdown to pick year/month-->
+                        <asp:PlaceHolder ID="phMY" runat="server">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <asp:Label ID="lblStartM" runat="server" Text="Start Month" Visible="false"></asp:Label>
+                                    <asp:DropDownList ID="drpStartMonth" Visible="false" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" 
+                                                        OnSelectedIndexChanged="drpStartMonth_SelectedIndexChanged">
+                                        <asp:ListItem Text="January" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
+                                        <asp:ListItem Text="March" Value="3"></asp:ListItem>
+                                        <asp:ListItem Text="April" Value="4"></asp:ListItem>
+                                        <asp:ListItem Text="May" Value="5"></asp:ListItem>
+                                        <asp:ListItem Text="June" Value="6"></asp:ListItem>
+                                        <asp:ListItem Text="July" Value="7"></asp:ListItem>
+                                        <asp:ListItem Text="August" Value="8"></asp:ListItem>
+                                        <asp:ListItem Text="September" Value="9"></asp:ListItem>
+                                        <asp:ListItem Text="October" Value="10"></asp:ListItem>
+                                        <asp:ListItem Text="November" Value="11"></asp:ListItem>
+                                        <asp:ListItem Text="December" Value="12"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <asp:Label ID="lblEndM" runat="server" Text="End Month" Visible="false"></asp:Label>
+                                    <asp:DropDownList ID="drpEndMonth" runat="server" Visible="false" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" 
+                                                        OnSelectedIndexChanged="drpEndMonth_SelectedIndexChanged">
+                                        <asp:ListItem Text="January" Value="1"></asp:ListItem>
+                                        <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
+                                        <asp:ListItem Text="March" Value="3"></asp:ListItem>
+                                        <asp:ListItem Text="April" Value="4"></asp:ListItem>
+                                        <asp:ListItem Text="May" Value="5"></asp:ListItem>
+                                        <asp:ListItem Text="June" Value="6"></asp:ListItem>
+                                        <asp:ListItem Text="July" Value="7"></asp:ListItem>
+                                        <asp:ListItem Text="August" Value="8"></asp:ListItem>
+                                        <asp:ListItem Text="September" Value="9"></asp:ListItem>
+                                        <asp:ListItem Text="October" Value="10"></asp:ListItem>
+                                        <asp:ListItem Text="November" Value="11"></asp:ListItem>
+                                        <asp:ListItem Text="December" Value="12"></asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                        </asp:PlaceHolder>
+
                         <br />
 
                         <!-- Specific Day -->
