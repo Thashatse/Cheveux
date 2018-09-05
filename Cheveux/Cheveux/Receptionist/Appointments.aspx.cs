@@ -88,7 +88,7 @@ namespace Cheveux
                 calDay.SelectedDate = calDay.TodaysDate;
             }
 
-
+            filterMonths();
             cookie = Request.Cookies["CheveuxUserID"];
 
             if (cookie == null)
@@ -228,8 +228,6 @@ namespace Cheveux
                         li.Enabled = true;
                     }
                 }
-                drpStartMonth.SelectedValue = currentMonth.ToString();
-                drpEndMonth.SelectedValue = "12";
             }
             else if (drpViewAppt.SelectedValue == "1")//past
             {
@@ -256,8 +254,6 @@ namespace Cheveux
                         li.Enabled = true;
                     }
                 }
-                drpStartMonth.SelectedValue = "1";
-                drpEndMonth.SelectedValue = currentMonth.ToString();
             }
         }
         public void errorCssStyles()
