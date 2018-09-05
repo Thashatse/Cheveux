@@ -145,7 +145,7 @@ namespace Cheveux
                 if (action == "CheckedIn" && custName != null && stylistName != null)
                 {
                     phCheckInSuccess.Visible = true;
-                    lblSuccess.Text = custName.ToString() + " has been checked for their booking with "
+                    lblSuccess.Text = custName.ToString() + " has been checked in for their booking with "
                                     + stylistName.ToString();
                 }
                 #endregion
