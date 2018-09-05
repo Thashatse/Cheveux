@@ -3703,5 +3703,51 @@ namespace DAL
             }
 
         }
+        
+        public List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate)
+        {
+            SP_GetTopCustomerbyBooking customer = null;
+            List<SP_GetTopCustomerbyBooking> list = new List<SP_GetTopCustomerbyBooking>();
+
+            SqlParameter[] pars = new SqlParameter[]
+
+            {
+               
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
+
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetTopCustomers", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            customer = new SP_GetTopCustomerbyBooking
+                            {
+                                noOfBookings = int.Parse(row[0].ToString()),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
+                                CustomerName = Convert.ToString(row["custFullName"])
+                            };
+                            list.Add(customer);
+                        }
+
+                    }
+
+                }
+
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+
+            }
+    
+        }
+        
     }
 }                  
