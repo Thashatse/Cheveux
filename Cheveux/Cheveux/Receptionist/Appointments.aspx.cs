@@ -79,14 +79,6 @@ namespace Cheveux
             btnPrint.Visible = false;
             errorCssStyles();
             DateTime d = DateTime.Today;
-            //set default selected date for calendars (calDay and calStart)
-            if (!Page.IsPostBack)
-            {
-                calStart.TodaysDate = d;
-                calStart.SelectedDate = calStart.TodaysDate;
-                calDay.TodaysDate = d;
-                calDay.SelectedDate = calDay.TodaysDate;
-            }
 
             filterMonths();
             cookie = Request.Cookies["CheveuxUserID"];
@@ -2741,6 +2733,23 @@ namespace Cheveux
                     e.Day.IsSelectable = false;
                 }
             }
+            if(drpViewAppt.SelectedValue == "0")
+            {
+                if (e.Day.Date.CompareTo(DateTime.Today) < 0)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.BackColor = System.Drawing.Color.LightGray;
+                }
+            }
+            else if(drpViewAppt.SelectedValue == "1")
+            {
+                if (e.Day.Date.CompareTo(DateTime.Today) > 0)
+                {
+                    e.Day.IsSelectable = false;
+                    e.Cell.BackColor = System.Drawing.Color.LightGray;
+                }
+            }
+
         }
 
         protected void empSelectionType_Changed(object sender, EventArgs e)
