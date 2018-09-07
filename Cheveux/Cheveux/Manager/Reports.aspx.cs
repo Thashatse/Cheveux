@@ -153,35 +153,33 @@ namespace Cheveux.Manager
                     if (report.Count != 0)
                     {
                         //counter to keep track of rows in report
-                        int reportRowCount = 0;
+                    int reportRowCount = 0;
 
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Date";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Customer Name";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //empty cell
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    newHeaderCell.Text = "Total spent";
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
 
-                        //display each record
+                   //display each record
                     foreach (SP_SaleOfHairstylist Sales in report)
                      {
                         if (drpPaymentType.SelectedItem.Text == "All"
                             || drpPaymentType.SelectedItem.Text == Sales.PaymentType.ToString().Replace(" ", string.Empty))
                         {
-                            // create a new row in the results table and set the height
-                            TableRow newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblReport.Rows.Add(newRow);
-                            //set the report headers
-                            TableHeaderCell newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Text = "Date";
-                            newHeaderCell.Width = 300;
-                            tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                            newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Text = "Customer Name";
-                            newHeaderCell.Width = 300;
-                            tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                            //empty cell
-                            newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Width = 300;
-                            newHeaderCell.Text = "Total spent";
-                            tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                            reportRowCount++;
-
                             // create a new row in the results table and set the height
                             newRow = new TableRow();
                             newRow.Height = 50;
@@ -243,25 +241,14 @@ namespace Cheveux.Manager
             {
 
                 List<SP_GetTopCustomerbyBooking> report = null;
-                /****
-                 * Create the View Model Object
-                 * E.g: List<SP_SaleOfHairstylist> report = null;
-                 ****/
-                
-
-
-                /****** Remove the above line ******/
-
+            
                 if (defaultDateRange == true)
                 {
                     report = handler.getTopCustomerByBookings(new DateTime(DateTime.Now.Year, 1, 1),
                         DateTime.Today);
                     reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
                         DateTime.Today.ToString("dd MMM yyyy");
-                    /****
-                 * if deafult date range fill the object usingg the BLL Method
-                 * E.g: report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today);
-                 ****/
+                   
                 }
                 else if (defaultDateRange == false)
                 {
@@ -269,10 +256,7 @@ namespace Cheveux.Manager
                         CalendarDateEnd.SelectedDate);
                     reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
                         CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
-                    /****
-                 * if custom date range fill the object usingg the BLL Method
-                 * E.g: report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate);
-                 ****/
+                  
                 }
 
                 //get the invoice dt lines
@@ -280,26 +264,30 @@ namespace Cheveux.Manager
                 {
                     //counter to keep track of rows in report
                     int reportRowCount = 0;
-                    
+
                     //display each record
-                    /******* Change the foreach to use the view model yopu have just created ******/
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Customer Name";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //empty cell
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    newHeaderCell.Text = "Total Bookings";
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    newHeaderCell.Text = "Total Spent";
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+
+
                     foreach (SP_GetTopCustomerbyBooking cust in report)
                     {
-                            // create a new row in the results table and set the height
-                            TableRow newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblReport.Rows.Add(newRow);
-                            TableHeaderCell newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Text = "Customer Name";
-                            newHeaderCell.Width = 300;
-                            tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                            //empty cell
-                            newHeaderCell = new TableHeaderCell();
-                            newHeaderCell.Width = 300;
-                            newHeaderCell.Text = "Total Bookings";
-                            tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                            reportRowCount++;
-
                             // create a new row in the results table and set the height
                             newRow = new TableRow();
                             newRow.Height = 50;
@@ -307,29 +295,24 @@ namespace Cheveux.Manager
                             //fill the row with the data from the product results object
                             TableCell newCell = new TableCell();
 
-                        newCell.Text = cust.CustomerName;
-                        /*********
-                         * Enter the name of the customer here
-                         * E.g: newCell.Text = Sales.date.ToString("dd MMM yyy");
-                         * ******/
-                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                           newCell.Text = cust.CustomerName;
+                      
+                           tblReport.Rows[reportRowCount].Cells.Add(newCell);
 
-                            newCell = new TableCell();
+                        newCell = new TableCell();
                         newCell.Text = cust.noOfBookings.ToString();
-                       
-                        /*********
-                         * Enter the No. Of bookings here 
-                         * E.g: newCell.Text = Sales.FullName.ToString();
-                         * ******/
+                        
                         tblReport.Rows[reportRowCount].Cells.Add(newCell);
-
-                            reportRowCount++;
+                        reportRowCount++;
                             //empty row
                             newRow = new TableRow();
                             newRow.Height = 50;
                             tblReport.Rows.Add(newRow);
                             reportRowCount++;
-                    }
+
+
+
+                   }
                 }
                 btnPrint.Visible = true;
             }
@@ -366,8 +349,9 @@ namespace Cheveux.Manager
 
             //print the report
             ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
+             divPrintHeader.Visible = true;
 
-            divPrintHeader.Visible = true;
+
         }
     }
 }
