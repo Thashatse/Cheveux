@@ -2231,6 +2231,7 @@ namespace Cheveux
 
             #endregion
         }
+
         #region Calendars
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
@@ -2791,21 +2792,22 @@ namespace Cheveux
         }
         protected void drpStartMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int month = Convert.ToInt16(drpStartMonth.SelectedValue);
             calStart.VisibleDate = new DateTime(2018,
-                                    int.Parse(drpStartMonth.SelectedValue),
-                                    (int)System.DateTime.Now.DayOfWeek);
+                                    month,
+                                    1);
 
-            calDay.VisibleDate = new DateTime(2018, int.Parse(drpStartMonth.SelectedValue),
-                                    (int)System.DateTime.Now.DayOfWeek);
+            calDay.VisibleDate = new DateTime(2018, month,
+                                    1);
         }
         protected void drpEndMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int month = Convert.ToInt16(drpEndMonth.SelectedValue);
             calEnd.VisibleDate = new DateTime(2018,
-                                    int.Parse(drpEndMonth.SelectedValue),
-                                   (int)System.DateTime.Now.DayOfWeek);
+                                    month,
+                                   1);
         }
         #endregion
-        
 
         protected void drpViewAppt_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2828,6 +2830,89 @@ namespace Cheveux
             newCell.Font.Bold = true;
             newCell.Text = "<a class='navbar-brand js-scroll-trigger' href='#' onClick='window.print()'>Cheveux </a>";
             tblLogo.Rows[0].Cells.Add(newCell);
+
+            newRow = new TableRow();
+            newRow.Height = 50;
+            tblSum.Rows.Add(newRow);
+
+            newCell = new TableCell();
+            newCell.Font.Bold = true;
+            newCell.Text = "Booking Type: ";
+            tblSum.Rows[0].Cells.Add(newCell);
+
+            newCell = new TableCell();
+            newCell.Text = drpViewAppt.SelectedItem.Text;
+            tblSum.Rows[0].Cells.Add(newCell);
+
+            newRow = new TableRow();
+            newRow.Height = 50;
+            tblSum.Rows.Add(newRow);
+
+            newCell = new TableCell();
+            newCell.Font.Bold = true;
+            newCell.Text = "For: ";
+            tblSum.Rows[1].Cells.Add(newCell);
+
+            if(empSelectionType.SelectedValue == "0")
+            {
+                newCell = new TableCell();
+                newCell.Text = empSelectionType.SelectedItem.Text;
+                tblSum.Rows[1].Cells.Add(newCell);
+            }
+            else if(empSelectionType.SelectedValue == "1")
+            {
+                newCell = new TableCell();
+                newCell.Text = drpStylistNames.SelectedItem.Text;
+                tblSum.Rows[1].Cells.Add(newCell);
+            }
+
+            newRow = new TableRow();
+            newRow.Height = 50;
+            tblSum.Rows.Add(newRow);
+
+            if (rdoDate.SelectedValue == "2")
+            {
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "When: ";
+                tblSum.Rows[2].Cells.Add(newCell);
+
+                newCell = new TableCell();
+                newCell.Text = calDay.SelectedDate.ToString("yyyy - MM - dd");
+                tblSum.Rows[2].Cells.Add(newCell);
+            }
+            else if(rdoDate.SelectedValue == "3")
+            {
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "From: ";
+                tblSum.Rows[2].Cells.Add(newCell);
+
+                newCell = new TableCell();
+                newCell.Text = calStart.SelectedDate.ToString("yyyy - MM - dd");
+                tblSum.Rows[2].Cells.Add(newCell);
+
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "To: ";
+                tblSum.Rows[2].Cells.Add(newCell);
+
+                newCell = new TableCell();
+                newCell.Text = calEnd.SelectedDate.ToString("yyyy - MM - dd");
+                tblSum.Rows[2].Cells.Add(newCell);
+
+            }
+            else
+            {
+                newCell = new TableCell();
+                newCell.Font.Bold = true;
+                newCell.Text = "When: ";
+                tblSum.Rows[2].Cells.Add(newCell);
+
+                newCell = new TableCell();
+                newCell.Text = rdoDate.SelectedItem.Text;
+                tblSum.Rows[2].Cells.Add(newCell);
+            }
 
             //print the report
             ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");

@@ -246,6 +246,8 @@
                         <div class="col-md-12">
                             <!-- Logo -->
                             <asp:Table ID="tblLogo" runat="server"></asp:Table>
+                            <!-- Report Summary -->
+                            <asp:Table ID="tblSum" runat="server"></asp:Table>
                         </div>
                     </div>
                 </div>
