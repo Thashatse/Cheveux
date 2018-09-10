@@ -150,9 +150,50 @@
                         <a name="Bookings"></a>
                         <!--Header-->
                         <h2>Bookings </h2>
+                                                <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#005">How to Make a Booking &nbsp; &nbsp;</a></li>
+                            <li><a href="#006">View Upcoming Bookings &nbsp; &nbsp;</a></li>
+                            <li><a href="#007">View Past Boookings  &nbsp; &nbsp;</a></li>
+                        </ul>
                         <!--Content-->
+                        <!--Make a Booking-->
+                                                                        <a name="005"></a>
+                                                <h4>How to Make A Booking</h4>
+                                                <ul>
+                            <li>First <a href="#UserAccounts">Log In</a></li>
+                            <li>1) Select the Make a Booking button on the homepage</li>
+                            <img src="Helpimages/Booking button.png" alt="Booking Button" />
+                            <li>2) Select one or more services on the Services page</li>
+                            <img src="Helpimages/Select service.png" alt="Select services" width="1000px"/>
+                            <img src="Helpimages/Select service goes to summary.png" alt="Select services summary" width="1000px"/>
+                            <li>3) Take note: services selected are placed in the booking summary</li>
+                            <li>4) Select 'Choose Hairstylist' button</li>
+                            <img src="Helpimages/Choose hairstylist btn.png" alt="Choose Hairstylist Button" width="1000px"/>
+                            <li>5)Select the hairstylist of your choice</li>
+                            <img src="Helpimages/Select hairstylist.png" alt="Select hairstylist" width="1000px" />
+                            <li>6) Select 'Choose Date & Time' button</li>
+                            <img src="Helpimages/Choose d&T btn.png" alt="Choose Date and Time Button" width="1000px"/>
+                            <li>7) Select the date of your choice</li>
+                            <img src="Helpimages/Date.png" alt="Select date" width="1000px"/>
+                            <li>8) Select time of your choice</li>
+                            <img src="Helpimages/Time.png" alt="Select Time" width="1000px"/>
+                            <li>9) Select 'Booking Summary'</li>
+                            <img src="Helpimages/summary btn.png" alt="Select Time" width="1000px"/>
+                            <li>10) You can view the summary of your booking</li>
+                            <img src="Helpimages/Summary.png" alt="Select Time" width="1000px"/>
+                            <li>11) You can also add a comment for any special requests</li>
+                            <img src="Helpimages/Summary comment.png" alt="Select Time" width="1000px"/>
+                            <li>12) Select 'Submit' button</li>
+                            <img src="Helpimages/Submit btn.png" alt="Select Time" width="1000px"/>
+                            <li>13) Welldone! You have made a booking</li>
+                            <img src="Helpimages/Congratulations!.png" alt="Select Time" />
+
+                                                    
+
+                        </ul>
                         <!--Upcoming Bookings-->
-                        <h4>View Upcoming Bookins</h4>
+                                                <a name="006"></a>
+                        <h4>View Upcoming Bookings</h4>
                         <ul>
                             <li>First <a href="#UserAccounts">Log In</a></li>
                             <img src="Helpimages/BookingsNavBar.png" alt="View Bookings" />
@@ -164,6 +205,7 @@
                             <li>4) Booking details will now be displayed</li>
                         </ul>
                         <!--Past Bookings-->
+                                                                        <a name="007"></a>
                         <h4>View Past Bookins</h4>
                         <ul>
                             <li>First <a href="#UserAccounts">Log In</a></li>
