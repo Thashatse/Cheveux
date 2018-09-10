@@ -272,7 +272,7 @@
                             </div>
                              <div runat="server" id="divSummaryPic" visible="false" style="height: 400px; " class="text-center">
                                  <br />
-                                        <img src="/Theam/img/checkbox.png" alt="Edit" width="300"
+                                        <img src="http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/checkbox.png" alt="Edit" width="300"
                                                 height="200" class="img-fluid" />
                                  <br />
                                  <br />
@@ -293,7 +293,7 @@
                                     <!--Line Break-->
                                     <br />
                                     <asp:ListBox runat="server" ID="lbCustomers" CssClass="form-control" DataTextField="Name" DataValueField="ID" 
-                                        Height="250" OnSelectedIndexChanged="lbPickAStylist_SelectionIndexChanged"></asp:ListBox>
+                                        Height="250"></asp:ListBox>
                                     <!--Line Break-->
                                     <br />
                                     <p style="text-align: right; float: right;">

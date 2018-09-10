@@ -103,7 +103,7 @@ namespace Cheveux
                 }
                 else
                 {
-                    Response.Redirect("/Authentication/Accounts.aspx?PreviousPage=NewInternalBooking");
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/Authentication/Accounts.aspx?PreviousPage=NewInternalBooking");
                 }
             }
             else if (Authcookie != null)
@@ -321,6 +321,9 @@ namespace Cheveux
                     divDateTime.Visible = false;
                     divSelectUser.Visible = true;
                     btnPrevious.Visible = true;
+                    rblPickAServiceA_SelectedIndexChanged(sender, e);
+                    rblPickAServiceB_SelectedIndexChanged(sender, e);
+                    cblPickAServiceN_SelectedIndexChanged(sender, e);
 
                     lblGoService.ForeColor = Color.Gray;
                     lblGoService.Font.Bold = false;
@@ -346,23 +349,26 @@ namespace Cheveux
                         lblErrorSummary.Visible = true;
                         lblErrorSummary.Text = "Please select a customer before moving to the next step!";
                         divSelectUser.Visible = true;
+                        rblPickAServiceA_SelectedIndexChanged(sender, e);
+                        rblPickAServiceB_SelectedIndexChanged(sender, e);
+                        cblPickAServiceN_SelectedIndexChanged(sender, e);
                     }
                     #endregion
                     else
                     {
-
+                        divSelectUser.Visible = false;
                         //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
                         rblPickAServiceA_SelectedIndexChanged(sender, e);
                         rblPickAServiceB_SelectedIndexChanged(sender, e);
                         cblPickAServiceN_SelectedIndexChanged(sender, e);
                         HttpCookie bookingTime = Request.Cookies["BookTime"];
-                        if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                        if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00" && bookingType != "Internal")
                         {
                             lblErrorSummary.Visible = true;
                             lblErrorSummary.Text = "Please select a date before moving to the next step!";
                             divDateTime.Visible = true;
                         }
-                        else if (bookingTime == null)
+                        else if (bookingTime == null && bookingType != "Internal")
                         {
                             lblErrorSummary.Visible = true;
                             lblErrorSummary.Text = "Please select a time before moving to the next step!";
@@ -386,20 +392,7 @@ namespace Cheveux
                                         }
                                     }
                                 }
-                                int serviceCount = 0;
-                                foreach (string name in pickedServiceName)
-                                {
-                                    if (serviceCount == 0)
-                                    {
-                                        tblBookingSummary.Rows[1].Cells[1].Text = name;
-                                        serviceCount++;
-                                    }
-                                    else
-                                    {
-                                        tblBookingSummary.Rows[1].Cells[1].Text += ", " + name;
-                                    }
-
-                                }
+                                
                             }
                             else
                             {
@@ -566,10 +559,10 @@ namespace Cheveux
                                 body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
                                 body.AppendLine(@"");
                                 body.AppendLine(@"");
-                                body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
+                                body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + lblTime.Text + ".");
                                 body.AppendLine(@"Your booking is for " + tblBookingSummary.Rows[1].Cells[1].Text.ToString() + ".");
                                 body.AppendLine(@"");
-                                body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                                body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + primaryBookingID.ToString().Replace(" ", string.Empty));
                                 body.AppendLine(@"");
                                 body.AppendLine(@"Regards,");
                                 body.AppendLine(@"");
@@ -590,7 +583,7 @@ namespace Cheveux
                                 body.AppendLine(@"Your booking is with " + lbPickAStylist.SelectedItem.Text.ToString() + " on " + calBooking.SelectedDate.ToString("dd MMM yyyy") + " at " + Convert.ToDateTime(bookingTime["Time"]).ToString("HH:mm") + ".");
                                 body.AppendLine(@"Your booking is for " + tblBookingSummary.Rows[1].Cells[1].Text.ToString() + ".");
                                 body.AppendLine(@"");
-                                body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + book.BookingID.ToString().Replace(" ", string.Empty));
+                                body.AppendLine(@"View or change your booking details here: http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingID=" + primaryBookingID.ToString().Replace(" ", string.Empty));
                                 body.AppendLine(@"");
                                 body.AppendLine(@"Regards,");
                                 body.AppendLine(@"");
@@ -621,7 +614,7 @@ namespace Cheveux
                         }
                         else
                         {
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('http://sict-iis.nmmu.ac.za/beauxdebut/Authentication/Accounts.aspx?PreviousPage=MakeABooking','_newtab');", true);
                         }
                     }
                     catch (Exception err)
@@ -719,6 +712,7 @@ namespace Cheveux
                     btnPrevious.Text = "Choose Date & Time";
                     btnNext.Text = "Booking Summary";
                     divSelectUser.Visible = true;
+                    divSummaryPic.Visible = false;
                     btnPrevious.Visible = true;
                     lblGoService.ForeColor = Color.Gray;
                     lblGoService.Font.Bold = false;
