@@ -1844,6 +1844,5 @@ namespace Cheveux
             LoadSummary(sender, e);
         }
         #endregion
-
     }
 }

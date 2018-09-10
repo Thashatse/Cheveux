@@ -1,0 +1,786 @@
+
+TimeStamp: 2018/09/10 15:47:21
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.InvalidOperationException: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:47:21
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load featurd items from the DB on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 23
+   at DAL.DBAccess.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 69
+   at BLL.DBHandler.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 24
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 241
+
+TimeStamp: 2018/09/10 15:47:21
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured hairstyls on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 252
+
+TimeStamp: 2018/09/10 15:47:21
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured products on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 287
+
+TimeStamp: 2018/09/10 15:47:21
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 316
+
+TimeStamp: 2018/09/10 15:47:21
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load operating hours on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1552
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1578
+   at BLL.DBHandler.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 246
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 345
+
+TimeStamp: 2018/09/10 15:47:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.InvalidOperationException: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:47:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load featurd items from the DB on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 23
+   at DAL.DBAccess.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 69
+   at BLL.DBHandler.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 24
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 241
+
+TimeStamp: 2018/09/10 15:47:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured hairstyls on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 252
+
+TimeStamp: 2018/09/10 15:47:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured products on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 287
+
+TimeStamp: 2018/09/10 15:47:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 316
+
+TimeStamp: 2018/09/10 15:47:52
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load operating hours on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1552
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1578
+   at BLL.DBHandler.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 246
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 345
+
+TimeStamp: 2018/09/10 15:48:01
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:48:19
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:48:19
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 33
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 932
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 949
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 266
+   at BLL.Authentication.AuthenticateGoogle(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 106. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.AuthenticateGoogle(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 110
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 260
+
+TimeStamp: 2018/09/10 15:48:36
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:48:37
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:48:37
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.ApplicationException: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 33
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.ParamSelect(String commandName, CommandType cmdType, SqlParameter[] pars) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 42
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 932
+   at DAL.DBAccess.CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 949
+   at BLL.DBHandler.BLL_CheckForUserType(String id) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 266
+   at BLL.Authentication.AuthenticateGoogle(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 106. We are unable to Log you in at this time try again later.
+   at BLL.Authentication.AuthenticateGoogle(String reg) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Authentication.cs:line 110
+   at Cheveux.Accounts.btnAuthenticate_Click(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 260
+
+TimeStamp: 2018/09/10 15:48:57
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.InvalidOperationException: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:48:57
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load featurd items from the DB on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 23
+   at DAL.DBAccess.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 69
+   at BLL.DBHandler.GetHomePageFeatures() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 24
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 241
+
+TimeStamp: 2018/09/10 15:48:57
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured hairstyls on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 252
+
+TimeStamp: 2018/09/10 15:48:57
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured products on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 287
+
+TimeStamp: 2018/09/10 15:48:57
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 316
+
+TimeStamp: 2018/09/10 15:48:57
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load operating hours on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception (0x80004005): The network path was not found
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1552
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1578
+   at BLL.DBHandler.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 246
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 345
+
+TimeStamp: 2018/09/10 15:49:50
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.InvalidOperationException: Timeout expired.  The timeout period elapsed prior to obtaining a connection from the pool.  This may have occurred because all pooled connections were in use and max pool size was reached.
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:49:50
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured hairstyls on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 252
+
+TimeStamp: 2018/09/10 15:49:50
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured products on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 287
+
+TimeStamp: 2018/09/10 15:49:50
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 316
+
+TimeStamp: 2018/09/10 15:49:51
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load operating hours on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Connection Timeout Expired.  The timeout period elapsed while attempting to consume the pre-login handshake acknowledgement.  This could be because the pre-login handshake failed or the server was unable to respond back in time.  The duration spent while attempting to connect to this server was - [Pre-Login] initialization=3686; handshake=1318;  ---> System.ComponentModel.Win32Exception (0x80004005): The wait operation timed out
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:9d20d838-cbd6-4fc9-92ac-979f10311c74
+Error Number:-2,State:0,Class:11
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1552
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1578
+   at BLL.DBHandler.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 246
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 345
+
+TimeStamp: 2018/09/10 15:54:22
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error sending out going booking notifications: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'MicrosoftAccount\thashatse@live.com'.
+   at System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, DbConnectionPool pool, String accessToken, Boolean applyTransientFaultHandling, SqlAuthenticationProviderManager sqlAuthProviderManager)
+   at System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:f9c5c2c2-2d46-4c89-8852-1d6bd8a2dcf3
+Error Number:4060,State:1,Class:11
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 81
+   at DAL.DBAccess.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 113
+   at BLL.DBHandler.GetOGBkngNotis() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 31
+   at BLL.Functions.sendOGBkngNoti() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\Functions.cs:line 285
+
+TimeStamp: 2018/09/10 15:54:22
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured hairstyls on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 252
+
+TimeStamp: 2018/09/10 15:54:22
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured products on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 287
+
+TimeStamp: 2018/09/10 15:54:22
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to display featured stylist on default.aspx: System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 316
+
+TimeStamp: 2018/09/10 15:54:22
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to load operating hours on default.aspx: System.ApplicationException: System.ApplicationException: An Error Occouerd When Comunicating With The DatabaseSystem.Data.SqlClient.SqlException (0x80131904): Cannot open database "CHEVEUX" requested by the login. The login failed.
+Login failed for user 'MicrosoftAccount\thashatse@live.com'.
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal oldConnection, DbConnectionInternal& connection)
+   at System.Data.ProviderBase.DbConnectionInternal.TryOpenConnectionInternal(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   at System.Data.SqlClient.SqlConnection.TryOpenInner(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   at System.Data.SqlClient.SqlConnection.Open()
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 94
+ClientConnectionId:f9c5c2c2-2d46-4c89-8852-1d6bd8a2dcf3
+Error Number:4060,State:1,Class:11
+   at DAL.DBHelper.Select(String commandName, CommandType cmdType) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBHelper.cs:line 104
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1552
+   at DAL.DBAccess.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\DAL\DBAccess.cs:line 1578
+   at BLL.DBHandler.getBusinessTable() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\BLL\DBHandler.cs:line 246
+   at Cheveux.Default2.loadHomePage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Default.aspx.cs:line 345
+
+TimeStamp: 2018/09/10 15:57:23
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 452
+
+TimeStamp: 2018/09/10 16:05:49
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: JPaul99 Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 442
+
+TimeStamp: 2018/09/10 16:22:32
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 452
+
+TimeStamp: 2018/09/10 16:26:09
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Receptionist.<>c__DisplayClass12_0.<getAgenda>b__0(Object ss, EventArgs ee) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 278
+
+TimeStamp: 2018/09/10 16:28:22
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: MaryJOfficial Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 202
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 451
+
+TimeStamp: 2018/09/10 16:29:55
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: EdStyles Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.goToPreviousPage() in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 202
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 466
+
+TimeStamp: 2018/09/10 16:32:16
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error creating visit record [stylist.aspx {btn}] err: System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Stylist.<>c__DisplayClass11_0.<getAgenda>b__0(Object ss, EventArgs ee) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Stylist\Stylist.aspx.cs:line 199
+
+TimeStamp: 2018/09/10 16:33:35
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error updating visit [customervisit.aspx btnVisit] err:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.CustomerVisit.<>c__DisplayClass11_1.<getDetailsAndCreateRecord>b__0(Object ss, EventArgs ee) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Stylist\CustomerVisit.aspx.cs:line 169
+
+TimeStamp: 2018/09/10 16:35:15
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: EdStyles Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 467

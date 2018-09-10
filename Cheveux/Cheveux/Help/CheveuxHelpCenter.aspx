@@ -79,6 +79,7 @@
                         </ul>
                         <!--Content-->
                          <!--Login with EMAIL-->
+                        <br />
                         <a name="00-1"></a>
                         <!--Login with google-->
                         <h4>Login with email</h4>
@@ -108,6 +109,7 @@
                                 <li>You are now signed in. if you are new to Cheveux you will have to complete the registration process entering a username and contact number.</li>
                             </ul>
                         </ul>
+                        <br />
                         <a name="002"></a>
                         <!--Usernames-->
                         <h4>Usernames</h4>
@@ -152,11 +154,11 @@
                         <h2>Bookings </h2>
                                                 <ul class="nav nav-pills nav-stacked">
                             <li><a href="#005">How to Make a Booking &nbsp; &nbsp;</a></li>
-                            <li><a href="#006">View Upcoming Bookings &nbsp; &nbsp;</a></li>
-                            <li><a href="#007">View Past Boookings  &nbsp; &nbsp;</a></li>
+                            <li><a href="#006">View Bookings &nbsp; &nbsp;</a></li>
                         </ul>
                         <!--Content-->
                         <!--Make a Booking-->
+                        <br />
                                                                         <a name="005"></a>
                                                 <h4>How to Make A Booking</h4>
                                                 <ul>
@@ -192,33 +194,16 @@
 
                         </ul>
                         <!--Upcoming Bookings-->
+                        <br />
                                                 <a name="006"></a>
-                        <h4>View Upcoming Bookings</h4>
+                        <h4>View Bookings</h4>
                         <ul>
                             <li>First <a href="#UserAccounts">Log In</a></li>
-                            <img src="Helpimages/BookingsNavBar.png" alt="View Bookings" />
-                            <li>1) Select 'Bookings'in the navigation bar</li>
-                            <li>2) Your upcoming bookings are displayed by default</li>
-                            <img src="Helpimages/BookingsPageViewBooking.png" alt="View Bookings" />
-                            <li>3) To display booking details select ‘View Booking’</li>
-                            <img src="Helpimages/UpcomingBooking.png" alt="View Bookings" />
-                            <li>4) Booking details will now be displayed</li>
-                        </ul>
-                        <!--Past Bookings-->
-                                                                        <a name="007"></a>
-                        <h4>View Past Bookins</h4>
-                        <ul>
-                            <li>First <a href="#UserAccounts">Log In</a></li>
-                            <img src="Helpimages/BookingsNavBar.png" alt="View Past Bookings" />
-                            <li>1) Select 'Bookings' in the navigation bar</li>
-                            <li>2) Your upcoming bookings are displayed by default</li>
-                            <img src="Helpimages/BookingsPagePastBookings.png" alt="View Past Bookings" />
-                            <li>3) To see past bookings select the ‘Past Bookings’ tab</li>
-                            <li>4) Past bookings will now be displayed</li>
-                            <img src="Helpimages/BookingsPageViewPastBooking.png" alt="View Past Bookings" />
-                            <li>5) To display booking details select ‘View Booking’</li>
-                            <img src="Helpimages/ViewPastBookings.png" alt="View Past Bookings" />
-                            <li>6) The booking details and invoice will now be displayed</li>
+                            <img src="Helpimages/Signedinwithgoogle.png" alt="profile" />
+                             <li>1) Select your profile in the navigation bar</li>
+                            <img src="Helpimages/BookingsNavBar.png" alt="upcoming or past?" />
+                            <li>2) Selct upcoming or past bookings</li>
+                            <li>Your bookings will now be listed</li>
                         </ul>
                     </div>
                 </div>
@@ -232,6 +217,7 @@
                             </div>
                 <!-- Internal Help displayed if user is logged in-->
                     <div class="container" runat="server" id="LogedIn" visible="false">
+                        <a name="InternalHelp"></a>
                 <a class='navbar-brand js-scroll-trigger' href='../Default.aspx'>Cheveux Home</a>
                         <!-- Lin Break -->
                         <br />
@@ -239,9 +225,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!-- if the user is loged Out -->
-                        <a name="InternalHelp"></a>
+                        
                         <div class="jumbotron bg-dark text-white">
-                            <h1>Internal Help</h1>
+                            <h1>Internal System</h1>
                             </div>
                         </div>
                     </div>
@@ -251,9 +237,7 @@
                             <div class="col-md-12">
                                 <!--Nav Pills for internal system-->
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In &nbsp; &nbsp;</a></li>
-                                    <li><a href="#ReceptionistCheckOut">Receptionist Customer Check-Out&nbsp; &nbsp;</a></li>
-                                    <li><a href="#StylistCustomerVisit">Stylist Customer Visit &nbsp; &nbsp;</a></li>
+                                    <li><a href="#ProcessBooking">Process Booking &nbsp; &nbsp;</a></li>
                                     <li><a href="#ManageProducts">Manage Products &nbsp; &nbsp;</a></li>
                                     <li><a href="#ManageServices">Manage Services &nbsp; &nbsp;</a></li>
                                     <li><a href="#ManageEmployee">Manage Employees &nbsp; &nbsp;</a></li>
@@ -271,6 +255,14 @@
                             </div>
 
                         <!--New Section-->
+                        <a name="ProcessBooking"></a>
+                        <!--Header-->
+                        <h2>Process Booking </h2>
+                        <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="#ReceptionistCheckIn">Receptionist Customer Check-In &nbsp; &nbsp;</a></li>
+                                    <li><a href="#ReceptionistCheckOut">Receptionist Customer Check-Out&nbsp; &nbsp;</a></li>
+                                    <li><a href="#StylistCustomerVisit">Stylist Customer Visit &nbsp; &nbsp;</a></li>
+                        </ul>
                         <!--Help Section Template 3-->
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
@@ -280,13 +272,12 @@
                                 <!--Content-->
                                 <p>
                                     <ul>
-                                        <li>Step 1) Log In</li>
-                                        <img src="Helpimages/Login-SignUp.png" alt="Login" />
-                                        <li>Step 2)Select dropdown list to select employee's schedule you would like to view </li>
+                                        <li>First <a href="#UserAccounts">Log In</a></li>
+                                        <li>Step 1) Select dropdown list to select employee's schedule you would like to view </li>
                                         <img src="Helpimages/Dropdown.png" alt="Dropdown" />
                                         <li>Stylists Agenda is displayed</li>
                                         <img src="Helpimages/viewAgenda.png" alt="viewAgenda" />
-                                        <li>Step 3)Look which time slot the customer has come in for and select check-in</li>
+                                        <li>Step 2) Look which the customer's booking and select check-in</li>
                                         <img src="Helpimages/CheckIn.png" alt="Check In" />
                                         <li>Button will change to check-out</li>
                                         <img src="Helpimages/CheckOut.png" alt="Check-out" />
@@ -366,10 +357,7 @@
                                         <img src="Helpimages/createVisit.png" alt="Create visit" />
                                         <li>You will be redirected to booking details page which booking details</li>
                                         <img src="Helpimages/customerVisitBookingDetail.png" alt="Booking Detail" />
-                                        <li>Step 2) To update service details click "Update"</li>
-                                        <img src="Helpimages/serviceDTLs.png" alt="Service details" />
-                                        <li>Step 3) Input service description and select "Update visit"</li>
-                                        <img src="Helpimages/serviceInput.png" alt="Service description input" />
+                                        <li>Step 2) To update service details Input service comment and click "Update"</li>
                                     </ul>
                                 </p>
                             </div>
@@ -397,9 +385,7 @@
                                         <li>Select ‘Manage Products’ from the navigation bar</li>
                                         <a href="../Manager/Products.aspx">Go to Manage Products Page</a>
                                         <img src="Helpimages/ViewProductsBy.png" alt="View Products By" />
-                                        <li>You can view products by product type  </li>
-                                        <img src="Helpimages/ViewProductsByTerm.png" alt="View Products By Term" />
-                                        <li>And or by a search term</li>
+                                        <li>You can view products by product type And or by a search term</li>
                                     </ul>
                                     <!--line Break-->
                                     <br />
@@ -408,7 +394,7 @@
                                     <h3>View Product Details</h3>
                                     <ul>
                                         <img src="Helpimages/ManageProductsViewProduct.png" alt="View Product Details BTN" />
-                                        <li>To view the details of a product select view next to the product</li>
+                                        <li>To view the details of a product select the name product</li>
                                     </ul>
 
                                     <!--line Break-->
@@ -419,16 +405,6 @@
                                     <ul>
                                         <img src="Helpimages/ManageProductsnewProduct.png" alt="Add New Product" />
                                         <li>To Add a product, select New Product </li>
-                                    </ul>
-
-                                    <!--line Break-->
-                                    <br />
-
-                                    <!--Sub Heading-->
-                                    <h3>Manage Stock</h3>
-                                    <ul>
-                                        <img src="Helpimages/ManageProductsManageStock.png" alt="Manage Stock BTN" />
-                                        <li>To add or remove stock select manage stock next to the product you want to change</li>
                                     </ul>
 
                                     <!--line Break-->
@@ -475,7 +451,7 @@
                                     <h3>View Service Details</h3>
                                     <ul>
                                         <img src="Helpimages/ManageServiceView.png" alt="View Service Details BTN" />
-                                        <li>To view the details of a service, select view button next to the service</li>
+                                        <li>To view the details of a service, select name or description of the service</li>
                                     </ul>
 
                                     <!--line Break-->
@@ -490,13 +466,6 @@
 
                                     <!--line Break-->
                                     <br />
-
-                                    <!--Sub Heading-->
-                                    <h3>Edit Service</h3>
-                                    <ul>
-                                        <img src="Helpimages/ManageServiceedit.png" alt="edit Service BTN" />
-                                        <li>To edit a service select edit button next to the service you wish to edit</li>
-                                    </ul>
                                 </p>
                             </div>
                         </div>
@@ -524,7 +493,7 @@
 
                                         <a href="../Manager/Employee.aspx">Go to Manage Employees Page</a>
                                         <img src="Helpimages/ViewEmployeesBy.png" alt="Login" />
-                                        <li>On the Employees page, you can view employees by employee type </li>
+                                        <li>On the Employees page, you can view employees by employee type or search term </li>
                                     </ul>
                                     <!--line Break-->
                                     <br />

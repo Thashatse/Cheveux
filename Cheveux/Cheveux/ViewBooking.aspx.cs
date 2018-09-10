@@ -2666,6 +2666,7 @@ namespace Cheveux
             divAddProducts.Visible = false;
             BookingID = Request.QueryString["BookingID"];
             checkOut(BookingID);
+            PaymentType_SelectedIndexChanged(sender, e);
             divCheckOut.Visible = true;
         }
 

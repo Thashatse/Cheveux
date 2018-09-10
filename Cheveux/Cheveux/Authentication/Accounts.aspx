@@ -63,7 +63,7 @@
                             <!-- sellect account Type -->
                             <div class="container" runat="server" id="divAccountType">
                                 <!--sign in with email buton-->
-                                <asp:Button type='btnEmailSignIn' CssClass='btn btn-primary' OnClick="Unnamed_Click" runat="server" Text="&#128231;  Sign In With Email"></asp:Button>
+                                <asp:Button type='btnEmailSignIn' CssClass='btn btn-primary' OnClick="Unnamed_Click" runat="server" Text="&#128231; Email"></asp:Button>
                                 <!--line break-->
                                 <br />
                                 <br />

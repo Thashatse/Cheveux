@@ -311,7 +311,7 @@
                                                     <asp:Button ID="btnSavePaymentType" runat="server" Text="Save" OnClick="btnSavePaymentType_Click" class="btn btn-primary" />
                                                 </asp:TableCell>
                                                 <asp:TableCell>
-                                                    <div runat="server" id="divCalcuateChange" visible="false">
+                                                    <div runat="server" id="divCalcuateChange">
                                                         <p style="text-align: left; float: left;">Amount Due: &nbsp; </p>
                                                         <p style="text-align: right; float: right;">
                                                             <asp:Label runat="server" ID="lAmountDue"></asp:Label>
