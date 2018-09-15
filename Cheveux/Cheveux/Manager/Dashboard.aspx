@@ -13,8 +13,8 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-1"></div>
+        <div class="col-10">
             <div runat="server" id="managerDashboardPage">
                 <!-- if the user is loged In -->
                 <div runat="server" id="LogedIn" visible="false">
@@ -90,7 +90,7 @@
                                 <br />
                             </div>
 
-                            <div runat="server" id="divOrders" visible="false">
+                            <div runat="server" id="divOrders">
                                 <!--Orders-->
                                 <h1>Outstanding Product Orders </h1>
                                 <!-- Orders Table -->
@@ -128,6 +128,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-1"></div>
     </div>
 </asp:Content>

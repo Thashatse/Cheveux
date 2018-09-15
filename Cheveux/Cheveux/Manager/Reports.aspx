@@ -15,8 +15,8 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-1"></div>
+        <div class="col-10">
 
             <div runat="server" id="ReportsPage">
                 <!-- if the user is loged In -->
@@ -58,7 +58,8 @@
                                     <br />
 
                                     <div class="container" runat="server" id="salesPaymentType" visible="False">
-                                        Payment Type: <asp:DropDownList ID="drpPaymentType" runat="server" CssClass="btn btn-secondary dropdown-toggle" AutoPostBack="True">
+                                        Payment Type:
+                                        <asp:DropDownList ID="drpPaymentType" runat="server" CssClass="btn btn-secondary dropdown-toggle" AutoPostBack="True">
                                             <asp:ListItem Text="All" Value="0" Selected="True"></asp:ListItem>
                                             <asp:ListItem Text="Cash" Value="1"></asp:ListItem>
                                             <asp:ListItem Text="Credit" Value="2"></asp:ListItem>
@@ -179,6 +180,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-1"></div>
     </div>
 </asp:Content>

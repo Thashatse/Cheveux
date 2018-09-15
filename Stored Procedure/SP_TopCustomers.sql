@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 
 GO
-CREATE PROCEDURE SP_GetTopCustomers
+alter PROCEDURE SP_GetTopCustomers
 	
 	@customerID nchar(30),
 	@startDate datetime,

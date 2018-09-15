@@ -141,12 +141,10 @@ namespace BLL
             return db.getBrandsForProductType(type);
         }
 
-        /*
-        public List<SP_GetSupplier> getSupplier();
+        public List<Supplier> getSuppliers()
         {
-            return db.getSupplier();
+            return db.getSuppliers();
         }
-        */
         #endregion
 
         #region Bookings

@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="bg-secondary text-white" id="Div1">                                
+    <div class="bg-secondary text-white" id="Div1">
         <!-- Top Margin & Nav Bar Back Color -->
         <br />
         <br />
@@ -14,8 +14,8 @@
     <!-- Top Margin -->
     <br />
     <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-1"></div>
+        <div class="col-10">
 
             <div runat="server" id="divViewAll">
                 <div class="jumbotron bg-dark text-white">
@@ -24,7 +24,7 @@
                         <h1 runat="server" id="lblHeader">Products</h1>
                     </header>
                 </div>
-                <asp:PlaceHolder runat="server" ID="phProducts">
+                <asp:placeholder runat="server" id="phProducts">
                     <div class="row">
                         <div class="col-md-12">
                             <asp:Label ID="productJumbotronLable" runat="server">   </asp:Label>
@@ -35,12 +35,12 @@
                         </div>
 
                     </div>
-                </asp:PlaceHolder>
+                </asp:placeholder>
             </div>
 
             <!--View specific product-->
             <div runat="server" id="DisplayProduct" visible="false">
-                <asp:PlaceHolder ID="phSpecProduct" runat="server">
+                <asp:placeholder id="phSpecProduct" runat="server">
 
                     <div class="row">
                         <div class="col-sm-auto col-md-auto col-lg-auto">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
 
-                </asp:PlaceHolder>
+                </asp:placeholder>
             </div>
 
             <div class="row">
@@ -68,7 +68,7 @@
                                             <h1>Add Product </h1>
                                         </header>
                                         <br />
-                                        <asp:Table runat="server" ID="tblProductDetails">
+                                        <asp:table runat="server" id="tblProductDetails">
                                             <asp:TableRow>
                                                 <asp:TableCell Text="Product Type:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                                 <asp:TableCell>
@@ -121,12 +121,12 @@
                                                 </asp:TableCell>
                                                
                                             </asp:TableRow>  
-                                        </asp:Table>
-                                        <asp:Button ID="btnAddProduct" runat="server" Text="Add Product" OnClick="btnAddProduct_Click" /> 
-                                        <asp:Button ID="btnUpdateProduct" runat="server" Text="Update Product"/>
+                                        </asp:table>
+                                        <asp:button id="btnAddProduct" runat="server" text="Add Product" onclick="btnAddProduct_Click" />
+                                        <asp:button id="btnUpdateProduct" runat="server" text="Update Product" />
                         </form>
                     </div>
 
-                    <div class="col-md-2 col-sm-1"></div>
+                    <div class="col-1"></div>
                 </div>
 </asp:Content>

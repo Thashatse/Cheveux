@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
+using System.Collections;
 
 namespace Cheveux.Manager
 {
@@ -20,7 +21,7 @@ namespace Cheveux.Manager
         int treatCount = 0;
         int accCount = 0;
 
-        //set the master page based on the user type
+        #region set the master page based on the user type
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -69,6 +70,7 @@ namespace Cheveux.Manager
                 this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
             }
         }
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -94,9 +96,10 @@ namespace Cheveux.Manager
                 LogedIn.Visible = true;
                 LogedOut.Visible = false;
 
-                if (!Page.IsPostBack)
+                    if (!Page.IsPostBack)
                 {
                     drpProductType.Items.Add(new ListItem("All", "X"));
+                    ddlOrdersProductType.Items.Add(new ListItem("All", "X"));
                     try
                     {
                         productTypes = handler.getProductTypes();
@@ -105,6 +108,9 @@ namespace Cheveux.Manager
                             if (productType.type != 'S')
                             {
                                 drpProductType.Items.Add(new ListItem(
+                                    function.GetFullProductTypeText(productType.type.ToString()[0]),
+                                    productType.type.ToString()));
+                                ddlOrdersProductType.Items.Add(new ListItem(
                                     function.GetFullProductTypeText(productType.type.ToString()[0]),
                                     productType.type.ToString()));
                             }
@@ -116,12 +122,20 @@ namespace Cheveux.Manager
                     }
                     drpProductType.Items.RemoveAt(0);
                     drpProductType.SelectedIndex = 0;
+                    ddlOrdersProductType.Items.RemoveAt(0);
+                    ddlOrdersProductType.SelectedIndex = 0;
+
+                    //load new order page
+                    loadSupplier();
+                    loadSupplierProducts();
                 }
+
                 //get the selected sort by and display the results
                 loadProductList(drpProductType.SelectedValue.ToString()[0]);
             }
         }
 
+        #region view all Products
         public void loadProductList(char productType)
         {
            try
@@ -169,11 +183,11 @@ namespace Cheveux.Manager
                         //if the product maches the selected type
                         //if product matches the tearm
                         if ((Access.ProductType[0] == productType || productType == 'X') &&
-                            (compareToSearchTerm(Access.Name) == true ||
-                            compareToSearchTerm(Access.ProductDescription) == true ||
-                            compareToSearchTerm(Access.Brandname) == true ||
-                            compareToSearchTerm(Access.brandType) == true ||
-                            compareToSearchTerm(Access.Colour) == true) &&
+                            (compareToSearchTerm(Access.Name, false) == true ||
+                            compareToSearchTerm(Access.ProductDescription, false) == true ||
+                            compareToSearchTerm(Access.Brandname, false) == true ||
+                            compareToSearchTerm(Access.brandType, false) == true ||
+                            compareToSearchTerm(Access.Colour, false) == true) &&
                             Access.ProductType[0] != 'S')
                         {
                             //add header only before the first accessorie
@@ -277,11 +291,11 @@ namespace Cheveux.Manager
                         //if the product maches the selected type
                         //if product matches the tearm
                         if ((treat.ProductType[0] == productType || productType == 'X') &&
-                            (compareToSearchTerm(treat.Name) == true ||
-                            compareToSearchTerm(treat.ProductDescription) == true ||
-                            compareToSearchTerm(treat.Brandname) == true ||
-                            compareToSearchTerm(treat.TreatmentType) == true ||
-                            compareToSearchTerm(treat.brandType) == true) &&
+                            (compareToSearchTerm(treat.Name, false) == true ||
+                            compareToSearchTerm(treat.ProductDescription, false) == true ||
+                            compareToSearchTerm(treat.Brandname, false) == true ||
+                            compareToSearchTerm(treat.TreatmentType, false) == true ||
+                            compareToSearchTerm(treat.brandType, false) == true) &&
                             treat.ProductType[0] != 'S')
                         {
                             //add header only before the first product
@@ -412,14 +426,186 @@ namespace Cheveux.Manager
                 productJumbotronLable.Text = "An error occurred retrieving Product details";
             }
         }
+        #endregion
 
-        public bool compareToSearchTerm(string toBeCompared)
+        #region New Order
+        List<string> productIDs = new List<string>();
+
+        public void loadSupplier()
+        {
+            try
+            {
+                List<Supplier> suppliers = handler.getSuppliers();
+                foreach (Supplier supplier in suppliers)
+                {
+                    //Load employee names into dropdownlist
+                    ddlSupplier.DataSource = suppliers;
+                    //set the coloumn that will be displayed to the user
+                    ddlSupplier.DataTextField = "SupplierName";
+                    //set the coloumn that will be used for the valuefield
+                    ddlSupplier.DataValueField = "SupplierID";
+                    //bind the data
+                    ddlSupplier.DataBind();
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20suppliers");
+            }
+        }
+
+        public void loadSupplierProducts()
+        {
+            try
+            {
+                //load a list of all products
+                products = handler.getAllProductsAndDetails();
+
+                ArrayList ListBoxArray = new ArrayList();
+                char productType = ddlOrdersProductType.SelectedValue.ToString()[0];
+                lbProducts.Items.Clear();
+
+                foreach (SP_GetAllAccessories Access in products.Item1)
+                {
+                    //if the product maches the selected type
+                    //if product matches the tearm
+                    if ((Access.ProductType[0] == productType || productType == 'X') &&
+                        (compareToSearchTerm(Access.Name, true) == true ||
+                        compareToSearchTerm(Access.ProductDescription, true) == true ||
+                        compareToSearchTerm(Access.Brandname, true) == true ||
+                        compareToSearchTerm(Access.brandType, true) == true ||
+                        compareToSearchTerm(Access.Colour, true) == true) &&
+                        Access.ProductType[0] != 'S')
+                    {
+                        lbProducts.Items.Add(Access.Name);
+                    }
+                }
+
+                foreach (SP_GetAllTreatments treat in products.Item2)
+                {
+                    //if the product maches the selected type
+                    //if product matches the tearm
+                    if ((treat.ProductType[0] == productType || productType == 'X') &&
+                        (compareToSearchTerm(treat.Name, true) == true ||
+                        compareToSearchTerm(treat.ProductDescription, true) == true ||
+                        compareToSearchTerm(treat.Brandname, true) == true ||
+                        compareToSearchTerm(treat.TreatmentType, true) == true ||
+                        compareToSearchTerm(treat.brandType, true) == true) &&
+                        treat.ProductType[0] != 'S')
+                    {
+                        lbProducts.Items.Add(treat.Name);
+                    }
+                }
+
+                for (int i = 0; i < lbProducts.Items.Count; i++)
+                {
+                    ListBoxArray.Add(lbProducts.Items[i].Value);
+                }
+
+                ListBoxArray.Sort();
+                lbProducts.Items.Clear();
+                foreach(string item in ListBoxArray)
+                {
+                    lbProducts.Items.Add(item);
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20products");
+            }
+        }
+
+        public void loadSupplierProductsID()
+        {
+            try
+            {
+                //load a list of all products IDS
+                products = handler.getAllProductsAndDetails();
+
+                ArrayList ListBoxArray = new ArrayList();
+                char productType = ddlOrdersProductType.SelectedValue.ToString()[0];
+                productIDs.Clear();
+
+                foreach (SP_GetAllAccessories Access in products.Item1)
+                {
+                    //if the product maches the selected type
+                    //if product matches the tearm
+                    if ((Access.ProductType[0] == productType || productType == 'X') &&
+                        (compareToSearchTerm(Access.Name, true) == true ||
+                        compareToSearchTerm(Access.ProductDescription, true) == true ||
+                        compareToSearchTerm(Access.Brandname, true) == true ||
+                        compareToSearchTerm(Access.brandType, true) == true ||
+                        compareToSearchTerm(Access.Colour, true) == true) &&
+                        Access.ProductType[0] != 'S')
+                    {
+                        productIDs.Add(Access.ProductID);
+                    }
+                }
+
+                foreach (SP_GetAllTreatments treat in products.Item2)
+                {
+                    //if the product maches the selected type
+                    //if product matches the tearm
+                    if ((treat.ProductType[0] == productType || productType == 'X') &&
+                        (compareToSearchTerm(treat.Name, true) == true ||
+                        compareToSearchTerm(treat.ProductDescription, true) == true ||
+                        compareToSearchTerm(treat.Brandname, true) == true ||
+                        compareToSearchTerm(treat.TreatmentType, true) == true ||
+                        compareToSearchTerm(treat.brandType, true) == true) &&
+                        treat.ProductType[0] != 'S')
+                    {
+                        productIDs.Add(treat.ProductID);
+                    }
+                }
+
+                for (int i = 0; i < productIDs.Count; i++)
+                {
+                    ListBoxArray.Add(productIDs[i]);
+                }
+
+                ListBoxArray.Sort();
+                productIDs.Clear();
+                foreach (string item in ListBoxArray)
+                {
+                    productIDs.Add(item);
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20products");
+            }
+        }
+
+        protected void ddlOrdersProductType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadSupplierProducts();
+        }
+
+        protected void btnNewProd_Click(object sender, EventArgs e)
+        {
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('http://sict-iis.nmmu.ac.za/beauxdebut/Cheveux/Products.aspx?Action=Add','_newtab');", true);
+        }
+        #endregion
+
+        public bool compareToSearchTerm(string toBeCompared, bool newOrder)
         {
             bool result = false;
-            if (txtProductSearchTerm.Text != null)
+            if (txtProductSearchTerm.Text != null && newOrder == false)
             {
                 toBeCompared = toBeCompared.ToLower();
                 string searcTearm = txtProductSearchTerm.Text.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else if(txtProductSearch.Text != null && newOrder == true)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = txtProductSearch.Text.ToLower();
                 if (toBeCompared.Contains(searcTearm))
                 {
                     result = true;
@@ -430,11 +616,6 @@ namespace Cheveux.Manager
                 result = true;
             }
             return result;
-        }
-
-        protected void btnAddProduct_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

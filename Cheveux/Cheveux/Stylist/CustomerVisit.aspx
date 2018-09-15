@@ -15,8 +15,8 @@
         <br />
 
         <div class="row">
-            <div class="col-md-2 col-sm-1"></div>
-            <div class="col-md-8 col-sm-10">
+            <div class="col-1"></div>
+            <div class="col-10">
                 <div class="jumbotron  bg-dark text-white" id="LoggedIn" runat="server">
                     <asp:Label ID="theVisit" runat="server" Font-Bold="true" Font-Size="X-Large">
                         <h1>Customer Visit</h1>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-12">
-                            <asp:PlaceHolder  ID="phOther" runat="server">
+                            <asp:PlaceHolder ID="phOther" runat="server">
                                 <asp:Table runat="server" ID="tblOther">
                                 </asp:Table>
                             </asp:PlaceHolder>
@@ -85,7 +85,7 @@
                 </asp:PlaceHolder>
 
 
-                         <div class="container" runat="server" id="LoggedOut" visible="true">
+                <div class="container" runat="server" id="LoggedOut" visible="true">
                     <div class="jumbotron bg-dark text-white">
                         <h1>Please Log-in to proceed</h1>
                         <button type="button" class="btn btn-primary">
@@ -99,7 +99,7 @@
                     <br />
                 </div>
             </div>
-            <div class="col-md-2 col-sm-1"></div>
+            <div class="col-1"></div>
         </div>
     </form>
 </asp:Content>

@@ -9,7 +9,7 @@ using TypeLibrary.Models;
 using TypeLibrary.ViewModels;
 using System.Data;
 using System.Drawing;
-
+using System.Collections;
 
 namespace Cheveux
 {
@@ -2396,9 +2396,9 @@ namespace Cheveux
                 if (products.Item1.Count != 0 && products.Item2.Count != 0)
                 {
                     int prodCount = 0;
-                    //sort the products by alphabetical oder
-                    products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
-                        products.Item2.OrderBy(o => o.Name).ToList());
+                    ArrayList ListBoxArray = new ArrayList();
+                    lbProducts.Items.Clear();
+
                     //add treatments
                     foreach (SP_GetAllTreatments treat in products.Item2)
                     {
@@ -2431,6 +2431,20 @@ namespace Cheveux
                     if (prodCount == 0)
                     {
                         lbProducts.Items.Add("No Products Found");
+                    }
+                    else
+                    {
+                        for (int i = 0; i < lbProducts.Items.Count; i++)
+                        {
+                            ListBoxArray.Add(lbProducts.Items[i].Value);
+                        }
+
+                        ListBoxArray.Sort();
+                        lbProducts.Items.Clear();
+                        foreach (string item in ListBoxArray)
+                        {
+                            lbProducts.Items.Add(item);
+                        }
                     }
 
                         //show the add product to sale view
@@ -2469,6 +2483,9 @@ namespace Cheveux
             //add items
             if (type == 'A')
             {
+                ArrayList ListBoxArray = new ArrayList();
+                productIDs.Clear();
+
                 //load the product ids
                 products = handler.getAllProductsAndDetails();
                 if (products.Item1.Count != 0 && products.Item2.Count != 0)
@@ -2500,6 +2517,18 @@ namespace Cheveux
                         {
                             productIDs.Add(Access.ProductID.ToString());
                         }
+                    }
+
+                    for (int i = 0; i < productIDs.Count; i++)
+                    {
+                        ListBoxArray.Add(productIDs[i]);
+                    }
+
+                    ListBoxArray.Sort();
+                    productIDs.Clear();
+                    foreach (string item in ListBoxArray)
+                    {
+                        productIDs.Add(item);
                     }
                 }
             }

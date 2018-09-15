@@ -1404,33 +1404,153 @@ namespace DAL
 
         }
 
-        /*
-           public List<SP_GetSupplier> getSupplier()
+        public List<Supplier> getSuppliers()
         {
-            List<SP_GetSupplier> list = new List<SP_GetSupplier>();
+            List<Supplier> list = new List<Supplier>();
             try 
             {
-               using (DataTable table = DBHelper.Select("SP_GetSupplier", CommandType.StoredProcedure))
+                using (DataTable table = DBHelper.Select("SP_Get_Supplier", CommandType.StoredProcedure))
+                {
                     if (table.Rows.Count > 0)
                     {
                         foreach (DataRow row in table.Rows)
                         {
-                            SP_GetSupplier supplier = new SP_GetSupplier();
-                            supplier.SupplierID = row["SupplierID"].ToString();
-                            supplier.SupplierName = row["SupplierName"].ToString();
-                            supplier.ContactName = row["ContactName"].ToString();
-                            supplier.ContactNo = row["ContactNo"].ToString();
+                            Supplier supplier = new Supplier();
+                            supplier.supplierID = row["SupplierID"].ToString();
+                            supplier.supplierName = row["SupplierName"].ToString();
+                            supplier.contactName = row["ContactName"].ToString();
+                            supplier.contactNo = row["ContactNo"].ToString();
                             supplier.AddressLine1 = row["AddressLine1"].ToString();
                             supplier.AddressLine2 = row["AddressLine2"].ToString();
                             supplier.Suburb = row["Suburb"].ToString();
                             supplier.City = row["City"].ToString();
-                            supplier.ContactEmail = row["ContactEmail"].ToString();
+                            supplier.contactEmail = row["ContactEmail"].ToString();
                             list.Add(supplier);
                         }
                     }
-                 }
-              }
-              */
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+        
+        public List<PRODUCT> getAllProducts()
+        {
+            PRODUCT product = null;
+            List<PRODUCT> products = new List<PRODUCT>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetAllProducts",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            product = new PRODUCT
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                ProductDescription = row["ProductDescription"].ToString(),
+                                Price = Convert.ToDecimal(row["Price"].ToString()),
+                                ProductType = row["ProductType(T/A/S)"].ToString(),
+                                Active = row["Active"].ToString(),
+                                //ProductImage = row["ProductImage"]
+                            };
+                            products.Add(product);
+                        }
+                    }
+                    return products;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool addAccessories(ACCESSORY a, PRODUCT p)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+                        new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
+                    new SqlParameter("@colour", a.Colour.ToString()),
+                    new SqlParameter("@qty", a.Qty.ToString()),
+                    new SqlParameter("@brandID", a.BrandID.ToString()),
+                    new SqlParameter("@productID",a.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString())
+                    };
+                return DBHelper.NonQuery("SP_AddAccessory", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+
+        //addTreatments
+        public bool addTreatments(TREATMENT t, PRODUCT p)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+                    new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
+                    new SqlParameter("@qty", t.Qty.ToString()),
+                    new SqlParameter("@qty", t.TreatmentType.ToString()),
+                    new SqlParameter("@brandID", t.BrandID.ToString()),
+                    new SqlParameter("@productID",t.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@Price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString())
+                    };
+                return DBHelper.NonQuery("SP_AddTreatment", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+
+        public List<SP_GetProductTypes> getProductTypes()
+        {
+            SP_GetProductTypes productType = null;
+            List<SP_GetProductTypes> productTypes = new List<SP_GetProductTypes>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetProductTypes",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productType = new SP_GetProductTypes
+                            {
+                                type = Convert.ToChar(row[0].ToString()[0])
+                            };
+                            productTypes.Add(productType);
+                        }
+                    }
+                    return productTypes;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Manager Dash Board
@@ -2309,128 +2429,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public List<PRODUCT> getAllProducts()
-        {
-            PRODUCT product = null;
-            List<PRODUCT> products = new List<PRODUCT>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_GetAllProducts",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            product = new PRODUCT
-                            {
-                                ProductID = row["ProductID"].ToString(),
-                                Name = row["Name"].ToString(),
-                                ProductDescription = row["ProductDescription"].ToString(),
-                                Price = Convert.ToDecimal(row["Price"].ToString()),
-                                ProductType = row["ProductType(T/A/S)"].ToString(),
-                                Active = row["Active"].ToString(),
-                                //ProductImage = row["ProductImage"]
-                            };
-                            products.Add(product);
-                        }
-                    }
-                    return products;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-
-        public bool addAccessories(ACCESSORY a,PRODUCT p)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                    {
-                        new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
-                    new SqlParameter("@colour", a.Colour.ToString()),
-                    new SqlParameter("@qty", a.Qty.ToString()),
-                    new SqlParameter("@brandID", a.BrandID.ToString()),
-                    new SqlParameter("@productID",a.TreatmentID.ToString()),
-                    new SqlParameter("@name",p.Name.ToString()),
-                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
-                    };
-                return DBHelper.NonQuery("SP_AddAccessory", CommandType.StoredProcedure, pars.ToArray());
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-
-        }
-        //addTreatments
-        public bool addTreatments(TREATMENT t,PRODUCT p)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                    {
-                    new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
-                    new SqlParameter("@qty", t.Qty.ToString()),
-                    new SqlParameter("@qty", t.TreatmentType.ToString()),
-                    new SqlParameter("@brandID", t.BrandID.ToString()),
-                    new SqlParameter("@productID",t.TreatmentID.ToString()),
-                    new SqlParameter("@name",p.Name.ToString()),
-                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
-                    };
-                return DBHelper.NonQuery("SP_AddTreatment", CommandType.StoredProcedure, pars.ToArray());
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-
-        }
-       
-
-
-
-
-
-
-        public List<SP_GetProductTypes> getProductTypes()
-        {
-            SP_GetProductTypes productType = null;
-            List<SP_GetProductTypes> productTypes = new List<SP_GetProductTypes>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_GetProductTypes",
-            CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            productType = new SP_GetProductTypes
-                            {
-                                type = Convert.ToChar(row[0].ToString()[0])
-                            };
-                            productTypes.Add(productType);
-                        }
-                    }
-                    return productTypes;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-        
+                
         public USER checkForAccountTypeEmail(string identifier)
         {
             USER AT = null;
@@ -2460,9 +2459,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-
-
+        
         public bool addEmployee(string empID, string bio, string ad1, string ad2, string suburb, string city, string firstname
                                 , string lastname, string username, string email, string contactNo, string password,
                                 string userimage, string passReset)

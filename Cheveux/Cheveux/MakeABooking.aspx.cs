@@ -710,6 +710,7 @@ namespace Cheveux
                     //if the booking is being made internaly i.e: by Receptionist
                     #region set the buttons
                     btnPrevious.Text = "Choose Date & Time";
+                    btnNext.Visible = true;
                     btnNext.Text = "Booking Summary";
                     divSelectUser.Visible = true;
                     divSummaryPic.Visible = false;

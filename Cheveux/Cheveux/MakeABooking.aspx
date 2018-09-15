@@ -14,8 +14,8 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-md-1 col-sm-1"></div>
-        <div class="col-md-10 col-sm-10">
+        <div class="col-1"></div>
+            <div class="col-10">
             <form id="MakeABooking" runat="server">
                 
                 <div class="container-fluid">
@@ -309,7 +309,7 @@
                 </div>
         </form>
         </div>
-        <div class="col-md-1 col-sm-1"></div>
+        <div class="col-1"></div>
     </div>
     
 </asp:content>

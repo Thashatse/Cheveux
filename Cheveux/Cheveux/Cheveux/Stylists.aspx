@@ -14,8 +14,9 @@
     <!-- Top Margin -->
     <br />
     <div class="row">
-        <div class="col-md-2 col-sm-1"></div>
-        <div class="col-md-8 col-sm-10">
+        <div class="col-1"></div>
+
+        <div class="col-10">
             <div class="jumbotron bg-dark text-white">
                 <br />
                 <div class="row">
@@ -35,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!--Error: If cant display the stylists-->
             <asp:PlaceHolder ID="phStylistsErr" runat="server" Visible="false">
                 <div class="container">
@@ -62,6 +63,7 @@
             </asp:PlaceHolder>
 
         </div>
-        <div class="col-md-2 col-sm-1"></div>
+        <div class="col-1"></div>
+
     </div>
 </asp:Content>
