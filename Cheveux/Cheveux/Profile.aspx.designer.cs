@@ -13,6 +13,15 @@ namespace Cheveux {
     public partial class Profile2 {
         
         /// <summary>
+        /// formProfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm formProfile;
+        
+        /// <summary>
         /// divTabs control.
         /// </summary>
         /// <remarks>
@@ -22,6 +31,33 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTabs;
         
         /// <summary>
+        /// btnViewUpBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewUpBook;
+        
+        /// <summary>
+        /// btnViewPasBook control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewPasBook;
+        
+        /// <summary>
+        /// btnViewPrfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewPrfile;
+        
+        /// <summary>
         /// LogOutBTN control.
         /// </summary>
         /// <remarks>
@@ -29,6 +65,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LogOutBTN;
+        
+        /// <summary>
+        /// UpcomingService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl UpcomingService;
         
         /// <summary>
         /// upcomingBookingsLable control.
@@ -49,6 +94,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Table upcomingBookings;
         
         /// <summary>
+        /// PastService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl PastService;
+        
+        /// <summary>
         /// pastBookingsLable control.
         /// </summary>
         /// <remarks>
@@ -67,22 +121,13 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Table pastBookings;
         
         /// <summary>
-        /// JumbotronLogedOut control.
+        /// divProfile control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl JumbotronLogedOut;
-        
-        /// <summary>
-        /// JumbotronLogedIn control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl JumbotronLogedIn;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divProfile;
         
         /// <summary>
         /// divProfileHeader control.
@@ -110,15 +155,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label profileLable;
-        
-        /// <summary>
-        /// formEditProfile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formEditProfile;
         
         /// <summary>
         /// profileTable control.
@@ -371,5 +407,14 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button OK;
+        
+        /// <summary>
+        /// JumbotronLogedOut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl JumbotronLogedOut;
     }
 }

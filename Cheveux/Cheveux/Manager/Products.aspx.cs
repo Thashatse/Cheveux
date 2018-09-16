@@ -74,11 +74,6 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack)
-            {
-               tblProductTable.Rows.Clear();
-            }
-
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
 
@@ -92,12 +87,22 @@ namespace Cheveux.Manager
             }
             else if (cookie["UT"] == "M" || cookie["UT"] == "R")
             {
+
+
                 //if the user is loged in as a manager display Products
                 LogedIn.Visible = true;
                 LogedOut.Visible = false;
-
-                    if (!Page.IsPostBack)
+                
+                if (Page.IsPostBack)
                 {
+                    tblProductTable.Rows.Clear();
+                }
+
+                if (!Page.IsPostBack)
+                {
+                    //set the view
+                    btnViewAllProducts_Click(sender, e);
+
                     drpProductType.Items.Add(new ListItem("All", "X"));
                     ddlOrdersProductType.Items.Add(new ListItem("All", "X"));
                     try
@@ -617,5 +622,39 @@ namespace Cheveux.Manager
             }
             return result;
         }
+
+        #region View
+        private void hideAllView()
+        {
+            ViewAllProducts.Visible = false;
+            NewOrder.Visible = false;
+            OutstandingOrders.Visible = false;
+            PastOrders.Visible = false;
+        }
+
+        protected void btnViewAllProducts_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+            ViewAllProducts.Visible = true;
+        }
+
+        protected void btnViewNewOrder_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+            NewOrder.Visible = true;
+        }
+
+        protected void btnViewOutstandingOrders_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+            OutstandingOrders.Visible = true;
+        }
+
+        protected void btnViewPastOrders_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+            PastOrders.Visible = true;
+        }
+        #endregion
     }
 }

@@ -84,9 +84,10 @@ namespace Cheveux
                 {
                     divTabs.Visible = true;
 
+                   btnViewUpBook_Click(sender, e);
+
                     #region  Bookings Funcrions
                     //if the user is loged in diplay upcoming and futer services
-                    JumbotronLogedIn.Visible = true;
                     JumbotronLogedOut.Visible = false;
 
                     //load the users uppcoming bookings in top the upcoming bookins tab
@@ -96,11 +97,14 @@ namespace Cheveux
                     displayPastBookings();
                     #endregion
                 }
+                else
+                {
+                   btnViewProfile_Click(sender, e);
+                }
 
                 #region Profile Functions
                 //ask the user to sign in first
                 //if the user is loged in diplay the profile container and hide the login container
-                JumbotronLogedIn.Visible = true;
                 JumbotronLogedOut.Visible = false;
                 //check the action
                 string action = Request.QueryString["Action"];
@@ -164,7 +168,7 @@ namespace Cheveux
                 if (action == "View")
                 {
                     //diplay the profile container and hide the login container
-                    JumbotronLogedIn.Visible = true;
+                    divProfile.Visible = true;
                     JumbotronLogedOut.Visible = false;
                     if(Request.QueryString["empID"] != null)
                     {
@@ -181,6 +185,33 @@ namespace Cheveux
             }
             #endregion
         }
+
+        #region Views
+        private void hideAllViews()
+        {
+            divProfile.Visible = false;
+            UpcomingService.Visible = false;
+            PastService.Visible = false;
+        }
+
+        protected void btnViewUpBook_Click(object sender, EventArgs e)
+        {
+            hideAllViews();
+            UpcomingService.Visible = true;
+        }
+
+        protected void btnViewPastBook_Click(object sender, EventArgs e)
+        {
+            hideAllViews();
+            PastService.Visible = true;
+        }
+
+        protected void btnViewProfile_Click(object sender, EventArgs e)
+        {
+            hideAllViews();
+            divProfile.Visible = true;
+        }
+        #endregion
 
         #region Profile Funcrions
         /*
@@ -1031,7 +1062,7 @@ namespace Cheveux
                     {
                         editEmailProfileTable.Visible = false;
                         editGoogleProfileTable.Visible = false;
-                        JumbotronLogedIn.Visible = false;
+                        divProfile.Visible = false;
                         confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your user profile </h1>";
                         confirmPlaceHolder.Text = "Please try again later";
                         yes.Visible = false;
@@ -1154,7 +1185,7 @@ namespace Cheveux
                     {
                         editEmailProfileTable.Visible = false;
                         editGoogleProfileTable.Visible = false;
-                        JumbotronLogedIn.Visible = false;
+                        divProfile.Visible = false;
                         confirmHeaderPlaceHolder.Text = "<h1> An error occurred updating your user profile </h1>";
                         confirmPlaceHolder.Text = "Please try again later";
                         yes.Visible = false;

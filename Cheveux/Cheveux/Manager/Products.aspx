@@ -26,10 +26,10 @@
                             <div id="divTabs" runat="server">
                                 <!--Tabs-->
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li><a class="btn" href="#ViewAllProducts" role="tab" data-toggle="tab">Manage Products&#09;</a></li>
-                                    <li><a class="btn" href="#NewOrder" role="tab" data-toggle="tab">New Order&#09;</a></li>
-                                    <li><a class="btn" href="#OutstandingOrders" role="tab" data-toggle="tab">Accept Order&#09;</a></li>
-                                    <li><a class="btn" href="#PastOrders" role="tab" data-toggle="tab">Past Orders</a></li>
+                                    <li><asp:Button ID="btnViewAllProducts" runat="server" Text="Manage Products" class="btn btn-light" OnClick="btnViewAllProducts_Click" /></li>
+                                    <li><asp:Button ID="btnViewNewOrder" runat="server" Text="New Order" class="btn btn-light" OnClick="btnViewNewOrder_Click" /></li>
+                                    <li><asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Accept Order" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
+                                    <li><asp:Button ID="btnViewPastOrders" runat="server" Text="Past Orders" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
                                 </ul>
                             </div>
                         </div>
@@ -38,8 +38,7 @@
                     <!-- Line Break -->
                     <br />
 
-                    <div class="tab-content">
-                        <div class="active tab-pane" id="ViewAllProducts">
+                        <div runat="server" visible="false" id="ViewAllProducts">
 
                             <!-- Jumbo Tron -->
                             <div class="jumbotron bg-dark text-white">
@@ -97,7 +96,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane" id="NewOrder">
+                        <div runat="server" visible="false" id="NewOrder">
                             <div class="jumbotron bg-dark text-white">
                                 <h1>New Order</h1>
                             </div>
@@ -228,18 +227,17 @@
                             <asp:Button ID="btnSaveOrder" runat="server" Text="Submit" CssClass="btn btn-primary" />
                         </div>
 
-                        <div class="tab-pane" id="OutstandingOrders">
+                        <div runat="server" visible="false" id="OutstandingOrders">
                             <div class="jumbotron bg-dark text-white">
                                 <h1>Accept Order</h1>
                             </div>
                         </div>
 
-                        <div class="tab-pane" id="PastOrders">
+                        <div runat="server" visible="false" id="PastOrders">
                             <div class="jumbotron bg-dark text-white">
                                 <h1>Past Orders</h1>
                             </div>
                         </div>
-                    </div>
                 </div>
 
                 <!-- if the user is loged Out -->

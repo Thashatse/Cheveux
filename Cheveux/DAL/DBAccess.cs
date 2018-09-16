@@ -1403,39 +1403,6 @@ namespace DAL
             }
 
         }
-
-        public List<Supplier> getSuppliers()
-        {
-            List<Supplier> list = new List<Supplier>();
-            try 
-            {
-                using (DataTable table = DBHelper.Select("SP_Get_Supplier", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            Supplier supplier = new Supplier();
-                            supplier.supplierID = row["SupplierID"].ToString();
-                            supplier.supplierName = row["SupplierName"].ToString();
-                            supplier.contactName = row["ContactName"].ToString();
-                            supplier.contactNo = row["ContactNo"].ToString();
-                            supplier.AddressLine1 = row["AddressLine1"].ToString();
-                            supplier.AddressLine2 = row["AddressLine2"].ToString();
-                            supplier.Suburb = row["Suburb"].ToString();
-                            supplier.City = row["City"].ToString();
-                            supplier.contactEmail = row["ContactEmail"].ToString();
-                            list.Add(supplier);
-                        }
-                    }
-                    return list;
-                }
-            }
-            catch (Exception E)
-            {
-                throw new ApplicationException(E.ToString());
-            }
-        }
         
         public List<PRODUCT> getAllProducts()
         {
@@ -1549,6 +1516,43 @@ namespace DAL
             catch (Exception e)
             {
                 throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
+        #region Product Orders
+
+
+        public List<Supplier> getSuppliers()
+        {
+            List<Supplier> list = new List<Supplier>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_Get_Supplier", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            Supplier supplier = new Supplier();
+                            supplier.supplierID = row["SupplierID"].ToString();
+                            supplier.supplierName = row["SupplierName"].ToString();
+                            supplier.contactName = row["ContactName"].ToString();
+                            supplier.contactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.contactEmail = row["ContactEmail"].ToString();
+                            list.Add(supplier);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
             }
         }
         #endregion
