@@ -1521,8 +1521,173 @@ namespace DAL
         #endregion
 
         #region Product Orders
+        public OrderViewModel getOrder(string orderID)
+        {
+            OrderViewModel listItem = new OrderViewModel();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID", orderID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetProductOrder", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            listItem.OrderID = row["OrderID"].ToString();
+                            listItem.orderDate = Convert.ToDateTime(row["OrderDate"].ToString());
+                            listItem.Received = Convert.ToBoolean(row["Received"].ToString());
+                            listItem.dateReceived = Convert.ToDateTime(row["DateReceived"].ToString());
+                            listItem.supplierID = row["SupplierID"].ToString();
+                            listItem.supplierName = row["SupplierName"].ToString();
+                            listItem.contactName = row["ContactName"].ToString();
+                            listItem.contactNo = row["ContactNo"].ToString();
+                            listItem.AddressLine1 = row["AddressLine1"].ToString();
+                            listItem.AddressLine2 = row["AddressLine2"].ToString();
+                            listItem.Suburb = row["Suburb"].ToString();
+                            listItem.City = row["City"].ToString();
+                            listItem.contactEmail = row["ContactEmail"].ToString();
+                        }
+                    }
+                    return listItem;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
 
+        public List<OrderViewModel> getOutStandingOrders()
+        {
+            List<OrderViewModel> list = new List<OrderViewModel>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetOutstandingProductOrders", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            OrderViewModel listItem = new OrderViewModel();
+                            listItem.OrderID = row["OrderID"].ToString();
+                            listItem.orderDate = Convert.ToDateTime(row["OrderDate"].ToString());
+                            listItem.Received = Convert.ToBoolean(row["Received"].ToString());
+                            if (row["DateReceived"].ToString() != "")
+                            {
+                                listItem.dateReceived = Convert.ToDateTime(row["DateReceived"].ToString());
+                            }
+                            listItem.supplierID = row["SupplierID"].ToString();
+                            listItem.supplierName = row["SupplierName"].ToString();
+                            listItem.contactName = row["ContactName"].ToString();
+                            listItem.contactNo = row["ContactNo"].ToString();
+                            listItem.AddressLine1 = row["AddressLine1"].ToString();
+                            listItem.AddressLine2 = row["AddressLine2"].ToString();
+                            listItem.Suburb = row["Suburb"].ToString();
+                            listItem.City = row["City"].ToString();
+                            listItem.contactEmail = row["ContactEmail"].ToString();
+                            list.Add(listItem);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
 
+        public List<OrderViewModel> getPastOrders()
+        {
+            List<OrderViewModel> list = new List<OrderViewModel>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetPastProductOrders", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            OrderViewModel listItem = new OrderViewModel();
+                            listItem.OrderID = row["OrderID"].ToString();
+                            listItem.orderDate = Convert.ToDateTime(row["OrderDate"].ToString());
+                            listItem.Received = Convert.ToBoolean(row["Received"].ToString());
+                            listItem.dateReceived = Convert.ToDateTime(row["DateReceived"].ToString());
+                            listItem.supplierID = row["SupplierID"].ToString();
+                            listItem.supplierName = row["SupplierName"].ToString();
+                            listItem.contactName = row["ContactName"].ToString();
+                            listItem.contactNo = row["ContactNo"].ToString();
+                            listItem.AddressLine1 = row["AddressLine1"].ToString();
+                            listItem.AddressLine2 = row["AddressLine2"].ToString();
+                            listItem.Suburb = row["Suburb"].ToString();
+                            listItem.City = row["City"].ToString();
+                            listItem.contactEmail = row["ContactEmail"].ToString();
+                            list.Add(listItem);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
+        public List<OrderViewModel> getProductOrderDL(string orderID)
+        {
+            List<OrderViewModel> list = new List<OrderViewModel>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID", orderID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetProductOrderDetailLines", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            OrderViewModel listItem = new OrderViewModel();
+                            listItem.OrderID = row["OrderID"].ToString();
+                            listItem.orderDate = Convert.ToDateTime(row["OrderDate"].ToString());
+                            listItem.Received = Convert.ToBoolean(row["Received"].ToString());
+                            if (row["DateReceived"].ToString() != "")
+                            {
+                                listItem.dateReceived = Convert.ToDateTime(row["DateReceived"].ToString());
+                            }
+                            listItem.supplierID = row["SupplierID"].ToString();
+                            listItem.supplierName = row["SupplierName"].ToString();
+                            listItem.contactName = row["ContactName"].ToString();
+                            listItem.contactNo = row["ContactNo"].ToString();
+                            listItem.AddressLine1 = row["AddressLine1"].ToString();
+                            listItem.AddressLine2 = row["AddressLine2"].ToString();
+                            listItem.Suburb = row["Suburb"].ToString();
+                            listItem.City = row["City"].ToString();
+                            listItem.contactEmail = row["ContactEmail"].ToString();
+                            listItem.ProductID = row["ProductID"].ToString();
+                            listItem.Name = row["Name"].ToString();
+                            listItem.ProductDescription = row["ProductDescription"].ToString();
+                            listItem.Price = Convert.ToDouble(row["Price"].ToString());
+                            listItem.ProductType = row["ProductType"].ToString();
+                            listItem.Active = row["Active"].ToString();
+                            listItem.Qty = Convert.ToInt32(row["Qty"].ToString());
+                            list.Add(listItem);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+        
         public List<Supplier> getSuppliers()
         {
             List<Supplier> list = new List<Supplier>();

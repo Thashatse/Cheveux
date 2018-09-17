@@ -26,10 +26,14 @@
                             <div id="divTabs" runat="server">
                                 <!--Tabs-->
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li><asp:Button ID="btnViewAllProducts" runat="server" Text="Manage Products" class="btn btn-light" OnClick="btnViewAllProducts_Click" /></li>
-                                    <li><asp:Button ID="btnViewNewOrder" runat="server" Text="New Order" class="btn btn-light" OnClick="btnViewNewOrder_Click" /></li>
-                                    <li><asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Accept Order" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
-                                    <li><asp:Button ID="btnViewPastOrders" runat="server" Text="Past Orders" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                    <li>
+                                        <asp:Button ID="btnViewAllProducts" runat="server" Text="Manage Products" class="btn btn-light" OnClick="btnViewAllProducts_Click" /></li>
+                                    <li>
+                                        <asp:Button ID="btnViewNewOrder" runat="server" Text="New Order" class="btn btn-light" OnClick="btnViewNewOrder_Click" /></li>
+                                    <li>
+                                        <asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Accept Order" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
+                                    <li>
+                                        <asp:Button ID="btnViewPastOrders" runat="server" Text="Past Orders" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
                                 </ul>
                             </div>
                         </div>
@@ -38,109 +42,110 @@
                     <!-- Line Break -->
                     <br />
 
-                        <div runat="server" visible="false" id="ViewAllProducts">
+                    <div runat="server" visible="false" id="ViewAllProducts">
 
-                            <!-- Jumbo Tron -->
-                            <div class="jumbotron bg-dark text-white">
+                        <!-- Jumbo Tron -->
+                        <div class="jumbotron bg-dark text-white">
 
-                                <h1>Manage Products</h1>
-                                <!-- line Break -->
-                                <br />
+                            <h1>Manage Products</h1>
+                            <!-- line Break -->
+                            <br />
 
 
-                                <!-- View By Selector -->
-                                <p>View Products By: </p>
-                                <asp:DropDownList ID="drpProductType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                                </asp:DropDownList>
+                            <!-- View By Selector -->
+                            <p>View Products By: </p>
+                            <asp:DropDownList ID="drpProductType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                            </asp:DropDownList>
 
-                                <!-- line Break -->
-                                <br />
-                                <br />
-                                <div class="row">
-                                    <div class="col-12">
-                                        <!-- View By search tearm -->
-                                        <p>View Products By Search Term: </p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5">
-                                        <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server" AutoPostBack="true"
-                                            OnTextChanged="Page_Load"></asp:TextBox>
-                                    </div>
-                                    <div class="col-2">
-                                        <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" />
-                                    </div>
+                            <!-- line Break -->
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-12">
+                                    <!-- View By search tearm -->
+                                    <p>View Products By Search Term: </p>
                                 </div>
                             </div>
-
-
-
                             <div class="row">
-                                <div class="col-md-10">
-                                    <asp:Label ID="productJumbotronLable" runat="server"></asp:Label>
+                                <div class="col-5">
+                                    <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server" AutoPostBack="true"
+                                        OnTextChanged="Page_Load"></asp:TextBox>
                                 </div>
-                                <div class="col-md-2"> 
-                                    <!--add product btn -->
-                                    <a class='btn btn-primary' href='../Cheveux/Products.aspx?Action=Add'>New Product </a>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!-- List Product Table -->
-                                    <asp:Table ID="tblProductTable" runat="server">
-                                    </asp:Table>
+                                <div class="col-2">
+                                    <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" />
                                 </div>
                             </div>
                         </div>
 
-                        <div runat="server" visible="false" id="NewOrder">
-                            <div class="jumbotron bg-dark text-white">
-                                <h1>New Order</h1>
+
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <asp:Label ID="productJumbotronLable" runat="server"></asp:Label>
+                            </div>
+                            <div class="col-md-2">
+                                <!--add product btn -->
+                                <a class='btn btn-primary' href='../Cheveux/Products.aspx?Action=Add'>New Product </a>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- List Product Table -->
+                                <asp:Table ID="tblProductTable" runat="server">
+                                </asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="NewOrder">
+                        <div class="jumbotron bg-dark text-white">
+                            <h1>New Order</h1>
+                        </div>
+
+                        <h3>Supplier: </h3>
+                        <asp:DropDownList ID="ddlSupplier" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                        </asp:DropDownList>
+
+                        <!-- Line Break -->
+                        <br />
+                        <br />
+
+                        <div class="row">
+
+                            <div class="col-md-12 col-lg-5">
+                                <!--Line Break-->
+                                <br />
+                                <h3 style="text-align: left; float: left;">Products: </h3>
+                                &#09;
+                                    <asp:DropDownList ID="ddlOrdersProductType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlOrdersProductType_SelectedIndexChanged" CssClass="btn btn-Secondary dropdown-toggle">
+                                        <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                    </asp:DropDownList>
+                                <p style="text-align: right; float: right;">
+                                    <!-- Search -->
+                                    <asp:TextBox ID="txtProductSearch" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control" OnTextChanged="ddlOrdersProductType_SelectedIndexChanged"></asp:TextBox>
+                                </p>
+                                <!--Line Break-->
+                                <br />
+                                <asp:ListBox runat="server" ID="lbProducts" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
                             </div>
 
-                            <h3>Supplier: </h3>
-                            <asp:DropDownList ID="ddlSupplier" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                            </asp:DropDownList>
+                            <div class="col-md-12 col-lg-2 text-center">
+                                <!-- Line Break -->
+                                <br />
+                                <br />
+                                <br />
+                                <br />
 
-                            <!-- Line Break -->
-                            <br />
-                            <br />
+                                <asp:Button ID="btnAddProductToOrder" runat="server" Text="Add Product" CssClass="btn btn-Secondary" />
 
-                            <div class="row">
+                                <!-- Line Break -->
+                                <br />
+                                <br />
 
-                                <div class="col-md-12 col-lg-5">
-                                    <!--Line Break-->
-                                    <br />
-                                    <h3 style="text-align: left; float: left;">Products: </h3>&#09;
-                                    <asp:DropDownList ID="ddlOrdersProductType" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlOrdersProductType_SelectedIndexChanged" CssClass="btn btn-Secondary dropdown-toggle">
-                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                                </asp:DropDownList>
-                                    <p style="text-align: right; float: right;">
-                                        <!-- Search -->
-                                        <asp:TextBox ID="txtProductSearch" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control" OnTextChanged="ddlOrdersProductType_SelectedIndexChanged"></asp:TextBox>
-                                    </p>
-                                    <!--Line Break-->
-                                    <br />
-                                    <asp:ListBox runat="server" ID="lbProducts" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
-                                </div>
-
-                                <div class="col-md-12 col-lg-2 text-center">
-                                    <!-- Line Break -->
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
-
-                                    <asp:Button ID="btnAddProductToOrder" runat="server" Text="Add Product" CssClass="btn btn-Secondary" />
-
-                                    <!-- Line Break -->
-                                    <br />
-                                    <br />
-
-                                    Qty:
+                                Qty:
                                 <asp:DropDownList runat="server" ID="Qty" CssClass="btn btn-outline-secondary dropdown-toggle">
                                     <asp:ListItem Value="1">1</asp:ListItem>
                                     <asp:ListItem Value="2">2</asp:ListItem>
@@ -194,68 +199,92 @@
                                     <asp:ListItem Value="50">50</asp:ListItem>
                                 </asp:DropDownList>
 
-                                    <!-- Line Break -->
-                                    <br />
-                                    <br />
+                                <!-- Line Break -->
+                                <br />
+                                <br />
 
-                                    <asp:Button ID="btnRemoveProductFromOrder" runat="server" Text="Remove Product" CssClass="btn" />
+                                <asp:Button ID="btnRemoveProductFromOrder" runat="server" Text="Remove Product" CssClass="btn" />
 
-                                    <!-- Line Break -->
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <asp:Button ID="btnNewProd" runat="server" OnClick="btnNewProd_Click" 
-                                        Text="Craete New Product" CssClass="btn btn-sm"/>
+                                <!-- Line Break -->
+                                <br />
+                                <br />
+                                <br />
+                                <asp:Button ID="btnNewProd" runat="server" OnClick="btnNewProd_Click"
+                                    Text="Craete New Product" CssClass="btn btn-sm" />
+                            </div>
+
+
+                            <div class="col-md-12 col-lg-5">
+                                <!--Line Break-->
+                                <br />
+                                <!-- Order -->
+                                <h3>Order: </h3>
+                                <!--Line Break-->
+                                <br />
+                                <asp:ListBox runat="server" ID="lProductsOnOrder" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
+                            </div>
+
+                        </div>
+
+                        <!-- Line Break -->
+                        <br />
+
+                        <asp:Button ID="btnSaveOrder" runat="server" Text="Submit" CssClass="btn btn-primary" />
+                    </div>
+
+                    <div runat="server" visible="false" id="OutstandingOrders">
+                        <div class="jumbotron bg-dark text-white">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <h1>Accept Order</h1>
                                 </div>
-
-
-                                <div class="col-md-12 col-lg-5">
-                                    <!--Line Break-->
-                                    <br />
-                                    <!-- Order -->
-                                    <h3>Order: </h3>
-                                    <!--Line Break-->
-                                    <br />
-                                    <asp:ListBox runat="server" ID="lProductsOnOrder" CssClass="form-control" DataTextField="Name" DataValueField="ID" Height="300"></asp:ListBox>
+                                <div class="col-lg-3 col-md-2 col-sm-2">
+                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Make a Order</a>
                                 </div>
-
-                            </div>
-
-                            <!-- Line Break -->
-                            <br />
-
-                            <asp:Button ID="btnSaveOrder" runat="server" Text="Submit" CssClass="btn btn-primary" />
-                        </div>
-
-                        <div runat="server" visible="false" id="OutstandingOrders">
-                            <div class="jumbotron bg-dark text-white">
-                                <h1>Accept Order</h1>
                             </div>
                         </div>
-
-                        <div runat="server" visible="false" id="PastOrders">
-                            <div class="jumbotron bg-dark text-white">
-                                <h1>Past Orders</h1>
-                            </div>
-                        </div>
-                </div>
-
-                <!-- if the user is loged Out -->
-                <div runat="server" id="LogedOut">
-                    <div class="bg-dark text-white jumbotron">
+                        <!-- Line Break -->
+                        <br />
                         <div class="row">
-                            <div class="col-10">
-                                <h1>Manage Products</h1>
-                                <p>Please log-in to Manage Products</p>
+                            <div class="col-xs-12 col-md-12">
+                                <asp:Label runat="server" ID="outstandingOrdersLable"></asp:Label>
+                                <!-- Line Break -->
+                                <br />
+                                <asp:Table ID="tblOutstandingOrders" runat="server"></asp:Table>
                             </div>
-                            <div class="col-2">
-                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="PastOrders">
+                        <div class="jumbotron bg-dark text-white">
+                            <div class="row">
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <h1>Past Orders</h1>
+                                </div>
+                                <div class="col-lg-3 col-md-2 col-sm-2">
+                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Make a Order</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </form>
+    <!-- if the user is loged Out -->
+    <div runat="server" id="LogedOut">
+        <div class="bg-dark text-white jumbotron">
+            <div class="row">
+                <div class="col-10">
+                    <h1>Manage Products</h1>
+                    <p>Please log-in to Manage Products</p>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </form>
         </div>
         <div class="col-1"></div>
     </div>

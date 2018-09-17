@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-3">
                         <div runat="server" id="LogOutBTN" visible="false">
-                            <a class="btn btn-secondary nav-link" href="../Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
+                            <a class="btn btn-secondary nav-link" href="/Authentication/Accounts.aspx?action=Logout" style="text-decoration: none;">Log Out</a>
                         </div>
                     </div>
                 </div>

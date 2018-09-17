@@ -87,8 +87,6 @@ namespace Cheveux.Manager
             }
             else if (cookie["UT"] == "M" || cookie["UT"] == "R")
             {
-
-
                 //if the user is loged in as a manager display Products
                 LogedIn.Visible = true;
                 LogedOut.Visible = false;
@@ -100,8 +98,16 @@ namespace Cheveux.Manager
 
                 if (!Page.IsPostBack)
                 {
-                    //set the view
-                    btnViewAllProducts_Click(sender, e);
+                    //check the action and set the view
+                    string action = Request.QueryString["Action"];
+                    if (action == "NewOrder")
+                    {
+                        btnViewNewOrder_Click(sender, e);
+                    }
+                    else
+                    {
+                        btnViewAllProducts_Click(sender, e);
+                    }
 
                     drpProductType.Items.Add(new ListItem("All", "X"));
                     ddlOrdersProductType.Items.Add(new ListItem("All", "X"));
@@ -129,16 +135,180 @@ namespace Cheveux.Manager
                     drpProductType.SelectedIndex = 0;
                     ddlOrdersProductType.Items.RemoveAt(0);
                     ddlOrdersProductType.SelectedIndex = 0;
-
-                    //load new order page
-                    loadSupplier();
-                    loadSupplierProducts();
                 }
 
                 //get the selected sort by and display the results
                 loadProductList(drpProductType.SelectedValue.ToString()[0]);
             }
         }
+
+        public bool compareToSearchTerm(string toBeCompared, bool newOrder)
+        {
+            bool result = false;
+            if (txtProductSearchTerm.Text != null && newOrder == false)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = txtProductSearchTerm.Text.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else if (txtProductSearch.Text != null && newOrder == true)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = txtProductSearch.Text.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        #region View
+        private void hideAllView()
+        {
+            ViewAllProducts.Visible = false;
+            NewOrder.Visible = false;
+            OutstandingOrders.Visible = false;
+            PastOrders.Visible = false;
+        }
+
+        protected void btnViewAllProducts_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+            ViewAllProducts.Visible = true;
+        }
+
+        protected void btnViewNewOrder_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+
+            //load new order page
+            loadSupplier();
+            loadSupplierProducts();
+
+            NewOrder.Visible = true;
+        }
+
+        protected void btnViewOutstandingOrders_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+
+            loadOutOrders();
+
+            OutstandingOrders.Visible = true;
+        }
+
+        protected void btnViewPastOrders_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+            PastOrders.Visible = true;
+        }
+        #endregion
+
+        #region Outstanding Orders
+        private void loadOutOrders()
+        {
+            try
+            {
+                List<OrderViewModel> outOrders = handler.getOutStandingOrders();
+                //check if there are outstanding orders
+                if (outOrders.Count > 0)
+                {
+                    //if there are bookings desplay them
+                    //create a new row in the uppcoming bookings table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblOutstandingOrders.Rows.Add(newRow);
+                    //create a header row and set cell withs
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Date Orderd";
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Supplier";
+                    newHeaderCell.Width = 1000;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Items Out Standing";
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 200;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+
+                    //create a loop to display each result
+                    //creat a counter to keep track of the current row
+                    int rowCount = 1;
+                    foreach (OrderViewModel outOrder in outOrders)
+                    {
+                        List<OrderViewModel> outOrderProducts = handler.getProductOrderDL(outOrder.OrderID.ToString());
+
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblOutstandingOrders.Rows.Add(newRow);
+                        //fill the row with the data from the results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = outOrder.orderDate.ToString("dd MMM yyyy");
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a href='../Profile.aspx?Action=Viewsup" +
+                                        "&supID=" + outOrder.supplierID.Replace(" ", string.Empty) +
+                                        "'>" + outOrder.supplierName + "</a>";
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        int outsandingItemCount = 0;
+                        foreach (OrderViewModel outOrderDL in outOrderProducts)
+                        {
+                            outsandingItemCount += outOrderDL.Qty;
+                        }
+                        newCell.Text = outsandingItemCount.ToString();
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                            "<a href='ViewOrder.aspx?OrderID=" + outOrder.OrderID.ToString() +
+                            "'>View</a></button>";
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        rowCount++;
+                    }
+
+                    if (rowCount == 1)
+                    {
+                        // if there aren't let the user know
+                        outstandingOrdersLable.Text =
+                            "<p> No Outstanding Orders </p>";
+                        tblOutstandingOrders.Visible = false;
+                    }
+                    else
+                    {
+                        // set the booking copunt
+                        outstandingOrdersLable.Text =
+                            "<p> " + (rowCount - 1) + " Outstanding Orders </p>";
+                    }
+                }
+                else
+                {
+                    // if there aren't let the user know
+                    outstandingOrdersLable.Text =
+                        "<p> No outstanding Orders </p>";
+                }
+            }
+            catch(Exception err)
+            {
+                function.logAnError("Error loading outstanding product orders on internal product page | Error: " + err.ToString());
+                outstandingOrdersLable.Visible = true;
+                tblOutstandingOrders.Visible = false;
+                outstandingOrdersLable.Text =
+                        "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
+            }
+        } 
+        #endregion
 
         #region view all Products
         public void loadProductList(char productType)
@@ -256,7 +426,7 @@ namespace Cheveux.Manager
                                 #region Stock
                                 newCell = new TableCell();
                                 //new stock oder
-                                newCell.Text = "<a class='btn  btn-secondary' href='Products.aspx?Action=NewOrder" +
+                                newCell.Text = "<a class='btn  btn-secondary' href='?Action=NewOrder&" +
                                             "ProductID=" + Access.ProductID.ToString().Replace(" ", string.Empty) +
                                             "'>Make Order</a>";
                                 tblProductTable.Rows[count].Cells.Add(newCell);
@@ -592,68 +762,6 @@ namespace Cheveux.Manager
         protected void btnNewProd_Click(object sender, EventArgs e)
         {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('http://sict-iis.nmmu.ac.za/beauxdebut/Cheveux/Products.aspx?Action=Add','_newtab');", true);
-        }
-        #endregion
-
-        public bool compareToSearchTerm(string toBeCompared, bool newOrder)
-        {
-            bool result = false;
-            if (txtProductSearchTerm.Text != null && newOrder == false)
-            {
-                toBeCompared = toBeCompared.ToLower();
-                string searcTearm = txtProductSearchTerm.Text.ToLower();
-                if (toBeCompared.Contains(searcTearm))
-                {
-                    result = true;
-                }
-            }
-            else if(txtProductSearch.Text != null && newOrder == true)
-            {
-                toBeCompared = toBeCompared.ToLower();
-                string searcTearm = txtProductSearch.Text.ToLower();
-                if (toBeCompared.Contains(searcTearm))
-                {
-                    result = true;
-                }
-            }
-            else
-            {
-                result = true;
-            }
-            return result;
-        }
-
-        #region View
-        private void hideAllView()
-        {
-            ViewAllProducts.Visible = false;
-            NewOrder.Visible = false;
-            OutstandingOrders.Visible = false;
-            PastOrders.Visible = false;
-        }
-
-        protected void btnViewAllProducts_Click(object sender, EventArgs e)
-        {
-            hideAllView();
-            ViewAllProducts.Visible = true;
-        }
-
-        protected void btnViewNewOrder_Click(object sender, EventArgs e)
-        {
-            hideAllView();
-            NewOrder.Visible = true;
-        }
-
-        protected void btnViewOutstandingOrders_Click(object sender, EventArgs e)
-        {
-            hideAllView();
-            OutstandingOrders.Visible = true;
-        }
-
-        protected void btnViewPastOrders_Click(object sender, EventArgs e)
-        {
-            hideAllView();
-            PastOrders.Visible = true;
         }
         #endregion
     }

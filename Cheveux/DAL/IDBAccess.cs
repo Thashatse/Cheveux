@@ -100,6 +100,17 @@ namespace DAL
         bool addAccessories(ACCESSORY a, PRODUCT p);
         bool addTreatments(TREATMENT t, PRODUCT p);
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+        #endregion
+
+        #region Product Orders
+        OrderViewModel getOrder(string orderID);
+
+        List<OrderViewModel> getOutStandingOrders();
+
+        List<OrderViewModel> getPastOrders();
+
+        List<OrderViewModel> getProductOrderDL(string orderID);
+
         List<Supplier> getSuppliers();
         #endregion
 

@@ -229,6 +229,24 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl OutstandingOrders;
         
         /// <summary>
+        /// outstandingOrdersLable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label outstandingOrdersLable;
+        
+        /// <summary>
+        /// tblOutstandingOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblOutstandingOrders;
+        
+        /// <summary>
         /// PastOrders control.
         /// </summary>
         /// <remarks>

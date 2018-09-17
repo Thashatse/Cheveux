@@ -60,6 +60,17 @@ namespace BLL
         SP_GetAllTreatments selectTreatment(string treatmentID);
         bool addProduct(PRODUCT addProduct);
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+        #endregion
+
+        #region Product Orders
+        OrderViewModel getOrder(string orderID);
+
+        List<OrderViewModel> getOutStandingOrders();
+
+        List<OrderViewModel> getPastOrders();
+
+        List<OrderViewModel> getProductOrderDL(string orderID);
+
         List<Supplier> getSuppliers();
         #endregion
 

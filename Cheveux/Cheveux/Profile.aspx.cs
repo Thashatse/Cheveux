@@ -84,7 +84,25 @@ namespace Cheveux
                 {
                     divTabs.Visible = true;
 
-                   btnViewUpBook_Click(sender, e);
+                    #region set the view
+                    string view = Request.QueryString["View"];
+                    if (view == "Up")
+                    {
+                        btnViewUpBook_Click(sender, e);
+                    }
+                    else if (view == "Past")
+                    {
+                        btnViewPastBook_Click(sender, e);
+                    }
+                    else if (view == "Prodile")
+                    {
+                        btnViewProfile_Click(sender, e);
+                    }
+                    else
+                    {
+                        btnViewUpBook_Click(sender, e);
+                    }
+                    #endregion
 
                     #region  Bookings Funcrions
                     //if the user is loged in diplay upcoming and futer services

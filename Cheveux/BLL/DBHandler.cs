@@ -140,7 +140,29 @@ namespace BLL
         {
             return db.getBrandsForProductType(type);
         }
+        #endregion
 
+        #region Product Orders
+        public OrderViewModel getOrder(string orderID)
+        {
+            return db.getOrder(orderID);
+        }
+
+        public List<OrderViewModel> getOutStandingOrders()
+        {
+            return db.getOutStandingOrders();
+        }
+
+        public List<OrderViewModel> getPastOrders()
+        {
+            return db.getPastOrders();
+        }
+
+        public List<OrderViewModel> getProductOrderDL(string orderID)
+        {
+            return db.getProductOrderDL(orderID);
+        }
+        
         public List<Supplier> getSuppliers()
         {
             return db.getSuppliers();
