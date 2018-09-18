@@ -167,6 +167,11 @@ namespace BLL
         {
             return db.getSuppliers();
         }
+
+        public Supplier getSupplier(string suppID)
+        {
+            return db.getSupplier(suppID);
+        }
         #endregion
 
         #region Bookings

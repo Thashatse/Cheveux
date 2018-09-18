@@ -1444,31 +1444,29 @@ namespace Cheveux
                 newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
                 + bookingServiceList[0].ServiceName.ToString() + "</a>";
             }
-            else if (bookingServiceList.Count == 2)
+            else if (bookingServiceList.Count > 1)
             {
-                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                    "'>" + bookingServiceList[0].ServiceName.ToString() +
-                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
-            }
-            else if (bookingServiceList.Count > 2)
-            {
-                string toolTip = "";
-                int toolTipCount = 0;
-                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
+                string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                    "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                if (bookingServiceList.Count == 2)
                 {
-                    if(toolTipCount == 0)
-                    {
-                        toolTip = toolTipDTL.ServiceName;
-                        toolTipCount++;
-                    }
-                    else
-                    {
-                        toolTip += ", " + toolTipDTL.ServiceName;
-                    }
+                    dropDown += bookingServiceList[0].ServiceName.ToString() +
+                    ", " + bookingServiceList[1].ServiceName.ToString();
                 }
-                newCell.Text = "<a title='"+ toolTip + "'" +
-                    "href ='../ViewBooking.aspx?BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                    "'> Multiple </a>";
+                else if (bookingServiceList.Count > 2)
+                {
+                    dropDown += " Multiple ";
+                }
+                dropDown += "<span class='caret'></span></a>" +
+                                "<ul class='dropdown-menu bg-dark text-white'>";
+                foreach (SP_GetBookingServices service in bookingServiceList)
+                {
+                    dropDown += "<li>&nbsp;<a href='/cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
+                        " "+ service.ServiceName.ToString() + " </a>&nbsp;</li>";
+                }
+                dropDown += "</ul></li>";
+
+                newCell.Text = dropDown;
             }
             upcomingBookings.Rows[rowCount].Cells.Add(newCell);
             newCell = new TableCell();
@@ -1614,31 +1612,29 @@ namespace Cheveux
                 newCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
                 + bookingServiceList[0].ServiceName.ToString() + "</a>";
             }
-            else if (bookingServiceList.Count == 2)
+            else if (bookingServiceList.Count > 1)
             {
-                newCell.Text = "<a href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                    "'>" + bookingServiceList[0].ServiceName.ToString() +
-                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
-            }
-            else if (bookingServiceList.Count > 2)
-            {
-                string toolTip = "";
-                int toolTipCount = 0;
-                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
+                string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                    "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                if (bookingServiceList.Count == 2)
                 {
-                    if (toolTipCount == 0)
-                    {
-                        toolTip = toolTipDTL.ServiceName;
-                        toolTipCount++;
-                    }
-                    else
-                    {
-                        toolTip += ", " + toolTipDTL.ServiceName;
-                    }
+                    dropDown += bookingServiceList[0].ServiceName.ToString() +
+                    ", " + bookingServiceList[1].ServiceName.ToString();
                 }
-                newCell.Text = "<a title='" + toolTip + "'" +
-                    "href='../ViewBooking.aspx?BookingType=Past&BookingID=" + booking.bookingID.ToString().Replace(" ", string.Empty) +
-                    "'> Multiple </a>";
+                else if (bookingServiceList.Count > 2)
+                {
+                    dropDown += " Multiple ";
+                }
+                dropDown += "<span class='caret'></span></a>" +
+                                "<ul class='dropdown-menu bg-dark text-white'>";
+                foreach (SP_GetBookingServices service in bookingServiceList)
+                {
+                    dropDown += "<li>&nbsp;<a href='/cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
+                        " " + service.ServiceName.ToString() + " </a>&nbsp;</li>";
+                }
+                dropDown += "</ul></li>";
+
+                newCell.Text = dropDown;
             }
             pastBookings.Rows[rowCount].Cells.Add(newCell);
 

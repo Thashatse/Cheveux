@@ -121,13 +121,22 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divOrders;
         
         /// <summary>
-        /// productOrders control.
+        /// outstandingOrdersLable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table productOrders;
+        protected global::System.Web.UI.WebControls.Label outstandingOrdersLable;
+        
+        /// <summary>
+        /// tblOutstandingOrders control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblOutstandingOrders;
         
         /// <summary>
         /// alertsContainer control.

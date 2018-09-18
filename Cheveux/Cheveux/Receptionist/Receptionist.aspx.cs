@@ -149,15 +149,17 @@ namespace Cheveux
                                     + stylistName.ToString();
                 }
                 #endregion
+
+                loadOutOrders();
             }
         }
         
+        #region Agenda
         protected void drpEmpNames_Changed(object sender, EventArgs e)
         {
             phCheckInSuccess.Visible = false;    
         }
 
-        #region Agenda
         public void getAgenda(string id, DateTime bookingDate,string sortBy, string sortDir)
         {
             Button btnCheckin;
@@ -407,34 +409,32 @@ namespace Cheveux
                 bServices = handler.getBookingServices(a.BookingID.ToString());
                 if (bServices.Count == 1)
                 {
-                    services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    services.Text = "<a href='../cheveux/services.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
                     + bServices[0].ServiceName.ToString() + "</a>";
                 }
-                else if (bServices.Count == 2)
+                else if (bServices.Count > 1)
                 {
-                    services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                        "'>" + bServices[0].ServiceName.ToString() +
-                        ", " + bServices[1].ServiceName.ToString() + "</a>";
-                }
-                else if (bServices.Count > 2)
-                {
-                    string toolTip = "";
-                    int toolTipCount = 0;
-                    foreach (SP_GetBookingServices toolTipDTL in bServices)
+                    string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                        "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                    if (bServices.Count == 2)
                     {
-                        if (toolTipCount == 0)
-                        {
-                            toolTip = toolTipDTL.ServiceName;
-                            toolTipCount++;
-                        }
-                        else
-                        {
-                            toolTip += ", " + toolTipDTL.ServiceName;
-                        }
+                        dropDown += bServices[0].ServiceName.ToString() +
+                        ", " + bServices[1].ServiceName.ToString();
                     }
-                    services.Text = "<a title='" + toolTip + "'" +
-                        "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                        "'> Multiple Services </a>";
+                    else if (bServices.Count > 2)
+                    {
+                        dropDown += " Multiple ";
+                    }
+                    dropDown += "<span class='caret'></span></a>" +
+                                    "<ul class='dropdown-menu bg-dark text-white'>";
+                    foreach (SP_GetBookingServices service in bServices)
+                    {
+                        dropDown += "<li>&nbsp;<a href='../cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
+                            " " + service.ServiceName.ToString() + " </a>&nbsp;</li>";
+                    }
+                    dropDown += "</ul></li>";
+
+                    services.Text = dropDown;
                 }
                 AgendaTable.Rows[i].Cells.Add(services);
             }
@@ -664,6 +664,114 @@ namespace Cheveux
         protected void btnNewCust_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Authentication/NewAccount.aspx?Type=NewCust");
+        }
+        #endregion
+
+        #region List Outstanding Orders
+        private void loadOutOrders()
+        {
+            try
+            {
+                List<OrderViewModel> outOrders = handler.getOutStandingOrders();
+                //check if there are outstanding orders
+                if (outOrders.Count > 0)
+                {
+                    //if there are bookings desplay them
+                    //create a new row in the uppcoming bookings table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblOutstandingOrders.Rows.Add(newRow);
+                    //create a header row and set cell withs
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Date Orderd";
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Supplier";
+                    newHeaderCell.Width = 800;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Items Out Standing";
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+
+                    //create a loop to display each result
+                    //creat a counter to keep track of the current row
+                    int rowCount = 1;
+                    foreach (OrderViewModel outOrder in outOrders)
+                    {
+                        List<OrderViewModel> outOrderProducts = handler.getProductOrderDL(outOrder.OrderID.ToString());
+
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblOutstandingOrders.Rows.Add(newRow);
+                        //fill the row with the data from the results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = outOrder.orderDate.ToString("dd MMM yyyy");
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a href='../Manager/Products.aspx?Action=Viewsup" +
+                                        "&supID=" + outOrder.supplierID.Replace(" ", string.Empty) +
+                                        "'>" + outOrder.supplierName + "</a>";
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        int outsandingItemCount = 0;
+                        foreach (OrderViewModel outOrderDL in outOrderProducts)
+                        {
+                            outsandingItemCount += outOrderDL.Qty;
+                        }
+                        string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                                "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                        dropDown += outsandingItemCount;
+                        dropDown += "<span class='caret'></span></a>" +
+                                            "<ul class='dropdown-menu bg-dark text-white'>";
+                        foreach (OrderViewModel outOrderDL in outOrderProducts)
+                        {
+                            dropDown += "<li>&nbsp;<a href='/cheveux/products.aspx?ProductID=" + outOrderDL.ProductID.Replace(" ", string.Empty) + "'>" +
+                                    " " + outOrderDL.Name.ToString() + " </a>&nbsp;</li>";
+                        }
+                        dropDown += "</ul></li>";
+                        newCell.Text = dropDown;
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a class='btn btn-primary' href='../Manager/Products.aspx?Action=AcceptOrder&OrderID=" + outOrder.OrderID.ToString() +
+                            "'> Accept Order </a>";
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        rowCount++;
+                    }
+
+                    if (rowCount == 1)
+                    {
+                        // if there aren't let the user know
+                        outstandingOrdersLable.Text =
+                            "<p> No Outstanding Orders </p>";
+                        tblOutstandingOrders.Visible = false;
+                    }
+                    else
+                    {
+                        // set the booking copunt
+                        outstandingOrdersLable.Text =
+                            "<p> " + (rowCount - 1) + " Outstanding Orders </p>";
+                    }
+                }
+                else
+                {
+                    // if there aren't let the user know
+                    outstandingOrdersLable.Text =
+                        "<p> No outstanding Orders </p>";
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error loading outstanding product orders on internal product page | Error: " + err.ToString());
+                outstandingOrdersLable.Visible = true;
+                tblOutstandingOrders.Visible = false;
+                outstandingOrdersLable.Text =
+                        "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
+            }
         }
         #endregion
     }

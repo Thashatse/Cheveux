@@ -72,6 +72,8 @@ namespace BLL
         List<OrderViewModel> getProductOrderDL(string orderID);
 
         List<Supplier> getSuppliers();
+
+        Supplier getSupplier(string suppID);
         #endregion
 
         #region Services

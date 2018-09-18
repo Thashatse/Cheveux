@@ -64,7 +64,7 @@ namespace Cheveux.Manager
                 //load to days bookings 
                 loadTodaysBookings();
                 //load outstanding stook oders
-                loadOutStandOrd();
+                loadOutOrders();
             }  
         }
 
@@ -90,7 +90,7 @@ namespace Cheveux.Manager
                             "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
                                             "ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Dashboard.aspx'>"
+                            "'>"
                              + treat.Name + "</a>");
                         dashOutCount++;
                     }
@@ -101,7 +101,7 @@ namespace Cheveux.Manager
                             "<a href='../Manager/Products.aspx?Action=NewOrder&" +
                                             "ProductID="
                             + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Dashboard.aspx'>" + treat.Name + "</a>");
+                            "'>" + treat.Name + "</a>");
                         dashOutCount++;
                     }
                 }
@@ -115,7 +115,7 @@ namespace Cheveux.Manager
                             "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
                                             "ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Dashboard.aspx'>" +
+                            "'>" +
                             "" + Access.Name + "</a>");
                         dashOutCount++;
                     }
@@ -126,7 +126,7 @@ namespace Cheveux.Manager
                             "<a href='../Manager/Products.aspx?Action=NewOrder&" +
                                             "ProductID="
                             + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Dashboard.aspx'>" +
+                            "'>" +
                             "" + Access.Name + "</a>");
                         dashOutCount++;
                     }
@@ -339,31 +339,29 @@ namespace Cheveux.Manager
                                 newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
                                 + bookingServiceList[0].ServiceName.ToString() + "</a>";
                             }
-                            else if (bookingServiceList.Count == 2)
+                            else if (bookingServiceList.Count > 1)
                             {
-                                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + bookingServiceList[0].ServiceName.ToString() +
-                                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
-                            }
-                            else if (bookingServiceList.Count > 2)
-                            {
-                                string toolTip = "";
-                                int toolTipCount = 0;
-                                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
+                                string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                                    "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                                if (bookingServiceList.Count == 2)
                                 {
-                                    if (toolTipCount == 0)
-                                    {
-                                        toolTip = toolTipDTL.ServiceName;
-                                        toolTipCount++;
-                                    }
-                                    else
-                                    {
-                                        toolTip += ", " + toolTipDTL.ServiceName;
-                                    }
+                                    dropDown += bookingServiceList[0].ServiceName.ToString() +
+                                    ", " + bookingServiceList[1].ServiceName.ToString();
                                 }
-                                newCell.Text = "<a title='" + toolTip + "'" +
-                                    "href ='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
-                                    "'> Multiple Services </a>";
+                                else if (bookingServiceList.Count > 2)
+                                {
+                                    dropDown += " Multiple ";
+                                }
+                                dropDown += "<span class='caret'></span></a>" +
+                                                "<ul class='dropdown-menu bg-dark text-white'>";
+                                foreach (SP_GetBookingServices service in bookingServiceList)
+                                {
+                                    dropDown += "<li>&nbsp;<a href='/cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
+                                        " " + service.ServiceName.ToString() + " </a>&nbsp;</li>";
+                                }
+                                dropDown += "</ul></li>";
+
+                                newCell.Text = dropDown;
                             }
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
                             newCell = new TableCell();
@@ -380,98 +378,14 @@ namespace Cheveux.Manager
                             newCell.Text = "<button type = 'button' class='btn btn-default'>" +
                             "<a href = '../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
                             "&BookingType=Past" +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>View Details</a></button>";
+                            "&PreviousPage=../Manager/Dashboard.aspx'>View</a></button>";
                             tblBookings.Rows[bookingCount].Cells.Add(newCell);
 
                             //increment rowcounter
                             bookingCount++;
                         }
                     }
-
-                    //past bookings 
-                    foreach (SP_GetTodaysBookings booking in todaysBookings)
-                    {
-                        if (booking.StartTime > DateTime.Now)
-                        {
-                            //create a new row in the table and set the height
-                            newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblBookings.Rows.Add(newRow);
-                            //fill the wrow with data
-                            TableCell newCell = new TableCell();
-                            newCell.Text = booking.StartTime.ToString("HH:mm");
-                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + booking.CustomerID.ToString().Replace(" ", string.Empty) +
-                                    "&PreviousPage=Dashboard.aspx'>" + booking.CustomerFirstName + " " + booking.CustomerLastName + "</a>";
-                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
-                            //Services
-                            List<SP_GetBookingServices> bookingServiceList = null;
-                            //get the booking services
-                            try
-                            {
-                                bookingServiceList = handler.getBookingServices(booking.BookingID.ToString());
-                            }
-                            catch (Exception Err)
-                            {
-                                function.logAnError("Error Loading Booking Services in manager dashboadr todays bookings (Past) Error:" +
-                                    Err.ToString());
-                            }
-                            newCell = new TableCell();
-                            if (bookingServiceList.Count == 1)
-                            {
-                                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bookingServiceList[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                                + bookingServiceList[0].ServiceName.ToString() + "</a>";
-                            }
-                            else if (bookingServiceList.Count == 2)
-                            {
-                                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + bookingServiceList[0].ServiceName.ToString() +
-                                    ", " + bookingServiceList[1].ServiceName.ToString() + "</a>";
-                            }
-                            else if (bookingServiceList.Count > 2)
-                            {
-                                string toolTip = "";
-                                int toolTipCount = 0;
-                                foreach (SP_GetBookingServices toolTipDTL in bookingServiceList)
-                                {
-                                    if (toolTipCount == 0)
-                                    {
-                                        toolTip = toolTipDTL.ServiceName;
-                                        toolTipCount++;
-                                    }
-                                    else
-                                    {
-                                        toolTip += ", " + toolTipDTL.ServiceName;
-                                    }
-                                }
-                                newCell.Text = "<a title='" + toolTip + "'" +
-                                    "href ='../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
-                                    "'> Multiple Services </a>";
-                            }
-                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "No")
-                            {
-                                newCell.Text = "Not Arrived";
-                            }
-                            else if (function.GetFullArrivedStatus(booking.Arrived.ToString()[0]) == "Yes")
-                            {
-                                newCell.Text = "Arrived";
-                            }
-                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            newCell.Text = "<button type = 'button' class='btn btn-default'>" +
-                            "<a href = '../ViewBooking.aspx?BookingID=" + booking.BookingID.ToString().Replace(" ", string.Empty) +
-                            "&BookingType=Past" +
-                            "&PreviousPage=../Manager/Dashboard.aspx'>View Details</a></button>";
-                            tblBookings.Rows[bookingCount].Cells.Add(newCell);
-
-                            //increment rowcounter
-                            bookingCount++;
-                        }
-                    }
-
+                    
                     //set the bookings count
                     bookingsLable.Text = bookingCount-1 + " Bookings";
                 }
@@ -495,9 +409,113 @@ namespace Cheveux.Manager
             }
         }
 
-        private void loadOutStandOrd()
+        #region List Outstanding Orders
+        private void loadOutOrders()
         {
+            try
+            {
+                List<OrderViewModel> outOrders = handler.getOutStandingOrders();
+                //check if there are outstanding orders
+                if (outOrders.Count > 0)
+                {
+                    //if there are bookings desplay them
+                    //create a new row in the uppcoming bookings table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblOutstandingOrders.Rows.Add(newRow);
+                    //create a header row and set cell withs
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Date Orderd";
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Supplier";
+                    newHeaderCell.Width = 800;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Items Out Standing";
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 400;
+                    tblOutstandingOrders.Rows[0].Cells.Add(newHeaderCell);
 
+                    //create a loop to display each result
+                    //creat a counter to keep track of the current row
+                    int rowCount = 1;
+                    foreach (OrderViewModel outOrder in outOrders)
+                    {
+                        List<OrderViewModel> outOrderProducts = handler.getProductOrderDL(outOrder.OrderID.ToString());
+
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblOutstandingOrders.Rows.Add(newRow);
+                        //fill the row with the data from the results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = outOrder.orderDate.ToString("dd MMM yyyy");
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a href='/Manager/Products.aspx?Action=Viewsup" +
+                                        "&supID=" + outOrder.supplierID.Replace(" ", string.Empty) +
+                                        "'>" + outOrder.supplierName + "</a>";
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        int outsandingItemCount = 0;
+                        foreach (OrderViewModel outOrderDL in outOrderProducts)
+                        {
+                            outsandingItemCount += outOrderDL.Qty;
+                        }
+                        string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                                "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                        dropDown += outsandingItemCount;
+                        dropDown += "<span class='caret'></span></a>" +
+                                            "<ul class='dropdown-menu bg-dark text-white'>";
+                        foreach (OrderViewModel outOrderDL in outOrderProducts)
+                        {
+                            dropDown += "<li>&nbsp;<a href='/cheveux/products.aspx?ProductID=" + outOrderDL.ProductID.Replace(" ", string.Empty) + "'>" +
+                                    " " + outOrderDL.Name.ToString() + " </a>&nbsp;</li>";
+                        }
+                        dropDown += "</ul></li>";
+                        newCell.Text = dropDown;
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<button type = 'button' class='btn btn-default'>" + 
+                            "<a href='/Manager/Products.aspx?Action=ViewOrder&OrderID=" + outOrder.OrderID.ToString() +
+                            "'> View </a></button>";
+                        tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
+                        rowCount++;
+                    }
+
+                    if (rowCount == 1)
+                    {
+                        // if there aren't let the user know
+                        outstandingOrdersLable.Text =
+                            "<p> No Outstanding Orders </p>";
+                        tblOutstandingOrders.Visible = false;
+                    }
+                    else
+                    {
+                        // set the booking copunt
+                        outstandingOrdersLable.Text =
+                            "<p> " + (rowCount - 1) + " Outstanding Orders </p>";
+                    }
+                }
+                else
+                {
+                    // if there aren't let the user know
+                    outstandingOrdersLable.Text =
+                        "<p> No outstanding Orders </p>";
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error loading outstanding product orders on internal product page | Error: " + err.ToString());
+                outstandingOrdersLable.Visible = true;
+                tblOutstandingOrders.Visible = false;
+                outstandingOrdersLable.Text =
+                        "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
+            }
         }
+        #endregion
     }
 }

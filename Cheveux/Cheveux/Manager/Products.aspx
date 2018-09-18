@@ -43,7 +43,6 @@
                     <br />
 
                     <div runat="server" visible="false" id="ViewAllProducts">
-
                         <!-- Jumbo Tron -->
                         <div class="jumbotron bg-dark text-white">
 
@@ -266,25 +265,65 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <asp:Label runat="server" ID="lblPastOrder"></asp:Label>
+                                <!-- Line Break -->
+                                <br />
+                                <asp:Table ID="tblPastOrders" runat="server"></asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="divViewOrder">
+                        <div class="jumbotron bg-dark text-white">
+                            <h1><asp:Label runat="server" ID="lblOrder" Text="Product Order"></asp:Label></h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <!-- Line Break -->
+                                <br />
+                                <asp:Table ID="tblViewOrder" runat="server"></asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="divviewSupplier">
+                        <div class="jumbotron bg-dark text-white">
+                            <h1><asp:Label runat="server" ID="lblSupplier" Text="Supplier"></asp:Label></h1>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <!-- Line Break -->
+                                <br />
+                                <asp:Table ID="tblSupplier" runat="server"></asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="divAcceptOrder">
+                        Accept Order
                     </div>
                 </div>
 
-    <!-- if the user is loged Out -->
-    <div runat="server" id="LogedOut">
-        <div class="bg-dark text-white jumbotron">
-            <div class="row">
-                <div class="col-10">
-                    <h1>Manage Products</h1>
-                    <p>Please log-in to Manage Products</p>
+                <!-- if the user is loged Out -->
+                <div runat="server" id="LogedOut">
+                    <div class="bg-dark text-white jumbotron">
+                        <div class="row">
+                            <div class="col-10">
+                                <h1>Manage Products</h1>
+                                <p>Please log-in to Manage Products</p>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    </form>
+            </form>
         </div>
         <div class="col-1"></div>
     </div>

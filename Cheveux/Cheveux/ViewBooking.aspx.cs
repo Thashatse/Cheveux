@@ -2071,10 +2071,9 @@ namespace Cheveux
                     " at " + BookingDetails.bookingStartTime.ToString("HH:mm") + "? </p>  " +
                     "<button type = 'button' class='btn btn-default'>" +
                     "<a href='javascript:goBack()'>No</a></button>  " +
-                    "<button type = 'button' class='btn btn-danger'>" +
-                    "<a href = ViewBooking.aspx?Action=CancelConfirmed&BookingID=" +
+                    "<a class='btn btn-danger' href = ViewBooking.aspx?Action=CancelConfirmed&BookingID=" +
                     BookingDetails.bookingID.ToString().Replace(" ", string.Empty) +
-                    "&PreviousPage="+PreviousPageAdress+">Yes</a></button>";
+                    "&PreviousPage="+PreviousPageAdress+">Yes</a>";
                 #endregion
             }
             catch (Exception Err)

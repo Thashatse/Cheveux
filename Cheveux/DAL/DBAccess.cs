@@ -1539,7 +1539,10 @@ namespace DAL
                             listItem.OrderID = row["OrderID"].ToString();
                             listItem.orderDate = Convert.ToDateTime(row["OrderDate"].ToString());
                             listItem.Received = Convert.ToBoolean(row["Received"].ToString());
-                            listItem.dateReceived = Convert.ToDateTime(row["DateReceived"].ToString());
+                            if (row["DateReceived"].ToString() != "")
+                            {
+                                listItem.dateReceived = Convert.ToDateTime(row["DateReceived"].ToString());
+                            }
                             listItem.supplierID = row["SupplierID"].ToString();
                             listItem.supplierName = row["SupplierName"].ToString();
                             listItem.contactName = row["ContactName"].ToString();
@@ -1688,6 +1691,41 @@ namespace DAL
             }
         }
         
+        public Supplier getSupplier(string suppID)
+        {
+            Supplier supplier = new Supplier();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SuppID", suppID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("getSupplierDetails", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            supplier.supplierID = row["SupplierID"].ToString();
+                            supplier.supplierName = row["SupplierName"].ToString();
+                            supplier.contactName = row["ContactName"].ToString();
+                            supplier.contactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.contactEmail = row["ContactEmail"].ToString();
+                        }
+                    }
+                    return supplier;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
         public List<Supplier> getSuppliers()
         {
             List<Supplier> list = new List<Supplier>();

@@ -94,6 +94,7 @@ namespace Cheveux.Manager
                 loadEmployeeList(drpEmpTyp.SelectedValue.ToString()[0]);
             }
         }
+
         public void loadEmployeeList(char empType)
         {
             try

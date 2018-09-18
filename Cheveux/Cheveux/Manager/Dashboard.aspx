@@ -93,9 +93,8 @@
                             <div runat="server" id="divOrders">
                                 <!--Orders-->
                                 <h1>Outstanding Product Orders </h1>
-                                <!-- Orders Table -->
-                                <asp:Table ID="productOrders" runat="server">
-                                </asp:Table>
+                                <asp:Label runat="server" ID="outstandingOrdersLable"></asp:Label>
+                                <asp:Table ID="tblOutstandingOrders" runat="server"></asp:Table>
                             </div>
 
                         </div>
@@ -113,7 +112,7 @@
                     </div>
                 </div>
                 <!-- if the user is loged Out -->
-                <div class="container" runat="server" id="LogedOut">
+                <div runat="server" id="LogedOut">
                     <div class="jumbotron bg-dark text-white">
                         <div class="row">
                             <div class="col-10">
@@ -127,6 +126,9 @@
                     </div>
                 </div>
             </div>
+            <!-- Line Break -->
+            <br />
+            <br />
         </div>
         <div class="col-1"></div>
     </div>

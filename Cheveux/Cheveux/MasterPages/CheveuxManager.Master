@@ -99,7 +99,7 @@
     <!-- End Loading Wheel -->
 </head>
 <body id="page-top">
-    
+
     <!-- Unpblished -->
     <!--Nav Bar-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -126,16 +126,11 @@
                         <a class="nav-link js-scroll-trigger" href="../Manager/Employee.aspx">Employees</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="../Manager/BusinessSetting.aspx">Settings</a>
-                    </li>
-                    <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
                             <!--Login Button-->
                             <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login</a>
                         </asp:PlaceHolder>
                     </li>
-
-
                     <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedIn">
                             <!--Profile Button-->
@@ -150,17 +145,22 @@
                         <!--Search Button-->
                         <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
                     </li>
-                    <li class="nav-item">
-                        <!--Help-->
-                        <a class="nav-link js-scroll-trigger" href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
+                    <li class='nav-item dropdown'>
+                        <a style='font-size:.9rem; font-weight:700; text-transform:uppercase; color:#212529;' data-toggle='dropdown' class='dropdown-toggle' data-toggle='dropdown' href='#'> More <span class='caret'></span></a>
+                        <ul class='dropdown-menu bg-dark text-white'>
+                            <li>
+                                &nbsp;<a class='nav-item'  href="../Manager/BusinessSetting.aspx">Settings</a>&nbsp;
+                            </li>
+                            <li>
+                                <!--Help-->
+                                &nbsp;<a class='nav-item' href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>&nbsp;
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
-
-
 
     <!--Place older for Content-->
     <div class="theTop">

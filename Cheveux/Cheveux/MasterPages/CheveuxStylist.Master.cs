@@ -41,12 +41,12 @@ namespace Cheveux
                 {
                     profile.Controls.Add(new LiteralControl
                         ("<li class='dropdown'>" +
-                            "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>" +
+                            "<a style='font-size:.9rem; font-weight:700; text-transform:uppercase; color:#212529;' data-toggle='dropdown' class='dropdown-toggle' href='#'>" +
                                 "<img src=" + UserDetails.UserImage + "" +
                                 " alt='" + UserDetails.UserName.ToString() +
-                                " Profile Image' width='35' height='35' style='border-radius:50%;'/>" +
+                                " Profile Image' width='35' height='35' style='border-radius:50%;'/> " +
                                 UserDetails.UserName.ToString() +
-                                "<span class='caret'></span></a>" +
+                                " <span class='caret'></span></a>" +
                                 "<ul class='dropdown-menu bg-dark text-white'>" +
                                     "<li>&nbsp;<a href='../Profile.aspx?View=Profile'> Profile </a>&nbsp;</li> " +
                                     "<li>&nbsp;<a href='/Authentication/Accounts.aspx?action=Logout'> Logout </a>&nbsp;</li> " +

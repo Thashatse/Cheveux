@@ -18,9 +18,10 @@
         <div class="col-1"></div>
         <div class="col-10">
             <form runat="server">
+                <div runat="server" id="LoggedIn" visible="false">
                 <!--If the user is logged in-->
                 <!--jumbotron page heading-->
-                <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn" visible="false">
+                <div class="jumbotron bg-dark text-white" >
                     <!--Date-->
                     <asp:Label ID="lblDate" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                     <br />
@@ -49,8 +50,8 @@
                         <div id="viewAgenda" runat="server">
                             <div class="row">
                                 <div class="col-xs-12 col-md-12">
-                                    <h3 id="viewStylistHeader" runat="server">View Stylist Schedule
-                                    </h3>
+                                    <h1 id="viewStylistHeader" runat="server">View Stylist Schedule
+                                    </h1>
                                 </div>
                             </div>
                             <div id="empDropdown" class="row">
@@ -132,9 +133,8 @@
                         <div runat="server" id="divOrders">
                             <!--Orders-->
                             <h1>Outstanding Product Orders </h1>
-                            <!-- Orders Table -->
-                            <asp:Table ID="productOrders" runat="server">
-                            </asp:Table>
+                            <asp:Label runat="server" ID="outstandingOrdersLable"></asp:Label>
+                            <asp:Table ID="tblOutstandingOrders" runat="server"></asp:Table>
                         </div>
                     </div>
 
@@ -174,6 +174,7 @@
                         </div>
                     </div>
                 </div>
+                </div>
 
                 <div class="jumbotron bg-dark text-white" runat="server" id="LoggedOut" visible="true">
                     <div class="row">
@@ -187,6 +188,9 @@
                     </div>
                 </div>
             </form>
+            <!-- Line Break -->
+            <br />
+            <br />
         </div>
         <div class="col-1"></div>
     </div>
