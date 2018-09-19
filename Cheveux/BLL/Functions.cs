@@ -69,7 +69,7 @@ namespace BLL
                 return "error";
             }
         }
-
+         
         public string GetFullEmployeeTypeText(char empType)
         {
             /*
@@ -210,7 +210,9 @@ namespace BLL
 
         public string GenerateRandomBookingID()
         {
-            string result;
+            try
+            {
+                string result;
             do
             {
                 int[] id = new int[9];
@@ -223,23 +225,58 @@ namespace BLL
             } while (Handler.getCustomerUpcomingBookingDetails(result) != null);
             return result;
         }
+            catch
+            {
+                throw new Exception();
+    }
+}
 
         public string GenerateRandomProductID()
         {
-            string result;
-            do
+            try
             {
-                int[] id = new int[3];
-                Random rn = new Random();
-                for (int i = 0; i < id.Length; i++)
+                string result;
+                do
                 {
-                    id[i] = rn.Next(0, 9);
-                }
-                result = "Pr"+string.Join("", id);
-            } while (Handler.CheckForProduct(result) != null);
-            return result;
+                    int[] id = new int[3];
+                    Random rn = new Random();
+                    for (int i = 0; i < id.Length; i++)
+                    {
+                        id[i] = rn.Next(0, 9);
+                    }
+                    result = "Pr" + string.Join("", id);
+                } while (Handler.CheckForProduct(result) != null);
+                return result;
+            }
+            catch
+            {
+                throw new Exception();
+            }
         }
 
+        public string GenerateRandomOrderID()
+        {
+            try
+            {
+                string result;
+                do
+                {
+                    int[] id = new int[9];
+                    Random rn = new Random();
+                    for (int i = 0; i < id.Length; i++)
+                    {
+                        id[i] = rn.Next(0, 9);
+                    }
+                    result = string.Join("", id);
+                } while (Handler.CheckForOrder(result) != null);
+                return result;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+        
         public bool sendEmailAlert(string receverAddress, string reciverName, string subject, string body, string senderName)
         {
             bool success = false;

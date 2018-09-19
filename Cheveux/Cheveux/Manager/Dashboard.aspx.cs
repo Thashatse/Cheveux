@@ -307,8 +307,7 @@ namespace Cheveux.Manager
                     //upcoming bookings 
                     foreach(SP_GetTodaysBookings booking in todaysBookings)
                     {
-                        if (booking.StartTime < DateTime.Now)
-                        {
+                        
                             //create a new row in the table and set the height
                             newRow = new TableRow();
                             newRow.Height = 50;
@@ -383,7 +382,7 @@ namespace Cheveux.Manager
 
                             //increment rowcounter
                             bookingCount++;
-                        }
+                        
                     }
                     
                     //set the bookings count
@@ -393,11 +392,13 @@ namespace Cheveux.Manager
                 {
                     //set the bookings count
                     bookingsLable.Text = "No bookings today";
+                    tblBookings.Visible = false;
                 }
                 else if (todaysBookings.Count < 0)
                 {
                     //let the user know an error occoured
                     bookingsLable.Text = "An error occurred loading all bookings";
+                    tblBookings.Visible = false;
                 }
 
             }

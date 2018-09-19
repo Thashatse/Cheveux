@@ -64,7 +64,7 @@ namespace Cheveux.Manager
             else
             {
                 //set the master page
-                this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                this.MasterPageFile = "~/MasterPages/Cheveux.Master";
             }
         }
         #endregion
@@ -76,11 +76,22 @@ namespace Cheveux.Manager
 
             if (cookie == null)
             {
+                string action = Request.QueryString["Action"];
+                if (action == "ViewOrder")
+                {
+                    LogedIn.Visible = true;
+                    LogedOut.Visible = false;
+                    divTabs.Visible = false;
+                    hideAllView();
+                    divViewOrder.Visible = true;
+                    viewOrder(sender, e, true);
+                }
+                
                 //if the user is not loged in as a manager or receptionist do not display Products
             }
             else if (cookie["UT"] != "M" && cookie["UT"] != "R")
             {
-                Response.Redirect("../Default.aspx");
+                    Response.Redirect("../Default.aspx");
             }
             else if (cookie["UT"] == "M" || cookie["UT"] == "R")
             {
@@ -88,11 +99,6 @@ namespace Cheveux.Manager
                 LogedIn.Visible = true;
                 LogedOut.Visible = false;
                 
-                if (Page.IsPostBack)
-                {
-                    tblProductTable.Rows.Clear();
-                }
-
                 if (!Page.IsPostBack)
                 {
                     //check the action and set the view
@@ -105,7 +111,7 @@ namespace Cheveux.Manager
                     {
                         hideAllView();
                         divViewOrder.Visible = true;
-                        viewOrder(sender, e);
+                        viewOrder(sender, e, false);
                     }
                     else if (action == "Viewsup")
                     {
@@ -123,11 +129,11 @@ namespace Cheveux.Manager
                     {
                         //check if a vie has been requested
                         string view = Request.QueryString["View"];
-                        if(view == "OutOrders")
+                        if (view == "OutOrders")
                         {
                             btnViewOutstandingOrders_Click(sender, e);
                         }
-                        else if(view == "PastOrders")
+                        else if (view == "PastOrders")
                         {
                             btnViewPastOrders_Click(sender, e);
                         }
@@ -135,7 +141,7 @@ namespace Cheveux.Manager
                         {
                             btnViewAllProducts_Click(sender, e);
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -178,6 +184,7 @@ namespace Cheveux.Manager
             divAcceptOrder.Visible = false;
             divViewOrder.Visible = false;
             divviewSupplier.Visible = false;
+            Suppliers.Visible = false;
         }
 
         protected void btnViewAllProducts_Click(object sender, EventArgs e)
@@ -185,6 +192,7 @@ namespace Cheveux.Manager
             hideAllView();
 
             loadProductTypeDropDowns();
+            loadSupplier();
 
             //get the selected sort by and display the results
             loadProductList(drpProductType.SelectedValue.ToString()[0]);
@@ -195,11 +203,11 @@ namespace Cheveux.Manager
         protected void btnViewNewOrder_Click(object sender, EventArgs e)
         {
             hideAllView();
-
+            
             loadProductTypeDropDowns();
+            loadSupplier();
 
             //load new order page
-            loadSupplier();
             loadSupplierProducts();
 
             NewOrder.Visible = true;
@@ -223,42 +231,106 @@ namespace Cheveux.Manager
             PastOrders.Visible = true;
         }
 
+        protected void btnViewSuppliers_Click(object sender, EventArgs e)
+        {
+            hideAllView();
+
+            loadSuppliers();
+
+            Suppliers.Visible = true;
+        }
+
+        protected void btnViewFillterAllProducts_Click(object sender, EventArgs e)
+        {
+            loadProductList(drpProductType.SelectedValue.ToString()[0]);
+            if (btnViewFillterAllProducts.Text == "Fillter")
+            {
+                btnViewFillterAllProducts.Text = "Hide Fillters";
+                divAllProductsFilter.Visible = true;
+            }
+            else if (btnViewFillterAllProducts.Text == "Hide Fillters")
+            {
+                btnViewFillterAllProducts.Text = "Fillter";
+                divAllProductsFilter.Visible = false;
+            }
+        }
+
         List<SP_GetProductTypes> productTypes = null;
 
         private void loadProductTypeDropDowns()
         {
-            drpProductType.Items.Add(new ListItem("All", "X"));
-            ddlOrdersProductType.Items.Add(new ListItem("All", "X"));
-            try
+            if (!Page.IsPostBack)
             {
-                productTypes = handler.getProductTypes();
-                foreach (SP_GetProductTypes productType in productTypes)
+                drpProductType.Items.Clear();
+                ddlOrdersProductType.Items.Clear();
+
+                drpProductType.Items.Add(new ListItem("All", "X"));
+                ddlOrdersProductType.Items.Add(new ListItem("All", "X"));
+                try
                 {
-                    if (productType.type != 'S')
+                    productTypes = handler.getProductTypes();
+                    foreach (SP_GetProductTypes productType in productTypes)
                     {
-                        drpProductType.Items.Add(new ListItem(
-                            function.GetFullProductTypeText(productType.type.ToString()[0]),
-                            productType.type.ToString()));
-                        ddlOrdersProductType.Items.Add(new ListItem(
-                            function.GetFullProductTypeText(productType.type.ToString()[0]),
-                            productType.type.ToString()));
+                        if (productType.type != 'S')
+                        {
+                            drpProductType.Items.Add(new ListItem(
+                                function.GetFullProductTypeText(productType.type.ToString()[0]),
+                                productType.type.ToString()));
+                            ddlOrdersProductType.Items.Add(new ListItem(
+                                function.GetFullProductTypeText(productType.type.ToString()[0]),
+                                productType.type.ToString()));
+                        }
                     }
                 }
+                catch (Exception Err)
+                {
+                    function.logAnError(Err.ToString() + "Unable to load drpEmpTyp on emplyee Page");
+                }
+
+                drpProductType.SelectedIndex = 0;
+                ddlOrdersProductType.SelectedIndex = 0;
             }
-            catch (Exception Err)
+        }
+
+        public void loadSupplier()
+        {
+            if (!Page.IsPostBack)
             {
-                function.logAnError(Err.ToString() + "Unable to load drpEmpTyp on emplyee Page");
+                ddlSupplier.Items.Clear();
+                ddlAllProdsSuppliers.Items.Clear();
+                try
+                {
+                    List<Supplier> suppliers = handler.getSuppliers();
+                    foreach (Supplier supplier in suppliers)
+                    {
+                        ddlSupplier.DataSource = suppliers;
+                        ddlSupplier.DataTextField = "SupplierName";
+                        ddlSupplier.DataValueField = "SupplierID";
+                        //bind the data
+                        ddlSupplier.DataBind();
+
+                        ddlAllProdsSuppliers.DataSource = suppliers;
+                        //set the coloumn that will be displayed to the user
+                        ddlAllProdsSuppliers.DataTextField = "SupplierName";
+                        //set the coloumn that will be used for the valuefield
+                        ddlAllProdsSuppliers.DataValueField = "SupplierID";
+                        //bind the data
+                        ddlAllProdsSuppliers.DataBind();
+                    }
+                    ddlAllProdsSuppliers.Items.Add(new ListItem("All", "X"));
+                    ddlAllProdsSuppliers.SelectedValue = "X";
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20suppliers");
+                }
             }
-            drpProductType.Items.RemoveAt(0);
-            drpProductType.SelectedIndex = 0;
-            ddlOrdersProductType.Items.RemoveAt(0);
-            ddlOrdersProductType.SelectedIndex = 0;
         }
         #endregion
 
         #region Product Orders
-        #region View Product Order
-        private void viewOrder(object sender, EventArgs e)
+        private void viewOrder(object sender, EventArgs e, bool External)
         {
             //check for the product ID and display the details
             string orderID = Request.QueryString["OrderID"];
@@ -274,13 +346,21 @@ namespace Cheveux.Manager
                     int DLCout = 0;
 
                     #region Heaing 
-                    if (order.Received == true)
+                    if (order.Received == true && External == false)
                     {
                         lblOrder.Text = "Product Order from " + order.supplierName;
                     }
-                    else
+                    else if (order.Received == false && External == false)
                     {
                         lblOrder.Text = "Outstanding Product Order from " + order.supplierName;
+                    }
+                    if (order.Received == true && External == true)
+                    {
+                        lblOrder.Text = "Fulfilled Product Order Request from Cheveux";
+                    }
+                    else if (order.Received == false && External == true)
+                    {
+                        lblOrder.Text = "Product Order Request from Cheveux";
                     }
                     #endregion
 
@@ -293,10 +373,10 @@ namespace Cheveux.Manager
                     TableCell newCell = new TableCell();
                     newCell.Font.Bold = true;
                     newCell.Width = 150;
-                    newCell.Text = "Order Date:";
+                    newCell.Text = "Ordered:";
                     tblViewOrder.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = order.orderDate.ToString("dd MMM yyyy");
+                    newCell.Text = order.orderDate.ToString("HH:mm dd MMM yyyy");
                     tblViewOrder.Rows[rowCount].Cells.Add(newCell);
                     rowCount++;
                     #endregion
@@ -310,7 +390,7 @@ namespace Cheveux.Manager
                         tblViewOrder.Rows.Add(newRow);
                         newCell = new TableCell();
                         newCell.Font.Bold = true;
-                        newCell.Text = "Date recived:";
+                        newCell.Text = "Received:";
                         tblViewOrder.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
                         newCell.Text = order.dateReceived.ToString("dd MMM yyyy");
@@ -328,9 +408,16 @@ namespace Cheveux.Manager
                     newCell.Text = "Supplier:";
                     tblViewOrder.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<a href='/Manager/Products.aspx?Action=Viewsup" +
+                    if (External != true)
+                    {
+                        newCell.Text = "<a href='/Manager/Products.aspx?Action=Viewsup" +
                                         "&supID=" + order.supplierID.Replace(" ", string.Empty) +
                                         "'>" + order.supplierName + "</a>";
+                    }
+                    else
+                    {
+                        newCell.Text = order.supplierName;
+                    }
                     tblViewOrder.Rows[rowCount].Cells.Add(newCell);
                     rowCount++;
 
@@ -345,7 +432,9 @@ namespace Cheveux.Manager
                     newCell = new TableCell();
                     newCell.Text = order.contactName;
                     tblViewOrder.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
+                    if(External != true)
+                    {
+                        newCell = new TableCell();
                     newCell.Text = "<button type = 'button' class='btn btn-default'>" +
                                 "<a href = 'tel:" + order.contactNo.ToString() +
                                 "'>Phone    </a></button>          " +
@@ -353,6 +442,7 @@ namespace Cheveux.Manager
                                 "<a href = 'mailto:" + order.contactEmail.ToString() +
                                 "'>Email    </a></button>";
                     tblViewOrder.Rows[rowCount].Cells.Add(newCell);
+                    }
                     rowCount++;
                     #endregion
                     #endregion
@@ -370,7 +460,7 @@ namespace Cheveux.Manager
                             newCell.Text = "Products:";
                             tblViewOrder.Rows[rowCount].Cells.Add(newCell);
                             newCell = new TableCell();
-                            newCell.Text = orderDL.Qty+"x <a href='/cheveux/products.aspx?ProductID=" + orderDL.ProductID.Replace(" ", string.Empty) + "'> " +
+                            newCell.Text = orderDL.Qty + "x <a href='/cheveux/products.aspx?ProductID=" + orderDL.ProductID.Replace(" ", string.Empty) + "'> " +
                                     orderDL.Name.ToString() + " </a>";
                             tblViewOrder.Rows[rowCount].Cells.Add(newCell);
                             rowCount++;
@@ -384,7 +474,6 @@ namespace Cheveux.Manager
                             //empty cell
                             newCell = new TableCell();
                             tblViewOrder.Rows[rowCount].Cells.Add(newCell);
-
                             newCell = new TableCell();
                             newCell.Text = orderDL.Qty + "x <a href='/cheveux/products.aspx?ProductID=" + orderDL.ProductID.Replace(" ", string.Empty) + "'> " +
                                     orderDL.Name.ToString() + " </a>";
@@ -393,31 +482,34 @@ namespace Cheveux.Manager
                         }
                     }
                     #endregion
-                    
+
                     #region Navigation
-                    newRow = new TableRow();
-                    newRow.Height = 50;
-                    tblViewOrder.Rows.Add(newRow);
-                    //empty cell
-                    newCell = new TableCell();
-                    tblViewOrder.Rows[rowCount].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    
-
-                    if (order.Received == false)
+                    if (External != true)
                     {
-                        newCell.Text = "<br/><br/> " +
-                            "<button type = 'button' class='btn btn-default'> <a href='Products.aspx?View=OutOrders'>All Outstanding Orders</a></button>" +
-                            "&nbsp; <button type = 'button' class='btn btn-primary'> <a class='btn-primary' href='?Action=AcceptOrder&OrderID=" + order.OrderID.ToString() +
-                            "'> Accept Order </a></button>";
-                    }
-                    else
-                    {
-                        newCell.Text = "<br/><br/> <button type = 'button' class='btn btn-default'> <a href='Products.aspx?View=PastOrders'>All Past Orders</a></button>";
-                    }
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblViewOrder.Rows.Add(newRow);
+                        //empty cell
+                        newCell = new TableCell();
+                        tblViewOrder.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
 
-                    tblViewOrder.Rows[rowCount].Cells.Add(newCell);
-                    rowCount++;
+
+                        if (order.Received == false)
+                        {
+                            newCell.Text = "<br/><br/> " +
+                                "<button type = 'button' class='btn btn-default'> <a href='Products.aspx?View=OutOrders'>All Outstanding Orders</a></button>" +
+                                "&nbsp; <button type = 'button' class='btn btn-primary'> <a class='btn-primary' href='?Action=AcceptOrder&OrderID=" + order.OrderID.ToString() +
+                                "'> Accept Order </a></button>";
+                        }
+                        else
+                        {
+                            newCell.Text = "<br/><br/> <button type = 'button' class='btn btn-default'> <a href='Products.aspx?View=PastOrders'>All Past Orders</a></button>";
+                        }
+
+                        tblViewOrder.Rows[rowCount].Cells.Add(newCell);
+                        rowCount++;
+                    }
                     #endregion
                 }
                 catch (Exception err)
@@ -428,15 +520,17 @@ namespace Cheveux.Manager
                             "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
                 }
             }
-            else
+            else if(External != true)
             {
                 //if there is no order ID
                 btnViewOutstandingOrders_Click(sender, e);
             }
+            else
+            {
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20product%20order");
+            }
         }
-        #endregion
-
-        #region List Outstanding Orders
+        
         private void loadOutOrders()
         {
             try
@@ -544,9 +638,7 @@ namespace Cheveux.Manager
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
         }
-        #endregion
-
-        #region List Past Orders
+        
         private void loadPastOrders()
         {
             try
@@ -652,35 +744,10 @@ namespace Cheveux.Manager
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
         }
-        #endregion
         
         #region New Order
         List<string> productIDs = new List<string>();
-
-        public void loadSupplier()
-        {
-            try
-            {
-                List<Supplier> suppliers = handler.getSuppliers();
-                foreach (Supplier supplier in suppliers)
-                {
-                    //Load employee names into dropdownlist
-                    ddlSupplier.DataSource = suppliers;
-                    //set the coloumn that will be displayed to the user
-                    ddlSupplier.DataTextField = "SupplierName";
-                    //set the coloumn that will be used for the valuefield
-                    ddlSupplier.DataValueField = "SupplierID";
-                    //bind the data
-                    ddlSupplier.DataBind();
-                }
-            }
-            catch (Exception err)
-            {
-                function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
-                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20suppliers");
-            }
-        }
-
+        
         public void loadSupplierProducts()
         {
             try
@@ -804,6 +871,111 @@ namespace Cheveux.Manager
                 Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20products");
             }
         }
+        
+        protected void btnAddProductToOrder_Click(object sender, EventArgs e)
+        {
+            if(lbProducts.SelectedItem != null)
+            {
+                lProductsOnOrder.Items.Add(Qty.SelectedItem.Text +" - "+ lbProducts.SelectedItem.Text);
+                NoProductSelectedOnOrder.Visible = false;
+            }
+        }
+        
+        protected void btnRemoveProductFromOrder_Click(object sender, EventArgs e)
+        {
+            if (lProductsOnOrder.SelectedItem != null)
+            {
+                lProductsOnOrder.Items.Remove(lProductsOnOrder.SelectedItem);
+            }
+        }
+
+        protected void btnSaveOrder_Click(object sender, EventArgs e)
+        {
+            if (lProductsOnOrder.Items.Count > 0)
+            {
+                bool success = false;
+                string orderID = "";
+
+                try
+                {
+                    Order newOrder = new Order();
+                    newOrder.OrderID = function.GenerateRandomOrderID();
+                    newOrder.supplierID = ddlSupplier.SelectedValue;
+                    success = handler.newProductOrder(newOrder);
+
+                    if (success != false)
+                    {
+                        for (int i = 0; i < lProductsOnOrder.Items.Count; i++)
+                        {
+                            Order_DTL newOrderDL = new Order_DTL();
+                            newOrderDL.OrderID = newOrder.OrderID;
+
+                            string[] array = lProductsOnOrder.Items[i].Text.Split('-');
+                            array[1] = array[1].Substring(1);
+                            string prodID = "";
+                            txtProductSearch.Text = "";
+                            ddlOrdersProductType.SelectedIndex = 0;
+                            loadSupplierProducts();
+                            loadSupplierProductsID();
+
+                            for (int index = 0; i < lbProducts.Items.Count; i++)
+                            {
+                                if (array[1] == lbProducts.Items[index].Text)
+                                {
+                                    prodID = productIDs[index];
+                                }
+                                index++;
+                            }
+
+                            newOrderDL.ProductID = prodID;
+                            newOrderDL.Qty = Convert.ToInt32(array[0]);
+                            success = handler.newProductOrderDL(newOrderDL);
+                        }
+                    }
+
+                    orderID = newOrder.OrderID;
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error making new product order | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20product%20order");
+                }
+
+                if (success == true)
+                {
+                    //email to supplier
+                    Supplier supp = handler.getSupplier(ddlSupplier.SelectedValue); 
+                    //send an email notification
+                    var body = new System.Text.StringBuilder();
+                    body.AppendFormat("Hello " + supp.contactName.ToString() + ",");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Please review the stock oder request at the link below");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx?Action=ViewOrder&OrderID=" + orderID);
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Regards,");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"The Cheveux Team");
+                    function.sendEmailAlert(supp.contactEmail, supp.contactName,
+                        "Product Stock Order Request",
+                        body.ToString(),
+                        "Cheveux");
+
+                    //show order details to user
+                    Response.Redirect("Products.aspx?Action=ViewOrder&OrderID=" + orderID);
+                }
+                else if (success == false)
+                {
+                    function.logAnError("Error making new product order");
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20product%20order");
+                }
+            }
+            else
+            {
+                NoProductSelectedOnOrder.Visible = true;
+            }
+        }
 
         protected void ddlOrdersProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -813,6 +985,15 @@ namespace Cheveux.Manager
         protected void btnNewProd_Click(object sender, EventArgs e)
         {
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('http://sict-iis.nmmu.ac.za/beauxdebut/Cheveux/Products.aspx?Action=Add','_newtab');", true);
+        }
+
+        protected void ddlSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtProductSearch.Text = "";
+            ddlOrdersProductType.SelectedIndex = 'X';
+            lProductsOnOrder.Items.Clear();
+            loadSupplierProducts();
+            loadSupplierProductsID();
         }
         #endregion
 
@@ -839,12 +1020,27 @@ namespace Cheveux.Manager
         #region Products
         int treatCount = 0;
         int accCount = 0;
-
-        #region view all Products
+        
         public void loadProductList(char productType)
         {
            try
             {
+                #region set the supplierID
+                if (!Page.IsPostBack)
+                {
+                    string view = Request.QueryString["View"];
+                    if (view == "ViewProds")
+                    {
+                        string suppID = Request.QueryString["SuppID"];
+                        if (suppID != "" || suppID != null)
+                        {
+                            ddlAllProdsSuppliers.SelectedValue = suppID;
+                            lblViewAllProductsHeading.Text = "<h1>"+ ddlAllProdsSuppliers.SelectedItem.Text + " Products</h1>";
+                        }
+                    }
+                }
+                #endregion
+                tblProductTable.Rows.Clear();
                 //load a list of all products
                 products = handler.getAllProductsAndDetails();
                 //sort the products by stock count
@@ -888,6 +1084,7 @@ namespace Cheveux.Manager
                         //if the product maches the selected type
                         //if product matches the tearm
                         if ((Access.ProductType[0] == productType || productType == 'X') &&
+                            (Access.supplierID == ddlAllProdsSuppliers.SelectedValue.ToString() || ddlAllProdsSuppliers.SelectedValue.ToString()[0] == 'X') &&
                             (compareToSearchTerm(Access.Name, false) == true ||
                             compareToSearchTerm(Access.ProductDescription, false) == true ||
                             compareToSearchTerm(Access.Brandname, false) == true ||
@@ -996,6 +1193,7 @@ namespace Cheveux.Manager
                         //if the product maches the selected type
                         //if product matches the tearm
                         if ((treat.ProductType[0] == productType || productType == 'X') &&
+                            (treat.supplierID == ddlAllProdsSuppliers.SelectedValue.ToString() || ddlAllProdsSuppliers.SelectedValue.ToString()[0] == 'X') &&
                             (compareToSearchTerm(treat.Name, false) == true ||
                             compareToSearchTerm(treat.ProductDescription, false) == true ||
                             compareToSearchTerm(treat.Brandname, false) == true ||
@@ -1131,11 +1329,107 @@ namespace Cheveux.Manager
                 productJumbotronLable.Text = "An error occurred retrieving Product details";
             }
         }
-        #endregion
+        
+        protected void ddlAllProdsSuppliers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadProductList(drpProductType.SelectedValue.ToString()[0]);
+            if (ddlAllProdsSuppliers.SelectedValue[0] != 'X')
+            {
+                lblViewAllProductsHeading.Text = "<h1>" + ddlAllProdsSuppliers.SelectedItem.Text + " Products</h1>";
+            }
+            else
+            {
+                lblViewAllProductsHeading.Text = "<h1>Manage Products</h1>";
+            }     
+        }
         #endregion
 
         #region Supplier
-        #region View Supplier
+        private void loadSuppliers()
+        {
+            try
+            {
+                List<Supplier> suppliers = handler.getSuppliers();
+                //check if there are outstanding orders
+                if (suppliers.Count > 0)
+                {
+                    //if there are bookings desplay them
+                    //create a new row in the uppcoming bookings table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblSuppliers.Rows.Add(newRow);
+                    //create a header row and set cell withs
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Name";
+                    newHeaderCell.Width = 800;
+                    tblSuppliers.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Contact";
+                    newHeaderCell.Width = 800;
+                    tblSuppliers.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 400;
+                    tblSuppliers.Rows[0].Cells.Add(newHeaderCell);
+
+                    //create a loop to display each result
+                    //creat a counter to keep track of the current row
+                    int rowCount = 1;
+                    foreach (Supplier supplier in suppliers)
+                    {
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblSuppliers.Rows.Add(newRow);
+                        //fill the row with the data from the results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = "<a href='/Manager/Products.aspx?Action=Viewsup" +
+                                        "&supID=" + supplier.supplierID.Replace(" ", string.Empty) +
+                                        "'>" + supplier.supplierName + "</a>";
+                        tblSuppliers.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = supplier.contactName;
+                        tblSuppliers.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = 'tel:" + supplier.contactNo.ToString() +
+                                "'>Phone    </a></button>          " +
+                                "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = 'mailto:" + supplier.contactEmail.ToString() +
+                                "'>Email    </a></button>";
+                        tblSuppliers.Rows[rowCount].Cells.Add(newCell);
+                        rowCount++;
+                    }
+
+                    if (rowCount == 1)
+                    {
+                        // if there aren't let the user know
+                        lblSuppliers.Text =
+                            "<p> No Suppliers </p>";
+                        tblSuppliers.Visible = false;
+                    }
+                    else
+                    {
+                        // set the booking copunt
+                        lblSuppliers.Text =
+                            "<p> " + (rowCount - 1) + " Supliers </p>";
+                    }
+                }
+                else
+                {
+                    // if there aren't let the user know
+                    lblSuppliers.Text =
+                        "<p> No Suppliers </p>";
+                }
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error loading Suppliers on internal product page | Error: " + err.ToString());
+                lblSuppliers.Visible = true;
+                tblOutstandingOrders.Visible = false;
+                lblSuppliers.Text =
+                        "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
+            }
+        }
+
         private void viewSupplier(object sender, EventArgs e)
         {
             //check for the product ID and display the details
@@ -1221,20 +1515,19 @@ namespace Cheveux.Manager
                     newCell = new TableCell();
                     newCell.Text = supp.City;
                     tblSupplier.Rows[rowCount].Cells.Add(newCell);
+                    rowCount++;
+                    #endregion
+
+                    #region Navigation
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblSupplier.Rows.Add(newRow);
                     newCell = new TableCell();
-                    newCell.Text = "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = 'https://www.google.com/maps/dir/?api=1&"
-                                + supp.AddressLine1.ToString().Replace(" ", string.Empty) + "%2C+";
-                    if (supp.AddressLine2 != null && supp.AddressLine2 != "")
-                    {
-                        newCell.Text += supp.AddressLine2.Replace(" ", string.Empty) + "%2C+";
-                    }
-                    if (supp.Suburb != null && supp.Suburb != "")
-                    {
-                        newCell.Text += supp.Suburb.ToString().Replace(" ", string.Empty) + "%2C+";
-                    }
-                                newCell.Text += supp.City.ToString().Replace(" ", string.Empty) +
-                                "'>Get Directions    </a></button>";
+                    tblSupplier.Rows[rowCount].Cells.Add(newCell);
+                    newCell = new TableCell();
+                    newCell.Text = "<button type = 'button' class='btn btn-default'>" + 
+                        "<a href='?SuppID=" + supp.supplierID + "&View=ViewProds" +
+                            "'> View Supplier Products </a></button>";
                     tblSupplier.Rows[rowCount].Cells.Add(newCell);
                     rowCount++;
                     #endregion
@@ -1253,7 +1546,6 @@ namespace Cheveux.Manager
                 btnViewOutstandingOrders_Click(sender, e);
             }
         }
-        #endregion
         #endregion
     }
 }

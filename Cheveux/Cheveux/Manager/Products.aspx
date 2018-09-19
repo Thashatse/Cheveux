@@ -34,6 +34,8 @@
                                         <asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Accept Order" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
                                     <li>
                                         <asp:Button ID="btnViewPastOrders" runat="server" Text="Past Orders" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                    <li>
+                                        <asp:Button ID="btnViewSuppliers" runat="server" Text="Suppliers" class="btn btn-light" OnClick="btnViewSuppliers_Click" /></li>
                                 </ul>
                             </div>
                         </div>
@@ -45,15 +47,28 @@
                     <div runat="server" visible="false" id="ViewAllProducts">
                         <!-- Jumbo Tron -->
                         <div class="jumbotron bg-dark text-white">
-
-                            <h1>Manage Products</h1>
+                            <div class="row">
+                                <div class="col-lg-9 col-md-12 col-sm-12">
+                                    <asp:Label ID="lblViewAllProductsHeading" runat="server" Text="<h1>Manage Products</h1>"></asp:Label>
+                                </div>
+                                <div class="col-lg-3 col-md-2 col-sm-2">
+                                    <asp:Button ID="btnViewFillterAllProducts" runat="server" Text="Fillter" class="btn btn-light" OnClick="btnViewFillterAllProducts_Click" />
+                                </div>
+                            </div>
+                            
+                            <div runat="server" id="divAllProductsFilter" visible="false">
+                                <!-- line Break -->
+                            <br />
+                            <!-- View By Selector -->
+                            <p>Product Type: </p>
+                            <asp:DropDownList ID="drpProductType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
+                                <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                            </asp:DropDownList>
                             <!-- line Break -->
                             <br />
-
-
-                            <!-- View By Selector -->
-                            <p>View Products By: </p>
-                            <asp:DropDownList ID="drpProductType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                            <br />
+                            <p>Product Supplier: </p>
+                            <asp:DropDownList ID="ddlAllProdsSuppliers" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
                                 <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                             </asp:DropDownList>
 
@@ -68,13 +83,14 @@
                             </div>
                             <div class="row">
                                 <div class="col-5">
-                                    <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server" AutoPostBack="true"
-                                        OnTextChanged="Page_Load"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server" AutoPostBack="true" 
+                                        OnTextChanged="ddlAllProdsSuppliers_SelectedIndexChanged"></asp:TextBox>
                                 </div>
                                 <div class="col-2">
-                                    <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" />
+                                    <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" OnClick="ddlAllProdsSuppliers_SelectedIndexChanged" />
                                 </div>
                             </div>
+                                </div>
                         </div>
 
 
@@ -102,10 +118,11 @@
                     <div runat="server" visible="false" id="NewOrder">
                         <div class="jumbotron bg-dark text-white">
                             <h1>New Order</h1>
+                            <p style="color:red;" runat="server" id="NoProductSelectedOnOrder" visible="false"> Select Product First </p>
                         </div>
 
                         <h3>Supplier: </h3>
-                        <asp:DropDownList ID="ddlSupplier" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                        <asp:DropDownList ID="ddlSupplier" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlSupplier_SelectedIndexChanged">
                         </asp:DropDownList>
 
                         <!-- Line Break -->
@@ -135,12 +152,6 @@
                                 <!-- Line Break -->
                                 <br />
                                 <br />
-                                <br />
-                                <br />
-
-                                <asp:Button ID="btnAddProductToOrder" runat="server" Text="Add Product" CssClass="btn btn-Secondary" />
-
-                                <!-- Line Break -->
                                 <br />
                                 <br />
 
@@ -202,7 +213,14 @@
                                 <br />
                                 <br />
 
-                                <asp:Button ID="btnRemoveProductFromOrder" runat="server" Text="Remove Product" CssClass="btn" />
+                                <asp:Button ID="btnAddProductToOrder" runat="server" Text="Add Product" CssClass="btn btn-Secondary" OnClick="btnAddProductToOrder_Click" />
+
+                                <!-- Line Break -->
+                                <br />
+                                <br />
+                                <br />
+
+                                <asp:Button ID="btnRemoveProductFromOrder" runat="server" Text="Remove Product" CssClass="btn" OnClick="btnRemoveProductFromOrder_Click" />
 
                                 <!-- Line Break -->
                                 <br />
@@ -228,7 +246,7 @@
                         <!-- Line Break -->
                         <br />
 
-                        <asp:Button ID="btnSaveOrder" runat="server" Text="Submit" CssClass="btn btn-primary" />
+                        <asp:Button ID="btnSaveOrder" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSaveOrder_Click" />
                     </div>
 
                     <div runat="server" visible="false" id="OutstandingOrders">
@@ -277,9 +295,35 @@
                         </div>
                     </div>
 
+                    <div runat="server" visible="false" id="Suppliers">
+                        <div class="jumbotron bg-dark text-white">
+                            <h1>Suppliers</h1>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblSuppliers"></asp:Label>
+                            </div>
+                            <div class="col-md-2">
+                                <!--add product btn -->
+                                <a class='btn btn-primary' href='?Action=NewSupp'>Add Supplier </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <!-- Line Break -->
+                                <br />
+                                <asp:Table ID="tblSuppliers" runat="server"></asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
                     <div runat="server" visible="false" id="divViewOrder">
                         <div class="jumbotron bg-dark text-white">
-                            <h1><asp:Label runat="server" ID="lblOrder" Text="Product Order"></asp:Label></h1>
+                            <h1>
+                                <asp:Label runat="server" ID="lblOrder" Text="Product Order"></asp:Label></h1>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-12">
@@ -292,7 +336,8 @@
 
                     <div runat="server" visible="false" id="divviewSupplier">
                         <div class="jumbotron bg-dark text-white">
-                            <h1><asp:Label runat="server" ID="lblSupplier" Text="Supplier"></asp:Label></h1>
+                            <h1>
+                                <asp:Label runat="server" ID="lblSupplier" Text="Supplier"></asp:Label></h1>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-md-12">

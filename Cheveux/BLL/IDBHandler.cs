@@ -74,6 +74,12 @@ namespace BLL
         List<Supplier> getSuppliers();
 
         Supplier getSupplier(string suppID);
+
+        bool newProductOrder(Order newOrder);
+
+        bool newProductOrderDL(Order_DTL newOrderDL);
+
+        Order CheckForOrder(string id);
         #endregion
 
         #region Services

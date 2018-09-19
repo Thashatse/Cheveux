@@ -172,6 +172,21 @@ namespace BLL
         {
             return db.getSupplier(suppID);
         }
+
+        public bool newProductOrder(Order newOrder)
+        {
+            return db.newProductOrder(newOrder);
+        }
+
+        public bool newProductOrderDL(Order_DTL newOrderDL)
+        {
+            return db.newProductOrderDL(newOrderDL);
+        }
+
+        public Order CheckForOrder(string id)
+        {
+            return db.CheckForOrder(id);
+        }
         #endregion
 
         #region Bookings

@@ -67,6 +67,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Button btnViewPastOrders;
         
         /// <summary>
+        /// btnViewSuppliers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewSuppliers;
+        
+        /// <summary>
         /// ViewAllProducts control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,33 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ViewAllProducts;
         
         /// <summary>
+        /// lblViewAllProductsHeading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblViewAllProductsHeading;
+        
+        /// <summary>
+        /// btnViewFillterAllProducts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewFillterAllProducts;
+        
+        /// <summary>
+        /// divAllProductsFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAllProductsFilter;
+        
+        /// <summary>
         /// drpProductType control.
         /// </summary>
         /// <remarks>
@@ -83,6 +119,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpProductType;
+        
+        /// <summary>
+        /// ddlAllProdsSuppliers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAllProdsSuppliers;
         
         /// <summary>
         /// txtProductSearchTerm control.
@@ -130,6 +175,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl NewOrder;
         
         /// <summary>
+        /// NoProductSelectedOnOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl NoProductSelectedOnOrder;
+        
+        /// <summary>
         /// ddlSupplier control.
         /// </summary>
         /// <remarks>
@@ -166,15 +220,6 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.ListBox lbProducts;
         
         /// <summary>
-        /// btnAddProductToOrder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddProductToOrder;
-        
-        /// <summary>
         /// Qty control.
         /// </summary>
         /// <remarks>
@@ -182,6 +227,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Qty;
+        
+        /// <summary>
+        /// btnAddProductToOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddProductToOrder;
         
         /// <summary>
         /// btnRemoveProductFromOrder control.
@@ -272,6 +326,33 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblPastOrders;
+        
+        /// <summary>
+        /// Suppliers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Suppliers;
+        
+        /// <summary>
+        /// lblSuppliers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSuppliers;
+        
+        /// <summary>
+        /// tblSuppliers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblSuppliers;
         
         /// <summary>
         /// divViewOrder control.

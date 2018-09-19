@@ -1758,6 +1758,72 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
         }
+
+        public bool newProductOrder(Order newOrder)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@OrderID", newOrder.OrderID),
+                new SqlParameter("@SuppID", newOrder.supplierID)
+                };
+
+                return DBHelper.NonQuery("SP_NewOrder", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool newProductOrderDL(Order_DTL newOrderDL)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@OrderID", newOrderDL.OrderID),
+                new SqlParameter("@ProdID", newOrderDL.ProductID),
+                new SqlParameter("@Qty", newOrderDL.Qty)
+                };
+
+                return DBHelper.NonQuery("SP_NewOrderDL", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public Order CheckForOrder(string id)
+        {
+            Order TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForOrder",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new Order
+                        {
+                            OrderID = row[0].ToString()
+                        };
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Manager Dash Board
