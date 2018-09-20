@@ -20,8 +20,8 @@
             <div runat="server" id="divViewAll">
                 <div class="jumbotron bg-dark text-white">
                     <!-- VIEW ALL PRODUCTS TABLE -->
-                    <header class="text-center">
-                        <h1 runat="server" id="lblHeader">Products</h1>
+                    <header class="text-left">
+                        <h1 runat="server" id="lblHeader">Add Products</h1>
                     </header>
                 </div>
                 <asp:placeholder runat="server" id="phProducts">
@@ -64,15 +64,16 @@
                                 <br />
                                 <div class="row">
                                     <div class="col-12">
-                                        <header>
-                                            <h1>Add Product </h1>
-                                        </header>
+                                       
                                         <br />
                                         <asp:table runat="server" id="tblProductDetails">
                                             <asp:TableRow>
                                                 <asp:TableCell Text="Product Type:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                                 <asp:TableCell>
                                                     <asp:DropDownList runat="server" ID="drpProductType" AutoPostBack="true" OnSelectedIndexChanged="drpProductType_Change">
+                                                      
+                                                        <asp:ListItem Text ="Application service" Value="0"></asp:ListItem>
+                                                        <asp:ListItem Text ="Treatment" Value ="1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </asp:TableCell>
                                             </asp:TableRow>
@@ -111,6 +112,8 @@
                                                 <asp:TableCell Text="Supplier:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                                 <asp:TableCell>
                                                     <asp:DropDownList runat="server" ID="drpListSupplier" AutoPostBack="true">
+                                                    <asp:ListItem Text ="Hair Supplies International" Value ="0"></asp:ListItem>
+                                                    <asp:ListItem Text ="Hair Supplies International" Value="1"></asp:ListItem>
                                                     </asp:DropDownList>
                                                 </asp:TableCell>
                                             </asp:TableRow>
@@ -122,8 +125,8 @@
                                                
                                             </asp:TableRow>  
                                         </asp:table>
-                                        <asp:button id="btnAddProduct" runat="server" text="Add Product" onclick="btnAddProduct_Click" />
-                                        <asp:button id="btnUpdateProduct" runat="server" text="Update Product" />
+                                        <asp:button id="btnAddProduct" runat="server" text="Add" onclick="btnAddProduct_Click" /><td></td>
+                                        <asp:button id="btnCancel" runat="server" text="Cancel" OnClick="btnCancel_Click" />
                         </form>
                     </div>
 

@@ -525,6 +525,11 @@ namespace Cheveux.Cheveux
 
 
         }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Manager/Products.aspx");
+        }
     }
 } 
 
