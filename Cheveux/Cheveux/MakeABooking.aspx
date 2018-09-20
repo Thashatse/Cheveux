@@ -30,7 +30,22 @@
                         </div>
                     </div>
 
-                     
+                     <div runat="server" id="divManageSchedule" visible ="false">
+                          <div runat="server" id="divChooseAStylist">
+                                <div class="container">
+                                    <div class="row">
+                                        <div style="border: solid #F05F40 2px; width: 900px;  height: 400px;">
+                                            <h3>Choose A Hairstylist</h3>
+                                            <br />
+                                                <asp:ListBox runat="server" ID="lbChooseAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300" AutoPostBack="true"></asp:ListBox>
+                                        </div>
+                                         <div runat="server" id="divSelectDate" style="border: solid #F05F40 2px; height: 400px; overflow-y: scroll;">
+
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                     </div>
 
                     <div class="row">
 
