@@ -18,6 +18,7 @@ namespace Cheveux.Cheveux
         SP_GetBraidService bservice = null;
         List<SP_GetServices> allservices = null;
         HttpCookie cookie = null;
+
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -66,6 +67,7 @@ namespace Cheveux.Cheveux
                 this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
             }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             string serviceID = Request.QueryString["ProductID"];
@@ -81,6 +83,7 @@ namespace Cheveux.Cheveux
                 LoadService(serviceID);
             }
         }
+
         public void LoadService(string serviceID)
         {
             service = handler.BLL_GetServiceFromID(serviceID);
@@ -129,6 +132,7 @@ namespace Cheveux.Cheveux
             }
 
         }
+
         public void LoadAllServices()
         {
             try

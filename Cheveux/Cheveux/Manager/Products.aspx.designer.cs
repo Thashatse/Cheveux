@@ -67,6 +67,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Button btnViewPastOrders;
         
         /// <summary>
+        /// btnViewBrands control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewBrands;
+        
+        /// <summary>
         /// btnViewSuppliers control.
         /// </summary>
         /// <remarks>
@@ -247,15 +256,6 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Button btnRemoveProductFromOrder;
         
         /// <summary>
-        /// btnNewProd control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNewProd;
-        
-        /// <summary>
         /// lProductsOnOrder control.
         /// </summary>
         /// <remarks>
@@ -263,6 +263,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListBox lProductsOnOrder;
+        
+        /// <summary>
+        /// btnNewProd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNewProd;
         
         /// <summary>
         /// btnSaveOrder control.
@@ -353,6 +362,33 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblSuppliers;
+        
+        /// <summary>
+        /// Brands control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Brands;
+        
+        /// <summary>
+        /// lblBrandss control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBrandss;
+        
+        /// <summary>
+        /// tblBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblBrand;
         
         /// <summary>
         /// divViewOrder control.

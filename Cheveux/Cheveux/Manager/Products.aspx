@@ -29,11 +29,13 @@
                                     <li>
                                         <asp:Button ID="btnViewAllProducts" runat="server" Text="Manage Products" class="btn btn-light" OnClick="btnViewAllProducts_Click" /></li>
                                     <li>
-                                        <asp:Button ID="btnViewNewOrder" runat="server" Text="New Order" class="btn btn-light" OnClick="btnViewNewOrder_Click" /></li>
+                                        <asp:Button ID="btnViewNewOrder" runat="server" Text="Create Purchase Order" class="btn btn-light" OnClick="btnViewNewOrder_Click" /></li>
                                     <li>
-                                        <asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Accept Order" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
+                                        <asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Accept Purchase Order" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
                                     <li>
-                                        <asp:Button ID="btnViewPastOrders" runat="server" Text="Past Orders" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                        <asp:Button ID="btnViewPastOrders" runat="server" Text="Past Purchase Orders" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                    <li>
+                                        <asp:Button ID="btnViewBrands" runat="server" Text="Brands" class="btn btn-light" OnClick="btnViewBrands_Click" /></li>
                                     <li>
                                         <asp:Button ID="btnViewSuppliers" runat="server" Text="Suppliers" class="btn btn-light" OnClick="btnViewSuppliers_Click" /></li>
                                 </ul>
@@ -55,42 +57,42 @@
                                     <asp:Button ID="btnViewFillterAllProducts" runat="server" Text="Fillter" class="btn btn-light" OnClick="btnViewFillterAllProducts_Click" />
                                 </div>
                             </div>
-                            
+
                             <div runat="server" id="divAllProductsFilter" visible="false">
                                 <!-- line Break -->
-                            <br />
-                            <!-- View By Selector -->
-                            <p>Product Type: </p>
-                            <asp:DropDownList ID="drpProductType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
-                                <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                            </asp:DropDownList>
-                            <!-- line Break -->
-                            <br />
-                            <br />
-                            <p>Product Supplier: </p>
-                            <asp:DropDownList ID="ddlAllProdsSuppliers" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
-                                <asp:ListItem Text="Select" Value="0"></asp:ListItem>
-                            </asp:DropDownList>
+                                <br />
+                                <!-- View By Selector -->
+                                <p>Product Type: </p>
+                                <asp:DropDownList ID="drpProductType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
+                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                </asp:DropDownList>
+                                <!-- line Break -->
+                                <br />
+                                <br />
+                                <p>Product Supplier: </p>
+                                <asp:DropDownList ID="ddlAllProdsSuppliers" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
+                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                </asp:DropDownList>
 
-                            <!-- line Break -->
-                            <br />
-                            <br />
-                            <div class="row">
-                                <div class="col-12">
-                                    <!-- View By search tearm -->
-                                    <p>View Products By Search Term: </p>
+                                <!-- line Break -->
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="col-12">
+                                        <!-- View By search tearm -->
+                                        <p>View Products By Search Term: </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server" AutoPostBack="true"
+                                            OnTextChanged="ddlAllProdsSuppliers_SelectedIndexChanged"></asp:TextBox>
+                                    </div>
+                                    <div class="col-2">
+                                        <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" OnClick="ddlAllProdsSuppliers_SelectedIndexChanged" />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-5">
-                                    <asp:TextBox class="form-control" ID="txtProductSearchTerm" runat="server" AutoPostBack="true" 
-                                        OnTextChanged="ddlAllProdsSuppliers_SelectedIndexChanged"></asp:TextBox>
-                                </div>
-                                <div class="col-2">
-                                    <asp:Button CssClass="btn btn-primary" ID="btnProductSearch" runat="server" Text="Search" OnClick="ddlAllProdsSuppliers_SelectedIndexChanged" />
-                                </div>
-                            </div>
-                                </div>
                         </div>
 
 
@@ -117,8 +119,8 @@
 
                     <div runat="server" visible="false" id="NewOrder">
                         <div class="jumbotron bg-dark text-white">
-                            <h1>New Order</h1>
-                            <p style="color:red;" runat="server" id="NoProductSelectedOnOrder" visible="false"> Select Product First </p>
+                            <h1>Create Purchase Order</h1>
+                            <p style="color: red;" runat="server" id="NoProductSelectedOnOrder" visible="false">Select Product First </p>
                         </div>
 
                         <h3>Supplier: </h3>
@@ -221,13 +223,6 @@
                                 <br />
 
                                 <asp:Button ID="btnRemoveProductFromOrder" runat="server" Text="Remove Product" CssClass="btn" OnClick="btnRemoveProductFromOrder_Click" />
-
-                                <!-- Line Break -->
-                                <br />
-                                <br />
-                                <br />
-                                <asp:Button ID="btnNewProd" runat="server" OnClick="btnNewProd_Click"
-                                    Text="Craete New Product" CssClass="btn btn-sm" />
                             </div>
 
 
@@ -245,18 +240,18 @@
 
                         <!-- Line Break -->
                         <br />
-
-                        <asp:Button ID="btnSaveOrder" runat="server" Text="Submit" CssClass="btn btn-primary" OnClick="btnSaveOrder_Click" />
+                        <asp:Button Style="float: left;" ID="btnNewProd" runat="server" OnClick="btnNewProd_Click" Text="Craete New Product" CssClass="btn btn-Secondary" />
+                        <asp:Button Style="float: right;" ID="btnSaveOrder" runat="server" Text="Submit Purchase Order" CssClass="btn btn-primary" OnClick="btnSaveOrder_Click" />
                     </div>
 
                     <div runat="server" visible="false" id="OutstandingOrders">
                         <div class="jumbotron bg-dark text-white">
                             <div class="row">
                                 <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <h1>Accept Order</h1>
+                                    <h1>Accept Purchase Order</h1>
                                 </div>
                                 <div class="col-lg-3 col-md-2 col-sm-2">
-                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Make a Order</a>
+                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Create Purchase Order</a>
                                 </div>
                             </div>
                         </div>
@@ -276,10 +271,10 @@
                         <div class="jumbotron bg-dark text-white">
                             <div class="row">
                                 <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <h1>Past Orders</h1>
+                                    <h1>Past Purchase Orders</h1>
                                 </div>
                                 <div class="col-lg-3 col-md-2 col-sm-2">
-                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Make a Order</a>
+                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Create Purchase Order</a>
                                 </div>
                             </div>
                         </div>
@@ -316,6 +311,31 @@
                                 <!-- Line Break -->
                                 <br />
                                 <asp:Table ID="tblSuppliers" runat="server"></asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="Brands">
+                        <div class="jumbotron bg-dark text-white">
+                            <h1>Brands</h1>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-md-10">
+                                <asp:Label runat="server" ID="lblBrandss"></asp:Label>
+                            </div>
+                            <div class="col-md-2">
+                                <!--add product btn -->
+                                <a class='btn btn-primary' href='?Action=NewBrand'>Add Brand </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                                <!-- Line Break -->
+                                <br />
+                                <asp:Table ID="tblBrand" runat="server"></asp:Table>
                             </div>
                         </div>
                     </div>
@@ -372,4 +392,8 @@
         </div>
         <div class="col-1"></div>
     </div>
+
+    <!-- Line Break -->
+    <br />
+    <br />
 </asp:Content>
