@@ -748,7 +748,7 @@ namespace Cheveux.Manager
         #region New Order
         List<string> productIDs = new List<string>();
         
-        public void loadSupplierProducts()
+        public void loadSupplierProducts() /** For Lachea **/
         {
             try
             {
@@ -764,12 +764,13 @@ namespace Cheveux.Manager
                     //if the product maches the selected type
                     //if product matches the tearm
                     if ((Access.ProductType[0] == productType || productType == 'X') &&
+                        (Access.supplierID == ddlSupplier.SelectedValue.ToString() || ddlSupplier.SelectedValue.ToString()[0] == 'X') &&/** For Lachea **/
                         (compareToSearchTerm(Access.Name, true) == true ||
                         compareToSearchTerm(Access.ProductDescription, true) == true ||
                         compareToSearchTerm(Access.Brandname, true) == true ||
                         compareToSearchTerm(Access.brandType, true) == true ||
                         compareToSearchTerm(Access.Colour, true) == true) &&
-                        Access.ProductType[0] != 'S')
+                        Access.ProductType[0] != 'S'/** For Lachea **/)
                     {
                         lbProducts.Items.Add(Access.Name);
                     }
@@ -780,12 +781,13 @@ namespace Cheveux.Manager
                     //if the product maches the selected type
                     //if product matches the tearm
                     if ((treat.ProductType[0] == productType || productType == 'X') &&
+                        (treat.supplierID == ddlSupplier.SelectedValue.ToString() || ddlSupplier.SelectedValue.ToString()[0] == 'X') &&/** For Lachea **/
                         (compareToSearchTerm(treat.Name, true) == true ||
                         compareToSearchTerm(treat.ProductDescription, true) == true ||
                         compareToSearchTerm(treat.Brandname, true) == true ||
                         compareToSearchTerm(treat.TreatmentType, true) == true ||
                         compareToSearchTerm(treat.brandType, true) == true) &&
-                        treat.ProductType[0] != 'S')
+                        treat.ProductType[0] != 'S'/** For Lachea **/)
                     {
                         lbProducts.Items.Add(treat.Name);
                     }
