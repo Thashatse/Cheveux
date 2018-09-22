@@ -69,6 +69,7 @@ namespace Cheveux.Manager
         }
         #endregion
 
+        #region View
         protected void Page_Load(object sender, EventArgs e)
         {
             //check if the user is loged out
@@ -125,6 +126,17 @@ namespace Cheveux.Manager
                         divAcceptOrder.Visible = true;
                         acceptOrder(sender, e);
                     }
+                    else if (action == "NewSupp")
+                    {
+                        hideAllView();
+                        divAddSupplier.Visible = true;
+                    }
+                    else if (action == "NewBrand")
+                    {
+                        hideAllView();
+                        loadProductTypeDropDowns();
+                        divAddBrand.Visible = true;
+                    }
                     else
                     {
                         //check if a vie has been requested
@@ -137,6 +149,14 @@ namespace Cheveux.Manager
                         {
                             btnViewPastOrders_Click(sender, e);
                         }
+                        else if (view == "Brands")
+                        {
+                            btnViewBrands_Click(sender, e);
+                        }
+                        else if (view == "Supps")
+                        {
+                            btnViewSuppliers_Click(sender, e);
+                        }
                         else
                         {
                             btnViewAllProducts_Click(sender, e);
@@ -145,36 +165,7 @@ namespace Cheveux.Manager
                 }
             }
         }
-
-        public bool compareToSearchTerm(string toBeCompared, bool newOrder)
-        {
-            bool result = false;
-            if (txtProductSearchTerm.Text != null && newOrder == false)
-            {
-                toBeCompared = toBeCompared.ToLower();
-                string searcTearm = txtProductSearchTerm.Text.ToLower();
-                if (toBeCompared.Contains(searcTearm))
-                {
-                    result = true;
-                }
-            }
-            else if (txtProductSearch.Text != null && newOrder == true)
-            {
-                toBeCompared = toBeCompared.ToLower();
-                string searcTearm = txtProductSearch.Text.ToLower();
-                if (toBeCompared.Contains(searcTearm))
-                {
-                    result = true;
-                }
-            }
-            else
-            {
-                result = true;
-            }
-            return result;
-        }
-
-        #region View
+        
         private void hideAllView()
         {
             ViewAllProducts.Visible = false;
@@ -184,6 +175,8 @@ namespace Cheveux.Manager
             divAcceptOrder.Visible = false;
             divViewOrder.Visible = false;
             divviewSupplier.Visible = false;
+            divAddBrand.Visible = false;
+            divAddSupplier.Visible = false;
             Suppliers.Visible = false;
             Brands.Visible = false;
         }
@@ -273,6 +266,7 @@ namespace Cheveux.Manager
             {
                 drpProductType.Items.Clear();
                 ddlOrdersProductType.Items.Clear();
+                ddlAddBrandProductType.Items.Clear();
 
                 drpProductType.Items.Add(new ListItem("All", "X"));
                 ddlOrdersProductType.Items.Add(new ListItem("All", "X"));
@@ -289,6 +283,9 @@ namespace Cheveux.Manager
                             ddlOrdersProductType.Items.Add(new ListItem(
                                 function.GetFullProductTypeText(productType.type.ToString()[0]),
                                 productType.type.ToString()));
+                            ddlAddBrandProductType.Items.Add(new ListItem(
+                                function.GetFullProductTypeText(productType.type.ToString()[0]),
+                                productType.type.ToString()));
                         }
                     }
                 }
@@ -299,6 +296,7 @@ namespace Cheveux.Manager
 
                 drpProductType.SelectedIndex = 0;
                 ddlOrdersProductType.SelectedIndex = 0;
+                ddlAddBrandProductType.SelectedIndex = 0;
             }
         }
 
@@ -338,6 +336,34 @@ namespace Cheveux.Manager
             }
         }
         #endregion
+
+        public bool compareToSearchTerm(string toBeCompared, bool newOrder)
+        {
+            bool result = false;
+            if (txtProductSearchTerm.Text != null && newOrder == false)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = txtProductSearchTerm.Text.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else if (txtProductSearch.Text != null && newOrder == true)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = txtProductSearch.Text.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
+        }
 
         #region Purchase Orders
         private void viewOrder(object sender, EventArgs e, bool External)
@@ -930,6 +956,7 @@ namespace Cheveux.Manager
         {
             if (lProductsOnOrder.Items.Count > 0)
             {
+                NoProductSelectedOnOrder.Visible = false;
                 bool success = false;
                 string orderID = "";
 
@@ -1561,93 +1588,112 @@ namespace Cheveux.Manager
                 btnViewOutstandingOrders_Click(sender, e);
             }
         }
+
+        protected void btnAddSupp_Click(object sender, EventArgs e)
+        {
+            
+        }
         #endregion
-        
+
         #region Brand
         private void loadBrands()
-        { /*
+        {
             try
             {
-                List<Supplier> suppliers = handler.getSuppliers();
-                //check if there are outstanding orders
-                if (suppliers.Count > 0)
+                List<BRAND> brands = handler.getAllBrands();
+                brands = brands.OrderBy(o => o.Name).ToList();
+                if (brands.Count > 0)
                 {
-                    //if there are bookings desplay them
                     //create a new row in the uppcoming bookings table and set the height
                     TableRow newRow = new TableRow();
                     newRow.Height = 50;
-                    tblSuppliers.Rows.Add(newRow);
+                    tblBrand.Rows.Add(newRow);
                     //create a header row and set cell withs
                     TableHeaderCell newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Name";
                     newHeaderCell.Width = 800;
-                    tblSuppliers.Rows[0].Cells.Add(newHeaderCell);
+                    tblBrand.Rows[0].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "Contact";
+                    newHeaderCell.Text = "Type";
                     newHeaderCell.Width = 800;
-                    tblSuppliers.Rows[0].Cells.Add(newHeaderCell);
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 400;
-                    tblSuppliers.Rows[0].Cells.Add(newHeaderCell);
+                    tblBrand.Rows[0].Cells.Add(newHeaderCell);
 
                     //create a loop to display each result
                     //creat a counter to keep track of the current row
                     int rowCount = 1;
-                    foreach (Supplier supplier in suppliers)
+                    foreach (BRAND brand in brands)
                     {
                         newRow = new TableRow();
                         newRow.Height = 50;
-                        tblSuppliers.Rows.Add(newRow);
+                        tblBrand.Rows.Add(newRow);
                         //fill the row with the data from the results object
                         TableCell newCell = new TableCell();
-                        newCell.Text = "<a href='/Manager/Products.aspx?Action=Viewsup" +
-                                        "&supID=" + supplier.supplierID.Replace(" ", string.Empty) +
-                                        "'>" + supplier.supplierName + "</a>";
-                        tblSuppliers.Rows[rowCount].Cells.Add(newCell);
+                        newCell.Text = brand.Name;
+                        tblBrand.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.Text = supplier.contactName;
-                        tblSuppliers.Rows[rowCount].Cells.Add(newCell);
-                        newCell = new TableCell();
-                        newCell.Text = "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = 'tel:" + supplier.contactNo.ToString() +
-                                "'>Phone    </a></button>          " +
-                                "<button type = 'button' class='btn btn-default'>" +
-                                "<a href = 'mailto:" + supplier.contactEmail.ToString() +
-                                "'>Email    </a></button>";
-                        tblSuppliers.Rows[rowCount].Cells.Add(newCell);
+                        newCell.Text = function.GetFullProductTypeText(brand.Type[0]);
+                        tblBrand.Rows[rowCount].Cells.Add(newCell);
                         rowCount++;
                     }
 
                     if (rowCount == 1)
                     {
                         // if there aren't let the user know
-                        lblSuppliers.Text =
-                            "<p> No Suppliers </p>";
-                        tblSuppliers.Visible = false;
+                        lblBrands.Text =
+                            "<p> No Brands </p>";
+                        tblBrand.Visible = false;
                     }
                     else
                     {
                         // set the booking copunt
-                        lblSuppliers.Text =
-                            "<p> " + (rowCount - 1) + " Supliers </p>";
+                        lblBrands.Text =
+                            "<p> " + (rowCount - 1) + " Brands </p>";
                     }
                 }
                 else
                 {
                     // if there aren't let the user know
-                    lblSuppliers.Text =
-                        "<p> No Suppliers </p>";
+                    lblBrands.Text =
+                        "<p> No Brands </p>";
                 }
             }
             catch (Exception err)
             {
-                function.logAnError("Error loading Suppliers on internal product page | Error: " + err.ToString());
-                lblSuppliers.Visible = true;
-                tblOutstandingOrders.Visible = false;
-                lblSuppliers.Text =
+                function.logAnError("Error loading Brands on internal product page | Error: " + err.ToString());
+                lblBrands.Visible = true;
+                tblBrand.Visible = false;
+                lblBrands.Text =
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
-            */
+        }
+
+        protected void btnAddBrand_Click(object sender, EventArgs e)
+        {
+            bool success = false;
+            try
+            {
+                BRAND newBrand = new BRAND();
+                newBrand.BrandID = function.GenerateRandomBrandID();
+                newBrand.Name = txtBrandName.Text;
+                newBrand.Type = ddlAddBrandProductType.SelectedValue;
+                success = handler.newBrand(newBrand);
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error making new brand | Error: " + err);
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Brand");
+            }
+
+            if (success == true)
+            {
+                //show Brands 
+                btnViewBrands_Click(sender, e);
+            }
+            else if (success == false)
+            {
+                function.logAnError("Error making new brand");
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Brand");
+            }
         }
         #endregion
     }

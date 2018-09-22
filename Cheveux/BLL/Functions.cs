@@ -276,7 +276,30 @@ namespace BLL
                 throw new Exception();
             }
         }
-        
+
+        public string GenerateRandomBrandID()
+        {
+            try
+            {
+                string result;
+                do
+                {
+                    int[] id = new int[9];
+                    Random rn = new Random();
+                    for (int i = 0; i < id.Length; i++)
+                    {
+                        id[i] = rn.Next(0, 9);
+                    }
+                    result = string.Join("", id);
+                } while (Handler.CheckForBrand(result) != null);
+                return result;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+
         public bool sendEmailAlert(string receverAddress, string reciverName, string subject, string body, string senderName)
         {
             bool success = false;

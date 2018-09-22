@@ -99,7 +99,6 @@ namespace DAL
         bool addProduct(PRODUCT addProduct);
         bool addAccessories(ACCESSORY a, PRODUCT p);
         bool addTreatments(TREATMENT t, PRODUCT p);
-        List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
         #endregion
 
         #region Product Orders
@@ -130,6 +129,13 @@ namespace DAL
         List<SP_GetStyles> GetStyles();
         SP_GetAllAccessories selectAccessory(string accessoryID);
         SP_GetAllTreatments selectTreatment(string treatmentID);
+        #endregion
+
+        #region Brands
+        List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+        List<BRAND> getAllBrands();
+        bool newBrand(BRAND newBrand);
+        BRAND CheckForBrand(string id);
         #endregion
 
         #region Manager Dash Board

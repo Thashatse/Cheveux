@@ -20,7 +20,6 @@
                 <!-- if the user is loged In -->
                 <div runat="server" id="LogedIn" visible="false">
 
-
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div id="divTabs" runat="server">
@@ -302,7 +301,7 @@
                             </div>
                             <div class="col-md-2">
                                 <!--add product btn -->
-                                <a class='btn btn-primary' href='?Action=NewSupp'>Add Supplier </a>
+                                <a class='btn btn-primary' href='?Action=NewSupp'>New Supplier </a>
                             </div>
                         </div>
 
@@ -323,11 +322,11 @@
                         <br />
                         <div class="row">
                             <div class="col-md-10">
-                                <asp:Label runat="server" ID="lblBrandss"></asp:Label>
+                                <asp:Label runat="server" ID="lblBrands"></asp:Label>
                             </div>
                             <div class="col-md-2">
                                 <!--add product btn -->
-                                <a class='btn btn-primary' href='?Action=NewBrand'>Add Brand </a>
+                                <a class='btn btn-primary' href='?Action=NewBrand'>New Brand </a>
                             </div>
                         </div>
 
@@ -364,6 +363,175 @@
                                 <!-- Line Break -->
                                 <br />
                                 <asp:Table ID="tblSupplier" runat="server"></asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="divAddBrand">
+                        <div class="jumbotron bg-dark text-white">
+                            <h1>
+                                <asp:Label runat="server" ID="Label1" Text="New Brand"></asp:Label></h1>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Name:
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtBrandName" CssClass="form-control" runat="server"></asp:TextBox>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtBrandName" runat="server"
+                                        ErrorMessage="*Name is required" ControlToValidate="txtBrandName"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Type:
+                            </div>
+                            <div class="col-6">
+                                <asp:DropDownList ID="ddlAddBrandProductType" runat="server" CssClass="btn btn-primary"></asp:DropDownList>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:Button Style="float: right;" ID="btnAddBrand" runat="server" Text="Create Brand" CssClass="btn btn-primary" OnClick="btnAddBrand_Click" />
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                    </div>
+
+                    <div runat="server" visible="false" id="divAddSupplier">
+                        <div class="jumbotron bg-dark text-white">
+                            <h1>
+                                <asp:Label runat="server" ID="Label2" Text="New Supplier"></asp:Label></h1>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Supplier Name:
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtSupName" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtSupName" runat="server"
+                                        ErrorMessage="*Name is required" ControlToValidate="txtSupName"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Contact Name:
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="TxtSupContactName" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatorTxtSupContactName" runat="server"
+                                        ErrorMessage="*Contact Name is required" ControlToValidate="TxtSupContactName"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Contact Number:
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtSupContactNum" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-4">
+                                <a href="#" target="_blank" title="10-digit RSA phone number">
+                                <span class="glyphicon">&#63;</span>
+                            </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtSupContactNum" runat="server"
+                                        ErrorMessage="*Contact Number is required" ControlToValidate="txtSupContactNum"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidatortxtSupContactNum" runat="server" ControlToValidate="txtSupContactNum" ErrorMessage="Please enter a valid phone number" ForeColor="Red" ValidationExpression="^0[0-9]{9}$"></asp:RegularExpressionValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Contact Email: 
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtSupContactEmail" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtSupContactEmail" runat="server"
+                                        ErrorMessage="*Contact Email is required" ControlToValidate="txtSupContactEmail"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidatortxtSupContactEmail" runat="server" ErrorMessage="Sorry, The email address entered is not in the correct format. The standard email address format is name@example.com"
+                                            ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+                                            ControlToValidate="txtSupContactEmail" ForeColor="Red"></asp:RegularExpressionValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Address:
+                            </div>
+                            <div class="col-6">
+                                google Address
+                            </div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2" />
+                            <div class="col-6">
+                                <asp:Button Style="float: right;" ID="btnAddSupp" runat="server" Text="Create Supplier" CssClass="btn btn-primary" OnClick="btnAddSupp_Click" />
                             </div>
                         </div>
                     </div>

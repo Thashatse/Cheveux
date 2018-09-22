@@ -93,6 +93,12 @@ namespace BLL
         SP_GetBraidService BLL_GetBraidServiceFromID(string serviceID);
         #endregion
 
+        #region Brands
+        List<BRAND> getAllBrands();
+        bool newBrand(BRAND newBrand);
+        BRAND CheckForBrand(string id);
+        #endregion
+
         #region Manager Dash Board
         ManagerStats GetManagerStats();
         #endregion

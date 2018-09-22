@@ -108,8 +108,7 @@ namespace BLL
         {
             return db.CheckForProduct(id);
         }
-
-
+        
         public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
             return db.addAccessories(a, p);
@@ -134,11 +133,6 @@ namespace BLL
         public bool addProduct(PRODUCT addProduct)
         {
             return db.addProduct(addProduct);
-        }
-
-        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
-        {
-            return db.getBrandsForProductType(type);
         }
         #endregion
 
@@ -244,7 +238,29 @@ namespace BLL
         public SP_GetService BLL_GetServiceFromID(string serviceID)
         {
             return db.GetServiceFromID(serviceID);
-        } 
+        }
+        #endregion
+
+        #region Brands
+        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
+        {
+            return db.getBrandsForProductType(type);
+        }
+
+        public List<BRAND> getAllBrands()
+        {
+            return db.getAllBrands();
+        }
+
+        public bool newBrand(BRAND newBrand)
+        {
+            return db.newBrand(newBrand);
+        }
+
+        public BRAND CheckForBrand(string id)
+        {
+            return db.CheckForBrand(id);
+        }
         #endregion
 
         #region Manager Dash Board

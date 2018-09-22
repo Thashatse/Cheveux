@@ -1370,40 +1370,7 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
         }
-
-        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
-        {
-            List<SP_GetBrandsForProductType> list = new List<SP_GetBrandsForProductType>();
-            SP_GetBrandsForProductType b = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@productType",type)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            b = new SP_GetBrandsForProductType();
-                            b.BrandID = row["BrandID"].ToString();
-                            b.Name = row["Name"].ToString();
-                            b.Type = row["Type(T/A)"].ToString();
-                            list.Add(b);
-                        }
-                    }
-                    return list;
-                }
-            }
-            catch (Exception E)
-            {
-                throw new ApplicationException(E.ToString());
-            }
-
-        }
-        
+                
         public List<PRODUCT> getAllProducts()
         {
             PRODUCT product = null;
@@ -1934,7 +1901,118 @@ namespace DAL
 
         }
         #endregion
-        
+
+        #region Brands
+        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
+        {
+            List<SP_GetBrandsForProductType> list = new List<SP_GetBrandsForProductType>();
+            SP_GetBrandsForProductType b = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@productType",type)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            b = new SP_GetBrandsForProductType();
+                            b.BrandID = row["BrandID"].ToString();
+                            b.Name = row["Name"].ToString();
+                            b.Type = row["Type(T/A)"].ToString();
+                            list.Add(b);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+
+        }
+
+        public List<BRAND> getAllBrands()
+        {
+            List<BRAND> brandList = new List<BRAND>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetAllBrands", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            BRAND brand = new BRAND();
+                            brand.BrandID = row["BrandID"].ToString();
+                            brand.Name = row["Name"].ToString();
+                            brand.Type = row["Type(T/A)"].ToString();
+                            brandList.Add(brand);
+                        }
+                    }
+                    return brandList;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+
+        }
+
+        public bool newBrand (BRAND newBrand)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BrandID", newBrand.BrandID),
+                new SqlParameter("@BrandName", newBrand.Name),
+                new SqlParameter("@Type", newBrand.Type)
+                };
+
+                return DBHelper.NonQuery("SP_NewBrand", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public BRAND CheckForBrand(string id)
+        {
+            BRAND TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BrandID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForBrand",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new BRAND
+                        {
+                            BrandID = row[0].ToString()
+                        };
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         #region Bussines Table
         public BUSINESS getBusinessTable()
         {

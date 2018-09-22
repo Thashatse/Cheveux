@@ -116,18 +116,38 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="../Manager/Reports.aspx">Reports</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx">Products</a>
+                    <li style='font-size: .9rem; font-weight: 700; text-transform: uppercase; color: #212529;'>
+                                <a class="class='nav-item" href="../Manager/Products.aspx">Products</a>
+                            </li>
+                    <li class='nav-item dropdown'>
+                        <a style='font-size: .9rem; font-weight: 700; text-transform: uppercase; color: #212529;' data-toggle='dropdown' class='dropdown-toggle' href='#'><span class='caret'></span></a>
+                        <ul class='dropdown-menu bg-dark text-white'>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx">Manage Products</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?Action=NewOrder">Create Purchase Order</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=OutOrders">Accept Purchase Order</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=PastOrders">Past Purchase Orders</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Brands">Manage Brands</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Supps">Manage Suppliers</a>&nbsp;
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="../Manager/Service.aspx">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="../Manager/Employee.aspx">Employees</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Reviews</a>
-                    </li>
+                    </li>                    
                     <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
                             <!--Login Button-->
@@ -149,10 +169,12 @@
                         <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
                     </li>
                     <li class='nav-item dropdown'>
-                        <a style='font-size:.9rem; font-weight:700; text-transform:uppercase; color:#212529;' data-toggle='dropdown' class='dropdown-toggle' data-toggle='dropdown' href='#'> More <span class='caret'></span></a>
+                        <a style='font-size: .9rem; font-weight: 700; text-transform: uppercase; color: #212529;' data-toggle='dropdown' class='dropdown-toggle' data-toggle='dropdown' href='#'>More <span class='caret'></span></a>
                         <ul class='dropdown-menu bg-dark text-white'>
                             <li>
-                                &nbsp;<a class='nav-item'  href="../Manager/BusinessSetting.aspx">Settings</a>&nbsp;
+                                &nbsp;<a class="class='nav-item" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Reviews</a>&nbsp;
+                            </li>
+                            <li>&nbsp;<a class='nav-item' href="../Manager/BusinessSetting.aspx">Settings</a>&nbsp;
                             </li>
                             <li>
                                 <!--Help-->
