@@ -136,10 +136,8 @@
                             <a class="nav-link js-scroll-trigger dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="Cheveux/Reviews.aspx"
                                 style="text-decoration: none;">Review</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=MyReviews">My Reviews</a>
                                 <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Read Reviews</a>
-                                <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=ReviewBooking">Review A Booking</a>
-                                <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=ReviewStylist">Review A Stylist</a>
+                                <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=MakeAreview">Write a Review</a>
                             </div>
                         </asp:PlaceHolder>
                     </li>

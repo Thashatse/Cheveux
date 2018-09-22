@@ -61,7 +61,7 @@ namespace Cheveux
             else
             {
                 //set the master page
-                this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                this.MasterPageFile = "~/MasterPages/Cheveux.Master";
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -70,16 +70,20 @@ namespace Cheveux
             action = Request.QueryString["Action"];
             if (cookie == null)
             {
-                if(action== "MyReviews" || action == "ReviewBooking" ||
-                    action == "ReviewStylist")
+                if(action == "MakeAreview")
                 {
                     phLogin.Visible = true;
                     phMain.Visible = false;
                 }
                 else
                 {
-                    phMain.Visible = true;
                     phLogin.Visible = false;
+                    phMain.Visible = true;
+                    
+                    OpeningHeader.Text = "Behind every review is an experience that matters";
+                    btnRev.Visible = true;
+                    readReviews.Visible = true;
+                    makeAreview.Visible = false;
                 }
             }
             else if (cookie["UT"] == "C")
@@ -87,21 +91,19 @@ namespace Cheveux
                 phMain.Visible = true;
                 phLogin.Visible = false;
 
-                if(action == "MyReviews")
+                if (action == "ReadReviews")
                 {
-                    OpeningHeader.Text = "My Reviews";
+                    OpeningHeader.Text = "Reviews";
+                    btnRev.Visible = true;
+                    readReviews.Visible = true;
+                    makeAreview.Visible = false;
                 }
-                else if (action == "ReadReviews")
+                else if (action == "MakeAreview")
                 {
-                    OpeningHeader.Text = "Behind every review is an experience that matters";
-                }
-                else if (action == "ReviewBooking")
-                {
-                    OpeningHeader.Text = "Review Booking";
-                }
-                else if (action == "ReviewStylist")
-                {
-                    OpeningHeader.Text = "Review Stylist";
+                    OpeningHeader.Text = "Write A Review";
+                    readReviews.Visible = false;
+                    btnRev.Visible = false;
+                    makeAreview.Visible = true;
                 }
                 
             }
@@ -111,9 +113,13 @@ namespace Cheveux
                 phLogin.Visible = false;
                 if (action == "ReadReviews")
                 {
-                    OpeningHeader.Text = "Read Customer Reviews";
+                    OpeningHeader.Text = "Customer Reviews";
+                    readReviews.Visible = true;
+                    btnRev.Visible = false;
+                    makeAreview.Visible = false;
                 }
             }
         }
+
     }
 }
