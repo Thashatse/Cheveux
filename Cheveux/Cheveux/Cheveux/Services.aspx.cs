@@ -230,6 +230,7 @@ namespace Cheveux.Cheveux
         {
             Response.Redirect("../Manager/UpdateService.aspx");
         }
+
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("../Manager/Service.aspx");
