@@ -20,9 +20,9 @@ namespace Cheveux
             HttpCookie UserID = Request.Cookies["CheveuxUserID"];
             if (UserID == null)
             {
+                Vreview.Visible = true;
                 // display sign in buton & Hide The Accounts Button
                 LogedIn.Visible = false;
-
             }
             else
             {
@@ -39,6 +39,7 @@ namespace Cheveux
                 }
                 if (UserDetails != null)
                 {
+                    Lreview.Visible = true;
                     profile.Controls.Add(new LiteralControl
                         ("<li class='dropdown'>" +
                             "<a style='font-size:.9rem; font-weight:700; text-transform:uppercase; color:#212529;' data-toggle='dropdown' class='dropdown-toggle' href='#'>" +
@@ -57,10 +58,12 @@ namespace Cheveux
                 }
                 else
                 {
+
                     profile.Controls.Add(new LiteralControl
                         ("<a href='../Profile.aspx'> User Profile </a>"));
                 }
                 LogedOut.Visible = false;
+                Vreview.Visible = false;
             }
         }
     }

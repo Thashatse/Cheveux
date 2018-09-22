@@ -147,6 +147,7 @@
     <Content Include="Manager\Service.aspx" />
     <Content Include="Manager\UpdateEmployee.aspx" />
     <Content Include="Receptionist\Receptionist.aspx" />
+    <Content Include="Cheveux\Reviews.aspx" />
     <Content Include="Stylist\Schedule.aspx" />
     <Content Include="Stylist\CustomerVisit.aspx" />
     <Content Include="Default.aspx" />
@@ -406,6 +407,13 @@
     </Compile>
     <Compile Include="Receptionist\Receptionist.aspx.designer.cs">
       <DependentUpon>Receptionist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Cheveux\Reviews.aspx.cs">
+      <DependentUpon>Reviews.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Cheveux\Reviews.aspx.designer.cs">
+      <DependentUpon>Reviews.aspx</DependentUpon>
     </Compile>
     <Compile Include="Stylist\Schedule.aspx.cs">
       <DependentUpon>Schedule.aspx</DependentUpon>

@@ -10,78 +10,60 @@
 namespace Cheveux {
     
     
-    public partial class Site1 {
+    public partial class Reviews {
         
         /// <summary>
-        /// PageTitle control.
+        /// phLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder PageTitle;
+        protected global::System.Web.UI.WebControls.PlaceHolder phLogin;
         
         /// <summary>
-        /// head control.
+        /// LoggedOut control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggedOut;
         
         /// <summary>
-        /// Vreview control.
+        /// phMain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder Vreview;
+        protected global::System.Web.UI.WebControls.PlaceHolder phMain;
         
         /// <summary>
-        /// Lreview control.
+        /// LoggedIn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder Lreview;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LoggedIn;
         
         /// <summary>
-        /// LogedOut control.
+        /// OpeningHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder LogedOut;
+        protected global::System.Web.UI.WebControls.Label OpeningHeader;
         
         /// <summary>
-        /// LogedIn control.
+        /// readReviews control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder LogedIn;
-        
-        /// <summary>
-        /// profile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder profile;
-        
-        /// <summary>
-        /// ContentPlaceHolder1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        protected global::System.Web.UI.WebControls.PlaceHolder readReviews;
     }
 }
