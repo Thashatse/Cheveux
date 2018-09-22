@@ -126,6 +126,9 @@
                         <a class="nav-link js-scroll-trigger" href="../Manager/Employee.aspx">Employees</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Reviews</a>
+                    </li>
+                    <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
                             <!--Login Button-->
                             <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Login</a>
