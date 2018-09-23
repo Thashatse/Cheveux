@@ -20,6 +20,7 @@ namespace Cheveux
         HttpCookie cookie = null;
         string PreviousPageAdress = "";
         string BookingID = null;
+        string CheckOutType = null;
         string action = null;
         List<string> productIDs = new List<string>();
         List<int> productSaleQty = new List<int>();
@@ -82,6 +83,8 @@ namespace Cheveux
             PreviousPageAdress = Request.QueryString["PreviousPage"];
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
+            //checked for check out type
+            CheckOutType = Request.QueryString["CheckOutType"];
             if (cookie == null)
             {
                 //if the user is not loged in do not diplay bookings details
@@ -91,11 +94,10 @@ namespace Cheveux
             {
                 //if the user is loged in diplay bookings details
                 //checked for the booking ID
-                BookingID = Request.QueryString["BookingID"];
+                BookingID = Request.QueryString["BookingID"];;
                 if (BookingID != null)
                 {
                     LogedIn.Visible = true;
-                    LogedOut.Visible = false;
 
                     //check the action
                     action = Request.QueryString["Action"];
@@ -110,8 +112,21 @@ namespace Cheveux
                         }
                         else if (bookingType == "CheckOut")
                         {
-                            //get past booking details
-                            checkOut(BookingID);
+                            if (CheckOutType == "NewSale")
+                            {
+                                //get past booking details
+                                checkOut(BookingID);
+                                if (!Page.IsPostBack)
+                                {
+                                    btnAddProduct_Click(sender, e);
+                                }
+                                btnSaveSale.Text = "Complete Sale";
+                            }
+                            else
+                            {
+                                //get past booking details
+                                checkOut(BookingID);
+                            }
                         }
                         else if (bookingType == null)
                         {
@@ -138,6 +153,11 @@ namespace Cheveux
                     }
                     #endregion
                 }
+                else if(CheckOutType == "NewSale")
+                {
+                    LogedIn.Visible = true;
+                    createSale();
+                }
                 else
                 {
                     //display an error message
@@ -156,7 +176,8 @@ namespace Cheveux
             //if no action or booking hass been sent in the querystring
             if(cookie != null 
                 && BookingID == null
-                && action == null)
+                && action == null
+                && CheckOutType == null)
             {
                 Response.Redirect("default.aspx");
             }
@@ -2137,6 +2158,7 @@ namespace Cheveux
         //calculate total price
         double total = 0.0;
         SP_GetCustomerBooking BookingDetails = null;
+        SALE saleDetails = null;
 
         public void checkOut(string BookingID)
         {
@@ -2147,85 +2169,131 @@ namespace Cheveux
                 //get the details from the db
                 List<SP_getInvoiceDL> invoicDetailLines = null;
                 List<SP_GetBookingServices> bookingServiceList = null;
-                //get booking deatils
-                BookingDetails = handler.getBookingDetaisForCheckOut(BookingID);
-                //get the services to add to the sale
-                bookingServiceList = handler.getBookingServices(BookingID);
 
-                //check if sales record exists
-                //if sales record dose not exist make a new one
-                if (handler.getInvoiceDL(BookingID).Count == 0)
+                if (CheckOutType != "NewSale")
                 {
-                    //create sales record
-                    handler.createSalesRecord(BookingID);
-                    //add booking to invoice for each product
-                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    //get booking deatils
+                    BookingDetails = handler.getBookingDetaisForCheckOut(BookingID);
+                    //get the services to add to the sale
+                    bookingServiceList = handler.getBookingServices(BookingID);
+
+                    //check if sales record exists
+                    //if sales record dose not exist make a new one
+                    if (handler.getInvoiceDL(BookingID).Count == 0)
                     {
-                        SALES_DTL detailLine = new SALES_DTL();
-                        detailLine.ProductID = service.ServiceID;
-                        detailLine.SaleID = BookingID;
-                        detailLine.Qty = 1;
-                        handler.createSalesDTLRecord(detailLine);
+                        //create sales record
+                        handler.createSalesRecordForBooking(BookingID);
+                        //add booking to invoice for each product
+                        foreach (SP_GetBookingServices service in bookingServiceList)
+                        {
+                            SALES_DTL detailLine = new SALES_DTL();
+                            detailLine.ProductID = service.ServiceID;
+                            detailLine.SaleID = BookingID;
+                            detailLine.Qty = 1;
+                            handler.createSalesDTLRecord(detailLine);
+                        }
                     }
                 }
 
                 //get the invoice 
                 invoicDetailLines = handler.getInvoiceDL(BookingID);
-                
+
+                if (CheckOutType == "NewSale")
+                {
+                    saleDetails =handler.getSale(BookingID);
+                }
+
                 //un-hide the checkout table 
                 divCheckOut.Visible = true;
 
                 #region Booking Details
-                //display a heading
-                BookingLable.Text = "<h2> Check Out </h2>";
+                if (CheckOutType != "NewSale")
+                {
+                    //display a heading
+                    BookingLable.Text = "<h2> Check Out </h2>";
+                }
+                else
+                {
+                    BookingLable.Text = "<h2> New Sale </h2>";
+                }
 
                 //create a variable to track the row count
                 int rowCount = 0;
 
                 //add booking details to the table
 
-                //Billed To
-                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.CustFullName.ToString();
-
-                //increment row count 
-                rowCount++;
-
-                //Date & Time
-                tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm")
-                    + " " + BookingDetails.bookingDate.ToString("dd-MMM-yyyy");
-
-                //increment row count 
-                rowCount++;
-
-                //service name
-                int i = 0;
-                if (bookingServiceList.Count == 1)
+                if (CheckOutType != "NewSale")
                 {
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = bookingServiceList[0].ServiceName.ToString();
+                    //Billed To
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.CustFullName.ToString();
                 }
-                else if (bookingServiceList.Count > 1)
+                else
                 {
-                    string services = "";
-                    foreach (SP_GetBookingServices service in bookingServiceList)
+                    //Billed To
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = handler.GetUserDetails(saleDetails.CustID).FirstName +
+                                                                " " + handler.GetUserDetails(saleDetails.CustID).LastName;
+                }
+
+                //increment row count 
+                rowCount++;
+                
+                if (CheckOutType != "NewSale")
+            {
+                    //Date & Time
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.bookingStartTime.ToString("HH:mm")
+                        + " " + BookingDetails.bookingDate.ToString("dd-MMM-yyyy");
+                }
+            else
+            {
+                    //Date & Time
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = saleDetails.Date.ToString("HH:mm")
+                        + " " + saleDetails.Date.ToString("dd-MMM-yyyy");
+                }
+
+            //increment row count 
+            rowCount++;
+
+                if (CheckOutType != "NewSale")
+                {
+                    //service name
+                    int i = 0;
+                    if (bookingServiceList.Count == 1)
                     {
-                        if (i == 0)
-                        {
-                            services += " " + service.ServiceName.ToString();
-                            i++;
-                        }
-                        else
-                        {
-                            services += ", " + service.ServiceName.ToString();
-                        }
+                        tblCheckOut.Rows[rowCount].Cells[1].Text = bookingServiceList[0].ServiceName.ToString();
                     }
-                    tblCheckOut.Rows[rowCount].Cells[1].Text = services;
-                }
+                    else if (bookingServiceList.Count > 1)
+                    {
+                        string services = "";
+                        foreach (SP_GetBookingServices service in bookingServiceList)
+                        {
+                            if (i == 0)
+                            {
+                                services += " " + service.ServiceName.ToString();
+                                i++;
+                            }
+                            else
+                            {
+                                services += ", " + service.ServiceName.ToString();
+                            }
+                        }
+                        tblCheckOut.Rows[rowCount].Cells[1].Text = services;
+                    }
+                
 
                 //increment row count 
                 rowCount++;
 
-                //stylist
+                //stylist 
                 tblCheckOut.Rows[rowCount].Cells[1].Text = BookingDetails.stylistFirstName.ToString();
+}
+                else
+                {
+                    tblCheckOut.Rows[rowCount].Cells[0].Text = " ";
+                    tblCheckOut.Rows[rowCount].Cells[1].Text = " ";
+                    //increment row count 
+                    rowCount++;
+                    tblCheckOut.Rows[rowCount].Cells[0].Text = " ";
+                }
 
                 //increment row count 
                 rowCount++;
@@ -2358,29 +2426,62 @@ namespace Cheveux
                 total = 0.0;
                 checkOut(BookingID);
                 //send booking completion email
-                USER user = handler.GetUserDetails(BookingDetails.CustomerID);
+                USER user = null;
+                if (CheckOutType != "NewSale")
+                {
+                    user = handler.GetUserDetails(BookingDetails.CustomerID);
+                }
+                else
+                {
+                    user = handler.GetUserDetails(saleDetails.CustID);
+                }
                 //send an email notification
                 var body = new System.Text.StringBuilder();
                 body.AppendFormat("Hello " + user.FirstName.ToString() + ",");
                 body.AppendLine(@"");
                 body.AppendLine(@"Thank you for choosing Cheveux,");
-                body.AppendLine(@"view your invoice here --> http://sict-iis.nmmu.ac.za/beauxdebut/ViewBooking.aspx?BookingType=Past&BookingID=" + BookingDetails.bookingID.ToString().Replace(" ", string.Empty)+".");
+                if (CheckOutType != "NewSale")
+                {
+                    body.AppendLine(@"view your invoice here --> http://sict-iis.nmmu.ac.za/beauxdebut/PrintInvoice.aspx?SaleID=" + BookingDetails.bookingID.ToString().Replace(" ", string.Empty));
+                }
+                else
+                {
+                    body.AppendLine(@"view your invoice here --> http://sict-iis.nmmu.ac.za/beauxdebut/PrintInvoice.aspx?SaleID=" + saleDetails.SaleID.ToString().Replace(" ", string.Empty));
+                }
                 body.AppendLine(@"");
-                body.AppendLine(@"Make your next booking now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                if (CheckOutType != "NewSale")
+                {
+                    body.AppendLine(@"Make your next booking now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                }
                 body.AppendLine(@"");
                 body.AppendLine(@"Regards,");
                 body.AppendLine(@"");
                 body.AppendLine(@"The Cheveux Team");
-                function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                if (CheckOutType != "NewSale")
+                {
+                    function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
                     "Booking Invoice",
                     body.ToString(),
                     "Bookings Cheveux");
+                }
+                else
+                {
+                    function.sendEmailAlert(user.Email, user.FirstName + " " + user.LastName,
+                    "Sale Invoice",
+                    body.ToString(),
+                    "Cheveux");
+                }
             }
             catch (Exception Err)
             {
                 function.logAnError(Err.ToString() + "\n An error ocoured updating payment type during checkout process");
                 Response.Write("<script>alert('An error ocoured updating payment type.');window.location='ViewBooking.aspx';</script>");
-                Response.Redirect(PreviousPageAdress);
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx");
+            }
+            
+            if (CheckOutType == "NewSale")
+            {
+                Response.Redirect("PrintInvoice.aspx?SaleID=" + saleDetails.SaleID.ToString().Replace(" ", string.Empty));
             }
         }
 
@@ -2666,12 +2767,7 @@ namespace Cheveux
                 }
                 else
                 {
-                    Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
-                    //return to check out
-                    divAddProducts.Visible = false;
-                    BookingID = Request.QueryString["BookingID"];
-                    checkOut(BookingID);
-                    divCheckOut.Visible = true;
+                    lProductsOnSale.Items.Add("No products added");
                 }
             }
             catch (Exception Err)
@@ -2756,6 +2852,141 @@ namespace Cheveux
                 lChangeDue.Text = "Invalid value for amount tendered";
             }
         }
+        #endregion
+
+        #region Product Sale
+        private void createSale()
+        {
+            BookingLable.Text = "<h2> New Sale </h2>";
+            if (!Page.IsPostBack)
+            {
+                loadCustomerList();
+            }
+            divNewSale.Visible = true;
+        }
+        
+        protected void btnCreateSales_Click(object sender, EventArgs e)
+        {
+            bool success = false;
+            SALE newSale = new SALE();
+            try
+            {
+                loadCustomerID();
+                newSale.SaleID = function.GenerateRandomBookingID();
+                newSale.CustID = CustomerIDs[lbCustomers.SelectedIndex];
+                success = handler.createSalesRecord(newSale);
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error making new sales | Error: " + err);
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Sales");
+            }
+
+            if (success == true)
+            {
+                //show add products
+                Response.Redirect("ViewBooking.aspx?BookingType=CheckOut&CheckOutType=NewSale&BookingID="+newSale.SaleID.ToString().Replace(" ", string.Empty));
+            }
+            else if (success == false)
+            {
+                function.logAnError("Error making new sales");
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Sale");
+            }
+        }
+
+        #region Customer list box & IDs
+        List<string> CustomerIDs = new List<string>();
+
+        //CustomerList
+        private void loadCustomerList()
+        {
+            lbCustomers.Items.Clear();
+            //add all customers to the list
+            try
+            {
+                List<SP_UserList> customers = handler.userList();
+                int customerCount = 0;
+                if (customers.Count != 0)
+                {
+                    //sort the Customers by alphabetical oder
+                    customers = customers.OrderBy(o => o.FullName).ToList();
+                    //add customers
+                    foreach (SP_UserList customer in customers)
+                    {
+                        //make sure there is stock
+                        if (customer.userType == 'C'
+                            && (function.compareToSearchTerm(customer.FullName, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.Email, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.ContactNo, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.UserName, txtCustomerSearch.Text) == true))
+                        {
+                            lbCustomers.Items.Add(customer.FullName.ToString());
+                            customerCount++;
+                        }
+                    }
+
+                    //if no products found matching the criteria
+                    if (customerCount == 0)
+                    {
+                        lbCustomers.Items.Add("No Customers Found");
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                lbCustomers.Items.Clear();
+                lbCustomers.Items.Add("Error Loading Customers, Try Again Later");
+                function.logAnError("Error Loading Customer on MakeABooking | Error: " + err);
+            }
+        }
+
+        //customerIDS
+        private void loadCustomerID()
+        {
+            try
+            {
+                List<SP_UserList> customers = handler.userList();
+                if (customers.Count != 0)
+                {
+                    //sort the Customers by alphabetical oder
+                    customers = customers.OrderBy(o => o.FullName).ToList();
+                    //add customers ids to array
+                    foreach (SP_UserList customer in customers)
+                    {
+                        //make sure there is stock
+                        if (customer.userType == 'C'
+                            && (function.compareToSearchTerm(customer.FullName, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.Email, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.ContactNo, txtCustomerSearch.Text) == true
+                            || function.compareToSearchTerm(customer.UserName, txtCustomerSearch.Text) == true))
+                        {
+                            CustomerIDs.Add(customer.UserID.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                lbCustomers.Items.Clear();
+                lbCustomers.Items.Add("Error adding customer, Try Again Later");
+                function.logAnError("Error Loading Customer IDs on MakeInternalBooking | Error: " + err);
+            }
+        }
+
+        //update customer for search criteria
+        protected void txtCustomerSearch_DataBinding(object sender, EventArgs e)
+        {
+            loadCustomerList();
+        }
+        #endregion
+
+        #region Register New Customer
+        protected void btnNewCust_Click(object sender, EventArgs e)
+        {
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/NewAccount.aspx?Type=NewCust&PreviousPage=MakeABooking','_newtab');", true);
+        }
+        #endregion
+
         #endregion
     }
 }

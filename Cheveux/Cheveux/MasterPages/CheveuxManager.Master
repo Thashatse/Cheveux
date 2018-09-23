@@ -123,22 +123,16 @@
                         <a style='font-size: .9rem; font-weight: 700; text-transform: uppercase; color: #212529;' data-toggle='dropdown' class='dropdown-toggle' href='#'><span class='caret'></span></a>
                         <ul class='dropdown-menu bg-dark text-white'>
                             <li>
-                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx">Manage Products</a>&nbsp;
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx">Products</a>&nbsp;
                             </li>
                             <li>
-                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?Action=NewOrder">Create Purchase Order</a>&nbsp;
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=OutOrders">Purchase Orders</a>&nbsp;
                             </li>
                             <li>
-                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=OutOrders">Accept Purchase Order</a>&nbsp;
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Brands">Brands</a>&nbsp;
                             </li>
                             <li>
-                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=PastOrders">Past Purchase Orders</a>&nbsp;
-                            </li>
-                            <li>
-                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Brands">Manage Brands</a>&nbsp;
-                            </li>
-                            <li>
-                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Supps">Manage Suppliers</a>&nbsp;
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Supps">Suppliers</a>&nbsp;
                             </li>
                         </ul>
                     </li>

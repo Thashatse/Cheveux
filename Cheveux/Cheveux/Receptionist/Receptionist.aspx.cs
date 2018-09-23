@@ -760,5 +760,12 @@ namespace Cheveux
             }
         }
         #endregion
+
+        #region New Sale
+        protected void btnNewSale_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../ViewBooking.aspx?BookingType=CheckOut&CheckOutType=NewSale");
+        }
+        #endregion
     }
 }

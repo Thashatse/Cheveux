@@ -222,7 +222,8 @@ namespace BLL
                     id[i] = rn.Next(0, 9);
                 }
                 result = string.Join("", id);
-            } while (Handler.getCustomerUpcomingBookingDetails(result) != null);
+            } while (Handler.getCustomerUpcomingBookingDetails(result) != null && 
+                    Handler.getSale(result) != null );
             return result;
         }
             catch
@@ -292,6 +293,29 @@ namespace BLL
                     }
                     result = string.Join("", id);
                 } while (Handler.CheckForBrand(result) != null);
+                return result;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
+
+        public string GenerateRandomSupplierID()
+        {
+            try
+            {
+                string result;
+                do
+                {
+                    int[] id = new int[9];
+                    Random rn = new Random();
+                    for (int i = 0; i < id.Length; i++)
+                    {
+                        id[i] = rn.Next(0, 9);
+                    }
+                    result = string.Join("", id);
+                } while (Handler.CheckForSupplier(result) != null);
                 return result;
             }
             catch
