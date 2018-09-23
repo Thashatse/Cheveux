@@ -120,6 +120,60 @@ namespace Cheveux
                 }
             }
         }
+        public void displayPastBookings(DateTime day,string customerID)
+        {
+            //////
+        }
+        #region Events
+        protected void calDay_SelectionChanged(object sender, EventArgs e)
+        {
+            lsBksHeader.InnerText = "Your Booking(s) on "
+                                + calDay.SelectedDate.ToString("dd-MM-yyyy");
+        }
+        protected void drpReadType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (drpReadType.SelectedValue == "1")//view my reviews
+            {
+                cookie = Request.Cookies["CheveuxUserID"];
+                if (cookie == null)
+                {
+                    phLogin.Visible = true;
+                    phMain.Visible = false;
+                }
+            }
+        }
+
+        protected void drpReviewType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (drpReviewType.SelectedValue == "0")//review booking
+            {
+                datepick.Visible = true;
+            }
+            else if (drpReviewType.SelectedValue == "1")//review stylist
+            {
+                datepick.Visible = false;
+            }
+        }
+        protected void drpMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int month = Convert.ToInt16(drpMonth.SelectedValue);
+            calDay.VisibleDate = new DateTime(2018, month,
+                                    1);
+        }
+        protected void cal_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date > DateTime.Today)
+            {
+                e.Day.IsSelectable = false;
+            }
+            if (e.Day.Date.CompareTo(DateTime.Today) > 0)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.BackColor = System.Drawing.Color.LightGray;
+            }
+        }
+        #endregion
+
 
     }
 }

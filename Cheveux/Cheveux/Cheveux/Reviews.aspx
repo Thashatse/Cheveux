@@ -59,7 +59,8 @@
                                     <p>View Reviews: </p>
                                 </div>
                                 <div class="col-sm-8 col-md-4 col-lg-4">
-                                    <asp:DropDownList ID="drpReadType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:DropDownList ID="drpReadType" runat="server" AutoPostBack="True"
+                                        CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReadType_SelectedIndexChanged">
                                         <asp:ListItem Text="All Reviews" Value="0"></asp:ListItem>
                                         <asp:ListItem Text="My Reviews" Value="1"></asp:ListItem>
                                     </asp:DropDownList>
@@ -74,40 +75,87 @@
                                     <p>Review Type: </p>
                                 </div>
                                 <div class="col-sm-8 col-md-4 col-lg-4">
-                                    <asp:DropDownList ID="drpReviewType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:DropDownList ID="drpReviewType" runat="server" AutoPostBack="True"
+                                        CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReviewType_SelectedIndexChanged">
                                         <asp:ListItem Text="Review Booking" Value="0"></asp:ListItem>
                                         <asp:ListItem Text="Review Stylist" Value="1"></asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-sm-4 col-md-2 col-lg-2">
-                                    <p>Select Date: </p>
-                                </div>
-                                <div class="col-sm-8 col-md-4 col-lg-4">
-                                    <asp:DropDownList ID="drpMonth" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                                        <asp:ListItem Text="January" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="March" Value="3"></asp:ListItem>
-                                        <asp:ListItem Text="April" Value="4"></asp:ListItem>
-                                        <asp:ListItem Text="May" Value="5"></asp:ListItem>
-                                        <asp:ListItem Text="June" Value="6"></asp:ListItem>
-                                        <asp:ListItem Text="July" Value="7"></asp:ListItem>
-                                        <asp:ListItem Text="August" Value="8"></asp:ListItem>
-                                        <asp:ListItem Text="September" Value="9"></asp:ListItem>
-                                        <asp:ListItem Text="October" Value="10"></asp:ListItem>
-                                        <asp:ListItem Text="November" Value="11"></asp:ListItem>
-                                        <asp:ListItem Text="December" Value="12"></asp:ListItem>
-                                    </asp:DropDownList>
+                            <!--Section: Date and listbox -->
+                            <div id="datepick" runat="server">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                <p>Select Date: </p>
+                                            </div>
+                                            <div class="col-sm-8 col-md-3 col-lg-3">
+                                                <asp:DropDownList ID="drpMonth" runat="server" AutoPostBack="True" 
+                                                    CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpMonth_SelectedIndexChanged">
+                                                    <asp:ListItem Text="January" Value="1"></asp:ListItem>
+                                                    <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
+                                                    <asp:ListItem Text="March" Value="3"></asp:ListItem>
+                                                    <asp:ListItem Text="April" Value="4"></asp:ListItem>
+                                                    <asp:ListItem Text="May" Value="5"></asp:ListItem>
+                                                    <asp:ListItem Text="June" Value="6"></asp:ListItem>
+                                                    <asp:ListItem Text="July" Value="7"></asp:ListItem>
+                                                    <asp:ListItem Text="August" Value="8"></asp:ListItem>
+                                                    <asp:ListItem Text="September" Value="9"></asp:ListItem>
+                                                    <asp:ListItem Text="October" Value="10"></asp:ListItem>
+                                                    <asp:ListItem Text="November" Value="11"></asp:ListItem>
+                                                    <asp:ListItem Text="December" Value="12"></asp:ListItem>
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-3 col-lg-3"></div>
+                                            <div class="col-sm-8 col-md-3 col-lg-3">
+                                                <asp:Calendar ID="calDay" runat="server" Height="100" Width="200" 
+                                                    OnSelectionChanged="calDay_SelectionChanged"
+                                                    OnDayRender="cal_DayRender"></asp:Calendar>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <h6 style="text-decoration:underline;">Choose a booking to review</h6>
+                                        <p id="lsBksHeader" runat="server"></p>
+                                        <asp:ListBox runat="server" ID="lstCustomersBookings" CssClass="form-control"
+                                            DataTextField="Name" DataValueField="ID" Height="200"></asp:ListBox>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-4 col-md-2 col-lg-2"></div>
-                                <div class="col-sm-8 col-md-4 col-lg-4">
-                                    <asp:Calendar ID="calDay" runat="server" Height="100" Width="200"></asp:Calendar>
+                            <br />
+
+                            <div id="theReview" runat="server">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <h4 >Write a review and rate the service</h4>
+                                        <p id="reviewFor" runat="server"></p>
+                                    </div>
+                                </div>
+                                <!--Star rating -->
+                                <div class="row"></div>
+                                <!--Comment-->
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3 col-lg-3">
+                                        <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" />
+                                    </div>
+                                    <div class="col-sm-12 col-md-3 col-lg-3">
+                                        <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
+                                    </div>
                                 </div>
                             </div>
+
+                            <br />
+
                         </asp:PlaceHolder>
                     </div>
 
