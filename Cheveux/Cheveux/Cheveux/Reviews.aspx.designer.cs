@@ -130,6 +130,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Calendar calDay;
         
         /// <summary>
+        /// choose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl choose;
+        
+        /// <summary>
         /// lsBksHeader control.
         /// </summary>
         /// <remarks>
@@ -139,13 +148,13 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lsBksHeader;
         
         /// <summary>
-        /// lstCustomersBookings control.
+        /// tblBookings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstCustomersBookings;
+        protected global::System.Web.UI.WebControls.Table tblBookings;
         
         /// <summary>
         /// theReview control.
@@ -155,15 +164,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl theReview;
-        
-        /// <summary>
-        /// reviewFor control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reviewFor;
         
         /// <summary>
         /// reviewComment control.

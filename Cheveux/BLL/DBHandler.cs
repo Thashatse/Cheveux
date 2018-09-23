@@ -642,5 +642,9 @@ namespace BLL
         {
             return db.getTopCustomerByBookings(startDate, endDate);
         }
+        public List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day)
+        {
+            return db.getCustomerPastBookingsForDate(customerID, day);
+        }
     }
 }

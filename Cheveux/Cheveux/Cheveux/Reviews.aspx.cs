@@ -16,6 +16,9 @@ namespace Cheveux
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
         string action = null;
+        List<SP_GetStylistBookings> customer = null;
+        List<SP_GetBookingServices> bServices = null;
+
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -63,11 +66,14 @@ namespace Cheveux
                 //set the master page
                 this.MasterPageFile = "~/MasterPages/Cheveux.Master";
             }
+
+
         }
         protected void Page_Load(object sender, EventArgs e)
         {
             cookie = Request.Cookies["CheveuxUserID"];
             action = Request.QueryString["Action"];
+
             if (cookie == null)
             {
                 if(action == "MakeAreview")
@@ -104,6 +110,12 @@ namespace Cheveux
                     readReviews.Visible = false;
                     btnRev.Visible = false;
                     makeAreview.Visible = true;
+
+                    if (Page.IsPostBack)
+                    {
+                        displayPastBookings(cookie["ID"].ToString(), calDay.SelectedDate);
+                    }
+
                 }
                 
             }
@@ -120,15 +132,148 @@ namespace Cheveux
                 }
             }
         }
-        public void displayPastBookings(DateTime day,string customerID)
+        public void displayPastBookings(string customerID,DateTime day)
         {
-            //////
+            Button btn;
+            tblBookings.Rows.Clear();
+            choose.Visible = true;
+            TableRow headerRow = new TableRow();
+            tblBookings.Rows.Add(headerRow);
+
+            TableCell rHeadings = new TableCell();
+            rHeadings.Text = "Time";
+            rHeadings.Width = 100;
+            tblBookings.Rows[0].Cells.Add(rHeadings);
+
+            rHeadings = new TableCell();
+            rHeadings.Text = "Service";
+            rHeadings.Width = 100;
+            tblBookings.Rows[0].Cells.Add(rHeadings);
+
+            rHeadings = new TableCell();
+            rHeadings.Text = "Stylist";
+            rHeadings.Width = 100;
+            tblBookings.Rows[0].Cells.Add(rHeadings);
+            try
+            {
+                customer = handler.getCustomerPastBookingsForDate(customerID,day);
+                int count = 1;
+                foreach (SP_GetStylistBookings a in customer)
+                {
+                    TableRow newRow = new TableRow();
+                    tblBookings.Rows.Add(newRow);
+
+                    TableCell newCell = new TableCell();
+                    tblBookings.Rows[count].Cells.Add(newCell);
+                    newCell.Width = 50;
+                    newCell.Text = a.StartTime.ToString("HH:mm");
+
+                    getServiceAndStylist(count, a);
+
+                    newCell = new TableCell();
+                    newCell.Width = 50;
+                    btn = new Button();
+                    btn.Text = "Review";
+                    btn.CssClass = "btn btn-primary";
+                    newCell.Controls.Add(btn);
+                    btn.Click += (ss, ee) => {
+                        theReview.Visible = true;
+                    };
+                    tblBookings.Rows[count].Cells.Add(newCell);
+                    count++;
+                }
+
+            }
+            catch (Exception Err)
+            {
+                TableRow newRow = new TableRow();
+                tblBookings.Rows.Add(newRow);
+                TableCell newCell = new TableCell();
+                newCell.Text = " ";
+                tblBookings.Rows[1].Cells.Add(newCell);
+                function.logAnError(Err.ToString());
+            }
+        }
+        public void getServiceAndStylist(int i, SP_GetStylistBookings a)
+        {
+            #region Services
+
+            TableCell services = new TableCell();
+            services.Width = 100;
+            try
+            {
+                bServices = handler.getBookingServices(a.BookingID.ToString());
+                if (bServices.Count == 1)
+                {
+                    services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    + bServices[0].ServiceName.ToString() + "</a>";
+                }
+                else if (bServices.Count == 2)
+                {
+                    services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>" + bServices[0].ServiceName.ToString() +
+                        ", " + bServices[1].ServiceName.ToString() + "</a>";
+                }
+                else if (bServices.Count > 2)
+                {
+                    string toolTip = "";
+                    int toolTipCount = 0;
+                    foreach (SP_GetBookingServices toolTipDTL in bServices)
+                    {
+                        if (toolTipCount == 0)
+                        {
+                            toolTip = toolTipDTL.ServiceName;
+                            toolTipCount++;
+                        }
+                        else
+                        {
+                            toolTip += ", " + toolTipDTL.ServiceName;
+                        }
+                    }
+                    services.Text = "<a title='" + toolTip + "'" +
+                        "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'> Multiple Services </a>";
+                }
+                tblBookings.Rows[i].Cells.Add(services);
+
+            }
+            catch (Exception Err)
+            {
+                //if theres an error or cant retrieve the services from the database 
+                services.Text = "<img src='https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png' alt='Error' width='10' height='10'></img>";
+                tblBookings.Rows[i].Cells.Add(services);
+                function.logAnError("Couldn't get the services [reviews.aspx "
+                    + "{getTimeCustomerServices?getServices} ] error:" + Err.ToString());
+            }
+
+
+            #endregion
+            #region Stylist
+            TableCell empCell = new TableCell();
+            empCell.Width = 150;
+            try
+            {
+                empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.StylistID.ToString().Replace(" ", string.Empty) +
+                                "'>" + a.StylistName.ToString() + "</a>";
+                tblBookings.Rows[i].Cells.Add(empCell);
+            }
+            catch (Exception Err)
+            {
+                empCell.Text = "------";
+                tblBookings.Rows[i].Cells.Add(empCell);
+                function.logAnError("Couldnt get stylist name[reviews.aspx {getT/c/s method}]err:" + Err.ToString());
+            }
+            
+            #endregion     
         }
         #region Events
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
+            theReview.Visible = false;
+            cookie = Request.Cookies["CheveuxUserID"];
             lsBksHeader.InnerText = "Your Booking(s) on "
                                 + calDay.SelectedDate.ToString("dd-MM-yyyy");
+            displayPastBookings(cookie["ID"].ToString(),calDay.SelectedDate);
         }
         protected void drpReadType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -142,7 +287,6 @@ namespace Cheveux
                 }
             }
         }
-
         protected void drpReviewType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (drpReviewType.SelectedValue == "0")//review booking
@@ -173,7 +317,5 @@ namespace Cheveux
             }
         }
         #endregion
-
-
     }
 }

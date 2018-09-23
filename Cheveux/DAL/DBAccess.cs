@@ -4091,5 +4091,45 @@ namespace DAL
 
             }
         }
+        public List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@customerID", customerID),
+                new SqlParameter("@date",day)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerPastBookingsForDate", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                FullName = row["CustomerFullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                Arrived = row["Arrived"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }                  

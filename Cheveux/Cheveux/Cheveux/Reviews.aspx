@@ -92,7 +92,7 @@
                                                 <p>Select Date: </p>
                                             </div>
                                             <div class="col-sm-8 col-md-3 col-lg-3">
-                                                <asp:DropDownList ID="drpMonth" runat="server" AutoPostBack="True" 
+                                                <asp:DropDownList ID="drpMonth" runat="server" AutoPostBack="True"
                                                     CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpMonth_SelectedIndexChanged">
                                                     <asp:ListItem Text="January" Value="1"></asp:ListItem>
                                                     <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
@@ -112,59 +112,67 @@
                                         <div class="row">
                                             <div class="col-sm-4 col-md-3 col-lg-3"></div>
                                             <div class="col-sm-8 col-md-3 col-lg-3">
-                                                <asp:Calendar ID="calDay" runat="server" Height="100" Width="200" 
+                                                <asp:Calendar ID="calDay" runat="server" Height="100" Width="200"
                                                     OnSelectionChanged="calDay_SelectionChanged"
                                                     OnDayRender="cal_DayRender"></asp:Calendar>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-6">
-                                        <h6 style="text-decoration:underline;">Choose a booking to review</h6>
-                                        <p id="lsBksHeader" runat="server"></p>
-                                        <asp:ListBox runat="server" ID="lstCustomersBookings" CssClass="form-control"
-                                            DataTextField="Name" DataValueField="ID" Height="200"></asp:ListBox>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h6 style="text-decoration: underline;" id="choose" runat="server" visible="false">Choose a booking to review</h6>
+                                                <p id="lsBksHeader" runat="server"></p>
+                                                <asp:Table ID="tblBookings" runat="server"></asp:Table>
+                                            </div>
+
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="theReview" runat="server" visible="false">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h4>Write a review and rate the service</h4>
+                                                        </div>
+                                                    </div>
+                                                    <!--Star rating -->
+                                                    <div class="row"></div>
+                                                    <!--Comment-->
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                                            <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" />
+                                                        </div>
+                                                        <div class="col-sm-12 col-md-3 col-lg-3">
+                                                            <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
-                            <br />
+                    <br />
 
-                            <div id="theReview" runat="server">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6 col-lg-6">
-                                        <h4 >Write a review and rate the service</h4>
-                                        <p id="reviewFor" runat="server"></p>
-                                    </div>
-                                </div>
-                                <!--Star rating -->
-                                <div class="row"></div>
-                                <!--Comment-->
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6 col-lg-6">
-                                        <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server"></textarea>
-                                    </div>
-                                </div>
-                                <br />
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-3 col-lg-3">
-                                        <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" />
-                                    </div>
-                                    <div class="col-sm-12 col-md-3 col-lg-3">
-                                        <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <br />
-
-                        </asp:PlaceHolder>
-                    </div>
-
-
-
-
+                    <br />
 
                 </asp:PlaceHolder>
             </div>
+
+
+
+
+
+            </asp:PlaceHolder>
+        </div>
         </div>
     </form>
 </asp:Content>
