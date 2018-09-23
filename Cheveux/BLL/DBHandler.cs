@@ -57,6 +57,11 @@ namespace BLL
         {
             return db.UpdateProductSalesDTLRecordQty(Sale);
         }
+
+        public bool createSalesRecord(SALE newSale)
+        {
+            return db.createSalesRecord(newSale);
+        }
         #endregion
 
         #region User Accounts
@@ -157,16 +162,6 @@ namespace BLL
             return db.getProductOrderDL(orderID);
         }
         
-        public List<Supplier> getSuppliers()
-        {
-            return db.getSuppliers();
-        }
-
-        public Supplier getSupplier(string suppID)
-        {
-            return db.getSupplier(suppID);
-        }
-
         public bool newProductOrder(Order newOrder)
         {
             return db.newProductOrder(newOrder);
@@ -260,6 +255,28 @@ namespace BLL
         public BRAND CheckForBrand(string id)
         {
             return db.CheckForBrand(id);
+        }
+        #endregion
+
+        #region Supplier
+        public List<Supplier> getSuppliers()
+        {
+            return db.getSuppliers();
+        }
+
+        public Supplier getSupplier(string suppID)
+        {
+            return db.getSupplier(suppID);
+        }
+
+        public bool newSupplier(Supplier newSupp)
+        {
+            return db.newSupplier(newSupp);
+        }
+
+        public Supplier CheckForSupplier(string id)
+        {
+            return db.CheckForSupplier(id);
         }
         #endregion
 
@@ -453,9 +470,9 @@ namespace BLL
             return db.getBookingDetaisForCheckOut(BookingID);
         }
 
-        public bool createSalesRecord(string bookingID)
+        public bool createSalesRecordForBooking(string bookingID)
         {
-            return db.createSalesRecord(bookingID);
+            return db.createSalesRecordForBooking(bookingID);
         }
 
         public bool updateVatRate(string bussinesID, int vatRate)

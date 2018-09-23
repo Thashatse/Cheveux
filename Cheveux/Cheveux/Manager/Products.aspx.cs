@@ -1591,7 +1591,44 @@ namespace Cheveux.Manager
 
         protected void btnAddSupp_Click(object sender, EventArgs e)
         {
-            
+            bool success = false;
+            try
+            {
+                Supplier newSupp = new Supplier();
+                newSupp.supplierID = function.GenerateRandomSupplierID();
+                newSupp.supplierName = txtSupName.Text;
+                newSupp.contactName = TxtSupContactName.Text;
+                newSupp.contactEmail = txtSupContactEmail.Text;
+                newSupp.contactNo = txtSupContactNum.Text;
+                newSupp.AddressLine1 = txtAddLine1.Text;
+                if(txtAddLine2.Text != null && txtAddLine2.Text != "")
+                {
+                    newSupp.AddressLine2 = txtAddLine2.Text;
+                }
+                else
+                {
+                    newSupp.AddressLine2 = "";
+                }
+                newSupp.Suburb = txtAddLineSuburb.Text;
+                newSupp.City = txtAddLineCity.Text;
+                success = handler.newSupplier(newSupp);
+            }
+            catch (Exception err)
+            {
+                function.logAnError("Error creating new supplier | Error: " + err);
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Supplier");
+            }
+
+            if (success == true)
+            {
+                //show suppliers
+                btnViewSuppliers_Click(sender, e);
+            }
+            else if (success == false)
+            {
+                function.logAnError("Error creating new supplier");
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Supplier");
+            }
         }
         #endregion
 

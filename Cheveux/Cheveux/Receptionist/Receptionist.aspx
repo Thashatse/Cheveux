@@ -150,6 +150,18 @@
                         </div>
                         <!--Line Break-->
                         <br />
+                        <div style="border: solid #F05F40 2px;" runat="server" id="DivNewSale">
+                            <!--Bookings-->
+                            <div class="container text-center">
+                                <br />
+                                <asp:Button ID="btnNewSale" runat="server" OnClick="btnNewSale_Click"
+                                    Text="New Sale" CssClass="btn btn-secondary btn-lg" />
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                        <!--Line Break-->
+                        <br />
                         <div style="border: solid #F05F40 2px;" runat="server" id="makeABookingContainer">
                             <!--Bookings-->
                             <div class="container text-center">

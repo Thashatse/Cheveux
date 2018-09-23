@@ -37,6 +37,8 @@ namespace BLL
         bool removeProductSalesDTLRecord(SALES_DTL Sale);
 
         bool UpdateProductSalesDTLRecordQty(SALES_DTL Sale);
+
+        bool createSalesRecord(SALE newSale);
         #endregion
 
         #region User Accounts
@@ -71,10 +73,6 @@ namespace BLL
 
         List<OrderViewModel> getProductOrderDL(string orderID);
 
-        List<Supplier> getSuppliers();
-
-        Supplier getSupplier(string suppID);
-
         bool newProductOrder(Order newOrder);
 
         bool newProductOrderDL(Order_DTL newOrderDL);
@@ -97,6 +95,16 @@ namespace BLL
         List<BRAND> getAllBrands();
         bool newBrand(BRAND newBrand);
         BRAND CheckForBrand(string id);
+        #endregion
+
+        #region Supplier
+        List<Supplier> getSuppliers();
+
+        Supplier getSupplier(string suppID);
+
+        bool newSupplier(Supplier newSupp);
+
+        Supplier CheckForSupplier(string id);
         #endregion
 
         #region Manager Dash Board
@@ -139,7 +147,7 @@ namespace BLL
         List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate);
         bool createSalesDTLRecord(SALES_DTL detailLine);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
-        bool createSalesRecord(string bookingID);
+        bool createSalesRecordForBooking(string bookingID);
         string getSalePaymentType(String SaleID);
         bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
         BUSINESS getBusinessTable();

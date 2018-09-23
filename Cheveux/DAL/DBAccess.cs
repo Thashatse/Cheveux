@@ -261,6 +261,23 @@ namespace DAL
             }
         }
 
+        public bool createSalesRecord(SALE newSale)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@SaleID", newSale.SaleID),
+                    new SqlParameter("@CustID", newSale.CustID)
+                };
+
+                return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Bookings
@@ -690,7 +707,7 @@ namespace DAL
             }
         }
 
-        public bool createSalesRecord(string bookingID)
+        public bool createSalesRecordForBooking(string bookingID)
         {
             try
             {
@@ -699,7 +716,7 @@ namespace DAL
                     new SqlParameter("@BookingID", bookingID)
                 };
 
-                return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
+                return DBHelper.NonQuery("SP_CreateSalesRecordForBooking", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -1657,75 +1674,7 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
         }
-        
-        public Supplier getSupplier(string suppID)
-        {
-            Supplier supplier = new Supplier();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@SuppID", suppID)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("getSupplierDetails", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            supplier.supplierID = row["SupplierID"].ToString();
-                            supplier.supplierName = row["SupplierName"].ToString();
-                            supplier.contactName = row["ContactName"].ToString();
-                            supplier.contactNo = row["ContactNo"].ToString();
-                            supplier.AddressLine1 = row["AddressLine1"].ToString();
-                            supplier.AddressLine2 = row["AddressLine2"].ToString();
-                            supplier.Suburb = row["Suburb"].ToString();
-                            supplier.City = row["City"].ToString();
-                            supplier.contactEmail = row["ContactEmail"].ToString();
-                        }
-                    }
-                    return supplier;
-                }
-            }
-            catch (Exception E)
-            {
-                throw new ApplicationException(E.ToString());
-            }
-        }
-
-        public List<Supplier> getSuppliers()
-        {
-            List<Supplier> list = new List<Supplier>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_Get_Supplier", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            Supplier supplier = new Supplier();
-                            supplier.supplierID = row["SupplierID"].ToString();
-                            supplier.supplierName = row["SupplierName"].ToString();
-                            supplier.contactName = row["ContactName"].ToString();
-                            supplier.contactNo = row["ContactNo"].ToString();
-                            supplier.AddressLine1 = row["AddressLine1"].ToString();
-                            supplier.AddressLine2 = row["AddressLine2"].ToString();
-                            supplier.Suburb = row["Suburb"].ToString();
-                            supplier.City = row["City"].ToString();
-                            supplier.contactEmail = row["ContactEmail"].ToString();
-                            list.Add(supplier);
-                        }
-                    }
-                    return list;
-                }
-            }
-            catch (Exception E)
-            {
-                throw new ApplicationException(E.ToString());
-            }
-        }
-
+       
         public bool newProductOrder(Order newOrder)
         {
             try
@@ -2001,6 +1950,130 @@ namespace DAL
                         TF = new BRAND
                         {
                             BrandID = row[0].ToString()
+                        };
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
+        #region Supplier
+        public Supplier getSupplier(string suppID)
+        {
+            Supplier supplier = new Supplier();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SuppID", suppID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("getSupplierDetails", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            supplier.supplierID = row["SupplierID"].ToString();
+                            supplier.supplierName = row["SupplierName"].ToString();
+                            supplier.contactName = row["ContactName"].ToString();
+                            supplier.contactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.contactEmail = row["ContactEmail"].ToString();
+                        }
+                    }
+                    return supplier;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
+        public List<Supplier> getSuppliers()
+        {
+            List<Supplier> list = new List<Supplier>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_Get_Supplier", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            Supplier supplier = new Supplier();
+                            supplier.supplierID = row["SupplierID"].ToString();
+                            supplier.supplierName = row["SupplierName"].ToString();
+                            supplier.contactName = row["ContactName"].ToString();
+                            supplier.contactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.contactEmail = row["ContactEmail"].ToString();
+                            list.Add(supplier);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
+        public bool newSupplier(Supplier newSupp)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@SuppID", newSupp.supplierID),
+                new SqlParameter("@SuppName", newSupp.supplierName),
+                new SqlParameter("@ContactName", newSupp.contactName),
+                new SqlParameter("@ContactNo", newSupp.contactNo),
+                new SqlParameter("@AddressL1", newSupp.AddressLine1),
+                new SqlParameter("@AddressL2", newSupp.AddressLine2),
+                new SqlParameter("@Suburb", newSupp.Suburb),
+                new SqlParameter("@City", newSupp.City),
+                new SqlParameter("@ContactEmail", newSupp.contactEmail),
+                };
+
+                return DBHelper.NonQuery("SP_NewSupplier", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public Supplier CheckForSupplier(string id)
+        {
+            Supplier TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SuppID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForSupplier",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new Supplier
+                        {
+                            supplierID = row[0].ToString()
                         };
                     }
                     return TF;

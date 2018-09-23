@@ -116,9 +116,26 @@
                             <a class="nav-link js-scroll-trigger" href="../Receptionist/Appointments.aspx" style="text-decoration:none;">Schedules</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx" style="text-decoration:none;">Products</a>
-                        </li>
+                        <li style='font-size: .9rem; font-weight: 700; text-transform: uppercase; color: #212529;'>
+                                <a class="class='nav-item" href="../Manager/Products.aspx">Products</a>
+                            </li>
+                    <li class='nav-item dropdown'>
+                        <a style='font-size: .9rem; font-weight: 700; text-transform: uppercase; color: #212529;' data-toggle='dropdown' class='dropdown-toggle' href='#'><span class='caret'></span></a>
+                        <ul class='dropdown-menu bg-dark text-white'>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx">Products</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=OutOrders">Purchase Orders</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Brands">Brands</a>&nbsp;
+                            </li>
+                            <li>
+                                &nbsp;<a class="class='nav-item" href="../Manager/Products.aspx?View=Supps">Suppliers</a>&nbsp;
+                            </li>
+                        </ul>
+                    </li>
                         
                         <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">

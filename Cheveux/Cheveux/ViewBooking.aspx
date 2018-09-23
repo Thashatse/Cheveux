@@ -256,7 +256,6 @@
                                             <asp:TableCell Font-Bold="true"> Stylist: </asp:TableCell>
                                             <asp:TableCell>
                                                 <!--Service Stylist-->
-                                                <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList>
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow Height="50">
@@ -408,20 +407,36 @@
                         </div>
                     </div>
                 </div>
+
+                <div runat="server" id="divNewSale" visible="false">
+                                    <!--Line Break-->
+                                    <br />
+                                    <h3 style="text-align: left; float: left;">Select Customer: </h3>
+                                    <p style="text-align: right; float: right;">
+                                        <!-- Search -->
+                                        <asp:TextBox ID="txtCustomerSearch" runat="server" AutoPostBack="true" placeholder="search"
+                                            OnDataBinding="txtCustomerSearch_DataBinding" OnTextChanged="txtCustomerSearch_DataBinding" CssClass="form-control"></asp:TextBox>
+                                    </p>
+                                    <!--Line Break-->
+                                    <br />
+                                    <asp:ListBox runat="server" ID="lbCustomers" CssClass="form-control" DataTextField="Name" DataValueField="ID" 
+                                        Height="250"></asp:ListBox>
+                                    <!--Line Break-->
+                                    <br />
+                                    <p style="text-align: left; float: left;">
+                                        <asp:Button ID="btnNewCust" runat="server" OnClick="btnNewCust_Click" 
+                                        Text="New Customer" CssClass="btn btn-secondary"/>
+                                    </p>
+                    <p style="text-align: right; float: right;">
+                                        <asp:Button ID="btnCreateSales" runat="server" OnClick="btnCreateSales_Click" 
+                                        Text="Create Sale" CssClass="btn btn-primary"/>
+                                    </p>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Display the Booking for the client -->
                         <asp:Label ID="BackButton" runat="server"></asp:Label>
-                    </div>
-                </div>
-
-
-                <!-- if the user is loged Out -->
-                <div runat="server" id="LogedOut">
-                    <div class="jumbotron bg-dark text-white">
-                        <h2>View Booking Details</h2>
-                        <p>Please log-in to view booking details</p>
-                        <button type="button" class="btn btn-primary"><a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Bookings.aspx" id="LogedOutButton">Login / Sign Up</a></button>
                     </div>
                 </div>
             </div>

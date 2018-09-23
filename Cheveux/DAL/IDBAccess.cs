@@ -87,6 +87,8 @@ namespace DAL
         bool removeProductSalesDTLRecord(SALES_DTL Sale);
 
         bool UpdateProductSalesDTLRecordQty(SALES_DTL Sale);
+
+        bool createSalesRecord(SALE newSale);
         #endregion
 
         #region Email/SMS Notifications
@@ -109,11 +111,7 @@ namespace DAL
         List<OrderViewModel> getPastOrders();
 
         List<OrderViewModel> getProductOrderDL(string orderID);
-
-        List<Supplier> getSuppliers();
-
-        Supplier getSupplier(string suppID);
-
+        
         bool newProductOrder(Order newOrder);
 
         bool newProductOrderDL(Order_DTL newOrderDL);
@@ -138,6 +136,16 @@ namespace DAL
         BRAND CheckForBrand(string id);
         #endregion
 
+        #region Supplier
+        List<Supplier> getSuppliers();
+
+        Supplier getSupplier(string suppID);
+
+        bool newSupplier(Supplier newSupp);
+
+        Supplier CheckForSupplier(string id);
+        #endregion
+
         #region Manager Dash Board
         ManagerStats GetManagerStats();
         #endregion
@@ -146,7 +154,7 @@ namespace DAL
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
-        bool createSalesRecord(string bookingID);
+        bool createSalesRecordForBooking(string bookingID);
         bool createSalesDTLRecord(SALES_DTL detailLine);
         bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
         string getSalePaymentType(String SaleID);

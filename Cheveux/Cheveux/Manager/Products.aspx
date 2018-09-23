@@ -26,13 +26,9 @@
                                 <!--Tabs-->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li>
-                                        <asp:Button ID="btnViewAllProducts" runat="server" Text="Manage Products" class="btn btn-light" OnClick="btnViewAllProducts_Click" /></li>
+                                        <asp:Button ID="btnViewAllProducts" runat="server" Text="Products" class="btn btn-light" OnClick="btnViewAllProducts_Click" /></li>
                                     <li>
-                                        <asp:Button ID="btnViewNewOrder" runat="server" Text="Create Purchase Order" class="btn btn-light" OnClick="btnViewNewOrder_Click" /></li>
-                                    <li>
-                                        <asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Accept Purchase Order" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
-                                    <li>
-                                        <asp:Button ID="btnViewPastOrders" runat="server" Text="Past Purchase Orders" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                        <asp:Button ID="btnViewOutstandingOrders" runat="server" Text="Purchase Orders" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
                                     <li>
                                         <asp:Button ID="btnViewBrands" runat="server" Text="Brands" class="btn btn-light" OnClick="btnViewBrands_Click" /></li>
                                     <li>
@@ -245,21 +241,34 @@
 
                     <div runat="server" visible="false" id="OutstandingOrders">
                         <div class="jumbotron bg-dark text-white">
-                            <div class="row">
-                                <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <h1>Accept Purchase Order</h1>
-                                </div>
-                                <div class="col-lg-3 col-md-2 col-sm-2">
-                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Create Purchase Order</a>
-                                </div>
-                            </div>
+                            <h1>Accept Purchase Order</h1>
                         </div>
                         <!-- Line Break -->
                         <br />
                         <div class="row">
-                            <div class="col-xs-12 col-md-12">
+                            <div class="col-md-4">
                                 <asp:Label runat="server" ID="outstandingOrdersLable"></asp:Label>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div id="div2" runat="server">
+                                    <!--Tabs-->
+                                    <ul class="nav" role="tablist">
+                                        <li>
+                                            <asp:Button ID="btnOut1" runat="server" Text="Outstanding" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
+                                        <li>
+                                            <asp:Button ID="btnPast1" runat="server" Text="Past" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Create Purchase Order</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
                                 <!-- Line Break -->
+                                <br />
                                 <br />
                                 <asp:Table ID="tblOutstandingOrders" runat="server"></asp:Table>
                             </div>
@@ -268,21 +277,34 @@
 
                     <div runat="server" visible="false" id="PastOrders">
                         <div class="jumbotron bg-dark text-white">
-                            <div class="row">
-                                <div class="col-lg-9 col-md-12 col-sm-12">
-                                    <h1>Past Purchase Orders</h1>
-                                </div>
-                                <div class="col-lg-3 col-md-2 col-sm-2">
-                                    <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Create Purchase Order</a>
-                                </div>
-                            </div>
+                            <h1>Past Purchase Orders</h1>
                         </div>
                         <!-- Line Break -->
                         <br />
                         <div class="row">
-                            <div class="col-xs-12 col-md-12">
+                            <div class="col-md-4">
                                 <asp:Label runat="server" ID="lblPastOrder"></asp:Label>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div id="div3" runat="server">
+                                    <!--Tabs-->
+                                    <ul class="nav" role="tablist">
+                                        <li>
+                                            <asp:Button ID="btnout2" runat="server" Text="Outstanding" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
+                                        <li>
+                                            <asp:Button ID="btnpast2" runat="server" Text="Past" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-primary js-scroll-trigger" href="?Action=NewOrder">Create Purchase Order</a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
                                 <!-- Line Break -->
+                                <br />
                                 <br />
                                 <asp:Table ID="tblPastOrders" runat="server"></asp:Table>
                             </div>
@@ -387,8 +409,8 @@
                             <div class="col-2"></div>
                             <div class="col-6">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtBrandName" runat="server"
-                                        ErrorMessage="*Name is required" ControlToValidate="txtBrandName"
-                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                    ErrorMessage="*Name is required" ControlToValidate="txtBrandName"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-4"></div>
                         </div>
@@ -433,8 +455,8 @@
                             <div class="col-2"></div>
                             <div class="col-6">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtSupName" runat="server"
-                                        ErrorMessage="*Name is required" ControlToValidate="txtSupName"
-                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                    ErrorMessage="*Name is required" ControlToValidate="txtSupName"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-4"></div>
                         </div>
@@ -452,8 +474,8 @@
                             <div class="col-2"></div>
                             <div class="col-6">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatorTxtSupContactName" runat="server"
-                                        ErrorMessage="*Contact Name is required" ControlToValidate="TxtSupContactName"
-                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                    ErrorMessage="*Contact Name is required" ControlToValidate="TxtSupContactName"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-4"></div>
                         </div>
@@ -468,16 +490,16 @@
                             </div>
                             <div class="col-4">
                                 <a href="#" target="_blank" title="10-digit RSA phone number">
-                                <span class="glyphicon">&#63;</span>
-                            </a>
+                                    <span class="glyphicon">&#63;</span>
+                                </a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-2"></div>
                             <div class="col-6">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtSupContactNum" runat="server"
-                                        ErrorMessage="*Contact Number is required" ControlToValidate="txtSupContactNum"
-                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                    ErrorMessage="*Contact Number is required" ControlToValidate="txtSupContactNum"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-4"></div>
                         </div>
@@ -502,8 +524,8 @@
                             <div class="col-2"></div>
                             <div class="col-6">
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtSupContactEmail" runat="server"
-                                        ErrorMessage="*Contact Email is required" ControlToValidate="txtSupContactEmail"
-                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                    ErrorMessage="*Contact Email is required" ControlToValidate="txtSupContactEmail"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-4"></div>
                         </div>
@@ -511,25 +533,74 @@
                             <div class="col-2"></div>
                             <div class="col-6">
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidatortxtSupContactEmail" runat="server" ErrorMessage="Sorry, The email address entered is not in the correct format. The standard email address format is name@example.com"
-                                            ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
-                                            ControlToValidate="txtSupContactEmail" ForeColor="Red"></asp:RegularExpressionValidator>
+                                    ValidationExpression="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|'(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*')@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+                                    ControlToValidate="txtSupContactEmail" ForeColor="Red"></asp:RegularExpressionValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                Address:
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtAddLine1" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtAddLine1" runat="server"
+                                    ErrorMessage="*Address Line One is required" ControlToValidate="txtAddLine1"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtAddLine2" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <!-- Line Break -->
+                        <br />
+                        <div class="row">
+                            <div class="col-2">
+                                Suburb:
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtAddLineSuburb" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtAddLineSuburb" runat="server"
+                                    ErrorMessage="*Contact Email is required" ControlToValidate="txtAddLineSuburb"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                City:
+                            </div>
+                            <div class="col-6">
+                                <asp:TextBox ID="txtAddLineCity" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-6">
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtAddLineCity" runat="server"
+                                    ErrorMessage="*City is required" ControlToValidate="txtAddLineCity"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
                             </div>
                             <div class="col-4"></div>
                         </div>
                         <!-- Line Break -->
                         <br />
                         <div class="row">
-                            <div class="col-2">
-                                Address:
-                            </div>
-                            <div class="col-6">
-                                google Address
-                            </div>
-                        </div>
-                        <!-- Line Break -->
-                        <br />
-                        <div class="row">
-                            <div class="col-2" />
+                            <div class="col-2"></div>
                             <div class="col-6">
                                 <asp:Button Style="float: right;" ID="btnAddSupp" runat="server" Text="Create Supplier" CssClass="btn btn-primary" OnClick="btnAddSupp_Click" />
                             </div>
@@ -539,23 +610,22 @@
                     <div runat="server" visible="false" id="divAcceptOrder">
                         Accept Order
                     </div>
-                </div>
+                    </div>
 
-                <!-- if the user is loged Out -->
-                <div runat="server" id="LogedOut">
-                    <div class="bg-dark text-white jumbotron">
-                        <div class="row">
-                            <div class="col-10">
-                                <h1>Manage Products</h1>
-                                <p>Please log-in to Manage Products</p>
-                            </div>
-                            <div class="col-2">
-                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
+                    <!-- if the user is loged Out -->
+                    <div runat="server" id="LogedOut">
+                        <div class="bg-dark text-white jumbotron">
+                            <div class="row">
+                                <div class="col-10">
+                                    <h1>Manage Products</h1>
+                                    <p>Please log-in to Manage Products</p>
+                                </div>
+                                <div class="col-2">
+                                    <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Products.aspx" id="LogedOutButton">Login</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
             </form>
         </div>
         <div class="col-1"></div>
