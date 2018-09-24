@@ -60,6 +60,11 @@ namespace Cheveux
                 #region Alerts
                 //Check For Low Stock
                 checkForLowStock();
+
+                if(alertCount == 0)
+                {
+                    alertsContainer.Visible = false;
+                }
                 #endregion
 
                 #region Header

@@ -2206,7 +2206,7 @@ namespace Cheveux
                 //un-hide the checkout table 
                 divCheckOut.Visible = true;
 
-                #region Booking Details
+                #region Booking\Sale Details
                 if (CheckOutType != "NewSale")
                 {
                     //display a heading
@@ -2392,7 +2392,8 @@ namespace Cheveux
                     tblCheckOut.Rows[6].Cells[1].Text = "";
                     //add Print invoice button
                     tblCheckOut.Rows[7].Width = 50;
-                    tblCheckOut.Rows[7].Cells[1].Text = "<a class='btn btn-primary' href='PrintInvoice.aspx?SaleID=" + BookingDetails.bookingID + "' target='_blank'>Print Invoice  </a>";
+                    tblCheckOut.Rows[7].Cells[1].Text = "<a class='btn btn-primary' href='PrintInvoice.aspx?SaleID=" + BookingID + "' target='_blank'>Print Invoice  </a>";
+                    BookingLable.Text = "<h2> Sale Summary </h2>";
                 }
                 else
                 {
@@ -2446,7 +2447,7 @@ namespace Cheveux
                 }
                 else
                 {
-                    body.AppendLine(@"view your invoice here --> http://sict-iis.nmmu.ac.za/beauxdebut/PrintInvoice.aspx?SaleID=" + saleDetails.SaleID.ToString().Replace(" ", string.Empty));
+                    body.AppendLine(@"view your invoice here --> http://sict-iis.nmmu.ac.za/beauxdebut/PrintInvoice.aspx?AutoPrint=False&SaleID=" + saleDetails.SaleID.ToString().Replace(" ", string.Empty));
                 }
                 body.AppendLine(@"");
                 if (CheckOutType != "NewSale")
@@ -2477,11 +2478,6 @@ namespace Cheveux
                 function.logAnError(Err.ToString() + "\n An error ocoured updating payment type during checkout process");
                 Response.Write("<script>alert('An error ocoured updating payment type.');window.location='ViewBooking.aspx';</script>");
                 Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx");
-            }
-            
-            if (CheckOutType == "NewSale")
-            {
-                Response.Redirect("PrintInvoice.aspx?SaleID=" + saleDetails.SaleID.ToString().Replace(" ", string.Empty));
             }
         }
 

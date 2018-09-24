@@ -93,8 +93,10 @@ namespace BLL
 
         #region Brands
         List<BRAND> getAllBrands();
+        BRAND getBrand(string BrandID);
         bool newBrand(BRAND newBrand);
         BRAND CheckForBrand(string id);
+        bool editBrand(BRAND brandUpdate);
         #endregion
 
         #region Supplier
@@ -103,6 +105,8 @@ namespace BLL
         Supplier getSupplier(string suppID);
 
         bool newSupplier(Supplier newSupp);
+
+        bool editSupplier(Supplier suppUpdate);
 
         Supplier CheckForSupplier(string id);
         #endregion

@@ -673,6 +673,77 @@ namespace DAL
         #endregion
 
         #region CheckIN CheckOut Cust Vist
+        public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
+        {
+            SP_ViewCustVisit visit = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustomerID", customerID),
+                new SqlParameter("@BookingID", bookingID),
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ViewCustVisit",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        visit = new SP_ViewCustVisit
+                        {
+                            CustomerID = Convert.ToString(row["CustomerID"]),
+                            Date = Convert.ToDateTime(row["Date"]),
+                            BookingID = Convert.ToString(row["BookingID"]),
+                            Description = Convert.ToString(row["Description"])
+                        };
+                    }
+                    return visit;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool UpdateCustVisit(CUST_VISIT visit, BOOKING b)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@CustomerID", visit.CustomerID.ToString()),
+                    new SqlParameter("@BookingID", visit.BookingID.ToString()),
+                    new SqlParameter("@Description", visit.Description.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateCustVisit", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool CreateCustVisit(CUST_VISIT cust_visit)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@CustomerID",cust_visit.CustomerID.ToString()),
+                    new SqlParameter("@Date", cust_visit.Date.ToString()),
+                    new SqlParameter("@PrimaryBookingID", cust_visit.BookingID.ToString()),
+                    new SqlParameter("@Description", cust_visit.Description.ToString()),
+                };
+
+                return DBHelper.NonQuery("SP_CreateCustVisit", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -1913,6 +1984,36 @@ namespace DAL
 
         }
 
+        public BRAND getBrand(string BrandID)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BrandID", BrandID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBrand", CommandType.StoredProcedure, pars))
+                {
+                    BRAND brand = new BRAND();
+                    if (table.Rows.Count == 1)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            brand.BrandID = row["BrandID"].ToString();
+                            brand.Name = row["Name"].ToString();
+                            brand.Type = row["Type(T/A)"].ToString();
+                        }
+                    }
+                    return brand;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+
+        }
+
         public bool newBrand (BRAND newBrand)
         {
             try
@@ -1925,6 +2026,25 @@ namespace DAL
                 };
 
                 return DBHelper.NonQuery("SP_NewBrand", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool editBrand (BRAND brandUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BrandID", brandUpdate.BrandID),
+                new SqlParameter("@BrandName", brandUpdate.Name),
+                new SqlParameter("@Type", brandUpdate.Type)
+                };
+
+                return DBHelper.NonQuery("SP_EditBrand", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -2049,6 +2169,31 @@ namespace DAL
                 };
 
                 return DBHelper.NonQuery("SP_NewSupplier", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool editSupplier(Supplier suppUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@SuppID", suppUpdate.supplierID),
+                new SqlParameter("@SuppName", suppUpdate.supplierName),
+                new SqlParameter("@ContactName", suppUpdate.contactName),
+                new SqlParameter("@ContactNo", suppUpdate.contactNo),
+                new SqlParameter("@AddressL1", suppUpdate.AddressLine1),
+                new SqlParameter("@AddressL2", suppUpdate.AddressLine2),
+                new SqlParameter("@Suburb", suppUpdate.Suburb),
+                new SqlParameter("@City", suppUpdate.City),
+                new SqlParameter("@ContactEmail", suppUpdate.contactEmail),
+                };
+
+                return DBHelper.NonQuery("SP_EditSupplier", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -2540,6 +2685,7 @@ namespace DAL
         }
         #endregion 
 
+        #region Employees
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
@@ -2595,77 +2741,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
-        {
-            SP_ViewCustVisit visit = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@CustomerID", customerID),
-                new SqlParameter("@BookingID", bookingID),
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_ViewCustVisit",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        visit = new SP_ViewCustVisit
-                        {
-                            CustomerID = Convert.ToString(row["CustomerID"]),
-                            Date = Convert.ToDateTime(row["Date"]),
-                            BookingID = Convert.ToString(row["BookingID"]),
-                            Description = Convert.ToString(row["Description"])
-                        };
-                    }
-                    return visit;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool UpdateCustVisit(CUST_VISIT visit, BOOKING b)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@CustomerID", visit.CustomerID.ToString()),
-                    new SqlParameter("@BookingID", visit.BookingID.ToString()),
-                    new SqlParameter("@Description", visit.Description.ToString())
-                };
-                return DBHelper.NonQuery("SP_UpdateCustVisit", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool CreateCustVisit(CUST_VISIT cust_visit)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@CustomerID",cust_visit.CustomerID.ToString()),
-                    new SqlParameter("@Date", cust_visit.Date.ToString()),
-                    new SqlParameter("@PrimaryBookingID", cust_visit.BookingID.ToString()),
-                    new SqlParameter("@Description", cust_visit.Description.ToString()),
-                };
-
-                return DBHelper.NonQuery("SP_CreateCustVisit", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
+        #endregion
         
         public List<SP_GetServices> GetAllServices()
         {

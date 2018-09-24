@@ -132,7 +132,7 @@
 
                         <div runat="server" id="divOrders">
                             <!--Orders-->
-                            <h1>Outstanding Product Orders </h1>
+                            <h1>Outstanding Purchase Orders </h1>
                             <asp:Label runat="server" ID="outstandingOrdersLable"></asp:Label>
                             <asp:Table ID="tblOutstandingOrders" runat="server"></asp:Table>
                         </div>

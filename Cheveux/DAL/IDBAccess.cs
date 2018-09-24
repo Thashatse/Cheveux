@@ -132,9 +132,11 @@ namespace DAL
 
         #region Brands
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+        BRAND getBrand(string BrandID);
         List<BRAND> getAllBrands();
         bool newBrand(BRAND newBrand);
         BRAND CheckForBrand(string id);
+        bool editBrand(BRAND brandUpdate);
         #endregion
 
         #region Supplier
@@ -143,6 +145,8 @@ namespace DAL
         Supplier getSupplier(string suppID);
 
         bool newSupplier(Supplier newSupp);
+
+        bool editSupplier(Supplier suppUpdate);
 
         Supplier CheckForSupplier(string id);
         #endregion
