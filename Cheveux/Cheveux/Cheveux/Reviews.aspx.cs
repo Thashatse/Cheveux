@@ -18,6 +18,7 @@ namespace Cheveux
         string action = null;
         List<SP_GetStylistBookings> customer = null;
         List<SP_GetBookingServices> bServices = null;
+        REVIEW review = null;
 
         protected void Page_PreInit(Object sender, EventArgs e)
         {

@@ -123,6 +123,8 @@ namespace BLL
         List<SP_GetReviews> getAllReviews();
         bool reviewBooking(REVIEW r);
         bool reviewStylist(REVIEW r);
+        bool updateStylistReview(REVIEW r);
+        bool updateBookingReview(REVIEW r);
         #endregion
 
         USER GetUserDetails(string ID);

@@ -2683,6 +2683,45 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public bool updateStylistReview(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@employeeID", r.EmployeeID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_UpdateStylistReview", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool updateBookingReview(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_UpdateBookingReview", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion 
 
         #region Employees

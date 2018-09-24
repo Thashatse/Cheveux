@@ -313,6 +313,7 @@ namespace BLL
             return db.searchBookings(startDate, endDate);
         }
         #endregion
+
         #region Reviews
         public List<SP_GetReviews> getAllReviews()
         {
@@ -325,6 +326,14 @@ namespace BLL
         public bool reviewStylist(REVIEW r)
         {
             return db.reviewStylist(r);
+        }
+        public bool updateBookingReview(REVIEW r)
+        {
+            return db.updateBookingReview(r);
+        }
+        public bool updateStylistReview(REVIEW r)
+        {
+            return db.updateStylistReview(r);
         }
         #endregion
 
