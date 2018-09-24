@@ -166,6 +166,33 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl theReview;
         
         /// <summary>
+        /// lblBookingID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBookingID;
+        
+        /// <summary>
+        /// lblCustID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCustID;
+        
+        /// <summary>
+        /// lblStylistID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStylistID;
+        
+        /// <summary>
         /// reviewComment control.
         /// </summary>
         /// <remarks>

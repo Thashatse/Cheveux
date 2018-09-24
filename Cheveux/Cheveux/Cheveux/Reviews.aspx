@@ -136,6 +136,13 @@
                                                             <h4>Write a review and rate the service</h4>
                                                         </div>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <asp:Label ID="lblBookingID" runat="server" Text="" Visible="false"></asp:Label>
+                                                            <asp:Label ID="lblCustID" runat="server" Text="" Visible="false"></asp:Label>
+                                                            <asp:Label ID="lblStylistID" runat="server" Text="" Visible="false"></asp:Label>
+                                                        </div>
+                                                    </div>
                                                     <!--Star rating -->
                                                     <div class="row"></div>
                                                     <!--Comment-->

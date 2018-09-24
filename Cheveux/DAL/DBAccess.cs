@@ -2461,6 +2461,84 @@ namespace DAL
             }
         }
         #endregion
+        #region Reviews
+        public List<SP_GetReviews> getAllReviews()
+        {
+            List<SP_GetReviews> list = new List<SP_GetReviews>();
+            try
+            {
+                using(DataTable table = DBHelper.Select("SP_GetAllReviews", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetReviews emp = new SP_GetReviews()
+                            {
+                                ReviewID = row["ReviewID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                EmployeeID = row["EmployeeID"].ToString(),
+                                PrimaryBookingID = row["primaryBookingID"].ToString(),
+                                Date = Convert.ToDateTime(row["Date"].ToString()),
+                                Time = Convert.ToDateTime(row["Time"].ToString()),
+                                Rating = Convert.ToDouble(row["Rating"].ToString()),
+                                Comment = row["Comment"].ToString()
+                            };
+                            list.Add(emp);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool reviewBooking(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@customerID",r.CustomerID),
+                    new SqlParameter("@employeeID", r.EmployeeID),
+                    new SqlParameter("@primaryBookingID",r.PrimaryBookingID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_ReviewBooking", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool reviewStylist(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@customerID",r.CustomerID),
+                    new SqlParameter("@employeeID", r.EmployeeID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_ReviewStylist", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion 
 
         public List<SP_GetEmpNames> GetEmpNames()
         {

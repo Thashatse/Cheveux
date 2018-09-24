@@ -298,6 +298,20 @@ namespace BLL
             return db.searchBookings(startDate, endDate);
         }
         #endregion
+        #region Reviews
+        public List<SP_GetReviews> getAllReviews()
+        {
+            return db.getAllReviews();
+        }
+        public bool reviewBooking(REVIEW r)
+        {
+            return db.reviewBooking(r);
+        }
+        public bool reviewStylist(REVIEW r)
+        {
+            return db.reviewStylist(r);
+        }
+        #endregion
 
         public List<SP_GetTodaysBookings> getTodaysBookings() 
         {

@@ -168,7 +168,70 @@ namespace Cheveux
                     newCell.Width = 50;
                     newCell.Text = a.StartTime.ToString("HH:mm");
 
-                    getServiceAndStylist(count, a);
+                    //getServiceAndStylist(count, a);
+
+                    TableCell services = new TableCell();
+                    services.Width = 100;
+                    try
+                    {
+                        bServices = handler.getBookingServices(a.BookingID.ToString());
+                        if (bServices.Count == 1)
+                        {
+                            services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                            + bServices[0].ServiceName.ToString() + "</a>";
+                        }
+                        else if (bServices.Count == 2)
+                        {
+                            services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                                "'>" + bServices[0].ServiceName.ToString() +
+                                ", " + bServices[1].ServiceName.ToString() + "</a>";
+                        }
+                        else if (bServices.Count > 2)
+                        {
+                            string toolTip = "";
+                            int toolTipCount = 0;
+                            foreach (SP_GetBookingServices toolTipDTL in bServices)
+                            {
+                                if (toolTipCount == 0)
+                                {
+                                    toolTip = toolTipDTL.ServiceName;
+                                    toolTipCount++;
+                                }
+                                else
+                                {
+                                    toolTip += ", " + toolTipDTL.ServiceName;
+                                }
+                            }
+                            services.Text = "<a title='" + toolTip + "'" +
+                                "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
+                                "'> Multiple Services </a>";
+                        }
+                        tblBookings.Rows[count].Cells.Add(services);
+
+                    }
+                    catch (Exception Err)
+                    {
+                        //if theres an error or cant retrieve the services from the database 
+                        services.Text = "<img src='https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png' alt='Error' width='10' height='10'></img>";
+                        tblBookings.Rows[count].Cells.Add(services);
+                        function.logAnError("Couldn't get the services [reviews.aspx "
+                            + "{getTimeCustomerServices?getServices} ] error:" + Err.ToString());
+                    }
+
+                    TableCell empCell = new TableCell();
+                    empCell.Width = 150;
+                    try
+                    {
+                        empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + a.StylistName.ToString() + "</a>";
+                        tblBookings.Rows[count].Cells.Add(empCell);
+                    }
+                    catch (Exception Err)
+                    {
+                        empCell.Text = "------";
+                        tblBookings.Rows[count].Cells.Add(empCell);
+                        function.logAnError("Couldnt get stylist name[reviews.aspx {getT/c/s method}]err:" + Err.ToString());
+                    }
 
                     newCell = new TableCell();
                     newCell.Width = 50;
@@ -177,6 +240,9 @@ namespace Cheveux
                     btn.CssClass = "btn btn-primary";
                     newCell.Controls.Add(btn);
                     btn.Click += (ss, ee) => {
+                        lblBookingID.Text = a.PrimaryID.ToString();
+                        lblCustID.Text = a.CustomerID.ToString();
+                        lblStylistID.Text = a.StylistID.ToString();
                         theReview.Visible = true;
                     };
                     tblBookings.Rows[count].Cells.Add(newCell);
@@ -189,82 +255,10 @@ namespace Cheveux
                 TableRow newRow = new TableRow();
                 tblBookings.Rows.Add(newRow);
                 TableCell newCell = new TableCell();
-                newCell.Text = " ";
+                newCell.Text = "--";
                 tblBookings.Rows[1].Cells.Add(newCell);
                 function.logAnError(Err.ToString());
             }
-        }
-        public void getServiceAndStylist(int i, SP_GetStylistBookings a)
-        {
-            #region Services
-
-            TableCell services = new TableCell();
-            services.Width = 100;
-            try
-            {
-                bServices = handler.getBookingServices(a.BookingID.ToString());
-                if (bServices.Count == 1)
-                {
-                    services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                    + bServices[0].ServiceName.ToString() + "</a>";
-                }
-                else if (bServices.Count == 2)
-                {
-                    services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                        "'>" + bServices[0].ServiceName.ToString() +
-                        ", " + bServices[1].ServiceName.ToString() + "</a>";
-                }
-                else if (bServices.Count > 2)
-                {
-                    string toolTip = "";
-                    int toolTipCount = 0;
-                    foreach (SP_GetBookingServices toolTipDTL in bServices)
-                    {
-                        if (toolTipCount == 0)
-                        {
-                            toolTip = toolTipDTL.ServiceName;
-                            toolTipCount++;
-                        }
-                        else
-                        {
-                            toolTip += ", " + toolTipDTL.ServiceName;
-                        }
-                    }
-                    services.Text = "<a title='" + toolTip + "'" +
-                        "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                        "'> Multiple Services </a>";
-                }
-                tblBookings.Rows[i].Cells.Add(services);
-
-            }
-            catch (Exception Err)
-            {
-                //if theres an error or cant retrieve the services from the database 
-                services.Text = "<img src='https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png' alt='Error' width='10' height='10'></img>";
-                tblBookings.Rows[i].Cells.Add(services);
-                function.logAnError("Couldn't get the services [reviews.aspx "
-                    + "{getTimeCustomerServices?getServices} ] error:" + Err.ToString());
-            }
-
-
-            #endregion
-            #region Stylist
-            TableCell empCell = new TableCell();
-            empCell.Width = 150;
-            try
-            {
-                empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.StylistID.ToString().Replace(" ", string.Empty) +
-                                "'>" + a.StylistName.ToString() + "</a>";
-                tblBookings.Rows[i].Cells.Add(empCell);
-            }
-            catch (Exception Err)
-            {
-                empCell.Text = "------";
-                tblBookings.Rows[i].Cells.Add(empCell);
-                function.logAnError("Couldnt get stylist name[reviews.aspx {getT/c/s method}]err:" + Err.ToString());
-            }
-            
-            #endregion     
         }
         #region Events
         protected void calDay_SelectionChanged(object sender, EventArgs e)

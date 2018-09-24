@@ -54,6 +54,7 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Order_DTL.cs" />
     <Compile Include="Models\PRODUCT.cs" />
+    <Compile Include="Models\REVIEW.cs" />
     <Compile Include="Models\SALE.cs" />
     <Compile Include="Models\SALES_DTL.cs" />
     <Compile Include="Models\SERVICE.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="ViewModels\SP_GetLength.cs" />
     <Compile Include="ViewModels\SP_GetMyNextCustomer.cs" />
     <Compile Include="ViewModels\SP_GetProductTypes.cs" />
+    <Compile Include="ViewModels\SP_GetReviews.cs" />
     <Compile Include="ViewModels\SP_GetService.cs" />
     <Compile Include="ViewModels\SP_GetServices.cs" />
     <Compile Include="ViewModels\SP_GetSlotTimes.cs" />

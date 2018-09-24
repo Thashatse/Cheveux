@@ -150,6 +150,11 @@ namespace DAL
         #region Manager Dash Board
         ManagerStats GetManagerStats();
         #endregion
+        #region Reviews
+        List<SP_GetReviews> getAllReviews();
+        bool reviewBooking(REVIEW r);
+        bool reviewStylist(REVIEW r);
+        #endregion
 
         List<SP_GetEmpNames> GetEmpNames();
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);

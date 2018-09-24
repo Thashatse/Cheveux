@@ -115,6 +115,11 @@ namespace BLL
         List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         #endregion
+        #region Reviews
+        List<SP_GetReviews> getAllReviews();
+        bool reviewBooking(REVIEW r);
+        bool reviewStylist(REVIEW r);
+        #endregion
 
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
