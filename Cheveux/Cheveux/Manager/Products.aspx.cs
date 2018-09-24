@@ -137,6 +137,23 @@ namespace Cheveux.Manager
                         loadProductTypeDropDowns();
                         divAddBrand.Visible = true;
                     }
+                    else if (action == "EditSupp")
+                    {
+                        hideAllView();
+                        lblNewSuppHeader.Text = "Edit Supplier";
+                        btnAddSupp.Text = "Save";
+                        LoadEditSupp();
+                        divAddSupplier.Visible = true;
+                    }
+                    else if (action == "EditBrand")
+                    {
+                        hideAllView();
+                        loadProductTypeDropDowns();
+                        lblNewBrandHeader.Text = "Edit Brand";
+                        btnAddBrand.Text = "Save";
+                        loadEditBrand();
+                        divAddBrand.Visible = true;
+                    }
                     else
                     {
                         //check if a vie has been requested
@@ -1387,6 +1404,8 @@ namespace Cheveux.Manager
         #endregion
 
         #region Supplier
+        string SuppID = null;
+
         private void loadSuppliers()
         {
             try
@@ -1469,6 +1488,54 @@ namespace Cheveux.Manager
                 tblOutstandingOrders.Visible = false;
                 lblSuppliers.Text =
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
+            }
+        }
+
+        private void LoadEditSupp()
+        {
+            //check for the SuppID
+            SuppID = Request.QueryString["SuppID"];
+
+            if (SuppID != null && SuppID != "")
+            {
+                //load current details
+                try
+                {
+                    //get Supplier Deatils
+                    Supplier supp = handler.getSupplier(SuppID);
+
+                    txtSupName.Text = supp.supplierName;
+
+                    TxtSupContactName.Text = supp.contactName;
+
+                    txtSupContactNum.Text = supp.contactNo.ToString();
+
+                    txtSupContactEmail.Text = supp.contactEmail.ToString();
+
+                    txtAddLine1.Text = supp.AddressLine1;
+
+                    if (supp.AddressLine2 != null && supp.AddressLine2 != "")
+                    {
+                        txtAddLine2.Text = supp.AddressLine2;
+                    }
+
+                    if (supp.Suburb != null && supp.Suburb != "")
+                    {
+                        txtAddLineSuburb.Text = supp.Suburb;
+                    }
+
+                    txtAddLineCity.Text = supp.City;
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error loading Supplier details for edit on internal product page suppID = " + SuppID + " | Error: " + err.ToString());
+                    tblSupplier.Visible = false;
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An Error Occured Communicating With The Data Base, Try Again Later");
+                }
+            }
+            else
+            {
+                Response.Redirect("Products.aspx?View=Supps");
             }
         }
 
@@ -1567,7 +1634,10 @@ namespace Cheveux.Manager
                     newCell = new TableCell();
                     tblSupplier.Rows[rowCount].Cells.Add(newCell);
                     newCell = new TableCell();
-                    newCell.Text = "<button type = 'button' class='btn btn-default'>" + 
+                    newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = '?Action=EditSupp&SuppID=" + supp.supplierID +
+                                "'>Edit</a></button>        " +
+                                "<button type = 'button' class='btn btn-default'>" + 
                         "<a href='?SuppID=" + supp.supplierID + "&View=ViewProds" +
                             "'> View Supplier Products </a></button>";
                     tblSupplier.Rows[rowCount].Cells.Add(newCell);
@@ -1591,48 +1661,84 @@ namespace Cheveux.Manager
 
         protected void btnAddSupp_Click(object sender, EventArgs e)
         {
+            //check for the SuppID
+            SuppID = Request.QueryString["SuppID"];
             bool success = false;
+            Supplier Supp = new Supplier();
             try
             {
-                Supplier newSupp = new Supplier();
-                newSupp.supplierID = function.GenerateRandomSupplierID();
-                newSupp.supplierName = txtSupName.Text;
-                newSupp.contactName = TxtSupContactName.Text;
-                newSupp.contactEmail = txtSupContactEmail.Text;
-                newSupp.contactNo = txtSupContactNum.Text;
-                newSupp.AddressLine1 = txtAddLine1.Text;
+                if (lblNewSuppHeader.Text == "Edit Supplier")
+                {
+                    Supp.supplierID = SuppID;
+                }
+                else if (lblNewSuppHeader.Text == "New Supplier")
+                {
+                    Supp.supplierID = function.GenerateRandomSupplierID();
+                }
+                Supp.supplierName = txtSupName.Text;
+                Supp.contactName = TxtSupContactName.Text;
+                Supp.contactEmail = txtSupContactEmail.Text;
+                Supp.contactNo = txtSupContactNum.Text;
+                Supp.AddressLine1 = txtAddLine1.Text;
                 if(txtAddLine2.Text != null && txtAddLine2.Text != "")
                 {
-                    newSupp.AddressLine2 = txtAddLine2.Text;
+                    Supp.AddressLine2 = txtAddLine2.Text;
                 }
                 else
                 {
-                    newSupp.AddressLine2 = "";
+                    Supp.AddressLine2 = "";
                 }
-                newSupp.Suburb = txtAddLineSuburb.Text;
-                newSupp.City = txtAddLineCity.Text;
-                success = handler.newSupplier(newSupp);
+                Supp.Suburb = txtAddLineSuburb.Text;
+                Supp.City = txtAddLineCity.Text;
+                if (lblNewSuppHeader.Text == "Edit Supplier")
+                {
+                    success = handler.editSupplier(Supp);
+                    SuppID = Supp.supplierID;
+                }
+                else if (lblNewSuppHeader.Text == "New Supplier")
+                {
+                    success = handler.newSupplier(Supp);
+                    SuppID = Supp.supplierID;
+                }
             }
             catch (Exception err)
             {
-                function.logAnError("Error creating new supplier | Error: " + err);
-                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Supplier");
+                if (lblNewSuppHeader.Text == "Edit Supplier")
+                {
+                    function.logAnError("Error editing supplier SuppID="+SuppID+" | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20updating%20Supplier");
+                }
+                else if (lblNewSuppHeader.Text == "New Supplier")
+                {
+                    function.logAnError("Error creating new supplier | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Supplier");
+                }
             }
 
             if (success == true)
             {
                 //show suppliers
-                btnViewSuppliers_Click(sender, e);
+                Response.Redirect("/Manager/Products.aspx?Action=Viewsup&supID=" + SuppID);
             }
             else if (success == false)
             {
-                function.logAnError("Error creating new supplier");
-                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Supplier");
+                if (lblNewSuppHeader.Text == "Edit Supplier")
+                {
+                    function.logAnError("Error editing supplier SuppID=" + SuppID);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20updating%20Supplier");
+                }
+                else if (lblNewSuppHeader.Text == "New Supplier")
+                {
+                    function.logAnError("Error creating new supplier");
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Supplier");
+                }
             }
         }
         #endregion
 
         #region Brand
+        string brandID = null;
+
         private void loadBrands()
         {
             try
@@ -1654,6 +1760,9 @@ namespace Cheveux.Manager
                     newHeaderCell.Text = "Type";
                     newHeaderCell.Width = 800;
                     tblBrand.Rows[0].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 800;
+                    tblBrand.Rows[0].Cells.Add(newHeaderCell);
 
                     //create a loop to display each result
                     //creat a counter to keep track of the current row
@@ -1669,6 +1778,14 @@ namespace Cheveux.Manager
                         tblBrand.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
                         newCell.Text = function.GetFullProductTypeText(brand.Type[0]);
+                        tblBrand.Rows[rowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                                "<a href = '?Action=EditBrand&BrandID=" + brand.BrandID +
+                                "'>Edit</a></button>        " +
+                                "<button type = 'button' class='btn btn-default'>" +
+                        "<a href='?BrandID=" + brand.BrandID + "&View=ViewProds" +
+                            "'> View Brand Products </a></button>";
                         tblBrand.Rows[rowCount].Cells.Add(newCell);
                         rowCount++;
                     }
@@ -1704,21 +1821,75 @@ namespace Cheveux.Manager
             }
         }
 
+        private void loadEditBrand()
+        {
+            //check for the brandID
+            brandID = Request.QueryString["BrandID"];
+
+            if(brandID != null && brandID != "")
+            {
+                //load current details
+                try
+                {
+                    //get Supplier Deatils
+                    BRAND brand = handler.getBrand(brandID);
+
+                    txtBrandName.Text = brand.Name;
+
+                    ddlAddBrandProductType.SelectedValue = brand.Type;
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error loading Brand details for edit on internal product page BrandID = " + brandID + " | Error: " + err.ToString());
+                    tblSupplier.Visible = false;
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An Error Occured Communicating With The Data Base, Try Again Later");
+                }
+            }
+            else
+            {
+                Response.Redirect("Products.aspx?View=Brands");
+            }
+        }
+
         protected void btnAddBrand_Click(object sender, EventArgs e)
         {
+            //check for the brandID
+            brandID = Request.QueryString["BrandID"];
             bool success = false;
             try
             {
-                BRAND newBrand = new BRAND();
-                newBrand.BrandID = function.GenerateRandomBrandID();
-                newBrand.Name = txtBrandName.Text;
-                newBrand.Type = ddlAddBrandProductType.SelectedValue;
-                success = handler.newBrand(newBrand);
+                BRAND Brand = new BRAND();
+                if (lblNewBrandHeader.Text == "Edit Brand")
+                {
+                    Brand.BrandID = brandID;
+                }
+                else if (lblNewBrandHeader.Text == "New Brand")
+                {
+                    Brand.BrandID = function.GenerateRandomBrandID();
+                }
+                Brand.Name = txtBrandName.Text;
+                Brand.Type = ddlAddBrandProductType.SelectedValue;
+                if (lblNewBrandHeader.Text == "Edit Brand")
+                {
+                    success = handler.editBrand(Brand);
+                }
+                else if (lblNewBrandHeader.Text == "New Brand")
+                {
+                    success = handler.newBrand(Brand);
+                }
             }
             catch (Exception err)
             {
-                function.logAnError("Error making new brand | Error: " + err);
-                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Brand");
+                if (lblNewBrandHeader.Text == "Edit Brand")
+                {
+                    function.logAnError("Error updating brand brandID = "+brandID+" | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20updating%20Brand");
+                }
+                else if (lblNewBrandHeader.Text == "New Brand")
+                {
+                    function.logAnError("Error making new brand | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Brand");
+                }
             }
 
             if (success == true)
@@ -1728,8 +1899,16 @@ namespace Cheveux.Manager
             }
             else if (success == false)
             {
-                function.logAnError("Error making new brand");
-                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Brand");
+                if (lblNewBrandHeader.Text == "Edit Brand")
+                {
+                    function.logAnError("Error updating brand brandID = " + brandID );
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20updating%20Brand");
+                }
+                else if (lblNewBrandHeader.Text == "New Brand")
+                {
+                    function.logAnError("Error making new brand");
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Brand");
+                }
             }
         }
         #endregion

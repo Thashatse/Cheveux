@@ -490,13 +490,13 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddBrand;
         
         /// <summary>
-        /// Label1 control.
+        /// lblNewBrandHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblNewBrandHeader;
         
         /// <summary>
         /// txtBrandName control.
@@ -544,13 +544,13 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divAddSupplier;
         
         /// <summary>
-        /// Label2 control.
+        /// lblNewSuppHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label lblNewSuppHeader;
         
         /// <summary>
         /// txtSupName control.
@@ -677,15 +677,6 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAddLineSuburb;
-        
-        /// <summary>
-        /// RequiredFieldValidatortxtAddLineSuburb control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtAddLineSuburb;
         
         /// <summary>
         /// txtAddLineCity control.

@@ -15,6 +15,7 @@ namespace Cheveux
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
         string SaleID = null;
+        string autoPrint = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,8 +34,14 @@ namespace Cheveux
                 {
                     //if loged in load invoice
                     loadInvoice();
-                    //print the invoice
-                    ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
+
+                    //open the print dialog box if requested
+                    autoPrint = Request.QueryString["AutoPrint"];
+                    if (autoPrint != "False" || autoPrint == null)
+                    {
+                        //print the invoice
+                        ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
+                    }
                 }
             }
 

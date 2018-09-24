@@ -41,26 +41,22 @@ namespace Cheveux
                 {
                     Lreview.Visible = true;
                     profile.Controls.Add(new LiteralControl
-                        ("<li class='dropdown'>" +
-                            "<a style='font-size:.9rem; font-weight:700; text-transform:uppercase; color:#212529;' data-toggle='dropdown' class='dropdown-toggle' href='#'>" +
+                        ("<a class='nav-link js-scroll-trigger dropdown-toggle' data-toggle='dropdown' href='../Profile.aspx?View=Profile' style='text-decoration: none;'>" +
                                 "<img src=" + UserDetails.UserImage + "" +
-                                " alt='" + UserDetails.UserName.ToString() +
-                                " Profile Image' width='35' height='35' style='border-radius:50%;'/> " +
-                                UserDetails.UserName.ToString() +
-                                " <span class='caret'></span></a>" +
-                                "<ul class='dropdown-menu bg-dark text-white'>" +
-                                    "<li>&nbsp;<a href='../Profile.aspx?View=Up'> Upcoming Bookings </a></li>" +
-                                    "<li>&nbsp;<a href='../Profile.aspx?View=Past'> Past Bookings </a>&nbsp;</li> " +
-                                    "<li>&nbsp;<a href='../Profile.aspx?View=Profile'> Profile </a>&nbsp;</li> " +
-                                    "<li>&nbsp;<a href='/Authentication/Accounts.aspx?action=Logout'> Logout </a>&nbsp;</li> " +
-                                "</ul>" +
-                        "</li> &nbsp; &nbsp;"));
+                                " width='35' height='35' style='border-radius:50%;'/> " +
+                                UserDetails.UserName.ToString() + "</a>" +
+                                "<div class='dropdown-menu'>" +
+                                    "<a class='dropdown-item' href='../Profile.aspx?View=Up'> Upcoming Bookings </a>" +
+                                    "<a class='dropdown-item' href='../Profile.aspx?View=Past'> Past Bookings </a>" +
+                                    "<a class='dropdown-item' href='../Profile.aspx?View=Profile'> Profile </a>" +
+                                    "<a class='dropdown-item' href='/Authentication/Accounts.aspx?action=Logout'> Logout </a>" +
+                                "</div>"));
                 }
                 else
                 {
 
                     profile.Controls.Add(new LiteralControl
-                        ("<a href='../Profile.aspx'> User Profile </a>"));
+                        ("<a href='../Profile.aspx' style='text-decoration: none;'> User Profile </a>"));
                 }
                 LogedOut.Visible = false;
                 Vreview.Visible = false;

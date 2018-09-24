@@ -254,7 +254,7 @@
                                     <!--Tabs-->
                                     <ul class="nav" role="tablist">
                                         <li>
-                                            <asp:Button ID="btnOut1" runat="server" Text="Outstanding" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
+                                            <asp:Button ID="btnOut1" runat="server" Text="Outstanding" class="btn btn-secondary" OnClick="btnViewOutstandingOrders_Click" /></li>
                                         <li>
                                             <asp:Button ID="btnPast1" runat="server" Text="Past" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
                                     </ul>
@@ -292,7 +292,7 @@
                                         <li>
                                             <asp:Button ID="btnout2" runat="server" Text="Outstanding" class="btn btn-light" OnClick="btnViewOutstandingOrders_Click" /></li>
                                         <li>
-                                            <asp:Button ID="btnpast2" runat="server" Text="Past" class="btn btn-light" OnClick="btnViewPastOrders_Click" /></li>
+                                            <asp:Button ID="btnpast2" runat="server" Text="Past" class="btn btn-secondary" OnClick="btnViewPastOrders_Click" /></li>
                                     </ul>
                                 </div>
                             </div>
@@ -392,7 +392,7 @@
                     <div runat="server" visible="false" id="divAddBrand">
                         <div class="jumbotron bg-dark text-white">
                             <h1>
-                                <asp:Label runat="server" ID="Label1" Text="New Brand"></asp:Label></h1>
+                                <asp:Label runat="server" ID="lblNewBrandHeader" Text="New Brand"></asp:Label></h1>
                         </div>
                         <!-- Line Break -->
                         <br />
@@ -439,7 +439,7 @@
                     <div runat="server" visible="false" id="divAddSupplier">
                         <div class="jumbotron bg-dark text-white">
                             <h1>
-                                <asp:Label runat="server" ID="Label2" Text="New Supplier"></asp:Label></h1>
+                                <asp:Label runat="server" ID="lblNewSuppHeader" Text="New Supplier"></asp:Label></h1>
                         </div>
                         <!-- Line Break -->
                         <br />
@@ -571,15 +571,8 @@
                                 <asp:TextBox ID="txtAddLineSuburb" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-2"></div>
-                            <div class="col-6">
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtAddLineSuburb" runat="server"
-                                    ErrorMessage="*Contact Email is required" ControlToValidate="txtAddLineSuburb"
-                                    ForeColor="Red"></asp:RequiredFieldValidator>
-                            </div>
-                            <div class="col-4"></div>
-                        </div>
+                        <!-- Line Break -->
+                        <br />
                         <div class="row">
                             <div class="col-2">
                                 City:

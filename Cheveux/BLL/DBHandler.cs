@@ -247,9 +247,19 @@ namespace BLL
             return db.getAllBrands();
         }
 
+        public BRAND getBrand(string BrandID)
+        {
+            return db.getBrand(BrandID);
+        }
+
         public bool newBrand(BRAND newBrand)
         {
             return db.newBrand(newBrand);
+        }
+
+        public bool editBrand(BRAND brandUpdate)
+        {
+            return db.editBrand(brandUpdate);
         }
 
         public BRAND CheckForBrand(string id)
@@ -272,6 +282,11 @@ namespace BLL
         public bool newSupplier(Supplier newSupp)
         {
             return db.newSupplier(newSupp);
+        }
+
+        public bool editSupplier(Supplier suppUpdate)
+        {
+            return db.editSupplier(suppUpdate);
         }
 
         public Supplier CheckForSupplier(string id)
