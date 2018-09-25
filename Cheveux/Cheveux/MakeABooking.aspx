@@ -40,8 +40,16 @@
                                                 <asp:ListBox runat="server" ID="lbChooseAStylist" CssClass="form-control" DataTextField="FirstName" DataValueField="UserID" Height="300" AutoPostBack="true"></asp:ListBox>
                                         </div>
                                          <div runat="server" id="divSelectDate" style="border: solid #F05F40 2px; height: 400px; overflow-y: scroll;">
-
+                                               <asp:Calendar runat="server" ID="calSchedule" Width="300" Height="150" OnDayRender="calBooking_DayRender" OnSelectionChanged="calBooking_SelectionChanged" ></asp:Calendar>
                                          </div>
+                                        <asp:DropDownList runat="server" id="drpWhen" AutoPostBack="true" OnSelectedIndexChanged="drpWhen_SelectionIndexChanged">
+                                            <asp:ListItem text="--Select Time Frame--" value="0"></asp:ListItem>
+                                            <asp:ListItem text="Whole Day" value="1"></asp:ListItem>
+                                            <asp:ListItem text="Morning" value="2"></asp:ListItem>
+                                            <asp:ListItem text="Afternoon" value="3"></asp:ListItem>                                            
+                                        </asp:DropDownList>
+                                        
+                                        <asp:Button class='btn btn-primary' runat="server" ID="btnManageSchedule" OnClick="btnNext_Click" Text="Submit" />
                                     </div>
                                 </div>
                             </div>

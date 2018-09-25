@@ -172,6 +172,10 @@ namespace Cheveux
                 serviceList = handler.BLL_GetAllServices();
                 stylistList = handler.BLL_GetAllStylists();
                 slotList = handler.BLL_GetAllTimeSlots();
+                if (cookie["UT"] == "M")
+                {
+                    divManageSchedule.Visible = true;
+                }
             }
             catch (Exception err)
             {
@@ -1175,19 +1179,29 @@ namespace Cheveux
 
         private int CalculateSlotLength(object sender, EventArgs e)
         {
-            if (pickedServiceID != null)
-            {
-                pickedServiceID.Clear();
-            }
-            service = new SERVICE();
-            rblPickAServiceA_SelectedIndexChanged(sender, e);
-            rblPickAServiceB_SelectedIndexChanged(sender, e);
-            cblPickAServiceN_SelectedIndexChanged(sender, e);
             int slotLength = 0;
-            foreach (string id in pickedServiceID)
+            HttpCookie Authcookie = Request.Cookies["CheveuxUserID"];
+            if (Authcookie["UT"].ToString()[0] == 'M')
             {
-                slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
+                slotLength = LeaveLength();
+            }
+            else
+            {
 
+                if (pickedServiceID != null)
+                {
+                    pickedServiceID.Clear();
+                }
+                service = new SERVICE();
+                rblPickAServiceA_SelectedIndexChanged(sender, e);
+                rblPickAServiceB_SelectedIndexChanged(sender, e);
+                cblPickAServiceN_SelectedIndexChanged(sender, e);
+
+                foreach (string id in pickedServiceID)
+                {
+                    slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
+
+                }
             }
             return slotLength;
         }
@@ -1617,8 +1631,39 @@ namespace Cheveux
             Page.ClientScript.RegisterStartupScript(this.GetType(), "OpenWindow", "window.open('/Authentication/NewAccount.aspx?Type=NewCust&PreviousPage=MakeABooking','_newtab');", true);
         }
         #endregion
+        #region Manage Schedule
+        //Load stylist list
+        private void LoadStylists()
+        {
+            lbChooseAStylist.Items.Clear();
+            foreach (SP_GetStylists stylists in stylistList)
+            {
+                ListItem item = new ListItem(stylists.FirstName, stylists.UserID);
+                lbChooseAStylist.Items.Add(item);
+            }
+
+        }
+        private int LeaveLength()
+        {
+            int leaveLength = 0;
+
+            if(drpWhen.SelectedValue == "1")
+            {
+                leaveLength = 20;
+            }
+            else if(drpWhen.SelectedValue == "2")
+            {
+                leaveLength = 10;
+            }
+            else if(drpWhen.SelectedValue == "3")
+            {
+                leaveLength = 10;
+            }
+            return leaveLength;
+        }
+        #endregion Manage Schedule
         #endregion
-        
+
         #region Summary
         private void FillSummary(object sender, EventArgs e)
         {
