@@ -14,7 +14,7 @@ namespace Cheveux.Cheveux
 
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        //HttpCookie cookie = null;
+        HttpCookie cookie = null;
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
         List<SP_GetProductTypes> productTypes = null;
         int treatCount = 0;
@@ -83,6 +83,9 @@ namespace Cheveux.Cheveux
             string productID = Request.QueryString["ProductID"];
             string action = Request.QueryString["Action"];
 
+            //access Contorl
+            cookie = Request.Cookies["CheveuxUserID"];
+
             //load all products
             if (action == null)
             {
@@ -106,7 +109,7 @@ namespace Cheveux.Cheveux
                     LoadProduct(productID);
                 }
             }
-            else if(action == "add")
+            else if(action == "add" && (cookie["UT"] == "M" || cookie["UT"] == "R"))
             {
                 phProducts.Visible = false;
                 addandedit.Visible = true;

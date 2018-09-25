@@ -132,7 +132,7 @@
 
                         <div runat="server" id="divOrders">
                             <!--Orders-->
-                            <h1>Outstanding Product Orders </h1>
+                            <h1>Outstanding Purchase Orders </h1>
                             <asp:Label runat="server" ID="outstandingOrdersLable"></asp:Label>
                             <asp:Table ID="tblOutstandingOrders" runat="server"></asp:Table>
                         </div>
@@ -146,6 +146,18 @@
                                 <h1>Alerts </h1>
                                 <asp:Table ID="tblAlerts" runat="server">
                                 </asp:Table>
+                            </div>
+                        </div>
+                        <!--Line Break-->
+                        <br />
+                        <div style="border: solid #F05F40 2px;" runat="server" id="DivNewSale">
+                            <!--Bookings-->
+                            <div class="container text-center">
+                                <br />
+                                <asp:Button ID="btnNewSale" runat="server" OnClick="btnNewSale_Click"
+                                    Text="New Sale" CssClass="btn btn-secondary btn-lg" />
+                                <br />
+                                <br />
                             </div>
                         </div>
                         <!--Line Break-->

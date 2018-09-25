@@ -261,6 +261,23 @@ namespace DAL
             }
         }
 
+        public bool createSalesRecord(SALE newSale)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@SaleID", newSale.SaleID),
+                    new SqlParameter("@CustID", newSale.CustID)
+                };
+
+                return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Bookings
@@ -656,6 +673,77 @@ namespace DAL
         #endregion
 
         #region CheckIN CheckOut Cust Vist
+        public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
+        {
+            SP_ViewCustVisit visit = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustomerID", customerID),
+                new SqlParameter("@BookingID", bookingID),
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ViewCustVisit",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        visit = new SP_ViewCustVisit
+                        {
+                            CustomerID = Convert.ToString(row["CustomerID"]),
+                            Date = Convert.ToDateTime(row["Date"]),
+                            BookingID = Convert.ToString(row["BookingID"]),
+                            Description = Convert.ToString(row["Description"])
+                        };
+                    }
+                    return visit;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool UpdateCustVisit(CUST_VISIT visit, BOOKING b)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@CustomerID", visit.CustomerID.ToString()),
+                    new SqlParameter("@BookingID", visit.BookingID.ToString()),
+                    new SqlParameter("@Description", visit.Description.ToString())
+                };
+                return DBHelper.NonQuery("SP_UpdateCustVisit", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool CreateCustVisit(CUST_VISIT cust_visit)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@CustomerID",cust_visit.CustomerID.ToString()),
+                    new SqlParameter("@Date", cust_visit.Date.ToString()),
+                    new SqlParameter("@PrimaryBookingID", cust_visit.BookingID.ToString()),
+                    new SqlParameter("@Description", cust_visit.Description.ToString()),
+                };
+
+                return DBHelper.NonQuery("SP_CreateCustVisit", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
         public SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID)
         {
             SP_GetCustomerBooking booking = null;
@@ -690,7 +778,7 @@ namespace DAL
             }
         }
 
-        public bool createSalesRecord(string bookingID)
+        public bool createSalesRecordForBooking(string bookingID)
         {
             try
             {
@@ -699,7 +787,7 @@ namespace DAL
                     new SqlParameter("@BookingID", bookingID)
                 };
 
-                return DBHelper.NonQuery("SP_CreateSalesRecord", CommandType.StoredProcedure, pars);
+                return DBHelper.NonQuery("SP_CreateSalesRecordForBooking", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -1370,40 +1458,7 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
         }
-
-        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
-        {
-            List<SP_GetBrandsForProductType> list = new List<SP_GetBrandsForProductType>();
-            SP_GetBrandsForProductType b = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@productType",type)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            b = new SP_GetBrandsForProductType();
-                            b.BrandID = row["BrandID"].ToString();
-                            b.Name = row["Name"].ToString();
-                            b.Type = row["Type(T/A)"].ToString();
-                            list.Add(b);
-                        }
-                    }
-                    return list;
-                }
-            }
-            catch (Exception E)
-            {
-                throw new ApplicationException(E.ToString());
-            }
-
-        }
-        
+                
         public List<PRODUCT> getAllProducts()
         {
             PRODUCT product = null;
@@ -1690,75 +1745,7 @@ namespace DAL
                 throw new ApplicationException(E.ToString());
             }
         }
-        
-        public Supplier getSupplier(string suppID)
-        {
-            Supplier supplier = new Supplier();
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@SuppID", suppID)
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("getSupplierDetails", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            supplier.supplierID = row["SupplierID"].ToString();
-                            supplier.supplierName = row["SupplierName"].ToString();
-                            supplier.contactName = row["ContactName"].ToString();
-                            supplier.contactNo = row["ContactNo"].ToString();
-                            supplier.AddressLine1 = row["AddressLine1"].ToString();
-                            supplier.AddressLine2 = row["AddressLine2"].ToString();
-                            supplier.Suburb = row["Suburb"].ToString();
-                            supplier.City = row["City"].ToString();
-                            supplier.contactEmail = row["ContactEmail"].ToString();
-                        }
-                    }
-                    return supplier;
-                }
-            }
-            catch (Exception E)
-            {
-                throw new ApplicationException(E.ToString());
-            }
-        }
-
-        public List<Supplier> getSuppliers()
-        {
-            List<Supplier> list = new List<Supplier>();
-            try
-            {
-                using (DataTable table = DBHelper.Select("SP_Get_Supplier", CommandType.StoredProcedure))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            Supplier supplier = new Supplier();
-                            supplier.supplierID = row["SupplierID"].ToString();
-                            supplier.supplierName = row["SupplierName"].ToString();
-                            supplier.contactName = row["ContactName"].ToString();
-                            supplier.contactNo = row["ContactNo"].ToString();
-                            supplier.AddressLine1 = row["AddressLine1"].ToString();
-                            supplier.AddressLine2 = row["AddressLine2"].ToString();
-                            supplier.Suburb = row["Suburb"].ToString();
-                            supplier.City = row["City"].ToString();
-                            supplier.contactEmail = row["ContactEmail"].ToString();
-                            list.Add(supplier);
-                        }
-                    }
-                    return list;
-                }
-            }
-            catch (Exception E)
-            {
-                throw new ApplicationException(E.ToString());
-            }
-        }
-
+       
         public bool newProductOrder(Order newOrder)
         {
             try
@@ -1934,7 +1921,316 @@ namespace DAL
 
         }
         #endregion
-        
+
+        #region Brands
+        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
+        {
+            List<SP_GetBrandsForProductType> list = new List<SP_GetBrandsForProductType>();
+            SP_GetBrandsForProductType b = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@productType",type)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBrandsForProductType", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            b = new SP_GetBrandsForProductType();
+                            b.BrandID = row["BrandID"].ToString();
+                            b.Name = row["Name"].ToString();
+                            b.Type = row["Type(T/A)"].ToString();
+                            list.Add(b);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+
+        }
+
+        public List<BRAND> getAllBrands()
+        {
+            List<BRAND> brandList = new List<BRAND>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetAllBrands", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            BRAND brand = new BRAND();
+                            brand.BrandID = row["BrandID"].ToString();
+                            brand.Name = row["Name"].ToString();
+                            brand.Type = row["Type(T/A)"].ToString();
+                            brandList.Add(brand);
+                        }
+                    }
+                    return brandList;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+
+        }
+
+        public BRAND getBrand(string BrandID)
+        {
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BrandID", BrandID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBrand", CommandType.StoredProcedure, pars))
+                {
+                    BRAND brand = new BRAND();
+                    if (table.Rows.Count == 1)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            brand.BrandID = row["BrandID"].ToString();
+                            brand.Name = row["Name"].ToString();
+                            brand.Type = row["Type(T/A)"].ToString();
+                        }
+                    }
+                    return brand;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+
+        }
+
+        public bool newBrand (BRAND newBrand)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BrandID", newBrand.BrandID),
+                new SqlParameter("@BrandName", newBrand.Name),
+                new SqlParameter("@Type", newBrand.Type)
+                };
+
+                return DBHelper.NonQuery("SP_NewBrand", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool editBrand (BRAND brandUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@BrandID", brandUpdate.BrandID),
+                new SqlParameter("@BrandName", brandUpdate.Name),
+                new SqlParameter("@Type", brandUpdate.Type)
+                };
+
+                return DBHelper.NonQuery("SP_EditBrand", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public BRAND CheckForBrand(string id)
+        {
+            BRAND TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BrandID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForBrand",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new BRAND
+                        {
+                            BrandID = row[0].ToString()
+                        };
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
+        #region Supplier
+        public Supplier getSupplier(string suppID)
+        {
+            Supplier supplier = new Supplier();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SuppID", suppID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("getSupplierDetails", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            supplier.supplierID = row["SupplierID"].ToString();
+                            supplier.supplierName = row["SupplierName"].ToString();
+                            supplier.contactName = row["ContactName"].ToString();
+                            supplier.contactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.contactEmail = row["ContactEmail"].ToString();
+                        }
+                    }
+                    return supplier;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
+        public List<Supplier> getSuppliers()
+        {
+            List<Supplier> list = new List<Supplier>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_Get_Supplier", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            Supplier supplier = new Supplier();
+                            supplier.supplierID = row["SupplierID"].ToString();
+                            supplier.supplierName = row["SupplierName"].ToString();
+                            supplier.contactName = row["ContactName"].ToString();
+                            supplier.contactNo = row["ContactNo"].ToString();
+                            supplier.AddressLine1 = row["AddressLine1"].ToString();
+                            supplier.AddressLine2 = row["AddressLine2"].ToString();
+                            supplier.Suburb = row["Suburb"].ToString();
+                            supplier.City = row["City"].ToString();
+                            supplier.contactEmail = row["ContactEmail"].ToString();
+                            list.Add(supplier);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
+
+        public bool newSupplier(Supplier newSupp)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@SuppID", newSupp.supplierID),
+                new SqlParameter("@SuppName", newSupp.supplierName),
+                new SqlParameter("@ContactName", newSupp.contactName),
+                new SqlParameter("@ContactNo", newSupp.contactNo),
+                new SqlParameter("@AddressL1", newSupp.AddressLine1),
+                new SqlParameter("@AddressL2", newSupp.AddressLine2),
+                new SqlParameter("@Suburb", newSupp.Suburb),
+                new SqlParameter("@City", newSupp.City),
+                new SqlParameter("@ContactEmail", newSupp.contactEmail),
+                };
+
+                return DBHelper.NonQuery("SP_NewSupplier", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool editSupplier(Supplier suppUpdate)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@SuppID", suppUpdate.supplierID),
+                new SqlParameter("@SuppName", suppUpdate.supplierName),
+                new SqlParameter("@ContactName", suppUpdate.contactName),
+                new SqlParameter("@ContactNo", suppUpdate.contactNo),
+                new SqlParameter("@AddressL1", suppUpdate.AddressLine1),
+                new SqlParameter("@AddressL2", suppUpdate.AddressLine2),
+                new SqlParameter("@Suburb", suppUpdate.Suburb),
+                new SqlParameter("@City", suppUpdate.City),
+                new SqlParameter("@ContactEmail", suppUpdate.contactEmail),
+                };
+
+                return DBHelper.NonQuery("SP_EditSupplier", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public Supplier CheckForSupplier(string id)
+        {
+            Supplier TF = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@SuppID", id)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForSupplier",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        TF = new Supplier
+                        {
+                            supplierID = row[0].ToString()
+                        };
+                    }
+                    return TF;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         #region Bussines Table
         public BUSINESS getBusinessTable()
         {
@@ -2310,7 +2606,125 @@ namespace DAL
             }
         }
         #endregion
+        #region Reviews
+        public List<SP_GetReviews> getAllReviews()
+        {
+            List<SP_GetReviews> list = new List<SP_GetReviews>();
+            try
+            {
+                using(DataTable table = DBHelper.Select("SP_GetAllReviews", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetReviews emp = new SP_GetReviews()
+                            {
+                                ReviewID = row["ReviewID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                EmployeeID = row["EmployeeID"].ToString(),
+                                PrimaryBookingID = row["primaryBookingID"].ToString(),
+                                Date = Convert.ToDateTime(row["Date"].ToString()),
+                                Time = Convert.ToDateTime(row["Time"].ToString()),
+                                Rating = Convert.ToDouble(row["Rating"].ToString()),
+                                Comment = row["Comment"].ToString()
+                            };
+                            list.Add(emp);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool reviewBooking(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@customerID",r.CustomerID),
+                    new SqlParameter("@employeeID", r.EmployeeID),
+                    new SqlParameter("@primaryBookingID",r.PrimaryBookingID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_ReviewBooking", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool reviewStylist(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@customerID",r.CustomerID),
+                    new SqlParameter("@employeeID", r.EmployeeID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_ReviewStylist", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool updateStylistReview(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@employeeID", r.EmployeeID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_UpdateStylistReview", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool updateBookingReview(REVIEW r)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@date",r.Date),
+                    new SqlParameter("@time",r.Time),
+                    new SqlParameter("@rating",r.Rating),
+                    new SqlParameter("@comment",r.Comment)
+                };
+                return DBHelper.NonQuery("SP_UpdateBookingReview", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion 
 
+        #region Employees
         public List<SP_GetEmpNames> GetEmpNames()
         {
             List<SP_GetEmpNames> list = new List<SP_GetEmpNames>();
@@ -2366,77 +2780,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-
-        public SP_ViewCustVisit ViewCustVisit(string customerID, string bookingID)
-        {
-            SP_ViewCustVisit visit = null;
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@CustomerID", customerID),
-                new SqlParameter("@BookingID", bookingID),
-            };
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_ViewCustVisit",
-            CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count == 1)
-                    {
-                        DataRow row = table.Rows[0];
-                        visit = new SP_ViewCustVisit
-                        {
-                            CustomerID = Convert.ToString(row["CustomerID"]),
-                            Date = Convert.ToDateTime(row["Date"]),
-                            BookingID = Convert.ToString(row["BookingID"]),
-                            Description = Convert.ToString(row["Description"])
-                        };
-                    }
-                    return visit;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool UpdateCustVisit(CUST_VISIT visit, BOOKING b)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@CustomerID", visit.CustomerID.ToString()),
-                    new SqlParameter("@BookingID", visit.BookingID.ToString()),
-                    new SqlParameter("@Description", visit.Description.ToString())
-                };
-                return DBHelper.NonQuery("SP_UpdateCustVisit", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-        public bool CreateCustVisit(CUST_VISIT cust_visit)
-        {
-            try
-            {
-                SqlParameter[] pars = new SqlParameter[]
-                {
-                    new SqlParameter("@CustomerID",cust_visit.CustomerID.ToString()),
-                    new SqlParameter("@Date", cust_visit.Date.ToString()),
-                    new SqlParameter("@PrimaryBookingID", cust_visit.BookingID.ToString()),
-                    new SqlParameter("@Description", cust_visit.Description.ToString()),
-                };
-
-                return DBHelper.NonQuery("SP_CreateCustVisit", CommandType.StoredProcedure, pars);
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
+        #endregion
         
         public List<SP_GetServices> GetAllServices()
         {
@@ -4011,6 +4355,46 @@ namespace DAL
             {
                 throw new ApplicationException(e.ToString());
 
+            }
+        }
+        public List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day)
+        {
+            SP_GetStylistBookings s = null;
+            List<SP_GetStylistBookings> bookings = new List<SP_GetStylistBookings>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@customerID", customerID),
+                new SqlParameter("@date",day)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerPastBookingsForDate", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            s = new SP_GetStylistBookings
+                            {
+                                BookingID = row["BookingID"].ToString(),
+                                PrimaryID = row["PrimaryID"].ToString(),
+                                StylistID = row["StylistID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                FullName = row["CustomerFullName"].ToString(),
+                                BookingDate = Convert.ToDateTime(row["Date"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                Arrived = row["Arrived"].ToString()
+                            };
+                            bookings.Add(s);
+                        }
+                    }
+                }
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
             }
         }
     }

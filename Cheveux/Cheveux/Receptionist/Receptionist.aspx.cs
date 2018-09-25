@@ -60,6 +60,11 @@ namespace Cheveux
                 #region Alerts
                 //Check For Low Stock
                 checkForLowStock();
+
+                if(alertCount == 0)
+                {
+                    alertsContainer.Visible = false;
+                }
                 #endregion
 
                 #region Header
@@ -539,21 +544,18 @@ namespace Cheveux
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "Out Of Stock",
-                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>"
-                             + treat.Name + "</a>");
+                            "<a href='../Manager/Products.aspx?ProductID="
+                            + treat.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + treat.Name + "</a>");
                         dashOutCount++;
                     }
                     else if (treat.Qty <= 0 && dashOutCount > 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "",
-                            "<a href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>"  + treat.Name + "</a>");
+                            "<a href='../Manager/Products.aspx?ProductID="
+                            + treat.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + treat.Name + "</a>");
                         dashOutCount++;
                     }
                 }
@@ -564,26 +566,23 @@ namespace Cheveux
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "Out Of Stock",
-                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>" +
-                            "" + Access.Name + "</a>");
+                            "<a href='../Manager/Products.aspx?ProductID="
+                            + Access.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + Access.Name + "</a>");
                         dashOutCount++;
                     }
                     else if (Access.Qty <= 0 && dashOutCount > 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#10071;", "",
-                            "<a href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>"+
-                            "" + Access.Name + "</a>");
+                            "<a href='../Manager/Products.aspx?ProductID="
+                            + Access.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + Access.Name + "</a>");
                         dashOutCount++;
                     }
                 }
                 #endregion
+
                 #region Low Stock
                 //check for low stock
                 //check low stock treatments
@@ -593,11 +592,9 @@ namespace Cheveux
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
-                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>"+
-                            "" + treat.Name + "</a><br/> "
+                            "<a href='../Manager/Products.aspx?ProductID="
+                            + treat.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + treat.Name + "</a><br/> "
                             + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -605,11 +602,9 @@ namespace Cheveux
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "",
-                            " <a  href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + treat.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>" +
-                            "" + treat.Name + "</a><br/> "
+                            " <a href='../Manager/Products.aspx?ProductID="
+                            + treat.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + treat.Name + "</a><br/> "
                             + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -621,11 +616,9 @@ namespace Cheveux
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
-                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>" +
-                            "" + Access.Name + "</a><br/>"
+                            "<a href='../Manager/Products.aspx?ProductID="
+                            + Access.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + Access.Name + "</a><br/>"
                             + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -633,11 +626,9 @@ namespace Cheveux
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "",
-                            "<a  href='../Manager/Products.aspx?Action=NewOrder&" +
-                                            "ProductID="
-                            + Access.ProductID.ToString().Replace(" ", string.Empty) +
-                            "&PreviousPage=Receptionist.aspx'>" +
-                            "" + Access.Name + "</a><br/> "
+                            "<a href='../Manager/Products.aspx?ProductID="
+                            + Access.ProductID.ToString() + "&Action=NewOrder" +
+                                            "'>" + Access.Name + "</a><br/> "
                             + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
@@ -772,6 +763,13 @@ namespace Cheveux
                 outstandingOrdersLable.Text =
                         "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
+        }
+        #endregion
+
+        #region New Sale
+        protected void btnNewSale_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../ViewBooking.aspx?BookingType=CheckOut&CheckOutType=NewSale");
         }
         #endregion
     }

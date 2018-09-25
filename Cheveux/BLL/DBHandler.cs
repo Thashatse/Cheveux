@@ -57,6 +57,11 @@ namespace BLL
         {
             return db.UpdateProductSalesDTLRecordQty(Sale);
         }
+
+        public bool createSalesRecord(SALE newSale)
+        {
+            return db.createSalesRecord(newSale);
+        }
         #endregion
 
         #region User Accounts
@@ -108,8 +113,7 @@ namespace BLL
         {
             return db.CheckForProduct(id);
         }
-
-
+        
         public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
             return db.addAccessories(a, p);
@@ -135,11 +139,6 @@ namespace BLL
         {
             return db.addProduct(addProduct);
         }
-
-        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
-        {
-            return db.getBrandsForProductType(type);
-        }
         #endregion
 
         #region Product Orders
@@ -163,16 +162,6 @@ namespace BLL
             return db.getProductOrderDL(orderID);
         }
         
-        public List<Supplier> getSuppliers()
-        {
-            return db.getSuppliers();
-        }
-
-        public Supplier getSupplier(string suppID)
-        {
-            return db.getSupplier(suppID);
-        }
-
         public bool newProductOrder(Order newOrder)
         {
             return db.newProductOrder(newOrder);
@@ -244,7 +233,66 @@ namespace BLL
         public SP_GetService BLL_GetServiceFromID(string serviceID)
         {
             return db.GetServiceFromID(serviceID);
-        } 
+        }
+        #endregion
+
+        #region Brands
+        public List<SP_GetBrandsForProductType> getBrandsForProductType(char type)
+        {
+            return db.getBrandsForProductType(type);
+        }
+
+        public List<BRAND> getAllBrands()
+        {
+            return db.getAllBrands();
+        }
+
+        public BRAND getBrand(string BrandID)
+        {
+            return db.getBrand(BrandID);
+        }
+
+        public bool newBrand(BRAND newBrand)
+        {
+            return db.newBrand(newBrand);
+        }
+
+        public bool editBrand(BRAND brandUpdate)
+        {
+            return db.editBrand(brandUpdate);
+        }
+
+        public BRAND CheckForBrand(string id)
+        {
+            return db.CheckForBrand(id);
+        }
+        #endregion
+
+        #region Supplier
+        public List<Supplier> getSuppliers()
+        {
+            return db.getSuppliers();
+        }
+
+        public Supplier getSupplier(string suppID)
+        {
+            return db.getSupplier(suppID);
+        }
+
+        public bool newSupplier(Supplier newSupp)
+        {
+            return db.newSupplier(newSupp);
+        }
+
+        public bool editSupplier(Supplier suppUpdate)
+        {
+            return db.editSupplier(suppUpdate);
+        }
+
+        public Supplier CheckForSupplier(string id)
+        {
+            return db.CheckForSupplier(id);
+        }
         #endregion
 
         #region Manager Dash Board
@@ -263,6 +311,29 @@ namespace BLL
         public List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate)
         {
             return db.searchBookings(startDate, endDate);
+        }
+        #endregion
+
+        #region Reviews
+        public List<SP_GetReviews> getAllReviews()
+        {
+            return db.getAllReviews();
+        }
+        public bool reviewBooking(REVIEW r)
+        {
+            return db.reviewBooking(r);
+        }
+        public bool reviewStylist(REVIEW r)
+        {
+            return db.reviewStylist(r);
+        }
+        public bool updateBookingReview(REVIEW r)
+        {
+            return db.updateBookingReview(r);
+        }
+        public bool updateStylistReview(REVIEW r)
+        {
+            return db.updateStylistReview(r);
         }
         #endregion
 
@@ -437,9 +508,9 @@ namespace BLL
             return db.getBookingDetaisForCheckOut(BookingID);
         }
 
-        public bool createSalesRecord(string bookingID)
+        public bool createSalesRecordForBooking(string bookingID)
         {
-            return db.createSalesRecord(bookingID);
+            return db.createSalesRecordForBooking(bookingID);
         }
 
         public bool updateVatRate(string bussinesID, int vatRate)
@@ -625,6 +696,10 @@ namespace BLL
          public List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate)
         {
             return db.getTopCustomerByBookings(startDate, endDate);
+        }
+        public List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day)
+        {
+            return db.getCustomerPastBookingsForDate(customerID, day);
         }
     }
 }

@@ -31,7 +31,7 @@
     <!-- Search Function-->
     <script>
         function search() {
-            window.location.href = "../Search.aspx?ST="+document.getElementById('serchTerm').value;
+            window.location.href = "../Search.aspx?ST=" + document.getElementById('serchTerm').value;
         }
     </script>
 
@@ -40,30 +40,30 @@
     </asp:ContentPlaceHolder>
 
     <!-- Loading Wheel -->
-	<style type="text/css">
-	    .modal {
-	        position: fixed;
-	        top: 0;
-	        left: 0;
-	        background-color: black;
-	        z-index: 99;
-	        opacity: 0.8;
-	        filter: alpha(opacity=80);
-	        -moz-opacity: 0.8;
-	        min-height: 100%;
-	        width: 100%;
-	    }
+    <style type="text/css">
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+            width: 100%;
+        }
 
-	    .loading {
-	        border: 5px solid #F05F40;
-	        width: 300px;
-	        height: 200px;
-	        display: none;
-	        position: fixed;
-	        background-color: White;
-	        z-index: 999;
-	    }
-	</style>
+        .loading {
+            border: 5px solid #F05F40;
+            width: 300px;
+            height: 200px;
+            display: none;
+            position: fixed;
+            background-color: White;
+            z-index: 999;
+        }
+    </style>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
@@ -99,70 +99,77 @@
     <!-- End Loading Wheel -->
 </head>
 <body id="page-top">
-        
-            <!-- Unpblished -->
-        <!--Nav Bar-->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container">
-                 <a class="navbar-brand js-scroll-trigger" href="../Receptionist/Receptionist.aspx#page-top">Cheveux
-                 </a>
+
+    <!-- Unpblished -->
+    <!--Nav Bar-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="../Receptionist/Receptionist.aspx#page-top">Cheveux
+            </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Receptionist/Appointments.aspx" style="text-decoration:none;">Schedules</a>
-                        </li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="../Receptionist/Appointments.aspx" style="text-decoration: none;">Schedules</a>
+                    </li>
+                    
+                    <li class='nav-item dropdown'>
+                        <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" href="../Manager/Products.aspx"
+                            style="text-decoration: none;">Products</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../Manager/Products.aspx">Products</a>
+                            <a class="dropdown-item" href="../Manager/Products.aspx?View=OutOrders">Purchase Orders</a>
+                            <a class="dropdown-item" href="../Manager/Products.aspx?View=Brands">Brands</a>
+                            <a class="dropdown-item" href="../Manager/Products.aspx?View=Supps">Suppliers</a>
+                        </div>
+                    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="../Manager/Products.aspx" style="text-decoration:none;">Products</a>
-                        </li>
-                        
-                        <li class="nav-item">
+                    <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
                             <!--Login Button-->
                             <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
                         </asp:PlaceHolder>
-                        </li>
-                        <li class="nav-item">
-                            <asp:PlaceHolder runat="server" ID="LogedIn">
-                                <!--Profile Button-->
-                                <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
-                            </asp:PlaceHolder>
-                        </li>
-                        <li class="nav-item">
-                            <!--Text Box-->
-                            <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
-                        </li>
-                        <li class="nav-item">
-                            <!--Search Button-->
-                            <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <!--Help-->
-                            <a class="nav-link js-scroll-trigger" href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <!--Place older for Content-->
-        <div class="theTop">
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
-        </div>
-
-        <!--Sticky back-to-top button-->
-        <div class='scrolltop'>
-            <div class='scroll icon'>
-                <i class="fa fa-4x fa-angle-up"></i>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <asp:PlaceHolder runat="server" ID="LogedIn">
+                            <!--Profile Button-->
+                            <asp:PlaceHolder runat="server" ID="profile"></asp:PlaceHolder>
+                        </asp:PlaceHolder>
+                    </li>
+                    <li class="nav-item">
+                        <!--Text Box-->
+                        <input class="form-control input-sm" id="serchTerm" type="text" placeholder="Search">
+                    </li>
+                    <li class="nav-item">
+                        <!--Search Button-->
+                        <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
+                    </li>
+                    <li class="nav-item">
+                        <!--Help-->
+                        <a class="nav-link js-scroll-trigger" href="../Help/CheveuxHelpCenter.aspx" target="_blank" style="text-decoration: none;">Help</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-     <!-- Bootstrap core JavaScript -->
+    <!--Place older for Content-->
+    <div class="theTop">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+
+    <!--Sticky back-to-top button-->
+    <div class='scrolltop'>
+        <div class='scroll icon'>
+            <i class="fa fa-4x fa-angle-up"></i>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
     <script src="../Theam/vendor/jquery/jquery.min.js"></script>
     <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

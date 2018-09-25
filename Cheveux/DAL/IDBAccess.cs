@@ -66,6 +66,7 @@ namespace DAL
         List<SP_GetStylistBookings> getAllStylistsPastBksForDate(DateTime bookingDate, string sortBy, string sortDir);
         bool deleteSecondaryBooking(string BookingID);
         SP_GetMultipleServicesTime getMultipleServicesTime(string primaryBookingID);
+        List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day);
         #endregion
 
         #region search
@@ -87,6 +88,8 @@ namespace DAL
         bool removeProductSalesDTLRecord(SALES_DTL Sale);
 
         bool UpdateProductSalesDTLRecordQty(SALES_DTL Sale);
+
+        bool createSalesRecord(SALE newSale);
         #endregion
 
         #region Email/SMS Notifications
@@ -99,7 +102,6 @@ namespace DAL
         bool addProduct(PRODUCT addProduct);
         bool addAccessories(ACCESSORY a, PRODUCT p);
         bool addTreatments(TREATMENT t, PRODUCT p);
-        List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
         #endregion
 
         #region Product Orders
@@ -110,11 +112,7 @@ namespace DAL
         List<OrderViewModel> getPastOrders();
 
         List<OrderViewModel> getProductOrderDL(string orderID);
-
-        List<Supplier> getSuppliers();
-
-        Supplier getSupplier(string suppID);
-
+        
         bool newProductOrder(Order newOrder);
 
         bool newProductOrderDL(Order_DTL newOrderDL);
@@ -132,15 +130,43 @@ namespace DAL
         SP_GetAllTreatments selectTreatment(string treatmentID);
         #endregion
 
+        #region Brands
+        List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
+        BRAND getBrand(string BrandID);
+        List<BRAND> getAllBrands();
+        bool newBrand(BRAND newBrand);
+        BRAND CheckForBrand(string id);
+        bool editBrand(BRAND brandUpdate);
+        #endregion
+
+        #region Supplier
+        List<Supplier> getSuppliers();
+
+        Supplier getSupplier(string suppID);
+
+        bool newSupplier(Supplier newSupp);
+
+        bool editSupplier(Supplier suppUpdate);
+
+        Supplier CheckForSupplier(string id);
+        #endregion
+
         #region Manager Dash Board
         ManagerStats GetManagerStats();
+        #endregion
+        #region Reviews
+        List<SP_GetReviews> getAllReviews();
+        bool reviewBooking(REVIEW r);
+        bool reviewStylist(REVIEW r);
+        bool updateStylistReview(REVIEW r);
+        bool updateBookingReview(REVIEW r);
         #endregion
 
         List<SP_GetEmpNames> GetEmpNames();
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
-        bool createSalesRecord(string bookingID);
+        bool createSalesRecordForBooking(string bookingID);
         bool createSalesDTLRecord(SALES_DTL detailLine);
         bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
         string getSalePaymentType(String SaleID);

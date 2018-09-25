@@ -58,6 +58,33 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSelectDate;
         
         /// <summary>
+        /// calSchedule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calSchedule;
+        
+        /// <summary>
+        /// drpWhen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpWhen;
+        
+        /// <summary>
+        /// btnManageSchedule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnManageSchedule;
+        
+        /// <summary>
         /// btnPrevious control.
         /// </summary>
         /// <remarks>

@@ -37,6 +37,8 @@ namespace BLL
         bool removeProductSalesDTLRecord(SALES_DTL Sale);
 
         bool UpdateProductSalesDTLRecordQty(SALES_DTL Sale);
+
+        bool createSalesRecord(SALE newSale);
         #endregion
 
         #region User Accounts
@@ -71,10 +73,6 @@ namespace BLL
 
         List<OrderViewModel> getProductOrderDL(string orderID);
 
-        List<Supplier> getSuppliers();
-
-        Supplier getSupplier(string suppID);
-
         bool newProductOrder(Order newOrder);
 
         bool newProductOrderDL(Order_DTL newOrderDL);
@@ -93,6 +91,26 @@ namespace BLL
         SP_GetBraidService BLL_GetBraidServiceFromID(string serviceID);
         #endregion
 
+        #region Brands
+        List<BRAND> getAllBrands();
+        BRAND getBrand(string BrandID);
+        bool newBrand(BRAND newBrand);
+        BRAND CheckForBrand(string id);
+        bool editBrand(BRAND brandUpdate);
+        #endregion
+
+        #region Supplier
+        List<Supplier> getSuppliers();
+
+        Supplier getSupplier(string suppID);
+
+        bool newSupplier(Supplier newSupp);
+
+        bool editSupplier(Supplier suppUpdate);
+
+        Supplier CheckForSupplier(string id);
+        #endregion
+
         #region Manager Dash Board
         ManagerStats GetManagerStats();
         #endregion
@@ -100,6 +118,13 @@ namespace BLL
         #region search
         List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
+        #endregion
+        #region Reviews
+        List<SP_GetReviews> getAllReviews();
+        bool reviewBooking(REVIEW r);
+        bool reviewStylist(REVIEW r);
+        bool updateStylistReview(REVIEW r);
+        bool updateBookingReview(REVIEW r);
         #endregion
 
         USER GetUserDetails(string ID);
@@ -133,7 +158,7 @@ namespace BLL
         List<SP_GetMyNextCustomer> BLL_GetMyNextCustomer(string employeeID, DateTime bookingDate);
         bool createSalesDTLRecord(SALES_DTL detailLine);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);
-        bool createSalesRecord(string bookingID);
+        bool createSalesRecordForBooking(string bookingID);
         string getSalePaymentType(String SaleID);
         bool addPaymentTypeToSalesRecord(string paymentType, string saleID);
         BUSINESS getBusinessTable();
@@ -179,6 +204,7 @@ namespace BLL
         bool addSpecialisation(STYLIST_SERVICE ss);
         SP_GetEmployee_S_ getBio(string id);
         List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate);
+        List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day);
     }
 }
 

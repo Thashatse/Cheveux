@@ -7,9 +7,8 @@ alter PROCEDURE SP_getInvoiceDL
 AS
 BEGIN
 	Select p.[Name], d.Qty, d.Price, p.ProductID, p.[ProductType(T/A/S)]
-	From SALE s, SALES_DTL d, PRODUCT p
-	Where s.SaleID = d.SaleID
-	AND s.BookingID = @BookingID
+	From SALES_DTL d, PRODUCT p
+	Where d.SaleID = @BookingID
 	AND p.ProductID = d.ProductID
 END
 GO
