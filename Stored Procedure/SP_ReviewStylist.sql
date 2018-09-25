@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_ReviewStylist
+alter PROCEDURE SP_ReviewStylist
 	@reviewID nchar(10),
 	@customerID nchar(30),
 	@employeeID nchar(30),

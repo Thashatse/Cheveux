@@ -245,7 +245,7 @@
                                     <a href = '?Action=Delete'>Delete Profile   </a>
                                 </asp:TableCell>
                                 <asp:TableCell HorizontalAlign="Right">
-                                    <a href='Profile.aspx'>Cancel   </a>
+                                    <a href='Profile.aspx?View=Profile'>Cancel   </a>
 
                                     <asp:Button ID="btnSaveEmail" runat="server" Text="Save" class="btn btn-primary" OnClick="commitEdit" UseSubmitBehavior="false" />
                                 </asp:TableCell>

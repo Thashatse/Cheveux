@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	check for a matching exisiting Brand with given ID
 -- =============================================
-create  PROCEDURE SP_CheckForBrand 
+alter PROCEDURE SP_CheckForBrand 
 	@BrandID nchar(10)
 AS
 BEGIN

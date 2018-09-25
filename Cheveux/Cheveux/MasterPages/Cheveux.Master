@@ -123,27 +123,16 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="../Default.aspx#Hairstylist" style="text-decoration: none;">Stylists</a>
                     </li>
-                    <li class="nav-item">
-                        <asp:PlaceHolder runat="server" ID="Vreview">
-                            <a class="nav-link" href='../Cheveux/Reviews.aspx?Action=ReadReviews' style="text-decoration: none;">Reviews</a>
-                        </asp:PlaceHolder>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <asp:PlaceHolder runat="server" ID="Lreview" Visible="false">
-                            <a class="nav-link js-scroll-trigger dropdown-toggle" id="navbardrop" data-toggle="dropdown" href="Cheveux/Reviews.aspx"
-                                style="text-decoration: none;">Review</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Read Reviews</a>
-                                <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=MakeAreview">Write a Review</a>
-                            </div>
-                        </asp:PlaceHolder>
-                    </li>
-                    <li class="nav-item">
-                        <asp:PlaceHolder runat="server" ID="LogedOut">
+                    <asp:PlaceHolder runat="server" ID="LogedOut">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../Authentication/NewAccount.aspx?Type=Email" style="text-decoration: none;">Sign Up</a>
+                        </li>
+                        <li class="nav-item">
                             <!--Login Button-->
-                            <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Sign In</a>
-                        </asp:PlaceHolder>
-                    </li>
+                            <a class="nav-link" href="../Authentication/Accounts.aspx" style="text-decoration: none;">Log in</a>
+                        </li>
+                        
+                    </asp:PlaceHolder>
                     <li class="nav-item dropdown">
                         <asp:PlaceHolder runat="server" ID="LogedIn">
                             <!--Profile Button-->
@@ -159,12 +148,13 @@
                         <a class="nav-link" href="javascript:search()" style="text-decoration: none;">Search</a>
                     </li>
                     <li class="nav-item dropdown">
-                            <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" href="#"
-                                style="text-decoration: none;">More</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="../Default.aspx#ContactUs">Connect</a>
-                                <a class="dropdown-item" href="../Help/CheveuxHelpCenter.aspx" target="_blank">Help</a>
-                            </div>
+                        <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" href="#"
+                            style="text-decoration: none;">More</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Reviews</a>
+                            <a class="dropdown-item" href="../Default.aspx#ContactUs">Connect</a>
+                            <a class="dropdown-item" href="../Help/CheveuxHelpCenter.aspx" target="_blank">Help</a>
+                        </div>
                     </li>
                 </ul>
             </div>

@@ -123,7 +123,6 @@ namespace Cheveux.Manager
                     else if (action == "AcceptOrder")
                     {
                         hideAllView();
-                        divAcceptOrder.Visible = true;
                         acceptOrder(sender, e);
                     }
                     else if (action == "NewSupp")
@@ -189,7 +188,6 @@ namespace Cheveux.Manager
             NewOrder.Visible = false;
             OutstandingOrders.Visible = false;
             PastOrders.Visible = false;
-            divAcceptOrder.Visible = false;
             divViewOrder.Visible = false;
             divviewSupplier.Visible = false;
             divAddBrand.Visible = false;
@@ -204,6 +202,7 @@ namespace Cheveux.Manager
 
             loadProductTypeDropDowns();
             loadSupplier();
+            loadBrandDropdown();
 
             //get the selected sort by and display the results
             loadProductList(drpProductType.SelectedValue.ToString()[0]);
@@ -349,6 +348,36 @@ namespace Cheveux.Manager
                 {
                     function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
                     Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20suppliers");
+                }
+            }
+        }
+
+        public void loadBrandDropdown()
+        {
+            if (!Page.IsPostBack)
+            {
+                ddlAllProdsBrands.Items.Clear();
+                try
+                {
+                    List<BRAND> brands = handler.getAllBrands();
+                    brands = brands.OrderBy(o => o.Name).ToList();
+                    foreach (BRAND brand in brands)
+                    {
+                        ddlAllProdsBrands.DataSource = brands;
+                        //set the coloumn that will be displayed to the user
+                        ddlAllProdsBrands.DataTextField = "Name";
+                        //set the coloumn that will be used for the valuefield
+                        ddlAllProdsBrands.DataValueField = "BrandID";
+                        //bind the data
+                        ddlAllProdsBrands.DataBind();
+                    }
+                    ddlAllProdsBrands.Items.Add(new ListItem("All", "X"));
+                    ddlAllProdsBrands.SelectedValue = "X";
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error Loading Brand on product page | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20brands");
                 }
             }
         }
@@ -1078,7 +1107,6 @@ namespace Cheveux.Manager
 
         #region Accept Order
         //Sivu's Code Here
-
         private void acceptOrder(object sender, EventArgs e)
         {
             //check for the product ID and display the accept form
@@ -1104,17 +1132,24 @@ namespace Cheveux.Manager
         {
            try
             {
-                #region set the supplierID
+                #region set the supplierID & brandID
                 if (!Page.IsPostBack)
                 {
                     string view = Request.QueryString["View"];
                     if (view == "ViewProds")
                     {
                         string suppID = Request.QueryString["SuppID"];
-                        if (suppID != "" || suppID != null)
+                        if (suppID != "" && suppID != null)
                         {
                             ddlAllProdsSuppliers.SelectedValue = suppID;
                             lblViewAllProductsHeading.Text = "<h1>"+ ddlAllProdsSuppliers.SelectedItem.Text + " Products</h1>";
+                        }
+
+                        string brandID = Request.QueryString["BrandID"];
+                        if (brandID != "" && brandID != null)
+                        {
+                            ddlAllProdsBrands.SelectedValue = brandID;
+                            lblViewAllProductsHeading.Text = "<h1>" + ddlAllProdsBrands.SelectedItem.Text + " Products</h1>";
                         }
                     }
                 }
@@ -1164,6 +1199,7 @@ namespace Cheveux.Manager
                         //if product matches the tearm
                         if ((Access.ProductType[0] == productType || productType == 'X') &&
                             (Access.supplierID == ddlAllProdsSuppliers.SelectedValue.ToString() || ddlAllProdsSuppliers.SelectedValue.ToString()[0] == 'X') &&
+                            (Access.BrandID == ddlAllProdsBrands.SelectedValue.ToString() || ddlAllProdsBrands.SelectedValue.ToString()[0] == 'X') &&
                             (compareToSearchTerm(Access.Name, false) == true ||
                             compareToSearchTerm(Access.ProductDescription, false) == true ||
                             compareToSearchTerm(Access.Brandname, false) == true ||
@@ -1263,6 +1299,7 @@ namespace Cheveux.Manager
                         //if product matches the tearm
                         if ((treat.ProductType[0] == productType || productType == 'X') &&
                             (treat.supplierID == ddlAllProdsSuppliers.SelectedValue.ToString() || ddlAllProdsSuppliers.SelectedValue.ToString()[0] == 'X') &&
+                            (treat.BrandID == ddlAllProdsBrands.SelectedValue.ToString() || ddlAllProdsBrands.SelectedValue.ToString()[0] == 'X') &&
                             (compareToSearchTerm(treat.Name, false) == true ||
                             compareToSearchTerm(treat.ProductDescription, false) == true ||
                             compareToSearchTerm(treat.Brandname, false) == true ||
@@ -1370,10 +1407,12 @@ namespace Cheveux.Manager
                 if(count-1 == 0)
                 {
                     productJumbotronLable.ForeColor = System.Drawing.Color.Red;
+                    tblProductTable.Visible = false;
                 }
                 else
                 {
                     productJumbotronLable.ForeColor = System.Drawing.Color.Black;
+                    tblProductTable.Visible = true;
                 }
             }
             catch (Exception Err)
@@ -1837,6 +1876,9 @@ namespace Cheveux.Manager
                     txtBrandName.Text = brand.Name;
 
                     ddlAddBrandProductType.SelectedValue = brand.Type;
+
+                    lblEditBrandType.Text = ddlAddBrandProductType.SelectedItem.Text;
+                    ddlAddBrandProductType.Visible = false;
                 }
                 catch (Exception err)
                 {

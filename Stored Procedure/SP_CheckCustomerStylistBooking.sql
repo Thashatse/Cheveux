@@ -17,7 +17,7 @@ GO
 -- Author:		S.MAQABANGQA
 -- Description:	Checks if customer has past bookings with a specific stylist
 -- =============================================
-CREATE PROCEDURE SP_CheckCustomerStylistBooking
+alter PROCEDURE SP_CheckCustomerStylistBooking
 	@customerID nchar(30),
 	@stylistID nchar(30)
 AS

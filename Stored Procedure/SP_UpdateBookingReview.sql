@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_UpdateBookingReview
+alter PROCEDURE SP_UpdateBookingReview
 	@reviewID nchar(10),
 	@date datetime,
 	@time time(7),

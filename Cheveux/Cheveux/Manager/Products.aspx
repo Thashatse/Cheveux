@@ -57,14 +57,22 @@
                                 <!-- line Break -->
                                 <br />
                                 <!-- View By Selector -->
-                                <p>Product Type: </p>
+                                <p>Type: </p>
                                 <asp:DropDownList ID="drpProductType" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
                                     <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                                 </asp:DropDownList>
                                 <!-- line Break -->
                                 <br />
                                 <br />
-                                <p>Product Supplier: </p>
+                                <p>Brand: </p>
+                                <asp:DropDownList ID="ddlAllProdsBrands" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
+                                    <asp:ListItem Text="Select" Value="0"></asp:ListItem>
+                                </asp:DropDownList>
+
+                                <!-- line Break -->
+                                <br />
+                                <br />
+                                <p>Supplier: </p>
                                 <asp:DropDownList ID="ddlAllProdsSuppliers" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="ddlAllProdsSuppliers_SelectedIndexChanged">
                                     <asp:ListItem Text="Select" Value="0"></asp:ListItem>
                                 </asp:DropDownList>
@@ -422,6 +430,7 @@
                             </div>
                             <div class="col-6">
                                 <asp:DropDownList ID="ddlAddBrandProductType" runat="server" CssClass="btn btn-primary"></asp:DropDownList>
+                                <asp:Label runat="server" ID="lblEditBrandType"></asp:Label>
                             </div>
                             <div class="col-4"></div>
                         </div>
@@ -598,10 +607,6 @@
                                 <asp:Button Style="float: right;" ID="btnAddSupp" runat="server" Text="Create Supplier" CssClass="btn btn-primary" OnClick="btnAddSupp_Click" />
                             </div>
                         </div>
-                    </div>
-
-                    <div runat="server" visible="false" id="divAcceptOrder">
-                        Accept Order
                     </div>
                     </div>
 

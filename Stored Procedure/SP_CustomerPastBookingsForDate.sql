@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_CustomerPastBookingsForDate
+alter PROCEDURE SP_CustomerPastBookingsForDate
 	@customerID nchar(30),
 	@date datetime
 AS

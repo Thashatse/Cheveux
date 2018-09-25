@@ -12,7 +12,7 @@ GO
 -- =============================================
 -- Description:	returns all brands in the database
 -- =============================================
-CREATE PROCEDURE SP_GetAllBrands
+alter PROCEDURE SP_GetAllBrands
 AS
 BEGIN
 	SELECT [BrandID]
