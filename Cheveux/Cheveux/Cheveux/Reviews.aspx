@@ -1,9 +1,33 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="Reviews.aspx.cs" Inherits="Cheveux.Reviews" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitle" runat="server">
     Reviews - Cheveux 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+
+    <style>
+        .starRating {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            display: block;
+        }
+
+        .filledStar {
+            background-image: url("../Images/filledStar.gif");
+        }
+
+        .waitingStar {
+            background-image: url("../Images/waitingStar.gif");
+        }
+
+        .emptyStar {
+            background-image: url("../Images/star.gif");
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
@@ -144,7 +168,18 @@
                                                         </div>
                                                     </div>
                                                     <!--Star rating -->
-                                                    <div class="row"></div>
+                                                    <div class="row">
+                                                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                                        <asp:UpdatePanel ID="ratingUpdatePanel" runat="server">
+                                                            <ContentTemplate>
+                                                                <ajaxToolkit:Rating ID="Rating1" runat="server" 
+                                                                    StarCssClass="starRating" 
+                                                                    FilledStarCssClass="filledStar"
+                                                                    EmptyStarCssClass="emptyStar" 
+                                                                    WaitingStarCssClass="waitingStar"></ajaxToolkit:Rating>
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                    </div>
                                                     <!--Comment-->
                                                     <div class="row">
                                                         <div class="col-12">
@@ -167,19 +202,19 @@
                                 </div>
 
                             </div>
-                    <br />
+                            <br />
 
                     <br />
+
+                        </asp:PlaceHolder>
+                    </div>
+
+
+
+
 
                 </asp:PlaceHolder>
             </div>
-
-
-
-
-
-            </asp:PlaceHolder>
-        </div>
         </div>
     </form>
 </asp:Content>
