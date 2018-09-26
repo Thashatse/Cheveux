@@ -4397,5 +4397,35 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public List<SP_GetLeaveServices> GetLeaveServices()
+        {
+            SP_GetLeaveServices leaveServicesList = null;
+            List<SP_GetLeaveServices> leaveService = new List<SP_GetLeaveServices>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetLeaveService",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            leaveServicesList = new SP_GetLeaveServices
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                NoOfSlots = Convert.ToInt32(row["NoOfSlots"].ToString()),
+                            };
+                            leaveService.Add(leaveServicesList);
+                        }
+                    }
+                    return leaveService;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }                  
