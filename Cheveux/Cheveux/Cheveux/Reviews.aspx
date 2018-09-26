@@ -142,6 +142,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <br />
                                     <div class="col-sm-12 col-md-6 col-lg-6">
                                         <div class="row">
                                             <div class="col-12">
@@ -169,16 +170,20 @@
                                                     </div>
                                                     <!--Star rating -->
                                                     <div class="row">
-                                                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                                                        <asp:UpdatePanel ID="ratingUpdatePanel" runat="server">
-                                                            <ContentTemplate>
-                                                                <ajaxToolkit:Rating ID="Rating1" runat="server" 
-                                                                    StarCssClass="starRating" 
-                                                                    FilledStarCssClass="filledStar"
-                                                                    EmptyStarCssClass="emptyStar" 
-                                                                    WaitingStarCssClass="waitingStar"></ajaxToolkit:Rating>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
+                                                        <div class="col-12">
+                                                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                                            <asp:UpdatePanel ID="ratingUpdatePanel" runat="server">
+                                                                <ContentTemplate>
+                                                                    <ajaxToolkit:Rating ID="Rating1" runat="server"
+                                                                        StarCssClass="starRating"
+                                                                        FilledStarCssClass="filledStar"
+                                                                        EmptyStarCssClass="emptyStar"
+                                                                        WaitingStarCssClass="waitingStar">
+                                                                    </ajaxToolkit:Rating>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </div>
+
                                                     </div>
                                                     <!--Comment-->
                                                     <div class="row">
@@ -189,7 +194,7 @@
                                                     <br />
                                                     <div class="row">
                                                         <div class="col-sm-12 col-md-3 col-lg-3">
-                                                            <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" />
+                                                            <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" OnClick="btnPostReview_Click" />
                                                         </div>
                                                         <div class="col-sm-12 col-md-3 col-lg-3">
                                                             <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
@@ -204,7 +209,7 @@
                             </div>
                             <br />
 
-                    <br />
+                            <br />
 
                         </asp:PlaceHolder>
                     </div>

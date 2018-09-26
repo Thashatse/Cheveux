@@ -311,6 +311,42 @@ namespace Cheveux
                 e.Cell.BackColor = System.Drawing.Color.LightGray;
             }
         }
+        protected void btnPostReview_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                review = new REVIEW();
+                cookie = Request.Cookies["CheveuxUserID"];
+
+                string rID = function.GenerateRandomReviewID();
+
+                review.ReviewID = rID;
+                review.CustomerID = cookie["ID"].ToString();
+                review.EmployeeID = lblStylistID.Text.ToString();
+                review.PrimaryBookingID = lblBookingID.Text.ToString();
+                review.Date = DateTime.Today;
+                review.Time = Convert.ToDateTime(DateTime.Now.ToString("h:mm:ss tt"));
+                review.Rating = Rating1.CurrentRating;
+                review.Comment = reviewComment.InnerText.ToString();
+
+                if (handler.reviewBooking(review))
+                {
+                    Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview");
+                }
+                else
+                {
+                    //temporary
+                    Response.Redirect("../Cheveux/Reviews.aspx?Action=ReadReviews");
+                }
+            }
+            catch (Exception Err)
+            {
+                Response.Redirect("../Default.aspx");//temporary
+                function.logAnError(Err.ToString());
+            }
+        }
         #endregion
+
+
     }
 }
