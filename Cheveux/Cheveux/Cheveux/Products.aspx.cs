@@ -79,6 +79,7 @@ namespace Cheveux.Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
             //check query string
             string productID = Request.QueryString["ProductID"];
             string action = Request.QueryString["Action"];
@@ -109,8 +110,10 @@ namespace Cheveux.Cheveux
                     LoadProduct(productID);
                 }
             }
-            else if(action == "add" && (cookie["UT"] == "M" || cookie["UT"] == "R"))
+            else if(action == "Add" && (cookie["UT"] == "M" || cookie["UT"] == "R"))
             {
+
+                loadSupplier();
                 phProducts.Visible = false;
                 addandedit.Visible = true;
                 phSpecProduct.Visible = false;
@@ -139,6 +142,35 @@ namespace Cheveux.Cheveux
 
             }
         }
+
+        public void loadSupplier()
+        {
+            if (!Page.IsPostBack)
+            {
+                drpListSupplier.Items.Clear();
+                try
+                {
+                    List<Supplier> suppliers = handler.getSuppliers();
+                    foreach (Supplier supplier in suppliers)
+                    {
+
+                        drpListSupplier.DataSource = suppliers;
+                        //set the coloumn that will be displayed to the user
+                        drpListSupplier.DataTextField = "SupplierName";
+                        //set the coloumn that will be used for the valuefield
+                       drpListSupplier.DataValueField = "SupplierID";
+                        //bind the data
+                        drpListSupplier.DataBind();
+                    }
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20suppliers");
+                }
+            }
+        }
+
 
         protected void drpProductType_Change(object sender, EventArgs e)
         {
@@ -174,6 +206,13 @@ namespace Cheveux.Cheveux
 
         public void loadProductList(char productType)
         {
+
+            /*add an edit button for the products
+             * set button action to edit
+             * 
+             */ 
+
+
             try
             {
                 //load a list of all products
@@ -460,7 +499,7 @@ namespace Cheveux.Cheveux
             newProduct.ProductDescription = txtPrice.Text;
 
 
-            if (drpProductType.SelectedItem.Text == "Application Service")
+            if (drpProductType.SelectedIndex == 0)
             {
                 PRODUCT p = new PRODUCT();
                 ACCESSORY a = new ACCESSORY();
@@ -469,7 +508,7 @@ namespace Cheveux.Cheveux
             
                 a.TreatmentID = ID;
                 a.Colour = productTextBox.Text;
-                a.Qty = int.Parse(txtQty.Text);
+                a.Qty = 0;
                 a.BrandID = drpBrandList.SelectedValue.ToString();
                 p.Name = txtName.Text;
                 p.ProductDescription = txtProductDescription.Text;
@@ -492,7 +531,7 @@ namespace Cheveux.Cheveux
                 }
                 
             }
-            else if (drpProductType.SelectedItem.Text == "Treatment")
+            else if (drpProductType.SelectedIndex == 1)
             {
                 PRODUCT p = new PRODUCT();
                 TREATMENT t = new TREATMENT();
@@ -501,7 +540,7 @@ namespace Cheveux.Cheveux
                 string prodID = function.GenerateRandomProductID();
 
                 t.TreatmentID = prodID;
-                t.Qty = int.Parse(txtQty.Text);
+                t.Qty = 0;
                 t.BrandID = drpBrandList.SelectedValue.ToString();
                 p.Name = txtName.Text;
                 p.ProductDescription = txtProductDescription.Text;
@@ -509,6 +548,7 @@ namespace Cheveux.Cheveux
                 p.ProductType = drpProductType.SelectedValue.ToString();
                 t.supplierID = drpListSupplier.SelectedValue.ToString();
                 t.TreatmentType = productTextBox.Text;
+                
                 bool result;
                 result = handler.addTreatments(t, p);
 
