@@ -160,6 +160,7 @@ namespace DAL
         bool reviewStylist(REVIEW r);
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
+        REVIEW CheckForReview(string reviewID);
         #endregion
 
         List<SP_GetEmpNames> GetEmpNames();

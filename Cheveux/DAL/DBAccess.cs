@@ -2724,6 +2724,34 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public REVIEW CheckForReview(string reviewID)
+        {
+            REVIEW rev = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@reviewID", reviewID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForReview",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        rev = new REVIEW
+                        {
+                            ReviewID = row[0].ToString()
+                        };
+                    }
+                    return rev;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion 
 
         #region Employees
