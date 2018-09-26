@@ -86,6 +86,13 @@ namespace Cheveux.Cheveux
             //access Contorl
             cookie = Request.Cookies["CheveuxUserID"];
 
+            if (cookie != null) {
+                if (action == null && productID == null && (cookie["UT"] == "M" || cookie["UT"] == "R"))
+                {
+                    Response.Redirect("../Manager/Products.aspx");
+                }
+        }
+
             //load all products
             if (action == null)
             {
@@ -109,34 +116,36 @@ namespace Cheveux.Cheveux
                     LoadProduct(productID);
                 }
             }
-            else if(action == "add" && (cookie["UT"] == "M" || cookie["UT"] == "R"))
+            else if (cookie != null)
             {
-                phProducts.Visible = false;
-                addandedit.Visible = true;
-                phSpecProduct.Visible = false;
-
-                if (!IsPostBack)
+                if (action == "add" && (cookie["UT"] == "M" || cookie["UT"] == "R"))
                 {
-                    productTypes = handler.getProductTypes();
-                    foreach (SP_GetProductTypes pType in productTypes)
+                    phProducts.Visible = false;
+                    addandedit.Visible = true;
+                    phSpecProduct.Visible = false;
+
+                    if (!IsPostBack)
                     {
-                        if (pType.type != 'S')
+                        productTypes = handler.getProductTypes();
+                        foreach (SP_GetProductTypes pType in productTypes)
                         {
-                            drpProductType.Items.Add(new ListItem(
-                            function.GetFullProductTypeText(pType.type.ToString()[0]),
-                            pType.type.ToString()));
+                            if (pType.type != 'S')
+                            {
+                                drpProductType.Items.Add(new ListItem(
+                                function.GetFullProductTypeText(pType.type.ToString()[0]),
+                                pType.type.ToString()));
+                            }
+                        }
+                        brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
+                        foreach (SP_GetBrandsForProductType brand in brandList)
+                        {
+                            drpBrandList.DataSource = brandList;
+                            drpBrandList.DataTextField = "Name";
+                            drpBrandList.DataValueField = "BrandID";
+                            drpBrandList.DataBind();
                         }
                     }
-                    brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
-                    foreach (SP_GetBrandsForProductType brand in brandList)
-                    {
-                        drpBrandList.DataSource = brandList;
-                        drpBrandList.DataTextField = "Name";
-                        drpBrandList.DataValueField = "BrandID";
-                        drpBrandList.DataBind();
-                    }
                 }
-
             }
         }
 
@@ -535,14 +544,3 @@ namespace Cheveux.Cheveux
         }
     }
 } 
-
-
-            
-
-            
-            
-            
-            
-   
-       
-    
