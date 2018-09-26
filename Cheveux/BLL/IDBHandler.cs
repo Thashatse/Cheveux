@@ -125,6 +125,7 @@ namespace BLL
         bool reviewStylist(REVIEW r);
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
+        REVIEW CheckForReview(string reviewID);
         #endregion
 
         USER GetUserDetails(string ID);
