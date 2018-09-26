@@ -1494,21 +1494,21 @@ namespace DAL
             }
         }
 
-        public bool addAccessories(ACCESSORY a, PRODUCT p)
+       public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
             try
             {
                 SqlParameter[] pars = new SqlParameter[]
                     {
-                        new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
+                     new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
                     new SqlParameter("@colour", a.Colour.ToString()),
                     new SqlParameter("@qty", a.Qty.ToString()),
-                    new SqlParameter("@brandID", a.BrandID.ToString()),
-                    new SqlParameter("@productID",a.TreatmentID.ToString()),
+                    new SqlParameter("@BrandID", a.BrandID.ToString()),
                     new SqlParameter("@name",p.Name.ToString()),
                     new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString()),
+                    new SqlParameter("@SupplierID", a.supplierID.ToString())
                     };
                 return DBHelper.NonQuery("SP_AddAccessory", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -1528,13 +1528,13 @@ namespace DAL
                     {
                     new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
                     new SqlParameter("@qty", t.Qty.ToString()),
-                    new SqlParameter("@qty", t.TreatmentType.ToString()),
-                    new SqlParameter("@brandID", t.BrandID.ToString()),
-                    new SqlParameter("@productID",t.TreatmentID.ToString()),
+                    new SqlParameter("@treatmentType", t.TreatmentType.ToString()),
+                    new SqlParameter("@BrandID", t.BrandID.ToString()),
                     new SqlParameter("@name",p.Name.ToString()),
                     new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString()),
+                    new SqlParameter("@SupplierID", t.supplierID.ToString())
                     };
                 return DBHelper.NonQuery("SP_AddTreatment", CommandType.StoredProcedure, pars.ToArray());
             }
