@@ -701,5 +701,9 @@ namespace BLL
         {
             return db.getCustomerPastBookingsForDate(customerID, day);
         }
+        public List<SP_GetLeaveServices> BLL_GetLeaveServices()
+        {
+            return db.GetLeaveServices();
+        }
     }
 }

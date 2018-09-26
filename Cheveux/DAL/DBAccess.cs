@@ -590,7 +590,8 @@ namespace DAL
                     new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
                     new SqlParameter("@Date", addBooking.Date.ToString()),
                     new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString()),
-                    new SqlParameter("@Comment", addBooking.Comment.ToString())
+                    new SqlParameter("@Comment", addBooking.Comment.ToString()),
+                    new SqlParameter("@Arrived", addBooking.Arrived.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -1494,21 +1495,21 @@ namespace DAL
             }
         }
 
-        public bool addAccessories(ACCESSORY a, PRODUCT p)
+       public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
             try
             {
                 SqlParameter[] pars = new SqlParameter[]
                     {
-                        new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
+                     new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
                     new SqlParameter("@colour", a.Colour.ToString()),
                     new SqlParameter("@qty", a.Qty.ToString()),
-                    new SqlParameter("@brandID", a.BrandID.ToString()),
-                    new SqlParameter("@productID",a.TreatmentID.ToString()),
+                    new SqlParameter("@BrandID", a.BrandID.ToString()),
                     new SqlParameter("@name",p.Name.ToString()),
                     new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString()),
+                    new SqlParameter("@SupplierID", a.supplierID.ToString())
                     };
                 return DBHelper.NonQuery("SP_AddAccessory", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -1528,13 +1529,13 @@ namespace DAL
                     {
                     new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
                     new SqlParameter("@qty", t.Qty.ToString()),
-                    new SqlParameter("@qty", t.TreatmentType.ToString()),
-                    new SqlParameter("@brandID", t.BrandID.ToString()),
-                    new SqlParameter("@productID",t.TreatmentID.ToString()),
+                    new SqlParameter("@treatmentType", t.TreatmentType.ToString()),
+                    new SqlParameter("@BrandID", t.BrandID.ToString()),
                     new SqlParameter("@name",p.Name.ToString()),
                     new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString()),
+                    new SqlParameter("@SupplierID", t.supplierID.ToString())
                     };
                 return DBHelper.NonQuery("SP_AddTreatment", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -4394,6 +4395,36 @@ namespace DAL
                 return bookings;
             }
             catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetLeaveServices> GetLeaveServices()
+        {
+            SP_GetLeaveServices leaveServicesList = null;
+            List<SP_GetLeaveServices> leaveService = new List<SP_GetLeaveServices>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetLeaveService",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            leaveServicesList = new SP_GetLeaveServices
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                NoOfSlots = Convert.ToInt32(row["NoOfSlots"].ToString()),
+                            };
+                            leaveService.Add(leaveServicesList);
+                        }
+                    }
+                    return leaveService;
+                }
+            }
+            catch(Exception e)
             {
                 throw new ApplicationException(e.ToString());
             }

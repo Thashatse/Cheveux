@@ -211,6 +211,11 @@
                                             <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="LoadSummary" AutoPostBack="true">
                                             </asp:RadioButtonList>
                                         </div>
+                                        <div runat ="server" id="divSickLeave" visible ="false">
+                                            <h5>Sick Leave Type</h5>
+                                            <asp:RadioButtonList runat="server" ID="rblSickLeave" OnSelectedIndexChanged="LoadSummary" AutoPostBack="true">
+                                            </asp:RadioButtonList>
+                                        </div>
                                     </div>
 
 

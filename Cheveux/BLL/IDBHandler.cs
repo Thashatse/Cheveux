@@ -205,6 +205,7 @@ namespace BLL
         SP_GetEmployee_S_ getBio(string id);
         List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day);
+        List<SP_GetLeaveServices> BLL_GetLeaveServices();
     }
 }
 
