@@ -17,7 +17,7 @@ GO
 -- Author:		S.MAQABANGQA
 -- Description:	
 -- =============================================
-CREATE PROCEDURE SP_ReturnStylistNamesForReview
+alter PROCEDURE SP_ReturnStylistNamesForReview
 	@customerID nchar(30)
 AS
 BEGIN
@@ -26,8 +26,8 @@ BEGIN
 	SELECT distinct B.StylistID, 
 				(U.FirstName + ' ' + U.LastName)as[StylistName]
   		
-	FROM BOOKING B,EMPLOYEE E, [USER] U
-	WHERE B.BookingID = B.primaryBookingID
+	FROM [CHEVEUX].[dbo].[BOOKING] B,EMPLOYEE E, [USER] U
+	WHERE B.BookingID = B.[primaryBookingID]
 	AND    B.StylistID = E.EmployeeID
 	AND    B.StylistID=U.UserID
 	AND	   B.Arrived = 'Y'
