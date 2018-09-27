@@ -15,15 +15,25 @@ SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		S.MAQABANGQA
--- Description:	check for a matching exisiting Review with given ID
+-- Description:	
 -- =============================================
-CREATE PROCEDURE SP_CheckForReview
-	@reviewID nchar(10)
+CREATE PROCEDURE SP_ReturnStylistNamesForReview
+	@customerID nchar(30)
 AS
 BEGIN
-	SELECT ReviewID
-	FROM REVIEW
-	WHERE ReviewID = @reviewID
+	SET NOCOUNT ON;
+	
+	SELECT distinct B.StylistID, 
+				(U.FirstName + ' ' + U.LastName)as[StylistName]
+  		
+	FROM BOOKING B,EMPLOYEE E, [USER] U
+	WHERE B.BookingID = B.primaryBookingID
+	AND    B.StylistID = E.EmployeeID
+	AND    B.StylistID=U.UserID
+	AND	   B.Arrived = 'Y'
+	AND	   B.StylistID= B.StylistID
+	AND	   B.[Date] !> CAST(GETDATE() AS DATE)
+	AND	   B.CustomerID=@customerID
 
 END
 GO

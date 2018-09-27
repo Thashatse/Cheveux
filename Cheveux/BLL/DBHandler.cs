@@ -339,6 +339,10 @@ namespace BLL
         {
             return db.CheckForReview(reviewID);
         }
+        public List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID)
+        {
+            return db.returnStylistNamesForReview(customerID);
+        }
         #endregion
 
         public List<SP_GetTodaysBookings> getTodaysBookings() 

@@ -105,6 +105,7 @@
     <Compile Include="ViewModels\SP_GetTopCustomers.cs" />
     <Compile Include="ViewModels\SP_GetWidth.cs" />
     <Compile Include="ViewModels\SP_ProductSearchByTerm.cs" />
+    <Compile Include="ViewModels\SP_ReturnStylistNamesForReview.cs" />
     <Compile Include="ViewModels\SP_SaleOfHairstylist.cs" />
     <Compile Include="ViewModels\SP_SearchStylistsBySearchTerm.cs" />
     <Compile Include="ViewModels\SP_SelectAccessory.cs" />

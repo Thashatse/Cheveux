@@ -126,6 +126,7 @@ namespace BLL
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
         REVIEW CheckForReview(string reviewID);
+        List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID);
         #endregion
 
         USER GetUserDetails(string ID);

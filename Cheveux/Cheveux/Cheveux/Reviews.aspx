@@ -106,6 +106,25 @@
                                     </asp:DropDownList>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="dvStylistNames" runat="server" visible="false">
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-2 col-lg-2">
+                                                <p>Select Stylist: </p>
+                                            </div>
+                                            <div class="col-sm-8 col-md-4 col-lg-4">
+                                                <asp:DropDownList ID="drpStylistNames" runat="server" AutoPostBack="true"
+                                                    CssClass="btn btn-primary dropdown-toggle">
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
 
                             <!--Section: Date and listbox -->
                             <div id="datepick" runat="server">

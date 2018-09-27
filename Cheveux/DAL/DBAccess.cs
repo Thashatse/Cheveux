@@ -2752,7 +2752,37 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        #endregion 
+        public List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID)
+        {
+            List<SP_ReturnStylistNamesForReview> list = new List<SP_ReturnStylistNamesForReview>();
+            SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@customerID" , customerID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ReturnStylistNamesForReview", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_ReturnStylistNamesForReview emp = new SP_ReturnStylistNamesForReview()
+                            {
+                                StylistID = row["StylistID"].ToString(),
+                                StylistName = row["StylistName"].ToString()
+                            };
+                            list.Add(emp);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
 
         #region Employees
         public List<SP_GetEmpNames> GetEmpNames()
