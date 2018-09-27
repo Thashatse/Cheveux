@@ -148,11 +148,16 @@ namespace Cheveux
                 loadCustomerList();
             }
             #endregion
-
+            cookie = Request.Cookies["CheveuxUserID"];
             lblChoose.Text = "Booking Summary...";
             lblChoose.Font.Size = 18;
             lblChoose.ForeColor = Color.Gray;
             bookingTime = new HttpCookie("BookTime");
+
+            serviceList = handler.BLL_GetAllServices();
+            stylistList = handler.BLL_GetAllStylists();
+            slotList = handler.BLL_GetAllTimeSlots();
+            leaveList = handler.BLL_GetLeaveServices();
             if (!Page.IsPostBack)
             {
                 if (bookingTime != null)
@@ -167,42 +172,42 @@ namespace Cheveux
                 lblGoSummary.ForeColor = Color.Gray;
                 lblGoCustomer.ForeColor = Color.Gray;
                 txtComment.Visible = false;
-            }
-            //Check if the user is logged 
-            try
-            {
-                cookie = Request.Cookies["CheveuxUserID"];
-                serviceList = handler.BLL_GetAllServices();
-                stylistList = handler.BLL_GetAllStylists();
-                slotList = handler.BLL_GetAllTimeSlots();
-                leaveList = handler.BLL_GetLeaveServices();
-                if (cookie["UT"] == "M")
-                {
-                    divApplication.Visible = false;
-                    divBraids.Visible = false;
-                    divNatural.Visible = false;
 
-                    divSickLeave.Visible = true;
-                    rblSickLeave.DataSource = leaveList;
-                    rblSickLeave.DataTextField = "Name";
-                    rblSickLeave.DataValueField = "ProductID";
-                    rblSickLeave.DataBind();
+                //Check if the user is logged 
+                try
+                {
+                    if (cookie != null)
+                    {
+
+                        if (cookie["UT"] == "M")
+                        {
+                            divApplication.Visible = false;
+                            divBraids.Visible = false;
+                            divNatural.Visible = false;
+
+                            divSickLeave.Visible = true;
+                            rblSickLeave.DataSource = leaveList;
+                            rblSickLeave.DataTextField = "Name";
+                            rblSickLeave.DataValueField = "ProductID";
+                            rblSickLeave.DataBind();
+                        }
+                    }
                 }
-            }
-            catch (Exception err)
-            {
-                function.logAnError("unable to comunicate with the database on Make A Booking page: " +
-                    err);
-                lblErrorSummary.Text = "Database connection failed. Please try again later";
-                divServices.Visible = false;
-
-
-            }
-
-            try
-            {
-                if (!Page.IsPostBack)
+                catch (Exception err)
                 {
+                    function.logAnError("unable to comunicate with the database on Make A Booking page: " +
+                        err);
+                    lblErrorSummary.Text = "Database connection failed. Please try again later";
+                    divServices.Visible = false;
+
+
+                }
+
+
+                try
+                {
+
+
                     ListItem deselect = new ListItem("None", "0");
                     deselect.Selected = true;
                     rblPickAServiceA.Items.Add(deselect);
@@ -232,11 +237,12 @@ namespace Cheveux
 
                     }
 
+
                 }
-            }
-            catch (Exception err)
-            {
-                function.logAnError(err.ToString());
+                catch (Exception err)
+                {
+                    function.logAnError(err.ToString());
+                }
             }
 
 
@@ -265,7 +271,7 @@ namespace Cheveux
                         }
                     }
 
-                    if ((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0"))
+                    if (((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0")) && (rblSickLeave.SelectedValue.ToString() == "-1"))
                     {
 
                         lblErrorSummary.Visible = true;
@@ -364,100 +370,126 @@ namespace Cheveux
                 #endregion
                 else if (btnNext.Text == "Booking Summary")
                 {
+                    rblPickAServiceA_SelectedIndexChanged(sender, e);
+                    rblPickAServiceB_SelectedIndexChanged(sender, e);
+                    cblPickAServiceN_SelectedIndexChanged(sender, e);
+                    rblSickLeave_SelectedIndexChanged(sender, e);
                     divLabels.Visible = false;
-                    #region Internal Booking
-                    //load booking type 
-                    bookingType = Request.QueryString["Type"];
-                    if (lbCustomers.SelectedIndex == -1 && bookingType == "Internal")
+                    if (cookie["UT"] == "M")
                     {
-                        lblErrorSummary.Visible = true;
-                        lblErrorSummary.Text = "Please select a customer before moving to the next step!";
-                        divSelectUser.Visible = true;
-                        rblPickAServiceA_SelectedIndexChanged(sender, e);
-                        rblPickAServiceB_SelectedIndexChanged(sender, e);
-                        cblPickAServiceN_SelectedIndexChanged(sender, e);
+                        divDateTime.Visible = false;
+                        divSelectUser.Visible = false;
+                        lblErrorSummary.Visible = false;
+
+                        FillSummary(sender, e);
+
+                        lblGoService.ForeColor = Color.Gray;
+                        lblGoService.Font.Bold = false;
+                        lblGoCustomer.ForeColor = Color.Gray;
+                        lblGoCustomer.Font.Bold = false;
+                        lblGoStylist.ForeColor = Color.Gray;
+                        lblGoStylist.Font.Bold = false;
+                        lblGoDateTime.ForeColor = Color.Gray;
+                        lblGoDateTime.Font.Bold = false;
+                        lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                        lblGoSummary.Font.Bold = true;
+                        btnNext.Text = "Submit";
+                        btnNext.Visible = false;
+                        divSummaryPic.Visible = true;
                     }
-                    #endregion
                     else
                     {
-                        divSelectUser.Visible = false;
-                        //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
-                        rblPickAServiceA_SelectedIndexChanged(sender, e);
-                        rblPickAServiceB_SelectedIndexChanged(sender, e);
-                        cblPickAServiceN_SelectedIndexChanged(sender, e);
-                        HttpCookie bookingTime = Request.Cookies["BookTime"];
-                        if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00" && bookingType != "Internal")
+                        #region Internal Booking
+                        //load booking type 
+                        bookingType = Request.QueryString["Type"];
+                        if (lbCustomers.SelectedIndex == -1 && bookingType == "Internal")
                         {
                             lblErrorSummary.Visible = true;
-                            lblErrorSummary.Text = "Please select a date before moving to the next step!";
-                            divDateTime.Visible = true;
+                            lblErrorSummary.Text = "Please select a customer before moving to the next step!";
+                            divSelectUser.Visible = true;
+                            rblPickAServiceA_SelectedIndexChanged(sender, e);
+                            rblPickAServiceB_SelectedIndexChanged(sender, e);
+                            cblPickAServiceN_SelectedIndexChanged(sender, e);
                         }
-                        else if (bookingTime == null && bookingType != "Internal")
-                        {
-                            lblErrorSummary.Visible = true;
-                            lblErrorSummary.Text = "Please select a time before moving to the next step!";
-                            divDateTime.Visible = true;
-                        }
+                        #endregion
                         else
                         {
-                            divDateTime.Visible = false;
                             divSelectUser.Visible = false;
-                            lblErrorSummary.Visible = false;
-
-                            if (pickedServiceID != null)
-                            {
-                                foreach (string id in pickedServiceID)
-                                {
-                                    foreach (SP_GetServices services in serviceList)
-                                    {
-                                        if (id == services.ServiceID)
-                                        {
-                                            totalPrice += services.Price;
-                                        }
-                                    }
-                                }
-                                
-                            }
-                            else
+                            //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
+                            HttpCookie bookingTime = Request.Cookies["BookTime"];
+                            if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00" && bookingType != "Internal")
                             {
                                 lblErrorSummary.Visible = true;
-                                lblErrorSummary.Text = "There was trouble retrieving the services";
+                                lblErrorSummary.Text = "Please select a date before moving to the next step!";
+                                divDateTime.Visible = true;
                             }
-                            txtComment.Visible = true;
-                            lblStylist.Text = lbPickAStylist.SelectedItem.Text;
-                            lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
-                            HttpCookie time = Request.Cookies["BookTime"];
-                            lblTime.Text = time["Time"];
-                            lblTotalCostLabel.Text = "Booking Total: ";
-                            lblTotalCost.Text = "R " + string.Format("{0:#.00}", totalPrice).ToString();
-                            lblCommentLabel.Text = "Comment: ";
-                            btnPrevious.Visible = true;
-
-
-                            if (bookingType == "Internal")
+                            else if (bookingTime == null && bookingType != "Internal")
                             {
-                                btnPrevious.Text = "Select Customer";
+                                lblErrorSummary.Visible = true;
+                                lblErrorSummary.Text = "Please select a time before moving to the next step!";
+                                divDateTime.Visible = true;
                             }
                             else
                             {
-                                btnPrevious.Text = "Choose Date & Time";
+                                divDateTime.Visible = false;
+                                divSelectUser.Visible = false;
+                                lblErrorSummary.Visible = false;
+
+                                if (pickedServiceID != null)
+                                {
+                                    foreach (string id in pickedServiceID)
+                                    {
+                                        foreach (SP_GetServices services in serviceList)
+                                        {
+                                            if (id == services.ServiceID)
+                                            {
+                                                totalPrice += services.Price;
+                                            }
+                                        }
+                                    }
+
+                                }
+                                else
+                                {
+                                    lblErrorSummary.Visible = true;
+                                    lblErrorSummary.Text = "There was trouble retrieving the services";
+                                }
+                                txtComment.Visible = true;
+                                lblStylist.Text = lbPickAStylist.SelectedItem.Text;
+                                lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
+                                HttpCookie time = Request.Cookies["BookTime"];
+                                lblTime.Text = time["Time"];
+                                lblTotalCostLabel.Text = "Booking Total: ";
+                                lblTotalCost.Text = "R " + string.Format("{0:#.00}", totalPrice).ToString();
+                                lblCommentLabel.Text = "Comment: ";
+                                btnPrevious.Visible = true;
+
+
+                                if (bookingType == "Internal")
+                                {
+                                    btnPrevious.Text = "Select Customer";
+                                }
+                                else
+                                {
+                                    btnPrevious.Text = "Choose Date & Time";
+                                }
+                                lblGoService.ForeColor = Color.Gray;
+                                lblGoService.Font.Bold = false;
+                                lblGoCustomer.ForeColor = Color.Gray;
+                                lblGoCustomer.Font.Bold = false;
+                                lblGoStylist.ForeColor = Color.Gray;
+                                lblGoStylist.Font.Bold = false;
+                                lblGoDateTime.ForeColor = Color.Gray;
+                                lblGoDateTime.Font.Bold = false;
+                                lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                                lblGoSummary.Font.Bold = true;
+                                btnNext.Text = "Submit";
+                                btnNext.Visible = false;
+                                divSummaryPic.Visible = true;
                             }
-                            lblGoService.ForeColor = Color.Gray;
-                            lblGoService.Font.Bold = false;
-                            lblGoCustomer.ForeColor = Color.Gray;
-                            lblGoCustomer.Font.Bold = false;
-                            lblGoStylist.ForeColor = Color.Gray;
-                            lblGoStylist.Font.Bold = false;
-                            lblGoDateTime.ForeColor = Color.Gray;
-                            lblGoDateTime.Font.Bold = false;
-                            lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
-                            lblGoSummary.Font.Bold = true;
-                            btnNext.Text = "Submit";
-                            btnNext.Visible = false;
-                            divSummaryPic.Visible = true;
+
+
                         }
-
-
                     }
                 }
                 else if (btnNext.Text == "Submit")
@@ -472,6 +504,7 @@ namespace Cheveux
                         rblPickAServiceA_SelectedIndexChanged(sender, e);
                         rblPickAServiceB_SelectedIndexChanged(sender, e);
                         cblPickAServiceN_SelectedIndexChanged(sender, e);
+                        rblSickLeave_SelectedIndexChanged(sender, e);
                         int length;
 
                         //access control
@@ -1288,6 +1321,7 @@ namespace Cheveux
             rblPickAServiceA_SelectedIndexChanged(sender, e);
             rblPickAServiceB_SelectedIndexChanged(sender, e);
             cblPickAServiceN_SelectedIndexChanged(sender, e);
+            rblSickLeave_SelectedIndexChanged(sender, e);
 
             foreach (string id in pickedServiceID)
             {
@@ -1566,7 +1600,6 @@ namespace Cheveux
         protected void rblPickAServiceB_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-
             if (rblPickAServiceB.SelectedValue != "0")
             {
                 if (pickedServiceID == null)
@@ -1628,6 +1661,27 @@ namespace Cheveux
                 }
                 
 
+            }
+        }
+        protected void rblSickLeave_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (pickedServiceID == null)
+            {
+                if (pickedServiceName == null)
+                {
+                    pickedServiceID = new List<string>();
+                    pickedServiceName = new List<string>();
+                    pickedServiceID.Add(rblSickLeave.SelectedValue);
+                    pickedServiceName.Add(rblSickLeave.SelectedItem.Text);
+                    count++;
+                }
+
+            }
+            else
+            {
+                pickedServiceID.Add(rblSickLeave.SelectedValue);
+                pickedServiceName.Add(rblSickLeave.SelectedItem.Text);
+                count++;
             }
         }
         #endregion
@@ -1758,114 +1812,124 @@ namespace Cheveux
             try
             {
                 #region Fill Services
-                if(pickedServiceID.Count ==1)
+                if (cookie["UT"] == "M")
                 {
-                    lblServiceLabel.Text = "Service(s): ";
-                    if(rblPickAServiceA.SelectedValue != "0")
-                    {
-                        tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceA.SelectedItem.Text;
-                    }
-                    if (rblPickAServiceB.SelectedValue != "0")
-                    {
-                        tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceB.SelectedItem.Text;
-                    }
-                    if (cblPickAServiceN.SelectedValue != "0")
-                    {
-
-                        foreach (ListItem item in cblPickAServiceN.Items)
-                        {
-                            if (item.Selected)
-                            {
-                                tblBookingSummary.Rows[1].Cells[1].Text = item.Text;
-
-                            }
-                        }
-                    }
-                    if(hours == 0 && minutes == 30)
-                    {
-                        lblNoOfHoursLabel.Text = "No. of Hours: ";
-                        lblNoOfHours.Text = minutes.ToString() + "min(s)";
-                    }
-                    else if(hours > 0 && minutes == 00)
-                    {
-                        lblNoOfHoursLabel.Text = "No. of Hours: ";
-                        lblNoOfHours.Text = hours.ToString() + "hr(s) ";
-                    }
-                    else if(hours > 0 && minutes == 30)
-                    {
-                        lblNoOfHoursLabel.Text = "No. of Hours: ";
-                        lblNoOfHours.Text = hours.ToString() + "hr(s) " + minutes.ToString() + "min(s)";
-                    }
-                  
-
-
+                    lblServiceLabel.Text = "Reason for absence";
+                    tblBookingSummary.Rows[1].Cells[1].Text = rblSickLeave.SelectedItem.Text;
                 }
-                else if(pickedServiceID.Count > 1)
+                else
                 {
-                    int count = 0;
-                    lblServiceLabel.Text = "Service(s): ";
 
-                    if (rblPickAServiceA.SelectedValue != "0")
+
+                    if (pickedServiceID.Count == 1)
                     {
-                        if (count == 0)
+                        lblServiceLabel.Text = "Service(s): ";
+                        if (rblPickAServiceA.SelectedValue != "0")
                         {
                             tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceA.SelectedItem.Text;
-                            count++;
                         }
-                        else
-                        {
-                            tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceA.SelectedItem.Text;
-                        }
-         
-                    }
-                    if (rblPickAServiceB.SelectedValue != "0")
-                    {
-                        if(count == 0)
+                        if (rblPickAServiceB.SelectedValue != "0")
                         {
                             tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceB.SelectedItem.Text;
-                            count++;
                         }
-                        else
+                        if (cblPickAServiceN.SelectedValue != "0")
                         {
-                            tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceB.SelectedItem.Text;
-                        }
-                    }
-                    if (cblPickAServiceN.SelectedValue != "0")
-                    {
 
-                        foreach (ListItem item in cblPickAServiceN.Items)
-                        {
-                            if (item.Selected)
-                            {                             
-                                if(count == 0)
+                            foreach (ListItem item in cblPickAServiceN.Items)
+                            {
+                                if (item.Selected)
                                 {
                                     tblBookingSummary.Rows[1].Cells[1].Text = item.Text;
-                                    count++;
+
                                 }
-                                else
-                                {
-                                    tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + item.Text;
-                                }
-                                                           
                             }
                         }
-                    }
-                    if (hours == 0 && minutes == 30)
-                    {
-                        lblNoOfHoursLabel.Text = "No. of Hours: ";
-                        lblNoOfHours.Text = minutes.ToString() + "min(s)";
-                    }
-                    else if (hours > 0 && minutes == 00)
-                    {
-                        lblNoOfHoursLabel.Text = "No. of Hours: ";
-                        lblNoOfHours.Text = hours.ToString() + "hr(s) ";
-                    }
-                    else if (hours > 0 && minutes == 30)
-                    {
-                        lblNoOfHoursLabel.Text = "No. of Hours: ";
-                        lblNoOfHours.Text = hours.ToString() + "hr(s) " + minutes.ToString() + "min(s)";
-                    }
+                        if (hours == 0 && minutes == 30)
+                        {
+                            lblNoOfHoursLabel.Text = "No. of Hours: ";
+                            lblNoOfHours.Text = minutes.ToString() + "min(s)";
+                        }
+                        else if (hours > 0 && minutes == 00)
+                        {
+                            lblNoOfHoursLabel.Text = "No. of Hours: ";
+                            lblNoOfHours.Text = hours.ToString() + "hr(s) ";
+                        }
+                        else if (hours > 0 && minutes == 30)
+                        {
+                            lblNoOfHoursLabel.Text = "No. of Hours: ";
+                            lblNoOfHours.Text = hours.ToString() + "hr(s) " + minutes.ToString() + "min(s)";
+                        }
 
+
+
+                    }
+                    else if (pickedServiceID.Count > 1)
+                    {
+                        int count = 0;
+                        lblServiceLabel.Text = "Service(s): ";
+
+                        if (rblPickAServiceA.SelectedValue != "0")
+                        {
+                            if (count == 0)
+                            {
+                                tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceA.SelectedItem.Text;
+                                count++;
+                            }
+                            else
+                            {
+                                tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceA.SelectedItem.Text;
+                            }
+
+                        }
+                        if (rblPickAServiceB.SelectedValue != "0")
+                        {
+                            if (count == 0)
+                            {
+                                tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceB.SelectedItem.Text;
+                                count++;
+                            }
+                            else
+                            {
+                                tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceB.SelectedItem.Text;
+                            }
+                        }
+                        if (cblPickAServiceN.SelectedValue != "0")
+                        {
+
+                            foreach (ListItem item in cblPickAServiceN.Items)
+                            {
+                                if (item.Selected)
+                                {
+                                    if (count == 0)
+                                    {
+                                        tblBookingSummary.Rows[1].Cells[1].Text = item.Text;
+                                        count++;
+                                    }
+                                    else
+                                    {
+                                        tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + item.Text;
+                                    }
+
+                                }
+                            }
+                        }
+                        if (hours == 0 && minutes == 30)
+                        {
+                            lblNoOfHoursLabel.Text = "No. of Hours: ";
+                            lblNoOfHours.Text = minutes.ToString() + "min(s)";
+                        }
+                        else if (hours > 0 && minutes == 00)
+                        {
+                            lblNoOfHoursLabel.Text = "No. of Hours: ";
+                            lblNoOfHours.Text = hours.ToString() + "hr(s) ";
+                        }
+                        else if (hours > 0 && minutes == 30)
+                        {
+                            lblNoOfHoursLabel.Text = "No. of Hours: ";
+                            lblNoOfHours.Text = hours.ToString() + "hr(s) " + minutes.ToString() + "min(s)";
+                        }
+
+                    }
                 }
                 #endregion
 
@@ -1936,6 +2000,7 @@ namespace Cheveux
             pickedServiceID = new List<string>();
             rblPickAServiceB_SelectedIndexChanged(sender, e);
             rblPickAServiceA_SelectedIndexChanged(sender, e);
+            rblSickLeave_SelectedIndexChanged(sender, e);
             cblPickAServiceN_SelectedIndexChanged(sender, e);
 
             FillSummary(sender, e);
