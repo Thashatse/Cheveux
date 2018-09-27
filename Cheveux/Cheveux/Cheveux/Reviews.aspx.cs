@@ -19,7 +19,7 @@ namespace Cheveux
         List<SP_GetStylistBookings> customer = null;
         List<SP_GetBookingServices> bServices = null;
         REVIEW review = null;
-
+        List<SP_ReturnStylistNamesForReview> empNames = null;
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -110,13 +110,16 @@ namespace Cheveux
                     OpeningHeader.Text = "Write A Review";
                     readReviews.Visible = false;
                     btnRev.Visible = false;
-                    makeAreview.Visible = true;
+                    makeAreview.Visible = true; 
 
                     if (Page.IsPostBack)
                     {
                         displayPastBookings(cookie["ID"].ToString(), calDay.SelectedDate);
                     }
 
+                    //Set the month dropdownlist to the current month by defualt on page load
+                    int index = DateTime.Today.Month;
+                    drpMonth.SelectedValue = index.ToString();
                 }
                 
             }
@@ -261,6 +264,7 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+
         #region Events
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
@@ -284,13 +288,35 @@ namespace Cheveux
         }
         protected void drpReviewType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             if (drpReviewType.SelectedValue == "0")//review booking
             {
                 datepick.Visible = true;
+                dvStylistNames.Visible = false;
             }
             else if (drpReviewType.SelectedValue == "1")//review stylist
             {
                 datepick.Visible = false;
+                theReview.Visible = true;
+                lblCustID.Text= cookie["ID"].ToString();
+                dvStylistNames.Visible = true;
+                try
+                {
+                    empNames = handler.returnStylistNamesForReview(cookie["ID"].ToString());
+                    foreach (SP_ReturnStylistNamesForReview emp in empNames)
+                    {
+                        drpStylistNames.DataSource = empNames;
+                        drpStylistNames.DataTextField = "StylistName";
+                        drpStylistNames.DataValueField = "StylistID";
+                        drpStylistNames.DataBind();
+                    }
+                }
+                catch (Exception err)
+                {
+                    drpStylistNames.Items.Add("Unable to retrieve names");
+                    function.logAnError("Error on review page" + err.ToString());
+                }
             }
         }
         protected void drpMonth_SelectedIndexChanged(object sender, EventArgs e)
@@ -346,7 +372,6 @@ namespace Cheveux
             }
         }
         #endregion
-
 
     }
 }
