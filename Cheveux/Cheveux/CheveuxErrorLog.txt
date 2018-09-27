@@ -1,0 +1,50 @@
+
+TimeStamp: 2018/09/27 10:39:36
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.BusinessSetting.loadStylistListBox(Object sender, EventArgs e, Int32 featureIndex) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\BusinessSetting.aspx.cs:line 575 An error occurred retrieving list of products in loadProductListBox method on Settings
+
+TimeStamp: 2018/09/27 10:39:39
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.BusinessSetting.loadStylistListBox(Object sender, EventArgs e, Int32 featureIndex) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\BusinessSetting.aspx.cs:line 575 An error occurred retrieving list of products in loadProductListBox method on Settings
+
+TimeStamp: 2018/09/27 10:39:47
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.BusinessSetting.loadStylistListBox(Object sender, EventArgs e, Int32 featureIndex) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\BusinessSetting.aspx.cs:line 575 An error occurred retrieving list of products in loadProductListBox method on Settings
+
+TimeStamp: 2018/09/27 10:40:18
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.BusinessSetting.loadStylistListBox(Object sender, EventArgs e, Int32 featureIndex) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\BusinessSetting.aspx.cs:line 575 An error occurred retrieving list of products in loadProductListBox method on Settings
+
+TimeStamp: 2018/09/27 10:41:29
+Machine Name: TEFO-NTSAKO-HAS
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: thash
+User Domain: TEFO-NTSAKO-HAS
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Cheveux.BusinessSetting.loadStylistListBox(Object sender, EventArgs e, Int32 featureIndex) in F:\Google Drive\Visual Studio\Cheveux\Cheveux\Cheveux\Manager\BusinessSetting.aspx.cs:line 575 An error occurred retrieving list of products in loadProductListBox method on Settings
