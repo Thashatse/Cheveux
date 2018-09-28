@@ -149,9 +149,9 @@ namespace Cheveux
             }
             #endregion
             cookie = Request.Cookies["CheveuxUserID"];
-            lblChoose.Text = "Booking Summary...";
             lblChoose.Font.Size = 18;
             lblChoose.ForeColor = Color.Gray;
+            lblErrorSummary.ForeColor = Color.Red;
             bookingTime = new HttpCookie("BookTime");
 
             serviceList = handler.BLL_GetAllServices();
@@ -185,11 +185,18 @@ namespace Cheveux
                             divBraids.Visible = false;
                             divNatural.Visible = false;
 
+                            lblHeading.Text = "Leave Request";
+                            lblChoose.Text = "Leave Request Summary...";
+
                             divSickLeave.Visible = true;
                             rblSickLeave.DataSource = leaveList;
                             rblSickLeave.DataTextField = "Name";
                             rblSickLeave.DataValueField = "ProductID";
                             rblSickLeave.DataBind();
+                        }
+                        else
+                        {
+                            lblChoose.Text = "Booking Summary...";
                         }
                     }
                 }
@@ -251,7 +258,7 @@ namespace Cheveux
 
         #region View
         protected void btnNext_Click(object sender, EventArgs e)
-        {
+         {
             try
             {
                 if (btnNext.Text == "Choose Hairstylist")
@@ -259,24 +266,46 @@ namespace Cheveux
                     lbPickAStylist.Items.Clear();
                     foreach (SP_GetStylists stylists in stylistList)
                     {
-                        if (cookie["UT"] == "M")
+                        if(cookie != null)
                         {
-                            ListItem item = new ListItem(stylists.FirstName, stylists.UserID);
-                            lbPickAStylist.Items.Add(item);
+                            if (cookie["UT"] == "M")
+                            {
+                                ListItem item = new ListItem(stylists.FirstName, stylists.UserID);
+                                lbPickAStylist.Items.Add(item);
+                            }
+                            else
+                            {
+                                ListItem item = new ListItem(stylists.FirstName + " - Specializes in " + stylists.ServiceName, stylists.UserID);
+                                lbPickAStylist.Items.Add(item);
+                            }
                         }
                         else
                         {
                             ListItem item = new ListItem(stylists.FirstName + " - Specializes in " + stylists.ServiceName, stylists.UserID);
                             lbPickAStylist.Items.Add(item);
                         }
+                       
                     }
 
-                    if (((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0")) && (rblSickLeave.SelectedValue.ToString() == "-1"))
+                    if (((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0")) && (rblSickLeave.SelectedValue.ToString() == ""))
                     {
-
                         lblErrorSummary.Visible = true;
-                        lblErrorSummary.Text = "Please select a service(s) before moving to the next step!";
                         divServices.Visible = true;
+                        if (cookie != null)
+                        {
+                            if (cookie["UT"] == "M")
+                            {
+                                lblErrorSummary.Text = "Please select leave request reason!";
+                            }
+                            else
+                            {
+                                lblErrorSummary.Text = "Please select a service(s) before moving to the next step!";
+                            }
+                        }
+                        else
+                        {
+                            lblErrorSummary.Text = "Please select a service(s) before moving to the next step!";
+                        }
                     }
                     else
                     {
@@ -375,120 +404,199 @@ namespace Cheveux
                     cblPickAServiceN_SelectedIndexChanged(sender, e);
                     rblSickLeave_SelectedIndexChanged(sender, e);
                     divLabels.Visible = false;
-                    if (cookie["UT"] == "M")
+                    if (cookie != null)
                     {
-                        divDateTime.Visible = false;
-                        divSelectUser.Visible = false;
-                        lblErrorSummary.Visible = false;
+                        if (cookie["UT"] == "M")
+                        {
+                            divDateTime.Visible = false;
+                            divSelectUser.Visible = false;
+                            lblErrorSummary.Visible = false;
 
-                        FillSummary(sender, e);
+                            FillSummary(sender, e);
 
-                        lblGoService.ForeColor = Color.Gray;
-                        lblGoService.Font.Bold = false;
-                        lblGoCustomer.ForeColor = Color.Gray;
-                        lblGoCustomer.Font.Bold = false;
-                        lblGoStylist.ForeColor = Color.Gray;
-                        lblGoStylist.Font.Bold = false;
-                        lblGoDateTime.ForeColor = Color.Gray;
-                        lblGoDateTime.Font.Bold = false;
-                        lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
-                        lblGoSummary.Font.Bold = true;
-                        btnNext.Text = "Submit";
-                        btnNext.Visible = false;
-                        divSummaryPic.Visible = true;
+                            lblGoService.ForeColor = Color.Gray;
+                            lblGoService.Font.Bold = false;
+                            lblGoCustomer.ForeColor = Color.Gray;
+                            lblGoCustomer.Font.Bold = false;
+                            lblGoStylist.ForeColor = Color.Gray;
+                            lblGoStylist.Font.Bold = false;
+                            lblGoDateTime.ForeColor = Color.Gray;
+                            lblGoDateTime.Font.Bold = false;
+                            lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                            lblGoSummary.Font.Bold = true;
+                            btnNext.Text = "Submit";
+                            btnNext.Visible = false;
+                            divSummaryPic.Visible = true;
+                        }
+                        else
+                        {
+                            #region Internal Booking
+                            //load booking type 
+                            bookingType = Request.QueryString["Type"];
+                            if (lbCustomers.SelectedIndex == -1 && bookingType == "Internal")
+                            {
+                                lblErrorSummary.Visible = true;
+                                lblErrorSummary.Text = "Please select a customer before moving to the next step!";
+                                divSelectUser.Visible = true;
+                                rblPickAServiceA_SelectedIndexChanged(sender, e);
+                                rblPickAServiceB_SelectedIndexChanged(sender, e);
+                                cblPickAServiceN_SelectedIndexChanged(sender, e);
+                            }
+                            #endregion
+                            else
+                            {
+                                divSelectUser.Visible = false;
+                                //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
+                                HttpCookie bookingTime = Request.Cookies["BookTime"];
+                                if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00" && bookingType != "Internal")
+                                {
+                                    lblErrorSummary.Visible = true;
+                                    lblErrorSummary.Text = "Please select a date before moving to the next step!";
+                                    divDateTime.Visible = true;
+                                }
+                                else if (bookingTime == null && bookingType != "Internal")
+                                {
+                                    lblErrorSummary.Visible = true;
+                                    lblErrorSummary.Text = "Please select a time before moving to the next step!";
+                                    divDateTime.Visible = true;
+                                }
+                                else
+                                {
+                                    divDateTime.Visible = false;
+                                    divSelectUser.Visible = false;
+                                    lblErrorSummary.Visible = false;
+
+                                    if (pickedServiceID != null)
+                                    {
+                                        foreach (string id in pickedServiceID)
+                                        {
+                                            foreach (SP_GetServices services in serviceList)
+                                            {
+                                                if (id == services.ServiceID)
+                                                {
+                                                    totalPrice += services.Price;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        lblErrorSummary.Visible = true;
+                                        lblErrorSummary.Text = "There was trouble retrieving the services";
+                                    }
+                                    txtComment.Visible = true;
+                                    lblStylist.Text = lbPickAStylist.SelectedItem.Text;
+                                    lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
+                                    HttpCookie time = Request.Cookies["BookTime"];
+                                    lblTime.Text = time["Time"];
+                                    lblTotalCostLabel.Text = "Booking Total: ";
+                                    lblTotalCost.Text = "R " + string.Format("{0:#.00}", totalPrice).ToString();
+                                    lblCommentLabel.Text = "Comment: ";
+                                    btnPrevious.Visible = true;
+
+
+                                    if (bookingType == "Internal")
+                                    {
+                                        btnPrevious.Text = "Select Customer";
+                                    }
+                                    else
+                                    {
+                                        btnPrevious.Text = "Choose Date & Time";
+                                    }
+                                    lblGoService.ForeColor = Color.Gray;
+                                    lblGoService.Font.Bold = false;
+                                    lblGoCustomer.ForeColor = Color.Gray;
+                                    lblGoCustomer.Font.Bold = false;
+                                    lblGoStylist.ForeColor = Color.Gray;
+                                    lblGoStylist.Font.Bold = false;
+                                    lblGoDateTime.ForeColor = Color.Gray;
+                                    lblGoDateTime.Font.Bold = false;
+                                    lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                                    lblGoSummary.Font.Bold = true;
+                                    btnNext.Text = "Submit";
+                                    btnNext.Visible = false;
+                                    divSummaryPic.Visible = true;
+                                }
+
+
+                            }
+                        }
                     }
                     else
                     {
-                        #region Internal Booking
-                        //load booking type 
-                        bookingType = Request.QueryString["Type"];
-                        if (lbCustomers.SelectedIndex == -1 && bookingType == "Internal")
+                        divSelectUser.Visible = false;
+                        //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
+                        HttpCookie bookingTime = Request.Cookies["BookTime"];
+                        if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00" && bookingType != "Internal")
                         {
                             lblErrorSummary.Visible = true;
-                            lblErrorSummary.Text = "Please select a customer before moving to the next step!";
-                            divSelectUser.Visible = true;
-                            rblPickAServiceA_SelectedIndexChanged(sender, e);
-                            rblPickAServiceB_SelectedIndexChanged(sender, e);
-                            cblPickAServiceN_SelectedIndexChanged(sender, e);
+                            lblErrorSummary.Text = "Please select a date before moving to the next step!";
+                            divDateTime.Visible = true;
                         }
-                        #endregion
+                        else if (bookingTime == null && bookingType != "Internal")
+                        {
+                            lblErrorSummary.Visible = true;
+                            lblErrorSummary.Text = "Please select a time before moving to the next step!";
+                            divDateTime.Visible = true;
+                        }
                         else
                         {
+                            divDateTime.Visible = false;
                             divSelectUser.Visible = false;
-                            //BookingSummary.Text = BookingSummary.Text + " for: " + calBooking.SelectedDate.ToString() + " " + bookedTime;
-                            HttpCookie bookingTime = Request.Cookies["BookTime"];
-                            if (calBooking.SelectedDate.ToString() == "0001/01/01 00:00:00" && bookingType != "Internal")
+                            lblErrorSummary.Visible = false;
+
+                            if (pickedServiceID != null)
                             {
-                                lblErrorSummary.Visible = true;
-                                lblErrorSummary.Text = "Please select a date before moving to the next step!";
-                                divDateTime.Visible = true;
-                            }
-                            else if (bookingTime == null && bookingType != "Internal")
-                            {
-                                lblErrorSummary.Visible = true;
-                                lblErrorSummary.Text = "Please select a time before moving to the next step!";
-                                divDateTime.Visible = true;
+                                foreach (string id in pickedServiceID)
+                                {
+                                    foreach (SP_GetServices services in serviceList)
+                                    {
+                                        if (id == services.ServiceID)
+                                        {
+                                            totalPrice += services.Price;
+                                        }
+                                    }
+                                }
+
                             }
                             else
                             {
-                                divDateTime.Visible = false;
-                                divSelectUser.Visible = false;
-                                lblErrorSummary.Visible = false;
-
-                                if (pickedServiceID != null)
-                                {
-                                    foreach (string id in pickedServiceID)
-                                    {
-                                        foreach (SP_GetServices services in serviceList)
-                                        {
-                                            if (id == services.ServiceID)
-                                            {
-                                                totalPrice += services.Price;
-                                            }
-                                        }
-                                    }
-
-                                }
-                                else
-                                {
-                                    lblErrorSummary.Visible = true;
-                                    lblErrorSummary.Text = "There was trouble retrieving the services";
-                                }
-                                txtComment.Visible = true;
-                                lblStylist.Text = lbPickAStylist.SelectedItem.Text;
-                                lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
-                                HttpCookie time = Request.Cookies["BookTime"];
-                                lblTime.Text = time["Time"];
-                                lblTotalCostLabel.Text = "Booking Total: ";
-                                lblTotalCost.Text = "R " + string.Format("{0:#.00}", totalPrice).ToString();
-                                lblCommentLabel.Text = "Comment: ";
-                                btnPrevious.Visible = true;
-
-
-                                if (bookingType == "Internal")
-                                {
-                                    btnPrevious.Text = "Select Customer";
-                                }
-                                else
-                                {
-                                    btnPrevious.Text = "Choose Date & Time";
-                                }
-                                lblGoService.ForeColor = Color.Gray;
-                                lblGoService.Font.Bold = false;
-                                lblGoCustomer.ForeColor = Color.Gray;
-                                lblGoCustomer.Font.Bold = false;
-                                lblGoStylist.ForeColor = Color.Gray;
-                                lblGoStylist.Font.Bold = false;
-                                lblGoDateTime.ForeColor = Color.Gray;
-                                lblGoDateTime.Font.Bold = false;
-                                lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
-                                lblGoSummary.Font.Bold = true;
-                                btnNext.Text = "Submit";
-                                btnNext.Visible = false;
-                                divSummaryPic.Visible = true;
+                                lblErrorSummary.Visible = true;
+                                lblErrorSummary.Text = "There was trouble retrieving the services";
                             }
+                            txtComment.Visible = true;
+                            lblStylist.Text = lbPickAStylist.SelectedItem.Text;
+                            lblDate.Text = calBooking.SelectedDate.ToString("dd MMM yyyy");
+                            HttpCookie time = Request.Cookies["BookTime"];
+                            lblTime.Text = time["Time"];
+                            lblTotalCostLabel.Text = "Booking Total: ";
+                            lblTotalCost.Text = "R " + string.Format("{0:#.00}", totalPrice).ToString();
+                            lblCommentLabel.Text = "Comment: ";
+                            btnPrevious.Visible = true;
 
 
+                            if (bookingType == "Internal")
+                            {
+                                btnPrevious.Text = "Select Customer";
+                            }
+                            else
+                            {
+                                btnPrevious.Text = "Choose Date & Time";
+                            }
+                            lblGoService.ForeColor = Color.Gray;
+                            lblGoService.Font.Bold = false;
+                            lblGoCustomer.ForeColor = Color.Gray;
+                            lblGoCustomer.Font.Bold = false;
+                            lblGoStylist.ForeColor = Color.Gray;
+                            lblGoStylist.Font.Bold = false;
+                            lblGoDateTime.ForeColor = Color.Gray;
+                            lblGoDateTime.Font.Bold = false;
+                            lblGoSummary.ForeColor = Color.FromArgb(240, 95, 64);
+                            lblGoSummary.Font.Bold = true;
+                            btnNext.Text = "Submit";
+                            btnNext.Visible = false;
+                            divSummaryPic.Visible = true;
                         }
                     }
                 }
@@ -719,7 +827,7 @@ namespace Cheveux
                     }
                     catch (Exception err)
                     {
-                        function.logAnError("Error Making abooking " + err.ToString());
+                        function.logAnError("Error Making a booking " + err.ToString());
                         lblErrorSummary.Visible = true;
                         lblErrorSummary.Text = "Database connection failed. Please contact admin and try again later";
                     }

@@ -24,7 +24,7 @@
                         <div class="col-12">
 
                             <div class="jumbotron  bg-dark text-white">
-                                <h1>Make A Booking</h1>
+                                <h1><asp:Label runat="server" ID="lblHeading" Visible="true" Text ="Make A Booking"></asp:Label></h1>
                                 <asp:Label runat="server" ID="lblErrorSummary" Visible="false"></asp:Label>
                               </div>
                         </div>
