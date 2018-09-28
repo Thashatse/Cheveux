@@ -67,6 +67,42 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor btnRev;
         
         /// <summary>
+        /// sucNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sucNoti;
+        
+        /// <summary>
+        /// lblSucNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSucNoti;
+        
+        /// <summary>
+        /// erNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl erNoti;
+        
+        /// <summary>
+        /// lblErNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErNoti;
+        
+        /// <summary>
         /// readReviews control.
         /// </summary>
         /// <remarks>

@@ -22,6 +22,7 @@ namespace Cheveux
         List<SP_ReturnStylistNamesForReview> empNames = null;
         SP_ViewEmployee viewEmp = null;
         SP_GetEmployee_S_ s = null;
+        string noti;
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -124,6 +125,15 @@ namespace Cheveux
                         rvBoxHeader.InnerText = "Write a review and rate the stylist";
                     }
 
+                    noti = Request.QueryString["noti"];
+                    if(noti == "s")
+                    {
+                        Notification(noti);
+                    }
+                    else if(noti == "f")
+                    {
+                        Notification(noti);
+                    }
 
                     if (Page.IsPostBack)
                     {
@@ -326,7 +336,23 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
-
+        public void Notification(string noti)
+        {
+            if(noti == "s")
+            {
+                erNoti.Visible = false;
+                sucNoti.Visible = true;
+                lblSucNoti.Text = "Your review has been successfully recieved." +
+                    "Thank you for your feedback";
+            }
+            else if(noti == "f")
+            {
+                erNoti.Visible = true;
+                sucNoti.Visible = false;
+                lblErNoti.Text = "Error posting the review." +
+                    "Please try again later.";
+            }
+        }
         #region Events
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
@@ -412,37 +438,44 @@ namespace Cheveux
         }
         protected void btnPostReview_Click(object sender, EventArgs e)
         {
-            try
+            if (drpReviewType.SelectedValue == "0")//review booking
             {
-                review = new REVIEW();
-                cookie = Request.Cookies["CheveuxUserID"];
-
-                string rID = function.GenerateRandomReviewID();
-
-                review.ReviewID = rID;
-                review.CustomerID = cookie["ID"].ToString();
-                review.EmployeeID = lblStylistID.Text.ToString();
-                review.PrimaryBookingID = lblBookingID.Text.ToString();
-                review.Date = DateTime.Today;
-                review.Time = Convert.ToDateTime(DateTime.Now.ToString("h:mm:ss tt"));
-                review.Rating = Rating1.CurrentRating;
-                review.Comment = reviewComment.InnerText.ToString();
-
-                if (handler.reviewBooking(review))
+                try
                 {
-                    Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview");
+                    review = new REVIEW();
+                    cookie = Request.Cookies["CheveuxUserID"];
+
+                    string rID = function.GenerateRandomReviewID();
+
+                    review.ReviewID = rID;
+                    review.CustomerID = cookie["ID"].ToString();
+                    review.EmployeeID = lblStylistID.Text.ToString();
+                    review.PrimaryBookingID = lblBookingID.Text.ToString();
+                    review.Date = DateTime.Today;
+                    review.Time = Convert.ToDateTime(DateTime.Now.ToString("h:mm:ss tt"));
+                    review.Rating = Rating1.CurrentRating;
+                    review.Comment = reviewComment.InnerText.ToString();
+
+                    if (handler.reviewBooking(review))
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview?noti=s");
+                    }
+                    else
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview?noti=f");
+                    }
                 }
-                else
+                catch (Exception Err)
                 {
-                    //temporary
-                    Response.Redirect("../Cheveux/Reviews.aspx?Action=ReadReviews");
+                    Response.Redirect("../Default.aspx");//temporary
+                    function.logAnError(Err.ToString());
                 }
             }
-            catch (Exception Err)
+            else if (drpReviewType.SelectedValue == "1")//review stylist
             {
-                Response.Redirect("../Default.aspx");//temporary
-                function.logAnError(Err.ToString());
+                //review stylist
             }
+            
         }
 
         #endregion
