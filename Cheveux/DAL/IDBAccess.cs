@@ -210,5 +210,7 @@ namespace DAL
         SP_GetEmployee_S_ getBio(string id);
         List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate);
         List<SP_GetLeaveServices> GetLeaveServices();
+        bool UpdateOrder(string orderID, DateTime dateReceived, bool received);
+        bool UpdateQtyOnHand(string prodID, int qty);
     }
 }
