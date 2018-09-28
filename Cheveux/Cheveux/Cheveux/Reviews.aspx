@@ -75,7 +75,7 @@
 
 
 
-                    <div class="container">
+
                         <!--Users reading reviews -->
                         <asp:PlaceHolder ID="readReviews" runat="server" Visible="false">
                             <div class="row">
@@ -127,8 +127,9 @@
                             </div>
 
                             <!--Section: Date and listbox -->
-                            <div id="datepick" runat="server">
-                                <div class="row">
+
+                            <div class="row">
+                                <asp:PlaceHolder ID="datepick" runat="server">
                                     <div class="col-sm-12 col-md-6 col-lg-6">
                                         <div class="row">
                                             <div class="col-sm-4 col-md-4 col-lg-4">
@@ -161,77 +162,78 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <br />
-                                    <div class="col-sm-12 col-md-6 col-lg-6">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <h6 style="text-decoration: underline;" id="choose" runat="server" visible="false">Choose a booking to review</h6>
-                                                <p id="lsBksHeader" runat="server"></p>
-                                                <asp:Table ID="tblBookings" runat="server"></asp:Table>
-                                            </div>
-
+                                </asp:PlaceHolder>
+                                <br />
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h6 style="text-decoration: underline;" id="choose" runat="server" visible="false">Choose a booking to review</h6>
+                                            <p id="lsBksHeader" runat="server"></p>
+                                            <asp:Table ID="tblBookings" runat="server"></asp:Table>
                                         </div>
-                                        <br />
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div id="theReview" runat="server" visible="false">
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <h4>Write a review and rate the service</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <asp:Label ID="lblBookingID" runat="server" Text="" Visible="false"></asp:Label>
-                                                            <asp:Label ID="lblCustID" runat="server" Text="" Visible="false"></asp:Label>
-                                                            <asp:Label ID="lblStylistID" runat="server" Text="" Visible="false"></asp:Label>
-                                                        </div>
-                                                    </div>
-                                                    <!--Star rating -->
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-                                                            <asp:UpdatePanel ID="ratingUpdatePanel" runat="server">
-                                                                <ContentTemplate>
-                                                                    <ajaxToolkit:Rating ID="Rating1" runat="server"
-                                                                        StarCssClass="starRating"
-                                                                        FilledStarCssClass="filledStar"
-                                                                        EmptyStarCssClass="emptyStar"
-                                                                        WaitingStarCssClass="waitingStar">
-                                                                    </ajaxToolkit:Rating>
-                                                                </ContentTemplate>
-                                                            </asp:UpdatePanel>
-                                                        </div>
 
-                                                    </div>
-                                                    <!--Comment-->
-                                                    <div class="row">
-                                                        <div class="col-12">
-                                                            <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <br />
-                                                    <div class="row">
-                                                        <div class="col-sm-12 col-md-3 col-lg-3">
-                                                            <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" OnClick="btnPostReview_Click" />
-                                                        </div>
-                                                        <div class="col-sm-12 col-md-3 col-lg-3">
-                                                            <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
-                                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <asp:PlaceHolder ID="theReview" runat="server" Visible="false">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <h4 id="rvBoxHeader" runat="server">Write a review and rate the service</h4>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <asp:Label ID="lblBookingID" runat="server" Text="" Visible="false"></asp:Label>
+                                                        <asp:Label ID="lblCustID" runat="server" Text="" Visible="false"></asp:Label>
+                                                        <asp:Label ID="lblStylistID" runat="server" Text="" Visible="false"></asp:Label>
+                                                    </div>
+                                                </div>
+                                                <!--Star rating -->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                                        <asp:UpdatePanel ID="ratingUpdatePanel" runat="server">
+                                                            <ContentTemplate>
+                                                                <ajaxToolkit:Rating ID="Rating1" runat="server"
+                                                                    StarCssClass="starRating"
+                                                                    FilledStarCssClass="filledStar"
+                                                                    EmptyStarCssClass="emptyStar"
+                                                                    WaitingStarCssClass="waitingStar">
+                                                                </ajaxToolkit:Rating>
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                    </div>
+
+                                                </div>
+                                                <!--Comment-->
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server"></textarea>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="row">
+                                                    <div class="col-sm-12 col-md-3 col-lg-3">
+                                                        <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" OnClick="btnPostReview_Click" />
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-3 col-lg-3">
+                                                        <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
+                                                    </div>
+                                                </div>
+
+                                            </asp:PlaceHolder>
+
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <br />
 
                             <br />
 
                         </asp:PlaceHolder>
-                    </div>
+                    
 
 
 

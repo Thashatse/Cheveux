@@ -20,6 +20,8 @@ namespace Cheveux
         List<SP_GetBookingServices> bServices = null;
         REVIEW review = null;
         List<SP_ReturnStylistNamesForReview> empNames = null;
+        SP_ViewEmployee viewEmp = null;
+        SP_GetEmployee_S_ s = null;
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -110,7 +112,18 @@ namespace Cheveux
                     OpeningHeader.Text = "Write A Review";
                     readReviews.Visible = false;
                     btnRev.Visible = false;
-                    makeAreview.Visible = true; 
+                    makeAreview.Visible = true;
+
+
+                    if (drpReviewType.SelectedValue == "0")//review booking
+                    {
+                        rvBoxHeader.InnerText = "Write a review and rate the service";
+                    }
+                    else if (drpReviewType.SelectedValue == "1")//review stylist
+                    {
+                        rvBoxHeader.InnerText = "Write a review and rate the stylist";
+                    }
+
 
                     if (Page.IsPostBack)
                     {
@@ -134,6 +147,57 @@ namespace Cheveux
                     btnRev.Visible = false;
                     makeAreview.Visible = false;
                 }
+            }
+        }
+        public void viewEmployee(string empID)
+        {
+            tblBookings.Rows.Clear();
+
+            try
+            {
+                viewEmp = handler.viewEmployee(empID);
+                TableRow row = new TableRow();
+                tblBookings.Rows.Add(row);
+                TableCell userImage = new TableCell();
+                userImage.Text = "<img src=" + viewEmp.empImage
+                                  + " alt='" + viewEmp.firstName + " " + viewEmp.lastName +
+                                 " Profile Image' width='150' height='170'/>";
+                userImage.Width = 220;
+                tblBookings.Rows[0].Cells.Add(userImage);
+
+                try
+                {
+                    s = handler.getEmployee_S(empID);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "<h5>Specialisation: "
+                                  + "<a href='ViewProduct.aspx?ProductID="
+                                  + s.ServiceID.Replace(" ", string.Empty) + "' target='_blank'>"
+                                  + s.Specialisation.ToString() + "</a></h5>";
+                    newCell.Width = 100;
+                    tblBookings.Rows[0].Cells.Add(newCell);
+
+                }
+                catch (Exception Err)
+                {
+                    TableCell errorCell = new TableCell();
+                    errorCell.Text = "Error displaying user image";
+                    tblBookings.Rows[0].Cells.Add(errorCell);
+
+                    function.logAnError("Unable to retrievee specialisation review.aspx err:" + Err.ToString());
+                }
+
+                TableRow newRow = new TableRow();
+                tblBookings.Rows.Add(newRow);
+            }
+            catch (Exception Err)
+            {
+                TableRow row = new TableRow();
+                tblBookings.Rows.Add(row);
+                TableCell userImage = new TableCell();
+                userImage.Text = "Error displaying user image";
+                tblBookings.Rows[0].Cells.Add(userImage);
+
+                function.logAnError("Couldn't display user image in reviews.aspx err:" + Err.ToString());
             }
         }
         public void displayPastBookings(string customerID,DateTime day)
@@ -294,11 +358,14 @@ namespace Cheveux
             {
                 datepick.Visible = true;
                 dvStylistNames.Visible = false;
+                choose.Visible = true;
+                tblBookings.Visible = true;
             }
             else if (drpReviewType.SelectedValue == "1")//review stylist
             {
                 datepick.Visible = false;
                 theReview.Visible = true;
+                choose.Visible = false;
                 lblCustID.Text= cookie["ID"].ToString();
                 dvStylistNames.Visible = true;
                 try
@@ -317,6 +384,7 @@ namespace Cheveux
                     drpStylistNames.Items.Add("Unable to retrieve names");
                     function.logAnError("Error on review page" + err.ToString());
                 }
+                viewEmployee(drpStylistNames.SelectedValue.ToString());
             }
         }
         protected void drpMonth_SelectedIndexChanged(object sender, EventArgs e)

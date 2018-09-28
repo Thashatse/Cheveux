@@ -127,7 +127,7 @@ namespace Cheveux {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl datepick;
+        protected global::System.Web.UI.WebControls.PlaceHolder datepick;
         
         /// <summary>
         /// drpMonth control.
@@ -181,7 +181,16 @@ namespace Cheveux {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl theReview;
+        protected global::System.Web.UI.WebControls.PlaceHolder theReview;
+        
+        /// <summary>
+        /// rvBoxHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rvBoxHeader;
         
         /// <summary>
         /// lblBookingID control.
