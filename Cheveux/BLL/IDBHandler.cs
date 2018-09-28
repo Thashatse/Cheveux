@@ -208,6 +208,8 @@ namespace BLL
         List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day);
         List<SP_GetLeaveServices> BLL_GetLeaveServices();
+        bool BLL_UpdateOrder(string orderID, DateTime dateReceived, bool received);
+        bool BLL_UpdateQtyOnHand(string prodID, int qty);
     }
 }
 

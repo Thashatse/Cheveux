@@ -713,5 +713,13 @@ namespace BLL
         {
             return db.GetLeaveServices();
         }
+        public bool BLL_UpdateOrder(string orderID, DateTime dateReceived, bool received)
+        {
+            return db.UpdateOrder(orderID, dateReceived, received);
+        }
+        public bool BLL_UpdateQtyOnHand(string prodID, int qty)
+        {
+            return db.UpdateQtyOnHand(prodID, qty);
+        }
     }
 }
