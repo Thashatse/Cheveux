@@ -153,11 +153,11 @@ namespace Cheveux
         {
             tblBookings.Rows.Clear();
 
+            TableRow row = new TableRow();
+            tblBookings.Rows.Add(row);
             try
             {
                 viewEmp = handler.viewEmployee(empID);
-                TableRow row = new TableRow();
-                tblBookings.Rows.Add(row);
                 TableCell userImage = new TableCell();
                 userImage.Text = "<img src=" + viewEmp.empImage
                                   + " alt='" + viewEmp.firstName + " " + viewEmp.lastName +
@@ -180,7 +180,7 @@ namespace Cheveux
                 catch (Exception Err)
                 {
                     TableCell errorCell = new TableCell();
-                    errorCell.Text = "Error displaying user image";
+                    errorCell.Text = " ";
                     tblBookings.Rows[0].Cells.Add(errorCell);
 
                     function.logAnError("Unable to retrievee specialisation review.aspx err:" + Err.ToString());
@@ -191,10 +191,8 @@ namespace Cheveux
             }
             catch (Exception Err)
             {
-                TableRow row = new TableRow();
-                tblBookings.Rows.Add(row);
                 TableCell userImage = new TableCell();
-                userImage.Text = "Error displaying user image";
+                userImage.Text = "<img src='https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png' alt='Error' width='10' height='10'></img>"; 
                 tblBookings.Rows[0].Cells.Add(userImage);
 
                 function.logAnError("Couldn't display user image in reviews.aspx err:" + Err.ToString());
