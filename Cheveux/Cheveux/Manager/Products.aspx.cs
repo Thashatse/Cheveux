@@ -1114,6 +1114,22 @@ namespace Cheveux.Manager
             if (orderID != null && orderID != "")
             {
                 //Sivu's Code Here
+                List<OrderViewModel> outOrderProducts = handler.getProductOrderDL(orderID);
+                try
+                {
+                    handler.BLL_UpdateOrder(orderID, DateTime.Now, true);
+                    foreach (OrderViewModel product in outOrderProducts)
+                    {
+                        handler.BLL_UpdateQtyOnHand(product.ProductID, product.Qty);
+                    }
+
+                }
+                catch(Exception er)
+                {
+                    function.logAnError("Error updating order details " + er.ToString());
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20products");
+                }
+                Response.Redirect("Products.aspx?Action=ViewOrder&OrderID=" + orderID);
             }
             else
             {
