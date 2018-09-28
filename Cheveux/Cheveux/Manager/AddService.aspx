@@ -32,6 +32,9 @@
                                 <br />
                                 <br />
                             </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:Label runat="server" ID="lblTypeValidation" Text="*Service Type is required" Visible="false"></asp:Label>
+                            </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                     <div class="container" runat="server" id="divBraidDetails" visible="false">
@@ -42,6 +45,11 @@
                                     <asp:RadioButtonList runat="server" ID="rblStyle"></asp:RadioButtonList>
                                     <br />
                                 </asp:TableCell>
+                                <asp:TableCell>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorrblStyle" runat="server"
+                                        ErrorMessage="*Braid style is required" ControlToValidate="rblStyle"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow>
                                 <asp:TableCell Text="Width: " Width="150px" VerticalAlign="Middle"></asp:TableCell>
@@ -49,12 +57,22 @@
                                     <asp:RadioButtonList runat="server" ID="rblWidth"></asp:RadioButtonList>
                                     <br />
                                 </asp:TableCell>
+                                <asp:TableCell>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorrblWidth" runat="server"
+                                        ErrorMessage="*Braid width is required" ControlToValidate="rblWidth"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
+                                </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow>
                                 <asp:TableCell Text="Length: " Width="150px" VerticalAlign="Middle"></asp:TableCell>
                                 <asp:TableCell>
                                     <asp:RadioButtonList runat="server" ID="rblLength"></asp:RadioButtonList>
                                     <br />
+                                </asp:TableCell>
+                                <asp:TableCell>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorrblLength" runat="server"
+                                        ErrorMessage="*Braid length is required" ControlToValidate="rblLength"
+                                        ForeColor="Red"></asp:RequiredFieldValidator>
                                 </asp:TableCell>
                             </asp:TableRow>
                         </asp:Table>
@@ -66,13 +84,17 @@
                                 <asp:TextBox runat="server" ID="txtName" CssClass="form-control"></asp:TextBox>
                                 <br />
                             </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtName" runat="server"
+                                    ErrorMessage="*Service name is required" ControlToValidate="txtName"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
+                            </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell Text="No of Slots: " Width="150px"></asp:TableCell>
                             <asp:TableCell>
                                 <asp:DropDownList runat="server" ID="drpNoOfSlots" AutoPostBack="true" CssClass="btn btn-primary dropdown-toggle">
-                                    <asp:ListItem Text="" Value="0" Selected="True"></asp:ListItem>
-                                    <asp:ListItem Text="1" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="1" Value="1" Selected="True"></asp:ListItem>
                                     <asp:ListItem Text="2" Value="2"></asp:ListItem>
                                     <asp:ListItem Text="3" Value="3"></asp:ListItem>
                                     <asp:ListItem Text="4" Value="4"></asp:ListItem>
@@ -102,12 +124,22 @@
                                 <asp:TextBox runat="server" ID="txtPrice" CssClass="form-control"></asp:TextBox>
                                 <br />
                             </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtPrice" runat="server"
+                                    ErrorMessage="*Service price is required" ControlToValidate="txtPrice"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
+                            </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
                             <asp:TableCell Text="Description: " Width="150px"></asp:TableCell>
                             <asp:TableCell>
                                 <asp:TextBox runat="server" ID="txtDescription" CssClass="form-control"></asp:TextBox>
                                 <br />
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidatortxtDescription" runat="server"
+                                    ErrorMessage="*Service name is required" ControlToValidate="txtDescription"
+                                    ForeColor="Red"></asp:RequiredFieldValidator>
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>

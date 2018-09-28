@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.Models;
 using TypeLibrary.ViewModels;
+using System.Drawing;
 
 namespace Cheveux.Manager
 {
@@ -57,6 +58,8 @@ namespace Cheveux.Manager
             if(drpType.SelectedValue == "0")
             {
                 divBraidDetails.Visible = false;
+                lblTypeValidation.Visible = true;
+                lblTypeValidation.ForeColor = Color.Red;
             }
             else if(drpType.SelectedValue == "B")
             {
@@ -102,6 +105,7 @@ namespace Cheveux.Manager
             product = new PRODUCT();
             service = new SERVICE();
             bservice = new BRAID_SERVICE();
+
             string price = String.Format("{0:N2}", txtPrice.Text);
             product.ProductID = function.GenerateRandomProductID();
             product.Name = txtName.Text;
@@ -121,7 +125,7 @@ namespace Cheveux.Manager
                 handler.BLL_AddBraidService(bservice);
                 handler.BLL_AddService(product, service);
             }
-            else if(drpType.SelectedValue == "A")
+            else if (drpType.SelectedValue == "A")
             {
                 handler.BLL_AddService(product, service);
             }
@@ -130,8 +134,8 @@ namespace Cheveux.Manager
                 handler.BLL_AddService(product, service);
             }
 
-            //redirect to previous page
-            Response.Redirect("Service.aspx");
+                //redirect to previous page
+                Response.Redirect("Service.aspx");
 
         }
     }

@@ -58,6 +58,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.DropDownList drpType;
         
         /// <summary>
+        /// lblTypeValidation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTypeValidation;
+        
+        /// <summary>
         /// divBraidDetails control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.RadioButtonList rblStyle;
         
         /// <summary>
+        /// RequiredFieldValidatorrblStyle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorrblStyle;
+        
+        /// <summary>
         /// rblWidth control.
         /// </summary>
         /// <remarks>
@@ -94,6 +112,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.RadioButtonList rblWidth;
         
         /// <summary>
+        /// RequiredFieldValidatorrblWidth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorrblWidth;
+        
+        /// <summary>
         /// rblLength control.
         /// </summary>
         /// <remarks>
@@ -101,6 +128,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblLength;
+        
+        /// <summary>
+        /// RequiredFieldValidatorrblLength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatorrblLength;
         
         /// <summary>
         /// tblServiceDetails2 control.
@@ -121,6 +157,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.TextBox txtName;
         
         /// <summary>
+        /// RequiredFieldValidatortxtName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtName;
+        
+        /// <summary>
         /// drpNoOfSlots control.
         /// </summary>
         /// <remarks>
@@ -139,6 +184,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.TextBox txtPrice;
         
         /// <summary>
+        /// RequiredFieldValidatortxtPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtPrice;
+        
+        /// <summary>
         /// txtDescription control.
         /// </summary>
         /// <remarks>
@@ -146,6 +200,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        
+        /// <summary>
+        /// RequiredFieldValidatortxtDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtDescription;
         
         /// <summary>
         /// btnCancel control.
