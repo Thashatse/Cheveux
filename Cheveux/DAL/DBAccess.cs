@@ -1391,8 +1391,11 @@ namespace DAL
                         accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         accessory.Price = Convert.ToInt32(row["Price"]);
                         accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
-                        accessory.BrandID = Convert.ToString("BrandID");
-                        accessory.Brandname = Convert.ToString("BrandName");
+                        accessory.BrandID = Convert.ToString(row["BrandID"]);
+                        accessory.Qty = Convert.ToInt16(row["Qty"]);
+                        accessory.Brandname = Convert.ToString(row["BrandName"]);
+                        accessory.supplierID= Convert.ToString(row["SupplierID"]);
+                        accessory.supplierName = Convert.ToString(row["SupplierName"]);
                     }
                 }
             }
@@ -1426,7 +1429,11 @@ namespace DAL
                         treatment.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         treatment.Active = Convert.ToString(row["Active"]);
                         treatment.BrandID = Convert.ToString("BrandID");
-                        treatment.Brandname = Convert.ToString("BrandName");
+                        treatment.Qty = Convert.ToInt16(row["Qty"]);
+                        treatment.Brandname = Convert.ToString(row["BrandName"]);
+                        treatment.supplierID = Convert.ToString(row["SupplierID"]);
+                        treatment.supplierName = Convert.ToString(row["SupplierName"]);
+
                     }
                 }
             }
