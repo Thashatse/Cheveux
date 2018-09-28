@@ -4487,5 +4487,40 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public bool UpdateOrder(string orderID, DateTime dateReceived, bool received)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@OrderID", orderID),
+                    new SqlParameter("@DateReceived", dateReceived),
+                    new SqlParameter("@Received", received)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateOrder", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool UpdateQtyOnHand(string prodID, int qty)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ProductID", prodID),
+                    new SqlParameter("@Qty", qty)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateQtyOnHand", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }                  
