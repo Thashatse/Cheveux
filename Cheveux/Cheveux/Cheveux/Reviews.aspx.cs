@@ -149,6 +149,7 @@ namespace Cheveux
                 }
             }
         }
+
         public void viewEmployee(string empID)
         {
             tblBookings.Rows.Clear();
@@ -162,7 +163,6 @@ namespace Cheveux
                 userImage.Text = "<img src=" + viewEmp.empImage
                                   + " alt='" + viewEmp.firstName + " " + viewEmp.lastName +
                                  " Profile Image' width='150' height='170'/>";
-                userImage.Width = 220;
                 tblBookings.Rows[0].Cells.Add(userImage);
 
                 try
@@ -173,7 +173,7 @@ namespace Cheveux
                                   + "<a href='ViewProduct.aspx?ProductID="
                                   + s.ServiceID.Replace(" ", string.Empty) + "' target='_blank'>"
                                   + s.Specialisation.ToString() + "</a></h5>";
-                    newCell.Width = 100;
+                    newCell.Width = 600;
                     tblBookings.Rows[0].Cells.Add(newCell);
 
                 }
@@ -385,6 +385,13 @@ namespace Cheveux
                 viewEmployee(drpStylistNames.SelectedValue.ToString());
             }
         }
+        protected void drpStylistNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            datepick.Visible = false;
+            theReview.Visible = true;
+            choose.Visible = false;
+            viewEmployee(drpStylistNames.SelectedValue.ToString());
+        }
         protected void drpMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
             int month = Convert.ToInt16(drpMonth.SelectedValue);
@@ -437,7 +444,9 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+
         #endregion
+
 
     }
 }

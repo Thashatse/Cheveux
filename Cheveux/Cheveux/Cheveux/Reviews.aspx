@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="col-sm-8 col-md-4 col-lg-4">
                                                 <asp:DropDownList ID="drpStylistNames" runat="server" AutoPostBack="true"
-                                                    CssClass="btn btn-primary dropdown-toggle">
+                                                    CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpStylistNames_SelectedIndexChanged">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>
