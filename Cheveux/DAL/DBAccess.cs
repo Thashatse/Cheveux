@@ -2616,12 +2616,12 @@ namespace DAL
         #endregion
 
         #region Reviews
-        public List<SP_GetReviews> getAllReviews()
+        public List<SP_GetReviews> getAllBookingReviews()
         {
             List<SP_GetReviews> list = new List<SP_GetReviews>();
             try
             {
-                using(DataTable table = DBHelper.Select("SP_GetAllReviews", CommandType.StoredProcedure))
+                using(DataTable table = DBHelper.Select("SP_GetAllBookingReviews", CommandType.StoredProcedure))
                 {
                     if (table.Rows.Count > 0)
                     {
@@ -2635,7 +2635,115 @@ namespace DAL
                                 PrimaryBookingID = row["primaryBookingID"].ToString(),
                                 Date = Convert.ToDateTime(row["Date"].ToString()),
                                 Time = Convert.ToDateTime(row["Time"].ToString()),
-                                Rating = Convert.ToDouble(row["Rating"].ToString()),
+                                Rating = Convert.ToInt32(row["Rating"].ToString()),
+                                Comment = row["Comment"].ToString()
+                            };
+                            list.Add(emp);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetReviews> getAllStylistReviews()
+        {
+            List<SP_GetReviews> list = new List<SP_GetReviews>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetAllStylistReviews", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetReviews emp = new SP_GetReviews()
+                            {
+                                ReviewID = row["ReviewID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                EmployeeID = row["EmployeeID"].ToString(),
+                                PrimaryBookingID = row["primaryBookingID"].ToString(),
+                                Date = Convert.ToDateTime(row["Date"].ToString()),
+                                Time = Convert.ToDateTime(row["Time"].ToString()),
+                                Rating = Convert.ToInt32(row["Rating"].ToString()),
+                                Comment = row["Comment"].ToString()
+                            };
+                            list.Add(emp);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetReviews> getCustomersReviews(string customerID)
+        {
+            List<SP_GetReviews> list = new List<SP_GetReviews>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@customerID", customerID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetCustomersReviews", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetReviews emp = new SP_GetReviews()
+                            {
+                                ReviewID = row["ReviewID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                EmployeeID = row["EmployeeID"].ToString(),
+                                PrimaryBookingID = row["primaryBookingID"].ToString(),
+                                Date = Convert.ToDateTime(row["Date"].ToString()),
+                                Time = Convert.ToDateTime(row["Time"].ToString()),
+                                Rating = Convert.ToInt32(row["Rating"].ToString()),
+                                Comment = row["Comment"].ToString()
+                            };
+                            list.Add(emp);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetReviews> getReviewsOfStylist(string stylistID)
+        {
+            List<SP_GetReviews> list = new List<SP_GetReviews>();
+            SqlParameter[] pars = new SqlParameter[] 
+            {
+                new SqlParameter("@stylistID", stylistID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetReviewsOfStylist", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetReviews emp = new SP_GetReviews()
+                            {
+                                ReviewID = row["ReviewID"].ToString(),
+                                CustomerID = row["CustomerID"].ToString(),
+                                EmployeeID = row["EmployeeID"].ToString(),
+                                PrimaryBookingID = row["primaryBookingID"].ToString(),
+                                Date = Convert.ToDateTime(row["Date"].ToString()),
+                                Time = Convert.ToDateTime(row["Time"].ToString()),
+                                Rating = Convert.ToInt32(row["Rating"].ToString()),
                                 Comment = row["Comment"].ToString()
                             };
                             list.Add(emp);
@@ -2782,6 +2890,34 @@ namespace DAL
                         }
                     }
                     return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public REVIEW getStylistRating(string stylistID)
+        {
+            REVIEW rev = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", stylistID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetStylistRating",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        rev = new REVIEW
+                        {
+                            Rating = Convert.ToInt32(row["AverageRating"].ToString())
+                        };
+                    }
+                    return rev;
                 }
             }
             catch (Exception e)

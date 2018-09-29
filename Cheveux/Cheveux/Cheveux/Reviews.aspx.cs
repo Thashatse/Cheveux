@@ -15,14 +15,17 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
-        string action = null;
+        
         List<SP_GetStylistBookings> customer = null;
         List<SP_GetBookingServices> bServices = null;
         REVIEW review = null;
         List<SP_ReturnStylistNamesForReview> empNames = null;
         SP_ViewEmployee viewEmp = null;
         SP_GetEmployee_S_ s = null;
+
         string noti;
+        string action = null;
+
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -202,7 +205,7 @@ namespace Cheveux
             catch (Exception Err)
             {
                 TableCell userImage = new TableCell();
-                userImage.Text = "<img src='https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png' alt='Error' width='10' height='10'></img>"; 
+                userImage.Text = "<img src='https://cdn1.iconfinder.com/data/icons/user-thinline-icons-set/144/User003_Error-512.png' alt='Error' width='50' height='50'></img>"; 
                 tblBookings.Rows[0].Cells.Add(userImage);
 
                 function.logAnError("Couldn't display user image in reviews.aspx err:" + Err.ToString());
@@ -243,8 +246,6 @@ namespace Cheveux
                     tblBookings.Rows[count].Cells.Add(newCell);
                     newCell.Width = 50;
                     newCell.Text = a.StartTime.ToString("HH:mm");
-
-                    //getServiceAndStylist(count, a);
 
                     TableCell services = new TableCell();
                     services.Width = 100;
@@ -288,7 +289,7 @@ namespace Cheveux
                     catch (Exception Err)
                     {
                         //if theres an error or cant retrieve the services from the database 
-                        services.Text = "<img src='https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png' alt='Error' width='10' height='10'></img>";
+                        services.Text = "---";
                         tblBookings.Rows[count].Cells.Add(services);
                         function.logAnError("Couldn't get the services [reviews.aspx "
                             + "{getTimeCustomerServices?getServices} ] error:" + Err.ToString());
@@ -317,7 +318,6 @@ namespace Cheveux
                     newCell.Controls.Add(btn);
                     btn.Click += (ss, ee) => {
                         lblBookingID.Text = a.PrimaryID.ToString();
-                        lblCustID.Text = a.CustomerID.ToString();
                         lblStylistID.Text = a.StylistID.ToString();
                         theReview.Visible = true;
                     };
@@ -380,17 +380,19 @@ namespace Cheveux
 
             if (drpReviewType.SelectedValue == "0")//review booking
             {
-                datepick.Visible = true;
+                lsBksHeader.Visible = true;
+                datesPick.Visible = true;
                 dvStylistNames.Visible = false;
+                theReview.Visible = false;
                 choose.Visible = true;
                 tblBookings.Visible = true;
             }
             else if (drpReviewType.SelectedValue == "1")//review stylist
             {
-                datepick.Visible = false;
+                lsBksHeader.Visible = false;
+                datesPick.Visible = false;
                 theReview.Visible = true;
                 choose.Visible = false;
-                lblCustID.Text= cookie["ID"].ToString();
                 dvStylistNames.Visible = true;
                 try
                 {
@@ -413,7 +415,7 @@ namespace Cheveux
         }
         protected void drpStylistNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            datepick.Visible = false;
+            datesPick.Visible = false;
             theReview.Visible = true;
             choose.Visible = false;
             viewEmployee(drpStylistNames.SelectedValue.ToString());
@@ -438,12 +440,13 @@ namespace Cheveux
         }
         protected void btnPostReview_Click(object sender, EventArgs e)
         {
-            if (drpReviewType.SelectedValue == "0")//review booking
+            cookie = Request.Cookies["CheveuxUserID"];
+            if (drpReviewType.SelectedValue == "0")
             {
+                //review booking
                 try
                 {
                     review = new REVIEW();
-                    cookie = Request.Cookies["CheveuxUserID"];
 
                     string rID = function.GenerateRandomReviewID();
 
@@ -458,26 +461,62 @@ namespace Cheveux
 
                     if (handler.reviewBooking(review))
                     {
-                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview?noti=s");
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=s");
                     }
                     else
                     {
-                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview?noti=f");
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=f");
                     }
                 }
                 catch (Exception Err)
                 {
-                    Response.Redirect("../Default.aspx");//temporary
+                    erReview.Visible = true;
+                    lblErReview.Text = "Error posting review";
                     function.logAnError(Err.ToString());
                 }
             }
-            else if (drpReviewType.SelectedValue == "1")//review stylist
+            else if (drpReviewType.SelectedValue == "1")
             {
                 //review stylist
+                try
+                {
+                    review = new REVIEW();
+
+                    string rID = function.GenerateRandomReviewID();
+
+                    review.ReviewID = rID;
+                    review.CustomerID = cookie["ID"].ToString();
+                    review.EmployeeID = drpStylistNames.SelectedValue.ToString();
+                    review.Date = DateTime.Today;
+                    review.Time = Convert.ToDateTime(DateTime.Now.ToString("h:mm:ss tt"));
+                    review.Rating = Rating1.CurrentRating;
+                    review.Comment = reviewComment.InnerText.ToString();
+
+                    if (handler.reviewStylist(review))
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=s");
+                    }
+                    else
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=f");
+                    }
+                }
+                catch (Exception Err)
+                {
+                    erReview.Visible = true;
+                    lblErReview.Text = "Error posting review";
+                    function.logAnError(Err.ToString());
+                }
+
             }
             
         }
-
+        protected void alertExitClick(object sender, EventArgs e)
+        {
+            erReview.Visible = false;
+            erNoti.Visible = false;
+            sucNoti.Visible = false;
+        }
         #endregion
 
 

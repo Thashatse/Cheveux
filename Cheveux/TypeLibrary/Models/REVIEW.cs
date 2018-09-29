@@ -14,7 +14,7 @@ namespace TypeLibrary.Models
         public string PrimaryBookingID { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
-        public double Rating { get; set; }
+        public int Rating { get; set; }
         public string Comment { get; set; }
     }
 }

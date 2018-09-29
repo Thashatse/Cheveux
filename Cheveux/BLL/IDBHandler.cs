@@ -119,14 +119,19 @@ namespace BLL
         List<SP_GetCustomerBooking> searchBookings(DateTime startDate, DateTime endDate);
         Tuple<List<SP_ProductSearchByTerm>, List<SP_SearchStylistsBySearchTerm>> UniversalSearch(string searchTerm);
         #endregion
+
         #region Reviews
-        List<SP_GetReviews> getAllReviews();
+        List<SP_GetReviews> getAllBookingReviews();
+        List<SP_GetReviews> getAllStylistReviews();
+        List<SP_GetReviews> getCustomersReviews(string customerID);
+        List<SP_GetReviews> getReviewsOfStylist(string stylistID);
         bool reviewBooking(REVIEW r);
         bool reviewStylist(REVIEW r);
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
         REVIEW CheckForReview(string reviewID);
         List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID);
+        REVIEW getStylistRating(string stylistID);
         #endregion
 
         USER GetUserDetails(string ID);

@@ -315,9 +315,9 @@ namespace BLL
         #endregion
 
         #region Reviews
-        public List<SP_GetReviews> getAllReviews()
+        public List<SP_GetReviews> getAllBookingReviews()
         {
-            return db.getAllReviews();
+            return db.getAllBookingReviews();
         }
         public bool reviewBooking(REVIEW r)
         {
@@ -342,6 +342,22 @@ namespace BLL
         public List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID)
         {
             return db.returnStylistNamesForReview(customerID);
+        }
+        public REVIEW getStylistRating(string stylistID)
+        {
+            return db.getStylistRating(stylistID);
+        }
+        public List<SP_GetReviews> getCustomersReviews(string customerID)
+        {
+            return db.getCustomersReviews(customerID);
+        }
+        public List<SP_GetReviews> getReviewsOfStylist(string stylistID)
+        {
+            return db.getReviewsOfStylist(stylistID);
+        }
+        public List<SP_GetReviews> getAllStylistReviews()
+        {
+            return db.getAllStylistReviews();
         }
         #endregion
 

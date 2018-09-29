@@ -103,6 +103,24 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblErNoti;
         
         /// <summary>
+        /// erReview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl erReview;
+        
+        /// <summary>
+        /// lblErReview control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErReview;
+        
+        /// <summary>
         /// readReviews control.
         /// </summary>
         /// <remarks>
@@ -157,13 +175,13 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.DropDownList drpStylistNames;
         
         /// <summary>
-        /// datepick control.
+        /// datesPick control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder datepick;
+        protected global::System.Web.UI.WebControls.PlaceHolder datesPick;
         
         /// <summary>
         /// drpMonth control.
@@ -236,15 +254,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBookingID;
-        
-        /// <summary>
-        /// lblCustID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCustID;
         
         /// <summary>
         /// lblStylistID control.

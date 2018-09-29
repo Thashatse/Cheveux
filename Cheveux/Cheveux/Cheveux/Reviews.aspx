@@ -78,11 +78,16 @@
                         <!--for general errors or telling user what must happen next-->
                         <div class="col-sm-12 col-md-12 alert alert-success alert-dismissible" id="sucNoti" visible="false" runat="server">
                             <asp:Label ID="lblSucNoti" runat="server" Text=" "></asp:Label>
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>
                         </div>
                         <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible" id="erNoti" visible="false" runat="server">
                             <asp:Label ID="lblErNoti" runat="server" Text=" "></asp:Label>
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>
+                        </div>
+                        <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible" id="erReview" visible="false" runat="server">
+                            <asp:Label ID="lblErReview" runat="server" Text=" "></asp:Label>
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>
+                            <%--<asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="Post Review" OnClick="alertExitClick" />--%>
                         </div>
                     </div>
 
@@ -140,7 +145,7 @@
 
                         <!--Section: Date and listbox -->
                         <div class="row">
-                            <asp:PlaceHolder ID="datepick" runat="server">
+                            <asp:PlaceHolder ID="datesPick" runat="server">
                                 <div class="col-sm-12 col-md-6 col-lg-6">
                                     <div class="row">
                                         <div class="col-sm-4 col-md-4 col-lg-4">
@@ -196,7 +201,6 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <asp:Label ID="lblBookingID" runat="server" Text="" Visible="false"></asp:Label>
-                                                    <asp:Label ID="lblCustID" runat="server" Text="" Visible="false"></asp:Label>
                                                     <asp:Label ID="lblStylistID" runat="server" Text="" Visible="false"></asp:Label>
                                                 </div>
                                             </div>
@@ -220,7 +224,7 @@
                                             <!--Comment-->
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server"></textarea>
+                                                    <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server" placeholder="Your review here...."></textarea>
                                                 </div>
                                             </div>
                                             <br />
@@ -228,6 +232,8 @@
                                                 <div class="col-sm-12 col-md-3 col-lg-3">
                                                     <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" OnClick="btnPostReview_Click" />
                                                 </div>
+                                                <br />
+                                                <br />
                                                 <div class="col-sm-12 col-md-3 col-lg-3">
                                                     <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
                                                 </div>

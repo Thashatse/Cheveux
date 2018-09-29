@@ -16,11 +16,13 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-alter PROCEDURE SP_GetAllReviews
+CREATE PROCEDURE SP_GetCustomersReviews
+	@customerID nchar(30)
 AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT ReviewID,CustomerID,EmployeeID,primaryBookingID,[Date],[Time],Rating,Comment
 	FROM REVIEW
+	WHERE CustomerID=@customerID
 END
 GO
