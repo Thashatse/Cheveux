@@ -590,7 +590,8 @@ namespace DAL
                     new SqlParameter("@StylistID", addBooking.StylistID.ToString()),
                     new SqlParameter("@Date", addBooking.Date.ToString()),
                     new SqlParameter("@primaryBookingID", addBooking.primaryBookingID.ToString()),
-                    new SqlParameter("@Comment", addBooking.Comment.ToString())
+                    new SqlParameter("@Comment", addBooking.Comment.ToString()),
+                    new SqlParameter("@Arrived", addBooking.Arrived.ToString())
                 };
                 return DBHelper.NonQuery("SP_AddBooking", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -1390,8 +1391,11 @@ namespace DAL
                         accessory.ProductDescription = Convert.ToString(row["ProductDescription"]);
                         accessory.Price = Convert.ToInt32(row["Price"]);
                         accessory.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
-                        accessory.BrandID = Convert.ToString("BrandID");
-                        accessory.Brandname = Convert.ToString("BrandName");
+                        accessory.BrandID = Convert.ToString(row["BrandID"]);
+                        accessory.Qty = Convert.ToInt16(row["Qty"]);
+                        accessory.Brandname = Convert.ToString(row["BrandName"]);
+                        accessory.supplierID= Convert.ToString(row["SupplierID"]);
+                        accessory.supplierName = Convert.ToString(row["SupplierName"]);
                     }
                 }
             }
@@ -1425,7 +1429,11 @@ namespace DAL
                         treatment.ProductType = Convert.ToString(row["ProductType(T/A/S)"]);
                         treatment.Active = Convert.ToString(row["Active"]);
                         treatment.BrandID = Convert.ToString("BrandID");
-                        treatment.Brandname = Convert.ToString("BrandName");
+                        treatment.Qty = Convert.ToInt16(row["Qty"]);
+                        treatment.Brandname = Convert.ToString(row["BrandName"]);
+                        treatment.supplierID = Convert.ToString(row["SupplierID"]);
+                        treatment.supplierName = Convert.ToString(row["SupplierName"]);
+
                     }
                 }
             }
@@ -1494,21 +1502,21 @@ namespace DAL
             }
         }
 
-        public bool addAccessories(ACCESSORY a, PRODUCT p)
+       public bool addAccessories(ACCESSORY a, PRODUCT p)
         {
             try
             {
                 SqlParameter[] pars = new SqlParameter[]
                     {
-                        new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
+                     new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
                     new SqlParameter("@colour", a.Colour.ToString()),
                     new SqlParameter("@qty", a.Qty.ToString()),
-                    new SqlParameter("@brandID", a.BrandID.ToString()),
-                    new SqlParameter("@productID",a.TreatmentID.ToString()),
+                    new SqlParameter("@BrandID", a.BrandID.ToString()),
                     new SqlParameter("@name",p.Name.ToString()),
                     new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString()),
+                    new SqlParameter("@SupplierID", a.supplierID.ToString())
                     };
                 return DBHelper.NonQuery("SP_AddAccessory", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -1528,13 +1536,13 @@ namespace DAL
                     {
                     new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
                     new SqlParameter("@qty", t.Qty.ToString()),
-                    new SqlParameter("@qty", t.TreatmentType.ToString()),
-                    new SqlParameter("@brandID", t.BrandID.ToString()),
-                    new SqlParameter("@productID",t.TreatmentID.ToString()),
+                    new SqlParameter("@treatmentType", t.TreatmentType.ToString()),
+                    new SqlParameter("@BrandID", t.BrandID.ToString()),
                     new SqlParameter("@name",p.Name.ToString()),
                     new SqlParameter("@productDescription",p.ProductDescription.ToString()),
-                    new SqlParameter("@Price", p.Price.ToString()),
-                    new SqlParameter("@productType", p.ProductType.ToString())
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@productType", p.ProductType.ToString()),
+                    new SqlParameter("@SupplierID", t.supplierID.ToString())
                     };
                 return DBHelper.NonQuery("SP_AddTreatment", CommandType.StoredProcedure, pars.ToArray());
             }
@@ -2606,6 +2614,7 @@ namespace DAL
             }
         }
         #endregion
+
         #region Reviews
         public List<SP_GetReviews> getAllReviews()
         {
@@ -2722,7 +2731,65 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        #endregion 
+        public REVIEW CheckForReview(string reviewID)
+        {
+            REVIEW rev = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@reviewID", reviewID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CheckForReview",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        rev = new REVIEW
+                        {
+                            ReviewID = row[0].ToString()
+                        };
+                    }
+                    return rev;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID)
+        {
+            List<SP_ReturnStylistNamesForReview> list = new List<SP_ReturnStylistNamesForReview>();
+            SqlParameter[] pars = new SqlParameter[] {
+                new SqlParameter("@customerID" , customerID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ReturnStylistNamesForReview", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_ReturnStylistNamesForReview emp = new SP_ReturnStylistNamesForReview()
+                            {
+                                StylistID = row["StylistID"].ToString(),
+                                StylistName = row["StylistName"].ToString()
+                            };
+                            list.Add(emp);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
 
         #region Employees
         public List<SP_GetEmpNames> GetEmpNames()
@@ -4391,6 +4458,71 @@ namespace DAL
                     }
                 }
                 return bookings;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_GetLeaveServices> GetLeaveServices()
+        {
+            SP_GetLeaveServices leaveServicesList = null;
+            List<SP_GetLeaveServices> leaveService = new List<SP_GetLeaveServices>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetLeaveService",
+            CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            leaveServicesList = new SP_GetLeaveServices
+                            {
+                                ProductID = row["ProductID"].ToString(),
+                                Name = row["Name"].ToString(),
+                                NoOfSlots = Convert.ToInt32(row["NoOfSlots"].ToString()),
+                            };
+                            leaveService.Add(leaveServicesList);
+                        }
+                    }
+                    return leaveService;
+                }
+            }
+            catch(Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool UpdateOrder(string orderID, DateTime dateReceived, bool received)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@OrderID", orderID),
+                    new SqlParameter("@DateReceived", dateReceived),
+                    new SqlParameter("@Received", received)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateOrder", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public bool UpdateQtyOnHand(string prodID, int qty)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ProductID", prodID),
+                    new SqlParameter("@Qty", qty)
+                };
+
+                return DBHelper.NonQuery("SP_UpdateQtyOnHand", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {

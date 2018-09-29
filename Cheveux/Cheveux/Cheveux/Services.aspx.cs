@@ -57,14 +57,14 @@ namespace Cheveux.Cheveux
                 else
                 {
                     //set the master page
-                    this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                    this.MasterPageFile = "~/MasterPages/Cheveux.Master";
                 }
             }
             //set the default master page if the cookie is empty
             else
             {
                 //set the master page
-                this.MasterPageFile = "~/MasterPages/CheveuxManager.Master";
+                this.MasterPageFile = "~/MasterPages/Cheveux.Master";
             }
         }
 
@@ -105,26 +105,28 @@ namespace Cheveux.Cheveux
                 lblDescription.Text = service.Description;
                 //check if the user is logged in
                 cookie = Request.Cookies["CheveuxUserID"];
-                if (cookie["UT"] == "M")
+                if (cookie != null)
                 {
-                    //add a new row
-                    TableRow newRow = new TableRow();
-                    newRow.Height = 50;
-                    tblDesc.Rows.Add(newRow);
-                    //Address
-                    TableCell newCell = new TableCell();
-                    newCell.Font.Bold = true;
-                    newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
-                                "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
-                                "' >Cancel</a>";
-                    tblDesc.Rows[1].Cells.Add(newCell);
-                    newCell = new TableCell();
-                    newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
-                                "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
-                                "' >Edit Service</a>";
-                    tblDesc.Rows[1].Cells.Add(newCell);
+                    if (cookie["UT"] == "M")
+                    {
+                        //add a new row
+                        TableRow newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblDesc.Rows.Add(newRow);
+                        //Address
+                        TableCell newCell = new TableCell();
+                        newCell.Font.Bold = true;
+                        newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
+                                    "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
+                                    "' >Cancel</a>";
+                        tblDesc.Rows[1].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
+                                    "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
+                                    "' >Edit Service</a>";
+                        tblDesc.Rows[1].Cells.Add(newCell);
+                    }
                 }
-
             }
             else
             {

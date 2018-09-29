@@ -47,7 +47,7 @@ namespace Cheveux.Cheveux
                     uImage.Text = "<img src=" + u.UserImage +
                                     " alt='Stylist Picture' " +
                                     "width='200' height='160' /><br/>"
-                                +   "<a href='#' target='_blank'>Click to review</a>";
+                                +   "<a href='#' target='_blank'>Write/Read Review</a>";
                     uImage.Width = 220;
                     tblStylists.Rows[count].Cells.Add(uImage);
                    

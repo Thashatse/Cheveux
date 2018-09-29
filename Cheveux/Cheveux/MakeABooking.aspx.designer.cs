@@ -13,6 +13,15 @@ namespace Cheveux {
     public partial class MakeABooking {
         
         /// <summary>
+        /// lblHeading control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblHeading;
+        
+        /// <summary>
         /// lblErrorSummary control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,33 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSelectDate;
+        
+        /// <summary>
+        /// calSchedule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calSchedule;
+        
+        /// <summary>
+        /// drpWhen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpWhen;
+        
+        /// <summary>
+        /// btnManageSchedule control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnManageSchedule;
         
         /// <summary>
         /// btnPrevious control.
@@ -344,6 +380,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblPickAServiceB;
+        
+        /// <summary>
+        /// divSickLeave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSickLeave;
+        
+        /// <summary>
+        /// rblSickLeave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblSickLeave;
         
         /// <summary>
         /// divStylist control.

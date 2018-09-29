@@ -335,6 +335,14 @@ namespace BLL
         {
             return db.updateStylistReview(r);
         }
+        public REVIEW CheckForReview(string reviewID)
+        {
+            return db.CheckForReview(reviewID);
+        }
+        public List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID)
+        {
+            return db.returnStylistNamesForReview(customerID);
+        }
         #endregion
 
         public List<SP_GetTodaysBookings> getTodaysBookings() 
@@ -700,6 +708,18 @@ namespace BLL
         public List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day)
         {
             return db.getCustomerPastBookingsForDate(customerID, day);
+        }
+        public List<SP_GetLeaveServices> BLL_GetLeaveServices()
+        {
+            return db.GetLeaveServices();
+        }
+        public bool BLL_UpdateOrder(string orderID, DateTime dateReceived, bool received)
+        {
+            return db.UpdateOrder(orderID, dateReceived, received);
+        }
+        public bool BLL_UpdateQtyOnHand(string prodID, int qty)
+        {
+            return db.UpdateQtyOnHand(prodID, qty);
         }
     }
 }

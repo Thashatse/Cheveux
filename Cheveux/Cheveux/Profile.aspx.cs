@@ -77,6 +77,8 @@ namespace Cheveux
         {
             //check if the user is loged in and display past and futcher bokings
             cookie = Request.Cookies["CheveuxUserID"];
+            //check the action
+            string action = Request.QueryString["Action"];
             if (cookie != null)
             {
                 //show the nav tabs menue only for customers
@@ -94,13 +96,20 @@ namespace Cheveux
                     {
                         btnViewPastBook_Click(sender, e);
                     }
-                    else if (view == "Prodile")
+                    else if (view == "Profile")
                     {
                         btnViewProfile_Click(sender, e);
                     }
                     else
                     {
-                        btnViewUpBook_Click(sender, e);
+                        if (action == "Edit")
+                        {
+                            btnViewProfile_Click(sender, e);
+                        }
+                        else
+                        {
+                            btnViewUpBook_Click(sender, e);
+                        }
                     }
                     #endregion
 
@@ -124,8 +133,6 @@ namespace Cheveux
                 //ask the user to sign in first
                 //if the user is loged in diplay the profile container and hide the login container
                 JumbotronLogedOut.Visible = false;
-                //check the action
-                string action = Request.QueryString["Action"];
                 if (action == null)
                 {
                     //load user details
@@ -162,12 +169,12 @@ namespace Cheveux
                             userDetails = handler.GetUserDetails(cookie["ID"].ToString());
                             commitEdit(sender, e);
                         }
-                        catch (Exception Err)
+                        catch (ApplicationException Err)
                         {
                             function.logAnError(Err.ToString()
                                 + " An error occurred retrieving user details form DB needed to commit edit for user id: " 
                                 + cookie["ID"].ToString());
-                            Response.Redirect("Error.aspx?Error='An error occurred updating your profile'");
+                            Response.Redirect("Error.aspx?Error=An error occurred updating your profile");
                         }
                     }
                 }
@@ -182,7 +189,7 @@ namespace Cheveux
             else if (cookie == null)
             {
                 //if the user is requesting to see a stylis profile
-                string action = Request.QueryString["Action"];
+                action = Request.QueryString["Action"];
                 if (action == "View")
                 {
                     //diplay the profile container and hide the login container
@@ -1011,7 +1018,7 @@ namespace Cheveux
                     && userName.Text == ""
                     && txtBio.Value.ToString() == "")
                 {
-                    Response.Redirect("Profile.aspx");
+                    Response.Redirect("Profile.aspx?View=Profile");
                 }
 
                 if (auth.checkForAccountEmail(userName.Text.ToString().Replace(" ", string.Empty), true)
@@ -1065,7 +1072,7 @@ namespace Cheveux
                             check = handler.updateStylistBio(bioUpdate);
                         }
                 }
-                catch (Exception Err)
+                catch (ApplicationException Err)
                 {
                     function.logAnError(Err.ToString()
                         + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
@@ -1074,7 +1081,7 @@ namespace Cheveux
                     //if error occours
                     if (check == true)
                     {
-                        Response.Redirect("Profile.aspx");
+                        Response.Redirect("Profile.aspx?View=Profile");
                     }
                     else if (check == false)
                     {
@@ -1107,7 +1114,7 @@ namespace Cheveux
                     && txtEmailAddress.Text == ""
                     && txtABioEmail.Value.ToString() == "")
                 {
-                    Response.Redirect("Profile.aspx");
+                    Response.Redirect("Profile.aspx?View=Profile");
                 }
 
                 if (auth.checkForAccountEmail(txtUsername.Text.ToString().Replace(" ", string.Empty), true)
@@ -1189,7 +1196,7 @@ namespace Cheveux
                             check = handler.updateStylistBio(bioUpdate);
                         }
                     }
-                    catch (Exception Err)
+                    catch (ApplicationException Err)
                     {
                         function.logAnError(Err.ToString()
                             + " An error occurred editing user profile for user id: " + cookie["ID"].ToString());
@@ -1197,7 +1204,7 @@ namespace Cheveux
 
                     if (check == true)
                     {
-                        Response.Redirect("Profile.aspx");
+                        Response.Redirect("Profile.aspx?View=Profile");
                     }
                     else if (check == false)
                     {

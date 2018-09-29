@@ -160,6 +160,8 @@ namespace DAL
         bool reviewStylist(REVIEW r);
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
+        REVIEW CheckForReview(string reviewID);
+        List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID);
         #endregion
 
         List<SP_GetEmpNames> GetEmpNames();
@@ -207,5 +209,8 @@ namespace DAL
         bool addSpecialisation(STYLIST_SERVICE ss);
         SP_GetEmployee_S_ getBio(string id);
         List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate);
+        List<SP_GetLeaveServices> GetLeaveServices();
+        bool UpdateOrder(string orderID, DateTime dateReceived, bool received);
+        bool UpdateQtyOnHand(string prodID, int qty);
     }
 }

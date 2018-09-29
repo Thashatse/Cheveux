@@ -6,47 +6,50 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="bg-secondary text-white" id="Div1">
-        <!-- Top Margin & Nav Bar Back Color -->
+    <form id="frmSettings" runat="server">
+        <div class="bg-secondary text-white" id="Div1">
+            <!-- Top Margin & Nav Bar Back Color -->
+            <br />
+            <br />
+        </div>
         <br />
-        <br />
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
-            <!-- if the user is loged In -->
-            <div runat="server" id="LogedIn" visible="false">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div id="divTabs" runat="server">
-                            <!--Tabs-->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li><a class="btn" href="#BS" role="tab" data-toggle="tab">Business Settings&#09;</a></li>
-                                <li><a class="btn" href="#FI" role="tab" data-toggle="tab">Featured Items&#09;</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Line Break -->
-                <br />
-
-                <!--Tabs Content-->
-                <div class="tab-content">
-                    <!-- Business Settings -->
-                    <div class="active tab-pane" id="BS">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="jumbotron bg-dark text-white">
-                                    <!--Heading-->
-                                    <asp:Label runat="server" ID="PageHeading"> <h2>Business Settings</h2> </asp:Label>
-                                </div>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <!-- if the user is loged In -->
+                <div runat="server" id="LogedIn" visible="false">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div id="divTabs" runat="server">
+                                <!--Tabs-->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li>
+                                        <asp:Button ID="btnViewFeaturedItems" runat="server" Text="Featured Items" class="btn btn-light" OnClick="btnViewFeaturedItems_Click" /></li>
+                                    <li>
+                                        <asp:Button ID="btnViewBS" runat="server" Text="Business Settings" class="btn btn-light" OnClick="btnViewBS_Click" /></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <form id="frmBussinessSettings" runat="server">
+                    </div>
+
+                    <!-- Line Break -->
+                    <br />
+
+                    <!--Tabs Content-->
+                    <div class="tab-content">
+                        <!-- Business Settings -->
+                        <div runat="server" visible="false" id="BS">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="jumbotron bg-dark text-white">
+                                        <!--Heading-->
+                                        <asp:Label runat="server" ID="PageHeading"> <h2>Business Settings</h2> </asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
                                     <asp:Table ID="tblBussinesSettings" runat="server">
                                         <asp:TableRow>
                                             <asp:TableHeaderCell Width="250">
@@ -212,43 +215,157 @@
                                             </asp:TableCell>
                                         </asp:TableRow>
                                     </asp:Table>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Featured Items -->
-                    <div class="tab-pane" id="FI">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="jumbotron bg-dark text-white">
-                                    <!--Heading-->
-                                    <h2>Featured Items</h2>
-                                    <!-- Line Break -->
-                                    <br />
-                                    <p>Featured items are the Services, Stylist and Products you would like to highlight. </p>
-                                    <p>They will appear on the homepage and at the top of the Service, Stylist & Products Pages.</p>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Featured Items -->
+                        <div runat="server" visible="false" id="FI">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="jumbotron bg-dark text-white">
+                                        <div class="row">
+                                            <div class="col-lg-9 col-md-12 col-sm-12">
+                                                <!--Heading-->
+                                                <h2>Featured Items</h2>
+                                            </div>
+                                            <div class="col-lg-3 col-md-2 col-sm-2">
+                                                <asp:Button ID="btnViewHint" runat="server" Text="Hint" class="btn btn-light" OnClick="btnViewHint_Click" />
+                                            </div>
+                                        </div>
+                                        <div runat="server" id="SettingsHint" visible="false">
+                                            <!-- Line Break -->
+                                            <br />
+                                            <p>Featured items are the Services, Stylist and Products you would like to highlight. </p>
+                                            <p>They will appear on the homepage and at the top of the Service, Stylist & Products Pages.</p>
+                                            <p>Select an item to begin the edit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h1>Services:</h1>
+                            <!-- Line Break -->
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedService1" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedService2" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedService3" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedService4" runat="server" Text="Label"></asp:Label>
+                                </div>
+                            </div>
+                            <!-- Line Break -->
+                            <br />
+                            <br />
+                            <h1>Products:</h1>
+                            <!-- Line Break -->
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedProduct1" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedProduct2" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedProduct3" runat="server" Text="Label"></asp:Label>
+                                </div>
+                            </div>
+                            <!-- Line Break -->
+                            <br />
+                            <br />
+                            <h1>Stylists:</h1>
+                            <!-- Line Break -->
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedStylist1" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedStylist2" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedStylist3" runat="server" Text="Label"></asp:Label>
+                                </div>
+                            </div>
+                            <!-- Line Break -->
+                            <br />
+                            <br />
+                            <h1>Contact Us:</h1>
+                            <!-- Line Break -->
+                            <br />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedPhone" runat="server" Text="Label"></asp:Label>
+                                </div>
+                                <div class="col-md-3">
+                                    <asp:Label ID="lblFeaturedEmail" runat="server" Text="Label"></asp:Label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div runat="server" visible="false" id="DivEditFeaturedItem">
+                    <!-- Line Break -->
+                            <br />
+                            <h1><asp:Label ID="LblFeatureEditHeading" runat="server" Text=" Label"></asp:Label></h1>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!--Line Break-->
+                                    <br />
+                                    <h3 style="text-align: left; float: left;">
+                                        <asp:Label ID="lblListBoxHeader" runat="server" Text="Label"></asp:Label>: </h3>
+                                    <p style="text-align: right; float: right;">
+                                        <!-- Search -->
+                                        <asp:TextBox ID="txtSearchItems" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control"></asp:TextBox>
+                                    </p>
+                                    <!--Line Break-->
+                                    <br />
+                                    <asp:ListBox runat="server" ID="lblFeatuerdItems" CssClass="form-control" DataTextField="Item" DataValueField="ID"
+                                        Height="500"></asp:ListBox>
+                                </div>
+                                <div class="col-md-6 text-center">
+                                    <!--Line Break-->
+                                    <br />
+                                    <br />
+                                    <!--EditImage-->
+                                    <img src="/Theam/img/edit-pencil-icon-vector-13483315.jpg" alt="Edit" width="400"
+                                        height="400" class="img-fluid" />
+                                    <!--Line Break-->
+                                    <br />
+                                    <br />
+                                    <asp:Button ID="btnDoneFatureEdit" runat="server" Text="Save" CssClass="btn btn-primary" OnClick="btnDoneFatureEdit_Click" />
+                                </div>
+                            </div>
+                            <!-- Line Break -->
+                            <br />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- if the user is loged Out -->
-            <div runat="server" id="LogedOut">
-                <div class="bg-dark text-white jumbotron">
-                    <div class="row">
-                        <div class="col-10">
-                            <h1>Settings</h1>
-                            <p>Please log-in to view Settings</p>
-                        </div>
-                        <div class="col-2">
-                            <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=BusinessSetting.aspx" id="LogedOutButton">Login</a>
+                <!-- if the user is loged Out -->
+                <div runat="server" id="LogedOut">
+                    <div class="bg-dark text-white jumbotron">
+                        <div class="row">
+                            <div class="col-10">
+                                <h1>Settings</h1>
+                                <p>Please log-in to view Settings</p>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=BusinessSetting.aspx" id="LogedOutButton">Login</a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- Line Break -->
+                <br />
+                <br />
             </div>
+            <div class="col-1"></div>
         </div>
-        <div class="col-1"></div>
-    </div>
+    </form>
 </asp:Content>

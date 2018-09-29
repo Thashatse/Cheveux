@@ -19,7 +19,10 @@ namespace Cheveux
         List<SP_GetStylistBookings> customer = null;
         List<SP_GetBookingServices> bServices = null;
         REVIEW review = null;
-
+        List<SP_ReturnStylistNamesForReview> empNames = null;
+        SP_ViewEmployee viewEmp = null;
+        SP_GetEmployee_S_ s = null;
+        string noti;
         protected void Page_PreInit(Object sender, EventArgs e)
         {
             //check the cheveux user id cookie for the user
@@ -112,11 +115,34 @@ namespace Cheveux
                     btnRev.Visible = false;
                     makeAreview.Visible = true;
 
+
+                    if (drpReviewType.SelectedValue == "0")//review booking
+                    {
+                        rvBoxHeader.InnerText = "Write a review and rate the service";
+                    }
+                    else if (drpReviewType.SelectedValue == "1")//review stylist
+                    {
+                        rvBoxHeader.InnerText = "Write a review and rate the stylist";
+                    }
+
+                    noti = Request.QueryString["noti"];
+                    if(noti == "s")
+                    {
+                        Notification(noti);
+                    }
+                    else if(noti == "f")
+                    {
+                        Notification(noti);
+                    }
+
                     if (Page.IsPostBack)
                     {
                         displayPastBookings(cookie["ID"].ToString(), calDay.SelectedDate);
                     }
 
+                    //Set the month dropdownlist to the current month by defualt on page load
+                    int index = DateTime.Today.Month;
+                    drpMonth.SelectedValue = index.ToString();
                 }
                 
             }
@@ -131,6 +157,55 @@ namespace Cheveux
                     btnRev.Visible = false;
                     makeAreview.Visible = false;
                 }
+            }
+        }
+
+        public void viewEmployee(string empID)
+        {
+            tblBookings.Rows.Clear();
+
+            TableRow row = new TableRow();
+            tblBookings.Rows.Add(row);
+            try
+            {
+                viewEmp = handler.viewEmployee(empID);
+                TableCell userImage = new TableCell();
+                userImage.Text = "<img src=" + viewEmp.empImage
+                                  + " alt='" + viewEmp.firstName + " " + viewEmp.lastName +
+                                 " Profile Image' width='150' height='170'/>";
+                tblBookings.Rows[0].Cells.Add(userImage);
+
+                try
+                {
+                    s = handler.getEmployee_S(empID);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "<h5>Specialisation: "
+                                  + "<a href='ViewProduct.aspx?ProductID="
+                                  + s.ServiceID.Replace(" ", string.Empty) + "' target='_blank'>"
+                                  + s.Specialisation.ToString() + "</a></h5>";
+                    newCell.Width = 600;
+                    tblBookings.Rows[0].Cells.Add(newCell);
+
+                }
+                catch (Exception Err)
+                {
+                    TableCell errorCell = new TableCell();
+                    errorCell.Text = " ";
+                    tblBookings.Rows[0].Cells.Add(errorCell);
+
+                    function.logAnError("Unable to retrievee specialisation review.aspx err:" + Err.ToString());
+                }
+
+                TableRow newRow = new TableRow();
+                tblBookings.Rows.Add(newRow);
+            }
+            catch (Exception Err)
+            {
+                TableCell userImage = new TableCell();
+                userImage.Text = "<img src='https://cdn4.iconfinder.com/data/icons/smiley-vol-3-2/48/134-512.png' alt='Error' width='10' height='10'></img>"; 
+                tblBookings.Rows[0].Cells.Add(userImage);
+
+                function.logAnError("Couldn't display user image in reviews.aspx err:" + Err.ToString());
             }
         }
         public void displayPastBookings(string customerID,DateTime day)
@@ -261,6 +336,23 @@ namespace Cheveux
                 function.logAnError(Err.ToString());
             }
         }
+        public void Notification(string noti)
+        {
+            if(noti == "s")
+            {
+                erNoti.Visible = false;
+                sucNoti.Visible = true;
+                lblSucNoti.Text = "Your review has been successfully recieved." +
+                    "Thank you for your feedback";
+            }
+            else if(noti == "f")
+            {
+                erNoti.Visible = true;
+                sucNoti.Visible = false;
+                lblErNoti.Text = "Error posting the review." +
+                    "Please try again later.";
+            }
+        }
         #region Events
         protected void calDay_SelectionChanged(object sender, EventArgs e)
         {
@@ -284,14 +376,47 @@ namespace Cheveux
         }
         protected void drpReviewType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cookie = Request.Cookies["CheveuxUserID"];
+
             if (drpReviewType.SelectedValue == "0")//review booking
             {
                 datepick.Visible = true;
+                dvStylistNames.Visible = false;
+                choose.Visible = true;
+                tblBookings.Visible = true;
             }
             else if (drpReviewType.SelectedValue == "1")//review stylist
             {
                 datepick.Visible = false;
+                theReview.Visible = true;
+                choose.Visible = false;
+                lblCustID.Text= cookie["ID"].ToString();
+                dvStylistNames.Visible = true;
+                try
+                {
+                    empNames = handler.returnStylistNamesForReview(cookie["ID"].ToString());
+                    foreach (SP_ReturnStylistNamesForReview emp in empNames)
+                    {
+                        drpStylistNames.DataSource = empNames;
+                        drpStylistNames.DataTextField = "StylistName";
+                        drpStylistNames.DataValueField = "StylistID";
+                        drpStylistNames.DataBind();
+                    }
+                }
+                catch (Exception err)
+                {
+                    drpStylistNames.Items.Add("Unable to retrieve names");
+                    function.logAnError("Error on review page" + err.ToString());
+                }
+                viewEmployee(drpStylistNames.SelectedValue.ToString());
             }
+        }
+        protected void drpStylistNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            datepick.Visible = false;
+            theReview.Visible = true;
+            choose.Visible = false;
+            viewEmployee(drpStylistNames.SelectedValue.ToString());
         }
         protected void drpMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -311,6 +436,50 @@ namespace Cheveux
                 e.Cell.BackColor = System.Drawing.Color.LightGray;
             }
         }
+        protected void btnPostReview_Click(object sender, EventArgs e)
+        {
+            if (drpReviewType.SelectedValue == "0")//review booking
+            {
+                try
+                {
+                    review = new REVIEW();
+                    cookie = Request.Cookies["CheveuxUserID"];
+
+                    string rID = function.GenerateRandomReviewID();
+
+                    review.ReviewID = rID;
+                    review.CustomerID = cookie["ID"].ToString();
+                    review.EmployeeID = lblStylistID.Text.ToString();
+                    review.PrimaryBookingID = lblBookingID.Text.ToString();
+                    review.Date = DateTime.Today;
+                    review.Time = Convert.ToDateTime(DateTime.Now.ToString("h:mm:ss tt"));
+                    review.Rating = Rating1.CurrentRating;
+                    review.Comment = reviewComment.InnerText.ToString();
+
+                    if (handler.reviewBooking(review))
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview?noti=s");
+                    }
+                    else
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview?noti=f");
+                    }
+                }
+                catch (Exception Err)
+                {
+                    Response.Redirect("../Default.aspx");//temporary
+                    function.logAnError(Err.ToString());
+                }
+            }
+            else if (drpReviewType.SelectedValue == "1")//review stylist
+            {
+                //review stylist
+            }
+            
+        }
+
         #endregion
+
+
     }
 }

@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_GetAllReviews
+alter PROCEDURE SP_GetAllReviews
 AS
 BEGIN
 	SET NOCOUNT ON;

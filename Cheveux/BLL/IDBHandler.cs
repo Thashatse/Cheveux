@@ -125,6 +125,8 @@ namespace BLL
         bool reviewStylist(REVIEW r);
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
+        REVIEW CheckForReview(string reviewID);
+        List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID);
         #endregion
 
         USER GetUserDetails(string ID);
@@ -205,6 +207,9 @@ namespace BLL
         SP_GetEmployee_S_ getBio(string id);
         List<SP_GetTopCustomerbyBooking> getTopCustomerByBookings(DateTime startDate, DateTime endDate);
         List<SP_GetStylistBookings> getCustomerPastBookingsForDate(string customerID, DateTime day);
+        List<SP_GetLeaveServices> BLL_GetLeaveServices();
+        bool BLL_UpdateOrder(string orderID, DateTime dateReceived, bool received);
+        bool BLL_UpdateQtyOnHand(string prodID, int qty);
     }
 }
 

@@ -131,9 +131,16 @@
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="../Manager/Service.aspx">Services</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="../Manager/Employee.aspx">Employees</a>
+
+                    <li class='nav-item dropdown'>
+                        <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" href="../Manager/Employee.aspx"
+                            style="text-decoration: none;">Employees</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../Manager/Employee.aspx">Employees</a>
+                            <a class="dropdown-item" href="../MakeABooking.aspx">Stylist Leave</a>
+                        </div>
                     </li>
+
                     <li class="nav-item">
                         <asp:PlaceHolder runat="server" ID="LogedOut">
                             <!--Login Button-->

@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	check for a matching exisiting Supplier with given ID
 -- =============================================
-create  PROCEDURE SP_CheckForSupplier 
+alter PROCEDURE SP_CheckForSupplier 
 	@SuppID nchar(10)
 AS
 BEGIN

@@ -67,6 +67,42 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor btnRev;
         
         /// <summary>
+        /// sucNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sucNoti;
+        
+        /// <summary>
+        /// lblSucNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSucNoti;
+        
+        /// <summary>
+        /// erNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl erNoti;
+        
+        /// <summary>
+        /// lblErNoti control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErNoti;
+        
+        /// <summary>
         /// readReviews control.
         /// </summary>
         /// <remarks>
@@ -103,13 +139,31 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.DropDownList drpReviewType;
         
         /// <summary>
+        /// dvStylistNames control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvStylistNames;
+        
+        /// <summary>
+        /// drpStylistNames control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpStylistNames;
+        
+        /// <summary>
         /// datepick control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl datepick;
+        protected global::System.Web.UI.WebControls.PlaceHolder datepick;
         
         /// <summary>
         /// drpMonth control.
@@ -163,7 +217,16 @@ namespace Cheveux {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl theReview;
+        protected global::System.Web.UI.WebControls.PlaceHolder theReview;
+        
+        /// <summary>
+        /// rvBoxHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rvBoxHeader;
         
         /// <summary>
         /// lblBookingID control.
@@ -191,6 +254,33 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStylistID;
+        
+        /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
+        /// ratingUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel ratingUpdatePanel;
+        
+        /// <summary>
+        /// Rating1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Rating Rating1;
         
         /// <summary>
         /// reviewComment control.

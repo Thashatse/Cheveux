@@ -624,6 +624,7 @@ namespace Cheveux
                             Err.ToString());
                     }
             }
+
             else if (btnChangePass.Text == "Change Pasword"
                 && divexistingPass.Visible == true)
                 {
@@ -633,7 +634,7 @@ namespace Cheveux
                     {
                     //check if the credentials are correct
                     string[] result = auth.AuthenticateEmail(user.UserName.ToString().Replace(" ", string.Empty),
-                        auth.generatePassHash(txtExistingPassword.Text.ToString().Replace(" ", string.Empty)));
+                        txtExistingPassword.Text.ToString().Replace(" ", string.Empty));
 
                     /*
                          * if the user deatails are incorect let the user know
@@ -649,7 +650,7 @@ namespace Cheveux
                         || result[1].ToString().Replace(" ", string.Empty) == "E")
                     {
                         //re set the password
-                        bool success = handler.updateUserAccountPassword(txtNewPasword.Text.ToString().Replace(" ", string.Empty),
+                        bool success = handler.updateUserAccountPassword(auth.generatePassHash(txtNewPasword.Text.ToString().Replace(" ", string.Empty)),
                             UserID["ID"].ToString().Replace(" ", string.Empty));
                         if (success == true)
                         {
@@ -695,10 +696,12 @@ namespace Cheveux
                     Err.ToString());
                     }
                 }
-                else if (btnChangePass.Text == "Done" && txtExistingPassword.Text == null)
+
+            else if (btnChangePass.Text == "Done" && txtExistingPassword.Text == null)
             {
                 Response.Redirect("../Authentication/Accounts.aspx?Type=Email");
             }
+
             else if (btnChangePass.Text == "Done" && txtExistingPassword.Text != null)
             {
                 Response.Redirect("../Profile.aspx");

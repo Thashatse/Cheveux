@@ -22,13 +22,13 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divViewAll;
         
         /// <summary>
-        /// lblHeader control.
+        /// lblHeadera control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblHeader;
+        protected global::System.Web.UI.WebControls.Label lblHeadera;
         
         /// <summary>
         /// phProducts control.
@@ -94,15 +94,6 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl addandedit;
         
         /// <summary>
-        /// formAddEditProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm formAddEditProduct;
-        
-        /// <summary>
         /// tblProductDetails control.
         /// </summary>
         /// <remarks>
@@ -110,6 +101,15 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblProductDetails;
+        
+        /// <summary>
+        /// drpListSupplier control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpListSupplier;
         
         /// <summary>
         /// drpProductType control.
@@ -148,24 +148,6 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.TextBox txtPrice;
         
         /// <summary>
-        /// QtyLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TableCell QtyLabel;
-        
-        /// <summary>
-        /// txtQty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQty;
-        
-        /// <summary>
         /// drpBrandList control.
         /// </summary>
         /// <remarks>
@@ -173,15 +155,6 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpBrandList;
-        
-        /// <summary>
-        /// drpListSupplier control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpListSupplier;
         
         /// <summary>
         /// productLabel control.
@@ -193,22 +166,13 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.TableCell productLabel;
         
         /// <summary>
-        /// productTextBox control.
+        /// txtcolour control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox productTextBox;
-        
-        /// <summary>
-        /// btnAddProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddProduct;
+        protected global::System.Web.UI.WebControls.TextBox txtcolour;
         
         /// <summary>
         /// btnCancel control.
@@ -218,5 +182,14 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// btnAddProduct control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddProduct;
     }
 }

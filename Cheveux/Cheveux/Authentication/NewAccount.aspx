@@ -25,22 +25,10 @@
 
     <!-- Our CSS-->
     <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
-
-    <!-- Default Theam
-
-    <!--Bootstrap
-    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
-
-    <!--CSS
-    <link rel="stylesheet" type="text/css" href="../CSS/Accounts.css">
--->
-
 </head>
 <body>
     <div class="container" id="Div1">
         <!-- Top Margin -->
-        <br />
-        <br />
         <br />
     </div>
     <!--form for regestering a new google user-->
@@ -327,6 +315,10 @@
                             <br />
                             <br />
                             <a href="../Authentication/Accounts.aspx?Type=Email">Sign in instead</a>
+                            <br />
+                            <br />
+                            <a href="../Authentication/Accounts.aspx">Use Google To Sign Up</a>
+                            
 
                             <!--err-->
                             <div class="container row" runat="server">

@@ -250,25 +250,25 @@ namespace Cheveux
             try
             {
                 LService1Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
-                    features[3].FeatureID.ToString()
+                    features[3].ItemID.ToString()
                     + "'>" + features[3].Name.ToString() + "</a></font>";
                 LService1Description.Text = features[3].description.ToString()
                 + " from R" + features[3].price.ToString();
 
                 LService2Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
-                    features[4].FeatureID.ToString()
+                    features[4].ItemID.ToString()
                     + "'>" + features[4].Name.ToString() + "</a></font>";
                 LService2Description.Text = features[4].description.ToString()
                 + " from R" + features[4].price.ToString();
 
                 LService3Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
-                    features[5].FeatureID.ToString()
+                    features[5].ItemID.ToString()
                     + "'>" + features[5].Name.ToString() + "</a></font>";
                 LService3Description.Text = features[5].description.ToString()
                 + " from R" + features[5].price.ToString();
 
                 LService4Header.Text = "<a class='btn btn-light' href='cheveux/services.aspx?ProductID=" +
-                    features[6].FeatureID.ToString()
+                    features[6].ItemID.ToString()
                     + "'>" + features[6].Name.ToString() + "</a>";
                 LService4Description.Text = features[6].description.ToString()
                 + " from R" + features[6].price.ToString();

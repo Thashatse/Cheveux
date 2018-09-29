@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.Maqabangqa
 -- =============================================
-CREATE PROCEDURE SP_ReviewBooking
+alter PROCEDURE SP_ReviewBooking
 	@reviewID nchar(10),
 	@customerID nchar(30),
 	@employeeID nchar(30),
