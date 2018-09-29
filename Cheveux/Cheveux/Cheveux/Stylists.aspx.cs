@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
+
 namespace Cheveux.Cheveux
 {
     public partial class Stylists : System.Web.UI.Page
@@ -14,6 +15,7 @@ namespace Cheveux.Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         List<SP_AboutStylist> sList = null;
+        REVIEW stylistRating = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,15 +46,40 @@ namespace Cheveux.Cheveux
                     TableRow row = new TableRow();
                     tblStylists.Rows.Add(row);
                     TableCell uImage = new TableCell();
-                    uImage.Text = "<img src=" + u.UserImage +
-                                    " alt='Stylist Picture' " +
-                                    "width='200' height='160' /><br/>"
-                                +   "<a href='#' target='_blank'>Write/Read Review</a>";
-                    uImage.Width = 220;
+                    PlaceHolder img = new PlaceHolder();
+                    img.Controls.Add(new LiteralControl(
+                                    "<img src=" + u.UserImage +
+                                    " alt='Stylist Picture' class='img-fluid' " +
+                                    "width='200' height='160' /><br/>"));
+                    uImage.Width = 250;
+                    PlaceHolder ph = new PlaceHolder();
+                    try
+                    {
+                        AjaxControlToolkit.Rating theStars = new AjaxControlToolkit.Rating();
+
+                        stylistRating = handler.getStylistRating(u.EmployeeID.ToString());
+
+                        theStars.CurrentRating = stylistRating.Rating;
+                        theStars.ID = "rt" + u.StylistName.ToString();
+                        theStars.StarCssClass = "starRating";
+                        theStars.WaitingStarCssClass = "waitingStar";
+                        theStars.FilledStarCssClass = "filledStar";
+                        theStars.EmptyStarCssClass = "emptyStar";
+                        theStars.CssClass = "img-fluid";
+                        theStars.ReadOnly = true;
+                        ph.Controls.Add(theStars);
+                    }
+                    catch (Exception Err)
+                    {
+
+                        function.logAnError("Couldn't get star rating stylist.aspx err:" + Err.ToString());
+                    }
+                    uImage.Controls.Add(img);
+                    uImage.Controls.Add(ph);
                     tblStylists.Rows[count].Cells.Add(uImage);
-                   
 
                     TableCell newCell = new TableCell();
+                    newCell.CssClass = "img-fluid";
                     newCell.Text =  "<h4>" 
                                   + u.StylistName.ToString() + "</h4>"
                                   + "<br/>"
@@ -65,7 +92,6 @@ namespace Cheveux.Cheveux
                                   + "<p>" + u.Bio + "</p>";
                     newCell.Width = 600;
                     tblStylists.Rows[count].Cells.Add(newCell);
-
                     count++;
                 }
             }
