@@ -347,6 +347,14 @@ namespace BLL
         {
             return db.getStylistRating(stylistID);
         }
+        public REVIEW customersReviewForStylist(string customerID, string stylistID)
+        {
+            return db.customersReviewForStylist(customerID, stylistID);
+        }
+        public REVIEW customersReviewForBooking(string customerID, string bookingID)
+        {
+            return db.customersReviewForBooking(customerID, bookingID);
+        }
         public List<SP_GetReviews> getCustomersReviews(string customerID)
         {
             return db.getCustomersReviews(customerID);

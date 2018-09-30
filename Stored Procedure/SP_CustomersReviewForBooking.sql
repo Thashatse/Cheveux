@@ -16,13 +16,15 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_GetReviewsOfStylist
-	@stylistID nchar(30)
+CREATE PROCEDURE SP_CustomersReviewForBooking
+	@customerID nchar(30),
+	@bookingID nchar(10)
 AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT ReviewID,CustomerID,EmployeeID,primaryBookingID,[Date],[Time],Rating,Comment
 	FROM REVIEW
-	WHERE EmployeeID=@stylistID
+	WHERE CustomerID=@customerID
+	and primaryBookingID=@bookingID
 END
 GO

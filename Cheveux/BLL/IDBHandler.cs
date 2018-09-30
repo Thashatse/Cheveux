@@ -130,6 +130,8 @@ namespace BLL
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
         REVIEW CheckForReview(string reviewID);
+        REVIEW customersReviewForStylist(string customerID, string stylistID);
+        REVIEW customersReviewForBooking(string customerID, string bookingID);
         List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID);
         REVIEW getStylistRating(string stylistID);
         #endregion

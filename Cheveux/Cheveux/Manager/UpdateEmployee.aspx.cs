@@ -151,11 +151,6 @@ namespace Cheveux.Manager
             catch (Exception Err)
             {
                 getUser(userID);
-                //phUsersErr.Visible = true;
-                //phMain.Visible = false;
-                //errorHeader.Text = "Error displaying user details.";
-                //errorMessage.Text = "It seems there is a problem communicating with the database."
-                //                    + "Please report problem to admin or try again later.";
                 function.logAnError("Error get stylist details (the specialisation problem) [update.aspx {getStylist}] err:"+Err.ToString());
             }
 

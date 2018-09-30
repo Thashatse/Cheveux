@@ -163,6 +163,8 @@ namespace DAL
         List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID);
         REVIEW CheckForReview(string reviewID);
         REVIEW getStylistRating(string stylistID);
+        REVIEW customersReviewForStylist(string customerID, string stylistID);
+        REVIEW customersReviewForBooking(string customerID, string bookingID);
         bool reviewBooking(REVIEW r);
         bool reviewStylist(REVIEW r);
         bool updateStylistReview(REVIEW r);

@@ -2867,6 +2867,78 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public REVIEW customersReviewForStylist(string customerID,string stylistID)
+        {
+            REVIEW rev = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@customerID", customerID),
+                new SqlParameter("@stylistID", stylistID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomersReviewForStylist",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        rev = new REVIEW
+                        {
+                            ReviewID = row["ReviewID"].ToString(),
+                            CustomerID = row["CustomerID"].ToString(),
+                            EmployeeID = row["EmployeeID"].ToString(),
+                            PrimaryBookingID = row["primaryBookingID"].ToString(),
+                            Date = Convert.ToDateTime(row["Date"].ToString()),
+                            Time = Convert.ToDateTime(row["Time"].ToString()),
+                            Rating = Convert.ToInt32(row["Rating"].ToString()),
+                            Comment = row["Comment"].ToString()
+                        };
+                    }
+                    return rev;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public REVIEW customersReviewForBooking(string customerID, string bookingID)
+        {
+            REVIEW rev = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@customerID", customerID),
+                new SqlParameter("@bookingID", bookingID)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomersReviewForBooking",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        rev = new REVIEW
+                        {
+                            ReviewID = row["ReviewID"].ToString(),
+                            CustomerID = row["CustomerID"].ToString(),
+                            EmployeeID = row["EmployeeID"].ToString(),
+                            PrimaryBookingID = row["primaryBookingID"].ToString(),
+                            Date = Convert.ToDateTime(row["Date"].ToString()),
+                            Time = Convert.ToDateTime(row["Time"].ToString()),
+                            Rating = Convert.ToInt32(row["Rating"].ToString()),
+                            Comment = row["Comment"].ToString()
+                        };
+                    }
+                    return rev;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         public List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID)
         {
             List<SP_ReturnStylistNamesForReview> list = new List<SP_ReturnStylistNamesForReview>();

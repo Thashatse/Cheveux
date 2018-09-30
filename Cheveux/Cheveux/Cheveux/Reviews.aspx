@@ -69,7 +69,8 @@
                         </div>
                         <div class="row">
                             <div class="col-2">
-                                <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnRev" runat="server">Write A Review</a>
+                                <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnRev" runat="server" visible="false">Write A Review</a>
+                                <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=ReadReviews" id="btnRead" runat="server" visible="false">Read Reviews</a>
                             </div>
                         </div>
                     </div>
@@ -78,16 +79,18 @@
                         <!--for general errors or telling user what must happen next-->
                         <div class="col-sm-12 col-md-12 alert alert-success alert-dismissible" id="sucNoti" visible="false" runat="server">
                             <asp:Label ID="lblSucNoti" runat="server" Text=" "></asp:Label>
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>
+                            <%--<a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>--%>
+                            <asp:Button ID="btnSuccessExit" data-dismiss="alert" CssClass="btn btn-primary close" aria-label="close"  runat="server" Text="&times;" OnClick="alertExitClick" />
                         </div>
                         <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible" id="erNoti" visible="false" runat="server">
                             <asp:Label ID="lblErNoti" runat="server" Text=" "></asp:Label>
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>
+                            <%--<a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>--%>
+                            <asp:Button ID="btnDExit" data-dismiss="alert" CssClass="btn btn-primary close" aria-label="close" runat="server" Text="&times;" OnClick="alertExitClick" />
                         </div>
                         <div class="col-sm-12 col-md-12 alert alert-danger alert-dismissible" id="erReview" visible="false" runat="server">
                             <asp:Label ID="lblErReview" runat="server" Text=" "></asp:Label>
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>
-                            <%--<asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="Post Review" OnClick="alertExitClick" />--%>
+                            <%--<a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server" onclick="alertExitClick">&times;</a>--%>
+                            <asp:Button ID="btnDangerExit" data-dismiss="alert" CssClass="btn btn-primary close" aria-label="close" runat="server" Text="&times;" OnClick="alertExitClick" />
                         </div>
                     </div>
 
@@ -202,6 +205,7 @@
                                                 <div class="col-12">
                                                     <asp:Label ID="lblBookingID" runat="server" Text="" Visible="false"></asp:Label>
                                                     <asp:Label ID="lblStylistID" runat="server" Text="" Visible="false"></asp:Label>
+                                                    <asp:Label ID="lblReviewID" runat="server" Text="" Visible="false"></asp:Label>
                                                 </div>
                                             </div>
                                             <!--Star rating -->
@@ -232,7 +236,9 @@
                                                 <div class="col-sm-12 col-md-3 col-lg-3">
                                                     <asp:Button ID="btnPostReview" CssClass="btn btn-primary" runat="server" Text="Post Review" OnClick="btnPostReview_Click" />
                                                 </div>
-                                                <br />
+                                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                                    <asp:Button ID="btnUpdateReview" CssClass="btn btn-primary" runat="server" Text="Update Review" OnClick="btnUpdateReview_Click" Visible="false" />
+                                                </div>
                                                 <br />
                                                 <div class="col-sm-12 col-md-3 col-lg-3">
                                                     <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
