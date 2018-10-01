@@ -18,6 +18,7 @@ GO
 -- =============================================
 alter PROCEDURE SP_UpdateBookingReview
 	@reviewID nchar(10),
+	@bookingID nchar(10),
 	@date datetime,
 	@time time(7),
 	@rating float = null,
@@ -32,6 +33,7 @@ BEGIN
 				Rating = @rating,
 				Comment = @comment
 			WHERE ReviewID=@reviewID
+			AND primaryBookingID=@bookingID
 		COMMIT TRANSACTION
 		END TRY
 	BEGIN CATCH

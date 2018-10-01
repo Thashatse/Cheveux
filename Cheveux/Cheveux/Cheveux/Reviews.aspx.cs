@@ -145,6 +145,7 @@ namespace Cheveux
                     if (Page.IsPostBack)
                     {
                         displayPastBookings(cookie["ID"].ToString(), calDay.SelectedDate);
+                        hideNoti();
                     }
 
                     if (!Page.IsPostBack)
@@ -443,9 +444,13 @@ namespace Cheveux
                 if (review != null)
                 {
                     loadStylistReview(cookie["ID"].ToString(), drpStylistNames.SelectedValue.ToString());
+                    btnPostReview.Visible = false;
+                    btnUpdateReview.Visible = true;
                 }
                 else
                 {
+                    btnPostReview.Visible = true;
+                    btnUpdateReview.Visible = false;
                     clearAndAddPlaceholderText();
                 }
             }
@@ -466,9 +471,13 @@ namespace Cheveux
                 {
                     //load the review comment in the text area 
                     loadBookingReview(cookie["ID"].ToString(), a.PrimaryID.ToString());
+                    btnPostReview.Visible = false;
+                    btnUpdateReview.Visible = true;
                 }
                 else
                 {
+                    btnPostReview.Visible = true;
+                    btnUpdateReview.Visible = false;
                     clearAndAddPlaceholderText();
                 }
             }
@@ -481,6 +490,12 @@ namespace Cheveux
         {
             reviewComment.InnerHtml = "Your review here....";
             Rating1.CurrentRating = 0;
+        }
+        public void hideNoti()
+        {
+            erReview.Visible = false;
+            erNoti.Visible = false;
+            sucNoti.Visible = false;
         }
         #region Events
         protected void calDay_SelectionChanged(object sender, EventArgs e)
@@ -629,13 +644,68 @@ namespace Cheveux
         }
         protected void btnUpdateReview_Click(object sender, EventArgs e)
         {
-            
-        }
-        protected void alertExitClick(object sender, EventArgs e)
-        {
-            erReview.Visible = false;
-            erNoti.Visible = false;
-            sucNoti.Visible = false;
+            cookie = Request.Cookies["CheveuxUserID"];
+            if (drpReviewType.SelectedValue=="0")
+            {
+                //reviewing a booking
+                try
+                {
+                    review = new REVIEW();
+
+                    review.ReviewID = lblReviewID.Text.ToString();
+                    review.PrimaryBookingID = lblBookingID.Text.ToString();
+                    review.Date = DateTime.Today;
+                    review.Time = Convert.ToDateTime(DateTime.Now.ToString("h:mm:ss tt"));
+                    review.Rating = Rating1.CurrentRating;
+                    review.Comment = reviewComment.InnerText.ToString();
+
+                    if (handler.updateBookingReview(review))
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=s");
+                    }
+                    else
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=f");
+                    }
+                }
+                catch (Exception err)
+                {
+                    erReview.Visible = true;
+                    lblErReview.Text = "Error";
+                    function.logAnError("Error updating booking review. Error: "+err.ToString());
+                }
+            }
+            else if (drpReviewType.SelectedValue=="1")
+            {
+                //reviewing a stylist
+                try
+                {
+                    review = new REVIEW();
+
+                    review.ReviewID = lblReviewID.Text.ToString();
+                    review.EmployeeID = drpStylistNames.SelectedValue.ToString();
+                    review.Date = DateTime.Today;
+                    review.Time = Convert.ToDateTime(DateTime.Now.ToString("h:mm:ss tt"));
+                    review.Rating = Rating1.CurrentRating;
+                    review.Comment = reviewComment.InnerText.ToString();
+
+                    if (handler.updateStylistReview(review))
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=s");
+                    }
+                    else
+                    {
+                        Response.Redirect("../Cheveux/Reviews.aspx?Action=MakeAreview&noti=f");
+                    }
+                }
+                catch (Exception err)
+                {
+                    erReview.Visible = true;
+                    lblErReview.Text = "Error";
+                    function.logAnError("Error updating stylist review. Error: "+err.ToString());
+                }
+            }
+
         }
         #endregion
     }

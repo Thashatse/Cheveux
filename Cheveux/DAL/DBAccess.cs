@@ -2864,6 +2864,7 @@ namespace DAL
                 SqlParameter[] pars = new SqlParameter[]
                 {
                     new SqlParameter("@reviewID",r.ReviewID),
+                    new SqlParameter("@bookingID", r.PrimaryBookingID),
                     new SqlParameter("@date",r.Date),
                     new SqlParameter("@time",r.Time),
                     new SqlParameter("@rating",r.Rating),

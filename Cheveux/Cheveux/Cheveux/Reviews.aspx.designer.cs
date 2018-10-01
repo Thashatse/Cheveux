@@ -94,15 +94,6 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblSucNoti;
         
         /// <summary>
-        /// btnSuccessExit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSuccessExit;
-        
-        /// <summary>
         /// erNoti control.
         /// </summary>
         /// <remarks>
@@ -121,15 +112,6 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label lblErNoti;
         
         /// <summary>
-        /// btnDExit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDExit;
-        
-        /// <summary>
         /// erReview control.
         /// </summary>
         /// <remarks>
@@ -146,15 +128,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErReview;
-        
-        /// <summary>
-        /// btnDangerExit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDangerExit;
         
         /// <summary>
         /// readReviews control.
