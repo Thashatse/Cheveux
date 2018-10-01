@@ -20,6 +20,8 @@ namespace BLL
 
         #region Home Page Features
         List<HomePageFeatures> GetHomePageFeatures();
+
+        bool UpdatedHomePageFeatures(Home_Page UpdateFeature);
         #endregion
 
         #region Email/SMS Notifications

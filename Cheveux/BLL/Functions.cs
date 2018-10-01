@@ -57,7 +57,7 @@ namespace BLL
             }
             else if (ProductType == 'A')
             {
-                return "Application Service";
+                return "Accessories";
             }
             else if (ProductType == 'X')
             {

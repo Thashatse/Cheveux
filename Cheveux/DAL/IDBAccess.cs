@@ -12,6 +12,8 @@ namespace DAL
     {
         #region Home Page Features
         List<HomePageFeatures> GetHomePageFeatures();
+
+        bool UpdatedHomePageFeatures(Home_Page UpdateFeature);
         #endregion
 
         #region User Accounts

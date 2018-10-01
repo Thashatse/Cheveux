@@ -23,6 +23,11 @@ namespace BLL
         {
             return db.GetHomePageFeatures();
         }
+
+        public bool UpdatedHomePageFeatures(Home_Page UpdateFeature)
+        {
+            return db.UpdatedHomePageFeatures(UpdateFeature);
+        }
         #endregion
 
         #region Email/SMS Notifications

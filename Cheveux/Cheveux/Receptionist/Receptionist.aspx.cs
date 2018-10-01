@@ -728,8 +728,9 @@ namespace Cheveux
                         newCell.Text = dropDown;
                         tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.Text = "<a class='btn btn-primary' href='../Manager/Products.aspx?Action=AcceptOrder&OrderID=" + outOrder.OrderID.ToString() +
-                            "'> Accept Order </a>";
+                        newCell.Text = "<button type = 'button' class='btn btn-default'>" +
+                            "<a href='../Manager/Products.aspx?Action=ViewOrder&OrderID=" + outOrder.OrderID.ToString() +
+                            "'> View </a></button>";
                         tblOutstandingOrders.Rows[rowCount].Cells.Add(newCell);
                         rowCount++;
                     }

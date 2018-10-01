@@ -248,16 +248,16 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedService1" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedService1" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedService2" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedService2" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedService3" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedService3" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedService4" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedService4" runat="server" Text="Error"></asp:Label>
                                 </div>
                             </div>
                             <!-- Line Break -->
@@ -268,13 +268,13 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedProduct1" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedProduct1" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedProduct2" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedProduct2" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedProduct3" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedProduct3" runat="server" Text="Error"></asp:Label>
                                 </div>
                             </div>
                             <!-- Line Break -->
@@ -285,13 +285,13 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedStylist1" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedStylist1" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedStylist2" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedStylist2" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedStylist3" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedStylist3" runat="server" Text="Error"></asp:Label>
                                 </div>
                             </div>
                             <!-- Line Break -->
@@ -302,10 +302,10 @@
                             <br />
                             <div class="row">
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedPhone" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedPhone" runat="server" Text="Error"></asp:Label>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label ID="lblFeaturedEmail" runat="server" Text="Label"></asp:Label>
+                                    <asp:Label ID="lblFeaturedEmail" runat="server" Text="Error"></asp:Label>
                                 </div>
                             </div>
                         </div>
@@ -324,10 +324,12 @@
                                         <!-- Search -->
                                         <asp:TextBox ID="txtSearchItems" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control"></asp:TextBox>
                                     </p>
+                                    <!--Line Break--> 
+                                    <br />
+                                    <asp:ListBox runat="server" ID="lblFeatuerdItems" CssClass="form-control" Height="500"></asp:ListBox>
                                     <!--Line Break-->
                                     <br />
-                                    <asp:ListBox runat="server" ID="lblFeatuerdItems" CssClass="form-control" DataTextField="Item" DataValueField="ID"
-                                        Height="500"></asp:ListBox>
+                                    <asp:Button ID="btnCancelFatureEdit" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancelFatureEdit_Click" />
                                 </div>
                                 <div class="col-md-6 text-center">
                                     <!--Line Break-->
@@ -338,6 +340,7 @@
                                         height="400" class="img-fluid" />
                                     <!--Line Break-->
                                     <br />
+                                    <asp:Label ID="lblErrorFeaturedItem" runat="server" Text="Please Select a Item" ForeColor="Red" Visible="false"></asp:Label>
                                     <br />
                                     <asp:Button ID="btnDoneFatureEdit" runat="server" Text="Save" CssClass="btn btn-primary" OnClick="btnDoneFatureEdit_Click" />
                                 </div>

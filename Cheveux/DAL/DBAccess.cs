@@ -69,6 +69,43 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+
+        public bool UpdatedHomePageFeatures(Home_Page UpdateFeature)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@FeatureID", UpdateFeature.FeatureID),
+                    new SqlParameter("@ItemID", UpdateFeature.ItemID)
+                };
+
+                if (UpdateFeature.FeatureID == "Ser01" || UpdateFeature.FeatureID == "Ser02" || UpdateFeature.FeatureID == "Ser03" || UpdateFeature.FeatureID == "Ser04")
+                {
+                    return DBHelper.NonQuery("SP_UpdateFeaturedService", CommandType.StoredProcedure, pars);
+                }
+                else if (UpdateFeature.FeatureID == "Pro01" || UpdateFeature.FeatureID == "Pro02" || UpdateFeature.FeatureID == "Pro03")
+                {
+                    return DBHelper.NonQuery("SP_UpdateFeaturedProduct", CommandType.StoredProcedure, pars);
+                }
+                else if (UpdateFeature.FeatureID == "Sty01" || UpdateFeature.FeatureID == "Sty02" || UpdateFeature.FeatureID == "Sty03")
+                {
+                    return DBHelper.NonQuery("SP_UpdateFeaturedStylist", CommandType.StoredProcedure, pars);
+                }
+                else if (UpdateFeature.FeatureID == "CwuPno" || UpdateFeature.FeatureID == "CwuEma")
+                {
+                    return DBHelper.NonQuery("SP_UpdateFeaturedContact", CommandType.StoredProcedure, pars);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Email/SMS Notifications
@@ -1487,7 +1524,7 @@ namespace DAL
                                 ProductDescription = row["ProductDescription"].ToString(),
                                 Price = Convert.ToDecimal(row["Price"].ToString()),
                                 ProductType = row["ProductType(T/A/S)"].ToString(),
-                                Active = row["Active"].ToString(),
+                                Active = row["Active"].ToString()//,
                                 //ProductImage = row["ProductImage"]
                             };
                             products.Add(product);

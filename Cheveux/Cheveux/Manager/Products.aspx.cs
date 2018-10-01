@@ -1174,8 +1174,8 @@ namespace Cheveux.Manager
                 //load a list of all products
                 products = handler.getAllProductsAndDetails();
                 //sort the products by stock count
-                products = Tuple.Create(products.Item1.OrderBy(o => o.Qty).ToList(),
-                    products.Item2.OrderBy(o => o.Qty).ToList());
+                products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
+                    products.Item2.OrderBy(o => o.Name).ToList());
                 //track row count & number of products cound
                 int count = 0;
 

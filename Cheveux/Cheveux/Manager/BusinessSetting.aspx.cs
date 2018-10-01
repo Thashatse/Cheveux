@@ -19,6 +19,7 @@ namespace Cheveux
         HttpCookie cookie = null;
         BUSINESS BusinessDetails = null;
         List<HomePageFeatures> features = null;
+        int listBoxSelectedIndex;
         //create bools to track which setings are to be edited
         bool editVatRate = false;
         bool editVatRegNo = false;
@@ -51,7 +52,7 @@ namespace Cheveux
 
                 //check if a view has been requested
                 string view = Request.QueryString["View"];
-                if(view == "BS")
+                if (view == "BS")
                 {
                     btnViewBS_Click(sender, e);
                 }
@@ -261,89 +262,95 @@ namespace Cheveux
                     Response.Redirect("Error.aspx?Error='An error occurred when communicating with the Cheveux server'");
                 }
 
+                listBoxSelectedIndex = lblFeatuerdItems.SelectedIndex;
+
                 #region display edit for feature
-                string editFeature = Request.QueryString["EditFeatureID"];
-                if (editFeature != null) 
+                if (!Page.IsPostBack)
                 {
-                    hideALL();
-                    DivEditFeaturedItem.Visible = true;
-                    if (editFeature == "Ser01" || editFeature == "Ser02" || editFeature == "Ser03" || editFeature == "Ser04")
+                    string editFeature = Request.QueryString["EditFeatureID"];
+                    if (editFeature != null)
                     {
-                        lblListBoxHeader.Text = "Services";
-                        if (editFeature == "Ser01")
+                        hideALL();
+                        DivEditFeaturedItem.Visible = true;
+                        if (editFeature == "Ser01" || editFeature == "Ser02" || editFeature == "Ser03" || editFeature == "Ser04")
                         {
-                            LblFeatureEditHeading.Text = "Edit Featured Service 1";
-                            loadServiceListBox(sender, e, 3);
+                            lblListBoxHeader.Text = "Services";
+                            if (editFeature == "Ser01")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Featured Service 1";
+                                loadServiceListBox(sender, e, 3);
+                            }
+                            else if (editFeature == "Ser02")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Featured Service 2";
+                                loadServiceListBox(sender, e, 4);
+                            }
+                            else if (editFeature == "Ser03")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Featured Service 3";
+                                loadServiceListBox(sender, e, 5);
+                            }
+                            else if (editFeature == "Ser04")
+                            {
+                                loadServiceListBox(sender, e, 6);
+                                LblFeatureEditHeading.Text = "Edit Featured Service 4";
+                            }
                         }
-                        else if (editFeature == "Ser02")
+                        else if (editFeature == "Pro01" || editFeature == "Pro02" || editFeature == "Pro03")
                         {
-                            LblFeatureEditHeading.Text = "Edit Featured Service 2";
-                            loadServiceListBox(sender, e, 4);
+                            lblListBoxHeader.Text = "Products";
+                            if (editFeature == "Pro01")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Featured Product 1";
+                                loadProductListBox(sender, e, 0);
+                            }
+                            else if (editFeature == "Pro02")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Featured Product 2";
+                                loadProductListBox(sender, e, 1);
+                            }
+                            else if (editFeature == "Pro03")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Featured Product 3";
+                                loadProductListBox(sender, e, 2);
+                            }
                         }
-                        else if (editFeature == "Ser03")
+                        else if (editFeature == "Sty01" || editFeature == "Sty02" || editFeature == "Sty03")
                         {
-                            LblFeatureEditHeading.Text = "Edit Featured Service 3";
-                            loadServiceListBox(sender, e, 5);
+                            lblListBoxHeader.Text = "Stylists";
+                            if (editFeature == "Sty01")
+                            {
+                                loadStylistListBox(sender, e, 7);
+                                LblFeatureEditHeading.Text = "Edit Featured Stylist 1";
+                            }
+                            else if (editFeature == "Sty02")
+                            {
+                                loadStylistListBox(sender, e, 8);
+                                LblFeatureEditHeading.Text = "Edit Featured Stylist 2";
+                            }
+                            else if (editFeature == "Sty03")
+                            {
+                                loadStylistListBox(sender, e, 9);
+                                LblFeatureEditHeading.Text = "Edit Featured Stylist 3";
+                            }
                         }
-                        else if (editFeature == "Ser04")
+                        else if (editFeature == "CwuPno" || editFeature == "CwuEma")
                         {
-                            loadServiceListBox(sender, e, 6);
-                            LblFeatureEditHeading.Text = "Edit Featured Service 4";
+                            lblListBoxHeader.Text = "Employee";
+                            if (editFeature == "CwuPno")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Contact Phone";
+                                loadEmpyeeListBox(sender, e, 11);
+                            }
+                            else if (editFeature == "CwuEma")
+                            {
+                                LblFeatureEditHeading.Text = "Edit Contact Email";
+                                loadEmpyeeListBox(sender, e, 10);
+                            }
                         }
                     }
-                    else if (editFeature == "Pro01" || editFeature == "Pro02" || editFeature == "Pro03")
-                    {
-                        lblListBoxHeader.Text = "Products";
-                        if (editFeature == "Pro01")
-                        {
-                            LblFeatureEditHeading.Text = "Edit Featured Product 1";
-                            loadProductListBox(sender, e, 0);
-                        }
-                        else if (editFeature == "Pro02")
-                        {
-                            LblFeatureEditHeading.Text = "Edit Featured Product 2";
-                            loadProductListBox(sender, e, 1);
-                        }
-                        else if (editFeature == "Pro03")
-                        {
-                            LblFeatureEditHeading.Text = "Edit Featured Product 3";
-                            loadProductListBox(sender, e, 2);
-                        }
-                    }
-                    else if (editFeature == "Sty01" || editFeature == "Sty02" || editFeature == "Sty03")
-                    {
-                        lblListBoxHeader.Text = "Stylists";
-                        if (editFeature == "Sty01")
-                        {
-                            loadStylistListBox(sender, e, 7);
-                            LblFeatureEditHeading.Text = "Edit Featured Stylist 1";
-                        }
-                        else if (editFeature == "Sty02")
-                        {
-                            loadStylistListBox(sender, e, 8);
-                            LblFeatureEditHeading.Text = "Edit Featured Stylist 2";
-                        }
-                        else if (editFeature == "Sty03")
-                        {
-                            loadStylistListBox(sender, e, 9);
-                            LblFeatureEditHeading.Text = "Edit Featured Stylist 3";
-                        }
-                    }
-                    else if (editFeature == "CwuPno" || editFeature == "CwuEma")
-                    {
-                        lblListBoxHeader.Text = "Employee";
-                        if (editFeature == "CwuPno")
-                        {
-                            LblFeatureEditHeading.Text = "Edit Contact Phone";
-                            loadEmpyeeListBox(sender, e, 11);
-                        }
-                        else if (editFeature == "CwuEma")
-                        {
-                            LblFeatureEditHeading.Text = "Edit Contact Email";
-                            loadEmpyeeListBox(sender, e, 10);
-                        }
-                    }
-                }
+                    
+            }
                 #endregion
             }
         }
@@ -465,39 +472,19 @@ namespace Cheveux
         {
             //add Products to the list
             serviceIDs.Clear();
-            selectedIndex = 0;
             try
             {
                 services = handler.getAllProducts();
                 if (services.Count != 0)
                 {
-                    int serviceCount = 0;
-                    ArrayList ListBoxArray = new ArrayList();
-                    lblFeatuerdItems.Items.Clear();
-
-                    //add treatments
                     foreach (PRODUCT service in services)
                     {
                         //make sure there is stock
                         if (service.ProductType[0] == 'S' &&
-                            (function.compareToSearchTerm(service.Name, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(service.ProductDescription, txtSearchItems.Text) == true))
+                            (service.Name == lblFeatuerdItems.Items[listBoxSelectedIndex].Text))
                         {
                             serviceIDs.Add(service.ProductID.ToString());
-                            serviceCount++;
                         }
-                    }
-
-                    for (int i = 0; i < serviceIDs.Count; i++)
-                    {
-                        ListBoxArray.Add(serviceIDs[i]);
-                    }
-
-                    ListBoxArray.Sort();
-                    serviceIDs.Clear();
-                    foreach (string item in ListBoxArray)
-                    {
-                        serviceIDs.Add(item);
                     }
                 }
                 else
@@ -531,6 +518,11 @@ namespace Cheveux
                 products = handler.getAllProductsAndDetails();
                 if (products.Item1.Count != 0 && products.Item2.Count != 0)
                 {
+
+                    //sort the products by alphabetical oder
+                    products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
+                        products.Item2.OrderBy(o => o.Name).ToList());
+
                     int prodCount = 0;
                     ArrayList ListBoxArray = new ArrayList();
                     lblFeatuerdItems.Items.Clear();
@@ -609,24 +601,16 @@ namespace Cheveux
 
         protected void loadproductIDs()
         {
-                ArrayList ListBoxArray = new ArrayList();
                 productIDs.Clear();
 
                 //load the product ids
                 products = handler.getAllProductsAndDetails();
                 if (products.Item1.Count != 0 && products.Item2.Count != 0)
                 {
-                    //sort the products by alphabetical oder
-                    products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
-                        products.Item2.OrderBy(o => o.Name).ToList());
                     //add treatments
                     foreach (SP_GetAllTreatments treat in products.Item2)
                     {
-                        //make sure there is stock
-                        if (treat.Qty > 0
-                            && (function.compareToSearchTerm(treat.Name, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(treat.ProductDescription, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(treat.Brandname, txtSearchItems.Text) == true))
+                        if (treat.Name == lblFeatuerdItems.SelectedItem.Text)
                         {
                             productIDs.Add(treat.ProductID.ToString());
                         }
@@ -635,28 +619,12 @@ namespace Cheveux
                     //add accessories
                     foreach (SP_GetAllAccessories Access in products.Item1)
                     {
-                        //make sure there is stock
-                        if (Access.Qty > 0
-                            && (function.compareToSearchTerm(Access.Name, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(Access.ProductDescription, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(Access.Brandname, txtSearchItems.Text) == true))
+                            if(Access.Name == lblFeatuerdItems.SelectedItem.Text)
                         {
                             productIDs.Add(Access.ProductID.ToString());
                         }
                     }
-
-                    for (int i = 0; i < productIDs.Count; i++)
-                    {
-                        ListBoxArray.Add(productIDs[i]);
-                    }
-
-                    ListBoxArray.Sort();
-                    productIDs.Clear();
-                    foreach (string item in ListBoxArray)
-                    {
-                        productIDs.Add(item);
-                    }
-                }
+            }
         }
         #endregion
 
@@ -667,75 +635,78 @@ namespace Cheveux
 
         protected void loadStylistListBox(object sender, EventArgs e, int featureIndex)
         {
-            //add Products to the list
-            lblFeatuerdItems.Items.Clear();
-            selectedIndex = 0;
-            try
+            if (!Page.IsPostBack)
             {
-                //load a list of all products
-                employees = handler.viewAllEmployees();
-                if (employees.Count != 0)
+                //add Products to the list
+                lblFeatuerdItems.Items.Clear();
+                selectedIndex = 0;
+                try
                 {
-                    int empCount = 0;
-                    ArrayList ListBoxArray = new ArrayList();
-                    lblFeatuerdItems.Items.Clear();
+                    //load a list of all products
+                    employees = handler.viewAllEmployees();
+                    if (employees.Count != 0)
+                    {
+                        int empCount = 0;
+                        ArrayList ListBoxArray = new ArrayList();
+                        lblFeatuerdItems.Items.Clear();
 
-                    //add treatments
-                    foreach (SP_ViewEmployee stylist in employees)
-                    {
-                        //make sure there is stock
-                        if (stylist.employeeType[0] == 'S' &&
-                            (function.compareToSearchTerm(stylist.firstName, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.lastName, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.email, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.phoneNumber, txtSearchItems.Text) == true))
+                        //add treatments
+                        foreach (SP_ViewEmployee stylist in employees)
                         {
-                            lblFeatuerdItems.Items.Add(stylist.firstName.ToString());
-                            empCount++;
+                            //make sure there is stock
+                            if (stylist.employeeType[0] == 'S' &&
+                                (function.compareToSearchTerm(stylist.firstName, txtSearchItems.Text) == true
+                                || function.compareToSearchTerm(stylist.lastName, txtSearchItems.Text) == true
+                                || function.compareToSearchTerm(stylist.email, txtSearchItems.Text) == true
+                                || function.compareToSearchTerm(stylist.phoneNumber, txtSearchItems.Text) == true))
+                            {
+                                lblFeatuerdItems.Items.Add(stylist.firstName.ToString());
+                                empCount++;
+                            }
                         }
-                    }
-                    
-                    //if no products found matching the criteria
-                    if (empCount == 0)
-                    {
-                        lblFeatuerdItems.Items.Add("No Stylist Found");
+
+                        //if no products found matching the criteria
+                        if (empCount == 0)
+                        {
+                            lblFeatuerdItems.Items.Add("No Stylist Found");
+                        }
+                        else
+                        {
+                            for (int i = 0; i < lblFeatuerdItems.Items.Count; i++)
+                            {
+                                ListBoxArray.Add(lblFeatuerdItems.Items[i].Value);
+                            }
+
+                            int x = 0;
+                            ListBoxArray.Sort();
+                            lblFeatuerdItems.Items.Clear();
+                            foreach (string item in ListBoxArray)
+                            {
+                                lblFeatuerdItems.Items.Add(item);
+                                if (item == features[featureIndex].firstName)
+                                {
+                                    selectedIndex = x;
+                                }
+                                x++;
+                            }
+
+                            lblFeatuerdItems.SelectedIndex = selectedIndex;
+                        }
                     }
                     else
                     {
-                        for (int i = 0; i < lblFeatuerdItems.Items.Count; i++)
-                        {
-                            ListBoxArray.Add(lblFeatuerdItems.Items[i].Value);
-                        }
-
-                        int x = 0;
-                        ListBoxArray.Sort();
-                        lblFeatuerdItems.Items.Clear();
-                        foreach (string item in ListBoxArray)
-                        {
-                            lblFeatuerdItems.Items.Add(item);
-                            if(item == features[featureIndex].firstName)
-                            {
-                                selectedIndex = x;
-                            }
-                            x++;
-                        }
-
-                        lblFeatuerdItems.SelectedIndex = selectedIndex;
+                        Response.Write("<script>alert('An error occoured loading stylists, Please try again later.');location.reload(true);</script>");
+                        btnViewFeaturedItems_Click(sender, e);
                     }
                 }
-                else
+                catch (Exception Err)
                 {
-                    Response.Write("<script>alert('An error occoured loading stylists, Please try again later.');location.reload(true);</script>");
+                    function.logAnError(Err.ToString()
+                        + " An error occurred retrieving list of stylist"
+                        + " in loadStylistListBox method on Settings");
+                    Response.Write("<script>alert('An error occoured loading stylist, Please try again later.');location.reload(true);</script>");
                     btnViewFeaturedItems_Click(sender, e);
                 }
-            }
-            catch (Exception Err)
-            {
-                function.logAnError(Err.ToString()
-                    + " An error occurred retrieving list of stylist"
-                    + " in loadStylistListBox method on Settings");
-                Response.Write("<script>alert('An error occoured loading stylist, Please try again later.');location.reload(true);</script>");
-                btnViewFeaturedItems_Click(sender, e);
             }
         }
 
@@ -750,36 +721,14 @@ namespace Cheveux
                 employees = handler.viewAllEmployees();
                 if (employees.Count != 0)
                 {
-                    int empCount = 0;
-                    ArrayList ListBoxArray = new ArrayList();
-                    lblFeatuerdItems.Items.Clear();
-
-                    //add treatments
                     foreach (SP_ViewEmployee stylist in employees)
                     {
-                        //make sure there is stock
-                        if (stylist.employeeType[0] == 'S' &&
-                            (function.compareToSearchTerm(stylist.firstName, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.lastName, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.email, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.phoneNumber, txtSearchItems.Text) == true))
+                        
+                        if (stylist.firstName == lblFeatuerdItems.Items[listBoxSelectedIndex].Text)
                         {
                             stylistIDs.Add(stylist.UserID.ToString());
-                            empCount++;
                         }
                     }
-                    
-                        for (int i = 0; i < stylistIDs.Count; i++)
-                        {
-                            ListBoxArray.Add(stylistIDs[i]);
-                        }
-                        
-                        ListBoxArray.Sort();
-                        stylistIDs.Clear();
-                        foreach (string item in ListBoxArray)
-                        {
-                            stylistIDs.Add(item);
-                        }
                 }
                 else
                 {
@@ -878,43 +827,19 @@ namespace Cheveux
         protected void loadEmaloyeeIDs(object sender, EventArgs e)
         {
             //add Products to the list
-            stylistIDs.Clear();
-            selectedIndex = 0;
+            employeeIDs.Clear();
             try
             {
                 //load a list of all products
                 employees = handler.viewAllEmployees();
                 if (employees.Count != 0)
                 {
-                    int empCount = 0;
-                    ArrayList ListBoxArray = new ArrayList();
-                    lblFeatuerdItems.Items.Clear();
-
-                    //add treatments
                     foreach (SP_ViewEmployee stylist in employees)
                     {
-                        //make sure there is stock
-                        if (stylist.employeeType[0] != 'S' &&
-                            (function.compareToSearchTerm(stylist.firstName, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.lastName, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.email, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(stylist.phoneNumber, txtSearchItems.Text) == true))
+                        if (stylist.firstName == lblFeatuerdItems.Items[listBoxSelectedIndex].Text)
                         {
-                            stylistIDs.Add(stylist.UserID.ToString());
-                            empCount++;
+                            employeeIDs.Add(stylist.UserID.ToString());
                         }
-                    }
-
-                    for (int i = 0; i < stylistIDs.Count; i++)
-                    {
-                        ListBoxArray.Add(stylistIDs[i]);
-                    }
-
-                    ListBoxArray.Sort();
-                    stylistIDs.Clear();
-                    foreach (string item in ListBoxArray)
-                    {
-                        stylistIDs.Add(item);
                     }
                 }
                 else
@@ -935,6 +860,73 @@ namespace Cheveux
         #endregion
 
         protected void btnDoneFatureEdit_Click(object sender, EventArgs e)
+        {
+            lblErrorFeaturedItem.Visible = false;
+
+            bool result = false;
+
+            try
+            {
+                if (lblFeatuerdItems.SelectedItem != null && lblFeatuerdItems.SelectedItem.Text != "" && lblFeatuerdItems.SelectedIndex >= 0)
+                {
+                    string editFeature = Request.QueryString["EditFeatureID"];
+                    if (editFeature != null)
+                    {
+                        Home_Page updatedFeture = new Home_Page();
+                        updatedFeture.FeatureID = editFeature;
+
+                        if (editFeature == "Ser01" || editFeature == "Ser02" || editFeature == "Ser03" || editFeature == "Ser04")
+                        {
+                            loadServiceIDs(sender, e);
+                            updatedFeture.ItemID = serviceIDs[0];
+                        }
+                        else if (editFeature == "Pro01" || editFeature == "Pro02" || editFeature == "Pro03")
+                        {
+                            loadproductIDs();
+                            updatedFeture.ItemID = productIDs[0];
+                        }
+                        else if (editFeature == "Sty01" || editFeature == "Sty02" || editFeature == "Sty03")
+                        {
+                            loadStylistIDs(sender, e);
+                            updatedFeture.ItemID = stylistIDs[0];
+                        }
+                        else if (editFeature == "CwuPno" || editFeature == "CwuEma")
+                        {
+                            loadEmaloyeeIDs(sender, e);
+                            updatedFeture.ItemID = employeeIDs[0];
+                        }
+
+                        result = handler.UpdatedHomePageFeatures(updatedFeture);
+                    }
+                }
+                else
+                {
+                    lblErrorFeaturedItem.Visible = true;
+                }
+            }
+            catch (Exception Err)
+            {
+                function.logAnError("Error Updating homepaeferes - business setings page. | Err: "+Err);
+                Response.Write("<script>alert('An error occurred updating the database try again later');</script>");
+                Response.Redirect("BusinessSetting.aspx?View=FI");
+            }
+
+            if (result == true)
+            {
+                Response.Redirect("BusinessSetting.aspx?View=FI");
+            }
+            else if(lblFeatuerdItems.SelectedIndex < 0)
+            {
+                lblErrorFeaturedItem.Visible = true;
+            }
+            else
+            {
+                Response.Write("<script>alert('An error occurred updating the database try again later');</script>");
+                Response.Redirect("BusinessSetting.aspx?View=FI");
+            }
+        }
+
+        protected void btnCancelFatureEdit_Click(object sender, EventArgs e)
         {
             Response.Redirect("BusinessSetting.aspx?View=FI");
         }

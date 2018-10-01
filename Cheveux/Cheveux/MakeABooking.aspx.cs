@@ -1433,7 +1433,8 @@ namespace Cheveux
 
             foreach (string id in pickedServiceID)
             {
-                slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
+                //** nullreferenceexception 
+                //slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
 
             }
 
@@ -1751,7 +1752,7 @@ namespace Cheveux
                         if (pickedServiceName == null)
                         {
                             pickedServiceName = new List<string>();
-                            pickedServiceID = new List<string>();
+                            pickedServiceID = new List<string>(); 
                             pickedServiceID.Add(item.Value);
                             pickedServiceName.Add(item.Text);
                             count++;
@@ -1771,6 +1772,7 @@ namespace Cheveux
 
             }
         }
+
         protected void rblSickLeave_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (pickedServiceID == null)
@@ -1788,7 +1790,8 @@ namespace Cheveux
             else
             {
                 pickedServiceID.Add(rblSickLeave.SelectedValue);
-                pickedServiceName.Add(rblSickLeave.SelectedItem.Text);
+                //** null refrence excepyion
+                //pickedServiceName.Add(rblSickLeave.SelectedItem.Text);
                 count++;
             }
         }
