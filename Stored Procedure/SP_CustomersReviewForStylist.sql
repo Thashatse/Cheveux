@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_CustomersReviewForStylist
+alter PROCEDURE SP_CustomersReviewForStylist
 	@customerID nchar(30),
 	@stylistID nchar(30)
 AS

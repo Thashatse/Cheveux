@@ -60,6 +60,10 @@ namespace Cheveux
                 {
                     btnViewFeaturedItems_Click(sender, e);
                 }
+                else if (view == "SK")
+                {
+                    btnViewSK_Click(sender, e);
+                }
                 else
                 {
                     btnViewFeaturedItems_Click(sender, e);
@@ -298,6 +302,7 @@ namespace Cheveux
                         }
                         else if (editFeature == "Pro01" || editFeature == "Pro02" || editFeature == "Pro03")
                         {
+                            TxtSearchProductForAutoLowStock.Text = "";
                             lblListBoxHeader.Text = "Products";
                             if (editFeature == "Pro01")
                             {
@@ -367,11 +372,23 @@ namespace Cheveux
             hideALL();
             BS.Visible = true;
         }
+        
+        protected void btnViewSK_Click(object sender, EventArgs e)
+        {
+            hideALL();
+
+            txtSearchItems.Text = "";
+            loadProductListBox(sender, e, 0);
+
+            SK.Visible = true;
+        }
 
         private void hideALL()
         {
             BS.Visible = false;
             FI.Visible = false;
+            SK.Visible = false;
+            DivEditFeaturedItem.Visible = false;
         }
 
         protected void btnViewHint_Click(object sender, EventArgs e)
@@ -387,7 +404,134 @@ namespace Cheveux
                 btnViewHint.Text = "Hint";
             }
         }
+
+        protected void rblAutoStockOrderProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rblAutoStockOrderProducts.SelectedIndex == 0)
+            {
+                divAutoStockOrderProducts.Visible = false;
+            }
+            else
+            {
+                divAutoStockOrderProducts.Visible = true;
+            }
+        }
+
+        protected void cbAutoLowStockOnOff_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAutoLowStockOnOff.Checked)
+            {
+                divAutoStockOrder.Visible = true;
+                AutoLowInfo.Visible = false;
+            }
+            else
+            {
+                divAutoStockOrder.Visible = false;
+                AutoLowInfo.Visible = true;
+            }
+        }
         #endregion
+        
+        protected void loadProductListBox(object sender, EventArgs e, int featureIndex)
+        {
+            //add Products to the list
+            lblFeatuerdItems.Items.Clear();
+            lblProductsForAutoOrder.Items.Clear();
+            try
+            {
+                //load a list of all products
+                products = handler.getAllProductsAndDetails();
+                if (products.Item1.Count != 0 && products.Item2.Count != 0)
+                {
+
+                    //sort the products by alphabetical oder
+                    products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
+                        products.Item2.OrderBy(o => o.Name).ToList());
+
+                    int prodCount = 0;
+                    ArrayList ListBoxArray = new ArrayList();
+                    lblFeatuerdItems.Items.Clear();
+
+                    //add treatments
+                    foreach (SP_GetAllTreatments treat in products.Item2)
+                    {
+                        //make sure there is stock
+                        if (treat.Qty > 0
+                            && (function.compareToSearchTerm(treat.Name, txtSearchItems.Text) == true
+                            || function.compareToSearchTerm(treat.ProductDescription, txtSearchItems.Text) == true
+                            || function.compareToSearchTerm(treat.Brandname, txtSearchItems.Text) == true)
+                            && (function.compareToSearchTerm(treat.Name, TxtSearchProductForAutoLowStock.Text) == true
+                            || function.compareToSearchTerm(treat.ProductDescription, TxtSearchProductForAutoLowStock.Text) == true
+                            || function.compareToSearchTerm(treat.Brandname, TxtSearchProductForAutoLowStock.Text) == true))
+                        {
+                            lblFeatuerdItems.Items.Add(treat.Name.ToString());
+                            prodCount++;
+                        }
+                    }
+
+                    //add accessories
+                    foreach (SP_GetAllAccessories Access in products.Item1)
+                    {
+                        //make sure there is stock
+                        if (Access.Qty > 0
+                            && (function.compareToSearchTerm(Access.Name, txtSearchItems.Text) == true
+                            || function.compareToSearchTerm(Access.ProductDescription, txtSearchItems.Text) == true
+                            || function.compareToSearchTerm(Access.Brandname, txtSearchItems.Text) == true)
+                            && (function.compareToSearchTerm(Access.Name, TxtSearchProductForAutoLowStock.Text) == true
+                            || function.compareToSearchTerm(Access.ProductDescription, TxtSearchProductForAutoLowStock.Text) == true
+                            || function.compareToSearchTerm(Access.Brandname, TxtSearchProductForAutoLowStock.Text) == true))
+                        {
+                            lblFeatuerdItems.Items.Add(Access.Name.ToString());
+                            prodCount++;
+                        }
+                    }
+
+                    //if no products found matching the criteria
+                    if (prodCount == 0)
+                    {
+                        lblFeatuerdItems.Items.Add("No Products Found");
+                        lblProductsForAutoOrder.Items.Add("No Products Found");
+                    }
+                    else
+                    {
+                        for (int i = 0; i < lblFeatuerdItems.Items.Count; i++)
+                        {
+                            ListBoxArray.Add(lblFeatuerdItems.Items[i].Value);
+                        }
+
+                        int x = 0;
+                        ListBoxArray.Sort();
+                        lblFeatuerdItems.Items.Clear();
+                        lblProductsForAutoOrder.Items.Clear();
+                        foreach (string item in ListBoxArray)
+                        {
+                            lblFeatuerdItems.Items.Add(item);
+                            lblProductsForAutoOrder.Items.Add(item);
+                            if (item == features[featureIndex].Name)
+                            {
+                                selectedIndex = x;
+                            }
+                            x++;
+                        }
+
+                        lblFeatuerdItems.SelectedIndex = selectedIndex;
+                    }
+                }
+                else
+                {
+                    Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                    btnViewFeaturedItems_Click(sender, e);
+                }
+            }
+            catch (Exception Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred retrieving list of products"
+                    + " in loadProductListBox method on Settings");
+                Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                btnViewFeaturedItems_Click(sender, e);
+            }
+        }
 
         #region Featured Items
         int selectedIndex = 0;
@@ -507,97 +651,6 @@ namespace Cheveux
         #region Product
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
         List<string> productIDs = new List<string>();
-
-        protected void loadProductListBox(object sender, EventArgs e, int featureIndex)
-        {
-            //add Products to the list
-            lblFeatuerdItems.Items.Clear();
-            try
-            {
-                //load a list of all products
-                products = handler.getAllProductsAndDetails();
-                if (products.Item1.Count != 0 && products.Item2.Count != 0)
-                {
-
-                    //sort the products by alphabetical oder
-                    products = Tuple.Create(products.Item1.OrderBy(o => o.Name).ToList(),
-                        products.Item2.OrderBy(o => o.Name).ToList());
-
-                    int prodCount = 0;
-                    ArrayList ListBoxArray = new ArrayList();
-                    lblFeatuerdItems.Items.Clear();
-
-                    //add treatments
-                    foreach (SP_GetAllTreatments treat in products.Item2)
-                    {
-                        //make sure there is stock
-                        if (treat.Qty > 0
-                            && (function.compareToSearchTerm(treat.Name, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(treat.ProductDescription, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(treat.Brandname, txtSearchItems.Text) == true))
-                        {
-                            lblFeatuerdItems.Items.Add(treat.Name.ToString());
-                            prodCount++;
-                        }
-                    }
-
-                    //add accessories
-                    foreach (SP_GetAllAccessories Access in products.Item1)
-                    {
-                        //make sure there is stock
-                        if (Access.Qty > 0
-                            && (function.compareToSearchTerm(Access.Name, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(Access.ProductDescription, txtSearchItems.Text) == true
-                            || function.compareToSearchTerm(Access.Brandname, txtSearchItems.Text) == true))
-                        {
-                            lblFeatuerdItems.Items.Add(Access.Name.ToString());
-                            prodCount++;
-                        }
-                    }
-
-                    //if no products found matching the criteria
-                    if (prodCount == 0)
-                    {
-                        lblFeatuerdItems.Items.Add("No Products Found");
-                    }
-                    else
-                    {
-                        for (int i = 0; i < lblFeatuerdItems.Items.Count; i++)
-                        {
-                            ListBoxArray.Add(lblFeatuerdItems.Items[i].Value);
-                        }
-
-                        int x = 0;
-                        ListBoxArray.Sort();
-                        lblFeatuerdItems.Items.Clear();
-                        foreach (string item in ListBoxArray)
-                        {
-                            lblFeatuerdItems.Items.Add(item);
-                            if (item == features[featureIndex].Name)
-                            {
-                                selectedIndex = x;
-                            }
-                            x++;
-                        }
-
-                        lblFeatuerdItems.SelectedIndex = selectedIndex;
-                    }
-                }
-                else
-                {
-                    Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
-                    btnViewFeaturedItems_Click(sender, e);
-                }
-            }
-            catch (Exception Err)
-            {
-                function.logAnError(Err.ToString()
-                    + " An error occurred retrieving list of products"
-                    + " in loadProductListBox method on Settings");
-                Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
-                btnViewFeaturedItems_Click(sender, e);
-            }
-        }
 
         protected void loadproductIDs()
         {
@@ -1314,6 +1367,10 @@ namespace Cheveux
                 //save the edit
             }
         }
+        #endregion
+
+        #region Stock Managment Settings
+
         #endregion
     }
 }

@@ -26,6 +26,8 @@
                                     <li>
                                         <asp:Button ID="btnViewFeaturedItems" runat="server" Text="Featured Items" class="btn btn-light" OnClick="btnViewFeaturedItems_Click" /></li>
                                     <li>
+                                        <asp:Button ID="btnViewSK" runat="server" Text="Stock Managment" class="btn btn-light" OnClick="btnViewSK_Click" /></li>
+                                    <li>
                                         <asp:Button ID="btnViewBS" runat="server" Text="Business Settings" class="btn btn-light" OnClick="btnViewBS_Click" /></li>
                                 </ul>
                             </div>
@@ -311,9 +313,10 @@
                         </div>
 
                         <div runat="server" visible="false" id="DivEditFeaturedItem">
-                    <!-- Line Break -->
+                            <!-- Line Break -->
                             <br />
-                            <h1><asp:Label ID="LblFeatureEditHeading" runat="server" Text=" Label"></asp:Label></h1>
+                            <h1>
+                                <asp:Label ID="LblFeatureEditHeading" runat="server" Text=" Label"></asp:Label></h1>
                             <div class="row">
                                 <div class="col-md-6">
                                     <!--Line Break-->
@@ -324,7 +327,7 @@
                                         <!-- Search -->
                                         <asp:TextBox ID="txtSearchItems" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control"></asp:TextBox>
                                     </p>
-                                    <!--Line Break--> 
+                                    <!--Line Break-->
                                     <br />
                                     <asp:ListBox runat="server" ID="lblFeatuerdItems" CssClass="form-control" Height="500"></asp:ListBox>
                                     <!--Line Break-->
@@ -347,6 +350,121 @@
                             </div>
                             <!-- Line Break -->
                             <br />
+                        </div>
+
+                        <div runat="server" visible="false" id="SK">
+                            <div class="jumbotron bg-dark text-white">
+                                <!--Heading-->
+                                <asp:Label runat="server" ID="lblManageStockSettins"> <h2>Stock Managment</h2> </asp:Label>
+                            </div>
+
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Low Stock Warning:
+                                </div>
+                                <div class="col-md-9">
+                                    <asp:TextBox runat="server" type="number" ID="txtLowStock" CssClass="form-control" Width="100" Text="10" /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Default Purchase Order Qty:
+                                </div>
+                                <div class="col-md-9">
+                                    <asp:TextBox runat="server" type="number" ID="txtPurchaseQty" CssClass="form-control" Width="100" Text="5" /><br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    Auto Purchase Order:
+                                </div>
+                                <div class="col-md-9">
+                                    <asp:CheckBox ID="cbAutoLowStockOnOff" runat="server" Text="On/Off" OnCheckedChanged="cbAutoLowStockOnOff_CheckedChanged" AutoPostBack="true" /><br />
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row" id="AutoLowInfo" runat="server">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-9">
+                                    <p>This Allows the system to automatically make purchase order on your behalf </p>
+                                    <p>from the supplier based on the ‘Low Stock Warning‘.</p>
+                                    <p>The Quantity of the products ordered will be the ‘Default Purchase Order Qty’.</p>
+                                    <p>You can set the frequency and the products that are to be automatically ordered.</p>
+                                </div>
+                            </div>
+                            <div id="divAutoStockOrder" runat="server" visible="false">
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        Frequency:
+                                    </div>
+                                    <div class="col-md-9">
+                                        <asp:DropDownList ID="ddlAutoStockOrderFrequency" runat="server" AutoPostBack="true" CssClass="btn btn-primary">
+                                            <asp:ListItem>As Needed</asp:ListItem>
+                                            <asp:ListItem>Every Week</asp:ListItem>
+                                            <asp:ListItem>Every 2 Week</asp:ListItem>
+                                            <asp:ListItem>Every Month</asp:ListItem>
+                                        </asp:DropDownList><br />
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2">
+                                        Products:
+                                    </div>
+                                    <div class="col-md-9">
+                                        <asp:RadioButtonList ID="rblAutoStockOrderProducts" runat="server" OnSelectedIndexChanged="rblAutoStockOrderProducts_SelectedIndexChanged" AutoPostBack="true">
+                                            <asp:ListItem Selected="True">All</asp:ListItem>
+                                            <asp:ListItem>Custom</asp:ListItem>
+                                        </asp:RadioButtonList>
+                                    </div>
+                                </div>
+                                <div class="row" id="divAutoStockOrderProducts" runat="server" visible="false">
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <!--Line Break-->
+                                                <br />
+                                                <h3 style="text-align: left; float: left;">
+                                                    Products: </h3>
+                                                <p style="text-align: right; float: right;">
+                                                    <!-- Search -->
+                                                    <asp:TextBox ID="TxtSearchProductForAutoLowStock" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control"></asp:TextBox>
+                                                </p>
+                                                <!--Line Break-->
+                                                <br />
+                                                <asp:ListBox runat="server" ID="lblProductsForAutoOrder" CssClass="form-control" Height="300"></asp:ListBox>
+                                            </div>
+                                            <div class="col-md-2 text-center">
+                                                <!--Line Break-->
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <asp:Button ID="btnAddProductToAutoOrder" runat="server" Text="Add" CssClass="btn btn-primary" />
+                                                <!--Line Break-->
+                                                <br />
+                                                <br />
+                                                <asp:Button ID="btnAddRemoveToAutoOrder" runat="server" Text="Remove" CssClass="btn btn-secondary" />
+                                            </div>
+                                            <div class="col-md-5">
+                                                <!--Line Break-->
+                                                <br />
+                                                <br />
+                                                <h3 style="text-align: left; float: left;">
+                                                    Auto Order Products: </h3>
+                                                <asp:ListBox runat="server" ID="lblProductsOnAutoOrder" CssClass="form-control" Height="300"></asp:ListBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

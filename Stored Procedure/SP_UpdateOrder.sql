@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE SP_UpdateOrder
+alter PROCEDURE SP_UpdateOrder
 	@OrderID nchar(10),
 	@DateReceived datetime,
 	@Received bit

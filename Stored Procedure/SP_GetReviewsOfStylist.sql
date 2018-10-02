@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_GetReviewsOfStylist
+alter PROCEDURE SP_GetReviewsOfStylist
 	@stylistID nchar(30)
 AS
 BEGIN

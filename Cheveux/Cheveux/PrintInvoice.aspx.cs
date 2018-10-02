@@ -182,15 +182,15 @@ namespace Cheveux
                     #region header
                     //fill in the item
                     newCell = new TableCell();
-                    newCell.Text = "Qty";
-                    newCell.Font.Bold = true;
-                    tblInvoice.Rows[rowCount].Cells.Add(newCell);
-
-                    newCell = new TableCell();
                     newCell.Text = "Item";
                     newCell.Font.Bold = true;
                     tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
+                    newCell = new TableCell();
+                    newCell.Text = "Qty";
+                    newCell.Font.Bold = true;
+                    tblInvoice.Rows[rowCount].Cells.Add(newCell);
+                    
                     newCell = new TableCell();
                     newCell.Text = "Unit Price";
                     newCell.Font.Bold = true;
@@ -215,12 +215,12 @@ namespace Cheveux
                             tblInvoice.Rows.Add(newRow);
 
                             //fill in the item
-                            newCell = new TableCell();
-                            newCell.Text = item.Qty.ToString();
+                        newCell = new TableCell();
+                        newCell.Text = item.itemName.ToString();
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                         newCell = new TableCell();
-                        newCell.Text = item.itemName.ToString();
+                        newCell.Text = item.Qty.ToString();
                         tblInvoice.Rows[rowCount].Cells.Add(newCell);
 
                         newCell = new TableCell();

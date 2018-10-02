@@ -189,7 +189,7 @@ namespace Cheveux
                     body.AppendLine(@"");
                     body.AppendLine(@"You have successfully registered with Cheveux, Using the Google account: " + User.Email.ToString()+",");
                     body.AppendLine(@"");
-                    body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx.");
+                    body.AppendLine(@"Make Your First Booking Now --> http://sict-iis.nmmu.ac.za/beauxdebut/MakeABooking.aspx");
                     body.AppendLine(@"");
                     body.AppendLine(@"Regards,");
                     body.AppendLine(@"");
@@ -198,8 +198,13 @@ namespace Cheveux
                         "Welcome To Cheveux",
                         body.ToString(),
                         "Accounts Cheveux");
+
+                    HttpCookie cookie = new HttpCookie("CheveuxRememberMe");
+                    cookie.Expires = DateTime.Now.AddDays(-1d);
+                    Response.Cookies.Add(cookie);
+
                     //log the user in by creating a cookie to manage their state
-                    HttpCookie cookie = new HttpCookie("CheveuxUserID");
+                    cookie = new HttpCookie("CheveuxUserID");
                     // Set the user id in it.
                     cookie["ID"] = reg.Split('|')[0];
                     cookie["UT"] = "C";
@@ -377,8 +382,12 @@ namespace Cheveux
                     //if a user is being registered 
                     if (type == "Email")
                     {
+                        HttpCookie cookie = new HttpCookie("CheveuxRememberMe");
+                        cookie.Expires = DateTime.Now.AddDays(-1d);
+                        Response.Cookies.Add(cookie);
+
                         //log the user in by creating a cookie to manage their state
-                        HttpCookie cookie = new HttpCookie("CheveuxUserID");
+                        cookie = new HttpCookie("CheveuxUserID");
                         // Set the user id in it.
                         cookie["ID"] = userID;
                         cookie["UT"] = "C";

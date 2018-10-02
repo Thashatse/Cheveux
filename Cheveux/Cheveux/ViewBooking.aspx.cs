@@ -2592,39 +2592,19 @@ namespace Cheveux
                     //add treatments
                     foreach (SP_GetAllTreatments treat in products.Item2)
                     {
-                        //make sure there is stock
-                        if (treat.Qty > 0
-                            && (compareToSearchTerm(treat.Name) == true
-                            || compareToSearchTerm(treat.ProductDescription) == true
-                            || compareToSearchTerm(treat.Brandname) == true))
+                        if(treat.Name == lbProducts.SelectedItem.Text)
                         {
-                            productIDs.Add(treat.ProductID.ToString());
+                            productIDs.Add(treat.ProductID);
                         }
                     }
 
                     //add accessories
                     foreach (SP_GetAllAccessories Access in products.Item1)
                     {
-                        //make sure there is stock
-                        if (Access.Qty > 0
-                            && (compareToSearchTerm(Access.Name) == true
-                            || compareToSearchTerm(Access.ProductDescription) == true
-                            || compareToSearchTerm(Access.Brandname) == true))
+                        if (Access.Name == lbProducts.SelectedItem.Text)
                         {
-                            productIDs.Add(Access.ProductID.ToString());
+                            productIDs.Add(Access.ProductID);
                         }
-                    }
-
-                    for (int i = 0; i < productIDs.Count; i++)
-                    {
-                        ListBoxArray.Add(productIDs[i]);
-                    }
-
-                    ListBoxArray.Sort();
-                    productIDs.Clear();
-                    foreach (string item in ListBoxArray)
-                    {
-                        productIDs.Add(item);
                     }
                 }
             }
@@ -2660,7 +2640,7 @@ namespace Cheveux
                         //add the selectedproduct to the sale
                         SALES_DTL newItem = new SALES_DTL();
                         newItem.SaleID = BookingID;
-                        newItem.ProductID = productIDs[lbProducts.SelectedIndex];
+                        newItem.ProductID = productIDs[0];
                         newItem.Qty = int.Parse(Qty.SelectedValue);
                         handler.createProductSalesDTLRecord(newItem);
                         btnAddProduct_Click(sender, e);
@@ -2709,6 +2689,7 @@ namespace Cheveux
                     }
                     removeProducts();
                     Qty.SelectedIndex = 0;
+                    btnAddProduct_Click(sender, e);
                 }
                 catch (Exception Err)
                 {
