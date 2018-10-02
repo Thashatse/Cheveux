@@ -16,13 +16,13 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_GetStylistRating
+alter PROCEDURE SP_GetStylistRating
 	@stylistID nchar(30)
 AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT ROUND(AVG(Rating),0) as AverageRating 
-	FROM REVIEW R
+	FROM [CHEVEUX].[dbo].[REVIEW]
 	WHERE EmployeeID=@stylistID
 	AND primaryBookingID IS NULL
 END

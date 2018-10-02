@@ -17,26 +17,34 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         USER restPassAccount;
+        HttpCookie cookie;
         string code = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-                Parallel.Invoke(() => loadPage(), () => function.sendOGBkngNoti());
+                Parallel.Invoke(() => loadPage(sender, e), () => function.sendOGBkngNoti());
         }
 
-        private void loadPage()
+        private void loadPage(object sender, EventArgs e)
         {
             lHeader.Text = "<h2>Get started with<b> Cheveux</b></h2>";
+
+            #region Previous Page
             string PreviousPage = Request.QueryString["PreviousPage"];
             //set the create acount URL
             if (PreviousPage != null)
             {
-                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email&PreviousPage=" + PreviousPage + "'>Create Account</a>";
+                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email&PreviousPage=" + PreviousPage + "'>Create account</a>";
+                lblDiferentAccount.Text = "<a href='../Authentication/Accounts.aspx?Type=All&PreviousPage=" + PreviousPage + "'>Use another account</a>";
             }
             else
             {
-                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create Account</a>";
+                lCreateAccount.Text = "<a href='../Authentication/NewAccount.aspx?Type=Email'>Create account</a>";
+                lblDiferentAccount.Text = "<a href='../Authentication/Accounts.aspx?Type=All'>Use another account</a>";
             }
+            #endregion
+
+            #region Logout/Reset/Change Pass
             //check if the user has requested a logout or login
             String action = Request.QueryString["action"];
             //login
@@ -46,7 +54,7 @@ namespace Cheveux
                 //log the user out on googles servers
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "signOut()", true);
                 //remove the 'reg' cookie
-                HttpCookie cookie = new HttpCookie("reg");
+                cookie = new HttpCookie("reg");
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(cookie);
                 //remove the 'CheveuxUserID' cookie
@@ -80,7 +88,7 @@ namespace Cheveux
                     }
                     catch (Exception err)
                     {
-                        function.logAnError("Bad Pass word reset code: "+ code +". Error: "+err);
+                        function.logAnError("Bad Pass word reset code: " + code + ". Error: " + err);
                         //if the code has expierd
                         //Display the rest email Form
                         lEamailResetError.Text = "The Rest Request Has Expired, Try Again.";
@@ -90,16 +98,16 @@ namespace Cheveux
                         divGetRestCode.Visible = true;
                         divGetEmailToReset.Visible = true;
                     }
-                        if (codeGenerate.AddMinutes(10) >= DateTime.Now)
+                    if (codeGenerate.AddMinutes(10) >= DateTime.Now)
                     {
                         //check if the account exist and the code is valid
                         restPassAccount = handler.GetAccountForRestCode(code);
                         if (restPassAccount != null)
                         {
                             divEmailAcount.Visible = false;
-                        divAccountType.Visible = false;
-                        divResetPasword.Visible = true;
-                        divResetPaswordtxtPass.Visible = true;
+                            divAccountType.Visible = false;
+                            divResetPasword.Visible = true;
+                            divResetPaswordtxtPass.Visible = true;
                             //get the user name and display it in the label
                             lPaswordResetUsernameLable.Text = restPassAccount.UserName.ToString();
                         }
@@ -147,8 +155,30 @@ namespace Cheveux
                     Response.Redirect("Accounts.aspx?PreviousPage=Profile.aspx");
                 }
             }
-                //check if the user has requested to sign in with email
-                string singInType = Request.QueryString["Type"];
+            #endregion
+
+            #region login Type Email
+            //check if the user has requested to sign in with email
+            string singInType = Request.QueryString["Type"];
+
+            #region Remember Me
+                string email = null;
+            if (!Page.IsPostBack && singInType == null)
+            {
+                cookie = Request.Cookies["CheveuxRememberMe"];
+                if (cookie != null)
+                {
+                    email = cookie["EM"].ToString();
+                    singInType = "Email";
+                }
+                else
+                {
+
+                    cbRememberMe.Checked = false;
+                }
+            }
+            #endregion
+
             if (singInType == "Email")
             {
                 //hide sign in with div and show sign in with email
@@ -156,12 +186,22 @@ namespace Cheveux
                 divEmailAcount.Visible = true;
                 //check for any othe alerts
                 string alert = Request.QueryString["Alert"];
-                if (alert != null || alert != "")
+                if (alert != null && alert != "")
                 {
                     lError.Visible = true;
                     lError.Text = alert;
                 }
             }
+        
+            #region Remember Me
+                if (email != null)
+                {
+                    txtEmailUsername.Text = email;
+                    cbRememberMe.Checked = true;
+                    displayPassword(sender, e);
+                }
+            #endregion
+            #endregion
         }
 
         private void goToPreviousPage()
@@ -207,16 +247,7 @@ namespace Cheveux
             }
             else if (PreviousPage == "MakeABooking")
             {
-                Response.Write("<script language='javascript'> { window.close(); }</script>");
-
-                this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Close", "window.close()", true);
-
-                Page.ClientScript.RegisterOnSubmitStatement(typeof(Page), "closePage", "window.onunload = CloseWindow();");
-
-                string jScript = "<script>window.close();</script>";
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "keyClientBlock", jScript);
-
-                Response.Redirect("CloseWindow.aspx");
+               Response.Redirect("CloseWindow.aspx");
             }
             else if (PreviousPage == "NewInternalBooking")
             {
@@ -290,9 +321,13 @@ namespace Cheveux
                 //if the user exists create a session cookie and return them to the previous or home page
                 else if (result == "C" || result == "E")
                 {
-                    //remove the 'reg' cookie
-                    HttpCookie cookie = new HttpCookie("reg");
-                    cookie.Expires = DateTime.Now.AddDays(-1d);
+                cookie = new HttpCookie("CheveuxRememberMe");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+
+                //remove the 'reg' cookie
+                cookie = new HttpCookie("reg");
+                    cookie.Expires = DateTime.Now.AddDays(-1d); 
                     Response.Cookies.Add(cookie);
                     //log the user in by creating a cookie to manage their state
                     cookie = new HttpCookie("CheveuxUserID");
@@ -381,6 +416,7 @@ namespace Cheveux
                     aRestPass.Visible = true;
                     divTxtBoxEmail.Visible = false;
                     LUsername.Text = txtEmailUsername.Text;
+                    lblDiferentAccount.Visible = true;
                 }
                 else
                 {
@@ -421,8 +457,28 @@ namespace Cheveux
                 else if (result[1].ToString().Replace(" ", string.Empty) == "C"
                     || result[1].ToString().Replace(" ", string.Empty) == "E")
                 {
+                    #region Remember Me
+                    if (cbRememberMe.Checked)
+                    {
+                        cookie = new HttpCookie("CheveuxRememberMe");
+                        cookie.Expires = DateTime.Now.AddDays(-1d);
+                        Response.Cookies.Add(cookie);
+
+                        cookie = new HttpCookie("CheveuxRememberMe");
+                        // Set the user id in it.
+                        cookie["EM"] = txtEmailUsername.Text.ToString();
+                        // Add it to the current web response.
+                        Response.Cookies.Add(cookie);
+                    }
+                    else
+                    {
+                        cookie = new HttpCookie("CheveuxRememberMe");
+                        cookie.Expires = DateTime.Now.AddDays(-1d);
+                        Response.Cookies.Add(cookie);
+                    }
+                    #endregion
                     //remove the 'reg' cookie
-                    HttpCookie cookie = new HttpCookie("reg");
+                    cookie = new HttpCookie("reg");
                     cookie.Expires = DateTime.Now.AddDays(-1d);
                     Response.Cookies.Add(cookie);
                     //log the user in by creating a cookie to manage their state
@@ -432,7 +488,7 @@ namespace Cheveux
                     cookie["UT"] = result[1].ToString().Replace(" ", string.Empty);
                     // Add it to the current web response.
                     Response.Cookies.Add(cookie);
-
+                    
                     //access control
                     //send the user to the correct page based on their usertype
                     if (result[1].Replace(" ", string.Empty) == "C")

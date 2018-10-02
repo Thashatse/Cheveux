@@ -16,12 +16,12 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_GetAllStylistReviews
+alter PROCEDURE SP_GetAllStylistReviews
 AS
 BEGIN
 	SET NOCOUNT ON;
 	SELECT ReviewID,CustomerID,EmployeeID,primaryBookingID,[Date],[Time],Rating,Comment
-	FROM REVIEW
+	FROM [CHEVEUX].[dbo].[REVIEW]
 	WHERE primaryBookingID is null
 END
 GO

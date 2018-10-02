@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head runat="server">
     <title>Sign In - Cheveux</title>
 
@@ -27,13 +28,8 @@
     <!--Google Authentecation code-->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="668357274065-dcicj2ak0lgus05beethuibpbcbt11g3.apps.googleusercontent.com" />
-
-    <script>
-        function CloseWindow() {
-            window.close();
-        }
-    </script>
 </head>
+
 <body>
     <div>
         <!-- Top Margin -->
@@ -41,6 +37,7 @@
         <br />
         <br />
     </div>
+
     <!--form for login in-->
     <form id="Login" runat="server">
         <div class="container-fluid">
@@ -112,6 +109,14 @@
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidatorTxtPassword" runat="server"
                                         ErrorMessage="*Password is required" ControlToValidate="txtPassword"
                                         ForeColor="Red"></asp:RequiredFieldValidator>
+
+                                    <!-- Line Break -->
+                                    <br />
+
+                                    <asp:CheckBox ID="cbRememberMe" runat="server" Text=" Remember me" Checked="true"/>
+
+                                    <!-- Line Break -->
+                                    <br />
                                 </div>
 
                                 <!-- email account Type login next btn -->
@@ -128,10 +133,14 @@
 
                                 <!--line break-->
                                 <br />
+                                <!--Use a different account -->
+                                <asp:Label ID="lblDiferentAccount" runat="server" Visible="false"></asp:Label>
+                                <!--line break-->
+                                <br />
+                                <br />
                                 <!--rest Button -->
                                 <a href="Accounts.aspx?action=Reset" runat="server" id="aRestPass" visible="false">Forgot Password?</a>
                                 <!--line break-->
-                                <br />
                                 <br />
                                 <!--Sign Up Button -->
                                 <asp:Label ID="lCreateAccount" runat="server"></asp:Label>
@@ -245,6 +254,7 @@
         <!--Sign out button-->
         <a href="" onclick="signOut();" hidden="true" id="SO">Sign out</a>
         <asp:Button runat="server" ID="btnAuthenticate" Style="display: none;" OnClick="btnAuthenticate_Click" />
+        <asp:Literal ID="Literal1" runat="server"></asp:Literal>
     </form>
     <!--google get user data function-->
     <script> 
@@ -265,6 +275,7 @@
             });
         }
     </script>
+    
     <!-- Bootstrap core JavaScript -->
     <script src="../Theam/vendor/jquery/jquery.min.js"></script>
     <script src="../Theam/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

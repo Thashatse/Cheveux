@@ -4,7 +4,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE SP_UpdateQtyOnHand
+alter PROCEDURE SP_UpdateQtyOnHand
 	@ProductID nchar(10),
 	@Qty int
 AS
