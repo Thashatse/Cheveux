@@ -75,8 +75,8 @@
                         </div>
                     </div>
 
+                    <!--for general errors or telling user what must happen next-->
                     <div class="row">
-                        <!--for general errors or telling user what must happen next-->
                         <div class="col-sm-12 col-md-12 alert alert-success alert-dismissible" id="sucNoti" visible="false" runat="server">
                             <asp:Label ID="lblSucNoti" runat="server" Text=" "></asp:Label>
                             <a href="#" class="close" data-dismiss="alert" aria-label="close" runat="server">&times;</a>
@@ -103,6 +103,36 @@
                                     <asp:ListItem Text="All Reviews" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="My Reviews" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
+                            </div>
+                        </div>
+
+                        <!--Stylist Reviews-->
+                        <div class="row">
+                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                <asp:Label runat="server" ID="lblStylistReviewsHeader" style="text-decoration: underline;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <asp:Panel ID="stylistPanel" runat="server">
+                                </asp:Panel>
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <br />
+
+                        <!--Booking Reviews-->
+                        <div class="row">
+                            <div class="col-sm-12 col-md-8 col-lg-8">
+                                <asp:Label runat="server" ID="lblBookingReviewsHeader" style="text-decoration: underline;"></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <asp:Panel ID="bookingsPanel" runat="server">
+                                </asp:Panel>
                             </div>
                         </div>
 
@@ -251,11 +281,6 @@
                         <br />
 
                     </asp:PlaceHolder>
-
-
-
-
-
 
                 </asp:PlaceHolder>
             </div>

@@ -2673,7 +2673,11 @@ namespace DAL
                                 Date = Convert.ToDateTime(row["Date"].ToString()),
                                 Time = Convert.ToDateTime(row["Time"].ToString()),
                                 Rating = Convert.ToInt32(row["Rating"].ToString()),
-                                Comment = row["Comment"].ToString()
+                                Comment = row["Comment"].ToString(),
+                                StylistImage = row["StylistImage"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                CustomerImage = row["CustomerImage"].ToString(),
+                                CustomerName = row["CustomerName"].ToString()
                             };
                             list.Add(emp);
                         }
@@ -2706,7 +2710,11 @@ namespace DAL
                                 Date = Convert.ToDateTime(row["Date"].ToString()),
                                 Time = Convert.ToDateTime(row["Time"].ToString()),
                                 Rating = Convert.ToInt32(row["Rating"].ToString()),
-                                Comment = row["Comment"].ToString()
+                                Comment = row["Comment"].ToString(),
+                                StylistImage = row["StylistImage"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                CustomerImage = row["CustomerImage"].ToString(),
+                                CustomerName = row["CustomerName"].ToString()
                             };
                             list.Add(emp);
                         }
@@ -2743,7 +2751,11 @@ namespace DAL
                                 Date = Convert.ToDateTime(row["Date"].ToString()),
                                 Time = Convert.ToDateTime(row["Time"].ToString()),
                                 Rating = Convert.ToInt32(row["Rating"].ToString()),
-                                Comment = row["Comment"].ToString()
+                                Comment = row["Comment"].ToString(),
+                                StylistImage = row["StylistImage"].ToString(),
+                                StylistName = row["StylistName"].ToString(),
+                                CustomerImage = row["CustomerImage"].ToString(),
+                                CustomerName = row["CustomerName"].ToString()
                             };
                             list.Add(emp);
                         }
@@ -2781,7 +2793,9 @@ namespace DAL
                                 Date = Convert.ToDateTime(row["Date"].ToString()),
                                 Time = Convert.ToDateTime(row["Time"].ToString()),
                                 Rating = Convert.ToInt32(row["Rating"].ToString()),
-                                Comment = row["Comment"].ToString()
+                                Comment = row["Comment"].ToString(),
+                                CustomerImage = row["CustomerImage"].ToString(),
+                                CustomerName = row["CustomerName"].ToString()
                             };
                             list.Add(emp);
                         }

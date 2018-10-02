@@ -14,7 +14,11 @@ namespace TypeLibrary.ViewModels
         public string PrimaryBookingID { get; set; }
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
-        public double Rating { get; set; }
+        public int Rating { get; set; }
         public string Comment { get; set; }
+        public string StylistImage { get; set; }
+        public string StylistName { get; set; }
+        public string CustomerImage { get; set; }
+        public string CustomerName { get; set; }
     }
 }

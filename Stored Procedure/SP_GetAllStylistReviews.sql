@@ -20,8 +20,26 @@ CREATE PROCEDURE SP_GetAllStylistReviews
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT ReviewID,CustomerID,EmployeeID,primaryBookingID,[Date],[Time],Rating,Comment
-	FROM REVIEW
-	WHERE primaryBookingID is null
+	SELECT r.ReviewID,r.CustomerID,r.EmployeeID,r.primaryBookingID,r.[Date],r.[Time],r.Rating,r.Comment,
+
+		   (select UserImage
+		   from [USER] stylist
+		   where stylist.UserID=r.EmployeeID)as[StylistImage],
+
+		   (select (stylist.FirstName+' '+stylist.LastName) as sName
+		   from [USER] stylist
+		   where stylist.UserID=r.EmployeeID)as[StylistName],
+
+		   (select UserImage
+		   from [USER] customer
+		   where customer.UserID=r.CustomerID and customer.UserID=r.CustomerID)as[CustomerImage],
+
+		   (select (customer.FirstName+' '+customer.LastName) as cName
+		   from [USER] customer
+		   where customer.UserID=r.CustomerID and customer.UserID=r.CustomerID)as[CustomerName]
+
+
+	FROM REVIEW r
+	WHERE r.primaryBookingID is null
 END
 GO
