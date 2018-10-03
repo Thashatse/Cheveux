@@ -220,6 +220,16 @@ namespace Cheveux.Manager
             //load new order page
             loadSupplierProducts();
 
+            try
+            {
+                int deafultQTY = handler.getStockSettings().PurchaseQty;
+                Qty.SelectedValue = deafultQTY.ToString();
+            }
+            catch
+            {
+
+            }
+
             NewOrder.Visible = true;
         }
 
@@ -828,7 +838,7 @@ namespace Cheveux.Manager
         List<string> productIDs = new List<string>();
         List<string> productsList = new List<string>();
         
-        public void loadSupplierProducts() /** For Lachea **/
+        public void loadSupplierProducts()
         {
             try
             {
@@ -864,6 +874,9 @@ namespace Cheveux.Manager
                 char productType = ddlOrdersProductType.SelectedValue.ToString()[0];
                 lbProducts.Items.Clear();
 
+                int lowStock = handler.getStockSettings().LowStock;
+                int defaultQty = handler.getStockSettings().PurchaseQty;
+
                 foreach (SP_GetAllAccessories Access in products.Item1)
                 {
                     //if the product maches the selected type
@@ -877,7 +890,7 @@ namespace Cheveux.Manager
                         compareToSearchTerm(Access.Colour, true) == true) &&
                         Access.ProductType[0] != 'S'/** For Lachea **/)
                     {
-                        if(Access.Qty < 10 && Access.Qty > 0)
+                        if (Access.Qty < lowStock  && Access.Qty > 0)
                         {
                             lbProducts.Items.Add("(Low Stock) " + Access.Name);
                         }
@@ -892,7 +905,7 @@ namespace Cheveux.Manager
 
                         if (productID == Access.ProductID)
                         {
-                            lProductsOnOrder.Items.Add("10* " + Access.Name);
+                            lProductsOnOrder.Items.Add(defaultQty+"* " + Access.Name);
                         }
                     }
                 }
@@ -910,7 +923,7 @@ namespace Cheveux.Manager
                         compareToSearchTerm(treat.brandType, true) == true) &&
                         treat.ProductType[0] != 'S'/** For Lachea **/)
                     {
-                        if (treat.Qty < 10 && treat.Qty > 0)
+                        if (treat.Qty < lowStock && treat.Qty > 0)
                         {
                             lbProducts.Items.Add("(Low Stock) " + treat.Name);
                         }
@@ -925,7 +938,7 @@ namespace Cheveux.Manager
 
                         if (productID == treat.ProductID)
                         {
-                            lProductsOnOrder.Items.Add("10* " + treat.Name);
+                            lProductsOnOrder.Items.Add(defaultQty+"* " + treat.Name);
                         }
                     }
                 }
@@ -1207,7 +1220,9 @@ namespace Cheveux.Manager
 
                     //increment rowcounter
                     count++;
-                    
+
+                    int lowStock = handler.getStockSettings().LowStock;
+
                     //display accessories
                     foreach (SP_GetAllAccessories Access in products.Item1)
                     {
@@ -1254,7 +1269,7 @@ namespace Cheveux.Manager
                             {
                                 newCell.Text = "&#10071;";
                             }
-                            else if (Access.Qty < 10 && Access.Qty > 0)
+                            else if (Access.Qty < lowStock && Access.Qty > 0)
                             {
                                 newCell.Text = "&#9888;";
                             }
@@ -1282,7 +1297,7 @@ namespace Cheveux.Manager
                                 tblProductTable.Rows[count].Cells.Add(newCell);
 
                                 #region Stock
-                                if (Access.Qty < 10)
+                                if (Access.Qty < lowStock)
                                 {
                                     newCell = new TableCell();
                                     //new stock oder
@@ -1354,7 +1369,7 @@ namespace Cheveux.Manager
                             {
                                 newCell.Text = "&#10071;";
                             }
-                            else if (treat.Qty < 10 && treat.Qty > 0)
+                            else if (treat.Qty < lowStock && treat.Qty > 0)
                             {
                                 newCell.Text = "&#9888;";
                             }
@@ -1381,7 +1396,7 @@ namespace Cheveux.Manager
 
                                 #region orders
                                 
-                                if (treat.Qty < 10)
+                                if (treat.Qty < lowStock)
                                 {
                                     newCell = new TableCell();
                                     string cellText = "";

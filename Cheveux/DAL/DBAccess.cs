@@ -1858,6 +1858,63 @@ namespace DAL
         }
         #endregion
 
+        #region Auto Product Orders
+
+        #endregion
+
+        #region Stock Managment Settings
+        public Stock_Management getStockSettings()
+        {
+            Stock_Management StockSettings = null;
+
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetStockManagementSettings", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        StockSettings = new Stock_Management
+                        {
+                            BusinessID = row["BusinessID"].ToString(),
+                            LowStock = int.Parse(row["LowStock"].ToString()),
+                            PurchaseQty = int.Parse(row["PurchaseQty"].ToString()),
+                            AutoPurchase = Convert.ToBoolean(row["AutoPurchase"].ToString()),
+                            AutoPurchaseFrequency = row["AutoPurchaseFrequency"].ToString(),
+                            AutoPurchaseProducts = Convert.ToBoolean(row["AutoPurchaseProducts"].ToString())
+                        };
+                    }
+                    return StockSettings;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool updateStockSettings(Stock_Management Update)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@BusinessID", Update.BusinessID),
+                    new SqlParameter("@LowStock", Update.LowStock),
+                    new SqlParameter("@PurchaseQty", Update.PurchaseQty),
+                    new SqlParameter("@AutoPurchase", Update.AutoPurchase),
+                    new SqlParameter("@AutoPurchaseFrequency", Update.AutoPurchaseFrequency),
+                    new SqlParameter("@AutoPurchaseProducts", Update.AutoPurchaseProducts),
+                };
+                return DBHelper.NonQuery("SP_UpdateStockManagementSettings", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        #endregion
+
         #region Manager Dash Board
         public ManagerStats GetManagerStats()
         {

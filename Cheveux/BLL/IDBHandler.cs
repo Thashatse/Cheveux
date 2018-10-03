@@ -82,6 +82,16 @@ namespace BLL
         Order CheckForOrder(string id);
         #endregion
 
+        #region Auto Product Orders
+
+        #endregion
+
+        #region Stock Managment Settings
+        Stock_Management getStockSettings();
+
+        bool updateStockSettings(Stock_Management Update);
+        #endregion
+
         #region Services
         bool BLL_AddService(PRODUCT p, SERVICE s);
         List<SP_GetWidth> BLL_GetWidths();

@@ -183,6 +183,22 @@ namespace BLL
         }
         #endregion
 
+        #region Auto Product Orders
+
+        #endregion
+
+        #region Stock Managment Settings
+        public Stock_Management getStockSettings()
+        {
+            return db.getStockSettings();
+        }
+
+        public bool updateStockSettings(Stock_Management Update)
+        {
+            return db.updateStockSettings(Update);
+        }
+        #endregion
+
         #region Bookings
         public List<SP_GetBookingServices> getBookingServices(string bookingID)
         {

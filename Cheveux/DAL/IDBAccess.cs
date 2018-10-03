@@ -122,6 +122,16 @@ namespace DAL
         Order CheckForOrder(string id);
         #endregion
 
+        #region Auto Product Orders
+
+        #endregion
+
+        #region Stock Managment Settings
+        Stock_Management getStockSettings();
+
+        bool updateStockSettings(Stock_Management Update);
+        #endregion
+
         #region Services
         bool AddService(PRODUCT p, SERVICE s);
         bool AddBraidService(BRAID_SERVICE bs);
