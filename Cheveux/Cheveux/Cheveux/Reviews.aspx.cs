@@ -20,10 +20,11 @@ namespace Cheveux
         List<SP_GetBookingServices> bServices = null;
         List<SP_ReturnStylistNamesForReview> empNames = null;
         List<SP_GetReviews> r = null;
-        REVIEW review = null;
+        List<SP_AboutStylist> abS = null;
         SP_ViewEmployee viewEmp = null;
         SP_GetEmployee_S_ s = null;
         SP_GetCustomerBooking dtl = null;
+        REVIEW review = null;
         REVIEW customerStylistReview = null;
         REVIEW customerBookingReview = null;
 
@@ -102,6 +103,10 @@ namespace Cheveux
                     btnRev.Visible = true;
                     readReviews.Visible = true;
                     makeAreview.Visible = false;
+                    if (drpReadType.SelectedValue == "0")
+                    {
+                        loadAllStylistReviews();
+                    }
                 }
             }
             else if (cookie["UT"] == "C")
@@ -116,6 +121,11 @@ namespace Cheveux
                     readReviews.Visible = true;
                     makeAreview.Visible = false;
                     btnRead.Visible = false;
+
+                    if(drpReadType.SelectedValue == "0")
+                    {
+                        loadAllStylistReviews();
+                    }
                 }
                 else if (action == "MakeAreview")
                 {
@@ -171,16 +181,6 @@ namespace Cheveux
                     btnRev.Visible = false;
                     makeAreview.Visible = false;
                 }
-            }
-        }
-
-        public void login()
-        {
-            cookie = Request.Cookies["CheveuxUserID"];
-            if (cookie == null)
-            {
-                phLogin.Visible = true;
-                phMain.Visible = false;
             }
         }
         public Tuple<string,string> getBookingDateTime(string bookingID)
@@ -928,19 +928,169 @@ namespace Cheveux
                 function.logAnError("Load Stylist Reviews method error. Error: " + err.ToString());
             }
         }
-        public void reviewsForSpecificStylist(string stylistID)
+        public void loadAllStylistReviews()
         {
-            //load a specific stylists reviews and their average rating 
+            int totStylistReviews = 0;
+            try
+            {
+                abS = handler.aboutStylist();
+
+                foreach(SP_AboutStylist stylist in abS)
+                {
+
+                    Table tblForStylist = new Table();
+
+                    TableRow newRow = new TableRow();
+                    tblForStylist.Rows.Add(newRow);
+
+                    TableCell newCell = new TableCell();
+
+                    PlaceHolder ph = new PlaceHolder();
+
+                    ph.Controls.Add(new LiteralControl(
+                                "<img src='" + stylist.UserImage +
+                                "' alt='Stylist Image' width='200' height='160'/><br/>"
+                                + stylist.StylistName + "<br/>"));
+                    newCell.Controls.Add(ph);
+
+                    ph = new PlaceHolder();
+                    ph.Controls.Add(new LiteralControl("Average Rating<br/>"));
+                    newCell.Controls.Add(ph);
+
+                    ph = new PlaceHolder();
+                    try
+                    {
+                        review = handler.getStylistRating(stylist.EmployeeID.ToString());
+
+                        AjaxControlToolkit.Rating theStars = new AjaxControlToolkit.Rating();
+                        theStars.CurrentRating = review.Rating;
+                        theStars.ID = "rt" + stylist.EmployeeID.ToString();
+                        theStars.StarCssClass = "starRating";
+                        theStars.WaitingStarCssClass = "waitingStar";
+                        theStars.FilledStarCssClass = "filledStar";
+                        theStars.EmptyStarCssClass = "emptyStar";
+                        theStars.CssClass = "img-fluid";
+                        theStars.ReadOnly = true;
+
+                        ph.Controls.Add(theStars);
+
+                    }
+                    catch(Exception err)
+                    {
+                        ph.Controls.Add(new LiteralControl("-"));
+                        function.logAnError("Error getting stylist rating. Error:"+err.ToString());
+                    }
+                    newCell.Controls.Add(ph);
+
+                    ph = new PlaceHolder();
+                    ph.Controls.Add(new LiteralControl("<a class='btn btn-primary' "+
+                                        "style='text-decoration:none !important;'"+
+                                        "href='../Cheveux/Reviews.aspx?Action=MakeAreview'"+
+                                        ">Review</a>"));
+                    newCell.Controls.Add(ph);
+
+                    newCell.Font.Bold = true;
+                    tblForStylist.Rows[0].Cells.Add(newCell);
+
+                    newCell = new TableCell();
+
+                    ph = new PlaceHolder();
+                    Panel newPanel = new Panel();
+                    newPanel.ScrollBars = ScrollBars.Vertical;
+                    newPanel.Height = 400;
+                    newPanel.Width = 600;
+                    newPanel.BorderColor = System.Drawing.Color.DarkGray;
+                    newPanel.BorderStyle = BorderStyle.Solid;
+
+                    PlaceHolder innerPh = new PlaceHolder();
+                    Label lblrev = new Label();
+                    lblrev.Text = "Reviews";
+                    lblrev.Font.Bold = true;
+                    lblrev.Attributes.Add("style", "text-decoration:underline;");
+                    innerPh.Controls.Add(lblrev);
+                    newPanel.Controls.Add(innerPh);
+
+                    innerPh = new PlaceHolder();
+                    Table innerTable = new Table();
+                    innerTable.CssClass = "table table-bordered";
+                    try
+                    {
+                        int counter = 0;
+                        r = handler.getReviewsOfStylist(stylist.EmployeeID.ToString());
+                        foreach(SP_GetReviews stylistReviews in r)
+                        {
+                            
+                            TableRow innerRow = new TableRow();
+                            innerTable.Rows.Add(innerRow);
+                            
+                            
+                            TableCell innerCell = new TableCell();
+                            PlaceHolder innerPhForTableCells = new PlaceHolder();
+                            innerPhForTableCells.Controls.Add(new LiteralControl(
+                                                   stylistReviews.CustomerName));
+                            innerCell.Controls.Add(innerPhForTableCells);
+
+                            innerPhForTableCells = new PlaceHolder();
+                            AjaxControlToolkit.Rating theStars = new AjaxControlToolkit.Rating();
+                            theStars.CurrentRating = stylistReviews.Rating;
+                            theStars.ID = "rt" + stylistReviews.ReviewID.ToString();
+                            theStars.StarCssClass = "starRating";
+                            theStars.WaitingStarCssClass = "waitingStar";
+                            theStars.FilledStarCssClass = "filledStar";
+                            theStars.EmptyStarCssClass = "emptyStar";
+                            theStars.ReadOnly = true;
+                            innerPhForTableCells.Controls.Add(theStars);
+                            innerCell.Controls.Add(innerPhForTableCells);
+
+                            innerPhForTableCells = new PlaceHolder();
+                            innerPhForTableCells.Controls.Add(new LiteralControl(
+                                                stylistReviews.Comment));
+                            innerCell.Controls.Add(innerPhForTableCells);
+
+                            innerTable.Rows[counter].Cells.Add(innerCell);
+
+                            counter++;
+                            totStylistReviews++;
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        TableRow innerRow = new TableRow();
+                        innerTable.Rows.Add(innerRow);
+
+                        TableCell innerCell = new TableCell();
+                        innerCell.Text = "Reviews unavailable.Please try again later.";
+
+                        innerTable.Rows[0].Cells.Add(innerCell);
+
+                        function.logAnError("GetReviewsOfStylist method error. Error:" + err.ToString());
+                    }
+                    innerPh.Controls.Add(innerTable);
+                    newPanel.Controls.Add(innerPh);
+
+
+                    ph.Controls.Add(newPanel);
+                    newCell.Controls.Add(ph);
+
+                    tblForStylist.Rows[0].Cells.Add(newCell);
+                    stylistPanel.Controls.Add(tblForStylist);
+                    lblStylistReviewsHeader.Text = "Total number of stylist reviews ("+totStylistReviews+")";
+                }
+            }
+            catch(Exception err)
+            {
+                Table erTbl = new Table();
+                TableRow erRow = new TableRow();
+                erTbl.Rows.Add(erRow);
+                TableCell erCell = new TableCell();
+                erCell.Text = "<img src='https://cdn1.iconfinder.com/data/icons/user-thinline-icons-set/144/User003_Error-512.png' alt='Error' width='100' height='100'></img>"
+                    +
+                    "<br/>Stylist Reviews are currently unavailable.Please try again later.";
+                erTbl.Rows[0].Cells.Add(erCell);
+                function.logAnError("error loading stylist reviews. Error: "+err.ToString());
+            }
         }
-        public void loadStylistReviews()
-        {
-            //show all stylists and their reviews 
-        }
-        public void loadBookingReviews()
-        {
-            //show all reviews of bookings made by customers 
-            //service specific 
-        }
+
         #endregion
 
         #endregion
@@ -949,11 +1099,22 @@ namespace Cheveux
         protected void drpReadType_SelectedIndexChanged(object sender, EventArgs e)
         {
             cookie = Request.Cookies["CheveuxUserID"];
-            if (drpReadType.SelectedValue == "1")//view my reviews
+            if (drpReadType.SelectedValue == "0")
             {
-                login();
-
-                loadMyReviews(cookie["ID"].ToString());
+                loadAllStylistReviews();
+            }
+            else if (drpReadType.SelectedValue == "1")//view my reviews
+            {
+                if (cookie == null)
+                {
+                    phLogin.Visible = true;
+                    phMain.Visible = false;
+                }
+                else if (cookie["UT"] == "C")
+                {
+                    loadMyReviews(cookie["ID"].ToString());
+                }
+                
             }
         }
 
