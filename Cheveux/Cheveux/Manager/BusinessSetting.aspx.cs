@@ -378,7 +378,10 @@ namespace Cheveux
             hideALL();
 
             txtSearchItems.Text = "";
-            loadProductListBoxs(sender, e, 0);
+            if (!Page.IsPostBack)
+            {
+                loadProductListBoxs(sender, e, 0);
+            }
             loadStockManagement(sender, e);
 
             SK.Visible = true;
@@ -444,7 +447,8 @@ namespace Cheveux
             btnSave.Visible = true;
         }
         #endregion
-
+        
+        #region Product ListBoxes
         protected void loadProductListBoxs(object sender, EventArgs e, int featureIndex)
         {
             //add Products to the list
@@ -543,6 +547,76 @@ namespace Cheveux
                 btnViewFeaturedItems_Click(sender, e);
             }
         }
+
+        List<string> productIDs = new List<string>();
+
+        protected void loadproductIDs()
+        {
+            productIDs.Clear();
+            productIDs.Add("");
+            productIDs.Add("");
+            productIDs.Add("");
+
+            //load the product ids
+            products = handler.getAllProductsAndDetails();
+            if (products.Item1.Count != 0 && products.Item2.Count != 0)
+            {
+                //add treatments
+                foreach (SP_GetAllTreatments treat in products.Item2)
+                {
+                    if (treat.Name == lblFeatuerdItems.SelectedItem.Text)
+                    {
+                        productIDs[0] = treat.ProductID.ToString();
+                    }
+
+                    if(lblProductsForAutoOrder.SelectedIndex != -1)
+                    {
+                        if (treat.Name == lblProductsForAutoOrder.SelectedItem.Text)
+                        {
+                            productIDs[1] = treat.ProductID.ToString();
+                        }
+                    }
+
+                    if (lblProductsOnAutoOrder.SelectedIndex != -1)
+                    {
+                        string[] array = lblProductsOnAutoOrder.SelectedItem.Text.Split('*');
+                        array[1] = array[1].Substring(1);
+                        if (treat.Name == array[1])
+                        {
+                            productIDs[2] = treat.ProductID.ToString();
+                        }
+                    }
+                }
+
+                //add accessories
+                foreach (SP_GetAllAccessories Access in products.Item1)
+                {
+                    if (Access.Name == lblFeatuerdItems.SelectedItem.Text)
+                    {
+                        productIDs[0] = Access.ProductID.ToString();
+                    }
+
+                    if (lblProductsForAutoOrder.SelectedIndex != -1)
+                    {
+                        if (Access.Name == lblProductsForAutoOrder.SelectedItem.Text)
+                        {
+                            productIDs[1] = Access.ProductID.ToString();
+                        }
+                    }
+
+                    if (lblProductsOnAutoOrder.SelectedIndex != -1)
+                    {
+                        string[] array = lblProductsOnAutoOrder.SelectedItem.Text.Split('*');
+                        array[1] = array[1].Substring(1);
+                        if (Access.Name == array[1])
+                        {
+                            productIDs[2] = Access.ProductID.ToString();
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
 
         #region Featured Items
         int selectedIndex = 0;
@@ -661,35 +735,6 @@ namespace Cheveux
 
         #region Product
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
-        List<string> productIDs = new List<string>();
-
-        protected void loadproductIDs()
-        {
-                productIDs.Clear();
-
-                //load the product ids
-                products = handler.getAllProductsAndDetails();
-                if (products.Item1.Count != 0 && products.Item2.Count != 0)
-                {
-                    //add treatments
-                    foreach (SP_GetAllTreatments treat in products.Item2)
-                    {
-                        if (treat.Name == lblFeatuerdItems.SelectedItem.Text)
-                        {
-                            productIDs.Add(treat.ProductID.ToString());
-                        }
-                    }
-
-                    //add accessories
-                    foreach (SP_GetAllAccessories Access in products.Item1)
-                    {
-                            if(Access.Name == lblFeatuerdItems.SelectedItem.Text)
-                        {
-                            productIDs.Add(Access.ProductID.ToString());
-                        }
-                    }
-            }
-        }
         #endregion
 
         List<SP_ViewEmployee> employees = null;
@@ -1382,6 +1427,8 @@ namespace Cheveux
 
         #region Stock Managment Settings
         Stock_Management stockSettings = null;
+        Auto_Purchase_Products AutoPurchProd = null;
+        List<SP_GetAuto_Purchase_Products> AutoPurchProds = null;
 
         public void loadStockManagement(object sender, EventArgs e)
         {
@@ -1392,6 +1439,8 @@ namespace Cheveux
                     stockSettings = handler.getStockSettings();
                     txtLowStock.Text = stockSettings.LowStock.ToString();
                     txtPurchaseQty.Text = stockSettings.PurchaseQty.ToString();
+                    ddlQty.SelectedValue = stockSettings.PurchaseQty.ToString();
+                    lblNextAutoOrderDate.Text = stockSettings.NxtOrderdDate.ToString("dd MMM yyyy");
                     if (stockSettings.AutoPurchase == true)
                     {
                         cbAutoLowStockOnOff.Checked = true;
@@ -1425,6 +1474,12 @@ namespace Cheveux
                     Response.Write("<script>alert('An error occoured loading settings, Please try again later.');location.reload(true);</script>");
                     btnViewFeaturedItems_Click(sender, e);
                 }
+
+                if (stockSettings.NxtOrderdDate < DateTime.Now)
+                {
+                    updateAutoOrderDate();
+                    updateStockManagement(sender, e);
+                }
             }
         }
         
@@ -1456,6 +1511,7 @@ namespace Cheveux
                 {
                     stockSettings.AutoPurchaseProducts = false;
                 }
+                updateAutoOrderDate();
                 handler.updateStockSettings(stockSettings);
             }
             catch (Exception Err)
@@ -1471,7 +1527,124 @@ namespace Cheveux
         
         public void loadAutoPurchaseProducts()
         {
+            lblProductsOnAutoOrder.Items.Clear();
+                try
+                {
+                //load a list of products
+                AutoPurchProds = handler.getAutoPurchOrdProds();
+                if (AutoPurchProds.Count != 0)
+                {
+                    foreach (SP_GetAuto_Purchase_Products Prod in AutoPurchProds)
+                    {
+                        lblProductsOnAutoOrder.Items.Add(Prod.Qty + "* " + Prod.Name);
+                        for (int i = 0; i < lblProductsForAutoOrder.Items.Count; i++)
+                        {
+                            if (lblProductsForAutoOrder.Items[i].Text == Prod.Name)
+                            {
+                                lblProductsForAutoOrder.Items.Remove(lblProductsForAutoOrder.Items[i]);
+                            }
+                        }
+                    }
+                }
+                    else
+                    {
+                        Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured loading products, Please try again later.");
+                }
+                }
+                catch (Exception Err)
+                {
+                    function.logAnError(Err.ToString()
+                        + " An error occurred retrieving list of products on auto order"
+                        + " in loadAutoPurchaseProducts method on Settings");
+                    Response.Write("<script>alert('An error occoured loading products, Please try again later.');location.reload(true);</script>");
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured loading products, Please try again later.");
+            }
+        }
 
+        protected void btnAddProductToAutoOrder_Click(object sender, EventArgs e)
+        {
+            bool success = false;
+
+            try
+            {
+                loadproductIDs();
+                if (productIDs[1] != "")
+                {
+                    AutoPurchProd = new Auto_Purchase_Products();
+                    AutoPurchProd.ProductID = productIDs[1];
+                    AutoPurchProd.Qty = int.Parse(ddlQty.SelectedValue.ToString());
+                    success = handler.newAutoPurchProd(AutoPurchProd);
+                }
+            }
+            catch (Exception Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred adding product to auto order"
+                    + " in btnAddProductToAutoOrder_Click method on Settings");
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured adding the product, Please try again later.");
+            }
+
+            if (success == true)
+            {
+                Response.Redirect("BusinessSetting.aspx?View=SK");
+            }
+            else
+            {
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured adding the product, Please try again later.");
+            }
+        }
+
+        protected void btnAddRemoveToAutoOrder_Click(object sender, EventArgs e)
+        {
+            bool success = false;
+
+            try
+            {
+                loadproductIDs();
+                if (productIDs[2] != "")
+                {
+                    AutoPurchProd = new Auto_Purchase_Products();
+                    AutoPurchProd.ProductID = productIDs[2];
+                    success = handler.deleteAutoPurchProd(AutoPurchProd);
+                }
+            }
+            catch (Exception Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred removing product from auto order"
+                    + " in btnAddRemoveToAutoOrder_Click method on Settings");
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured removing the product, Please try again later.");
+            }
+
+            if (success == true)
+            {
+                Response.Redirect("BusinessSetting.aspx?View=SK");
+            }
+            else
+            {
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured removing the product, Please try again later.");
+            }
+        }
+
+        private void updateAutoOrderDate()
+        {
+            if(ddlAutoStockOrderFrequency.SelectedValue == "Asn")
+            {
+                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(1);
+            }
+            else if (ddlAutoStockOrderFrequency.SelectedValue == "Ewe")
+            {
+                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(7);
+            }
+            else if (ddlAutoStockOrderFrequency.SelectedValue == "E2w")
+            {
+                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(14);
+            }
+            else if (ddlAutoStockOrderFrequency.SelectedValue == "Emo")
+            {
+                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(28);
+            }
         }
         #endregion
     }

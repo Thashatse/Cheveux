@@ -83,7 +83,9 @@ namespace BLL
         #endregion
 
         #region Auto Product Orders
-
+        List<SP_GetAuto_Purchase_Products> getAutoPurchOrdProds();
+        bool newAutoPurchProd(Auto_Purchase_Products newProduct);
+        bool deleteAutoPurchProd(Auto_Purchase_Products product);
         #endregion
 
         #region Stock Managment Settings

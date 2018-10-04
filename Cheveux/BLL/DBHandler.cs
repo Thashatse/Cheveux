@@ -184,7 +184,20 @@ namespace BLL
         #endregion
 
         #region Auto Product Orders
+        public List<SP_GetAuto_Purchase_Products> getAutoPurchOrdProds()
+        {
+            return db.getAutoPurchOrdProds();
+        }
 
+        public bool newAutoPurchProd(Auto_Purchase_Products newProduct)
+        {
+            return db.newAutoPurchProd(newProduct);
+        }
+
+        public bool deleteAutoPurchProd(Auto_Purchase_Products product)
+        {
+            return db.deleteAutoPurchProd(product);
+        }
         #endregion
 
         #region Stock Managment Settings

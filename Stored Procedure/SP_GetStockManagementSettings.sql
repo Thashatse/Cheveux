@@ -14,6 +14,7 @@ BEGIN
       ,[AutoPurchaseFrequency]
       ,[AutoPurchaseProducts]
       ,[BusinessID]
+	  ,[NxtOrderDate]
 	FROM [CHEVEUX].[dbo].[Stock_Management]
 END
 GO

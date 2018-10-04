@@ -14,5 +14,6 @@ namespace TypeLibrary.Models
         public bool AutoPurchase { get; set; }
         public string AutoPurchaseFrequency { get; set; }
         public bool AutoPurchaseProducts { get; set; }
+        public DateTime NxtOrderdDate { get; set; }
     }
 }

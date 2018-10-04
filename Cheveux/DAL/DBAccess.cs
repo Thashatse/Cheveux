@@ -1859,7 +1859,67 @@ namespace DAL
         #endregion
 
         #region Auto Product Orders
+        public List<SP_GetAuto_Purchase_Products> getAutoPurchOrdProds()
+        {
+            List<SP_GetAuto_Purchase_Products> list = new List<SP_GetAuto_Purchase_Products>();
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetAuto_Purchase_Products", CommandType.StoredProcedure))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetAuto_Purchase_Products listItem = new SP_GetAuto_Purchase_Products();
+                            listItem.Name = row["Name"].ToString();
+                            listItem.ProductID = row["ProductID"].ToString();
+                            listItem.Qty = int.Parse(row["Qty"].ToString());
+                            list.Add(listItem);
+                        }
+                    }
+                    return list;
+                }
+            }
+            catch (Exception E)
+            {
+                throw new ApplicationException(E.ToString());
+            }
+        }
 
+        public bool newAutoPurchProd(Auto_Purchase_Products newProduct)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ProductID", newProduct.ProductID),
+                    new SqlParameter("@QTY", newProduct.Qty)
+                };
+
+                return DBHelper.NonQuery("SP_AddProdToAutoPurch", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool deleteAutoPurchProd(Auto_Purchase_Products product)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                    new SqlParameter("@ProductID", product.ProductID)
+                };
+
+                return DBHelper.NonQuery("SP_DeleteProdFromAutoPurch", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Stock Managment Settings
@@ -1881,7 +1941,8 @@ namespace DAL
                             PurchaseQty = int.Parse(row["PurchaseQty"].ToString()),
                             AutoPurchase = Convert.ToBoolean(row["AutoPurchase"].ToString()),
                             AutoPurchaseFrequency = row["AutoPurchaseFrequency"].ToString(),
-                            AutoPurchaseProducts = Convert.ToBoolean(row["AutoPurchaseProducts"].ToString())
+                            AutoPurchaseProducts = Convert.ToBoolean(row["AutoPurchaseProducts"].ToString()),
+                            NxtOrderdDate = Convert.ToDateTime(row["NxtOrderDate"].ToString())
                         };
                     }
                     return StockSettings;
@@ -1905,6 +1966,7 @@ namespace DAL
                     new SqlParameter("@AutoPurchase", Update.AutoPurchase),
                     new SqlParameter("@AutoPurchaseFrequency", Update.AutoPurchaseFrequency),
                     new SqlParameter("@AutoPurchaseProducts", Update.AutoPurchaseProducts),
+                    new SqlParameter("@nextDate", Update.NxtOrderdDate)
                 };
                 return DBHelper.NonQuery("SP_UpdateStockManagementSettings", CommandType.StoredProcedure, pars);
             }

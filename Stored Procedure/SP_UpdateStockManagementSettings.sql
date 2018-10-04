@@ -9,7 +9,8 @@ alter PROCEDURE SP_UpdateStockManagementSettings
 	@PurchaseQty int,
 	@AutoPurchase bit,
 	@AutoPurchaseFrequency nchar(3),
-	@AutoPurchaseProducts bit
+	@AutoPurchaseProducts bit,
+	@nextDate DateTime
 AS
 BEGIN
 	BEGIN TRY
@@ -19,7 +20,8 @@ BEGIN
 				PurchaseQty = @PurchaseQty,
 				AutoPurchase = @AutoPurchase,
 				AutoPurchaseFrequency = @AutoPurchaseFrequency,
-				AutoPurchaseProducts = @AutoPurchaseProducts
+				AutoPurchaseProducts = @AutoPurchaseProducts,
+				[NxtOrderDate] = @nextDate
 			WHERE BusinessID = @BusinessID
 		COMMIT TRANSACTION
 	END TRY

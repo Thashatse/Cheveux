@@ -8,6 +8,7 @@ using System.Data;
 using System.Web.UI.WebControls;
 using System.Net;
 using System.Net.Mail;
+using TypeLibrary.Models;
 
 namespace BLL
 {
@@ -506,5 +507,69 @@ namespace BLL
             }
             return result;
         }
+
+        public string newPurchaseOrder(Order order, List<Order_DTL> orderDTLs)
+        {
+                bool success = false;
+                string orderID = "";
+
+                try
+                {
+                    Order newOrder = new Order();
+                    newOrder.OrderID = GenerateRandomOrderID();
+                newOrder.supplierID = order.supplierID;
+                    success = Handler.newProductOrder(newOrder);
+
+                    if (success != false)
+                    {
+                        foreach (Order_DTL prod in orderDTLs)
+                        {
+                            Order_DTL newOrderDL = new Order_DTL();
+                            newOrderDL.OrderID = newOrder.OrderID;
+                            newOrderDL.ProductID = prod.ProductID;
+                            newOrderDL.Qty = prod.Qty;
+                            success = Handler.newProductOrderDL(newOrderDL);
+                        }
+                    }
+
+                    orderID = newOrder.OrderID;
+                }
+                catch (Exception err)
+                {
+                    logAnError("Error making new product order | Error: " + err);
+                return "Err";
+                }
+
+                if (success == true)
+                {
+                    //email to supplier
+                    Supplier supp = Handler.getSupplier(order.supplierID);
+                    //send an email notification
+                    var body = new System.Text.StringBuilder();
+                    body.AppendFormat("Hello " + supp.contactName.ToString() + ",");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Please review the purchase order request at the link below");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx?Action=ViewOrder&OrderID=" + orderID);
+                    body.AppendLine(@"");
+                    body.AppendLine(@"Regards,");
+                    body.AppendLine(@"");
+                    body.AppendLine(@"The Cheveux Team");
+                    sendEmailAlert(supp.contactEmail, supp.contactName,
+                        "Purchase Order Request",
+                        body.ToString(),
+                        "Cheveux");
+
+                //show order details to user
+                return orderID;
+                }
+                else if (success == false)
+                {
+                    logAnError("Error making new product order");
+                return "Err";
+            }
+            return "Err";
+        }
+        }
     }
-}

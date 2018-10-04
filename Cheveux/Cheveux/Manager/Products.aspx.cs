@@ -732,7 +732,7 @@ namespace Cheveux.Manager
         {
             try
             {
-                List<OrderViewModel> pastOrders = handler.getPastOrders();
+                List<OrderViewModel> pastOrders = handler.getPastOrders(); 
                 //check if there are outstanding orders
                 if (pastOrders.Count > 0)
                 {
@@ -1016,23 +1016,19 @@ namespace Cheveux.Manager
             if (lProductsOnOrder.Items.Count > 0)
             {
                 NoProductSelectedOnOrder.Visible = false;
-                bool success = false;
-                string orderID = "";
+                string result = "Err";
 
                 try
                 {
-                    Order newOrder = new Order();
-                    newOrder.OrderID = function.GenerateRandomOrderID();
-                    newOrder.supplierID = ddlSupplier.SelectedValue;
-                    success = handler.newProductOrder(newOrder);
+                    Order order = new Order();
+                    order.supplierID = ddlSupplier.SelectedValue;
 
-                    if (success != false)
-                    {
+                    List<Order_DTL> orderDTLs = new List<Order_DTL>();
                         loadSupplierProductsID();
+
                         for (int i = 0; i < lProductsOnOrder.Items.Count; i++)
                         {
                             Order_DTL newOrderDL = new Order_DTL();
-                            newOrderDL.OrderID = newOrder.OrderID;
 
                             string[] array = lProductsOnOrder.Items[i].Text.Split('*');
                             array[1] = array[1].Substring(1);
@@ -1050,45 +1046,23 @@ namespace Cheveux.Manager
 
                             newOrderDL.ProductID = prodID;
                             newOrderDL.Qty = Convert.ToInt32(array[0]);
-                            success = handler.newProductOrderDL(newOrderDL);
+                        orderDTLs.Add(newOrderDL);
                         }
-                    }
 
-                    orderID = newOrder.OrderID;
-                }
+                    result = function.newPurchaseOrder(order, orderDTLs);
+                    }
                 catch (Exception err)
                 {
                     function.logAnError("Error making new product order | Error: " + err);
                     Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20product%20order");
                 }
 
-                if (success == true)
+                if (result != "Err")
                 {
-                    //email to supplier
-                    Supplier supp = handler.getSupplier(ddlSupplier.SelectedValue); 
-                    //send an email notification
-                    var body = new System.Text.StringBuilder();
-                    body.AppendFormat("Hello " + supp.contactName.ToString() + ",");
-                    body.AppendLine(@"");
-                    body.AppendLine(@"");
-                    body.AppendLine(@"Please review the purchase order request at the link below");
-                    body.AppendLine(@"");
-                    body.AppendLine(@"http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx?Action=ViewOrder&OrderID=" + orderID);
-                    body.AppendLine(@"");
-                    body.AppendLine(@"Regards,");
-                    body.AppendLine(@"");
-                    body.AppendLine(@"The Cheveux Team");
-                    function.sendEmailAlert(supp.contactEmail, supp.contactName,
-                        "Purchase Order Request",
-                        body.ToString(),
-                        "Cheveux");
-
-                    //show order details to user
-                    Response.Redirect("Products.aspx?Action=ViewOrder&OrderID=" + orderID);
+                    Response.Redirect("Products.aspx?Action=ViewOrder&OrderID=" + result);
                 }
-                else if (success == false)
+                else if (result == "Err")
                 {
-                    function.logAnError("Error making new product order");
                     Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20product%20order");
                 }
             }
