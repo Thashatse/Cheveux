@@ -27,6 +27,15 @@
         .emptyStar {
             background-image: url("../Images/star.gif");
         }
+
+        .dvbox {
+            border: 1px solid #ddd;
+            border-radius: 0;
+            padding: 5px;
+            /*height: 400px;*/ 
+            height: auto;
+            /*overflow-y: scroll;*/
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -109,12 +118,12 @@
                         <!--Stylist Reviews-->
                         <div class="row">
                             <div class="col-sm-12 col-md-8 col-lg-8">
-                                <asp:Label runat="server" ID="lblStylistReviewsHeader" style="text-decoration: underline;"></asp:Label>
+                                <asp:Label runat="server" ID="lblStylistReviewsHeader" Style="text-decoration: underline;" Font-Size="Large"></asp:Label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <asp:Panel ID="stylistPanel" runat="server">
+                                <asp:Panel ID="stylistPanel" CssClass="dvbox" runat="server">
                                 </asp:Panel>
                             </div>
                         </div>
@@ -126,12 +135,12 @@
                         <!--Booking Reviews-->
                         <div class="row">
                             <div class="col-sm-12 col-md-8 col-lg-8">
-                                <asp:Label runat="server" ID="lblBookingReviewsHeader" style="text-decoration: underline;"></asp:Label>
+                                <asp:Label runat="server" ID="lblBookingReviewsHeader" Style="text-decoration: underline;" Font-Size="Large"></asp:Label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <asp:Panel ID="bookingsPanel" runat="server">
+                                <asp:Panel ID="bookingsPanel" CssClass="dvbox" runat="server">
                                 </asp:Panel>
                             </div>
                         </div>

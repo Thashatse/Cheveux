@@ -34,5 +34,6 @@ BEGIN
 	FROM REVIEW r, [USER] u
 	WHERE r.EmployeeID=@stylistID
 	and r.EmployeeID=u.UserID
+	and r.primaryBookingID is null
 END
 GO
