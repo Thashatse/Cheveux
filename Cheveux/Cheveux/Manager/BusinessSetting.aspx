@@ -26,7 +26,7 @@
                                     <li>
                                         <asp:Button ID="btnViewFeaturedItems" runat="server" Text="Featured Items" class="btn btn-light" OnClick="btnViewFeaturedItems_Click" /></li>
                                     <li>
-                                        <asp:Button ID="btnViewSK" runat="server" Text="Stock Managment" class="btn btn-light" OnClick="btnViewSK_Click" /></li>
+                                        <asp:Button ID="btnViewSK" runat="server" Text="Stock Managment" class="btn btn-light" OnClick="btnViewSK_Click1" /></li>
                                     <li>
                                         <asp:Button ID="btnViewBS" runat="server" Text="Business Settings" class="btn btn-light" OnClick="btnViewBS_Click" /></li>
                                 </ul>
@@ -355,17 +355,17 @@
                         <div runat="server" visible="false" id="SK">
                             <div class="jumbotron bg-dark text-white">
                                 <!--Heading-->
-                                <asp:Label runat="server" ID="lblManageStockSettins"> <h2>Stock Managment</h2> </asp:Label>
+                                <asp:Label runat="server" ID="lblManageStockSettins"> <h2>Stock Management</h2> </asp:Label>
                             </div>
 
                             <br />
-
+                            
                             <div class="row">
                                 <div class="col-md-3">
                                     Low Stock Warning:
                                 </div>
                                 <div class="col-md-9">
-                                    <asp:TextBox runat="server" type="number" ID="txtLowStock" CssClass="form-control" Width="100" Text="10" /><br />
+                                    <asp:TextBox runat="server" type="number" ID="txtLowStock" CssClass="form-control" Width="100" Text="10" OnTextChanged="showSaveStockSetting" AutoPostBack="true" /><br />
                                 </div>
                             </div>
                             <div class="row">
@@ -373,7 +373,7 @@
                                     Default Purchase Order Qty:
                                 </div>
                                 <div class="col-md-9">
-                                    <asp:TextBox runat="server" type="number" ID="txtPurchaseQty" CssClass="form-control" Width="100" Text="5" /><br />
+                                    <asp:TextBox runat="server" type="number" ID="txtPurchaseQty" CssClass="form-control" Width="100" Text="5" OnTextChanged="showSaveStockSetting" AutoPostBack="true"/><br />
                                 </div>
                             </div>
                             <div class="row">
@@ -381,7 +381,7 @@
                                     Auto Purchase Order:
                                 </div>
                                 <div class="col-md-9">
-                                    <asp:CheckBox ID="cbAutoLowStockOnOff" runat="server" Text="On/Off" OnCheckedChanged="cbAutoLowStockOnOff_CheckedChanged" AutoPostBack="true" /><br />
+                                    <asp:CheckBox ID="cbAutoLowStockOnOff" runat="server" Text="On/Off" OnCheckedChanged="showSaveStockSetting" AutoPostBack="true" /><br />
                                     <br />
                                 </div>
                             </div>
@@ -401,11 +401,11 @@
                                         Frequency:
                                     </div>
                                     <div class="col-md-9">
-                                        <asp:DropDownList ID="ddlAutoStockOrderFrequency" runat="server" AutoPostBack="true" CssClass="btn btn-primary">
-                                            <asp:ListItem>As Needed</asp:ListItem>
-                                            <asp:ListItem>Every Week</asp:ListItem>
-                                            <asp:ListItem>Every 2 Week</asp:ListItem>
-                                            <asp:ListItem>Every Month</asp:ListItem>
+                                        <asp:DropDownList ID="ddlAutoStockOrderFrequency" runat="server" OnSelectedIndexChanged="showSaveStockSetting" AutoPostBack="true" CssClass="btn btn-primary" >
+                                            <asp:ListItem Text ="As Needed" Value="Asn"></asp:ListItem>
+                                            <asp:ListItem Text ="Every Week" Value="Ewe"></asp:ListItem>
+                                            <asp:ListItem Text ="Every 2 Weeks" Value="E2w"></asp:ListItem>
+                                            <asp:ListItem Text ="Every Month" Value="Emo"></asp:ListItem>
                                         </asp:DropDownList><br />
                                         <br />
                                     </div>
@@ -416,16 +416,15 @@
                                         Products:
                                     </div>
                                     <div class="col-md-9">
-                                        <asp:RadioButtonList ID="rblAutoStockOrderProducts" runat="server" OnSelectedIndexChanged="rblAutoStockOrderProducts_SelectedIndexChanged" AutoPostBack="true">
-                                            <asp:ListItem Selected="True">All</asp:ListItem>
-                                            <asp:ListItem>Custom</asp:ListItem>
+                                        <asp:RadioButtonList ID="rblAutoStockOrderProducts" runat="server" OnSelectedIndexChanged="showSaveStockSetting" AutoPostBack="true">
+                                            <asp:ListItem Text ="All" Value="False"></asp:ListItem>
+                                            <asp:ListItem Text ="Custom" Value="True"></asp:ListItem>
                                         </asp:RadioButtonList>
                                     </div>
                                 </div>
                                 <div class="row" id="divAutoStockOrderProducts" runat="server" visible="false">
                                     <div class="col-md-1"></div>
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-11">
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <!--Line Break-->
@@ -465,6 +464,12 @@
                                     </div>
                                 </div>
                             </div>
+
+                             <br />
+
+                                <p style="text-align: right; float: right;">
+                                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="updateStockManagement" Visible="false" CssClass="btn btn-primary" />
+                                    </p>
                         </div>
                     </div>
                 </div>

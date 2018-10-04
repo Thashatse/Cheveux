@@ -127,11 +127,12 @@ namespace Cheveux.Manager
                 #endregion
 
                 #region Low Stock
+                int lowStock = handler.getStockSettings().LowStock;
                 //check for low stock
                 //check low stock treatments
                 foreach (SP_GetAllTreatments treat in products.Item2)
                 {
-                    if (treat.Qty < 10 && treat.Qty > 0 && dashLowCount == 0)
+                    if (treat.Qty < lowStock && treat.Qty > 0 && dashLowCount == 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
@@ -141,7 +142,7 @@ namespace Cheveux.Manager
                             + treat.Qty + " Left in stock");
                         dashLowCount++;
                     }
-                    else if (treat.Qty < 10 && treat.Qty > 0 && dashLowCount > 0)
+                    else if (treat.Qty < lowStock && treat.Qty > 0 && dashLowCount > 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "",
@@ -155,7 +156,7 @@ namespace Cheveux.Manager
                 //check low stock accessories
                 foreach (SP_GetAllAccessories Access in products.Item1)
                 {
-                    if (Access.Qty < 10 && Access.Qty > 0 && dashLowCount == 0)
+                    if (Access.Qty < lowStock && Access.Qty > 0 && dashLowCount == 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "Low Stock",
@@ -165,7 +166,7 @@ namespace Cheveux.Manager
                             + Access.Qty + " Left in stock");
                         dashLowCount++;
                     }
-                    else if (Access.Qty < 10 && Access.Qty > 0 && dashLowCount > 0)
+                    else if (Access.Qty < lowStock && Access.Qty > 0 && dashLowCount > 0)
                     {
                         //if the accessory is low and stock add an alert to the alert table
                         addAlertToTable("&#9888;", "",

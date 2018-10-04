@@ -47,6 +47,7 @@
     <Compile Include="Models\BRAID_SERVICE.cs" />
     <Compile Include="Models\BRAND.cs" />
     <Compile Include="Models\BUSINESS.cs" />
+    <Compile Include="Models\Auto_Purchase_Products.cs" />
     <Compile Include="Models\CUST_VISIT.cs" />
     <Compile Include="Models\EMPLOYEE.cs" />
     <Compile Include="Models\Home_Page.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Models\SALE.cs" />
     <Compile Include="Models\SALES_DTL.cs" />
     <Compile Include="Models\SERVICE.cs" />
+    <Compile Include="Models\Stock_Management.cs" />
     <Compile Include="Models\STYLE.cs" />
     <Compile Include="Models\STYLIST_SERVICE.cs" />
     <Compile Include="Models\Supplier.cs" />

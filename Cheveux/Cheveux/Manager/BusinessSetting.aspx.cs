@@ -13,7 +13,6 @@ namespace Cheveux
 {
     public partial class BusinessSetting : System.Web.UI.Page
     {
-
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
@@ -45,6 +44,20 @@ namespace Cheveux
             }
             else if (cookie["UT"] == "M")
             {
+                #region load Featured items in to edit selector
+                features = null;
+                try
+                {
+                    //get the home page featurs
+                    features = handler.GetHomePageFeatures();
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("unable to load featurd items from the DB on BusinessSetting.aspx: " +
+                        err);
+                }
+                #endregion
+                
                 #region view
                 //if the user is loged in as a manager display Bussines setting
                 LogedIn.Visible = true;
@@ -73,19 +86,6 @@ namespace Cheveux
                 try
                 {
                     #region featuredItems
-                    //load Featured items in to edit selector
-                    features = null;
-                    try
-                    {
-                        //get the home page featurs
-                        features = handler.GetHomePageFeatures();
-                    }
-                    catch (Exception err)
-                    {
-                        function.logAnError("unable to load featurd items from the DB on BusinessSetting.aspx: " +
-                            err);
-                    }
-
                     #region Featured hairstyles
                     try
                     {
@@ -307,17 +307,17 @@ namespace Cheveux
                             if (editFeature == "Pro01")
                             {
                                 LblFeatureEditHeading.Text = "Edit Featured Product 1";
-                                loadProductListBox(sender, e, 0);
+                                loadProductListBoxs(sender, e, 0);
                             }
                             else if (editFeature == "Pro02")
                             {
                                 LblFeatureEditHeading.Text = "Edit Featured Product 2";
-                                loadProductListBox(sender, e, 1);
+                                loadProductListBoxs(sender, e, 1);
                             }
                             else if (editFeature == "Pro03")
                             {
                                 LblFeatureEditHeading.Text = "Edit Featured Product 3";
-                                loadProductListBox(sender, e, 2);
+                                loadProductListBoxs(sender, e, 2);
                             }
                         }
                         else if (editFeature == "Sty01" || editFeature == "Sty02" || editFeature == "Sty03")
@@ -378,7 +378,8 @@ namespace Cheveux
             hideALL();
 
             txtSearchItems.Text = "";
-            loadProductListBox(sender, e, 0);
+            loadProductListBoxs(sender, e, 0);
+            loadStockManagement(sender, e);
 
             SK.Visible = true;
         }
@@ -403,6 +404,11 @@ namespace Cheveux
                 SettingsHint.Visible = false;
                 btnViewHint.Text = "Hint";
             }
+        }
+
+        protected void btnViewSK_Click1(object sender, EventArgs e)
+        {
+            Response.Redirect("../Manager/BusinessSetting.aspx?View=SK");
         }
 
         protected void rblAutoStockOrderProducts_SelectedIndexChanged(object sender, EventArgs e)
@@ -430,9 +436,16 @@ namespace Cheveux
                 AutoLowInfo.Visible = true;
             }
         }
+
+        protected void showSaveStockSetting(object sender, EventArgs e)
+        {
+            cbAutoLowStockOnOff_CheckedChanged(sender, e);
+            rblAutoStockOrderProducts_SelectedIndexChanged(sender, e);
+            btnSave.Visible = true;
+        }
         #endregion
-        
-        protected void loadProductListBox(object sender, EventArgs e, int featureIndex)
+
+        protected void loadProductListBoxs(object sender, EventArgs e, int featureIndex)
         {
             //add Products to the list
             lblFeatuerdItems.Items.Clear();
@@ -509,12 +522,10 @@ namespace Cheveux
                             lblProductsForAutoOrder.Items.Add(item);
                             if (item == features[featureIndex].Name)
                             {
-                                selectedIndex = x;
+                                lblFeatuerdItems.SelectedIndex = x;
                             }
                             x++;
                         }
-
-                        lblFeatuerdItems.SelectedIndex = selectedIndex;
                     }
                 }
                 else
@@ -1370,7 +1381,98 @@ namespace Cheveux
         #endregion
 
         #region Stock Managment Settings
+        Stock_Management stockSettings = null;
 
+        public void loadStockManagement(object sender, EventArgs e)
+        {
+            if (!Page.IsPostBack)
+            {
+                try
+                {
+                    stockSettings = handler.getStockSettings();
+                    txtLowStock.Text = stockSettings.LowStock.ToString();
+                    txtPurchaseQty.Text = stockSettings.PurchaseQty.ToString();
+                    if (stockSettings.AutoPurchase == true)
+                    {
+                        cbAutoLowStockOnOff.Checked = true;
+                        AutoLowInfo.Visible = false;
+                        divAutoStockOrder.Visible = true;
+                    }
+                    else
+                    {
+                        cbAutoLowStockOnOff.Checked = false;
+                        AutoLowInfo.Visible = true;
+                        divAutoStockOrder.Visible = false;
+                    }
+                    ddlAutoStockOrderFrequency.SelectedValue = stockSettings.AutoPurchaseFrequency;
+                    if (stockSettings.AutoPurchaseProducts == true)
+                    {
+                        rblAutoStockOrderProducts.SelectedValue = "True";
+                        divAutoStockOrderProducts.Visible = true;
+                    }
+                    else
+                    {
+                        rblAutoStockOrderProducts.SelectedValue = "False";
+                        divAutoStockOrderProducts.Visible = false;
+                    }
+                    loadAutoPurchaseProducts();
+                }
+                catch (Exception Err)
+                {
+                    function.logAnError(Err.ToString()
+                        + " An error occurred Stock Management Settings"
+                        + " in loadStockManagement method on Settings");
+                    Response.Write("<script>alert('An error occoured loading settings, Please try again later.');location.reload(true);</script>");
+                    btnViewFeaturedItems_Click(sender, e);
+                }
+            }
+        }
+        
+        public void updateStockManagement(object sender, EventArgs e)
+        {
+            try
+            {
+                if(stockSettings == null)
+                {
+                    stockSettings = handler.getStockSettings();
+                }
+
+                stockSettings.LowStock = int.Parse(txtLowStock.Text);
+                stockSettings.PurchaseQty = int.Parse(txtPurchaseQty.Text);
+                if (cbAutoLowStockOnOff.Checked == true)
+                {
+                    stockSettings.AutoPurchase = true;
+                }
+                else
+                {
+                    stockSettings.AutoPurchase = false;
+                }
+                stockSettings.AutoPurchaseFrequency = ddlAutoStockOrderFrequency.SelectedValue;
+                if (rblAutoStockOrderProducts.SelectedValue == "True")
+                {
+                    stockSettings.AutoPurchaseProducts = true;
+                }
+                else
+                {
+                    stockSettings.AutoPurchaseProducts = false;
+                }
+                handler.updateStockSettings(stockSettings);
+            }
+            catch (Exception Err)
+            {
+                function.logAnError(Err.ToString()
+                    + " An error occurred updating Stock Management Settings"
+                    + " in updateStockManagement method on Settings");
+                Response.Write("<script>alert('An error occoured updating settings, Please try again later.');location.reload(true);</script>");
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured updating settings, Please try again later.");
+            }
+            Response.Redirect("BusinessSetting.aspx?View=SK");
+        }
+        
+        public void loadAutoPurchaseProducts()
+        {
+
+        }
         #endregion
     }
 }
