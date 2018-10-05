@@ -401,12 +401,15 @@
                                         Frequency:
                                     </div>
                                     <div class="col-md-9">
-                                        <asp:DropDownList ID="ddlAutoStockOrderFrequency" runat="server" OnSelectedIndexChanged="showSaveStockSetting" AutoPostBack="true" CssClass="btn btn-primary" >
-                                            <asp:ListItem Text ="As Needed" Value="Asn"></asp:ListItem>
-                                            <asp:ListItem Text ="Every Week" Value="Ewe"></asp:ListItem>
-                                            <asp:ListItem Text ="Every 2 Weeks" Value="E2w"></asp:ListItem>
-                                            <asp:ListItem Text ="Every Month" Value="Emo"></asp:ListItem>
-                                        </asp:DropDownList><br />
+                                        <asp:DropDownList ID="ddlAutoStockOrderFrequency" runat="server" OnSelectedIndexChanged="updateStockManagement" AutoPostBack="true" CssClass="btn btn-primary" >
+                                            <asp:ListItem Text ="Daily" Value="Asn"></asp:ListItem>
+                                            <asp:ListItem Text ="Weekly" Value="Ewe"></asp:ListItem>
+                                            <asp:ListItem Text ="Biweekly" Value="E2w"></asp:ListItem>
+                                            <asp:ListItem Text ="Monthly" Value="Emo"></asp:ListItem>
+                                        </asp:DropDownList>
+                                        &nbsp;
+                                        Next Auto Order: <asp:Label ID="lblNextAutoOrderDate" runat="server" Text=""></asp:Label>
+                                        <br />
                                         <br />
                                     </div>
                                 </div>
@@ -416,7 +419,7 @@
                                         Products:
                                     </div>
                                     <div class="col-md-9">
-                                        <asp:RadioButtonList ID="rblAutoStockOrderProducts" runat="server" OnSelectedIndexChanged="showSaveStockSetting" AutoPostBack="true">
+                                        <asp:RadioButtonList ID="rblAutoStockOrderProducts" runat="server" OnSelectedIndexChanged="updateStockManagement" AutoPostBack="true">
                                             <asp:ListItem Text ="All" Value="False"></asp:ListItem>
                                             <asp:ListItem Text ="Custom" Value="True"></asp:ListItem>
                                         </asp:RadioButtonList>
@@ -446,11 +449,66 @@
                                                 <br />
                                                 <br />
                                                 <br />
-                                                <asp:Button ID="btnAddProductToAutoOrder" runat="server" Text="Add" CssClass="btn btn-primary" />
+                                                Qty to Order:
+                                <asp:DropDownList runat="server" ID="ddlQty" CssClass="btn btn-outline-secondary dropdown-toggle">
+                                    <asp:ListItem Value="1">1</asp:ListItem>
+                                    <asp:ListItem Value="2">2</asp:ListItem>
+                                    <asp:ListItem Value="3">3</asp:ListItem>
+                                    <asp:ListItem Value="4">4</asp:ListItem>
+                                    <asp:ListItem Value="5">5</asp:ListItem>
+                                    <asp:ListItem Value="6">6</asp:ListItem>
+                                    <asp:ListItem Value="7">7</asp:ListItem>
+                                    <asp:ListItem Value="8">8</asp:ListItem>
+                                    <asp:ListItem Value="9">9</asp:ListItem>
+                                    <asp:ListItem Value="10">10</asp:ListItem>
+                                    <asp:ListItem Value="11">11</asp:ListItem>
+                                    <asp:ListItem Value="12">12</asp:ListItem>
+                                    <asp:ListItem Value="13">13</asp:ListItem>
+                                    <asp:ListItem Value="14">14</asp:ListItem>
+                                    <asp:ListItem Value="15">15</asp:ListItem>
+                                    <asp:ListItem Value="16">16</asp:ListItem>
+                                    <asp:ListItem Value="17">17</asp:ListItem>
+                                    <asp:ListItem Value="18">18</asp:ListItem>
+                                    <asp:ListItem Value="19">19</asp:ListItem>
+                                    <asp:ListItem Value="20">20</asp:ListItem>
+                                    <asp:ListItem Value="21">21</asp:ListItem>
+                                    <asp:ListItem Value="22">22</asp:ListItem>
+                                    <asp:ListItem Value="23">23</asp:ListItem>
+                                    <asp:ListItem Value="24">24</asp:ListItem>
+                                    <asp:ListItem Value="25">25</asp:ListItem>
+                                    <asp:ListItem Value="26">26</asp:ListItem>
+                                    <asp:ListItem Value="27">27</asp:ListItem>
+                                    <asp:ListItem Value="28">28</asp:ListItem>
+                                    <asp:ListItem Value="29">29</asp:ListItem>
+                                    <asp:ListItem Value="30">30</asp:ListItem>
+                                    <asp:ListItem Value="31">31</asp:ListItem>
+                                    <asp:ListItem Value="32">32</asp:ListItem>
+                                    <asp:ListItem Value="33">33</asp:ListItem>
+                                    <asp:ListItem Value="34">34</asp:ListItem>
+                                    <asp:ListItem Value="35">35</asp:ListItem>
+                                    <asp:ListItem Value="36">36</asp:ListItem>
+                                    <asp:ListItem Value="37">37</asp:ListItem>
+                                    <asp:ListItem Value="38">38</asp:ListItem>
+                                    <asp:ListItem Value="39">39</asp:ListItem>
+                                    <asp:ListItem Value="10">10</asp:ListItem>
+                                    <asp:ListItem Value="41">41</asp:ListItem>
+                                    <asp:ListItem Value="42">42</asp:ListItem>
+                                    <asp:ListItem Value="43">43</asp:ListItem>
+                                    <asp:ListItem Value="44">44</asp:ListItem>
+                                    <asp:ListItem Value="45">45</asp:ListItem>
+                                    <asp:ListItem Value="46">46</asp:ListItem>
+                                    <asp:ListItem Value="47">47</asp:ListItem>
+                                    <asp:ListItem Value="48">48</asp:ListItem>
+                                    <asp:ListItem Value="49">49</asp:ListItem>
+                                    <asp:ListItem Value="50">50</asp:ListItem>
+                                </asp:DropDownList>
+                                                <br />
+                                                <br />
+                                                <asp:Button ID="btnAddProductToAutoOrder" runat="server" Text="Add" CssClass="btn btn-primary" OnClick="btnAddProductToAutoOrder_Click" />
                                                 <!--Line Break-->
                                                 <br />
                                                 <br />
-                                                <asp:Button ID="btnAddRemoveToAutoOrder" runat="server" Text="Remove" CssClass="btn btn-secondary" />
+                                                <asp:Button ID="btnAddRemoveToAutoOrder" runat="server" Text="Remove" CssClass="btn btn-secondary" OnClick="btnAddRemoveToAutoOrder_Click" />
                                             </div>
                                             <div class="col-md-5">
                                                 <!--Line Break-->

@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
+using System.Threading.Tasks;
 
 namespace Cheveux.Manager
 {
@@ -24,6 +25,11 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Parallel.Invoke(() => loadPage(sender, e), () => function.runAutoFunctions());
+        }
+
+        private void loadPage(object sender, EventArgs e)
+        {
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
 
@@ -31,7 +37,7 @@ namespace Cheveux.Manager
             {
                 //if the user is not loged in as a manager do not display Bussines setting
             }
-            else if(cookie["UT"] != "M")
+            else if (cookie["UT"] != "M")
             {
                 Response.Redirect("../Default.aspx");
             }
@@ -65,7 +71,7 @@ namespace Cheveux.Manager
                 loadTodaysBookings();
                 //load outstanding stook oders
                 loadOutOrders();
-            }  
+            }
         }
 
         private void checkForLowStock()

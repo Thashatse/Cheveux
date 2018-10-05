@@ -123,7 +123,9 @@ namespace DAL
         #endregion
 
         #region Auto Product Orders
-
+        List<SP_GetAuto_Purchase_Products> getAutoPurchOrdProds();
+        bool newAutoPurchProd(Auto_Purchase_Products newProduct);
+        bool deleteAutoPurchProd(Auto_Purchase_Products product);
         #endregion
 
         #region Stock Managment Settings
@@ -183,7 +185,11 @@ namespace DAL
         bool updateBookingReview(REVIEW r);
         #endregion
 
+        #region Employee
         List<SP_GetEmpNames> GetEmpNames();
+        USER getManagerContact();
+        #endregion
+
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);

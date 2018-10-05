@@ -24,6 +24,6 @@ BEGIN
 	From [Order], Supplier
 	Where Received = 'true'
 		AND [Order].SupplierID = Supplier.SupplierID
-	order by [DateReceived] 
+	order by [DateReceived] DESC
 END
 GO

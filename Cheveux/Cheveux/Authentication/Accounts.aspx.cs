@@ -22,7 +22,7 @@ namespace Cheveux
 
         protected void Page_Load(object sender, EventArgs e)
         {
-                Parallel.Invoke(() => loadPage(sender, e), () => function.sendOGBkngNoti());
+                Parallel.Invoke(() => loadPage(sender, e), () => function.runAutoFunctions());
         }
 
         private void loadPage(object sender, EventArgs e)
