@@ -22,6 +22,7 @@ namespace Cheveux
         BLL.Authentication auth = new BLL.Authentication();
         List<SP_GetCustomerBooking> bookingsList = null;
         List<SP_GetBookingServices> bookingServiceList = null;
+        REVIEW review = null;
 
         //set the master page based on the user type
         protected void Page_PreInit(Object sender, EventArgs e)
@@ -267,6 +268,37 @@ namespace Cheveux
                 profileImage.ImageUrl = employee.empImage.ToString();
                 //Styslis Name
                 profileLable.Text = (employee.firstName.ToString() +" " + employee.lastName.ToString()).ToUpper();
+                //stylist rating
+                try
+                {
+                    review = handler.getStylistRating(empID.ToString());
+                    if(review != null)
+                    {
+                        ratingsPanel.Visible = true;
+                        PlaceHolder ph = new PlaceHolder();
+                        AjaxControlToolkit.Rating theStars = new AjaxControlToolkit.Rating();
+                        theStars.CurrentRating = review.Rating;
+                        theStars.ID = "rt" + empID.ToString();
+                        theStars.StarCssClass = "starRating";
+                        theStars.WaitingStarCssClass = "waitingStar";
+                        theStars.FilledStarCssClass = "filledStar";
+                        theStars.EmptyStarCssClass = "emptyStar";
+                        theStars.CssClass = "img-fluid";
+                        theStars.ReadOnly = true;
+                        ph.Controls.Add(theStars);
+                        ratingsPanel.Controls.Add(ph);
+                    }
+                    else
+                    {
+                        ratingsPanel.Visible = false;
+                    }
+                }
+                catch (Exception err)
+                {
+                    ratingsPanel.Controls.Clear();
+                    ratingsPanel.Visible = false;
+                    function.logAnError("Error getting stylist rating. Error: " + err.ToString());
+                }
                 //details
                 TableRow newRow;
                 TableCell newCell;
@@ -551,7 +583,7 @@ namespace Cheveux
                         if (handler.getEmployeeType(cookie["ID"].ToString()).Type.ToString().Replace(" ", string.Empty)
                             == "S")
                         {
-                            specialisationAndBio = handler.viewStylistSpecialisationAndBio(cookie["ID"].ToString());
+                            specialisationAndBio = handler.viewStylistSpecialisationAndBio(cookie["ID"].ToString()); 
                         }
                     }
                     //details

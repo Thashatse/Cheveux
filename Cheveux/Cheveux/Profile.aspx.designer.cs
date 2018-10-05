@@ -22,6 +22,15 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlForm formProfile;
         
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
         /// divTabs control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label profileLable;
+        
+        /// <summary>
+        /// ratingsPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ratingsPanel;
         
         /// <summary>
         /// profileTable control.

@@ -6,6 +6,28 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <!--CSS-->
     <link rel="stylesheet" type="text/css" href="/CSS/Cheveux.css">
+
+    <style>
+        .starRating {
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            display: block;
+        }
+
+        .filledStar {
+            background-image: url("../Images/filledStar.gif");
+        }
+
+        .waitingStar {
+            background-image: url("../Images/waitingStar.gif");
+        }
+
+        .emptyStar {
+            background-image: url("../Images/star.gif");
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="bg-secondary text-white" id="Div1">
@@ -18,19 +40,20 @@
         <div class="col-1"></div>
         <div class="col-10">
             <form id="formProfile" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <div class="row">
                     <div class="col-lg-9 col-md-12 col-sm-12">
                         <div id="divTabs" runat="server" visible="false">
                             <!--Tabs-->
                             <ul class="nav nav-tabs" role="tablist">
                                 <li>
-                                    <asp:Button runat="server" Text="Upcoming Booking(s)" ID="btnViewUpBook" OnClick="btnViewUpBook_Click"  class="btn btn-light" />
+                                    <asp:Button runat="server" Text="Upcoming Booking(s)" ID="btnViewUpBook" OnClick="btnViewUpBook_Click" class="btn btn-light" />
                                 </li>
                                 <li>
-                                    <asp:Button runat="server" Text="Past Booking(s)" ID="btnViewPasBook" OnClick="btnViewPastBook_Click"  class="btn btn-light" />
+                                    <asp:Button runat="server" Text="Past Booking(s)" ID="btnViewPasBook" OnClick="btnViewPastBook_Click" class="btn btn-light" />
                                 </li>
                                 <li>
-                                    <asp:Button runat="server" Text="Profile" ID="btnViewPrfile" OnClick="btnViewProfile_Click"  class="btn btn-light" />
+                                    <asp:Button runat="server" Text="Profile" ID="btnViewPrfile" OnClick="btnViewProfile_Click" class="btn btn-light" />
                                 </li>
                             </ul>
                         </div>
@@ -98,6 +121,10 @@
                         <asp:Image ID="profileImage" runat="server" Height="100" Width="100" />
                         &nbsp;
                         <asp:Label ID="profileLable" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
+                        <br />
+                        <br />
+                        <asp:Panel ID="ratingsPanel" runat="server" Visible="false">
+                        </asp:Panel>
                     </div>
 
 

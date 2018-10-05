@@ -29,9 +29,9 @@
         }
 
         .dvbox {
-            border: 1px solid #ddd;
+            /*border: 1px solid #ddd;
             border-radius: 0;
-            padding: 5px;
+            padding: 5px;*/
             /*height: 400px;*/ 
             height: auto;
             /*overflow-y: scroll;*/
@@ -107,10 +107,15 @@
                                 <p>View Reviews: </p>
                             </div>
                             <div class="col-sm-8 col-md-4 col-lg-4">
-                                <asp:DropDownList ID="drpReadType" runat="server" AutoPostBack="True"
+                                <asp:DropDownList ID="drpReadType" runat="server" AutoPostBack="True" Visible="false"
                                     CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReadType_SelectedIndexChanged">
                                     <asp:ListItem Text="All Reviews" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="My Reviews" Value="1"></asp:ListItem>
+                                </asp:DropDownList>
+                                <asp:DropDownList ID="drpRev" runat="server" AutoPostBack="True" Visible="false"
+                                    CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpRev_SelectedIndexChanged">
+                                    <asp:ListItem Text="Stylist Reviews" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Booking Reviews" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -123,14 +128,10 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <asp:Panel ID="stylistPanel" CssClass="dvbox" runat="server">
+                                <asp:Panel ID="stylistPanel" CssClass="dvbox" runat="server" Visible="false">
                                 </asp:Panel>
                             </div>
                         </div>
-
-                        <br />
-                        <br />
-                        <br />
 
                         <!--Booking Reviews-->
                         <div class="row">
@@ -140,7 +141,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <asp:Panel ID="bookingsPanel" CssClass="dvbox" runat="server">
+                                <asp:Panel ID="bookingsPanel" CssClass="dvbox" runat="server" Visible="false">
                                 </asp:Panel>
                             </div>
                         </div>

@@ -103,10 +103,37 @@ namespace Cheveux
                     btnRev.Visible = true;
                     readReviews.Visible = true;
                     makeAreview.Visible = false;
-                    if (drpReadType.SelectedValue == "0")
+
+                    drpReadType.Visible = false;
+                    drpRev.Visible = true;
+
+                    drpReadType.SelectedValue = "0";
+
+                    if (!IsPostBack)
                     {
-                        loadAllStylistReviews();
+                        if (drpReadType.SelectedValue == "0")
+                        {
+                            if (drpRev.SelectedValue == "0")//stylist reviews
+                            {
+                                stylistPanel.Visible = true;
+                                bookingsPanel.Visible = false;
+
+                                lblBookingReviewsHeader.Visible = false;
+                                lblStylistReviewsHeader.Visible = true;
+                                loadAllStylistReviews();
+                            }
+                            else if (drpRev.SelectedValue == "1")//bookings reviews
+                            {
+                                bookingsPanel.Visible = true;
+                                stylistPanel.Visible = false;
+
+                                lblStylistReviewsHeader.Visible = false;
+                                lblBookingReviewsHeader.Visible = true;
+                                loadAllBookingReviews();
+                            }
+                        }
                     }
+
                 }
             }
             else if (cookie["UT"] == "C")
@@ -122,10 +149,58 @@ namespace Cheveux
                     makeAreview.Visible = false;
                     btnRead.Visible = false;
 
-                    if(drpReadType.SelectedValue == "0")
+                    drpReadType.Visible = true;
+                    drpRev.Visible = true;
+
+                    if (!IsPostBack)
                     {
-                        loadAllStylistReviews();
+                        if (drpReadType.SelectedValue == "0")
+                        {
+                            if (drpRev.SelectedValue == "0")
+                            {
+                                stylistPanel.Visible = true;
+                                bookingsPanel.Visible = false;
+
+                                lblBookingReviewsHeader.Visible = false;
+                                lblStylistReviewsHeader.Visible = true;
+
+
+                                loadAllStylistReviews();
+                            }
+                            else if (drpRev.SelectedValue == "1")
+                            {
+                                bookingsPanel.Visible = true;
+                                stylistPanel.Visible = false;
+
+                                lblStylistReviewsHeader.Visible = false;
+                                lblBookingReviewsHeader.Visible = true;
+
+
+                                loadAllBookingReviews();
+                            }
+                        }
+                        else if (drpReadType.SelectedValue == "1")
+                        {
+                            loadMyReviews(cookie["ID"].ToString());
+                            if (drpRev.SelectedValue == "0")
+                            {
+                                stylistPanel.Visible = true;
+                                bookingsPanel.Visible = false;
+
+                                lblBookingReviewsHeader.Visible = false;
+                                lblStylistReviewsHeader.Visible = true;
+                            }
+                            else if (drpRev.SelectedValue == "1")
+                            {
+                                bookingsPanel.Visible = true;
+                                stylistPanel.Visible = false;
+
+                                lblStylistReviewsHeader.Visible = false;
+                                lblBookingReviewsHeader.Visible = true;
+                            }
+                        }
                     }
+
                 }
                 else if (action == "MakeAreview")
                 {
@@ -180,6 +255,36 @@ namespace Cheveux
                     readReviews.Visible = true;
                     btnRev.Visible = false;
                     makeAreview.Visible = false;
+
+                    drpReadType.Visible = false;
+                    drpRev.Visible = true;
+
+                    drpReadType.SelectedValue = "0";
+
+                    if (!IsPostBack)
+                    {
+                        if (drpReadType.SelectedValue == "0")
+                        {
+                            if (drpRev.SelectedValue == "0")//stylist reviews
+                            {
+                                stylistPanel.Visible = true;
+                                bookingsPanel.Visible = false;
+
+                                lblBookingReviewsHeader.Visible = false;
+                                lblStylistReviewsHeader.Visible = true;
+                                loadAllStylistReviews();
+                            }
+                            else if (drpRev.SelectedValue == "1")//bookings reviews
+                            {
+                                bookingsPanel.Visible = true;
+                                stylistPanel.Visible = false;
+
+                                lblStylistReviewsHeader.Visible = false;
+                                lblBookingReviewsHeader.Visible = true;
+                                loadAllBookingReviews();
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -205,6 +310,7 @@ namespace Cheveux
             }
             
         }
+
         #region Write Reviews
         
         #region Methods
@@ -746,6 +852,7 @@ namespace Cheveux
         {
             int numofStylistReviews = 0;
             int numofBookingReviews = 0;
+            
             try
             {
                 r = handler.getCustomersReviews(customerID);
@@ -756,6 +863,7 @@ namespace Cheveux
                     if(string.IsNullOrEmpty(a.PrimaryBookingID))//stylist reviews
                     {
                         Table tblStylistReviews = new Table();
+                        tblStylistReviews.CssClass = "table-bordered";
 
                         TableRow newRow = new TableRow();
                         tblStylistReviews.Rows.Add(newRow);
@@ -802,7 +910,7 @@ namespace Cheveux
                         //Customer review of the stylist
                         ph = new PlaceHolder();
                         ph.Controls.Add(new LiteralControl(
-                                        a.Comment.ToString()));
+                                        a.Comment.ToString() +"<br>"));
                         newCell.Controls.Add(ph);
 
 
@@ -814,33 +922,42 @@ namespace Cheveux
                     {
                         int bCount = 0;
                         Table tblBookings = new Table();
+                        tblBookings.CssClass = "table-bordered";
 
                         TableRow newRow = new TableRow();
                         tblBookings.Rows.Add(newRow);
 
                         TableCell newCell = new TableCell();
-                        var dt = getBookingDateTime(a.PrimaryBookingID.ToString());
+
+                        PlaceHolder ph;
                         try
                         {
                             bServices = handler.getBookingServices(a.PrimaryBookingID.ToString());
+                            var dt = getBookingDateTime(a.PrimaryBookingID.ToString());
                             if (bServices.Count == 1)
                             {
-                                newCell.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                                ph = new PlaceHolder();
+                                ph.Controls.Add(new LiteralControl(
+                                "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
                                 + bServices[0].ServiceName.ToString() + "</a>"
                                 + " with "
                                 + a.StylistName.ToString()
                                 + " on " + dt.Item1
-                                + " at " + dt.Item2;
+                                + " at " + dt.Item2+ "<br><br>"));
+                                newCell.Controls.Add(ph);
                             }
                             else if (bServices.Count == 2)
                             {
-                                newCell.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.PrimaryBookingID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + bServices[0].ServiceName.ToString() +
-                                    ", " + bServices[1].ServiceName.ToString() + "</a>"
-                                    + " with "
-                                    + a.StylistName.ToString()
-                                    + " on " + dt.Item1
-                                    + " at " + dt.Item2;
+                                ph = new PlaceHolder();
+                                ph.Controls.Add(new LiteralControl(
+                                "<a href='../ViewBooking.aspx?BookingID=" + a.PrimaryBookingID.ToString().Replace(" ", string.Empty) +
+                                "'>" + bServices[0].ServiceName.ToString() +
+                                ", " + bServices[1].ServiceName.ToString() + "</a>"
+                                + " with "
+                                + a.StylistName.ToString()
+                                + " on " + dt.Item1
+                                + " at " + dt.Item2+ "<br><br>"));
+                                newCell.Controls.Add(ph);
                             }
                             else if (bServices.Count > 2)
                             {
@@ -858,34 +975,33 @@ namespace Cheveux
                                         toolTip += ", " + toolTipDTL.ServiceName;
                                     }
                                 }
-                                newCell.Text = "<a title='" + toolTip + "'" +
-                                    "href='../ViewBooking.aspx?BookingID=" + a.PrimaryBookingID.ToString().Replace(" ", string.Empty) +
-                                    "'> Multiple Services </a>"
-                                    + a.StylistName.ToString()
-                                    + " on " + dt.Item1
-                                    + " at " + dt.Item2;
+                                ph = new PlaceHolder();
+                                ph.Controls.Add(new LiteralControl(
+                                "<a title='" + toolTip + "'" +
+                                "href='../ViewBooking.aspx?BookingID=" + a.PrimaryBookingID.ToString().Replace(" ", string.Empty) +
+                                "'> Multiple Services </a>"
+                                + a.StylistName.ToString()
+                                + " on " + dt.Item1
+                                + " at " + dt.Item2+ "<br><br>"));
+                                newCell.Controls.Add(ph);
                             }
-                            tblBookings.Rows[bCount].Cells.Add(newCell);
-                            bCount++;
+
                         }
                         catch (Exception Err)
                         {
-                            newCell.Text = "---";
-                            tblBookings.Rows[bCount].Cells.Add(newCell);
+                            PlaceHolder phE = new PlaceHolder();
+                            phE.Controls.Add(new LiteralControl("Booking details currently unavailable."));
+                            newCell.Controls.Add(phE);
+
                             function.logAnError("Error getting booking services for reading booking reviews(my)."
                                     +"Error : "+ Err.ToString());
-                        }
-
-                        newRow = new TableRow();
-                        tblBookings.Rows.Add(newRow);
-
-                        newCell = new TableCell();
-                        
-                        PlaceHolder ph = new PlaceHolder();
+                        }  
+                        ph = new PlaceHolder();
                         ph.Controls.Add(new LiteralControl(
-                                        "Rating given: <br/>"));
-                        
+                                        "<b>Rating given:</b><br>"));
+                        newCell.Controls.Add(ph);
 
+                        ph = new PlaceHolder();
                         AjaxControlToolkit.Rating theStars = new AjaxControlToolkit.Rating();
                         theStars.CurrentRating = a.Rating;
                         theStars.ID = "rt" + a.PrimaryBookingID.ToString();
@@ -893,19 +1009,22 @@ namespace Cheveux
                         theStars.WaitingStarCssClass = "waitingStar";
                         theStars.FilledStarCssClass = "filledStar";
                         theStars.EmptyStarCssClass = "emptyStar";
-                        theStars.CssClass = "img-fluid";
                         theStars.ReadOnly = true;
                         ph.Controls.Add(theStars);
                         newCell.Controls.Add(ph);
 
-                        tblBookings.Rows[bCount].Cells.Add(newCell);
-                        bCount++;
+                        ph = new PlaceHolder();
+                        ph.Controls.Add(new LiteralControl("<br><br><br>"));
+                        newCell.Controls.Add(ph);
 
-                        newRow = new TableRow();
-                        tblBookings.Rows.Add(newRow);
+                        ph = new PlaceHolder();
+                        ph.Controls.Add(new LiteralControl("<b>Comment: </b><br>"));
+                        newCell.Controls.Add(ph);
 
-                        newCell = new TableCell();
-                        newCell.Text = "Comment: <br/>"+a.Comment.ToString();
+                        ph = new PlaceHolder();
+                        ph.Controls.Add(new LiteralControl(a.Comment.ToString() + "<br><br>"));
+                        newCell.Controls.Add(ph);
+
                         tblBookings.Rows[bCount].Cells.Add(newCell);
                         bCount++;
 
@@ -930,6 +1049,7 @@ namespace Cheveux
         }
         public void loadAllStylistReviews()
         {
+            
             int totStylistReviews = 0;
             try
             {
@@ -950,11 +1070,11 @@ namespace Cheveux
                     ph.Controls.Add(new LiteralControl(
                                 "<img src='" + stylist.UserImage +
                                 "' alt='Stylist Image' width='200' height='160'/><br/>"
-                                + stylist.StylistName + "<br/>"));
+                                + stylist.StylistName + "<br/><br/>"));
                     newCell.Controls.Add(ph);
 
                     ph = new PlaceHolder();
-                    ph.Controls.Add(new LiteralControl("Average Rating<br/>"));
+                    ph.Controls.Add(new LiteralControl("<span style='text-decoration:underline;'>Average Rating</span>:<br/>"));
                     newCell.Controls.Add(ph);
 
                     ph = new PlaceHolder();
@@ -1004,7 +1124,7 @@ namespace Cheveux
 
                     PlaceHolder innerPh = new PlaceHolder();
                     Label lblrev = new Label();
-                    lblrev.Text = "Reviews";
+                    lblrev.Text = "Reviews:";
                     lblrev.Font.Bold = true;
                     lblrev.Attributes.Add("style", "text-decoration:underline;");
                     innerPh.Controls.Add(lblrev);
@@ -1012,7 +1132,7 @@ namespace Cheveux
 
                     innerPh = new PlaceHolder();
                     Table innerTable = new Table();
-                    innerTable.CssClass = "table table-bordered";
+                    innerTable.CssClass = "table-bordered";
                     try
                     {
                         int counter = 0;
@@ -1026,8 +1146,12 @@ namespace Cheveux
                             
                             TableCell innerCell = new TableCell();
                             PlaceHolder innerPhForTableCells = new PlaceHolder();
-                            innerPhForTableCells.Controls.Add(new LiteralControl(
+                            innerPhForTableCells.Controls.Add(new LiteralControl("<b>Review by:</b><br>"+
                                                    stylistReviews.CustomerName));
+                            innerCell.Controls.Add(innerPhForTableCells);
+
+                            innerPhForTableCells = new PlaceHolder();
+                            innerPhForTableCells.Controls.Add(new LiteralControl("<br><b>Rating given:</b><br>"));
                             innerCell.Controls.Add(innerPhForTableCells);
 
                             innerPhForTableCells = new PlaceHolder();
@@ -1044,7 +1168,8 @@ namespace Cheveux
 
                             innerPhForTableCells = new PlaceHolder();
                             innerPhForTableCells.Controls.Add(new LiteralControl(
-                                                stylistReviews.Comment));
+                                                    "<br><b>Comment:</b><br>"+
+                                                stylistReviews.Comment + "<br><br>"));
                             innerCell.Controls.Add(innerPhForTableCells);
 
                             innerTable.Rows[counter].Cells.Add(innerCell);
@@ -1090,6 +1215,142 @@ namespace Cheveux
                 function.logAnError("error loading stylist reviews. Error: "+err.ToString());
             }
         }
+        public void loadAllBookingReviews()
+        {
+            
+            int totBookingReviews = 0;
+            try
+            {
+                r = handler.getAllBookingReviews();
+                Table bTable = new Table();
+                bTable.CssClass = "table-bordered";
+                int count = 0;
+                foreach(SP_GetReviews br in r)
+                {
+                    TableRow newRow = new TableRow();
+                    bTable.Rows.Add(newRow);
+
+                    TableCell newCell = new TableCell();
+
+                    PlaceHolder newPH = new PlaceHolder();
+
+                    newPH.Controls.Add(new LiteralControl(
+                    "<img src='" + br.CustomerImage +
+                    "' alt='Stylist Image' width='200' height='160'/><br/><b>"
+                    + br.CustomerName + "</b><br/><span style='text-decoration:underline;'><b>Review Date:<br></span>" 
+                    + br.Date.ToString("dd-MM-yyyy")+ "</b><br><br>"));
+                    newCell.Controls.Add(newPH);
+
+                    try
+                    {
+                        bServices = handler.getBookingServices(br.PrimaryBookingID.ToString());
+                        var dt = getBookingDateTime(br.PrimaryBookingID.ToString());
+                        if (bServices.Count == 1)
+                        {
+                            newPH = new PlaceHolder();
+                            newPH.Controls.Add(new LiteralControl("<span style='text-decoration:underline;'><b>Booking Details:</b></span><br>"
+                            + "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                            + bServices[0].ServiceName.ToString() + "</a>"
+                            + " with "
+                            + br.StylistName.ToString()
+                            + "<br> on " + dt.Item1
+                            + " at " + dt.Item2 + "<br><br>"));
+                            newCell.Controls.Add(newPH);
+                        }
+                        else if (bServices.Count == 2)
+                        {
+                            newPH = new PlaceHolder();
+                            newPH.Controls.Add(new LiteralControl("<span style='text-decoration:underline;'><b>Booking Details:</b></span><br>"
+                                +"<a href='../ViewBooking.aspx?BookingID=" + br.PrimaryBookingID.ToString().Replace(" ", string.Empty) +
+                                "'>" + bServices[0].ServiceName.ToString() +
+                                ", " + bServices[1].ServiceName.ToString() + "</a>"
+                                + " with "
+                                + br.StylistName.ToString()
+                                + "<br> on " + dt.Item1
+                                + " at " + dt.Item2 + "<br><br>"));
+                            newCell.Controls.Add(newPH);
+                        }
+                        else if (bServices.Count > 2)
+                        {
+                            string toolTip = "";
+                            int toolTipCount = 0;
+                            foreach (SP_GetBookingServices toolTipDTL in bServices)
+                            {
+                                if (toolTipCount == 0)
+                                {
+                                    toolTip = toolTipDTL.ServiceName;
+                                    toolTipCount++;
+                                }
+                                else
+                                {
+                                    toolTip += ", " + toolTipDTL.ServiceName;
+                                }
+                            }
+                            newPH = new PlaceHolder();
+                            newPH.Controls.Add(new LiteralControl("<span style='text-decoration:underline;'><b>Booking Details:</b></span><br>"
+                                +"<a title='" + toolTip + "'" +
+                                "href='../ViewBooking.aspx?BookingID=" + br.PrimaryBookingID.ToString().Replace(" ", string.Empty) +
+                                "'> Multiple Services </a>"
+                                + " with "
+                                + br.StylistName.ToString()
+                                + "<br> on " + dt.Item1
+                                + " at " + dt.Item2 + "<br><br>"));
+                            newCell.Controls.Add(newPH);
+                        }
+
+                    }
+                    catch (Exception Err)
+                    {
+                        PlaceHolder phE = new PlaceHolder();
+                        phE.Controls.Add(new LiteralControl("Booking details currently unavailable."));
+                        newCell.Controls.Add(phE);
+
+                        function.logAnError("Error getting booking services for reading booking reviews(my)."
+                                + "Error : " + Err.ToString());
+                    }
+
+                    bTable.Rows[count].Cells.Add(newCell);
+
+                    newCell = new TableCell();
+                    newPH = new PlaceHolder();
+                    newPH.Controls.Add(new LiteralControl("<b>Rating given:</b><br>"));
+                    newCell.Controls.Add(newPH);
+
+                    newPH = new PlaceHolder();
+                    AjaxControlToolkit.Rating theStars = new AjaxControlToolkit.Rating();
+                    theStars.CurrentRating = br.Rating;
+                    theStars.ID = "rt" + br.ReviewID.ToString();
+                    theStars.StarCssClass = "starRating";
+                    theStars.WaitingStarCssClass = "waitingStar";
+                    theStars.FilledStarCssClass = "filledStar";
+                    theStars.EmptyStarCssClass = "emptyStar";
+                    theStars.CssClass = "img-fluid";
+                    theStars.ReadOnly = true;
+                    newPH.Controls.Add(theStars);
+                    newCell.Controls.Add(newPH);
+
+                    newPH = new PlaceHolder();
+                    newPH.Controls.Add(new LiteralControl("<b>Comment:</b><br>"));
+                    newCell.Controls.Add(newPH);
+
+                    newPH = new PlaceHolder();
+                    newPH.Controls.Add(new LiteralControl(br.Comment + "<br><br>"));
+                    newCell.Controls.Add(newPH);
+
+                    bTable.Rows[count].Cells.Add(newCell);
+                    count++;
+                    totBookingReviews++;
+                }
+
+                lblBookingReviewsHeader.Text="Total number of booking reviews ("+totBookingReviews+")";
+                bookingsPanel.Controls.Add(bTable);
+            }
+            catch(Exception err)
+            {
+                bookingsPanel.Controls.Add(new LiteralControl("Booking reviews currently unavailable. Please try again later."));
+                function.logAnError("Error with loadAllBookingReviews method. Error: " + err.ToString());
+            }
+        }
 
         #endregion
 
@@ -1101,7 +1362,24 @@ namespace Cheveux
             cookie = Request.Cookies["CheveuxUserID"];
             if (drpReadType.SelectedValue == "0")
             {
-                loadAllStylistReviews();
+                if (drpRev.SelectedValue == "0")
+                {
+                    stylistPanel.Visible = true;
+                    bookingsPanel.Visible = false;
+
+                    lblBookingReviewsHeader.Visible = false;
+                    lblStylistReviewsHeader.Visible = true;
+                    loadAllStylistReviews();
+                }
+                else if (drpRev.SelectedValue == "1")
+                {
+                    bookingsPanel.Visible = true;
+                    stylistPanel.Visible = false;
+
+                    lblStylistReviewsHeader.Visible = false;
+                    lblBookingReviewsHeader.Visible = true;
+                    loadAllBookingReviews();
+                }
             }
             else if (drpReadType.SelectedValue == "1")//view my reviews
             {
@@ -1113,11 +1391,73 @@ namespace Cheveux
                 else if (cookie["UT"] == "C")
                 {
                     loadMyReviews(cookie["ID"].ToString());
+                    if (drpRev.SelectedValue == "0")
+                    {
+                        stylistPanel.Visible = true;
+                        bookingsPanel.Visible = false;
+
+                        lblBookingReviewsHeader.Visible = false;
+                        lblStylistReviewsHeader.Visible = true;
+                    }
+                    else if (drpRev.SelectedValue == "1")
+                    {
+                        bookingsPanel.Visible = true;
+                        stylistPanel.Visible = false;
+
+                        lblStylistReviewsHeader.Visible = false;
+                        lblBookingReviewsHeader.Visible = true;
+                    }
                 }
                 
             }
         }
+        protected void drpRev_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cookie = Request.Cookies["CheveuxUserID"];
+            if (drpReadType.SelectedValue == "0")
+            {
 
+                if (drpRev.SelectedValue == "0")//stylist reviews
+                {
+                    stylistPanel.Visible = true;
+                    bookingsPanel.Visible = false;
+
+                    lblBookingReviewsHeader.Visible = false;
+                    lblStylistReviewsHeader.Visible = true;
+                    loadAllStylistReviews();
+                }
+                else if (drpRev.SelectedValue == "1")//bookings reviews
+                {
+                    bookingsPanel.Visible = true;
+                    stylistPanel.Visible = false;
+
+                    lblStylistReviewsHeader.Visible = false;
+                    lblBookingReviewsHeader.Visible = true;
+                    loadAllBookingReviews();
+                }
+            }
+            else if (drpReadType.SelectedValue == "1")
+            {
+                loadMyReviews(cookie["ID"].ToString());
+                if (drpRev.SelectedValue == "0")//stylist reviews
+                {
+                    stylistPanel.Visible = true;
+                    bookingsPanel.Visible = false;
+
+                    lblBookingReviewsHeader.Visible = false;
+                    lblStylistReviewsHeader.Visible = true;
+                }
+                else if (drpRev.SelectedValue == "1")//bookings reviews
+                {
+                    bookingsPanel.Visible = true;
+                    stylistPanel.Visible = false;
+
+                    lblStylistReviewsHeader.Visible = false;
+                    lblBookingReviewsHeader.Visible = true;
+                }
+            }
+
+        }
         #endregion
 
         #endregion
