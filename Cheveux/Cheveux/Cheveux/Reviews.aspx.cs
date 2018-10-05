@@ -1102,12 +1102,12 @@ namespace Cheveux
                     }
                     newCell.Controls.Add(ph);
 
-                    ph = new PlaceHolder();
-                    ph.Controls.Add(new LiteralControl("<a class='btn btn-primary' "+
-                                        "style='text-decoration:none !important;'"+
-                                        "href='../Cheveux/Reviews.aspx?Action=MakeAreview'"+
-                                        ">Review</a>"));
-                    newCell.Controls.Add(ph);
+                    //ph = new PlaceHolder();
+                    //ph.Controls.Add(new LiteralControl("<a class='btn btn-primary' "+
+                    //                    "style='text-decoration:none !important;'"+
+                    //                    "href='../Cheveux/Reviews.aspx?Action=MakeAreview'"+
+                    //                    ">Review</a>"));
+                    //newCell.Controls.Add(ph);
 
                     newCell.Font.Bold = true;
                     tblForStylist.Rows[0].Cells.Add(newCell);
