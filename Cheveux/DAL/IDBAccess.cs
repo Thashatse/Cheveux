@@ -185,7 +185,11 @@ namespace DAL
         bool updateBookingReview(REVIEW r);
         #endregion
 
+        #region Employee
         List<SP_GetEmpNames> GetEmpNames();
+        USER getManagerContact();
+        #endregion
+
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);

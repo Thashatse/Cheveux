@@ -1477,7 +1477,7 @@ namespace Cheveux
 
                 if (stockSettings.NxtOrderdDate < DateTime.Now)
                 {
-                    updateAutoOrderDate();
+                    stockSettings.NxtOrderdDate = function.updateAutoOrderDate(ddlAutoStockOrderFrequency.SelectedValue.ToString());
                     updateStockManagement(sender, e);
                 }
             }
@@ -1511,7 +1511,7 @@ namespace Cheveux
                 {
                     stockSettings.AutoPurchaseProducts = false;
                 }
-                updateAutoOrderDate();
+                stockSettings.NxtOrderdDate = function.updateAutoOrderDate(ddlAutoStockOrderFrequency.SelectedValue.ToString());
                 handler.updateStockSettings(stockSettings);
             }
             catch (Exception Err)
@@ -1624,26 +1624,6 @@ namespace Cheveux
             else
             {
                 Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An error occoured removing the product, Please try again later.");
-            }
-        }
-
-        private void updateAutoOrderDate()
-        {
-            if(ddlAutoStockOrderFrequency.SelectedValue == "Asn")
-            {
-                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(1);
-            }
-            else if (ddlAutoStockOrderFrequency.SelectedValue == "Ewe")
-            {
-                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(7);
-            }
-            else if (ddlAutoStockOrderFrequency.SelectedValue == "E2w")
-            {
-                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(14);
-            }
-            else if (ddlAutoStockOrderFrequency.SelectedValue == "Emo")
-            {
-                stockSettings.NxtOrderdDate = DateTime.Now.AddDays(28);
             }
         }
         #endregion

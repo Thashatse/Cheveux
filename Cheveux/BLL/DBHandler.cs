@@ -403,6 +403,11 @@ namespace BLL
         }
         #endregion
 
+        public USER getManagerContact()
+        {
+            return db.getManagerContact();
+        }
+
         public List<SP_GetTodaysBookings> getTodaysBookings() 
         {
             return db.getTodaysBookings();

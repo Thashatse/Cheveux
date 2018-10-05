@@ -150,6 +150,7 @@ namespace BLL
         REVIEW getStylistRating(string stylistID);
         #endregion
 
+        USER getManagerContact();
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
         List<SP_GetCustomerBooking> getCustomerUpcomingBookings(string CustomerID);

@@ -11,6 +11,7 @@ BEGIN
 	SELECT P.[Name]
 	   ,AP.[ProductID]
       ,AP.[Qty]
+	  ,p.[ProductType(T/A/S)]
 	FROM [CHEVEUX].[dbo].[Auto_Purchase_Products] AP, PRODUCT P
 	Where AP.[ProductID] = P.ProductID
 	order by P.[Name]

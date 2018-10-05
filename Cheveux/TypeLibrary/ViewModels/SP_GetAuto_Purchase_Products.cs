@@ -11,5 +11,6 @@ namespace TypeLibrary.ViewModels
         public string Name { get; set; }
         public int Qty { get; set; }
         public string ProductID { get; set; }
+        public string ProductType { get; set; }
     }
 }

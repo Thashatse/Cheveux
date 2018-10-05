@@ -1873,6 +1873,7 @@ namespace DAL
                             SP_GetAuto_Purchase_Products listItem = new SP_GetAuto_Purchase_Products();
                             listItem.Name = row["Name"].ToString();
                             listItem.ProductID = row["ProductID"].ToString();
+                            listItem.ProductType = row["ProductType(T/A/S)"].ToString();
                             listItem.Qty = int.Parse(row["Qty"].ToString());
                             list.Add(listItem);
                         }
@@ -3219,6 +3220,32 @@ namespace DAL
                         };
                     }
                     return Emp;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public USER getManagerContact()
+        {
+            try
+            {
+                using (DataTable table = DBHelper.Select("SP_GetManagerContact",
+            CommandType.StoredProcedure))
+                {
+                    USER ManagerContact = null;
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        ManagerContact = new USER
+                        {
+                            Email = row["Email"].ToString(),
+                            ContactNo = row["ContactNo"].ToString()
+                        };
+                    }
+                    return ManagerContact;
                 }
             }
             catch (Exception e)

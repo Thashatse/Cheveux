@@ -16,6 +16,12 @@ namespace BLL
     {
         DBHandler Handler = new DBHandler();
 
+        public void runAutoFunctions()
+        {
+            sendOGBkngNoti();
+            autoPurchOrders();
+        }
+
         public Tuple<double, double> getVat(double VATIncluded)
         {
             /*
@@ -40,105 +46,6 @@ namespace BLL
                 VAT = VATExcluded - VATIncluded;
             }
             return Tuple.Create(VATExcluded, (VAT * -1));
-        }
-
-        public string GetFullProductTypeText(char ProductType)
-        {
-            /*
-             * Given abbreviated char that database returns for product type, 
-             * this class will return the full text of that product type
-             */
-            if (ProductType == 'S')
-            {
-                return "Service";
-            }
-            else if (ProductType == 'T')
-            {
-                return "Treatment";
-            }
-            else if (ProductType == 'A')
-            {
-                return "Accessories";
-            }
-            else if (ProductType == 'X')
-            {
-                return "ALL";
-            }
-            else
-            {
-                logAnError("Unknown Product Type given to GetFullProductTypeText method in functions");
-                return "error";
-            }
-        }
-         
-        public string GetFullEmployeeTypeText(char empType)
-        {
-            /*
-             * Given abbreviated char that database returns for product type, 
-             * this class will return the full text of that product type
-             */
-            if (empType == 'S')
-            {
-                return "Stylist";
-            }
-            else if (empType == 'R')
-            {
-                return "Receptionist";
-            }
-            else if (empType == 'M')
-            {
-                return "Manager";
-            }
-            else if (empType == 'A')
-            {
-                return "Manager";
-            }
-            else
-            {
-                logAnError("Unknown Employee Type given to GetFullEmployeeTypeText in functions");
-                return "error";
-            }
-        }
-
-        public string GetFullActiveTypeText(char activeType)
-        {
-            /*
-             * Given abbreviated char that database returns for Active, 
-             * this class will return the full text of that Active type
-             */
-            if (activeType == 'T')
-            {
-                return "True";
-            }
-            else if (activeType == 'F')
-            {
-                return "Fasle";
-            }
-            else
-            {
-                logAnError("Unknown Active Type given to GetFullActiveTypeText in functions: "+activeType);
-                return "error";
-            }
-        }
-
-        public string GetFullArrivedStatus(char ArrivedStatus)
-        {
-            /*
-             * Given abbreviated char that database returns for Arrived, 
-             * this class will return the full text of that Arrival status
-             */
-            if (ArrivedStatus == 'Y')
-            {
-                return "Yes";
-            }
-            else if (ArrivedStatus == 'N')
-            {
-                return "No";
-            }
-            else
-            {
-                return "error";
-            }
         }
 
         public void logAnError(string Err)
@@ -209,6 +116,27 @@ namespace BLL
             }
         }
 
+        public bool compareToSearchTerm(string toBeCompared, string comparedTo)
+        {
+            //check if toBeCompared is contained in comparedTo 
+            bool result = false;
+            if (comparedTo != null)
+            {
+                toBeCompared = toBeCompared.ToLower();
+                string searcTearm = comparedTo.ToLower();
+                if (toBeCompared.Contains(searcTearm))
+                {
+                    result = true;
+                }
+            }
+            else
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        #region Generate IDs
         public string GenerateRandomBookingID()
         {
             try
@@ -347,7 +275,9 @@ namespace BLL
                 throw new Exception();
             }
         }
+        #endregion
 
+        #region Emails
         public bool sendEmailAlert(string receverAddress, string reciverName, string subject, string body, string senderName)
         {
             bool success = false;
@@ -487,27 +417,9 @@ namespace BLL
                     logAnError("Error sending out going booking notifications: " + err);
             }
         }
+        #endregion
 
-        public bool compareToSearchTerm(string toBeCompared, string comparedTo)
-        {
-            //check if toBeCompared is contained in comparedTo 
-            bool result = false;
-            if (comparedTo != null)
-            {
-                toBeCompared = toBeCompared.ToLower();
-                string searcTearm = comparedTo.ToLower();
-                if (toBeCompared.Contains(searcTearm))
-                {
-                    result = true;
-                }
-            }
-            else
-            {
-                result = true;
-            }
-            return result;
-        }
-
+        #region Purchase Orders
         public string newPurchaseOrder(Order order, List<Order_DTL> orderDTLs)
         {
                 bool success = false;
@@ -571,5 +483,292 @@ namespace BLL
             }
             return "Err";
         }
+
+        public DateTime updateAutoOrderDate(string frequency)
+        {
+            DateTime NxtOrderdDate = DateTime.Now.AddDays(-1);
+            if (frequency == "Asn")
+            {
+                NxtOrderdDate = DateTime.Now.AddDays(1);
+            }
+            else if (frequency == "Ewe")
+            {
+                NxtOrderdDate = DateTime.Now.AddDays(7);
+            }
+            else if (frequency == "E2w")
+            {
+                NxtOrderdDate = DateTime.Now.AddDays(14);
+            }
+            else if (frequency == "Emo")
+            {
+                NxtOrderdDate = DateTime.Now.AddDays(28);
+            }
+            return NxtOrderdDate;
         }
+
+        public void autoPurchOrders()
+        {
+            Stock_Management stockSettings = new Stock_Management();
+            List<SP_GetAuto_Purchase_Products> AutoPurchProds = new List<SP_GetAuto_Purchase_Products>();
+            List<PRODUCT> allProducts = null;
+            string success = "Err";
+            try
+            {
+                stockSettings = Handler.getStockSettings();
+                if (stockSettings.AutoPurchase == true)
+                {
+                    if (stockSettings.NxtOrderdDate < DateTime.Now)
+                    {
+                        if(stockSettings.AutoPurchaseProducts == true)
+                        {
+                            AutoPurchProds = Handler.getAutoPurchOrdProds();
+                        }
+                        else
+                        {
+                            allProducts = Handler.getAllProducts();
+                            foreach(PRODUCT prod in allProducts)
+                            {
+                                SP_GetAuto_Purchase_Products purchProd = new SP_GetAuto_Purchase_Products();
+                                purchProd.ProductID = prod.ProductID;
+                                purchProd.Name = prod.Name;
+                                purchProd.ProductType = prod.ProductType;
+                                purchProd.Qty = stockSettings.PurchaseQty;
+                                AutoPurchProds.Add(purchProd);
+                            }
+                        }
+
+                        List<Supplier> supps = Handler.getSuppliers();
+                        foreach(Supplier sup in supps)
+                        {
+                            Order order = new Order();
+                            order.supplierID = sup.supplierID;
+                            List<Order_DTL> orderDTLs = new List<Order_DTL>();
+
+                            foreach (SP_GetAuto_Purchase_Products prod in AutoPurchProds)
+                            {
+                                if(prod.ProductType == "A")
+                                {
+                                    SP_GetAllAccessories prodDetails = Handler.selectAccessory(prod.ProductID);
+                                    if(prodDetails.supplierID == sup.supplierID
+                                        && prodDetails.Qty < stockSettings.LowStock)
+                                    {
+                                        Order_DTL newOrderProduct = new Order_DTL();
+                                        newOrderProduct.Qty = prod.Qty;
+                                        newOrderProduct.ProductID = prod.ProductID;
+                                        orderDTLs.Add(newOrderProduct);
+                                    }
+                                }
+                                else if (prod.ProductType == "T")
+                                {
+                                    SP_GetAllTreatments prodDetails = Handler.selectTreatment(prod.ProductID);
+                                    if (prodDetails.supplierID == sup.supplierID
+                                        && prodDetails.Qty < stockSettings.LowStock)
+                                    {
+                                        Order_DTL newOrderProduct = new Order_DTL();
+                                        newOrderProduct.Qty = prod.Qty;
+                                        newOrderProduct.ProductID = prod.ProductID;
+                                        orderDTLs.Add(newOrderProduct);
+                                    }
+                                }
+                            }
+
+                            if(orderDTLs.Count > 0)
+                            {
+                                success = newPurchaseOrder(order, orderDTLs);
+
+                            if (success != "Err")
+                            {
+                                    stockSettings.NxtOrderdDate = updateAutoOrderDate(stockSettings.AutoPurchaseFrequency);
+                                    Handler.updateStockSettings(stockSettings);
+
+                                //send manager confirmation email
+                                Supplier supp = Handler.getSupplier(order.supplierID);
+                                //send an email notification
+                                var body = new System.Text.StringBuilder();
+                                body.AppendFormat("Hello Mnager,");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"Please review the auto purchase order request sent to "+sup.supplierName+" at the link below");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx?Action=ViewOrder&OrderID=" + success);
+                                body.AppendLine(@"");
+                                body.AppendLine(@"The Next Auto Purchase request will occur on " + stockSettings.NxtOrderdDate.ToString("dd MMM yyyy"));
+                                body.AppendLine(@"");
+                                body.AppendLine(@"Regards,");
+                                body.AppendLine(@"");
+                                body.AppendLine(@"The Cheveux Team");
+                                sendEmailAlert(Handler.getManagerContact().Email, "Manager",
+                                    "New Auto Purchase Order Request",
+                                    body.ToString(),
+                                    "Cheveux");
+                            }
+                            else
+                            {
+                                    stockSettings.NxtOrderdDate = updateAutoOrderDate(stockSettings.AutoPurchaseFrequency);
+                                    Handler.updateStockSettings(stockSettings);
+
+                                    //send manager error email
+                                    Supplier supp = Handler.getSupplier(order.supplierID);
+                                    //send an email notification
+                                    var body = new System.Text.StringBuilder();
+                                    body.AppendFormat("Hello Mnager,");
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"A failed  auto purchase order request for supplier " + sup.supplierName + " occurred at " + DateTime.Now.ToString("HH:mm dd MMM yyyy"));
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"Please contact admin");
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"The Next Auto Purchase request will occur on " + stockSettings.NxtOrderdDate.ToString("dd MMM yyyy"));
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"Regards,");
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"The Cheveux Team");
+                                    sendEmailAlert(Handler.getManagerContact().Email, "Manager",
+                                        "New Auto Purchase Order Request",
+                                        body.ToString(),
+                                        "Cheveux");
+
+                                    logAnError("Error making Auto Purchse Order");
+
+                                    success = "";
+                            }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        success = "";
+                    }
+                }
+                else
+                {
+                    success = "";
+                }
+            }
+            catch (Exception err)
+            {
+                logAnError("Error making Auto Purchse Order: " + err);
+            }
+
+            if (success == "Err")
+            {
+                logAnError("Error making Auto Purchse Order");
+                //send an email notification
+                var body = new System.Text.StringBuilder();
+                body.AppendFormat("Hello Mnager,");
+                body.AppendLine(@"");
+                body.AppendLine(@"A faild auto purchase order request ocourde at " + DateTime.Now.ToString("HH:mm dd MMM yyyy"));
+                body.AppendLine(@"");
+                body.AppendLine(@"Please contact admin");
+                body.AppendLine(@"");
+                body.AppendLine(@"Regards,");
+                body.AppendLine(@"");
+                body.AppendLine(@"The Cheveux Team");
+                sendEmailAlert(Handler.getManagerContact().Email, "Manager",
+                    "New Auto Purchase Order Request",
+                    body.ToString(),
+                    "Cheveux");
+            }
+        }
+        #endregion
+
+        #region Abreviation Full Text
+        public string GetFullProductTypeText(char ProductType)
+        {
+            /*
+             * Given abbreviated char that database returns for product type, 
+             * this class will return the full text of that product type
+             */
+            if (ProductType == 'S')
+            {
+                return "Service";
+            }
+            else if (ProductType == 'T')
+            {
+                return "Treatment";
+            }
+            else if (ProductType == 'A')
+            {
+                return "Accessories";
+            }
+            else if (ProductType == 'X')
+            {
+                return "ALL";
+            }
+            else
+            {
+                logAnError("Unknown Product Type given to GetFullProductTypeText method in functions");
+                return "error";
+            }
+        }
+
+        public string GetFullEmployeeTypeText(char empType)
+        {
+            /*
+             * Given abbreviated char that database returns for product type, 
+             * this class will return the full text of that product type
+             */
+            if (empType == 'S')
+            {
+                return "Stylist";
+            }
+            else if (empType == 'R')
+            {
+                return "Receptionist";
+            }
+            else if (empType == 'M')
+            {
+                return "Manager";
+            }
+            else if (empType == 'A')
+            {
+                return "Manager";
+            }
+            else
+            {
+                logAnError("Unknown Employee Type given to GetFullEmployeeTypeText in functions");
+                return "error";
+            }
+        }
+
+        public string GetFullActiveTypeText(char activeType)
+        {
+            /*
+             * Given abbreviated char that database returns for Active, 
+             * this class will return the full text of that Active type
+             */
+            if (activeType == 'T')
+            {
+                return "True";
+            }
+            else if (activeType == 'F')
+            {
+                return "Fasle";
+            }
+            else
+            {
+                logAnError("Unknown Active Type given to GetFullActiveTypeText in functions: " + activeType);
+                return "error";
+            }
+        }
+
+        public string GetFullArrivedStatus(char ArrivedStatus)
+        {
+            /*
+             * Given abbreviated char that database returns for Arrived, 
+             * this class will return the full text of that Arrival status
+             */
+            if (ArrivedStatus == 'Y')
+            {
+                return "Yes";
+            }
+            else if (ArrivedStatus == 'N')
+            {
+                return "No";
+            }
+            else
+            {
+                return "error";
+            }
+        }
+        #endregion
     }
+}
