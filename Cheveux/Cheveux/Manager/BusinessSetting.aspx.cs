@@ -473,8 +473,7 @@ namespace Cheveux
                     foreach (SP_GetAllTreatments treat in products.Item2)
                     {
                         //make sure there is stock
-                        if (treat.Qty > 0
-                            && (function.compareToSearchTerm(treat.Name, txtSearchItems.Text) == true
+                        if ((function.compareToSearchTerm(treat.Name, txtSearchItems.Text) == true
                             || function.compareToSearchTerm(treat.ProductDescription, txtSearchItems.Text) == true
                             || function.compareToSearchTerm(treat.Brandname, txtSearchItems.Text) == true)
                             && (function.compareToSearchTerm(treat.Name, TxtSearchProductForAutoLowStock.Text) == true
@@ -490,8 +489,7 @@ namespace Cheveux
                     foreach (SP_GetAllAccessories Access in products.Item1)
                     {
                         //make sure there is stock
-                        if (Access.Qty > 0
-                            && (function.compareToSearchTerm(Access.Name, txtSearchItems.Text) == true
+                        if ((function.compareToSearchTerm(Access.Name, txtSearchItems.Text) == true
                             || function.compareToSearchTerm(Access.ProductDescription, txtSearchItems.Text) == true
                             || function.compareToSearchTerm(Access.Brandname, txtSearchItems.Text) == true)
                             && (function.compareToSearchTerm(Access.Name, TxtSearchProductForAutoLowStock.Text) == true
@@ -548,6 +546,11 @@ namespace Cheveux
             }
         }
 
+        protected void TxtSearchProductForAutoLowStock_TextChanged(object sender, EventArgs e)
+        {
+            loadProductListBoxs(sender, e, 0);
+        }
+
         List<string> productIDs = new List<string>();
 
         protected void loadproductIDs()
@@ -564,12 +567,15 @@ namespace Cheveux
                 //add treatments
                 foreach (SP_GetAllTreatments treat in products.Item2)
                 {
-                    if (treat.Name == lblFeatuerdItems.SelectedItem.Text)
+                    if (lblProductsForAutoOrder.SelectedIndex != -1 && lblFeatuerdItems.SelectedItem != null)
                     {
-                        productIDs[0] = treat.ProductID.ToString();
+                        if (treat.Name == lblFeatuerdItems.SelectedItem.Text)
+                        {
+                            productIDs[0] = treat.ProductID.ToString();
+                        }
                     }
 
-                    if(lblProductsForAutoOrder.SelectedIndex != -1)
+                    if(lblProductsForAutoOrder.SelectedIndex != -1 && lblProductsForAutoOrder.SelectedItem != null)
                     {
                         if (treat.Name == lblProductsForAutoOrder.SelectedItem.Text)
                         {
@@ -577,7 +583,7 @@ namespace Cheveux
                         }
                     }
 
-                    if (lblProductsOnAutoOrder.SelectedIndex != -1)
+                    if (lblProductsOnAutoOrder.SelectedIndex != -1 && lblProductsOnAutoOrder.SelectedItem != null)
                     {
                         string[] array = lblProductsOnAutoOrder.SelectedItem.Text.Split('*');
                         array[1] = array[1].Substring(1);
@@ -591,12 +597,15 @@ namespace Cheveux
                 //add accessories
                 foreach (SP_GetAllAccessories Access in products.Item1)
                 {
-                    if (Access.Name == lblFeatuerdItems.SelectedItem.Text)
+                    if (lblProductsForAutoOrder.SelectedIndex != -1 && lblFeatuerdItems.SelectedItem != null)
                     {
-                        productIDs[0] = Access.ProductID.ToString();
+                        if (Access.Name == lblFeatuerdItems.SelectedItem.Text)
+                        {
+                            productIDs[0] = Access.ProductID.ToString();
+                        }
                     }
 
-                    if (lblProductsForAutoOrder.SelectedIndex != -1)
+                    if (lblProductsForAutoOrder.SelectedIndex != -1 && lblProductsForAutoOrder.SelectedItem != null)
                     {
                         if (Access.Name == lblProductsForAutoOrder.SelectedItem.Text)
                         {
@@ -604,7 +613,7 @@ namespace Cheveux
                         }
                     }
 
-                    if (lblProductsOnAutoOrder.SelectedIndex != -1)
+                    if (lblProductsOnAutoOrder.SelectedIndex != -1 && lblProductsOnAutoOrder.SelectedItem != null)
                     {
                         string[] array = lblProductsOnAutoOrder.SelectedItem.Text.Split('*');
                         array[1] = array[1].Substring(1);
@@ -1627,5 +1636,6 @@ namespace Cheveux
             }
         }
         #endregion
+
     }
 }

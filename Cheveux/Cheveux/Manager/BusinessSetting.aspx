@@ -325,7 +325,7 @@
                                         <asp:Label ID="lblListBoxHeader" runat="server" Text="Label"></asp:Label>: </h3>
                                     <p style="text-align: right; float: right;">
                                         <!-- Search -->
-                                        <asp:TextBox ID="txtSearchItems" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control"></asp:TextBox>
+                                        <asp:TextBox ID="txtSearchItems" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control" OnTextChanged="TxtSearchProductForAutoLowStock_TextChanged"></asp:TextBox>
                                     </p>
                                     <!--Line Break-->
                                     <br />
@@ -436,7 +436,7 @@
                                                     Products: </h3>
                                                 <p style="text-align: right; float: right;">
                                                     <!-- Search -->
-                                                    <asp:TextBox ID="TxtSearchProductForAutoLowStock" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="TxtSearchProductForAutoLowStock" runat="server" AutoPostBack="true" placeholder="search" CssClass="form-control" OnTextChanged="TxtSearchProductForAutoLowStock_TextChanged"></asp:TextBox>
                                                 </p>
                                                 <!--Line Break-->
                                                 <br />

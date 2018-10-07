@@ -538,71 +538,90 @@ namespace BLL
                         }
 
                         List<Supplier> supps = Handler.getSuppliers();
-                        foreach(Supplier sup in supps)
+                        foreach (Supplier sup in supps)
                         {
                             Order order = new Order();
                             order.supplierID = sup.supplierID;
                             List<Order_DTL> orderDTLs = new List<Order_DTL>();
+                            List<OrderViewModel> outOrders = Handler.getOutStandingOrders();
 
                             foreach (SP_GetAuto_Purchase_Products prod in AutoPurchProds)
                             {
-                                if(prod.ProductType == "A")
+                                bool add = true;
+
+                                //check if the product is not alread on order 
+                                foreach (OrderViewModel outOrder in outOrders)
                                 {
-                                    SP_GetAllAccessories prodDetails = Handler.selectAccessory(prod.ProductID);
-                                    if(prodDetails.supplierID == sup.supplierID
-                                        && prodDetails.Qty < stockSettings.LowStock)
+                                    List<OrderViewModel> outOrderProducts = Handler.getProductOrderDL(outOrder.OrderID.ToString());
+                                    foreach (OrderViewModel outOrderDL in outOrderProducts)
                                     {
-                                        Order_DTL newOrderProduct = new Order_DTL();
-                                        newOrderProduct.Qty = prod.Qty;
-                                        newOrderProduct.ProductID = prod.ProductID;
-                                        orderDTLs.Add(newOrderProduct);
+                                        if (outOrderDL.ProductID == prod.ProductID)
+                                        {
+                                            add = false;
+                                        }
                                     }
                                 }
-                                else if (prod.ProductType == "T")
+
+                                if (add == true)
                                 {
-                                    SP_GetAllTreatments prodDetails = Handler.selectTreatment(prod.ProductID);
-                                    if (prodDetails.supplierID == sup.supplierID
-                                        && prodDetails.Qty < stockSettings.LowStock)
+                                    if (prod.ProductType == "A")
                                     {
-                                        Order_DTL newOrderProduct = new Order_DTL();
-                                        newOrderProduct.Qty = prod.Qty;
-                                        newOrderProduct.ProductID = prod.ProductID;
-                                        orderDTLs.Add(newOrderProduct);
+                                        SP_GetAllAccessories prodDetails = Handler.selectAccessory(prod.ProductID);
+                                        if (prodDetails.supplierID == sup.supplierID
+                                            && prodDetails.Qty < stockSettings.LowStock)
+                                        {
+                                            Order_DTL newOrderProduct = new Order_DTL();
+                                            newOrderProduct.Qty = prod.Qty;
+                                            newOrderProduct.ProductID = prod.ProductID;
+                                            orderDTLs.Add(newOrderProduct);
+                                        }
+                                    }
+                                    else if (prod.ProductType == "T")
+                                    {
+                                        SP_GetAllTreatments prodDetails = Handler.selectTreatment(prod.ProductID);
+                                        if (prodDetails.supplierID == sup.supplierID
+                                            && prodDetails.Qty < stockSettings.LowStock)
+                                        {
+                                            Order_DTL newOrderProduct = new Order_DTL();
+                                            newOrderProduct.Qty = prod.Qty;
+                                            newOrderProduct.ProductID = prod.ProductID;
+                                            orderDTLs.Add(newOrderProduct);
+                                        }
                                     }
                                 }
                             }
 
-                            if(orderDTLs.Count > 0)
+                            if (orderDTLs.Count > 0)
                             {
                                 success = newPurchaseOrder(order, orderDTLs);
 
-                            if (success != "Err")
-                            {
+                                if (success != "Err")
+                                {
                                     stockSettings.NxtOrderdDate = updateAutoOrderDate(stockSettings.AutoPurchaseFrequency);
                                     Handler.updateStockSettings(stockSettings);
 
-                                //send manager confirmation email
-                                Supplier supp = Handler.getSupplier(order.supplierID);
-                                //send an email notification
-                                var body = new System.Text.StringBuilder();
-                                body.AppendFormat("Hello Mnager,");
-                                body.AppendLine(@"");
-                                body.AppendLine(@"Please review the auto purchase order request sent to "+sup.supplierName+" at the link below");
-                                body.AppendLine(@"");
-                                body.AppendLine(@"http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx?Action=ViewOrder&OrderID=" + success);
-                                body.AppendLine(@"");
-                                body.AppendLine(@"The Next Auto Purchase request will occur on " + stockSettings.NxtOrderdDate.ToString("dd MMM yyyy"));
-                                body.AppendLine(@"");
-                                body.AppendLine(@"Regards,");
-                                body.AppendLine(@"");
-                                body.AppendLine(@"The Cheveux Team");
-                                sendEmailAlert(Handler.getManagerContact().Email, "Manager",
-                                    "New Auto Purchase Order Request",
-                                    body.ToString(),
-                                    "Cheveux");
-                            }
-                            else
-                            {
+                                    //send manager confirmation email
+                                    Supplier supp = Handler.getSupplier(order.supplierID);
+                                    //send an email notification
+                                    var body = new System.Text.StringBuilder();
+                                    body.AppendFormat("Hello Mnager,");
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"Please review the auto purchase order request sent to " + sup.supplierName + " at the link below");
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"http://sict-iis.nmmu.ac.za/beauxdebut/Manager/Products.aspx?Action=ViewOrder&OrderID=" + success);
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"The Next Auto Purchase request will occur on " + stockSettings.NxtOrderdDate.ToString("dd MMM yyyy"));
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"Regards,");
+                                    body.AppendLine(@"");
+                                    body.AppendLine(@"The Cheveux Team");
+                                    sendEmailAlert(Handler.getManagerContact().Email, "Manager",
+                                        "New Auto Purchase Order Request",
+                                        body.ToString(),
+                                        "Cheveux");
+                                }
+                                else
+                                {
                                     stockSettings.NxtOrderdDate = updateAutoOrderDate(stockSettings.AutoPurchaseFrequency);
                                     Handler.updateStockSettings(stockSettings);
 
@@ -629,7 +648,7 @@ namespace BLL
                                     logAnError("Error making Auto Purchse Order");
 
                                     success = "";
-                            }
+                                }
                             }
                         }
                     }

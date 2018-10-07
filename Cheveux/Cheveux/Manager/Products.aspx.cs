@@ -153,6 +153,11 @@ namespace Cheveux.Manager
                         loadEditBrand();
                         divAddBrand.Visible = true;
                     }
+                    else if (action == "RepeatOrder")
+                    {
+                        hideAllView();
+                        repeatPurchaseOrder(sender, e);
+                    }
                     else
                     {
                         //check if a vie has been requested
@@ -595,7 +600,9 @@ namespace Cheveux.Manager
                         }
                         else
                         {
-                            newCell.Text = "<br/><br/> <button type = 'button' class='btn btn-default'> <a href='Products.aspx?View=PastOrders'>All Past Purchase Orders</a></button>";
+                            newCell.Text = "<br/><br/> <button type = 'button' class='btn btn-default'> <a href='Products.aspx?View=PastOrders'>All Past Purchase Orders</a></button>" +
+                                " &nbsp; <button type = 'button' class='btn btn-primary'> <a class='btn-primary' href='?Action=RepeatOrder&OrderID=" + order.OrderID.ToString() +
+                                "'> Repeat Order </a></button>";
                         }
 
                         tblViewOrder.Rows[rowCount].Cells.Add(newCell);
@@ -1125,6 +1132,56 @@ namespace Cheveux.Manager
             }
         }
         #endregion
+
+        public void repeatPurchaseOrder(object sender, EventArgs e)
+        {
+            string orderID = Request.QueryString["OrderID"];
+            if (orderID != null && orderID != "")
+            {
+                string result = "Err";
+
+                try
+                {
+                    //get order
+                    OrderViewModel pastOrder = handler.getOrder(orderID);
+                    //get order detail lines
+                    List<OrderViewModel> pastOrderProducts = handler.getProductOrderDL(pastOrder.OrderID.ToString());
+
+                    Order order = new Order();
+                    order.supplierID = pastOrder.supplierID.ToString();
+
+                    List<Order_DTL> orderDTLs = new List<Order_DTL>();
+
+                    foreach (OrderViewModel prod in pastOrderProducts)
+                    {
+                        Order_DTL newOrderDL = new Order_DTL();
+                        newOrderDL.ProductID = prod.ProductID;
+                        newOrderDL.Qty = prod.Qty;
+                        orderDTLs.Add(newOrderDL);
+                    }
+
+                    result = function.newPurchaseOrder(order, orderDTLs);
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error making new product order | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20product%20order");
+                }
+
+                if (result != "Err")
+                {
+                    Response.Redirect("Products.aspx?Action=ViewOrder&OrderID=" + result);
+                }
+                else if (result == "Err")
+                {
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20product%20order");
+                }
+            }
+            else
+            {
+                btnViewPastOrders_Click(sender, e);
+            }
+        }
         #endregion
 
         #region Products
