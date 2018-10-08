@@ -32,7 +32,7 @@
             /*border: 1px solid #ddd;
             border-radius: 0;
             padding: 5px;*/
-            /*height: 400px;*/ 
+            /*height: 400px;*/
             height: auto;
             /*overflow-y: scroll;*/
         }
@@ -76,13 +76,22 @@
                                 <asp:Label ID="OpeningHeader" CssClass="text-center" runat="server" Text="" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                             </div>
                         </div>
-                        <div class="row">
+                        <%--                        <div class="row">
                             <div class="col-2">
                                 <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnRev" runat="server" visible="false">Write A Review</a>
                                 <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=ReadReviews" id="btnRead" runat="server" visible="false">Read Reviews</a>
                             </div>
+                        </div>--%>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-10"></div>
+                        <div class="col-sm-12 col-md-2">
+                            <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnRev" runat="server" visible="false">Write A Review</a>
+                            <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=ReadReviews" id="btnRead" runat="server" visible="false">Read Reviews</a>
                         </div>
                     </div>
+
 
                     <!--for general errors or telling user what must happen next-->
                     <div class="row">
