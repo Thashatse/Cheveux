@@ -131,6 +131,39 @@ namespace Cheveux.Manager
                 }
 
             }
+            else if (drpReport.SelectedIndex == 3)
+            {
+                reportByContainer.Visible = true;
+                if (ddlReportFor.SelectedIndex == -1)
+                {
+                    ddlReportFor.Items.Add("Value");
+                    ddlReportFor.Items.Add("Volume");
+                }
+
+                if (ddlReportFor.SelectedValue != "-1"
+                    && CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                {
+                    reportByContainer.Visible = true;
+                    reportDateRangeContainer.Visible = true;
+                    divReport.Visible = true;
+                    salesPaymentType.Visible = true;
+                    //display the sales report
+                    getProductSalesReport(true);
+                }
+                else if (ddlReportFor.SelectedValue != "-1"
+                    && CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
+                {
+                    reportDateRangeContainer.Visible = true;
+                    reportByContainer.Visible = true;
+                    divReport.Visible = true;
+                    salesPaymentType.Visible = true;
+                    //display the sales report
+                    getProductSalesReport(false);
+                }
+
+            }
         }
 
         protected void btnRefresh_Click(object sender, EventArgs e)
@@ -431,6 +464,180 @@ namespace Cheveux.Manager
                     chartConfig.Add("subCaption", reportGenerateDateLable.Text);
                     chartConfig.Add("xAxisName", "Customer");
                     chartConfig.Add("yAxisName", "Visits");
+                    chartConfig.Add("theme", "fusion");
+
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+
+                    Chart MyFirstChart = new Chart("column2d", "first_chart", "800", "550", "json", jsonData.ToString());
+                    // render chart
+                    Literal1.Text = MyFirstChart.Render();
+                    #endregion
+                }
+                btnPrint.Visible = true;
+                btnGraph.Visible = true;
+            }
+            catch (Exception Err)
+            {
+                function.logAnError("Error getting Sales Report " + Err.ToString());
+                divReport.Visible = false;
+                lError.Visible = true;
+                lError.Text = "An error occurred generating the report, Try Again Later";
+            }
+        }
+
+        private void getProductSalesReport(bool defaultDateRange)
+        {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion
+
+            //clear the table
+            tblReport.Rows.Clear();
+
+            reportLable.Text = "Sales Report";
+            reportByLable.Text = "By: " + ddlReportFor.SelectedItem.Text.ToString();
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
+            try
+            {
+                List<SP_SaleOfHairstylist> report = null;
+                if (defaultDateRange == true)
+                {
+                    reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
+                        DateTime.Today.ToString("dd MMM yyyy");
+                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today);
+                }
+                else if (defaultDateRange == false)
+                {
+                    reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                        CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
+                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate);
+                }
+
+                //get the invoice dt lines
+                if (report.Count != 0)
+                {
+                    //counter to keep track of rows in report
+                    int reportRowCount = 0;
+
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Product";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    if(ddlReportFor.SelectedIndex == 0)
+                    {
+                        newHeaderCell.Text = "Value";
+                    }
+                    else
+                    {
+                        newHeaderCell.Text = "Volume";
+                    }
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //empty cell
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    if (ddlReportFor.SelectedIndex == 1)
+                    {
+                        newHeaderCell.Text = "Volume";
+                    }
+                    else
+                    {
+                        newHeaderCell.Text = "Value";
+                    }
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+
+                    //display each record
+                    foreach (SP_SaleOfHairstylist Sales in report)
+                    {
+                        if (drpPaymentType.SelectedItem.Text == "All"
+                            || drpPaymentType.SelectedItem.Text == Sales.PaymentType.ToString().Replace(" ", string.Empty))
+                        {
+                            // create a new row in the results table and set the height
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblReport.Rows.Add(newRow);
+                            //fill the row with the data from the product results object
+                            TableCell newCell = new TableCell();
+                            newCell.Text = "Date";
+                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                            newCell = new TableCell();
+                            if (ddlReportFor.SelectedIndex == 0)
+                            {
+                                newHeaderCell.Text = "Value";
+                            }
+                            else
+                            {
+                                newHeaderCell.Text = "Volume";
+                            }
+                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                            
+                            //fill in total
+                            newCell = new TableCell();
+                            if (ddlReportFor.SelectedIndex == 1)
+                            {
+                                newHeaderCell.Text = "Volume";
+                            }
+                            else
+                            {
+                                newHeaderCell.Text = "Value";
+                            }
+                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                            reportRowCount++;
+
+                            //empty row
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblReport.Rows.Add(newRow);
+                            reportRowCount++;
+
+                            #region Graph
+                            dataValuePair.Add(new KeyValuePair<string, double>(Sales.date.ToString("dd/MM/yy") + " " + Sales.FullName.ToString(), 0));
+                            #endregion
+                        }
+                    }
+
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("caption", "Top Products By " + ddlReportFor.SelectedItem.Text.ToString() + ". Date Range: " + reportDateRangeLable.Text);
+                    chartConfig.Add("subCaption", reportGenerateDateLable.Text);
+                    chartConfig.Add("xAxisName", "Customer Visit");
+                    if (ddlReportFor.SelectedIndex == 1)
+                    {
+                        chartConfig.Add("numberSuffix", "Qty");
+                        chartConfig.Add("yAxisName", "Volume");
+                    }
+                    else
+                    {
+                        chartConfig.Add("yAxisName", "Value");
+                        chartConfig.Add("numberSuffix", "ZAR");
+                    }
                     chartConfig.Add("theme", "fusion");
 
                     // json data to use as chart data source

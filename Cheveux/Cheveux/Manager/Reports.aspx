@@ -37,12 +37,10 @@
                                     <asp:DropDownList ID="drpReport" runat="server" AutoPostBack="True" class="dropdown"
                                         CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReport_SelectedIndexChanged1"
                                         OnTextChanged="drpReport_SelectedIndexChanged1">
-
-
                                         <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
                                         <asp:ListItem Text="Bookings" Value="1"></asp:ListItem>
                                         <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
-
+                                        <asp:ListItem Text="Top Products" Value="3"></asp:ListItem>
                                     </asp:DropDownList>
 
                                     <!-- line Break -->
