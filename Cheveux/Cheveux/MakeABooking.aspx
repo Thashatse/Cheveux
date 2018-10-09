@@ -111,7 +111,7 @@
                                             <asp:TableCell >
                                                 <asp:Label runat="server" ID="lblServiceLabel"></asp:Label>
                                             </asp:TableCell>
-                                            <asp:TableCell width="170px">
+                                            <asp:TableCell>
                                             </asp:TableCell>
 </asp:TableRow>
 
@@ -249,6 +249,8 @@
 
                                                 <div class="col-6">
                                                     <h4>Morning</h4>
+                                                    <br />
+                                                    <asp:label runat="server" ID="lblMorningUnavailable"  Text="Unavailable" Visible="false"></asp:label>
                                                     <asp:Button class='btn btn-light' runat="server" ID="btnMorning1" OnClick="btnMorning1_Click" Visible="false" /><br />
                                                     <br />
                                                     <asp:Button class='btn btn-light' runat="server" ID="btnMorning2" OnClick="btnMorning2_Click" Visible="false" /><br />
@@ -268,10 +270,12 @@
                                                     <asp:Button class='btn btn-light' runat="server" ID="btnMorning9" OnClick="btnMorning9_Click" Visible="false" /><br />
                                                     <br />
                                                     <asp:Button class='btn btn-light' runat="server" ID="btnMorning10" OnClick="btnMorning10_Click" Visible="false" /><br />
-                                                    <br />
+                                                    
                                                 </div>
                                                 <div class="col-6">
                                                     <h4>Afternoon</h4>
+                                                    <br />
+                                                    <asp:label runat="server" ID="lblAfternoonUnavailable"  Text="Unavailable" Visible="false"></asp:label>
                                                     <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon11" OnClick="btnAfternoon11_Click" Visible="false" /><br />
                                                     <br />
                                                     <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon12" OnClick="btnAfternoon12_Click" Visible="false" /><br />
@@ -292,6 +296,7 @@
                                                     <br />
                                                     <asp:Button class='btn btn-light' runat="server" ID="btnAfternoon20" OnClick="btnAfternoon20_Click" Visible="false" /><br />
                                                     <br />
+                                                   
                                                 </div>
                                             </div>
                                         </div>

@@ -436,6 +436,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Calendar calBooking;
         
         /// <summary>
+        /// lblMorningUnavailable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMorningUnavailable;
+        
+        /// <summary>
         /// btnMorning1 control.
         /// </summary>
         /// <remarks>
@@ -524,6 +533,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnMorning10;
+        
+        /// <summary>
+        /// lblAfternoonUnavailable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAfternoonUnavailable;
         
         /// <summary>
         /// btnAfternoon11 control.
