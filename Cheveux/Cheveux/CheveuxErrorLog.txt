@@ -1,0 +1,1050 @@
+
+TimeStamp: 10/9/2018 11:14:03 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:14:03 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:14:07 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:14:08 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:14:21 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:14:22 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:14:52 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making a booking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 819
+
+TimeStamp: 10/9/2018 11:14:52 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 833
+
+TimeStamp: 10/9/2018 11:17:34 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making a booking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 819
+
+TimeStamp: 10/9/2018 11:17:34 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 833
+
+TimeStamp: 10/9/2018 11:17:37 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:17:37 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:18:45 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2123
+
+TimeStamp: 10/9/2018 11:18:45 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2123
+
+TimeStamp: 10/9/2018 11:19:19 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:19:20 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:19:24 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:19:24 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:19:56 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making a booking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 819
+
+TimeStamp: 10/9/2018 11:19:56 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 833
+
+TimeStamp: 10/9/2018 11:19:59 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:19:59 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:20:03 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:20:03 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:20:43 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making a booking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 819
+
+TimeStamp: 10/9/2018 11:20:43 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 833
+
+TimeStamp: 10/9/2018 11:20:46 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 11:20:47 AM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:19:45 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:19:45 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:20:33 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:20:33 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:20:42 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:20:42 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:20:50 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:20:50 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:21:37 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making a booking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 819
+
+TimeStamp: 10/9/2018 12:21:37 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 833
+
+TimeStamp: 10/9/2018 12:27:19 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:27:19 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:27:31 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:27:31 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:01 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making a booking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 819
+
+TimeStamp: 10/9/2018 12:28:01 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 833
+
+TimeStamp: 10/9/2018 12:28:05 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:05 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:08 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:09 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:29 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:30 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:34 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:28:34 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [receptionist.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Receptionist.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetEmpAgenda a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Receptionist.aspx.cs:line 379
+
+TimeStamp: 10/9/2018 12:29:06 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error Making a booking System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 819
+
+TimeStamp: 10/9/2018 12:29:06 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+unable to comunicate with the database on Make A Booking page: System.Threading.ThreadAbortException: Thread was being aborted.
+   at Cheveux.MakeABooking.btnNext_Click(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\MakeABooking.aspx.cs:line 833
+
+TimeStamp: 10/9/2018 12:35:41 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2123
+
+TimeStamp: 10/9/2018 12:35:41 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2123
+
+TimeStamp: 10/9/2018 12:35:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2123
+
+TimeStamp: 10/9/2018 12:35:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Couldn't get the time (check db for 2nd bkID) [appointments.aspx {getTimeCustomerServices?getTime}] error:System.ApplicationException: System.FormatException: String was not recognized as a valid DateTime.
+   at System.DateTimeParse.Parse(String s, DateTimeFormatInfo dtfi, DateTimeStyles styles)
+   at System.Convert.ToDateTime(String value)
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 697
+   at DAL.DBAccess.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 708
+   at BLL.DBHandler.getMultipleServicesTime(String primaryBookingID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 232
+   at Cheveux.Appointments.getTimeCustomerServices(String aBookingID, String primaryBookingID, Int32 i, SP_GetStylistBookings a) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Receptionist\Appointments.aspx.cs:line 2123
+
+TimeStamp: 10/9/2018 1:12:44 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:12:45 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:12:46 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:12:46 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:12:52 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error verifiying user name and password for username or email address: lachea Error:System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.End()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at System.Web.HttpResponse.Redirect(String url)
+   at Cheveux.Accounts.signIn(Object sender, EventArgs e) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Authentication\Accounts.aspx.cs:line 498
+
+TimeStamp: 10/9/2018 1:12:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:12:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:12:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:12:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:16:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:16:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:16:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083
+
+TimeStamp: 10/9/2018 1:16:56 PM
+Machine Name: JAEGAR
+OS Version: Microsoft Windows NT 10.0.17134.0
+Curent User: Sisikelelwe
+User Domain: JAEGAR
+Curent Directory: C:\Program Files (x86)\IIS Express
+Error: 
+Error getting stylist rating. Error:System.ApplicationException: System.FormatException: Input string was not in a correct format.
+   at System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   at System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3159
+   at DAL.DBAccess.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\DAL\DBAccess.cs:line 3169
+   at BLL.DBHandler.getStylistRating(String stylistID) in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\BLL\DBHandler.cs:line 382
+   at Cheveux.Reviews.loadAllStylistReviews() in C:\Users\Sisikelelwe\Source\Repos\Cheveux\Cheveux\Cheveux\Cheveux\Reviews.aspx.cs:line 1083

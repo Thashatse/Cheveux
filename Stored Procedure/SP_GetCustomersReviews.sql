@@ -21,13 +21,6 @@ alter PROCEDURE SP_GetCustomersReviews
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT ReviewID,CustomerID,EmployeeID,primaryBookingID,[Date],[Time],Rating,Comment
-	FROM [CHEVEUX].[dbo].[REVIEW]
-	WHERE CustomerID=@customerID
-END	@customerID nchar(30)
-AS
-BEGIN
-	SET NOCOUNT ON;
 	SELECT r.ReviewID,r.CustomerID,r.EmployeeID,r.primaryBookingID,r.[Date],r.[Time],r.Rating,r.Comment,
 
 

@@ -151,7 +151,8 @@
                         <a class="nav-link js-scroll-trigger dropdown-toggle" data-toggle="dropdown" href="#"
                             style="text-decoration: none;">More</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Reviews</a>
+                            <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=ReadReviews">Read Reviews</a>
+                            <a class="dropdown-item" href="../Cheveux/Reviews.aspx?Action=MakeAreview">Write Reviews</a>
                             <a class="dropdown-item" href="../Default.aspx#ContactUs">Connect</a>
                             <a class="dropdown-item" href="../Help/CheveuxHelpCenter.aspx" target="_blank">Help</a>
                         </div>
