@@ -41,7 +41,7 @@ BEGIN
 		   where customer.UserID=@customerID and customer.UserID=r.CustomerID)as[CustomerName]
 
 
-	FROM REVIEW r,[USER] u
+	FROM [CHEVEUX].[dbo].[REVIEW] r,[USER] u
 	WHERE r.CustomerID=@customerID
 	and r.CustomerID=u.UserID
 END

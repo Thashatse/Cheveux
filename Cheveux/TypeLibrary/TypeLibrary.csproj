@@ -72,6 +72,7 @@
     <Compile Include="ViewModels\ManagerStats.cs" />
     <Compile Include="ViewModels\OGBkngNoti.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\productSalesReport.cs" />
     <Compile Include="ViewModels\SP_AboutStylist.cs" />
     <Compile Include="ViewModels\SP_BookingsReportForHairstylist.cs" />
     <Compile Include="ViewModels\SP_GetAllAccessories.cs" />

@@ -134,13 +134,18 @@ namespace Cheveux.Manager
             else if (drpReport.SelectedIndex == 3)
             {
                 reportByContainer.Visible = true;
-                if (ddlReportFor.SelectedIndex == -1)
+                if (ddlReportFor.SelectedIndex == -1 || 
+                    (ddlReportFor.SelectedItem.Text != "Value" &&
+                    ddlReportFor.SelectedItem.Text != "Volume"))
                 {
+                    ddlReportFor.Items.Clear();
                     ddlReportFor.Items.Add("Value");
                     ddlReportFor.Items.Add("Volume");
                 }
 
                 if (ddlReportFor.SelectedValue != "-1"
+                    && (ddlReportFor.SelectedItem.Text == "Value" ||
+                        ddlReportFor.SelectedItem.Text == "Volume")
                     && CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
@@ -152,6 +157,8 @@ namespace Cheveux.Manager
                     getProductSalesReport(true);
                 }
                 else if (ddlReportFor.SelectedValue != "-1"
+                    && (ddlReportFor.SelectedItem.Text == "Value" ||
+                        ddlReportFor.SelectedItem.Text == "Volume")
                     && CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
@@ -513,24 +520,108 @@ namespace Cheveux.Manager
 
             //clear the table
             tblReport.Rows.Clear();
-
             reportLable.Text = "Sales Report";
-            reportByLable.Text = "By: " + ddlReportFor.SelectedItem.Text.ToString();
+            reportByLable.Text = "By: " + ddlReportFor.SelectedItem.Text.ToString() + 
+                " For "+drpPaymentType.SelectedItem.Text+" Payment Types";
             reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
+
             try
             {
-                List<SP_SaleOfHairstylist> report = null;
+                List<productSalesReport> report = null;
+
                 if (defaultDateRange == true)
                 {
                     reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
                         DateTime.Today.ToString("dd MMM yyyy");
-                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today);
+
+                    #region get the report from the db
+                    if (drpPaymentType.SelectedItem.Text == "All")
+                    {
+                        if(ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getProductSalesValueAll(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getProductSalesVolumeAll(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Cash")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getProductSalesValueCash(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getProductSalesVolumeCash(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Credit")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getProductSalesValueCredit(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getProductSalesVolumeCredit(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    #endregion
                 }
                 else if (defaultDateRange == false)
                 {
                     reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
                         CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
-                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate);
+
+                    #region get the report from the db
+                    if (drpPaymentType.SelectedItem.Text == "All")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getProductSalesValueAll(CalendarDateStrart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getProductSalesVolumeAll(CalendarDateStrart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Cash")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getProductSalesValueCash(CalendarDateStrart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getProductSalesVolumeCash(CalendarDateStrart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Credit")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getProductSalesValueCredit(CalendarDateStrart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getProductSalesVolumeCredit(CalendarDateStrart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    #endregion
                 }
 
                 //get the invoice dt lines
@@ -542,6 +633,8 @@ namespace Cheveux.Manager
                     TableRow newRow = new TableRow();
                     newRow.Height = 50;
                     tblReport.Rows.Add(newRow);
+
+                    #region Header
                     //set the report headers
                     TableHeaderCell newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Product";
@@ -561,7 +654,7 @@ namespace Cheveux.Manager
                     //empty cell
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Width = 300;
-                    if (ddlReportFor.SelectedIndex == 1)
+                    if (ddlReportFor.SelectedIndex == 0)
                     {
                         newHeaderCell.Text = "Volume";
                     }
@@ -571,62 +664,60 @@ namespace Cheveux.Manager
                     }
                     tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
                     reportRowCount++;
+                    #endregion
 
                     //display each record
-                    foreach (SP_SaleOfHairstylist Sales in report)
+                    foreach (productSalesReport prod in report)
                     {
-                        if (drpPaymentType.SelectedItem.Text == "All"
-                            || drpPaymentType.SelectedItem.Text == Sales.PaymentType.ToString().Replace(" ", string.Empty))
-                        {
                             // create a new row in the results table and set the height
                             newRow = new TableRow();
                             newRow.Height = 50;
                             tblReport.Rows.Add(newRow);
                             //fill the row with the data from the product results object
                             TableCell newCell = new TableCell();
-                            newCell.Text = "Date";
+                            newCell.Text = prod.product;
                             tblReport.Rows[reportRowCount].Cells.Add(newCell);
                             newCell = new TableCell();
                             if (ddlReportFor.SelectedIndex == 0)
                             {
-                                newHeaderCell.Text = "Value";
+                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
                             }
                             else
                             {
-                                newHeaderCell.Text = "Volume";
+                            newCell.Text = prod.volume.ToString();
                             }
                             tblReport.Rows[reportRowCount].Cells.Add(newCell);
                             
                             //fill in total
                             newCell = new TableCell();
-                            if (ddlReportFor.SelectedIndex == 1)
+                            if (ddlReportFor.SelectedIndex == 0)
                             {
-                                newHeaderCell.Text = "Volume";
-                            }
+                            newCell.Text = prod.volume.ToString();
+                        }
                             else
                             {
-                                newHeaderCell.Text = "Value";
-                            }
+                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
+                        }
                             tblReport.Rows[reportRowCount].Cells.Add(newCell);
                             reportRowCount++;
 
-                            //empty row
-                            newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblReport.Rows.Add(newRow);
-                            reportRowCount++;
-
-                            #region Graph
-                            dataValuePair.Add(new KeyValuePair<string, double>(Sales.date.ToString("dd/MM/yy") + " " + Sales.FullName.ToString(), 0));
+                        #region Graph
+                        if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            dataValuePair.Add(new KeyValuePair<string, double>(prod.product, prod.volume));
+                        }
+                        else
+                        {
+                            dataValuePair.Add(new KeyValuePair<string, double>(prod.product, prod.value));
+                        }
                             #endregion
                         }
-                    }
 
                     #region Graph
                     //store chart config name - config value pair
                     Dictionary<string, string> chartConfig = new Dictionary<string, string>();
-                    chartConfig.Add("caption", "Top Products By " + ddlReportFor.SelectedItem.Text.ToString() + ". Date Range: " + reportDateRangeLable.Text);
-                    chartConfig.Add("subCaption", reportGenerateDateLable.Text);
+                    chartConfig.Add("caption", "Top Products By " + reportByLable.Text );
+                    chartConfig.Add("subCaption", "Date Range: " + reportDateRangeLable.Text);
                     chartConfig.Add("xAxisName", "Customer Visit");
                     if (ddlReportFor.SelectedIndex == 1)
                     {
@@ -672,7 +763,7 @@ namespace Cheveux.Manager
             }
             catch (Exception Err)
             {
-                function.logAnError("Error getting Sales Report " + Err.ToString());
+                function.logAnError("Error getting Product Sales Report " + Err.ToString());
                 divReport.Visible = false;
                 lError.Visible = true;
                 lError.Text = "An error occurred generating the report, Try Again Later";

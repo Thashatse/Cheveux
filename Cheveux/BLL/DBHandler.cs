@@ -401,8 +401,40 @@ namespace BLL
         {
             return db.getAllStylistReviews();
         }
-        #endregion
+        #endregion 
 
+        #region Report
+        public List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getProductSalesVolumeAll(startDate, endDate);
+        }
+
+        public List<productSalesReport> getProductSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getProductSalesVolumeCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getProductSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getProductSalesVolumeCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getProductSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getProductSalesValueCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getProductSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getProductSalesValueCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getProductSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getProductSalesValueAll(startDate, endDate);
+        }
+        #endregion
+        
         public USER getManagerContact()
         {
             return db.getManagerContact();

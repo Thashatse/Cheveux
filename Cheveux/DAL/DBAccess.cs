@@ -3254,7 +3254,350 @@ namespace DAL
             }
         }
         #endregion
+
+        #region Reports
+
+        public List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID)
+        {
+            SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
+            List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", stylistID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylist", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
+                            {
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                slotNo = Convert.ToString(row["slotNo"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
+                                FirstName = Convert.ToString(row["FirstName"]),
+                                LastName = Convert.ToString(row["LastName"]),
+                                stylistID = Convert.ToString(row["StylistID"]),
+                                serviceID = Convert.ToString(row["ServiceID"]),
+                                Name = Convert.ToString(row["Name"]),
+                                Date = Convert.ToDateTime(row["Date"]),
+                                Available = Convert.ToString(row["Available"]),
+                                Arrived = Convert.ToString(row["Arrived"]),
+                                Comment = Convert.ToString(row["Comment"]),
+                            };
+                            list.Add(hairstylistBookingReportrecord);
+                        }
+                    }
+                }
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
+        {
+
+            SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
+            List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", stylistID),
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylistwithDateRange", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+
+                            hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
+                            {
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                slotNo = Convert.ToString(row["slotNo"]),
+                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
+                                FirstName = Convert.ToString(row["FirstName"]),
+                                LastName = Convert.ToString(row["LastName"]),
+                                stylistID = Convert.ToString(row["StylistID"]),
+                                serviceID = Convert.ToString(row["ServiceID"]),
+                                Name = Convert.ToString(row["Name"]),
+                                Date = Convert.ToDateTime(row["Date"]),
+                                Available = Convert.ToString(row["Available"]),
+                                Arrived = Convert.ToString(row["Arrived"]),
+                                Comment = Convert.ToString(row["Comment"]),
+                            };
+                            list.Add(hairstylistBookingReportrecord);
+                        }
+                    }
+                }
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+
+        public List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID, DateTime startDate, DateTime endDate)
+        {
+            SP_SaleOfHairstylist saleOfHairstylistrecord = null;
+            List<SP_SaleOfHairstylist> list = new List<SP_SaleOfHairstylist>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@stylistID", stylistID),
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_SaleOfHairstylist", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            saleOfHairstylistrecord = new SP_SaleOfHairstylist
+                            {
+                                SaleID = Convert.ToString(row["SaleID"]),
+                                date = Convert.ToDateTime(row["Date"]),
+                                CustomerID = Convert.ToString(row["CustomerID"]),
+                                FullName = Convert.ToString(row["FullName"]),
+                                BookingID = Convert.ToString(row["BookingID"]),
+                                PaymentType = Convert.ToString(row["PaymentType"])
+                            };
+                            list.Add(saleOfHairstylistrecord);
+
+                        }
+                    }
+                }
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         
+        public List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ProductSalesReportByVolume", 
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Product"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getProductSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ProductSalesReportByVolumeCredit",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Product"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getProductSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ProductSalesReportByVolumeCash", 
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Product"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getProductSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ProductSalesReportByValueCredit", 
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Product"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getProductSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ProductSalesReportByValueCash", 
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Product"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getProductSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ProductSalesReportByValue", 
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Product"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+        #endregion
+
         public List<SP_GetServices> GetAllServices()
         {
             try
@@ -3601,147 +3944,6 @@ namespace DAL
             catch (Exception E)
             {
                 throw new ApplicationException(E.ToString());
-            }
-        }
-
-        public List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID)
-        {
-            SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
-            List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
-
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@stylistID", stylistID)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylist", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
-                            {
-                                BookingID = Convert.ToString(row["BookingID"]),
-                                slotNo = Convert.ToString(row["slotNo"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
-                                CustomerID = Convert.ToString(row["CustomerID"]),
-                                FirstName = Convert.ToString(row["FirstName"]),
-                                LastName = Convert.ToString(row["LastName"]),
-                                stylistID = Convert.ToString(row["StylistID"]),
-                                serviceID = Convert.ToString(row["ServiceID"]),
-                                Name = Convert.ToString(row["Name"]),
-                                Date = Convert.ToDateTime(row["Date"]),
-                                Available = Convert.ToString(row["Available"]),
-                                Arrived = Convert.ToString(row["Arrived"]),
-                                Comment = Convert.ToString(row["Comment"]),
-                            };
-                            list.Add(hairstylistBookingReportrecord);
-                        }
-                    }
-                }
-                return list;
-            } catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-        }
-
-
-        public List<SP_BookingsReportForHairstylist> getBookingReportForHairstylistWithDateRange(string stylistID, DateTime startDate, DateTime endDate)
-        {
-
-            SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;
-            List<SP_BookingsReportForHairstylist> list = new List<SP_BookingsReportForHairstylist>();
-
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@stylistID", stylistID),
-                new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_BookingsReportForHairstylistwithDateRange", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-
-                            hairstylistBookingReportrecord = new SP_BookingsReportForHairstylist
-                            {
-                                BookingID = Convert.ToString(row["BookingID"]),
-                                slotNo = Convert.ToString(row["slotNo"]),
-                                StartTime = Convert.ToDateTime(row["StartTime"].ToString()),
-                                EndTime = Convert.ToDateTime(row["EndTime"].ToString()),
-                                CustomerID = Convert.ToString(row["CustomerID"]),
-                                FirstName = Convert.ToString(row["FirstName"]),
-                                LastName = Convert.ToString(row["LastName"]),
-                                stylistID = Convert.ToString(row["StylistID"]),
-                                serviceID = Convert.ToString(row["ServiceID"]),
-                                Name = Convert.ToString(row["Name"]),
-                                Date = Convert.ToDateTime(row["Date"]),
-                                Available = Convert.ToString(row["Available"]),
-                                Arrived = Convert.ToString(row["Arrived"]),
-                                Comment = Convert.ToString(row["Comment"]),
-                            };
-                            list.Add(hairstylistBookingReportrecord);
-                        }
-                    }
-                }
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
-            }
-
-        }
-
-        public List<SP_SaleOfHairstylist> getSaleOfHairstylist(string stylistID, DateTime startDate, DateTime endDate)
-        {
-            SP_SaleOfHairstylist saleOfHairstylistrecord = null;
-            List<SP_SaleOfHairstylist> list = new List<SP_SaleOfHairstylist>();
-
-            SqlParameter[] pars = new SqlParameter[]
-            {
-                new SqlParameter("@stylistID", stylistID),
-                new SqlParameter("@startDate", startDate),
-                new SqlParameter("@endDate", endDate)
-            };
-
-            try
-            {
-                using (DataTable table = DBHelper.ParamSelect("SP_SaleOfHairstylist", CommandType.StoredProcedure, pars))
-                {
-                    if (table.Rows.Count > 0)
-                    {
-                        foreach (DataRow row in table.Rows)
-                        {
-                            saleOfHairstylistrecord = new SP_SaleOfHairstylist
-                            {
-                                SaleID = Convert.ToString(row["SaleID"]),
-                                date = Convert.ToDateTime(row["Date"]),
-                                CustomerID = Convert.ToString(row["CustomerID"]),
-                                FullName = Convert.ToString(row["FullName"]),
-                                BookingID = Convert.ToString(row["BookingID"]),
-                                PaymentType = Convert.ToString(row["PaymentType"])
-                            };
-                            list.Add(saleOfHairstylistrecord);
-
-                        }
-                    }
-                }
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.ToString());
             }
         }
 

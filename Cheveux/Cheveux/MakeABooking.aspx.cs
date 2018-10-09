@@ -1184,6 +1184,9 @@ namespace Cheveux
                             }
                             else
                             {
+                                noAfter = false;
+                                noMorning = false;
+
                                 int checkslotIndex = slotIndex;
                                 bool add = true;
                                 for (int b = 0; b < i; b++)
@@ -1389,6 +1392,7 @@ namespace Cheveux
                             {
                                 if (times.Time > Convert.ToDateTime("12:00"))
                                 {
+                                    noAfter = false;
                                     if (afternoonButtonCount == 11)
                                     {
                                         btnAfternoon11.Visible = true;
@@ -1463,6 +1467,7 @@ namespace Cheveux
                                 }
                                 else
                                 {
+                                    noMorning = false;
                                     if (morningButtonCount == 1)
                                     {
                                         btnMorning1.Visible = true;
@@ -1539,6 +1544,9 @@ namespace Cheveux
                         }
                         else
                         {
+                            noAfter = false;
+                            noMorning = false;
+
                             int checkslotIndex = slotIndex;
                             bool add = true;
                             for (int b = 0; b < i; b++)
@@ -1820,7 +1828,6 @@ namespace Cheveux
 
                     foreach (string id in pickedServiceID)
                     {
-                        //** nullreferenceexception 
                         slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
 
                     }
@@ -1833,7 +1840,6 @@ namespace Cheveux
 
                     foreach (string id in pickedServiceID)
                     {
-                        //** nullreferenceexception 
                         slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
 
                     }
@@ -1847,7 +1853,6 @@ namespace Cheveux
 
                 foreach (string id in pickedServiceID)
                 {
-                    //** nullreferenceexception 
                     slotLength += Convert.ToInt32(handler.BLL_GetSlotLength(id).NoOfSlots);
 
                 }

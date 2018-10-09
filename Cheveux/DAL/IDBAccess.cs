@@ -190,6 +190,15 @@ namespace DAL
         USER getManagerContact();
         #endregion
 
+        #region Report
+        List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesVolumeCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesVolumeCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesValueCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesValueCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesValueAll(DateTime startDate, DateTime endDate);
+        #endregion
+
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
         List<SP_GetMyNextCustomer> GetMyNextCustomer(string employeeID, DateTime bookingDate);
         SP_GetCustomerBooking getBookingDetaisForCheckOut(string BookingID);

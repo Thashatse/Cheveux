@@ -11,7 +11,7 @@ CREATE PROCEDURE SP_ProductSalesReportByValue
 AS
 BEGIN
 	SELECT sum(sd.Price) as [Value], sum(sd.Qty) as Volume, sd.ProductID, max(p.[Name]) as [Product]
-  FROM [CHEVEUX].[dbo].[SALES_DTL] sd, PRODUCT p, SALE s
+  FROM [CHEVEUX].[dbo].[SALES_DTL] sd, [CHEVEUX].[dbo].PRODUCT p, [CHEVEUX].[dbo].SALE s
   Where p.ProductID = sd.ProductID
 	AND p.[ProductType(T/A/S)] != 'S'
 	AND sd.SaleID = s.SaleID

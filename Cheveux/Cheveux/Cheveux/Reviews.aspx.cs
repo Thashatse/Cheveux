@@ -100,7 +100,7 @@ namespace Cheveux
                     phMain.Visible = true;
                     
                     OpeningHeader.Text = "Behind every review is an experience that matters";
-                    btnRev.Visible = true;
+                    //btnRev.Visible = true;
                     readReviews.Visible = true;
                     makeAreview.Visible = false;
 
@@ -144,10 +144,10 @@ namespace Cheveux
                 if (action == "ReadReviews")
                 {
                     OpeningHeader.Text = "Reviews";
-                    btnRev.Visible = true;
+                    //btnRev.Visible = true;
                     readReviews.Visible = true;
                     makeAreview.Visible = false;
-                    btnRead.Visible = false;
+                    //btnRead.Visible = false;
 
                     drpReadType.Visible = true;
                     drpRev.Visible = true;
@@ -206,9 +206,9 @@ namespace Cheveux
                 {
                     OpeningHeader.Text = "Write A Review";
                     readReviews.Visible = false;
-                    btnRev.Visible = false;
+                    //btnRev.Visible = false;
                     makeAreview.Visible = true;
-                    btnRead.Visible = true;
+                    //btnRead.Visible = true;
 
                     if (drpReviewType.SelectedValue == "0")//review booking
                     {
@@ -253,7 +253,7 @@ namespace Cheveux
                 {
                     OpeningHeader.Text = "Customer Reviews";
                     readReviews.Visible = true;
-                    btnRev.Visible = false;
+                    //btnRev.Visible = false;
                     makeAreview.Visible = false;
 
                     drpReadType.Visible = false;

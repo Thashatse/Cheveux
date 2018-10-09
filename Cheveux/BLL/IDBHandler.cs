@@ -150,6 +150,15 @@ namespace BLL
         REVIEW getStylistRating(string stylistID);
         #endregion
 
+        #region Report
+        List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesVolumeCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesVolumeCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesValueCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesValueCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getProductSalesValueAll(DateTime startDate, DateTime endDate);
+        #endregion
+
         USER getManagerContact();
         USER GetUserDetails(string ID);
         SP_GetCurrentVATate GetVATRate();
