@@ -5,6 +5,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script> 
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -89,6 +91,7 @@
                                         <div class="col-8"></div>
                                         <div class="col-4">
                                             <asp:Button ID="btnRefresh" runat="server" Text="Refresh" OnClick="btnRefresh_Click" CssClass="btn btn-secondary" />
+                                            <asp:Button ID="btnGraph" runat="server" Text="Graph" OnClick="btnGraph_Click" CssClass="btn btn-secondary" Visible="false" />
                                             <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" Visible="false" CssClass="btn btn-secondary" />
                                         </div>
                                     </div>
@@ -162,6 +165,10 @@
                         </div>
                         <div class="col-4"></div>
                     </div>
+                </div>
+
+                <div id="divGraph" runat="server" visible="false" style="text-align:center">
+                    <asp:Literal ID="Literal1" runat="server"></asp:Literal>
                 </div>
             </div>
 

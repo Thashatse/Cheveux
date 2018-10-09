@@ -192,7 +192,7 @@ namespace Cheveux.Cheveux
                         drpProductType_Change(sender, e);
                         drpBrandList.SelectedValue = Accessory.BrandID;
                         drpListSupplier.SelectedValue= Accessory.supplierID;
-                            txtcolour.Text = Accessory.Colour.ToString();
+                        txtcolour.Text = Accessory.Colour.ToString();
                         }
                     //display accessories
                     else if (Treatment != null)
@@ -204,7 +204,7 @@ namespace Cheveux.Cheveux
                         drpProductType_Change(sender, e);
                         drpBrandList.SelectedValue = Treatment.BrandID;
                         drpListSupplier.SelectedValue = Treatment.supplierID;
-                            txtcolour.Text = Treatment.TreatmentType;
+                        txtcolour.Text = Treatment.TreatmentType;
                         }
 
                     }

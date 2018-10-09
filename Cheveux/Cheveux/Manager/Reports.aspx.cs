@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
+using FusionCharts.Charts;
+using System.Text;
 
 namespace Cheveux.Manager
 {
@@ -15,6 +17,11 @@ namespace Cheveux.Manager
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
+
+        #region Graphs
+        StringBuilder jsonData = new StringBuilder();
+        StringBuilder data = new StringBuilder();
+        #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -39,7 +46,8 @@ namespace Cheveux.Manager
                 LogedOut.Visible = false;
             }
         }
-
+        
+        #region BTN Functions
         protected void drpReport_SelectedIndexChanged1(object sender, EventArgs e)
         {
             lError.Visible = false;
@@ -109,7 +117,7 @@ namespace Cheveux.Manager
                 if (CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
-                   
+
                     divReport.Visible = true;
                     //display the top customer report
                     getTopCustomerReport(true);
@@ -125,8 +133,63 @@ namespace Cheveux.Manager
             }
         }
 
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            drpReport_SelectedIndexChanged1(sender, e);
+        }
+
+        protected void btnPrint_Click(object sender, EventArgs e)
+        {
+            divPrintHeader.Visible = true;
+            divReport.Visible = true;
+
+            LogedIn.Visible = false;
+            LogedOut.Visible = false;
+
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            tblLogo.Rows.Add(newRow);
+            TableCell newCell = new TableCell();
+            newCell.Font.Bold = true;
+            newCell.Font.Bold = true;
+            newCell.Text = "<a class='navbar-brand js-scroll-trigger' href='#' onClick='window.print()'>Cheveux </a>";
+            tblLogo.Rows[0].Cells.Add(newCell);
+
+            //print the report
+            ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
+            divPrintHeader.Visible = true;
+        }
+
+        protected void btnGraph_Click(object sender, EventArgs e)
+        {
+            divPrintHeader.Visible = true;
+            divReport.Visible = false;
+            
+            divGraph.Visible = true;
+
+            LogedIn.Visible = false;
+            LogedOut.Visible = false;
+
+            TableRow newRow = new TableRow();
+            newRow.Height = 50;
+            tblLogo.Rows.Add(newRow);
+            TableCell newCell = new TableCell();
+            newCell.Font.Bold = true;
+            newCell.Font.Bold = true;
+            newCell.Text = "<a class='navbar-brand js-scroll-trigger' href='#' onClick='window.print()'>Cheveux </a>";
+            tblLogo.Rows[0].Cells.Add(newCell);
+
+            divPrintHeader.Visible = true;
+        }
+        #endregion
+
+        #region Load Reports
         private void getSalesReport(bool defaultDateRange)
         {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion
+
             //clear the table
             tblReport.Rows.Clear();
 
@@ -216,10 +279,52 @@ namespace Cheveux.Manager
                             tblReport.Rows.Add(newRow);
                             reportRowCount++;
                             #endregion
+
+                            #region Graph
+                            dataValuePair.Add(new KeyValuePair<string, double>(Sales.date.ToString("dd/MM/yy")+" "+ Sales.FullName.ToString(), total));
+                            #endregion
                         }
-                     }
                     }
+
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("caption", "Sales Report For: " + ddlReportFor.SelectedItem.Text.ToString()+". Date Range: "+ reportDateRangeLable.Text);
+                    chartConfig.Add("subCaption", reportGenerateDateLable.Text);
+                    chartConfig.Add("xAxisName", "Customer Visit");
+                    chartConfig.Add("yAxisName", "Total Spent");
+                    chartConfig.Add("numberSuffix", "ZAR");
+                    chartConfig.Add("theme", "fusion");
+
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+
+                    Chart MyFirstChart = new Chart("column2d", "first_chart", "800", "550", "json", jsonData.ToString());
+                    // render chart
+                    Literal1.Text = MyFirstChart.Render();
+                    #endregion
+                }
                 btnPrint.Visible = true;
+                btnGraph.Visible = true;
             }
             catch (Exception Err)
             {
@@ -232,6 +337,10 @@ namespace Cheveux.Manager
 
         private void getTopCustomerReport(bool defaultDateRange)
         {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion
+
             //clear the table
             tblReport.Rows.Clear();
 
@@ -292,29 +401,67 @@ namespace Cheveux.Manager
                             newRow = new TableRow();
                             newRow.Height = 50;
                             tblReport.Rows.Add(newRow);
+
                             //fill the row with the data from the product results object
                             TableCell newCell = new TableCell();
-
                            newCell.Text = cust.CustomerName;
-                      
                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
 
                         newCell = new TableCell();
                         newCell.Text = cust.noOfBookings.ToString();
-                        
                         tblReport.Rows[reportRowCount].Cells.Add(newCell);
                         reportRowCount++;
-                            //empty row
-                            newRow = new TableRow();
+
+                        #region empty row
+                        newRow = new TableRow();
                             newRow.Height = 50;
                             tblReport.Rows.Add(newRow);
                             reportRowCount++;
+                        #endregion
 
+                        #region Graph
+                        dataValuePair.Add(new KeyValuePair<string, double>(cust.CustomerName, Convert.ToDouble(cust.noOfBookings)));
+                        #endregion
+                    }
 
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("caption", reportLable.Text);
+                    chartConfig.Add("subCaption", reportGenerateDateLable.Text);
+                    chartConfig.Add("xAxisName", "Customer");
+                    chartConfig.Add("yAxisName", "Visits");
+                    chartConfig.Add("theme", "fusion");
 
-                   }
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+
+                    Chart MyFirstChart = new Chart("column2d", "first_chart", "800", "550", "json", jsonData.ToString());
+                    // render chart
+                    Literal1.Text = MyFirstChart.Render();
+                    #endregion
                 }
                 btnPrint.Visible = true;
+                btnGraph.Visible = true;
             }
             catch (Exception Err)
             {
@@ -324,35 +471,7 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
-
-        protected void btnRefresh_Click(object sender, EventArgs e)
-        {
-            drpReport_SelectedIndexChanged1(sender, e);
-        }
-
-        protected void btnPrint_Click(object sender, EventArgs e)
-        {
-            divPrintHeader.Visible = true;
-            divReport.Visible = true;
-
-            LogedIn.Visible = false;
-            LogedOut.Visible = false;
-
-            TableRow newRow = new TableRow();
-            newRow.Height = 50;
-            tblLogo.Rows.Add(newRow);
-            TableCell newCell = new TableCell();
-            newCell.Font.Bold = true;
-            newCell.Font.Bold = true;
-            newCell.Text = "<a class='navbar-brand js-scroll-trigger' href='#' onClick='window.print()'>Cheveux </a>";
-            tblLogo.Rows[0].Cells.Add(newCell);
-
-            //print the report
-            ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
-             divPrintHeader.Visible = true;
-
-
-        }
+        #endregion
     }
 }
  
