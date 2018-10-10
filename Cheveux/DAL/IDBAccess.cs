@@ -219,7 +219,7 @@ namespace DAL
         List<SP_ViewEmployee> viewAllEmployees();
         List<SP_GetEmployeeTypes> getEmpTypes();
         List<PRODUCT> getAllProducts();
-        List<SP_GetProductTypes> getProductTypes();
+        List<ProductType> getProductTypes();
         bool deactivateUser(string userID);
         bool AddBooking(BOOKING addBooking);
         bool AddToBookingService(BookingService bs);

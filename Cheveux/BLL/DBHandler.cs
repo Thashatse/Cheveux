@@ -667,7 +667,7 @@ namespace BLL
         }
         
 
-        public List<SP_GetProductTypes> getProductTypes()
+        public List<ProductType> getProductTypes()
         {
             return db.getProductTypes();
         }

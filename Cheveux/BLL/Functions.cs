@@ -690,31 +690,46 @@ namespace BLL
         #endregion
 
         #region Abreviation Full Text
-        public string GetFullProductTypeText(char ProductType)
+        public string GetFullProductTypeText(string ProductType, bool productsOnly, bool servicesOnly)
         {
             /*
              * Given abbreviated char that database returns for product type, 
              * this class will return the full text of that product type
              */
-            if (ProductType == 'S')
+            try
             {
-                return "Service";
-            }
-            else if (ProductType == 'T')
-            {
-                return "Treatment";
-            }
-            else if (ProductType == 'A')
-            {
-                return "Accessories";
-            }
-            else if (ProductType == 'X')
-            {
-                return "ALL";
-            }
-            else
-            {
+                List<ProductType> productTypes = Handler.getProductTypes();
+                foreach(ProductType type in productTypes)
+                {
+                    if(productsOnly == false && servicesOnly == false)
+                    {
+                        if (ProductType == type.typeID)
+                        {
+                            return type.name;
+                        }
+                    }
+                    else if(productsOnly == true)
+                    {
+                        if (ProductType == type.typeID.Replace(" ", string.Empty) && type.ProductOrService == 'P')
+                        {
+                            return type.name;
+                        }
+                    }
+                    else if (servicesOnly == true )
+                    {
+                        if (ProductType == type.typeID.Replace(" ", string.Empty) && type.ProductOrService == 'S')
+                        {
+                            return type.name;
+                        }
+                    }
+                }
+
                 logAnError("Unknown Product Type given to GetFullProductTypeText method in functions");
+                return "error";
+            }
+            catch (Exception Err)
+            {
+                logAnError("error ing GetFullProductTypeText method in functions | " + Err.ToString());
                 return "error";
             }
         }

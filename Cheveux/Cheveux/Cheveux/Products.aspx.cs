@@ -16,7 +16,7 @@ namespace Cheveux.Cheveux
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> products = null;
-        List<SP_GetProductTypes> productTypes = null;
+        List<ProductType> productTypes = null;
         int treatCount = 0;
         string productID;
         int accCount = 0;
@@ -129,13 +129,12 @@ namespace Cheveux.Cheveux
                     if (!IsPostBack)
                     {
                         productTypes = handler.getProductTypes();
-                        foreach (SP_GetProductTypes pType in productTypes)
+                        foreach (ProductType pType in productTypes)
                         {
-                            if (pType.type != 'S')
+                            if (pType.ProductOrService == 'P')
                             {
-                                drpProductType.Items.Add(new ListItem(
-                                function.GetFullProductTypeText(pType.type.ToString()[0]),
-                                pType.type.ToString()));
+                                drpProductType.Items.Add(new ListItem(pType.name,
+                                pType.typeID.ToString()));
                             }
                         }
                         brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
@@ -159,13 +158,12 @@ namespace Cheveux.Cheveux
                     if (!IsPostBack)
                     {
                         productTypes = handler.getProductTypes();
-                        foreach (SP_GetProductTypes pType in productTypes)
+                        foreach (ProductType pType in productTypes)
                         {
-                            if (pType.type != 'S')
+                            if (pType.ProductOrService == 'P')
                             {
-                                drpProductType.Items.Add(new ListItem(
-                                function.GetFullProductTypeText(pType.type.ToString()[0]),
-                                pType.type.ToString()));
+                                drpProductType.Items.Add(new ListItem(pType.name,
+                                pType.typeID.ToString()));
                             }
                         }
                         brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
@@ -343,7 +341,7 @@ namespace Cheveux.Cheveux
                                 tblProductTable.Rows.Add(newRow);
                                 //Product Type
                                 newHeaderCell = new TableHeaderCell();
-                                newHeaderCell.Text = function.GetFullProductTypeText('A') + "'s:";
+                                newHeaderCell.Text = function.GetFullProductTypeText("A", true, false) + "'s:";
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 //increment rowcounter
                                 count++;
@@ -403,7 +401,7 @@ namespace Cheveux.Cheveux
                                 tblProductTable.Rows.Add(newRow);
                                 //Product Type
                                 newHeaderCell = new TableHeaderCell();
-                                newHeaderCell.Text = function.GetFullProductTypeText('T') + "'s:";
+                                newHeaderCell.Text = function.GetFullProductTypeText("T", true, false) + "'s:";
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 //increment rowcounter
                                 count++;
@@ -451,7 +449,7 @@ namespace Cheveux.Cheveux
                 }
                 else
                 {
-                    productJumbotronLable.Text = count - 1 + " " + function.GetFullProductTypeText(productType);
+                    productJumbotronLable.Text = count - 1 + " " + function.GetFullProductTypeText(productType.ToString(), true, false);
                 }
                 if (count - 1 == 0)
                 {

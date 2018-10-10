@@ -1590,10 +1590,10 @@ namespace DAL
 
         }
 
-        public List<SP_GetProductTypes> getProductTypes()
+        public List<ProductType> getProductTypes()
         {
-            SP_GetProductTypes productType = null;
-            List<SP_GetProductTypes> productTypes = new List<SP_GetProductTypes>();
+            ProductType productType = null;
+            List<ProductType> productTypes = new List<ProductType>();
             try
             {
                 using (DataTable table = DBHelper.Select("SP_GetProductTypes",
@@ -1603,9 +1603,11 @@ namespace DAL
                     {
                         foreach (DataRow row in table.Rows)
                         {
-                            productType = new SP_GetProductTypes
+                            productType = new ProductType
                             {
-                                type = Convert.ToChar(row[0].ToString()[0])
+                                typeID = row["TypeID"].ToString(),
+                                name = row["Name"].ToString(),
+                                ProductOrService = row["Product/Service"].ToString()[0]
                             };
                             productTypes.Add(productType);
                         }
@@ -3256,7 +3258,6 @@ namespace DAL
         #endregion
 
         #region Reports
-
         public List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID)
         {
             SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;

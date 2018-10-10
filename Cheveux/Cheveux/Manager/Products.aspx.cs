@@ -289,7 +289,7 @@ namespace Cheveux.Manager
             }
         }
 
-        List<SP_GetProductTypes> productTypes = null;
+        List<ProductType> productTypes = null;
 
         private void loadProductTypeDropDowns()
         {
@@ -304,19 +304,16 @@ namespace Cheveux.Manager
                 try
                 {
                     productTypes = handler.getProductTypes();
-                    foreach (SP_GetProductTypes productType in productTypes)
+                    foreach (ProductType productType in productTypes)
                     {
-                        if (productType.type != 'S')
+                        if (productType.ProductOrService != 'S')
                         {
-                            drpProductType.Items.Add(new ListItem(
-                                function.GetFullProductTypeText(productType.type.ToString()[0]),
-                                productType.type.ToString()));
-                            ddlOrdersProductType.Items.Add(new ListItem(
-                                function.GetFullProductTypeText(productType.type.ToString()[0]),
-                                productType.type.ToString()));
-                            ddlAddBrandProductType.Items.Add(new ListItem(
-                                function.GetFullProductTypeText(productType.type.ToString()[0]),
-                                productType.type.ToString()));
+                            drpProductType.Items.Add(new ListItem(productType.name,
+                                productType.typeID.ToString()));
+                            ddlOrdersProductType.Items.Add(new ListItem(productType.name,
+                                productType.typeID.ToString()));
+                            ddlAddBrandProductType.Items.Add(new ListItem(productType.name,
+                                productType.typeID.ToString()));
                         }
                     }
                 }
@@ -1280,7 +1277,7 @@ namespace Cheveux.Manager
                                 newHeaderCell = new TableHeaderCell();
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 newHeaderCell = new TableHeaderCell();
-                                newHeaderCell.Text = function.GetFullProductTypeText('A') + "'s:";
+                                newHeaderCell.Text = function.GetFullProductTypeText("A", true, false) + "'s:";
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 //increment rowcounter
                                 count++;
@@ -1380,7 +1377,7 @@ namespace Cheveux.Manager
                                 newHeaderCell = new TableHeaderCell();
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 newHeaderCell = new TableHeaderCell();
-                                newHeaderCell.Text = function.GetFullProductTypeText('T') + "'s:";
+                                newHeaderCell.Text = function.GetFullProductTypeText("T", true, false) + "'s:";
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 //increment rowcounter
                                 count++;
@@ -1464,7 +1461,7 @@ namespace Cheveux.Manager
                 }
                 else
                 {
-                    productJumbotronLable.Text = count-1 + " " + function.GetFullProductTypeText(productType);
+                    productJumbotronLable.Text = count-1 + " " + function.GetFullProductTypeText(productType.ToString(), true, false);
                 }
                 if(count-1 == 0)
                 {
@@ -1481,7 +1478,7 @@ namespace Cheveux.Manager
             {
                 function.logAnError(Err.ToString()
                     + " An error occurred retrieving list of products for product type: "
-                    + productType + " - " + function.GetFullProductTypeText(productType)
+                    + productType + " - " + function.GetFullProductTypeText(productType.ToString(), true, false)
                     +  " with tearm: " + txtProductSearchTerm.Text
                     + " in loadProductList(char productType) method on Manager/Product page");
                 productJumbotronLable.Font.Size = 22;
@@ -1878,7 +1875,7 @@ namespace Cheveux.Manager
                         newCell.Text = brand.Name;
                         tblBrand.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
-                        newCell.Text = function.GetFullProductTypeText(brand.Type[0]);
+                        newCell.Text = function.GetFullProductTypeText(brand.Type, false, false);
                         tblBrand.Rows[rowCount].Cells.Add(newCell);
                         newCell = new TableCell();
                         newCell.Text = "<button type = 'button' class='btn btn-default'>" +

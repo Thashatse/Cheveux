@@ -25,8 +25,6 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            btnPrint.Visible = false;
-
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
 
@@ -54,10 +52,16 @@ namespace Cheveux.Manager
             if (drpReport.SelectedIndex == 0)
             {
                 reportByContainer.Visible = true;
-                if (ddlReportFor.SelectedIndex == -1)
+                if (ddlReportFor.SelectedIndex == -1
+                    || (ddlReportFor.SelectedItem.Text == "Value" ||
+                        ddlReportFor.SelectedItem.Text == "Volume"))
                 {
+                    divReport.Visible = false;
+                    divReportHeader.Visible = false;
+                    divGraph.Visible = false;
                     try
                     {
+                        ddlReportFor.Items.Clear();
                         List<SP_GetEmpNames> list = handler.BLL_GetEmpNames();
                         foreach (SP_GetEmpNames emps in list)
                         {
@@ -88,10 +92,9 @@ namespace Cheveux.Manager
                 {
                     reportByContainer.Visible = true;
                     reportDateRangeContainer.Visible = true;
-                    divReport.Visible = true;
                     salesPaymentType.Visible = true;
                     //display the sales report
-                    getSalesReport(true);
+                    getSalesReport(sender, e, true);
                 }
                 else if (ddlReportFor.SelectedValue != "-1"
                     && CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
@@ -99,10 +102,9 @@ namespace Cheveux.Manager
                 {
                     reportDateRangeContainer.Visible = true;
                     reportByContainer.Visible = true;
-                    divReport.Visible = true;
                     salesPaymentType.Visible = true;
                     //display the sales report
-                    getSalesReport(false);
+                    getSalesReport(sender, e, false);
                 }
 
             }
@@ -117,17 +119,14 @@ namespace Cheveux.Manager
                 if (CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
-
-                    divReport.Visible = true;
                     //display the top customer report
-                    getTopCustomerReport(true);
+                    getTopCustomerReport(sender, e, true);
                 }
                 else if (CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
-                    divReport.Visible = true;
                     //display the top customer report
-                    getTopCustomerReport(false);
+                    getTopCustomerReport(sender, e, false);
                 }
 
             }
@@ -138,6 +137,9 @@ namespace Cheveux.Manager
                     (ddlReportFor.SelectedItem.Text != "Value" &&
                     ddlReportFor.SelectedItem.Text != "Volume"))
                 {
+                    divReport.Visible = false;
+                    divReportHeader.Visible = false;
+                    divGraph.Visible = false;
                     ddlReportFor.Items.Clear();
                     ddlReportFor.Items.Add("Value");
                     ddlReportFor.Items.Add("Volume");
@@ -149,12 +151,8 @@ namespace Cheveux.Manager
                     && CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
-                    reportByContainer.Visible = true;
-                    reportDateRangeContainer.Visible = true;
-                    divReport.Visible = true;
-                    salesPaymentType.Visible = true;
                     //display the sales report
-                    getProductSalesReport(true);
+                    getProductSalesReport(sender, e, true);
                 }
                 else if (ddlReportFor.SelectedValue != "-1"
                     && (ddlReportFor.SelectedItem.Text == "Value" ||
@@ -162,12 +160,8 @@ namespace Cheveux.Manager
                     && CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
-                    reportDateRangeContainer.Visible = true;
-                    reportByContainer.Visible = true;
-                    divReport.Visible = true;
-                    salesPaymentType.Visible = true;
                     //display the sales report
-                    getProductSalesReport(false);
+                    getProductSalesReport(sender, e, false);
                 }
 
             }
@@ -181,10 +175,10 @@ namespace Cheveux.Manager
         protected void btnPrint_Click(object sender, EventArgs e)
         {
             divPrintHeader.Visible = true;
-            divReport.Visible = true;
-
-            LogedIn.Visible = false;
+            
             LogedOut.Visible = false;
+            btnControlls.Visible = false;
+            ReportsPage.Visible = false;
 
             TableRow newRow = new TableRow();
             newRow.Height = 50;
@@ -197,7 +191,6 @@ namespace Cheveux.Manager
 
             //print the report
             ClientScript.RegisterStartupScript(typeof(Page), "key", "<script type='text/javascript'>window.print();;</script>");
-            divPrintHeader.Visible = true;
         }
 
         protected void btnGraph_Click(object sender, EventArgs e)
@@ -221,10 +214,44 @@ namespace Cheveux.Manager
 
             divPrintHeader.Visible = true;
         }
+        
+        protected void btnViewText_Click(object sender, EventArgs e)
+        {
+            divGraph.Visible = false;
+            divReport.Visible = true;
+            divGraphType.Visible = false;
+            btnViewText.CssClass = "btn btn-primary";
+            btnViewGraph.CssClass = "btn btn-light";
+        }
+
+        protected void btnViewGraph_Click(object sender, EventArgs e)
+        {
+            divGraph.Visible = true;
+            divReport.Visible = false;
+            divGraphType.Visible = true;
+            btnViewText.CssClass = "btn btn-light";
+            btnViewGraph.CssClass = "btn btn-primary";
+        }
+        
+        protected void btnShowPieGraph_Click(object sender, EventArgs e)
+        {
+            graphBar.Visible = false;
+            graphPie.Visible = true;
+            btnShowBarGraph.CssClass = "btn btn-light";
+            btnShowPieGraph.CssClass = "btn btn-primary";
+        }
+
+        protected void btnShowBarGraph_Click(object sender, EventArgs e)
+        {
+            graphBar.Visible = true;
+            graphPie.Visible = false;
+            btnShowBarGraph.CssClass = "btn btn-primary";
+            btnShowPieGraph.CssClass= "btn btn-light";
+        }
         #endregion
 
         #region Load Reports
-        private void getSalesReport(bool defaultDateRange)
+        private void getSalesReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
             var dataValuePair = new List<KeyValuePair<string, double>>();
@@ -329,8 +356,6 @@ namespace Cheveux.Manager
                     #region Graph
                     //store chart config name - config value pair
                     Dictionary<string, string> chartConfig = new Dictionary<string, string>();
-                    chartConfig.Add("caption", "Sales Report For: " + ddlReportFor.SelectedItem.Text.ToString()+". Date Range: "+ reportDateRangeLable.Text);
-                    chartConfig.Add("subCaption", reportGenerateDateLable.Text);
                     chartConfig.Add("xAxisName", "Customer Visit");
                     chartConfig.Add("yAxisName", "Total Spent");
                     chartConfig.Add("numberSuffix", "ZAR");
@@ -357,14 +382,21 @@ namespace Cheveux.Manager
                     jsonData.Append("}");
                     //Create chart instance
                     // charttype, chartID, width, height, data format, data
-
-                    Chart MyFirstChart = new Chart("column2d", "first_chart", "800", "550", "json", jsonData.ToString());
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("bar2d", "first_chart", "1700", "750", "json", jsonData.ToString());
                     // render chart
-                    Literal1.Text = MyFirstChart.Render();
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
                     #endregion
                 }
-                btnPrint.Visible = true;
-                btnGraph.Visible = true;
+
+                if (divGraph.Visible != true && divReport.Visible != true)
+                {
+                    btnControlls.Visible = true;
+                    divReportHeader.Visible = true;
+                    divReport.Visible = true;
+                    btnViewText_Click(sender, e);
+                }
             }
             catch (Exception Err)
             {
@@ -375,7 +407,7 @@ namespace Cheveux.Manager
             }
         }
 
-        private void getTopCustomerReport(bool defaultDateRange)
+        private void getTopCustomerReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
             var dataValuePair = new List<KeyValuePair<string, double>>();
@@ -467,8 +499,6 @@ namespace Cheveux.Manager
                     #region Graph
                     //store chart config name - config value pair
                     Dictionary<string, string> chartConfig = new Dictionary<string, string>();
-                    chartConfig.Add("caption", reportLable.Text);
-                    chartConfig.Add("subCaption", reportGenerateDateLable.Text);
                     chartConfig.Add("xAxisName", "Customer");
                     chartConfig.Add("yAxisName", "Visits");
                     chartConfig.Add("theme", "fusion");
@@ -495,13 +525,21 @@ namespace Cheveux.Manager
                     //Create chart instance
                     // charttype, chartID, width, height, data format, data
 
-                    Chart MyFirstChart = new Chart("column2d", "first_chart", "800", "550", "json", jsonData.ToString());
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("column2d", "first_chart", "1700", "750", "json", jsonData.ToString());
                     // render chart
-                    Literal1.Text = MyFirstChart.Render();
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
                     #endregion
                 }
-                btnPrint.Visible = true;
-                btnGraph.Visible = true;
+
+                if (divGraph.Visible != true && divReport.Visible != true)
+                {
+                    btnControlls.Visible = true;
+                    divReportHeader.Visible = true;
+                    divReport.Visible = true;
+                    btnViewText_Click(sender, e);
+                }
             }
             catch (Exception Err)
             {
@@ -512,7 +550,7 @@ namespace Cheveux.Manager
             }
         }
 
-        private void getProductSalesReport(bool defaultDateRange)
+        private void getProductSalesReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
             var dataValuePair = new List<KeyValuePair<string, double>>();
@@ -638,7 +676,7 @@ namespace Cheveux.Manager
                     //set the report headers
                     TableHeaderCell newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Product";
-                    newHeaderCell.Width = 300;
+                    newHeaderCell.Width = 1000;
                     tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
                     if(ddlReportFor.SelectedIndex == 0)
@@ -649,11 +687,11 @@ namespace Cheveux.Manager
                     {
                         newHeaderCell.Text = "Volume";
                     }
-                    newHeaderCell.Width = 300;
+                    newHeaderCell.Width = 200;
                     tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
                     //empty cell
                     newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Width = 300;
+                    newHeaderCell.Width = 200;
                     if (ddlReportFor.SelectedIndex == 0)
                     {
                         newHeaderCell.Text = "Volume";
@@ -716,9 +754,7 @@ namespace Cheveux.Manager
                     #region Graph
                     //store chart config name - config value pair
                     Dictionary<string, string> chartConfig = new Dictionary<string, string>();
-                    chartConfig.Add("caption", "Top Products By " + reportByLable.Text );
-                    chartConfig.Add("subCaption", "Date Range: " + reportDateRangeLable.Text);
-                    chartConfig.Add("xAxisName", "Customer Visit");
+                    chartConfig.Add("xAxisName", "Product");
                     if (ddlReportFor.SelectedIndex == 1)
                     {
                         chartConfig.Add("numberSuffix", "Qty");
@@ -753,18 +789,27 @@ namespace Cheveux.Manager
                     //Create chart instance
                     // charttype, chartID, width, height, data format, data
 
-                    Chart MyFirstChart = new Chart("column2d", "first_chart", "800", "550", "json", jsonData.ToString());
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("column2d", "first_chart", "1700", "750", "json", jsonData.ToString());
                     // render chart
-                    Literal1.Text = MyFirstChart.Render();
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
                     #endregion
                 }
-                btnPrint.Visible = true;
-                btnGraph.Visible = true;
+
+                if (divGraph.Visible != true && divReport.Visible != true)
+                {
+                    btnControlls.Visible = true;
+                    divReportHeader.Visible = true;
+                    divReport.Visible = true;
+                    btnViewText_Click(sender, e);
+                }
             }
             catch (Exception Err)
             {
                 function.logAnError("Error getting Product Sales Report " + Err.ToString());
                 divReport.Visible = false;
+                divReportHeader.Visible = false;
                 lError.Visible = true;
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
