@@ -21,6 +21,7 @@ namespace Cheveux.Manager
         PRODUCT product = null;
         SERVICE service = null;
         BRAID_SERVICE bservice = null;
+        List<ProductType> prodTypes = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,14 +43,27 @@ namespace Cheveux.Manager
 
             if (!Page.IsPostBack)
             {
-                ListItem select = new ListItem(" --Select Type-- ", "0");
-                ListItem braid = new ListItem("Braid", "B");
-                ListItem application = new ListItem("Application", "A");
-                ListItem natural = new ListItem("Natural", "N");
-                drpType.Items.Add(select);
-                drpType.Items.Add(braid);
-                drpType.Items.Add(application);
-                drpType.Items.Add(natural);
+                drpType.Items.Clear();
+
+                drpType.Items.Add(new ListItem(" --Select Type-- ", "0"));
+                try
+                {
+                    prodTypes = handler.getProductTypes();
+                    foreach (ProductType productType in prodTypes)
+                    {
+                        if (productType.ProductOrService == 'S' && productType.name.Replace(" ", string.Empty) != "Service" && productType.name.Replace(" ", string.Empty) != "Employee Leave".Replace(" ", string.Empty))
+                        {
+                            drpType.Items.Add(new ListItem(productType.name,
+                                productType.typeID.Replace(" ", string.Empty)));
+                        }
+                    }
+                }
+                catch (Exception Err)
+                {
+                    function.logAnError(Err.ToString() + "Unable to load drpType on Add Service Page");
+                }
+
+                drpType.SelectedIndex = 0;
             }
         }
 
