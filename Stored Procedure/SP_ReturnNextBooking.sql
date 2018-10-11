@@ -16,15 +16,24 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-alter PROCEDURE SP_GetStylistRating
-	@stylistID nchar(30)
+CREATE PROCEDURE SP_ReturnNextBooking
+	@startTime nvarchar(20),
+	@bookingID nchar(10),
+	@stylistID nchar(30),
+	@date datetime
 AS
 BEGIN
 	SET NOCOUNT ON;
-	SELECT ROUND(AVG(Rating),0) as AverageRating 
-	FROM [CHEVEUX].[dbo].[REVIEW]
-	WHERE EmployeeID=@stylistID
-	AND primaryBookingID IS NULL
-	AND [CHEVEUX].[dbo].[REVIEW].[Date] !< DATEADD(mm, -2, GETDATE())
+
+	SELECT top(1) b.BookingID,b.SlotNo,ts.StartTime
+	FROM BOOKING b, TIMESLOT ts
+	WHERE b.BookingID=b.primaryBookingID
+	and b.BookingID <> @bookingID
+	and b.StylistID=@stylistID
+	and b.[Date]=@date
+	and b.SlotNo=ts.SlotNo
+	and ts.StartTime !< @startTime
+	
+	ORDER BY ts.StartTime
 END
 GO

@@ -139,13 +139,22 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.DropDownList drpRev;
         
         /// <summary>
-        /// lblStylistReviewsHeader control.
+        /// names control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStylistReviewsHeader;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl names;
+        
+        /// <summary>
+        /// drpsNames control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpsNames;
         
         /// <summary>
         /// stylistPanel control.
@@ -157,13 +166,22 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Panel stylistPanel;
         
         /// <summary>
-        /// lblBookingReviewsHeader control.
+        /// tblViewEmployee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBookingReviewsHeader;
+        protected global::System.Web.UI.WebControls.Table tblViewEmployee;
+        
+        /// <summary>
+        /// tblStylistReviews control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Table tblStylistReviews;
         
         /// <summary>
         /// bookingsPanel control.
@@ -211,33 +229,6 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.DropDownList drpStylistNames;
         
         /// <summary>
-        /// datesPick control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder datesPick;
-        
-        /// <summary>
-        /// drpMonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpMonth;
-        
-        /// <summary>
-        /// calDay control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar calDay;
-        
-        /// <summary>
         /// choose control.
         /// </summary>
         /// <remarks>
@@ -245,15 +236,6 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl choose;
-        
-        /// <summary>
-        /// lsBksHeader control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lsBksHeader;
         
         /// <summary>
         /// tblBookings control.
@@ -337,6 +319,15 @@ namespace Cheveux {
         protected global::AjaxControlToolkit.Rating Rating1;
         
         /// <summary>
+        /// valRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label valRating;
+        
+        /// <summary>
         /// reviewComment control.
         /// </summary>
         /// <remarks>
@@ -344,6 +335,15 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTextArea reviewComment;
+        
+        /// <summary>
+        /// valComment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label valComment;
         
         /// <summary>
         /// btnPostReview control.

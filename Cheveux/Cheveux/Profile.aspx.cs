@@ -271,7 +271,7 @@ namespace Cheveux
                 //stylist rating
                 try
                 {
-                    review = handler.getStylistRating(empID.ToString());
+                    review = handler.getStylistRating(empID);
                     if(review != null)
                     {
                         ratingsPanel.Visible = true;

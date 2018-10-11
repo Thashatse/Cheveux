@@ -148,6 +148,7 @@ namespace BLL
         REVIEW customersReviewForBooking(string customerID, string bookingID);
         List<SP_ReturnStylistNamesForReview> returnStylistNamesForReview(string customerID);
         REVIEW getStylistRating(string stylistID);
+        List<SP_GetCustomerBooking> getCustRecentBookings(string CustomerID);
         #endregion
 
         #region Report
@@ -241,6 +242,8 @@ namespace BLL
         List<SP_GetLeaveServices> BLL_GetLeaveServices();
         bool BLL_UpdateOrder(string orderID, DateTime dateReceived, bool received);
         bool BLL_UpdateQtyOnHand(string prodID, int qty);
+        SP_ReturnBooking returnNextBooking(DateTime startTime, string bookingID, string stylistID, DateTime date);
+        SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date);
     }
 }
 

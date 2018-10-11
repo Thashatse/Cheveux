@@ -4,6 +4,18 @@
     Customer Visit - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+
+    <style>
+        #box {
+            border: 1px solid #ddd;
+            border-radius: 0;
+            padding: 5px;
+            height: auto;
+            overflow-y: scroll;
+            width: 30%;
+        }
+    </style>
+
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form id="form1" runat="server">
@@ -19,7 +31,7 @@
             <div class="col-10">
                 <div class="jumbotron  bg-dark text-white" id="LoggedIn" runat="server">
                     <asp:Label ID="theVisit" runat="server" Font-Bold="true" Font-Size="X-Large">
-                        <h1>Customer Visit</h1>
+                        <h1 runat="server" id="jheader"></h1>
                     </asp:Label>
                 </div>
                 <div class="container">
@@ -57,6 +69,18 @@
                     </div>
                 </div>
 
+
+                <!--Changing a service-->
+                <asp:PlaceHolder ID="phChangeService" runat="server" Visible="false">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <div id="box" runat="server">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </asp:PlaceHolder>
+
                 <!--Error: If details cant be displayed-->
                 <asp:PlaceHolder ID="phBookingsErr" runat="server" Visible="false">
                     <div class="container">
@@ -85,6 +109,7 @@
                 </asp:PlaceHolder>
 
 
+                <!--Login requeset-->
                 <div class="container" runat="server" id="LoggedOut" visible="true">
                     <div class="jumbotron bg-dark text-white">
                         <h1>Please Log-in to proceed</h1>

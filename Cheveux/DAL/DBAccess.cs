@@ -3169,6 +3169,43 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public List<SP_GetCustomerBooking> getCustRecentBookings(string CustomerID)
+        {
+            List<SP_GetCustomerBooking> customerBookings = new List<SP_GetCustomerBooking>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@CustID", CustomerID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustRecentBookings",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetCustomerBooking booking = new SP_GetCustomerBooking
+                            {
+                                stylistFirstName = row["FirstName"].ToString(),
+                                bookingDate = Convert.ToDateTime(row["Date"].ToString()),
+                                bookingStartTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                                bookingID = row["BookingID"].ToString(),
+                                arrived = row["Arrived"].ToString()[0],
+                                stylistEmployeeID = row["StylistID"].ToString()
+                            };
+                            customerBookings.Add(booking);
+                        }
+                    }
+                    return customerBookings;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
         #endregion
 
         #region Employees
@@ -5131,6 +5168,75 @@ namespace DAL
                 };
 
                 return DBHelper.NonQuery("SP_UpdateQtyOnHand", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public SP_ReturnBooking returnNextBooking(DateTime startTime, string bookingID, string stylistID, DateTime date)
+        {
+            SP_ReturnBooking rb = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@startTime", startTime.ToString()),
+                new SqlParameter("@bookingID", bookingID),
+                new SqlParameter("@stylistID", stylistID),
+                new SqlParameter("@date", date)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ReturnNextBooking",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        rb = new SP_ReturnBooking
+                        {
+                            bookingID = row["BookingID"].ToString(),
+                            slotNo = row["SlotNo"].ToString(),
+                            startTime = Convert.ToDateTime(row["StartTime"].ToString())
+                        };
+                    }
+                    return rb;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date)
+        {
+            SP_ReturnBooking rb = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@bookingID", bookingID),
+                new SqlParameter("@customerID", customerID),
+                new SqlParameter("@stylistID", stylistID),
+                new SqlParameter("@date", date)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ReturnBooking",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+                        rb = new SP_ReturnBooking
+                        {
+                            bookingID = row["BookingID"].ToString(),
+                            customerID = row["CustomerID"].ToString(),
+                            stylistID = row["StylistID"].ToString(),
+                            slotNo = row["SlotNo"].ToString(),
+                            startTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            date = Convert.ToDateTime(row["Date"].ToString())
+                        };
+                    }
+                    return rb;
+                }
             }
             catch (Exception e)
             {

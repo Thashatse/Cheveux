@@ -44,5 +44,7 @@ BEGIN
 	FROM [CHEVEUX].[dbo].[REVIEW] r,[USER] u
 	WHERE r.CustomerID=@customerID
 	and r.CustomerID=u.UserID
+	and r.[Date] !< DATEADD(mm, -2, GETDATE())
+	order by r.[Date] desc
 END
 GO

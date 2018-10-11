@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="Reviews.aspx.cs" Inherits="Cheveux.Reviews" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/Cheveux.Master" AutoEventWireup="true" CodeBehind="Reviews.aspx.cs" Inherits="Cheveux.Reviews" EnableEventValidation="false" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -9,8 +9,8 @@
 
     <style>
         .starRating {
-            width: 50px;
-            height: 50px;
+            width: 25px;
+            height: auto;
             cursor: pointer;
             background-repeat: no-repeat;
             display: block;
@@ -78,14 +78,6 @@
                         </div>
                     </div>
 
-<%--                    <div class="row">
-                        <div class="col-md-10"></div>
-                        <div class="col-sm-12 col-md-2">
-                            <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnRev" runat="server" visible="false">Write A Review</a>
-                            <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=ReadReviews" id="btnRead" runat="server" visible="false">Read Reviews</a>
-                        </div>
-                    </div>--%>
-
 
                     <!--for general errors or telling user what must happen next-->
                     <div class="row">
@@ -109,12 +101,12 @@
                             <div class="col-sm-4 col-md-2 col-lg-2">
                                 <p>View Reviews: </p>
                             </div>
-                            <div class="col-sm-8 col-md-4 col-lg-4">
+                            <div class="col-sm-8 col-md-4 col-lg-8">
                                 <asp:DropDownList ID="drpReadType" runat="server" AutoPostBack="True" Visible="false"
                                     CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReadType_SelectedIndexChanged">
                                     <asp:ListItem Text="All Reviews" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="My Reviews" Value="1"></asp:ListItem>
-                                </asp:DropDownList>
+                                </asp:DropDownList>&nbsp;
                                 <asp:DropDownList ID="drpRev" runat="server" AutoPostBack="True" Visible="false"
                                     CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpRev_SelectedIndexChanged">
                                     <asp:ListItem Text="Stylist Reviews" Value="0"></asp:ListItem>
@@ -123,25 +115,33 @@
                             </div>
                         </div>
 
-                        <!--Stylist Reviews-->
-                        <div class="row">
-                            <div class="col-sm-12 col-md-8 col-lg-8">
-                                <asp:Label runat="server" ID="lblStylistReviewsHeader" Style="text-decoration: underline;" Font-Size="Large"></asp:Label>
+                        <div id="names" runat="server">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-2 col-lg-2">
+                                    <p>Select Stylist: </p>
+                                </div>
+                                <div class="col-sm-8 col-md-4 col-lg-4">
+                                    &nbsp;<asp:DropDownList ID="drpsNames" runat="server" AutoPostBack="True"
+                                        CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpsNames_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </div>
                             </div>
                         </div>
+
+
+                        <!--Stylist Reviews-->
                         <div class="row">
                             <div class="col-12">
                                 <asp:Panel ID="stylistPanel" CssClass="dvbox" runat="server" Visible="false">
+                                    <asp:Table ID="tblViewEmployee" runat="server"></asp:Table>
+                                    <br />
+                                    <h3>Reviews for stylist</h3>
+                                    <asp:Table ID="tblStylistReviews" runat="server"></asp:Table>
                                 </asp:Panel>
                             </div>
                         </div>
 
                         <!--Booking Reviews-->
-                        <div class="row">
-                            <div class="col-sm-12 col-md-8 col-lg-8">
-                                <asp:Label runat="server" ID="lblBookingReviewsHeader" Style="text-decoration: underline;" Font-Size="Large"></asp:Label>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <asp:Panel ID="bookingsPanel" CssClass="dvbox" runat="server" Visible="false">
@@ -182,59 +182,26 @@
 
                                 </div>
                             </div>
-
-
                         </div>
-
-                        <!--Section: Date and listbox -->
+                        <br />
+                        <!--Section: Booking user would like to review-->
                         <div class="row">
-                            <asp:PlaceHolder ID="datesPick" runat="server">
-                                <div class="col-sm-12 col-md-6 col-lg-6">
-                                    <div class="row">
-                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                            <p>Select Date: </p>
-                                        </div>
-                                        <div class="col-sm-8 col-md-3 col-lg-3">
-                                            <asp:DropDownList ID="drpMonth" runat="server" AutoPostBack="True"
-                                                CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpMonth_SelectedIndexChanged">
-                                                <asp:ListItem Text="January" Value="1"></asp:ListItem>
-                                                <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
-                                                <asp:ListItem Text="March" Value="3"></asp:ListItem>
-                                                <asp:ListItem Text="April" Value="4"></asp:ListItem>
-                                                <asp:ListItem Text="May" Value="5"></asp:ListItem>
-                                                <asp:ListItem Text="June" Value="6"></asp:ListItem>
-                                                <asp:ListItem Text="July" Value="7"></asp:ListItem>
-                                                <asp:ListItem Text="August" Value="8"></asp:ListItem>
-                                                <asp:ListItem Text="September" Value="9"></asp:ListItem>
-                                                <asp:ListItem Text="October" Value="10"></asp:ListItem>
-                                                <asp:ListItem Text="November" Value="11"></asp:ListItem>
-                                                <asp:ListItem Text="December" Value="12"></asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-4 col-md-3 col-lg-3"></div>
-                                        <div class="col-sm-8 col-md-3 col-lg-3">
-                                            <asp:Calendar ID="calDay" runat="server" Height="100" Width="200"
-                                                OnSelectionChanged="calDay_SelectionChanged"
-                                                OnDayRender="cal_DayRender"></asp:Calendar>
-                                        </div>
-                                    </div>
-                                </div>
-                            </asp:PlaceHolder>
-                            <br />
+                            <!--bookings-->
                             <div class="col-sm-12 col-md-6 col-lg-6">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <h6 style="text-decoration: underline;" id="choose" runat="server" visible="false">Choose a booking to review</h6>
-                                        <p id="lsBksHeader" runat="server"></p>
+                                    <div class="col-sm-12 col-md-6 col-lg-6">
+                                        <p id="choose" runat="server">Choose a booking to review</p>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                         <asp:Table ID="tblBookings" runat="server"></asp:Table>
                                     </div>
-
                                 </div>
-                                <br />
+                            </div>
+
+                            <!--write review area-->
+                            <div class="col-sm-12 col-md-6 col-lg-6">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                         <asp:PlaceHolder ID="theReview" runat="server" Visible="false">
                                             <div class="row">
                                                 <div class="col-12">
@@ -254,21 +221,29 @@
                                                     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                                                     <asp:UpdatePanel ID="ratingUpdatePanel" runat="server">
                                                         <ContentTemplate>
-                                                            <ajaxToolkit:Rating ID="Rating1" runat="server"
+                                                            <ajaxToolkit:Rating ID="Rating1" runat="server" BehaviorID="RatingBehavior1"
                                                                 StarCssClass="starRating"
                                                                 FilledStarCssClass="filledStar"
                                                                 EmptyStarCssClass="emptyStar"
                                                                 WaitingStarCssClass="waitingStar">
                                                             </ajaxToolkit:Rating>
                                                         </ContentTemplate>
+                                                        
                                                     </asp:UpdatePanel>
                                                 </div>
-
+                                                <div class="col-12">
+                                                    <asp:Label ID="valRating" CssClass="text-center" runat="server" Text="*Please select rating" ForeColor="Red" Visible="false"></asp:Label>
+                                                </div>
                                             </div>
                                             <!--Comment-->
                                             <div class="row">
                                                 <div class="col-12">
                                                     <textarea id="reviewComment" class="form-control" cols="50" rows="5" runat="server" placeholder="Your review here...."></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <asp:Label ID="valComment" CssClass="text-center" runat="server" Text="*Please enter a short review of your experience" ForeColor="Red" Visible="false"></asp:Label>
                                                 </div>
                                             </div>
                                             <br />
@@ -278,17 +253,19 @@
                                                 </div>
                                                 <br />
                                                 <br />
+                                                <div class="col-sm-12 col-md-1 col-lg-1"></div>
                                                 <div class="col-sm-12 col-md-3 col-lg-3">
-                                                    <a class="btn btn-primary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
+                                                    <a class="btn btn-secondary" href="../Cheveux/Reviews.aspx?Action=MakeAreview" id="btnCancel" runat="server">Cancel Review</a>
                                                 </div>
                                             </div>
 
                                         </asp:PlaceHolder>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
                         <br />
 
                         <br />

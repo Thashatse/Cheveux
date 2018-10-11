@@ -35,5 +35,7 @@ BEGIN
 	WHERE r.EmployeeID=@stylistID
 	and r.EmployeeID=u.UserID
 	and r.primaryBookingID is null
+	and r.[Date] !< DATEADD(mm,-2,GETDATE())
+	order by r.[Date] desc
 END
 GO

@@ -183,6 +183,7 @@ namespace DAL
         bool reviewStylist(REVIEW r);
         bool updateStylistReview(REVIEW r);
         bool updateBookingReview(REVIEW r);
+        List<SP_GetCustomerBooking> getCustRecentBookings(string CustomerID);
         #endregion
 
         #region Employee
@@ -246,5 +247,7 @@ namespace DAL
         List<SP_GetLeaveServices> GetLeaveServices();
         bool UpdateOrder(string orderID, DateTime dateReceived, bool received);
         bool UpdateQtyOnHand(string prodID, int qty);
+        SP_ReturnBooking returnNextBooking(DateTime startTime,string bookingID,string stylistID,DateTime date);
+        SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date);
     }
 }

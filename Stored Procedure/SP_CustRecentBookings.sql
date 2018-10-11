@@ -14,17 +14,20 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
--- Author:		S.MAQABANGQA
+-- Author:	S.MAQABANGQA
 -- =============================================
-alter PROCEDURE SP_GetStylistRating
-	@stylistID nchar(30)
+CREATE PROCEDURE SP_CustRecentBookings
+	@CustID nchar(30)
 AS
 BEGIN
-	SET NOCOUNT ON;
-	SELECT ROUND(AVG(Rating),0) as AverageRating 
-	FROM [CHEVEUX].[dbo].[REVIEW]
-	WHERE EmployeeID=@stylistID
-	AND primaryBookingID IS NULL
-	AND [CHEVEUX].[dbo].[REVIEW].[Date] !< DATEADD(mm, -2, GETDATE())
+	Select U.FirstName, B.[Date], TS.StartTime, BookingID, B.Arrived, B.StylistID       
+	From BOOKING B, TIMESLOT TS, [User] U
+	Where CustomerID = @CustID 
+	AND B.SlotNo = TS.SlotNo 
+	AND B.StylistID = U.UserID
+	AND B.Arrived = 'Y'
+	And B.BookingID = B.primaryBookingID
+	AND	B.[Date] !< DATEADD(mm, -2, GETDATE())
+	Order by B.[Date] desc
 END
 GO

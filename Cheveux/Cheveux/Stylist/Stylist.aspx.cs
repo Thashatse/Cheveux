@@ -13,13 +13,15 @@ namespace Cheveux
     {
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
-        String dayDate = DateTime.Today.ToString("D");
+
         CUST_VISIT cust_visit = null;
         HttpCookie cookie = null;
         SP_ViewCustVisit cv = null;
         List<SP_GetEmpAgenda> agenda = null;
         List<SP_GetBookingServices> bServices = null;
         SP_GetMultipleServicesTime time = null;
+
+        String dayDate = DateTime.Today.ToString("D");
         String bookingDate = DateTime.Now.ToString("yyyy-MM-dd");
 
         protected void Page_Load(object sender, EventArgs e)
@@ -196,7 +198,7 @@ namespace Cheveux
                                     cust_visit.Description = "Pending";
                                     if (handler.BLL_CreateCustVisit(cust_visit))
                                     {
-                                        Response.Redirect("../Stylist/CustomerVisit.aspx?bookingID=" + cust_visit.BookingID.ToString()
+                                        Response.Redirect("../Stylist/CustomerVisit.aspx?Action=CreateRecord&bookingID=" + cust_visit.BookingID.ToString()
                                                           +"&customerID=" + cust_visit.CustomerID.ToString());
                                     }
                                     else
@@ -230,8 +232,23 @@ namespace Cheveux
                                                 + "' style='color:White; text-decoration:none;' >Update</a>"
                                                 + "</button>";
                         }
-                        
+
+
                         //add the cell to the row
+                        AgendaTable.Rows[i].Cells.Add(buttonCell);
+
+                        //change service button
+                        buttonCell = new TableCell();
+                        buttonCell.Width = 100;
+                        buttonCell.Height = 50;
+                        buttonCell.Text = "<button type='button' class='btn btn-secondary'>"
+                                        + "<a href='../Stylist/CustomerVisit.aspx?Action=ChangeService&bookingID="
+                                        + a.PrimaryID.ToString().Replace(" ", string.Empty)
+                                        + "&customerID=" + a.UserID.ToString().Replace(" ", string.Empty)
+                                        + "&stylistID=" + a.empID.ToString().Replace(" ", string.Empty)
+                                        + "&date=" + a.Date
+                                        + "' style='color:White; text-decoration:none;'>Change Service</a>"
+                                        + "</button>";
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }
                     //increment i 

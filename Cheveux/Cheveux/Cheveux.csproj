@@ -50,7 +50,7 @@
       <HintPath>..\packages\AjaxControlToolkit.18.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="FusionCharts">
-      <HintPath>..\packages\fusioncharts-wrapper-assembly\FusionCharts.dll</HintPath>
+      <HintPath>..\..\FusionCharts\fusioncharts-wrapper-assembly\FusionCharts.dll</HintPath>
     </Reference>
     <Reference Include="Google.Apis, Version=1.33.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.33.0\lib\net45\Google.Apis.dll</HintPath>

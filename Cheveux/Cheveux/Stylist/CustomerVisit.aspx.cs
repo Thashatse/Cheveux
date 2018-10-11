@@ -16,12 +16,19 @@ namespace Cheveux
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         SP_GetAllofBookingDTL bDTL = null;
-        string bookingID;
-        string customerID;
+        
         CUST_VISIT visit = null;
         BOOKING b=null;
         List<SP_GetBookingServices> bServices = null;
         SP_GetMultipleServicesTime time = null;
+        SP_ReturnBooking rb = null;
+        SP_ReturnBooking rbNext = null;
+
+        string bookingID;
+        string customerID;
+        string action;
+        DateTime date;
+        int num;
         protected void Page_Load(object sender, EventArgs e)
         {
             errorHeader.Font.Bold = true;
@@ -45,21 +52,41 @@ namespace Cheveux
                 LoggedOut.Visible = false;
                 LoggedIn.Visible = true;
 
-                bookingID = Request.QueryString["bookingID"];
-                customerID = Request.QueryString["customerID"];
+                action = Request.QueryString["Action"];
 
-                if (bookingID != null && customerID != null)
+                if(action == "CreateRecord")
                 {
-                    getDetailsAndCreateRecord(bookingID, customerID);
+                    jheader.InnerText = "Create Visit Record";
+                    bookingID = Request.QueryString["bookingID"];
+                    customerID = Request.QueryString["customerID"];
+
+                    if (bookingID != null && customerID != null)
+                    {
+                        getDetailsAndCreateRecord(bookingID, customerID);
+                    }
+                    else
+                    {
+                        phBookingsErr.Visible = true;
+                        errorHeader.Text = "Fail.";
+                        errorMessage.Text = "Unable to display visit details.<br/>"
+                                            + "Rest assured, customer visit record was created.<br/>"
+                                            + "Please report this fault to the administrator so we can make your life"
+                                            + "a bit easier and fix it as soon as possible.";
+                    }
+                }
+                else if (action == "ChangeService")
+                {
+                    jheader.InnerText = "Change Booking Service";
+                    date =Convert.ToDateTime(Request.QueryString["date"]);
+                    bookingID = Request.QueryString["bookingID"];
+                    customerID = Request.QueryString["customerID"];
+                    
+                    if(bookingID != null && customerID != null && date != null)
+                    num = getNumOfSlotsOpen(bookingID,customerID,UserID["ID"].ToString(),date);
                 }
                 else
                 {
-                    phBookingsErr.Visible = true;
-                    errorHeader.Text = "Fail.";
-                    errorMessage.Text = "Unable to display visit details.<br/>"
-                                        + "Rest assured, customer visit record was created.<br/>"
-                                        + "Please report this fault to the administrator so we can make your life"
-                                        + "a bit easier and fix it as soon as possible.";
+                    jheader.InnerText = "Create Customer Visit Record";
                 }
             }
         }
@@ -313,6 +340,42 @@ namespace Cheveux
             rCnt++;
             #endregion
         }
+        public int getNumOfSlotsOpen(string bookingID,string customerID, string stylistID,DateTime date)
+        {
+            try
+            {
+                rb = handler.returnBooking(bookingID, customerID, stylistID, date);
+            }
+            catch(Exception err)
+            {
+                function.logAnError("Error getting current booking. Error: " + err.ToString());
+            }
 
+            try
+            {
+                rbNext = handler.returnNextBooking(rb.startTime,rb.bookingID,rb.stylistID,rb.date);
+            }
+            catch(Exception err)
+            {
+                function.logAnError("Error getting next booking. Error: " + err.ToString());
+            }
+
+            string slo = rbNext.slotNo.ToString();
+            int no;
+
+            if(int.TryParse(slo.Substring(3),out no))
+            {
+                return no;
+            }
+            else
+            {
+                int num2 = -1;
+                return num2;
+            }
+        }
+        public void loadAvailServices(int num)
+        {
+            //pending
+        }
     }
 }

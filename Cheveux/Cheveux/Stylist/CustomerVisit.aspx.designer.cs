@@ -40,6 +40,15 @@ namespace Cheveux {
         protected global::System.Web.UI.WebControls.Label theVisit;
         
         /// <summary>
+        /// jheader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl jheader;
+        
+        /// <summary>
         /// phVisitErr control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblOther;
+        
+        /// <summary>
+        /// phChangeService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phChangeService;
+        
+        /// <summary>
+        /// box control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl box;
         
         /// <summary>
         /// phBookingsErr control.

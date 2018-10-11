@@ -401,7 +401,11 @@ namespace BLL
         {
             return db.getAllStylistReviews();
         }
-        #endregion 
+        public List<SP_GetCustomerBooking> getCustRecentBookings(string CustomerID)
+        {
+            return db.getCustRecentBookings(CustomerID);
+        }
+        #endregion
 
         #region Report
         public List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate)
@@ -815,6 +819,14 @@ namespace BLL
         public bool BLL_UpdateQtyOnHand(string prodID, int qty)
         {
             return db.UpdateQtyOnHand(prodID, qty);
+        }
+        public SP_ReturnBooking returnNextBooking(DateTime startTime, string bookingID, string stylistID, DateTime date)
+        {
+            return db.returnNextBooking(startTime, bookingID, stylistID, date);
+        }
+        public SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date)
+        {
+            return db.returnBooking(bookingID, customerID, stylistID, date);
         }
     }
 }
