@@ -12,5 +12,6 @@ BEGIN
       ,[Name]
       ,[Product/Service]
 	FROM [CHEVEUX].[dbo].[ProductType]
+	order by [Name]
 END
 GO

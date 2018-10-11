@@ -19,11 +19,6 @@ namespace Cheveux.Manager
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack)
-            {
-               tblProductTable.Rows.Clear();
-            }
-
             //check if the user is loged out
             cookie = Request.Cookies["CheveuxUserID"];
 
@@ -43,11 +38,70 @@ namespace Cheveux.Manager
                 LogedIn.Visible = true;
                 LogedOut.Visible = false;
 
-                //get the selected sort by and display the results
-                loadProductList();
+                if (!Page.IsPostBack)
+                {
+                    //check the action and set the view
+                    string action = Request.QueryString["Action"];
+                    if (action == "NewType")
+                    {
+                        hideAll();
+                        divNewType.Visible = true;
+                    }
+                    else if(action == "EditType")
+                    {
+                        hideAll();
+                        divNewType.Visible = true;
+                    }
+                    else
+                    {
+                        //check if a view has been requested
+                        string view = Request.QueryString["View"];
+                        if (view == "Service")
+                        {
+                            btnViewAllServices_Click(sender, e);
+                        }
+                        else if (view == "Type")
+                        {
+                            btnViewServiceTypes_Click(sender, e);
+                        }
+                        else
+                        {
+                            btnViewAllServices_Click(sender, e);
+                        }
+                    }
+                }
             }
         }
 
+        #region View
+        private void hideAll()
+        {
+            divAllServices.Visible = false;
+            divNewType.Visible = false;
+            divServiceTypes.Visible = false;
+        }
+
+        protected void btnViewAllServices_Click(object sender, EventArgs e)
+        {
+            hideAll();
+
+            //get the selected sort by and display the results
+            loadProductList();
+
+            divAllServices.Visible = true;
+        }
+
+        protected void btnViewServiceTypes_Click(object sender, EventArgs e)
+        {
+            hideAll();
+
+            loadSerivceTypes();
+
+            divServiceTypes.Visible = true;
+        }
+        #endregion
+
+        #region services
         public void loadProductList()
         {
             try
@@ -90,8 +144,8 @@ namespace Cheveux.Manager
                     {
                         //if the product maches the selected type
                         //if product matches the tearm
-                        if ((compareToSearchTerm(prod.Name) == true ||
-                            compareToSearchTerm(prod.ProductDescription) == true) &&
+                        if ((function.compareToSearchTerm(prod.Name, txtProductSearchTerm.Text) == true ||
+                            function.compareToSearchTerm(prod.ProductDescription, txtProductSearchTerm.Text) == true) &&
                             prod.ProductType[0] == 'S')
                         {
                             //diplay the product details
@@ -111,7 +165,7 @@ namespace Cheveux.Manager
                             //Name
                             newCell = new TableCell();
                             newCell.Text = "<a class='btn btn-default' href ='../cheveux/services.aspx?ProductID="
-                                        + prod.ProductID.ToString().Replace(" ", string.Empty)+"'>" + prod.Name + "</a>";
+                                        + prod.ProductID.ToString().Replace(" ", string.Empty) + "'>" + prod.Name + "</a>";
                             tblProductTable.Rows[count].Cells.Add(newCell);
 
                             //Description
@@ -140,7 +194,7 @@ namespace Cheveux.Manager
                 }
 
                 //result count
-                    productJumbotronLable.Text = count - 1 + " Services";
+                productJumbotronLable.Text = count - 1 + " Services";
                 if (count - 1 == 0)
                 {
                     productJumbotronLable.ForeColor = System.Drawing.Color.Red;
@@ -153,31 +207,91 @@ namespace Cheveux.Manager
             catch (Exception Err)
             {
                 function.logAnError(Err.ToString()
-                    + " An error occurred retrieving list of Services with tearm "+ txtProductSearchTerm.Text
+                    + " An error occurred retrieving list of Services with tearm " + txtProductSearchTerm.Text
                     + " in loadEmployeeList() method on Manager/Employee page");
                 productJumbotronLable.Font.Size = 22;
                 productJumbotronLable.Font.Bold = true;
                 productJumbotronLable.Text = "An error occurred retrieving employee details";
             }
         }
+        #endregion
 
-        public bool compareToSearchTerm(string toBeCompared)
+        #region Types
+        public void loadSerivceTypes()
         {
-            bool result = false;
-            if (txtProductSearchTerm.Text != null)
+            try
             {
-                toBeCompared = toBeCompared.ToLower();
-                string searcTearm = txtProductSearchTerm.Text.ToLower();
-                if (toBeCompared.Contains(searcTearm))
+                List<ProductType> types = handler.getProductTypes();
+                //check if there are outstanding orders
+                if (types.Count > 0)
                 {
-                    result = true;
+                    //if there are bookings desplay them
+                    //create a new row in the uppcoming bookings table and set the height
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblServiceTypes.Rows.Add(newRow);
+                    //create a header row and set cell withs
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Name";
+                    newHeaderCell.Width = 1000;
+
+                    //create a loop to display each result
+                    //creat a counter to keep track of the current row
+                    int rowCount = 1;
+                    foreach (ProductType type in types)
+                    {
+                        if(type.ProductOrService == 'S' && type.name.Replace(" ", string.Empty) != "Service")
+                        {
+                            newRow = new TableRow();
+                            newRow.Height = 50;
+                            tblServiceTypes.Rows.Add(newRow);
+                            //fill the row with the data from the results object
+                            TableCell newCell = new TableCell();
+                            newCell.Text = "<a href='/Manager/Service.aspx?Action=EditType" +
+                                            "&typeID=" + type.typeID.Replace(" ", string.Empty) +
+                                            "'>" + type.name + "</a>";
+                            tblServiceTypes.Rows[rowCount].Cells.Add(newCell);
+                            rowCount++;
+                        }
+                    }
+
+                    if (rowCount == 1)
+                    {
+                        // if there aren't let the user know
+                        lblServicetypes.Text =
+                            "<p> No Suppliers </p>";
+                        tblServiceTypes.Visible = false;
+                    }
+                    else
+                    {
+                        // set the booking copunt
+                        lblServicetypes.Text =
+                            "<p> " + (rowCount - 1) + " Supliers </p>";
+                    }
+                }
+                else
+                {
+                    // if there aren't let the user know
+                    lblServicetypes.Text =
+                        "<p> No Suppliers </p>";
                 }
             }
-            else
+            catch (Exception err)
             {
-                result = true;
+                function.logAnError("Error loading Service Types on internal service page | Error: " + err.ToString());
+                lblServicetypes.Visible = true;
+                tblServiceTypes.Visible = false;
+                lblServicetypes.Text =
+                        "<h2> An Error Occured Communicating With The Data Base, Try Again Later. </h2>";
             }
-            return result;
         }
+        #endregion
+
+        #region New Type
+        protected void btnAddType_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
