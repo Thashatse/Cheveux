@@ -50,6 +50,7 @@ namespace Cheveux.Manager
                     else if(action == "EditType")
                     {
                         hideAll();
+                        loadEdit();
                         divNewType.Visible = true;
                     }
                     else
@@ -222,6 +223,7 @@ namespace Cheveux.Manager
             try
             {
                 List<ProductType> types = handler.getProductTypes();
+                types = types.OrderBy(o => o.name).ToList();
                 //check if there are outstanding orders
                 if (types.Count > 0)
                 {
@@ -234,6 +236,7 @@ namespace Cheveux.Manager
                     TableHeaderCell newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Text = "Name";
                     newHeaderCell.Width = 1000;
+                    tblServiceTypes.Rows[0].Cells.Add(newHeaderCell);
 
                     //create a loop to display each result
                     //creat a counter to keep track of the current row
@@ -287,10 +290,27 @@ namespace Cheveux.Manager
         }
         #endregion
 
-        #region New Type
+        #region New/Edit Type
         protected void btnAddType_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void loadEdit()
+        {
+            string typeID = Request.QueryString["typeID"];
+            if (typeID != null && typeID != "")
+            {
+                List<ProductType> types = handler.getProductTypes();
+                foreach (ProductType type in types)
+                {
+                    if (type.typeID.Replace(" ", string.Empty) == typeID)
+                    {
+                        txtTypeName.Text = type.name;
+                    }
+                }
+                lblNewTypeHeader.Text = "Edit Type";
+            }
         }
         #endregion
     }
