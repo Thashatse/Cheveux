@@ -181,6 +181,7 @@ namespace Cheveux
 
                         if (cookie["UT"] == "M")
                         {
+                            lblGoService.Text = "Leave Reason";
                             divApplication.Visible = false;
                             divBraids.Visible = false;
                             divNatural.Visible = false;
