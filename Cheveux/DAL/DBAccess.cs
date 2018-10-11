@@ -1589,11 +1589,13 @@ namespace DAL
             }
 
         }
+        #endregion
 
-        public List<SP_GetProductTypes> getProductTypes()
+        #region ProductTypes
+        public List<ProductType> getProductTypes()
         {
-            SP_GetProductTypes productType = null;
-            List<SP_GetProductTypes> productTypes = new List<SP_GetProductTypes>();
+            ProductType productType = null;
+            List<ProductType> productTypes = new List<ProductType>();
             try
             {
                 using (DataTable table = DBHelper.Select("SP_GetProductTypes",
@@ -1603,15 +1605,55 @@ namespace DAL
                     {
                         foreach (DataRow row in table.Rows)
                         {
-                            productType = new SP_GetProductTypes
+                            productType = new ProductType
                             {
-                                type = Convert.ToChar(row[0].ToString()[0])
+                                typeID = row["TypeID"].ToString(),
+                                name = row["Name"].ToString(),
+                                ProductOrService = row["Product/Service"].ToString()[0]
                             };
                             productTypes.Add(productType);
                         }
                     }
                     return productTypes;
                 }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool addProductType(ProductType newType)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@typeID", newType.typeID),
+                new SqlParameter("@typeName", newType.name),
+                new SqlParameter("@ProdOrSer", newType.ProductOrService)
+                };
+
+                return DBHelper.NonQuery("SP_NewProductType", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool editProductType(ProductType updateType)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@typeID", updateType.typeID),
+                new SqlParameter("@typeName", updateType.name),
+                new SqlParameter("@ProdOrSer", updateType.ProductOrService)
+                };
+
+                return DBHelper.NonQuery("SP_EditProductType", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {
@@ -3293,7 +3335,6 @@ namespace DAL
         #endregion
 
         #region Reports
-
         public List<SP_BookingsReportForHairstylist> getBookingsReportForHairstylist(string stylistID)
         {
             SP_BookingsReportForHairstylist hairstylistBookingReportrecord = null;

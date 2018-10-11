@@ -146,6 +146,18 @@ namespace BLL
         }
         #endregion
 
+        #region ProductTypes
+        public bool addProductType(ProductType newType)
+        {
+            return db.addProductType(newType);
+        }
+
+        public bool editProductType(ProductType updateType)
+        {
+            return db.editProductType(updateType);
+        }
+        #endregion
+
         #region Product Orders
         public OrderViewModel getOrder(string orderID)
         {
@@ -671,7 +683,7 @@ namespace BLL
         }
         
 
-        public List<SP_GetProductTypes> getProductTypes()
+        public List<ProductType> getProductTypes()
         {
             return db.getProductTypes();
         }

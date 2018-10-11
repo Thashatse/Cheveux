@@ -66,6 +66,12 @@ namespace BLL
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
         #endregion
 
+        #region ProductTypes
+        bool addProductType(ProductType newType);
+
+        bool editProductType(ProductType updateType);
+        #endregion
+
         #region Product Orders
         OrderViewModel getOrder(string orderID);
 
@@ -208,7 +214,7 @@ namespace BLL
         List<SP_ViewEmployee> viewAllEmployees();
         List<SP_GetEmployeeTypes> getEmpTypes();
         List<PRODUCT> getAllProducts();
-        List<SP_GetProductTypes> getProductTypes();
+        List<ProductType> getProductTypes();
         Tuple<List<SP_GetAllAccessories>, List<SP_GetAllTreatments>> getAllProductsAndDetails();
         List<SP_GetTodaysBookings> getTodaysBookings();
         USER checkForAccountTypeEmail(string identifier);

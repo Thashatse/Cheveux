@@ -13,15 +13,6 @@ namespace Cheveux.Manager {
     public partial class Reports {
         
         /// <summary>
-        /// ReportsPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReportsPage;
-        
-        /// <summary>
         /// LogedIn control.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LogedIn;
+        
+        /// <summary>
+        /// ReportsPage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReportsPage;
         
         /// <summary>
         /// drpReport control.
@@ -103,6 +103,24 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Calendar CalendarDateEnd;
         
         /// <summary>
+        /// lError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lError;
+        
+        /// <summary>
+        /// btnControlls control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl btnControlls;
+        
+        /// <summary>
         /// btnRefresh control.
         /// </summary>
         /// <remarks>
@@ -112,13 +130,49 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Button btnRefresh;
         
         /// <summary>
-        /// btnGraph control.
+        /// btnViewText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGraph;
+        protected global::System.Web.UI.WebControls.Button btnViewText;
+        
+        /// <summary>
+        /// btnViewGraph control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewGraph;
+        
+        /// <summary>
+        /// divGraphType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGraphType;
+        
+        /// <summary>
+        /// btnShowBarGraph control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShowBarGraph;
+        
+        /// <summary>
+        /// btnShowPieGraph control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnShowPieGraph;
         
         /// <summary>
         /// btnPrint control.
@@ -128,15 +182,6 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPrint;
-        
-        /// <summary>
-        /// lError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lError;
         
         /// <summary>
         /// divPrintHeader control.
@@ -157,13 +202,13 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Table tblLogo;
         
         /// <summary>
-        /// divReport control.
+        /// divReportHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divReport;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divReportHeader;
         
         /// <summary>
         /// reportLable control.
@@ -202,6 +247,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.Label reportDateRangeLable;
         
         /// <summary>
+        /// divReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divReport;
+        
+        /// <summary>
         /// tblReport control.
         /// </summary>
         /// <remarks>
@@ -220,13 +274,22 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divGraph;
         
         /// <summary>
-        /// Literal1 control.
+        /// graphBar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal Literal1;
+        protected global::System.Web.UI.WebControls.Literal graphBar;
+        
+        /// <summary>
+        /// graphPie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal graphPie;
         
         /// <summary>
         /// LogedOut control.

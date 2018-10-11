@@ -106,6 +106,12 @@ namespace DAL
         bool addTreatments(TREATMENT t, PRODUCT p);
         #endregion
 
+        #region ProductTypes
+        bool addProductType(ProductType newType);
+
+        bool editProductType(ProductType updateType);
+        #endregion
+
         #region Product Orders
         OrderViewModel getOrder(string orderID);
 
@@ -220,7 +226,7 @@ namespace DAL
         List<SP_ViewEmployee> viewAllEmployees();
         List<SP_GetEmployeeTypes> getEmpTypes();
         List<PRODUCT> getAllProducts();
-        List<SP_GetProductTypes> getProductTypes();
+        List<ProductType> getProductTypes();
         bool deactivateUser(string userID);
         bool AddBooking(BOOKING addBooking);
         bool AddToBookingService(BookingService bs);

@@ -39,11 +39,16 @@ namespace Cheveux
                 }
                 if (UserDetails != null)
                 {
+                    string username = UserDetails.UserName.ToString();
+                    if (username.Length > 7)
+                    {
+                        username = username.Substring(0, 6) + "...";
+                    }
                     profile.Controls.Add(new LiteralControl
                         ("<a class='nav-link js-scroll-trigger dropdown-toggle' data-toggle='dropdown' href='../Profile.aspx?View=Profile' style='text-decoration: none;'>" +
                                 "<img src=" + UserDetails.UserImage + "" +
                                 " width='35' height='35' style='border-radius:50%;'/> " +
-                                UserDetails.UserName.ToString() + "</a>" +
+                                username + "</a>" +
                                 "<div class='dropdown-menu'>" +
                                     "<a class='dropdown-item' href='../Profile.aspx?View=Profile'> Profile </a>" +
                                     "<a class='dropdown-item' href='/Authentication/Accounts.aspx?action=Logout'> Logout </a>" +

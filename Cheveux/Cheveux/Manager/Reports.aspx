@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
-    <script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script> 
+    <script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -16,175 +16,187 @@
         <br />
     </div>
     <br />
-    <div class="row">
-        <div class="col-1"></div>
-        <div class="col-10">
-
-            <div runat="server" id="ReportsPage">
-                <!-- if the user is loged In -->
+    <form runat="server">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
                 <div runat="server" id="LogedIn" visible="false">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Jumbo Tron -->
-                            <div class="jumbotron bg-dark text-white">
-                                <h1>Reports</h1>
-                                <!-- line Break -->
-                                <br />
-                                <form runat="server">
+                    <div runat="server" id="ReportsPage">
+                        <!-- if the user is loged In -->
 
-                                    <!-- Report Selector -->
-                                    <p>Select A Report: </p>
-                                    <asp:DropDownList ID="drpReport" runat="server" AutoPostBack="True" class="dropdown"
-                                        CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReport_SelectedIndexChanged1"
-                                        OnTextChanged="drpReport_SelectedIndexChanged1">
-                                        <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
-                                        <asp:ListItem Text="Bookings" Value="1"></asp:ListItem>
-                                        <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
-                                        <asp:ListItem Text="Top Products" Value="3"></asp:ListItem>
-                                    </asp:DropDownList>
+                        <!-- Jumbo Tron -->
+                        <div class="jumbotron bg-dark text-white">
+                            <h1>Reports</h1>
 
-                                    <!-- line Break -->
-                                    <br />
-                                    <br />
 
-                                    <div class="container" runat="server" id="reportByContainer" visible="False">
+                            <div id="SelectReport">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <!-- Report Selector -->
+                                        <p>Select A Report: </p>
+                                        <asp:DropDownList ID="drpReport" runat="server" AutoPostBack="True" class="dropdown"
+                                            CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReport_SelectedIndexChanged1"
+                                            OnTextChanged="drpReport_SelectedIndexChanged1">
+                                            <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Text="Bookings" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Top Services" Value="4"></asp:ListItem>
+                                            <asp:ListItem Text="Top Products" Value="3"></asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+
+                                    <div class="col-2" runat="server" id="reportByContainer" visible="False">
                                         <p>Report By: </p>
                                         <asp:DropDownList ID="ddlReportFor" runat="server" AutoPostBack="True" CssClass="btn btn-secondary dropdown-toggle">
                                         </asp:DropDownList>
                                     </div>
 
-                                    <!-- line Break  -->
-                                    <br />
-                                    <br />
-
-                                    <div class="container" runat="server" id="salesPaymentType" visible="False">
-                                        Payment Type:
+                                    <div class="col-2" runat="server" id="salesPaymentType" visible="False">
+                                        <p>Payment Type:</p>
                                         <asp:DropDownList ID="drpPaymentType" runat="server" CssClass="btn btn-secondary dropdown-toggle" AutoPostBack="True">
                                             <asp:ListItem Text="All" Value="0" Selected="True"></asp:ListItem>
                                             <asp:ListItem Text="Cash" Value="1"></asp:ListItem>
                                             <asp:ListItem Text="Credit" Value="2"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
+                                </div>
+                            </div>
 
-                                    <!-- line Break  -->
-                                    <br />
-                                    <br />
+                            <!-- line Break  -->
+                            <br />
 
-                                    <div class="row" runat="server" id="reportDateRangeContainer" visible="false">
-                                        <div class="col-lg-5">
-                                            <p>Start Date: </p>
-                                            <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateStrart" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <p>End Date: </p>
-                                            <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateEnd" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
-                                        </div>
-                                    </div>
+                            <div class="row" runat="server" id="reportDateRangeContainer" visible="false">
+                                <div class="col-lg-4">
+                                    <p>Start Date: </p>
+                                    <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateStrart" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
+                                </div>
+                                <div class="col-lg-4">
+                                    <p>End Date: </p>
+                                    <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateEnd" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
+                                </div>
+                            </div>
+                            <!-- line Break -->
+                            <br />
+                            <asp:Label ID="lError" runat="server" Text="Label" Visible="false"></asp:Label>
+                        </div>
+                    </div>
 
-                                    <!-- line Break  -->
-                                    <br />
-                                    <br />
+                    <!-- line Break  -->
+                    <br />
 
-                                    <div class="row">
-                                        <div class="col-8"></div>
-                                        <div class="col-4">
-                                            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" OnClick="btnRefresh_Click" CssClass="btn btn-secondary" />
-                                            <asp:Button ID="btnGraph" runat="server" Text="Graph" OnClick="btnGraph_Click" CssClass="btn btn-secondary" Visible="false" />
-                                            <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" Visible="false" CssClass="btn btn-secondary" />
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- line Break -->
+                    <div class="row" id="btnControlls" runat="server" visible="false">
+                        <div class="col-3">
+                            <asp:Button ID="btnRefresh" runat="server" Text="Refresh" OnClick="btnRefresh_Click" CssClass="btn btn-secondary" />
+                        </div>
+                        <div class="col-3 text-center">
+                            <!--Tabs-->
+                            <ul class="nav" role="tablist">
+                                <li>
+                                    <asp:Button ID="btnViewText" runat="server" Text="Text" class="btn btn-primary" OnClick="btnViewText_Click" /></li>
+                                <li>
+                                    <asp:Button ID="btnViewGraph" runat="server" Text="Graph" class="btn btn-light" OnClick="btnViewGraph_Click" /></li>
+                            </ul>
+                        </div>
+                        <div class="col-3 text-center" runat="server" id="divGraphType">
+                            <ul class="nav" role="tablist">
+                                <li>
+                                    <asp:Button ID="btnShowBarGraph" runat="server" Text="Bar" class="btn btn-primary" OnClick="btnShowBarGraph_Click" /></li>
+                                <li>
+                                    <asp:Button ID="btnShowPieGraph" runat="server" Text="Pie" class="btn btn-light" OnClick="btnShowPieGraph_Click" /></li>
+                            </ul>
+                        </div>
+                    <div class="col-3">
+                        <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" CssClass="btn btn-secondary" />
+                    </div>
+
+                    <div class="col-12">
+                        <hr class="my-4">
+                    </div>
+                    </div>
+
+                    <div runat="server" id="divPrintHeader" visible="false">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Logo -->
+                                <asp:Table ID="tblLogo" runat="server"></asp:Table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div runat="server" id="divReportHeader" visible="false">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <asp:Label ID="reportLable" runat="server" Font-Bold Font-Size="XX-Large"></asp:Label>
+                            </div>
+                            <div class="col-4">
+                                <asp:Label ID="reportGenerateDateLable" runat="server" Font-Bold></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <asp:Label ID="reportByLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <asp:Label ID="reportDateRangeLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                    </div>
+
+                    <div runat="server" id="divReport" visible="false">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Line Break -->
                                 <br />
-                                <asp:Label ID="lError" runat="server" Text="Label" Visible="false"></asp:Label>
+                                <br />
+                                <!-- Report Table -->
+                                <asp:Table ID="tblReport" runat="server">
+                                </asp:Table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4"></div>
+                            <div class="col-4" align="center">
+                                <!-- Line Break -->
+                                <br />
+                                <br />
+                                <h3>--- End Of Report ---</h3>
+                            </div>
+                            <div class="col-4"></div>
+                        </div>
+                    </div>
+
+                    <div id="divGraph" runat="server" visible="false" style="text-align: center">
+                        <!-- line Break  -->
+                            <br />
+                        <asp:Literal ID="graphBar" runat="server" Visible="true"></asp:Literal>
+                        <asp:Literal ID="graphPie" runat="server" Visible="false"></asp:Literal>
+                    </div>
+                </div>
+
+                <!-- if the user is loged Out -->
+                <div runat="server" id="LogedOut">
+                    <div class="jumbotron bg-dark text-white">
+                        <div class="row">
+                            <div class="col-10">
+                                <h1>Reports</h1>
+                                <p>Please log-in to view Reports</p>
+                            </div>
+                            <div class="col-2">
+                                <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Reports.aspx" id="LogedOutButton">Login</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div runat="server" id="divPrintHeader" visible="false">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Logo -->
-                            <asp:Table ID="tblLogo" runat="server"></asp:Table>
-                        </div>
-                    </div>
-                </div>
-
-                <div runat="server" id="divReport" visible="false">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!--Logo-->
-                            <!-- <img src="../IMG_0715.png" alt="logo" width="300" height="300" class="img-fluid" />-->
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <asp:Label ID="reportLable" runat="server" Font-Bold Font-Size="XX-Large"></asp:Label>
-
-                        </div>
-                        <div class="col-4">
-                            <asp:Label ID="reportGenerateDateLable" runat="server" Font-Bold></asp:Label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <asp:Label ID="reportByLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
-                        </div>
-                        <div class="col-4"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <asp:Label ID="reportDateRangeLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
-                        </div>
-                        <div class="col-4"></div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Line Break -->
-                            <br />
-                            <br />
-
-                            <!-- Report Table -->
-                            <asp:Table ID="tblReport" runat="server">
-                            </asp:Table>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4" align="center">
-                            <!-- Line Break -->
-                            <br />
-                            <br />
-
-                            <h3>--- End Of Report ---</h3>
-                        </div>
-                        <div class="col-4"></div>
-                    </div>
-                </div>
-
-                <div id="divGraph" runat="server" visible="false" style="text-align:center">
-                    <asp:Literal ID="Literal1" runat="server"></asp:Literal>
-                </div>
             </div>
-
-            <!-- if the user is loged Out -->
-            <div runat="server" id="LogedOut">
-                <div class="jumbotron bg-dark text-white">
-                    <div class="row">
-                        <div class="col-10">
-                            <h1>Reports</h1>
-                            <p>Please log-in to view Reports</p>
-                        </div>
-                        <div class="col-2">
-                            <a class="btn btn-primary" href="../Authentication/Accounts.aspx?PreviousPage=Reports.aspx" id="LogedOutButton">Login</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="col-1"></div>
         </div>
-        <div class="col-1"></div>
-    </div>
+        <!-- line Break -->
+        <br />
+        <br />
+    </form>
 </asp:Content>
