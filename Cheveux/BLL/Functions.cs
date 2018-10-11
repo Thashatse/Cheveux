@@ -275,6 +275,40 @@ namespace BLL
                 throw new Exception();
             }
         }
+
+        public string GenerateRandomServiceTypeID()
+        {
+            try
+            {
+                string result;
+                bool add = true;
+                do
+                {
+                    int[] id = new int[3];
+                    Random rn = new Random();
+                    for (int i = 0; i < id.Length; i++)
+                    {
+                        id[i] = rn.Next(0, 9);
+                    }
+                    result = string.Join("", id);
+
+                    List<ProductType> types = Handler.getProductTypes();
+                    foreach (ProductType type in types)
+                    {
+                        if (type.typeID.Replace(" ", string.Empty) == result)
+                        {
+                            add = false;
+                        }
+                    }
+
+                } while (add == false);
+                return result;
+            }
+            catch
+            {
+                throw new Exception();
+            }
+        }
         #endregion
 
         #region Emails

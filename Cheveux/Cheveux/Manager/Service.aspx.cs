@@ -50,7 +50,7 @@ namespace Cheveux.Manager
                     else if(action == "EditType")
                     {
                         hideAll();
-                        loadEdit();
+                        loadEdit(sender, e);
                         divNewType.Visible = true;
                     }
                     else
@@ -99,6 +99,11 @@ namespace Cheveux.Manager
             loadSerivceTypes();
 
             divServiceTypes.Visible = true;
+        }
+        
+        protected void btnCancelAddType_Click(object sender, EventArgs e)
+        {
+            btnViewServiceTypes_Click(sender, e);
         }
         #endregion
 
@@ -243,7 +248,9 @@ namespace Cheveux.Manager
                     int rowCount = 1;
                     foreach (ProductType type in types)
                     {
-                        if(type.ProductOrService == 'S' && type.name.Replace(" ", string.Empty) != "Service")
+                        if(type.ProductOrService == 'S' 
+                            && type.name.Replace(" ", string.Empty) != "Service"
+                            && type.name.Replace(" ", string.Empty) != "EmployeeLeave")
                         {
                             newRow = new TableRow();
                             newRow.Height = 50;
@@ -291,14 +298,76 @@ namespace Cheveux.Manager
         #endregion
 
         #region New/Edit Type
+        string typeID;
+
         protected void btnAddType_Click(object sender, EventArgs e)
         {
+            //check for the ID
+            typeID = Request.QueryString["typeID"];
+            bool success = false;
+            ProductType type = new ProductType();
+            try
+            {
+                if (lblNewTypeHeader.Text == "Edit Type")
+                {
+                    type.typeID = typeID;
+                }
+                else if (lblNewTypeHeader.Text == "New Type")
+                {
+                    type.typeID = function.GenerateRandomServiceTypeID();
+                }
+                type.name = txtTypeName.Text;
+                type.ProductOrService = 'S';
+                
+                if (btnAddType.Text == "Create Type")
+                {
+                    //add
+                    success = handler.addProductType(type);
+                    typeID = type.typeID;
+                }
+                else if (btnAddType.Text == "Save")
+                {
+                    //edit
+                    success = handler.editProductType(type);
+                    typeID = type.typeID;
+                }
+            }
+            catch (Exception err)
+            {
+                if (btnAddType.Text == "Save")
+                {
+                    function.logAnError("Error editing service Type typeID=" + typeID + " | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20updating%20Service%20Type");
+                }
+                else if (btnAddType.Text == "Create Type")
+                {
+                    function.logAnError("Error creating new type | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Service%20Type");
+                }
+            }
 
+            if (success == true)
+            {
+                btnViewServiceTypes_Click(sender, e);
+            }
+            else if (success == false)
+            {
+                if (btnAddType.Text == "Save")
+                {
+                    function.logAnError("Error editing service Type typeID=" + typeID);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20updating%20Service%20Type");
+                }
+                else if (btnAddType.Text == "Create Type")
+                {
+                    function.logAnError("Error creating new type | Error: ");
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20creating%20Service%20Type");
+                }
+            }
         }
 
-        private void loadEdit()
+        private void loadEdit(object sender, EventArgs e)
         {
-            string typeID = Request.QueryString["typeID"];
+            typeID = Request.QueryString["typeID"];
             if (typeID != null && typeID != "")
             {
                 List<ProductType> types = handler.getProductTypes();
@@ -310,6 +379,11 @@ namespace Cheveux.Manager
                     }
                 }
                 lblNewTypeHeader.Text = "Edit Type";
+                btnAddType.Text = "Save";
+            }
+            else
+            {
+                btnViewServiceTypes_Click(sender, e);
             }
         }
         #endregion

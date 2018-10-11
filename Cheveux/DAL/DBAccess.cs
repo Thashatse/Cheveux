@@ -1589,7 +1589,9 @@ namespace DAL
             }
 
         }
+        #endregion
 
+        #region ProductTypes
         public List<ProductType> getProductTypes()
         {
             ProductType productType = null;
@@ -1614,6 +1616,44 @@ namespace DAL
                     }
                     return productTypes;
                 }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool addProductType(ProductType newType)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@typeID", newType.typeID),
+                new SqlParameter("@typeName", newType.name),
+                new SqlParameter("@ProdOrSer", newType.ProductOrService)
+                };
+
+                return DBHelper.NonQuery("SP_NewProductType", CommandType.StoredProcedure, pars);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+
+        public bool editProductType(ProductType updateType)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                {
+                new SqlParameter("@typeID", updateType.typeID),
+                new SqlParameter("@typeName", updateType.name),
+                new SqlParameter("@ProdOrSer", updateType.ProductOrService)
+                };
+
+                return DBHelper.NonQuery("SP_EditProductType", CommandType.StoredProcedure, pars);
             }
             catch (Exception e)
             {

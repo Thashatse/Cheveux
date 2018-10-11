@@ -4,6 +4,8 @@
     Products - Cheveux
 </asp:content>
 <asp:content id="Content2" contentplaceholderid="head" runat="server">
+<script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 </asp:content>
 <asp:content id="Content3" contentplaceholderid="ContentPlaceHolder1" runat="server">
     <form runat="server">
@@ -48,6 +50,17 @@
 
                             <asp:Table ID="tblProducts" runat="server"></asp:Table>
 
+                            <div id="diveViewProductr" runat="server" visible="false">
+                                <div class="row">
+                                    <div class="col-5"></div>
+                                    <div class="col-6">
+                            <br />
+                            <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                            <br />
+                            <asp:Label runat="server" id="EditProductBtn" style="float: right"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </asp:PlaceHolder>

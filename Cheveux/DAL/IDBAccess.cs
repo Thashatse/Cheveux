@@ -106,6 +106,12 @@ namespace DAL
         bool addTreatments(TREATMENT t, PRODUCT p);
         #endregion
 
+        #region ProductTypes
+        bool addProductType(ProductType newType);
+
+        bool editProductType(ProductType updateType);
+        #endregion
+
         #region Product Orders
         OrderViewModel getOrder(string orderID);
 

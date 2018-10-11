@@ -66,6 +66,12 @@ namespace BLL
         List<SP_GetBrandsForProductType> getBrandsForProductType(char type);
         #endregion
 
+        #region ProductTypes
+        bool addProductType(ProductType newType);
+
+        bool editProductType(ProductType updateType);
+        #endregion
+
         #region Product Orders
         OrderViewModel getOrder(string orderID);
 

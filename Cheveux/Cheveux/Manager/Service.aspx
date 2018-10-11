@@ -135,7 +135,9 @@
                         <!-- Line Break -->
                         <br />
                         <div class="row">
-                            <div class="col-2"></div>
+                            <div class="col-2">
+                                <asp:Button Style="float: left;" ID="btnCancelAddType" runat="server" Text="Cancel" CssClass="btn btn-secondary" OnClick="btnCancelAddType_Click" />
+                            </div>
                             <div class="col-6">
                                 <asp:Button Style="float: right;" ID="btnAddType" runat="server" Text="Create Type" CssClass="btn btn-primary" OnClick="btnAddType_Click" />
                             </div>

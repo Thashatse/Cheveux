@@ -7,11 +7,13 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
+using System.Text;
+using FusionCharts.Charts;
+
 namespace Cheveux.Cheveux
 {
     public partial class Products : System.Web.UI.Page 
     {
-
         Functions function = new Functions();
         IDBHandler handler = new DBHandler();
         HttpCookie cookie = null;
@@ -78,6 +80,7 @@ namespace Cheveux.Cheveux
         }
         #endregion
 
+        #region View
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -209,74 +212,10 @@ namespace Cheveux.Cheveux
                 }
                     }
                 }
+        #endregion
         
-        public void loadSupplier()
-        {
-            if (!Page.IsPostBack)
-            {
-                drpListSupplier.Items.Clear();
-                try
-                {
-                    List<Supplier> suppliers = handler.getSuppliers();
-                    foreach (Supplier supplier in suppliers)
-                    {
-
-                        drpListSupplier.DataSource = suppliers;
-                        //set the coloumn that will be displayed to the user
-                        drpListSupplier.DataTextField = "SupplierName";
-                        //set the coloumn that will be used for the valuefield
-                       drpListSupplier.DataValueField = "SupplierID";
-                        //bind the data
-                        drpListSupplier.DataBind();
-                    }
-                }
-                catch (Exception err)
-                {
-                    function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
-                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20suppliers");
-                }
-            }
-        }
-        
-        protected void drpProductType_Change(object sender, EventArgs e)
-        {
-            try
-            {
-                brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
-            }
-            catch(Exception err)
-            {
-                drpBrandList.Text = "-------";
-                function.logAnError("Error getting product type and brand [drpProductType_change]"+err.ToString());
-            }
-            foreach (SP_GetBrandsForProductType brand in brandList)
-            {
-                drpBrandList.DataSource = brandList;
-                drpBrandList.DataTextField = "Name";
-                drpBrandList.DataValueField = "BrandID";
-                drpBrandList.DataBind();
-            }
-
-            if (drpProductType.SelectedItem.Text == "Application Service")
-            {
-                productLabel.Text = "Colour";        
-            }
-            else if (drpProductType.SelectedItem.Text == "Treatment")
-            {
-                productLabel.Text = "Treatment Type";
-            }
-
-
-
-        }
-
         public void loadProductList(char productType)
         {
-
-
-
-
-
             /*add an edit button for the products
              * set button action to edit
              * 
@@ -481,6 +420,7 @@ namespace Cheveux.Cheveux
 
             tblProducts.Visible = true;
 
+            #region Header
             int count = 0;
             //displaythe table headers
             //create a new row in the table and set the height
@@ -503,7 +443,6 @@ namespace Cheveux.Cheveux
             newHeaderCell.Text = "Product Description: ";
             newHeaderCell.Width = 300;
             tblProducts.Rows[count].Cells.Add(newHeaderCell);
-
             count++;
 
             newRow = new TableRow();
@@ -512,22 +451,12 @@ namespace Cheveux.Cheveux
             newHeaderCell.Text = "Price: ";
             newHeaderCell.Width = 100;
             tblProducts.Rows[count].Cells.Add(newHeaderCell);
-
             count++;
 
             if (cookie != null)
             {
                 if (cookie["UT"] == "M" || cookie["UT"] == "R")
                 {
-                    newRow = new TableRow();
-                    tblProducts.Rows.Add(newRow);
-                    //create a header row and set cell widths
-                    newHeaderCell = new TableHeaderCell();
-                    newHeaderCell.Text = "QTY on Hand: ";
-                    newHeaderCell.Width = 300;
-                    tblProducts.Rows[count].Cells.Add(newHeaderCell);
-                    count++;
-
                     newRow = new TableRow();
                     tblProducts.Rows.Add(newRow);
                     //create a header row and set cell widths
@@ -544,7 +473,6 @@ namespace Cheveux.Cheveux
                     newHeaderCell.Text = "Supplier: ";
                     newHeaderCell.Width = 100;
                     tblProducts.Rows[count].Cells.Add(newHeaderCell);
-
                     count++;
 
                     //edit BTN Row
@@ -553,14 +481,11 @@ namespace Cheveux.Cheveux
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Width = 100;
                     tblProducts.Rows[count].Cells.Add(newHeaderCell);
-
                     count++;
-
-
-
-
                 }
             }
+            #endregion
+
             //Display specific product
             try
             {
@@ -573,22 +498,17 @@ namespace Cheveux.Cheveux
                     count = 0;
                     TableCell cell = new TableCell();
                     cell.Text = Accessory.Name.ToString();
-                    tblProducts.Rows[
-            count].Cells.Add(cell);
-
+                    tblProducts.Rows[count].Cells.Add(cell);
                     count++; 
 
                     cell = new TableCell();
                     cell.Text = Accessory.ProductDescription.ToString();
-                    tblProducts.Rows[
-            count].Cells.Add(cell);
-
+                    tblProducts.Rows[count].Cells.Add(cell);
                     count++; 
 
                     cell = new TableCell();
                     cell.Text = "R" + string.Format("{0:#.00}", Accessory.Price);
-                    tblProducts.Rows[
-            count].Cells.Add(cell);
+                    tblProducts.Rows[count].Cells.Add(cell);
                     count++;
 
                     if (cookie != null)
@@ -596,39 +516,29 @@ namespace Cheveux.Cheveux
                         if (cookie["UT"] == "M" || cookie["UT"] == "R")
                         {
                             cell = new TableCell();
-                            cell.Text = Accessory.Qty.ToString();
-                            tblProducts.Rows[
-                    count].Cells.Add(cell);
-                            count++;
-
-                            cell = new TableCell();
                             cell.Text = Accessory.Brandname.ToString();
-                            tblProducts.Rows[
-                    count].Cells.Add(cell);
+                            tblProducts.Rows[count].Cells.Add(cell);
                             count++;
 
                             cell = new TableCell();
                             cell.Text = Accessory.supplierName.ToString();
                             tblProducts.Rows[count].Cells.Add(cell);
                             count++;
-
-                            cell = new TableCell();
-                            cell.Text = "<a class= 'btn btn-primary' href = '?Action=EditProd&" +
+                            
+                            EditProductBtn.Text = "<a class= 'btn btn-primary' href = '?Action=EditProd&" +
                                         "ProductID=" + productID.ToString().Replace(" ", string.Empty) +
                                         "' >Edit Product</a>";
-                            tblProducts.Rows[count].Cells.Add(cell);
-                            count++;
+
+                            diveViewProductr.Visible = true;
                         }
                     }
                 }
-                //display accessories
                 else if (Treatment != null)
                 {
                     count = 0;
                     TableCell cell = new TableCell();
                     cell.Text = Treatment.Name.ToString();
-                    tblProducts.Rows[
-            count].Cells.Add(cell);
+                    tblProducts.Rows[count].Cells.Add(cell);
                     count++;
 
                     cell = new TableCell();
@@ -646,46 +556,178 @@ namespace Cheveux.Cheveux
                         if (cookie["UT"] == "M" || cookie["UT"] == "R")
                         {
                             cell = new TableCell();
-                            cell.Text = Treatment.Qty.ToString();
-                            tblProducts.Rows[
-                    count].Cells.Add(cell);
-                            count++;
-
-                            cell = new TableCell();
                             cell.Text = Treatment.Brandname.ToString();
-                            tblProducts.Rows[
-                    count].Cells.Add(cell);
+                            tblProducts.Rows[count].Cells.Add(cell);
                             count++;
 
                             cell = new TableCell();
                             cell.Text = Treatment.supplierName.ToString();
                             tblProducts.Rows[count].Cells.Add(cell);
                             count++;
-
-                            cell = new TableCell();
-                            cell.Text = "<a class= 'btn btn-primary' href = '?Action=EditProd&" +
+                            
+                            EditProductBtn.Text = "<a class= 'btn btn-primary' href = '?Action=EditProd&" +
                                         "ProductID=" + productID.ToString().Replace(" ", string.Empty) +
                                         "' >Edit Product</a>";
-                            tblProducts.Rows[count].Cells.Add(cell);
-                            count++;
+
+                            diveViewProductr.Visible = true;
                         }
                     }
                 }
 
+#region Gauge
+                if (cookie != null)
+                {
+                    if (cookie["UT"] == "M" || cookie["UT"] == "R")
+                    {
+                        
+                        Stock_Management settings = handler.getStockSettings();
+                        int lowStockTier = settings.LowStock;
+                        int middelTier = lowStockTier * 2;
+                        int UpperlTier = middelTier * 2;
+
+                        Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                        chartConfig.Add("caption", "Qty On Hand");
+                        chartConfig.Add("lowerLimit", "0");
+                        chartConfig.Add("upperLimit", UpperlTier.ToString());
+                        chartConfig.Add("showValue", "1");
+                        chartConfig.Add("numberSuffix", "Units");
+                        chartConfig.Add("theme", "fusion");
+                        chartConfig.Add("showToolTip", "0");
+
+                        List<ColorRange> color = new List<ColorRange>();
+                        color.Add(new ColorRange(0, lowStockTier, "#F2726F"));
+                        color.Add(new ColorRange(lowStockTier, middelTier, "#FFC533"));
+                        color.Add(new ColorRange(middelTier, UpperlTier, "#62B58F"));
+
+                        //store dial configuration
+
+                        var dial = new List<KeyValuePair<string,
+                            string>>();
+                        if (Accessory != null)
+                        {
+                            dial.Add(new KeyValuePair<string, string>("value", Accessory.Qty.ToString()));
+                        }
+                        else if (Treatment != null)
+                        {
+                            dial.Add(new KeyValuePair<string, string>("value", Treatment.Qty.ToString()));
+                        }
+
+                        // json data to use as chart data source
+                        StringBuilder jsonData = new StringBuilder();
+                        //build chart config object
+                        jsonData.Append("{'chart':{");
+                        foreach (var config in chartConfig)
+                        {
+                            jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                        }
+                        jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                        StringBuilder range = new StringBuilder();
+                        //build colorRange object
+                        range.Append("'colorRange':{");
+                        range.Append("'color':[");
+                        foreach (ColorRange clr in color)
+                        {
+                            range.AppendFormat("{{'minValue':'{0}','maxValue':'{1}','code':'{2}'}},", clr.Min, clr.Max, clr.ColorCode);
+                        }
+                        range.Replace(",", "]},", range.Length - 1, 1);
+                        //build dials object
+                        StringBuilder dials = new StringBuilder();
+                        dials.Append("'dials':{");
+                        dials.Append("'dial':[");
+                        foreach (var dialCnf in dial)
+                        {
+                            dials.AppendFormat("{{'{0}':'{1}'}},", dialCnf.Key, dialCnf.Value);
+                        }
+                        dials.Replace(",", "]}", dials.Length - 1, 1);
+
+                        jsonData.Append(range.ToString());
+                        jsonData.Append(dials.ToString());
+                        jsonData.Append("}");
+
+                        //Create gauge instance
+                        // charttype, chartID, width, height, data format, data
+
+                        Chart MyFirstGauge = new Chart("angulargauge", "first_gauge", "400", "250", "json", jsonData.ToString());
+                        //render gauge
+                        Literal1.Text = MyFirstGauge.Render();
+                        
+                    }
+                }
+                #endregion
             }
             catch (Exception Err)
             {
                 function.logAnError(" An error occurred retrieving list of products external products page. Error: " + Err);
+            }  
+        }
+        
+        #region New/EditProduct
+        public void loadSupplier()
+        {
+            if (!Page.IsPostBack)
+            {
+                drpListSupplier.Items.Clear();
+                try
+                {
+                    List<Supplier> suppliers = handler.getSuppliers();
+                    foreach (Supplier supplier in suppliers)
+                    {
+
+                        drpListSupplier.DataSource = suppliers;
+                        //set the coloumn that will be displayed to the user
+                        drpListSupplier.DataTextField = "SupplierName";
+                        //set the coloumn that will be used for the valuefield
+                        drpListSupplier.DataValueField = "SupplierID";
+                        //bind the data
+                        drpListSupplier.DataBind();
+                    }
+                }
+                catch (Exception err)
+                {
+                    function.logAnError("Error Loading Suppliers in new product order | Error: " + err);
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An%20error%20occurred%20loading%20suppliers");
+                }
+            }
+        }
+        
+        protected void drpProductType_Change(object sender, EventArgs e)
+        {
+            try
+            {
+                brandList = handler.getBrandsForProductType(drpProductType.SelectedItem.Text.ToCharArray()[0]);
+            }
+            catch (Exception err)
+            {
+                drpBrandList.Text = "-------";
+                function.logAnError("Error getting product type and brand [drpProductType_change]" + err.ToString());
+            }
+            foreach (SP_GetBrandsForProductType brand in brandList)
+            {
+                drpBrandList.DataSource = brandList;
+                drpBrandList.DataTextField = "Name";
+                drpBrandList.DataValueField = "BrandID";
+                drpBrandList.DataBind();
             }
 
-            
+            if (drpProductType.SelectedItem.Text == "Application Service")
+            {
+                productLabel.Text = "Colour";
+            }
+            else if (drpProductType.SelectedItem.Text == "Treatment")
+            {
+                productLabel.Text = "Treatment Type";
+            }
+
+
+
         }
 
         protected void btnAddProduct_Click(object sender, EventArgs e)
         {
-          //create a product object 
+            //create a product object 
             PRODUCT newProduct = new PRODUCT();
-          
+
             newProduct.Name = txtName.Text;
             newProduct.ProductDescription = txtPrice.Text;
 
@@ -738,15 +780,15 @@ namespace Cheveux.Cheveux
                     else if (btnAddProduct.Text == "Save")
                     {
                         //redirct to product page
-                        Response.Redirect("../cheveux/Products.aspx?ProductID="+productID);
-                        
+                        Response.Redirect("../cheveux/Products.aspx?ProductID=" + productID);
+
                     }
                 }
                 else
                 {
-                   Response.Redirect("Error.aspx");
+                    Response.Redirect("Error.aspx");
                 }
-                
+
             }
             else if (drpProductType.SelectedIndex == 1)
             {
@@ -775,7 +817,7 @@ namespace Cheveux.Cheveux
                 p.ProductType = drpProductType.SelectedValue.ToString();
                 t.supplierID = drpListSupplier.SelectedValue.ToString();
                 t.TreatmentType = txtcolour.Text;
-                
+
                 bool result = false;
                 if (btnAddProduct.Text != "Save")
                 {
@@ -810,5 +852,34 @@ namespace Cheveux.Cheveux
         {
             Response.Redirect("../Manager/Products.aspx");
         }
+        #endregion
+
+        #region Gauge
+        class ColorRange
+        {
+            public int Min
+            {
+                get;
+                set;
+            }
+            public int Max
+            {
+                get;
+                set;
+            }
+            public string ColorCode
+            {
+                get;
+                set;
+            }
+
+            public ColorRange(int min, int max, string code)
+            {
+                Min = min;
+                Max = max;
+                ColorCode = code;
+            }
+        }
+        #endregion
     }
 } 
