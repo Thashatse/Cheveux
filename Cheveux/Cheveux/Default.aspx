@@ -272,7 +272,7 @@
             <br />
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="section-heading">Conect With Us!</h2>
+                    <h2 class="section-heading">Connect With Us!</h2>
                     <hr class="my-4">
                 </div>
             </div>
