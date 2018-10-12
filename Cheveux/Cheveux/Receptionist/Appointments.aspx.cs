@@ -2110,15 +2110,7 @@ namespace Cheveux
                     function.logAnError("Error getting services [appointments.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
                 }
 
-                if (bServices.Count == 1)
-                {
-                    start.Text = a.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[i].Cells.Add(start);
-
-                    end.Text = a.EndTime.ToString("HH:mm");
-                    tblSchedule.Rows[i].Cells.Add(end);
-                }
-                else if (bServices.Count >= 2)
+                if (bServices.Count > 0)
                 {
                     time = handler.getMultipleServicesTime(primaryBookingID);
 
