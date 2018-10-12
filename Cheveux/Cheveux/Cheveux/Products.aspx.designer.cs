@@ -157,6 +157,15 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.TextBox txtName;
         
         /// <summary>
+        /// RequiredFieldValidatortxtName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtName;
+        
+        /// <summary>
         /// txtProductDescription control.
         /// </summary>
         /// <remarks>
@@ -166,6 +175,15 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.TextBox txtProductDescription;
         
         /// <summary>
+        /// RequiredFieldValidatortxtProductDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtProductDescription;
+        
+        /// <summary>
         /// txtPrice control.
         /// </summary>
         /// <remarks>
@@ -173,6 +191,15 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPrice;
+        
+        /// <summary>
+        /// RequiredFieldValidatortxtPrice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtPrice;
         
         /// <summary>
         /// drpBrandList control.
@@ -200,6 +227,15 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtcolour;
+        
+        /// <summary>
+        /// RequiredFieldValidatortxtcolour control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtcolour;
         
         /// <summary>
         /// btnCancel control.
