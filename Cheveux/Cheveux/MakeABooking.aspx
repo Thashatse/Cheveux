@@ -85,16 +85,7 @@
                         <div class="col-md-12 col-lg-7">
                              <div class="container" runat="server" id="divLabels">
                                         <h6><b>Select Service(s)</b></h6>
-
-                                        <!--Nav Pills for external system-->
-                                        <ul class="nav nav-pills nav-stacked">
-                                            <li><a href="#Natural">Natural &nbsp; &nbsp;</a></li>
-                                            <li><a href="#Application">Application  &nbsp; &nbsp;</a></li>
-                                            <li><a href="#Braid">Braid &nbsp; &nbsp;</a></li>
-                                        </ul>
-                                        
-                                       
-                                    </div>
+                             </div>
                         </div>
                     </div>
                     <div class="row">
@@ -185,9 +176,7 @@
                             <div runat="server" id="divServices" visible="true">
 
                                 <div class="container">
-                                   
-
-
+                                    <asp:Label runat="server" ID="lblServices" visible="true"></asp:Label>
                                     <div style="border: solid #F05F40 2px; height: 400px; overflow-y: scroll;">
                                         <div runat="server" id="divNatural" visible="true">
                                             <a name="Natural"></a>
@@ -209,6 +198,12 @@
 
                                             <h5>Braids</h5>
                                             <asp:RadioButtonList runat="server" ID="rblPickAServiceB" OnSelectedIndexChanged="LoadSummary" AutoPostBack="true">
+                                            </asp:RadioButtonList><br />
+                                            <a = name="Other"></a>
+                                        </div>
+                                        <div runat="server" id="divOther" visible="false">
+                                            <h5>Other</h5>
+                                            <asp:RadioButtonList runat="server" ID="rblPickOtherService" OnSelectedIndexChanged="LoadSummary" AutoPostBack="true">
                                             </asp:RadioButtonList>
                                         </div>
                                         <div runat ="server" id="divSickLeave" visible ="false">

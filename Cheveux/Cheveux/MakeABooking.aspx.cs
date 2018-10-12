@@ -31,6 +31,7 @@ namespace Cheveux
         List<string> pickedServiceID;
         string bookingType;
         decimal totalPrice = 0;
+        List<ProductType> prodType = null;
         //internal booking variable
         List<string> CustomerIDs = new List<string>();
 
@@ -158,6 +159,11 @@ namespace Cheveux
             stylistList = handler.BLL_GetAllStylists();
             slotList = handler.BLL_GetAllTimeSlots();
             leaveList = handler.BLL_GetLeaveServices();
+            prodType = handler.getProductTypes();
+
+            string serviceLabel = "";
+            bool addOther = false;
+
             if (!Page.IsPostBack)
             {
                 if (bookingTime != null)
@@ -185,7 +191,7 @@ namespace Cheveux
                             divApplication.Visible = false;
                             divBraids.Visible = false;
                             divNatural.Visible = false;
-
+                            
                             lblHeading.Text = "Leave Request";
                             lblChoose.Text = "Leave Request Summary...";
 
@@ -219,11 +225,22 @@ namespace Cheveux
                 try
                 {
 
-
+                    divOther.Visible = true;
                     ListItem deselect = new ListItem("None", "0");
                     deselect.Selected = true;
                     rblPickAServiceA.Items.Add(deselect);
                     rblPickAServiceB.Items.Add(deselect);
+                    rblPickOtherService.Items.Add(deselect);
+                    foreach (ProductType type in prodType)
+                    {
+                        if (type.ProductOrService == 'S'
+                            && type.name.Replace(" ", string.Empty) != "Service"
+                            && type.name.Replace(" ", string.Empty) != "EmployeeLeave" && type.PrimaryService == true)
+                        {
+                            serviceLabel += " <a href='#" + type.name.Replace(" ", string.Empty) + "'>" + type.name + "</a>    &nbsp; &nbsp;&nbsp; &nbsp; ";
+                        }
+
+                    }
 
                     foreach (SP_GetServices services in serviceList)
                     {
@@ -246,9 +263,20 @@ namespace Cheveux
                             item = new ListItem(services.Name + " - R" + string.Format("{0:#.00}", services.Price).ToString(), services.ServiceID);
                             rblPickAServiceB.Items.Add(item);
                         }
+                        else if(services.ServiceType != 'N' && services.ServiceType != 'A' && services.ServiceType != 'B' && services.ServiceType != 'U')
+                        {
+                            ListItem item;
+                            item = new ListItem(services.Name + " - R" + string.Format("{0:#.00}", services.Price).ToString(), services.ServiceID);
+                            rblPickOtherService.Items.Add(item);
+                            addOther = true;
+                        }
 
                     }
-
+                    if (addOther == true)
+                    {
+                        serviceLabel += " <a href='#Other'>" + "Other" + "</a>     ";
+                    }
+                    lblServices.Text = serviceLabel;
 
                 }
                 catch (Exception err)
@@ -292,7 +320,7 @@ namespace Cheveux
                        
                     }
 
-                    if (((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0")) && (rblSickLeave.SelectedValue.ToString() == ""))
+                    if (((cblPickAServiceN.SelectedValue.ToString() == "") && (rblPickAServiceA.SelectedValue.ToString() == "0") && (rblPickAServiceB.SelectedValue.ToString() == "0")) && (rblSickLeave.SelectedValue.ToString() == "") && (rblPickOtherService.SelectedValue.ToString() == "0"))
                     {
                         lblErrorSummary.Visible = true;
                         divServices.Visible = true;
@@ -1816,10 +1844,10 @@ namespace Cheveux
             int slotLength = 0;
             service = new SERVICE();
 
-            if (pickedServiceID != null)
+            /**if (pickedServiceID != null)
             {
                 pickedServiceID.Clear();
-            }
+            }**/
 
             if (cookie != null)
             {
@@ -2224,6 +2252,29 @@ namespace Cheveux
             }
             
         }
+        protected void rblPickOtherService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(rblPickOtherService.SelectedValue != "0")
+            {
+                if(pickedServiceID==null && pickedServiceName == null)
+                {
+                    pickedServiceID = new List<string>();
+                    pickedServiceName = new List<string>();
+
+                    pickedServiceID.Add(rblPickOtherService.SelectedValue);
+                    pickedServiceName.Add(rblPickOtherService.SelectedItem.Text);
+
+                    count++;
+                }
+                else
+                {
+                    pickedServiceID.Add(rblPickOtherService.SelectedValue);
+                    pickedServiceName.Add(rblPickOtherService.SelectedItem.Text);
+
+                    count++;
+                }
+            }
+        }
         #endregion
 
         #region Internal Bookings
@@ -2387,6 +2438,10 @@ namespace Cheveux
                             {
                                 tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceB.SelectedItem.Text;
                             }
+                            if (rblPickOtherService.SelectedValue != "0")
+                            {
+                                tblBookingSummary.Rows[1].Cells[1].Text = rblPickOtherService.SelectedItem.Text;
+                            }
                             if (cblPickAServiceN.SelectedValue != "0")
                             {
 
@@ -2448,6 +2503,18 @@ namespace Cheveux
                                     tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceB.SelectedItem.Text;
                                 }
                             }
+                            if (rblPickOtherService.SelectedValue != "0")
+                            {
+                                if (count == 0)
+                                {
+                                    tblBookingSummary.Rows[1].Cells[1].Text = rblPickOtherService.SelectedItem.Text;
+                                    count++;
+                                }
+                                else
+                                {
+                                    tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickOtherService.SelectedItem.Text;
+                                }
+                            }
                             if (cblPickAServiceN.SelectedValue != "0")
                             {
 
@@ -2496,11 +2563,15 @@ namespace Cheveux
                         {
                             tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceA.SelectedItem.Text;
                         }
-                        if (rblPickAServiceB.SelectedValue != "0")
+                        else if (rblPickAServiceB.SelectedValue != "0")
                         {
                             tblBookingSummary.Rows[1].Cells[1].Text = rblPickAServiceB.SelectedItem.Text;
                         }
-                        if (cblPickAServiceN.SelectedValue != "0")
+                        else if (rblPickOtherService.SelectedValue != "0")
+                        {
+                            tblBookingSummary.Rows[1].Cells[1].Text = rblPickOtherService.SelectedItem.Text;
+                        }
+                        else if (cblPickAServiceN.SelectedValue != "0")
                         {
 
                             foreach (ListItem item in cblPickAServiceN.Items)
@@ -2512,6 +2583,8 @@ namespace Cheveux
                                 }
                             }
                         }
+
+                        //No Of Hours
                         if (hours == 0 && minutes == 30)
                         {
                             lblNoOfHoursLabel.Text = "No. of Hours: ";
@@ -2561,6 +2634,18 @@ namespace Cheveux
                                 tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickAServiceB.SelectedItem.Text;
                             }
                         }
+                        if (rblPickOtherService.SelectedValue != "0")
+                        {
+                            if (count == 0)
+                            {
+                                tblBookingSummary.Rows[1].Cells[1].Text = rblPickOtherService.SelectedItem.Text;
+                                count++;
+                            }
+                            else
+                            {
+                                tblBookingSummary.Rows[1].Cells[1].Text += ", <br/>" + rblPickOtherService.SelectedItem.Text;
+                            }
+                        }
                         if (cblPickAServiceN.SelectedValue != "0")
                         {
 
@@ -2581,6 +2666,8 @@ namespace Cheveux
                                 }
                             }
                         }
+
+                        //No Of Hours
                         if (hours == 0 && minutes == 30)
                         {
                             lblNoOfHoursLabel.Text = "No. of Hours: ";
@@ -2597,6 +2684,11 @@ namespace Cheveux
                             lblNoOfHours.Text = hours.ToString() + "hr(s) " + minutes.ToString() + "min(s)";
                         }
 
+                    }
+                    else
+                    {
+                        lblServiceLabel.Text = "";
+                        tblBookingSummary.Rows[1].Cells[1].Text = "";
                     }
                 }
                 #endregion
@@ -2666,6 +2758,7 @@ namespace Cheveux
         {
             pickedServiceName = new List<string>();
             pickedServiceID = new List<string>();
+            //run reload of services
             rblPickAServiceB_SelectedIndexChanged(sender, e);
             rblPickAServiceA_SelectedIndexChanged(sender, e);
             rblSickLeave_SelectedIndexChanged(sender, e);
