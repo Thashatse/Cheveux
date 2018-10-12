@@ -40,8 +40,8 @@
                                             <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
                                             <asp:ListItem Text="Bookings" Value="1"></asp:ListItem>
                                             <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
-                                            <asp:ListItem Text="Top Services" Value="4"></asp:ListItem>
                                             <asp:ListItem Text="Top Products" Value="3"></asp:ListItem>
+                                            <asp:ListItem Text="Top Services" Value="4"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
 
