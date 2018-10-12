@@ -160,7 +160,7 @@
 
                         <div class="row">
                             <div class="col-sm-12 col-md-2 col-lg-2">
-                                <button class="btn btn-primary">
+                                <button class="btn btn-secondary">
                                     <a href="../Manager/Employee.aspx" style="color: white; text-decoration: none;">Cancel
                                     </a>
                                 </button>
