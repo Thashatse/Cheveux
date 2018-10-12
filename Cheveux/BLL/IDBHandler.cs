@@ -250,6 +250,7 @@ namespace BLL
         bool BLL_UpdateQtyOnHand(string prodID, int qty);
         SP_ReturnBooking returnNextBooking(DateTime startTime, string bookingID, string stylistID, DateTime date);
         SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date);
+        List<SP_ReturnAvailServices> returnAvailServices(int num);
     }
 }
 
