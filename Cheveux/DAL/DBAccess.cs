@@ -1433,6 +1433,7 @@ namespace DAL
                         accessory.Brandname = Convert.ToString(row["BrandName"]);
                         accessory.supplierID= Convert.ToString(row["SupplierID"]);
                         accessory.supplierName = Convert.ToString(row["SupplierName"]);
+                        accessory.Colour = Convert.ToString(row["Colour"]);
                     }
                 }
             }
@@ -1470,7 +1471,7 @@ namespace DAL
                         treatment.Brandname = Convert.ToString(row["BrandName"]);
                         treatment.supplierID = Convert.ToString(row["SupplierID"]);
                         treatment.supplierName = Convert.ToString(row["SupplierName"]);
-
+                        treatment.TreatmentType = Convert.ToString(row["TreatmentType"]);
                     }
                 }
             }
