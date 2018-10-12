@@ -1610,7 +1610,8 @@ namespace DAL
                             {
                                 typeID = row["TypeID"].ToString(),
                                 name = row["Name"].ToString(),
-                                ProductOrService = row["Product/Service"].ToString()[0]
+                                ProductOrService = row["Product/Service"].ToString()[0],
+                                PrimaryService = Convert.ToBoolean(row["PrimaryService"])
                             };
                             productTypes.Add(productType);
                         }
