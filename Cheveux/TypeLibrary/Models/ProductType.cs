@@ -11,5 +11,6 @@ namespace TypeLibrary.Models
         public string name { get; set; }
         public char ProductOrService { get; set; }
         public string typeID { get; set; }
+        public bool PrimaryService { get; set; }
     }
 }
