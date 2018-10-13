@@ -19,7 +19,6 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
-
             <div runat="server" id="divViewAll">
                 <div class="jumbotron bg-dark text-white">
                     <!-- VIEW ALL PRODUCTS TABLE -->
@@ -66,8 +65,6 @@
                 </asp:PlaceHolder>
             </div>
            
-            <div class="row">
-                <div class="col-md-8 col-sm-10">
                     <div runat="server" id="addandedit" visible="false">
                             <!-- ADD EDIT PRODUCTS FORM -->
                             <div class="row">
@@ -93,18 +90,45 @@
                                                 <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
                                             </asp:TableCell>
                                         </asp:TableRow>
+                                        
+                                        <asp:TableRow>
+                                            <asp:TableCell></asp:TableCell>
+                                            <asp:TableCell><asp:RequiredFieldValidator ID="RequiredFieldValidatortxtName" runat="server"
+                                            ErrorMessage="*Name is required" ControlToValidate="txtName"
+                                            ForeColor="Red"></asp:RequiredFieldValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+
                                         <asp:TableRow>
                                             <asp:TableCell Text="Product Description: " Width="150px"></asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:TextBox runat="server" ID="txtProductDescription"></asp:TextBox>
                                             </asp:TableCell>
                                         </asp:TableRow>
+
+                                        <asp:TableRow>
+                                            <asp:TableCell></asp:TableCell>
+                                            <asp:TableCell><asp:RequiredFieldValidator ID="RequiredFieldValidatortxtProductDescription" runat="server"
+                                            ErrorMessage="*Description is required" ControlToValidate="txtProductDescription"
+                                            ForeColor="Red"></asp:RequiredFieldValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+
                                         <asp:TableRow>
                                             <asp:TableCell Text="Price: " Width="150px"></asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:TextBox runat="server" ID="txtPrice"></asp:TextBox>
                                             </asp:TableCell>
                                         </asp:TableRow>
+
+                                        <asp:TableRow>
+                                            <asp:TableCell></asp:TableCell>
+                                            <asp:TableCell><asp:RequiredFieldValidator ID="RequiredFieldValidatortxtPrice" runat="server"
+                                            ErrorMessage="*Price is required" ControlToValidate="txtPrice"
+                                            ForeColor="Red"></asp:RequiredFieldValidator>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+
                                         <asp:TableRow>
                                             <asp:TableCell Text="Brand:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                             <asp:TableCell>
@@ -117,7 +141,14 @@
                                             <asp:TableCell>
                                                 <asp:TextBox runat="server" ID="txtcolour"></asp:TextBox>
                                             </asp:TableCell>
+</asp:TableRow>
 
+                                            <asp:TableRow>
+                                            <asp:TableCell></asp:TableCell>
+                                            <asp:TableCell><asp:RequiredFieldValidator ID="RequiredFieldValidatortxtcolour" runat="server"
+                                            ErrorMessage="*Required" ControlToValidate="txtcolour"
+                                            ForeColor="Red"></asp:RequiredFieldValidator>
+                                            </asp:TableCell>
                                         </asp:TableRow>
                                     </asp:Table>
 
@@ -126,7 +157,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 col-md-4">
-                                    <asp:Button ID="btnCancel" CssClass="btn btn-primary" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+                                    <asp:Button ID="btnCancel" CssClass="btn btn-secondary" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
                                 </div>
                                 <div class="col-sm-12 col-md-4">
                                     <asp:Button ID="btnAddProduct" CssClass="btn btn-primary" runat="server" Text="Add" OnClick="btnAddProduct_Click" />
@@ -135,25 +166,7 @@
                     </div>
 
                     <div class="col-1"></div>
-                </div>
-                </div>
             </div>
         </div>
-
-           
-
-            <!-- at the top of this page change the text displayed in the jumbotron based on the action-->
-
-            <!--start of update div-->
-            <!-- use bootstrap not a table-->
-
-            <!--have a label and its corresponding textbox/dropdown in a single row -->
-            <!-- for lables make the the div col-2 and for textboxes/dropdowns col-6 -->
-
-            <!-- at the bottom add cancel and update button-->
-            <!-- cancel button on the left-->
-            <!--update button on the right-->
-
-            <!-- end of update div -->
     </form>
 </asp:content>

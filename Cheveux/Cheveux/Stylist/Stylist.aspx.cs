@@ -169,7 +169,7 @@ namespace Cheveux
                     if (function.GetFullArrivedStatus(a.Arrived.ToString()[0]) == "Yes")
                     {
                         TableCell buttonCell = new TableCell();
-                        buttonCell.Width = 200;
+                        buttonCell.Width = 100;
                         buttonCell.Height = 50;
 
                         if (cv == null)
@@ -226,8 +226,8 @@ namespace Cheveux
                         {   
                             //if visit record already exists stylist should be able to update the visit
                             buttonCell.Text =   "<button type='button' class='btn btn-primary'>"
-                                                +"<a href='../Stylist/CustomerVisit.aspx?bookingID="
-                                                +a.PrimaryID.ToString().Replace(" ", string.Empty)
+                                                + "<a href='../Stylist/CustomerVisit.aspx?Action=CreateRecord&bookingID="
+                                                + a.PrimaryID.ToString().Replace(" ", string.Empty)
                                                 + "&customerID="+a.UserID.ToString().Replace(" ", string.Empty)
                                                 + "' style='color:White; text-decoration:none;' >Update</a>"
                                                 + "</button>";
@@ -286,15 +286,7 @@ namespace Cheveux
                     function.logAnError("Error retreiving services [stylist.aspx {nested try in getTime method}] method err:" + serviceErr.ToString());
                 }
 
-                if (bServices.Count == 1)
-                {
-                    start.Text = a.StartTime.ToString("HH:mm");
-                    AgendaTable.Rows[i].Cells.Add(start);
-
-                    end.Text = a.EndTime.ToString("HH:mm");
-                    AgendaTable.Rows[i].Cells.Add(end);
-                }
-                else if (bServices.Count >= 2)
+                if (bServices.Count > 0)
                 {
                     time = handler.getMultipleServicesTime(primaryBookingID);
 

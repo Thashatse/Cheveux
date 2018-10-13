@@ -724,7 +724,7 @@ namespace BLL
         #endregion
 
         #region Abreviation Full Text
-        public string GetFullProductTypeText(string ProductType, bool productsOnly, bool servicesOnly)
+        public string GetFullProductTypeText(string ProductType)
         {
             /*
              * Given abbreviated char that database returns for product type, 
@@ -735,27 +735,10 @@ namespace BLL
                 List<ProductType> productTypes = Handler.getProductTypes();
                 foreach(ProductType type in productTypes)
                 {
-                    if(productsOnly == false && servicesOnly == false)
-                    {
-                        if (ProductType == type.typeID)
+                        if (ProductType == type.typeID.Replace(" ", string.Empty))
                         {
                             return type.name;
                         }
-                    }
-                    else if(productsOnly == true)
-                    {
-                        if (ProductType == type.typeID.Replace(" ", string.Empty) && type.ProductOrService == 'P')
-                        {
-                            return type.name;
-                        }
-                    }
-                    else if (servicesOnly == true )
-                    {
-                        if (ProductType == type.typeID.Replace(" ", string.Empty) && type.ProductOrService == 'S')
-                        {
-                            return type.name;
-                        }
-                    }
                 }
 
                 logAnError("Unknown Product Type given to GetFullProductTypeText method in functions");

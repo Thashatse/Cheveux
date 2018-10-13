@@ -840,5 +840,9 @@ namespace BLL
         {
             return db.returnBooking(bookingID, customerID, stylistID, date);
         }
+        public List<SP_ReturnAvailServices> returnAvailServices(int num)
+        {
+            return db.returnAvailServices(num);
+        }
     }
 }

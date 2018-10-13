@@ -88,6 +88,7 @@ namespace Cheveux.Cheveux
         {
             service = handler.BLL_GetServiceFromID(serviceID);
             bservice = handler.BLL_GetBraidServiceFromID(serviceID);
+
             if (service != null)
             {
 
@@ -99,8 +100,8 @@ namespace Cheveux.Cheveux
                     lblLength.Text = bservice.LengthDesc;
                     lblWidth.Text = bservice.WidthDesc;
                 }
-                lblName.Text = service.ServiceName;
-                lblNoOfSlots.Text = Convert.ToString(service.NoOfSlots);
+                lblViewService.Text = service.ServiceName;
+                lblNoOfSlots.Text = Convert.ToString(service.NoOfSlots*30)+" Mins";
                 lblPrice.Text = "R " + string.Format("{0:#.00}", service.Price).ToString();
                 lblDescription.Text = service.Description;
                 //check if the user is logged in
@@ -132,7 +133,6 @@ namespace Cheveux.Cheveux
             {
                 Response.Redirect("Services.aspx");
             }
-
         }
 
         public void LoadAllServices()

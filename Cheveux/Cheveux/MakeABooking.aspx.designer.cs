@@ -328,6 +328,15 @@ namespace Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divServices;
         
         /// <summary>
+        /// lblServices control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblServices;
+        
+        /// <summary>
         /// divNatural control.
         /// </summary>
         /// <remarks>
@@ -380,6 +389,24 @@ namespace Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblPickAServiceB;
+        
+        /// <summary>
+        /// divOther control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divOther;
+        
+        /// <summary>
+        /// rblPickOtherService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPickOtherService;
         
         /// <summary>
         /// divSickLeave control.

@@ -1433,6 +1433,7 @@ namespace DAL
                         accessory.Brandname = Convert.ToString(row["BrandName"]);
                         accessory.supplierID= Convert.ToString(row["SupplierID"]);
                         accessory.supplierName = Convert.ToString(row["SupplierName"]);
+                        accessory.Colour = Convert.ToString(row["Colour"]);
                     }
                 }
             }
@@ -1470,7 +1471,7 @@ namespace DAL
                         treatment.Brandname = Convert.ToString(row["BrandName"]);
                         treatment.supplierID = Convert.ToString(row["SupplierID"]);
                         treatment.supplierName = Convert.ToString(row["SupplierName"]);
-
+                        treatment.TreatmentType = Convert.ToString(row["TreatmentType"]);
                     }
                 }
             }
@@ -1609,7 +1610,8 @@ namespace DAL
                             {
                                 typeID = row["TypeID"].ToString(),
                                 name = row["Name"].ToString(),
-                                ProductOrService = row["Product/Service"].ToString()[0]
+                                ProductOrService = row["Product/Service"].ToString()[0],
+                                PrimaryService = Convert.ToBoolean(row["PrimaryService"])
                             };
                             productTypes.Add(productType);
                         }
@@ -5277,6 +5279,41 @@ namespace DAL
                         };
                     }
                     return rb;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public List<SP_ReturnAvailServices> returnAvailServices(int num)
+        {
+            List<SP_ReturnAvailServices> list = new List<SP_ReturnAvailServices>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@slots", num)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_ReturnAvailServices", CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_ReturnAvailServices serv = new SP_ReturnAvailServices()
+                            {
+                                serviceID = row["ServiceID"].ToString(),
+                                name = row["Name"].ToString(),
+                                productDescription = row["ProductDescription"].ToString(),
+                                price= Convert.ToDecimal(row["Price"]),
+                                noSlots = Convert.ToInt32(row["NoOfSlots"].ToString()),
+                                type = row["Type(A/N/B)"].ToString()
+                            };
+                            list.Add(serv);
+                        }
+                    }
+                    return list;
                 }
             }
             catch (Exception e)

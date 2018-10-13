@@ -15,26 +15,15 @@ ALTER PROCEDURE [dbo].[SP_AddTreatment]
 	@productDescription varchar(max),
 	@price money,
 	@productType char(1),
-	@active char(1)
+	@SupplierID nchar(10)
 
 AS
 BEGIN
 	BEGIN TRY
 		BEGIN TRANSACTION
 
-     INSERT TREATMENT(TreatmentID,Qty,TreatmentType,BrandID)
-	 VALUES(@treatmentID, @qty, @treatmentType, @BrandID)
-	
-	COMMIT TRANSACTION
-	END TRY
-	BEGIN CATCH
-		IF @@TRANCOUNT > 0
-			ROLLBACK TRANSACTION
-	END CATCH
-
-	BEGIN
-	BEGIN TRY
-		BEGIN TRANSACTION
+     INSERT TREATMENT(TreatmentID,Qty,TreatmentType,BrandID, SupplierID)
+	 VALUES(@treatmentID, @qty, @treatmentType, @BrandID, @SupplierID)
 
      INSERT PRODUCT(ProductID,Name,ProductDescription, Price,[ProductType(T/A/S)], Active)
 	 VALUES(@treatmentID, @Name,@ProductDescription, @Price,@productType, 'Y' )
@@ -46,5 +35,4 @@ BEGIN
 			ROLLBACK TRANSACTION
 	END CATCH
 
-END
 END 

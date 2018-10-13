@@ -280,7 +280,7 @@ namespace Cheveux.Cheveux
                                 tblProductTable.Rows.Add(newRow);
                                 //Product Type
                                 newHeaderCell = new TableHeaderCell();
-                                newHeaderCell.Text = function.GetFullProductTypeText("A", true, false) + "'s:";
+                                newHeaderCell.Text = function.GetFullProductTypeText("A") + "'s:";
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 //increment rowcounter
                                 count++;
@@ -340,7 +340,7 @@ namespace Cheveux.Cheveux
                                 tblProductTable.Rows.Add(newRow);
                                 //Product Type
                                 newHeaderCell = new TableHeaderCell();
-                                newHeaderCell.Text = function.GetFullProductTypeText("T", true, false) + "'s:";
+                                newHeaderCell.Text = function.GetFullProductTypeText("T") + "'s:";
                                 tblProductTable.Rows[count].Cells.Add(newHeaderCell);
                                 //increment rowcounter
                                 count++;
@@ -388,7 +388,7 @@ namespace Cheveux.Cheveux
                 }
                 else
                 {
-                    productJumbotronLable.Text = count - 1 + " " + function.GetFullProductTypeText(productType.ToString(), true, false);
+                    productJumbotronLable.Text = count - 1 + " " + function.GetFullProductTypeText(productType.ToString());
                 }
                 if (count - 1 == 0)
                 {
@@ -411,14 +411,14 @@ namespace Cheveux.Cheveux
 
         public void LoadProduct(string productID)
         {
-            /*Lachea To-do:
-             * 
-             * - Make sure the user can see the image of the product as well as the product details.
-             * - Make it so that instead of the jumbotron displaying a heading it should display the product 
-             *   instead. (lblHeader.Visible=false; and then add the productImage in that area)
-             */
 
-            tblProducts.Visible = true;
+            //Display specific product
+            try
+            {
+                Accessory = handler.selectAccessory(productID);
+                Treatment = handler.selectTreatment(productID);
+
+                tblProducts.Visible = true;
 
             #region Header
             int count = 0;
@@ -431,12 +431,6 @@ namespace Cheveux.Cheveux
 
             //create a header row and set cell widths
             TableHeaderCell newHeaderCell = new TableHeaderCell();
-            newHeaderCell.Text = "Name: ";
-            newHeaderCell.Width = 300;
-            tblProducts.Rows[count].Cells.Add(newHeaderCell);
-            count++;
-
-            newRow = new TableRow();
             tblProducts.Rows.Add(newRow);
             //create a header row and set cell widths
             newHeaderCell = new TableHeaderCell();
@@ -453,7 +447,18 @@ namespace Cheveux.Cheveux
             tblProducts.Rows[count].Cells.Add(newHeaderCell);
             count++;
 
-            if (cookie != null)
+                if (Accessory != null)
+                {
+                    newRow = new TableRow();
+                    tblProducts.Rows.Add(newRow);
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Colour: ";
+                    newHeaderCell.Width = 100;
+                    tblProducts.Rows[count].Cells.Add(newHeaderCell);
+                    count++;
+                }
+
+                    if (cookie != null)
             {
                 if (cookie["UT"] == "M" || cookie["UT"] == "R")
                 {
@@ -486,28 +491,24 @@ namespace Cheveux.Cheveux
             }
             #endregion
 
-            //Display specific product
-            try
-            {
-                Accessory = handler.selectAccessory(productID);
-                Treatment = handler.selectTreatment(productID);
-
                 //track row count & number of products count
                 if (Accessory != null)
                 {
                     count = 0;
-                    TableCell cell = new TableCell();
-                    cell.Text = Accessory.Name.ToString();
-                    tblProducts.Rows[count].Cells.Add(cell);
-                    count++; 
+                    lblHeadera.Text = Accessory.Name.ToString();
 
-                    cell = new TableCell();
+                    TableCell cell = new TableCell();
                     cell.Text = Accessory.ProductDescription.ToString();
                     tblProducts.Rows[count].Cells.Add(cell);
                     count++; 
 
                     cell = new TableCell();
                     cell.Text = "R" + string.Format("{0:#.00}", Accessory.Price);
+                    tblProducts.Rows[count].Cells.Add(cell);
+                    count++;
+
+                    cell = new TableCell();
+                    cell.Text = Accessory.Colour;
                     tblProducts.Rows[count].Cells.Add(cell);
                     count++;
 
@@ -536,12 +537,9 @@ namespace Cheveux.Cheveux
                 else if (Treatment != null)
                 {
                     count = 0;
-                    TableCell cell = new TableCell();
-                    cell.Text = Treatment.Name.ToString();
-                    tblProducts.Rows[count].Cells.Add(cell);
-                    count++;
+                    lblHeadera.Text = Treatment.Name.ToString();
 
-                    cell = new TableCell();
+                    TableCell cell = new TableCell();
                     cell.Text = Treatment.ProductDescription.ToString();
                     tblProducts.Rows[count].Cells.Add(cell);
                     count++;
@@ -573,8 +571,8 @@ namespace Cheveux.Cheveux
                         }
                     }
                 }
-
-#region Gauge
+                
+                #region Gauge
                 if (cookie != null)
                 {
                     if (cookie["UT"] == "M" || cookie["UT"] == "R")
@@ -651,7 +649,6 @@ namespace Cheveux.Cheveux
                         Chart MyFirstGauge = new Chart("angulargauge", "first_gauge", "400", "250", "json", jsonData.ToString());
                         //render gauge
                         Literal1.Text = MyFirstGauge.Render();
-                        
                     }
                 }
                 #endregion
@@ -718,135 +715,100 @@ namespace Cheveux.Cheveux
             {
                 productLabel.Text = "Treatment Type";
             }
-
-
-
         }
 
         protected void btnAddProduct_Click(object sender, EventArgs e)
         {
-            //create a product object 
-            PRODUCT newProduct = new PRODUCT();
+            bool result = false;
 
-            newProduct.Name = txtName.Text;
-            newProduct.ProductDescription = txtPrice.Text;
-
-
-            if (drpProductType.SelectedIndex == 0)
+            try
             {
-                PRODUCT p = new PRODUCT();
-                ACCESSORY a = new ACCESSORY();
-
-
-                if (btnAddProduct.Text != "Save")
+                //create a product object 
+                PRODUCT newProduct = new PRODUCT();
+                newProduct.Name = txtName.Text;
+                newProduct.ProductDescription = txtPrice.Text;
+                if (drpProductType.SelectedIndex == 0)
                 {
-
-                    string ID = function.GenerateRandomProductID();
-                    a.TreatmentID = ID;
-
-                    a.Qty = 0;
-                }
-                else if (btnAddProduct.Text == "Save")
-                {
-
-                    a.TreatmentID = productID;
-                }
-                a.Colour = txtcolour.Text;
-                a.BrandID = drpBrandList.SelectedValue.ToString();
-                p.Name = txtName.Text;
-                p.ProductDescription = txtProductDescription.Text;
-                p.Price = Convert.ToDecimal(txtPrice.Text);
-                p.ProductType = drpProductType.SelectedValue.ToString();
-                a.supplierID = drpListSupplier.SelectedValue.ToString();
-
-                bool result = false;
-                if (btnAddProduct.Text != "Save")
-                {
-                    result = handler.addAccessories(a, p);
-                }
-                else if (btnAddProduct.Text == "Save")
-                {
-                    //run updated product BLL method for accessory
-                    //result = handler.updateAccessories(a, p);
-                }
-
-
-                if (result == true)
-                {
+                    PRODUCT p = new PRODUCT();
+                    ACCESSORY a = new ACCESSORY();
                     if (btnAddProduct.Text != "Save")
                     {
-                        Response.Redirect("../Manager/Products.aspx");
+                        string ID = function.GenerateRandomProductID();
+                        newProduct.ProductID = ID;
+                        a.TreatmentID = ID;
+                        a.Qty = 0;
                     }
                     else if (btnAddProduct.Text == "Save")
                     {
-                        //redirct to product page
-                        Response.Redirect("../cheveux/Products.aspx?ProductID=" + productID);
-
+                        a.TreatmentID = productID;
                     }
-                }
-                else
-                {
-                    Response.Redirect("Error.aspx");
-                }
+                    a.Colour = txtcolour.Text;
+                    a.BrandID = drpBrandList.SelectedValue.ToString();
+                    p.Name = txtName.Text;
+                    p.ProductDescription = txtProductDescription.Text;
+                    p.Price = Convert.ToDecimal(txtPrice.Text);
+                    p.ProductType = drpProductType.SelectedValue.ToString();
+                    a.supplierID = drpListSupplier.SelectedValue.ToString();
 
-            }
-            else if (drpProductType.SelectedIndex == 1)
-            {
-                PRODUCT p = new PRODUCT();
-                TREATMENT t = new TREATMENT();
-
-
-                if (btnAddProduct.Text != "Save")
-                {
-
-                    string prodID = function.GenerateRandomProductID();
-
-                    t.TreatmentID = prodID;
-
-                    t.Qty = 0;
-                }
-                else if (btnAddProduct.Text == "Save")
-                {
-
-                    t.TreatmentID = productID;
-                }
-                t.BrandID = drpBrandList.SelectedValue.ToString();
-                p.Name = txtName.Text;
-                p.ProductDescription = txtProductDescription.Text;
-                p.Price = Convert.ToDecimal(txtPrice.Text);
-                p.ProductType = drpProductType.SelectedValue.ToString();
-                t.supplierID = drpListSupplier.SelectedValue.ToString();
-                t.TreatmentType = txtcolour.Text;
-
-                bool result = false;
-                if (btnAddProduct.Text != "Save")
-                {
-                    result = handler.addTreatments(t, p);
-                }
-                else if (btnAddProduct.Text == "Save")
-                {
-                    //run updated product BLL method fot treatment
-                    //result = handler.updateTreatment(t, p);
-                }
-
-                if (result == true)
-                {
                     if (btnAddProduct.Text != "Save")
                     {
-                        Response.Redirect("../Manager/Products.aspx");
+                        result = handler.addAccessories(a, p);
                     }
                     else if (btnAddProduct.Text == "Save")
                     {
-                        //redirct to product page
-                        Response.Redirect("../cheveux/Products.aspx?ProductID=" + productID);
+                        //run updated product BLL method for accessory
+                        //result = handler.updateAccessories(a, p);
                     }
+                }
+                else if (drpProductType.SelectedIndex == 1)
+                {
+                    PRODUCT p = new PRODUCT();
+                    TREATMENT t = new TREATMENT();
+                    if (btnAddProduct.Text != "Save")
+                    {
+                        string prodID = function.GenerateRandomProductID();
+                        newProduct.ProductID = ID;
+                        t.TreatmentID = prodID;
+                        t.Qty = 0;
+                    }
+                    else if (btnAddProduct.Text == "Save")
+                    {
+                        t.TreatmentID = productID;
+                    }
+                    t.BrandID = drpBrandList.SelectedValue.ToString();
+                    p.Name = txtName.Text;
+                    p.ProductDescription = txtProductDescription.Text;
+                    p.Price = Convert.ToDecimal(txtPrice.Text);
+                    p.ProductType = drpProductType.SelectedValue.ToString();
+                    t.supplierID = drpListSupplier.SelectedValue.ToString();
+                    t.TreatmentType = txtcolour.Text;
+
+                    if (btnAddProduct.Text != "Save")
+                    {
+                        result = handler.addTreatments(t, p);
+                    }
+                    else if (btnAddProduct.Text == "Save")
+                    {
+                        //run updated product BLL method fot treatment
+                        //result = handler.updateTreatment(t, p);
+                    }
+                }
+                productID = newProduct.ProductID;
+            }
+            catch (Exception Err)
+            {
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An Error Occured Communicating With The Data Base, Try Again Later");
+            }
+
+            if (result == true)
+                {
+                        Response.Redirect("../cheveux/Products.aspx?ProductID=" + productID);
                 }
                 else
                 {
-                    Response.Redirect("Error.aspx");
+                    Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An Error Occured Communicating With The Data Base, Try Again Later");
                 }
             }
-        }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {

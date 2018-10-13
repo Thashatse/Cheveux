@@ -76,6 +76,15 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divViewService;
         
         /// <summary>
+        /// lblViewService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblViewService;
+        
+        /// <summary>
         /// divServiceTable control.
         /// </summary>
         /// <remarks>
@@ -92,15 +101,6 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table tblServiceDetails2;
-        
-        /// <summary>
-        /// lblName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblName;
         
         /// <summary>
         /// lblNoOfSlots control.
