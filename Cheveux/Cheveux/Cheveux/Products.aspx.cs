@@ -577,7 +577,7 @@ namespace Cheveux.Cheveux
                 {
                     if (cookie["UT"] == "M" || cookie["UT"] == "R")
                     {
-                        
+                        #region stock
                         Stock_Management settings = handler.getStockSettings();
                         int lowStockTier = settings.LowStock;
                         int middelTier = lowStockTier * 2;
@@ -649,6 +649,7 @@ namespace Cheveux.Cheveux
                         Chart MyFirstGauge = new Chart("angulargauge", "first_gauge", "400", "250", "json", jsonData.ToString());
                         //render gauge
                         Literal1.Text = MyFirstGauge.Render();
+                        #endregion
                     }
                 }
                 #endregion

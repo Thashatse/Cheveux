@@ -204,6 +204,15 @@ namespace DAL
         List<productSalesReport> getProductSalesValueCredit(DateTime startDate, DateTime endDate);
         List<productSalesReport> getProductSalesValueCash(DateTime startDate, DateTime endDate);
         List<productSalesReport> getProductSalesValueAll(DateTime startDate, DateTime endDate);
+
+        List<productSalesReport> getServiceSalesVolumeAll(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getServiceSalesVolumeCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getServiceSalesVolumeCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getServiceSalesValueCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getServiceSalesValueCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getServiceSalesValueAll(DateTime startDate, DateTime endDate);
+
+        List<productSalesReport> getSalesGauge(string ProductID);
         #endregion
 
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
