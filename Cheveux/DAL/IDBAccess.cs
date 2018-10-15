@@ -204,6 +204,9 @@ namespace DAL
         List<productSalesReport> getProductSalesValueCredit(DateTime startDate, DateTime endDate);
         List<productSalesReport> getProductSalesValueCash(DateTime startDate, DateTime endDate);
         List<productSalesReport> getProductSalesValueAll(DateTime startDate, DateTime endDate);
+        List<SP_TotalBksMissedByCustomers> returnTotalbksMissedbyCustomers(DateTime startDate, DateTime endDate);
+        List<SP_GetReviews> mostPopularStylist(DateTime startDate, DateTime endDate);
+        List<SP_GetReviews> customerSatistfaction(DateTime startDate, DateTime endDate);
         #endregion
 
         List<SP_GetEmpAgenda> GetEmpAgenda(string employeeID, DateTime bookingDate, string sortBy, string sortDir);
@@ -253,7 +256,7 @@ namespace DAL
         List<SP_GetLeaveServices> GetLeaveServices();
         bool UpdateOrder(string orderID, DateTime dateReceived, bool received);
         bool UpdateQtyOnHand(string prodID, int qty);
-        SP_ReturnBooking returnNextBooking(DateTime startTime,string bookingID,string stylistID,DateTime date);
+        SP_ReturnBooking returnNextBooking(string startTime,string bookingID,string stylistID,DateTime date);
         SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date);
         List<SP_ReturnAvailServices> returnAvailServices(int num);
     }

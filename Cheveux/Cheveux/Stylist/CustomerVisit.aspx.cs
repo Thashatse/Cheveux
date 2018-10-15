@@ -23,12 +23,11 @@ namespace Cheveux
         SP_GetMultipleServicesTime time = null;
         SP_ReturnBooking rb = null;
         SP_ReturnBooking rbNext = null;
+        List<SP_ReturnAvailServices> ras = null;
 
         string bookingID;
         string customerID;
         string action;
-        DateTime date;
-        int num;
         protected void Page_Load(object sender, EventArgs e)
         {
             errorHeader.Font.Bold = true;
@@ -56,7 +55,7 @@ namespace Cheveux
 
                 if(action == "CreateRecord")
                 {
-                    jheader.InnerText = "Create Visit Record";
+                    jheader.InnerText = "Create Customer Visit Record";
                     bookingID = Request.QueryString["bookingID"];
                     customerID = Request.QueryString["customerID"];
 
@@ -73,16 +72,7 @@ namespace Cheveux
                                             + "Please report this fault to the administrator so we can make your life"
                                             + "a bit easier and fix it as soon as possible.";
                     }
-                }
-                else if (action == "ChangeService")
-                {
-                    jheader.InnerText = "Change Booking Service";
-                    date =Convert.ToDateTime(Request.QueryString["date"]);
-                    bookingID = Request.QueryString["bookingID"];
-                    customerID = Request.QueryString["customerID"];
-                    
-                    if(bookingID != null && customerID != null && date != null)
-                    num = getNumOfSlotsOpen(bookingID,customerID,UserID["ID"].ToString(),date);
+                
                 }
                 else
                 {
@@ -317,65 +307,31 @@ namespace Cheveux
                 {
                     function.logAnError("Error retreiving services [receptionist.aspx] getTimeAndServices method err:" + serviceErr.ToString());
                 }
-                time = handler.getMultipleServicesTime(primaryBookingID);
+                if (bServices.Count > 0)
+                {
+                    time = handler.getMultipleServicesTime(primaryBookingID);
 
+                    newCell.Text = time.StartTime.ToString("HH:mm") + " - " + time.EndTime.ToString("HH:mm");
+
+                    allBookingTable.Rows[rCnt].Cells.Add(newCell);
+                    rCnt++;
+                }
             }
             catch (Exception Err)
             {
                 newCell.Text = "Unable to retrieve time";
-                //start.Text = "---";
-                //end.Text = "---";
-                function.logAnError("Couldn't get the time [customerVisit.aspx, etT&C&S method] error:" + Err.ToString());
+                function.logAnError("Couldn't get the time [customerVisit.aspx, getT&C&S method] Error:" + Err.ToString());
             }
 
-            if (bServices.Count < 2)
-            {
-                newCell.Text = a.StartTime.ToString("HH:mm") + " - " + a.EndTime.ToString("HH:mm");
-            }
-            else if (bServices.Count >= 2)
-            {
-                newCell.Text = time.StartTime.ToString("HH:mm") + " - " + time.EndTime.ToString("HH:mm");
-            }
-            allBookingTable.Rows[rCnt].Cells.Add(newCell);
-            rCnt++;
+            //if (bServices.Count < 2)
+            //{
+            //    newCell.Text = a.StartTime.ToString("HH:mm") + " - " + a.EndTime.ToString("HH:mm");
+            //}
+            //else if (bServices.Count >= 2)
+            //{
+            //    newCell.Text = time.StartTime.ToString("HH:mm") + " - " + time.EndTime.ToString("HH:mm");
+            //}
             #endregion
-        }
-        public int getNumOfSlotsOpen(string bookingID,string customerID, string stylistID,DateTime date)
-        {
-            try
-            {
-                rb = handler.returnBooking(bookingID, customerID, stylistID, date);
-            }
-            catch(Exception err)
-            {
-                function.logAnError("Error getting current booking. Error: " + err.ToString());
-            }
-
-            try
-            {
-                rbNext = handler.returnNextBooking(rb.startTime,rb.bookingID,rb.stylistID,rb.date);
-            }
-            catch(Exception err)
-            {
-                function.logAnError("Error getting next booking. Error: " + err.ToString());
-            }
-
-            string slo = rbNext.slotNo.ToString();
-            int no;
-
-            if(int.TryParse(slo.Substring(3),out no))
-            {
-                return no;
-            }
-            else
-            {
-                int num2 = -1;
-                return num2;
-            }
-        }
-        public void loadAvailServices(int num)
-        {
-            //pending
         }
     }
 }

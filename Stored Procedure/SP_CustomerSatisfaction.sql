@@ -16,20 +16,18 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_ReturnAvailServices
-	@slots int
+CREATE PROCEDURE SP_CustomerSatisfaction 
+	@startDate datetime = null,
+	@endDate datetime =null
 AS
 BEGIN
-
 	SET NOCOUNT ON;
-
-	SELECT  s.ServiceID, p.[Name],p.ProductDescription,p.Price,
-			s.NoOfSlots,s.[Type(A/N/B)]
-	FROM [SERVICE] s, PRODUCT p
-	WHERE s.ServiceID=p.ProductID
-	and p.Active ='Y'
-	and s.NoOfSlots <= @slots
-	and s.[Type(A/N/B)]<>'U'
-
+	SELECT Distinct(r.CustomerID),(u.FirstName + ' ' + u.LastName)as[CustomerName],
+		   AVG(Rating)as Rating, COUNT(r.CustomerID) as NoOfReviews
+	FROM REVIEW r, [USER] u
+	where r.CustomerID=u.UserID
+	and   r.[Date] between @startDate and @endDate
+	GROUP BY r.CustomerID,u.FirstName,u.LastName
+	ORDER BY Rating desc
 END
 GO

@@ -31,7 +31,7 @@
 
                             <div id="SelectReport">
                                 <div class="row">
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <!-- Report Selector -->
                                         <p>Select A Report: </p>
                                         <asp:DropDownList ID="drpReport" runat="server" AutoPostBack="True" class="dropdown"
@@ -42,16 +42,19 @@
                                             <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
                                             <asp:ListItem Text="Top Products" Value="3"></asp:ListItem>
                                             <asp:ListItem Text="Top Services" Value="4"></asp:ListItem>
+                                            <asp:ListItem Text="Bookings Missed" Value="5"></asp:ListItem>
+                                            <asp:ListItem Text="Stylist Popularity" Value="6"></asp:ListItem>
+                                            <asp:ListItem Text="Customer Satisfaction" Value="7"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
 
-                                    <div class="col-2" runat="server" id="reportByContainer" visible="False">
+                                    <div class="col-3" runat="server" id="reportByContainer" visible="False">
                                         <p>Report By: </p>
                                         <asp:DropDownList ID="ddlReportFor" runat="server" AutoPostBack="True" CssClass="btn btn-secondary dropdown-toggle">
                                         </asp:DropDownList>
                                     </div>
 
-                                    <div class="col-2" runat="server" id="salesPaymentType" visible="False">
+                                    <div class="col-3" runat="server" id="salesPaymentType" visible="False">
                                         <p>Payment Type:</p>
                                         <asp:DropDownList ID="drpPaymentType" runat="server" CssClass="btn btn-secondary dropdown-toggle" AutoPostBack="True">
                                             <asp:ListItem Text="All" Value="0" Selected="True"></asp:ListItem>
@@ -59,25 +62,57 @@
                                             <asp:ListItem Text="Credit" Value="2"></asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
+
                                 </div>
                             </div>
 
                             <!-- line Break  -->
                             <br />
-
-                            <div class="row" runat="server" id="reportDateRangeContainer" visible="false">
-                                <div class="col-lg-4">
-                                    <p>Start Date: </p>
-                                    <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateStrart" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
-                                </div>
-                                <div class="col-lg-4">
-                                    <p>End Date: </p>
-                                    <asp:Calendar CssClass="bg-secondary text-primary" ID="CalendarDateEnd" runat="server" OnSelectionChanged="btnRefresh_Click"></asp:Calendar>
-                                </div>
-                            </div>
-                            <!-- line Break -->
-                            <br />
                             <asp:Label ID="lError" runat="server" Text="Label" Visible="false"></asp:Label>
+                        </div>
+                        <div class="row" runat="server" id="reportDateRangeContainer" visible="false">
+                            <div class="col-lg-4">
+                                <p>Start Date: </p>
+                                <asp:DropDownList ID="drpStartMonth" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle"
+                                    OnSelectedIndexChanged="drpStartMonth_SelectedIndexChanged">
+                                    <asp:ListItem Text="January" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="March" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="April" Value="4"></asp:ListItem>
+                                    <asp:ListItem Text="May" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="June" Value="6"></asp:ListItem>
+                                    <asp:ListItem Text="July" Value="7"></asp:ListItem>
+                                    <asp:ListItem Text="August" Value="8"></asp:ListItem>
+                                    <asp:ListItem Text="September" Value="9"></asp:ListItem>
+                                    <asp:ListItem Text="October" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="November" Value="11"></asp:ListItem>
+                                    <asp:ListItem Text="December" Value="12"></asp:ListItem>
+                                </asp:DropDownList>
+                                <br />
+                                <br />
+                                <asp:Calendar ID="CalendarDateStart" runat="server" Height="100" Width="200" OnSelectionChanged="btnRefresh_Click" OnDayRender="CalendarDateStart_DayRender"></asp:Calendar>
+                            </div>
+                            <div class="col-lg-4">
+                                <p>End Date: </p>
+                                <asp:DropDownList ID="drpEndMonth" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle"
+                                    OnSelectedIndexChanged="drpEndMonth_SelectedIndexChanged">
+                                    <asp:ListItem Text="January" Value="1"></asp:ListItem>
+                                    <asp:ListItem Text="Febuary" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="March" Value="3"></asp:ListItem>
+                                    <asp:ListItem Text="April" Value="4"></asp:ListItem>
+                                    <asp:ListItem Text="May" Value="5"></asp:ListItem>
+                                    <asp:ListItem Text="June" Value="6"></asp:ListItem>
+                                    <asp:ListItem Text="July" Value="7"></asp:ListItem>
+                                    <asp:ListItem Text="August" Value="8"></asp:ListItem>
+                                    <asp:ListItem Text="September" Value="9"></asp:ListItem>
+                                    <asp:ListItem Text="October" Value="10"></asp:ListItem>
+                                    <asp:ListItem Text="November" Value="11"></asp:ListItem>
+                                    <asp:ListItem Text="December" Value="12"></asp:ListItem>
+                                </asp:DropDownList>
+                                <br />
+                                <br />
+                                <asp:Calendar ID="CalendarDateEnd" runat="server" Height="100" Width="200" OnSelectionChanged="btnRefresh_Click" OnDayRender="CalendarDateStart_DayRender"></asp:Calendar>
+                            </div>
                         </div>
                     </div>
 
@@ -105,13 +140,13 @@
                                     <asp:Button ID="btnShowPieGraph" runat="server" Text="Pie" class="btn btn-light" OnClick="btnShowPieGraph_Click" /></li>
                             </ul>
                         </div>
-                    <div class="col-3">
-                        <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" CssClass="btn btn-secondary" />
-                    </div>
+                        <div class="col-3">
+                            <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" CssClass="btn btn-secondary" />
+                        </div>
 
-                    <div class="col-12">
-                        <hr class="my-4">
-                    </div>
+                        <div class="col-12">
+                            <hr class="my-4">
+                        </div>
                     </div>
 
                     <div runat="server" id="divPrintHeader" visible="false">
@@ -126,21 +161,21 @@
                     <div runat="server" id="divReportHeader" visible="false">
                         <div class="row">
                             <div class="col-md-8">
-                                <asp:Label ID="reportLable" runat="server" Font-Bold Font-Size="XX-Large"></asp:Label>
+                                <asp:Label ID="reportLable" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
                             </div>
                             <div class="col-4">
-                                <asp:Label ID="reportGenerateDateLable" runat="server" Font-Bold></asp:Label>
+                                <asp:Label ID="reportGenerateDateLable" runat="server" Font-Bold="true"></asp:Label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                <asp:Label ID="reportByLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
+                                <asp:Label ID="reportByLable" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
                             </div>
                             <div class="col-4"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                <asp:Label ID="reportDateRangeLable" runat="server" Font-Bold Font-Size="X-Large"></asp:Label>
+                                <asp:Label ID="reportDateRangeLable" runat="server" Font-Bold="true" Font-Size="X-Large"></asp:Label>
                             </div>
                             <div class="col-4"></div>
                         </div>
@@ -172,7 +207,7 @@
 
                     <div id="divGraph" runat="server" visible="false" style="text-align: center">
                         <!-- line Break  -->
-                            <br />
+                        <br />
                         <asp:Literal ID="graphBar" runat="server" Visible="true"></asp:Literal>
                         <asp:Literal ID="graphPie" runat="server" Visible="false"></asp:Literal>
                     </div>

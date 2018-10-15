@@ -236,20 +236,6 @@ namespace Cheveux
 
                         //add the cell to the row
                         AgendaTable.Rows[i].Cells.Add(buttonCell);
-
-                        //change service button
-                        buttonCell = new TableCell();
-                        buttonCell.Width = 100;
-                        buttonCell.Height = 50;
-                        buttonCell.Text = "<button type='button' class='btn btn-secondary'>"
-                                        + "<a href='../Stylist/CustomerVisit.aspx?Action=ChangeService&bookingID="
-                                        + a.PrimaryID.ToString().Replace(" ", string.Empty)
-                                        + "&customerID=" + a.UserID.ToString().Replace(" ", string.Empty)
-                                        + "&stylistID=" + a.empID.ToString().Replace(" ", string.Empty)
-                                        + "&date=" + a.Date
-                                        + "' style='color:White; text-decoration:none;'>Change Service</a>"
-                                        + "</button>";
-                        AgendaTable.Rows[i].Cells.Add(buttonCell);
                     }
                     //increment i 
                     i++;

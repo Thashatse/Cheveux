@@ -69,18 +69,6 @@
                     </div>
                 </div>
 
-
-                <!--Changing a service-->
-                <asp:PlaceHolder ID="phChangeService" runat="server" Visible="false">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <div id="box" runat="server">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </asp:PlaceHolder>
-
                 <!--Error: If details cant be displayed-->
                 <asp:PlaceHolder ID="phBookingsErr" runat="server" Visible="false">
                     <div class="container">

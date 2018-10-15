@@ -40,11 +40,12 @@ namespace Cheveux.Manager
             {
                 //if the user is loged in as a manager display Bussines setting
                 drpReport_SelectedIndexChanged1(sender, e);
+                filterMonths();
                 LogedIn.Visible = true;
                 LogedOut.Visible = false;
             }
         }
-        
+
         #region BTN Functions
         protected void drpReport_SelectedIndexChanged1(object sender, EventArgs e)
         {
@@ -87,7 +88,7 @@ namespace Cheveux.Manager
                 }
 
                 if (ddlReportFor.SelectedValue != "-1"
-                    && CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                    && CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
                     reportByContainer.Visible = true;
@@ -97,7 +98,7 @@ namespace Cheveux.Manager
                     getSalesReport(sender, e, true);
                 }
                 else if (ddlReportFor.SelectedValue != "-1"
-                    && CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
                     reportDateRangeContainer.Visible = true;
@@ -116,13 +117,13 @@ namespace Cheveux.Manager
             {
                 reportByContainer.Visible = false;
                 reportDateRangeContainer.Visible = true;
-                if (CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
                     //display the top customer report
                     getTopCustomerReport(sender, e, true);
                 }
-                else if (CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                else if (CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
                     //display the top customer report
@@ -133,7 +134,7 @@ namespace Cheveux.Manager
             else if (drpReport.SelectedIndex == 3)
             {
                 reportByContainer.Visible = true;
-                if (ddlReportFor.SelectedIndex == -1 || 
+                if (ddlReportFor.SelectedIndex == -1 ||
                     (ddlReportFor.SelectedItem.Text != "Value" &&
                     ddlReportFor.SelectedItem.Text != "Volume"))
                 {
@@ -148,7 +149,7 @@ namespace Cheveux.Manager
                 if (ddlReportFor.SelectedValue != "-1"
                     && (ddlReportFor.SelectedItem.Text == "Value" ||
                         ddlReportFor.SelectedItem.Text == "Volume")
-                    && CalendarDateStrart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                    && CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
                     //display the sales report
@@ -157,13 +158,66 @@ namespace Cheveux.Manager
                 else if (ddlReportFor.SelectedValue != "-1"
                     && (ddlReportFor.SelectedItem.Text == "Value" ||
                         ddlReportFor.SelectedItem.Text == "Volume")
-                    && CalendarDateStrart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
                     //display the sales report
                     getProductSalesReport(sender, e, false);
                 }
 
+            }
+            else if (drpReport.SelectedIndex == 5)
+            {
+                reportByContainer.Visible = false;
+                salesPaymentType.Visible = false;
+                reportDateRangeContainer.Visible = true;
+
+                if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                {
+                    //display most bookings missed
+                    getMissedBookingsReport(sender, e, true);
+                }
+                else if (CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
+                {
+                    //display most bookings missed
+                    getMissedBookingsReport(sender, e, false);
+                }
+            }
+            else if (drpReport.SelectedIndex == 6)
+            {
+                reportByContainer.Visible = false;
+                salesPaymentType.Visible = false;
+                reportDateRangeContainer.Visible = true;
+
+                if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                {
+                    getStylistRatings(sender, e, true);
+                }
+                else if (CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
+                {
+                    getStylistRatings(sender, e, false);
+                }
+            }
+            else if (drpReport.SelectedIndex == 7)
+            {
+                reportByContainer.Visible = false;
+                salesPaymentType.Visible = false;
+                reportDateRangeContainer.Visible = true;
+
+                if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                {
+                    getCustomerSatisfaction(sender, e, true);
+                }
+                else if (CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
+                {
+                    getCustomerSatisfaction(sender, e, false);
+                }
             }
         }
 
@@ -175,7 +229,7 @@ namespace Cheveux.Manager
         protected void btnPrint_Click(object sender, EventArgs e)
         {
             divPrintHeader.Visible = true;
-            
+
             LogedOut.Visible = false;
             btnControlls.Visible = false;
             ReportsPage.Visible = false;
@@ -197,7 +251,7 @@ namespace Cheveux.Manager
         {
             divPrintHeader.Visible = true;
             divReport.Visible = false;
-            
+
             divGraph.Visible = true;
 
             LogedIn.Visible = false;
@@ -214,7 +268,7 @@ namespace Cheveux.Manager
 
             divPrintHeader.Visible = true;
         }
-        
+
         protected void btnViewText_Click(object sender, EventArgs e)
         {
             divGraph.Visible = false;
@@ -232,7 +286,7 @@ namespace Cheveux.Manager
             btnViewText.CssClass = "btn btn-light";
             btnViewGraph.CssClass = "btn btn-primary";
         }
-        
+
         protected void btnShowPieGraph_Click(object sender, EventArgs e)
         {
             graphBar.Visible = false;
@@ -246,7 +300,7 @@ namespace Cheveux.Manager
             graphBar.Visible = true;
             graphPie.Visible = false;
             btnShowBarGraph.CssClass = "btn btn-primary";
-            btnShowPieGraph.CssClass= "btn btn-light";
+            btnShowPieGraph.CssClass = "btn btn-light";
         }
         #endregion
 
@@ -261,8 +315,8 @@ namespace Cheveux.Manager
             tblReport.Rows.Clear();
 
             reportLable.Text = "Sales Report";
-            reportByLable.Text = "For: "+ ddlReportFor.SelectedItem.Text.ToString();
-            reportGenerateDateLable.Text = "Generated: "+DateTime.Now.ToString("HH:mm dd MMM yyyy");
+            reportByLable.Text = "For: " + ddlReportFor.SelectedItem.Text.ToString();
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
             try
             {
                 List<SP_SaleOfHairstylist> report = null;
@@ -270,19 +324,19 @@ namespace Cheveux.Manager
                 {
                     reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
                         DateTime.Today.ToString("dd MMM yyyy");
-                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today) ;
+                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today);
                 }
                 else if (defaultDateRange == false)
                 {
-                    reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
                         CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
-                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, CalendarDateStrart.SelectedDate, CalendarDateEnd.SelectedDate);
+                    report = handler.getSaleOfHairstylist(ddlReportFor.SelectedValue, CalendarDateStart.SelectedDate, CalendarDateEnd.SelectedDate);
                 }
 
-                    //get the invoice dt lines
-                    if (report.Count != 0)
-                    {
-                        //counter to keep track of rows in report
+                //get the invoice dt lines
+                if (report.Count != 0)
+                {
+                    //counter to keep track of rows in report
                     int reportRowCount = 0;
 
                     TableRow newRow = new TableRow();
@@ -304,9 +358,9 @@ namespace Cheveux.Manager
                     tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
                     reportRowCount++;
 
-                   //display each record
+                    //display each record
                     foreach (SP_SaleOfHairstylist Sales in report)
-                     {
+                    {
                         if (drpPaymentType.SelectedItem.Text == "All"
                             || drpPaymentType.SelectedItem.Text == Sales.PaymentType.ToString().Replace(" ", string.Empty))
                         {
@@ -348,7 +402,7 @@ namespace Cheveux.Manager
                             #endregion
 
                             #region Graph
-                            dataValuePair.Add(new KeyValuePair<string, double>(Sales.date.ToString("dd/MM/yy")+" "+ Sales.FullName.ToString(), total));
+                            dataValuePair.Add(new KeyValuePair<string, double>(Sales.date.ToString("dd/MM/yy") + " " + Sales.FullName.ToString(), total));
                             #endregion
                         }
                     }
@@ -422,22 +476,22 @@ namespace Cheveux.Manager
             {
 
                 List<SP_GetTopCustomerbyBooking> report = null;
-            
+
                 if (defaultDateRange == true)
                 {
                     report = handler.getTopCustomerByBookings(new DateTime(DateTime.Now.Year, 1, 1),
                         DateTime.Today);
                     reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
                         DateTime.Today.ToString("dd MMM yyyy");
-                   
+
                 }
                 else if (defaultDateRange == false)
                 {
-                    report = handler.getTopCustomerByBookings(CalendarDateStrart.SelectedDate,
+                    report = handler.getTopCustomerByBookings(CalendarDateStart.SelectedDate,
                         CalendarDateEnd.SelectedDate);
-                    reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
                         CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
-                  
+
                 }
 
                 //get the invoice dt lines
@@ -459,7 +513,7 @@ namespace Cheveux.Manager
                     newHeaderCell.Width = 300;
                     newHeaderCell.Text = "Total Bookings";
                     tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
-                    
+
                     newHeaderCell = new TableHeaderCell();
                     newHeaderCell.Width = 300;
                     newHeaderCell.Text = "Total Spent";
@@ -469,15 +523,15 @@ namespace Cheveux.Manager
 
                     foreach (SP_GetTopCustomerbyBooking cust in report)
                     {
-                            // create a new row in the results table and set the height
-                            newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblReport.Rows.Add(newRow);
+                        // create a new row in the results table and set the height
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
 
-                            //fill the row with the data from the product results object
-                            TableCell newCell = new TableCell();
-                           newCell.Text = cust.CustomerName;
-                           tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        //fill the row with the data from the product results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = cust.CustomerName;
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
 
                         newCell = new TableCell();
                         newCell.Text = cust.noOfBookings.ToString();
@@ -486,9 +540,9 @@ namespace Cheveux.Manager
 
                         #region empty row
                         newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblReport.Rows.Add(newRow);
-                            reportRowCount++;
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        reportRowCount++;
                         #endregion
 
                         #region Graph
@@ -559,8 +613,8 @@ namespace Cheveux.Manager
             //clear the table
             tblReport.Rows.Clear();
             reportLable.Text = "Sales Report";
-            reportByLable.Text = "By: " + ddlReportFor.SelectedItem.Text.ToString() + 
-                " For "+drpPaymentType.SelectedItem.Text+" Payment Types";
+            reportByLable.Text = "By: " + ddlReportFor.SelectedItem.Text.ToString() +
+                " For " + drpPaymentType.SelectedItem.Text + " Payment Types";
             reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
 
             try
@@ -575,7 +629,7 @@ namespace Cheveux.Manager
                     #region get the report from the db
                     if (drpPaymentType.SelectedItem.Text == "All")
                     {
-                        if(ddlReportFor.SelectedIndex == 0)
+                        if (ddlReportFor.SelectedIndex == 0)
                         {
                             report = handler.getProductSalesValueAll(new DateTime(DateTime.Now.Year, 1, 1),
                                  DateTime.Today);
@@ -616,7 +670,7 @@ namespace Cheveux.Manager
                 }
                 else if (defaultDateRange == false)
                 {
-                    reportDateRangeLable.Text = CalendarDateStrart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
                         CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
 
                     #region get the report from the db
@@ -624,12 +678,12 @@ namespace Cheveux.Manager
                     {
                         if (ddlReportFor.SelectedIndex == 0)
                         {
-                            report = handler.getProductSalesValueAll(CalendarDateStrart.SelectedDate,
+                            report = handler.getProductSalesValueAll(CalendarDateStart.SelectedDate,
                                  CalendarDateEnd.SelectedDate);
                         }
                         else if (ddlReportFor.SelectedIndex == 1)
                         {
-                            report = handler.getProductSalesVolumeAll(CalendarDateStrart.SelectedDate,
+                            report = handler.getProductSalesVolumeAll(CalendarDateStart.SelectedDate,
                                  CalendarDateEnd.SelectedDate);
                         }
                     }
@@ -637,12 +691,12 @@ namespace Cheveux.Manager
                     {
                         if (ddlReportFor.SelectedIndex == 0)
                         {
-                            report = handler.getProductSalesValueCash(CalendarDateStrart.SelectedDate,
+                            report = handler.getProductSalesValueCash(CalendarDateStart.SelectedDate,
                                  CalendarDateEnd.SelectedDate);
                         }
                         else if (ddlReportFor.SelectedIndex == 1)
                         {
-                            report = handler.getProductSalesVolumeCash(CalendarDateStrart.SelectedDate,
+                            report = handler.getProductSalesVolumeCash(CalendarDateStart.SelectedDate,
                                  CalendarDateEnd.SelectedDate);
                         }
                     }
@@ -650,12 +704,12 @@ namespace Cheveux.Manager
                     {
                         if (ddlReportFor.SelectedIndex == 0)
                         {
-                            report = handler.getProductSalesValueCredit(CalendarDateStrart.SelectedDate,
+                            report = handler.getProductSalesValueCredit(CalendarDateStart.SelectedDate,
                                  CalendarDateEnd.SelectedDate);
                         }
                         else if (ddlReportFor.SelectedIndex == 1)
                         {
-                            report = handler.getProductSalesVolumeCredit(CalendarDateStrart.SelectedDate,
+                            report = handler.getProductSalesVolumeCredit(CalendarDateStart.SelectedDate,
                                  CalendarDateEnd.SelectedDate);
                         }
                     }
@@ -679,7 +733,7 @@ namespace Cheveux.Manager
                     newHeaderCell.Width = 1000;
                     tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
                     newHeaderCell = new TableHeaderCell();
-                    if(ddlReportFor.SelectedIndex == 0)
+                    if (ddlReportFor.SelectedIndex == 0)
                     {
                         newHeaderCell.Text = "Value";
                     }
@@ -707,37 +761,37 @@ namespace Cheveux.Manager
                     //display each record
                     foreach (productSalesReport prod in report)
                     {
-                            // create a new row in the results table and set the height
-                            newRow = new TableRow();
-                            newRow.Height = 50;
-                            tblReport.Rows.Add(newRow);
-                            //fill the row with the data from the product results object
-                            TableCell newCell = new TableCell();
-                            newCell.Text = prod.product;
-                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                            newCell = new TableCell();
-                            if (ddlReportFor.SelectedIndex == 0)
-                            {
-                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
-                            }
-                            else
-                            {
-                            newCell.Text = prod.volume.ToString();
-                            }
-                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                            
-                            //fill in total
-                            newCell = new TableCell();
-                            if (ddlReportFor.SelectedIndex == 0)
-                            {
-                            newCell.Text = prod.volume.ToString();
-                        }
-                            else
-                            {
+                        // create a new row in the results table and set the height
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+                        //fill the row with the data from the product results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = prod.product;
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        newCell = new TableCell();
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
                             newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
                         }
-                            tblReport.Rows[reportRowCount].Cells.Add(newCell);
-                            reportRowCount++;
+                        else
+                        {
+                            newCell.Text = prod.volume.ToString();
+                        }
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        //fill in total
+                        newCell = new TableCell();
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            newCell.Text = prod.volume.ToString();
+                        }
+                        else
+                        {
+                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
+                        }
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        reportRowCount++;
 
                         #region Graph
                         if (ddlReportFor.SelectedIndex == 1)
@@ -748,8 +802,8 @@ namespace Cheveux.Manager
                         {
                             dataValuePair.Add(new KeyValuePair<string, double>(prod.product, prod.value));
                         }
-                            #endregion
-                        }
+                        #endregion
+                    }
 
                     #region Graph
                     //store chart config name - config value pair
@@ -814,7 +868,457 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
+        private void getMissedBookingsReport(object sender, EventArgs e, bool defaultDateRange)
+        {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion 
+
+            //clear the table
+            tblReport.Rows.Clear();
+
+            reportLable.Text = "Most Bookings Missed";
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
+            reportByLable.Text = "For: All Customers";
+            try
+            {
+                List<SP_TotalBksMissedByCustomers> report = null;
+                if (defaultDateRange == true)
+                {
+                    reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
+                        DateTime.Today.ToString("dd MMM yyyy");
+                    report = handler.returnTotalbksMissedbyCustomers(new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today);
+                }
+                else if (defaultDateRange == false)
+                {
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                        CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
+                    report = handler.returnTotalbksMissedbyCustomers(CalendarDateStart.SelectedDate, CalendarDateEnd.SelectedDate);
+                }
+
+                if (report.Count != 0)
+                {
+                    int reportRowCount = 0;
+
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Customer Name";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //Bookings Missed
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    newHeaderCell.Text = "Total Bookings Missed";
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+
+                    foreach (SP_TotalBksMissedByCustomers tot in report)
+                    {
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+
+                        TableCell newCell = new TableCell();
+                        newCell.Text = tot.customerName.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        newCell = new TableCell();
+                        newCell.Text = tot.missed.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        reportRowCount++;
+
+                        #region Graph
+                        dataValuePair.Add(new KeyValuePair<string, double>(tot.customerName.ToString()
+                                            , Convert.ToDouble(tot.missed)));
+                        #endregion
+                    }
+
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("xAxisName", "Customer Name");
+                    chartConfig.Add("yAxisName", "Bookings Missed");
+                    //chartConfig.Add("numberSuffix", "ZAR");
+                    chartConfig.Add("theme", "fusion");
+
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("bar2d", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    // render chart
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
+
+                    #endregion
+                }
+
+                if (divGraph.Visible != true && divReport.Visible != true)
+                {
+                    btnControlls.Visible = true;
+                    divReportHeader.Visible = true;
+                    divReport.Visible = true;
+                    btnViewText_Click(sender, e);
+                }
+            }
+            catch (Exception err)
+            {
+                TableRow newRow = new TableRow();
+                tblReport.Rows.Add(newRow);
+
+                TableCell newCell = new TableCell();
+                newCell.Text = "Report for bookings missed for customers is currently unavailable.<br>" +
+                        "Please try again later.";
+                tblReport.Rows[0].Cells.Add(newCell);
+
+                function.logAnError("Error getting most bookings missed. Error:" + err.ToString());
+            }
+        }
+        private void getStylistRatings(object sender, EventArgs e, bool defaultDateRange)
+        {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion 
+
+            //clear the table
+            tblReport.Rows.Clear();
+
+            reportLable.Text = "Stylist Popularity";
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
+            reportByLable.Text = "For: All Stylists";
+            try
+            {
+                List<SP_GetReviews> report = null;
+                if (defaultDateRange == true)
+                {
+                    reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
+                        DateTime.Today.ToString("dd MMM yyyy");
+                    report = handler.mostPopularStylist(new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today);
+                }
+                else if (defaultDateRange == false)
+                {
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                        CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
+                    report = handler.mostPopularStylist(CalendarDateStart.SelectedDate, CalendarDateEnd.SelectedDate);
+                }
+
+                if (report.Count != 0)
+                {
+                    int reportRowCount = 0;
+
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Stylist Name";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //Bookings Missed
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    newHeaderCell.Text = "Stylist Rating";
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+
+                    foreach (SP_GetReviews rev in report)
+                    {
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+
+                        TableCell newCell = new TableCell();
+                        newCell.Text = rev.StylistName.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        newCell = new TableCell();
+                        newCell.Text = rev.Rating.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        reportRowCount++;
+
+                        #region Graph
+                        dataValuePair.Add(new KeyValuePair<string, double>(rev.StylistName.ToString()
+                                            , Convert.ToDouble(rev.Rating)));
+                        #endregion
+                    }
+
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("xAxisName", "Employee Name");
+                    chartConfig.Add("yAxisName", "Rating");
+                    //chartConfig.Add("numberSuffix", "ZAR");
+                    chartConfig.Add("theme", "fusion");
+
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("bar2d", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    // render chart
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
+
+                    #endregion
+                }
+
+                if (divGraph.Visible != true && divReport.Visible != true)
+                {
+                    btnControlls.Visible = true;
+                    divReportHeader.Visible = true;
+                    divReport.Visible = true;
+                    btnViewText_Click(sender, e);
+                }
+            }
+            catch (Exception err)
+            {
+                tblReport.Rows.Clear();
+                TableRow newRow = new TableRow();
+                tblReport.Rows.Add(newRow);
+
+                TableCell newCell = new TableCell();
+                newCell.Text = "Report for stylist popularity customers is currently unavailable.<br>" +
+                        "Please try again later.";
+                tblReport.Rows[0].Cells.Add(newCell);
+
+                function.logAnError("Error getting stylist popularity. Error:" + err.ToString());
+            }
+        }
+        public void getCustomerSatisfaction(object sender, EventArgs e, bool defaultDateRange)
+        {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion 
+
+            //clear the table
+            tblReport.Rows.Clear();
+
+            reportLable.Text = "Customer Satisfaction Of Services and Stylists";
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
+            reportByLable.Text = "For: All Customers";
+            try
+            {
+                List<SP_GetReviews> report = null;
+                if (defaultDateRange == true)
+                {
+                    reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
+                        DateTime.Today.ToString("dd MMM yyyy");
+                    report = handler.customerSatistfaction(new DateTime(DateTime.Now.Year, 1, 1), DateTime.Today);
+                }
+                else if (defaultDateRange == false)
+                {
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                        CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
+                    report = handler.customerSatistfaction(CalendarDateStart.SelectedDate, CalendarDateEnd.SelectedDate);
+                }
+
+                if (report.Count != 0)
+                {
+                    int reportRowCount = 0;
+
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Customer Name";
+                    newHeaderCell.Width = 300;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //Average of ratings given by the customer
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    newHeaderCell.Text = "Rating Given";
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //number of reviews the customer has made 
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 300;
+                    newHeaderCell.Text = "No. Reviews By Customer";
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+
+                    foreach (SP_GetReviews rev in report)
+                    {
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+
+                        TableCell newCell = new TableCell();
+                        newCell.Text = rev.CustomerName.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        newCell = new TableCell();
+                        newCell.Text = rev.Rating.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        newCell = new TableCell();
+                        newCell.Text = rev.noOfReviews.ToString();
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        reportRowCount++;
+
+                        #region Graph
+                        dataValuePair.Add(new KeyValuePair<string, double>(
+                                            "("+rev.noOfReviews.ToString()+")" + " "
+                                            + rev.CustomerName.ToString()
+                                            , Convert.ToDouble(rev.Rating)));
+                        #endregion
+                    }
+
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("xAxisName", "Customer Name");
+                    chartConfig.Add("yAxisName", "Rating");
+                    //chartConfig.Add("numberSuffix", "ZAR");
+                    chartConfig.Add("theme", "fusion");
+
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("bar2d", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    // render chart
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
+
+                    #endregion
+                }
+
+                if (divGraph.Visible != true && divReport.Visible != true)
+                {
+                    btnControlls.Visible = true;
+                    divReportHeader.Visible = true;
+                    divReport.Visible = true;
+                    btnViewText_Click(sender, e);
+                }
+            }
+            catch (Exception err)
+            {
+                tblReport.Rows.Clear();
+                TableRow newRow = new TableRow();
+                tblReport.Rows.Add(newRow);
+
+                TableCell newCell = new TableCell();
+                newCell.Text = "Report for Customer Satisfaction is currently unavailable.<br>" +
+                        "Please try again later.";
+                tblReport.Rows[0].Cells.Add(newCell);
+
+                function.logAnError("Error getting customer satisfaction. Error:" + err.ToString());
+            }
+        }
         #endregion
+
+        protected void CalendarDateStart_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date > DateTime.Today)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.BackColor = System.Drawing.Color.LightGray;
+            }
+        }
+        protected void drpStartMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int month = Convert.ToInt16(drpStartMonth.SelectedValue);
+            CalendarDateStart.VisibleDate = new DateTime(2018,
+                                    month,
+                                    1);
+        }
+        protected void drpEndMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int month = Convert.ToInt16(drpEndMonth.SelectedValue);
+            CalendarDateEnd.VisibleDate = new DateTime(2018,
+                                    month,
+                                   1);
+        }
+        public void filterMonths()
+        {
+            DateTime now = DateTime.Now;
+            int currentMonth = now.Month;
+
+            foreach (ListItem li in drpStartMonth.Items)
+            {
+                if (int.Parse(li.Value) > currentMonth)
+                {
+                    li.Enabled = false;
+                }
+                else
+                {
+                    li.Enabled = true;
+                }
+            }
+
+            foreach (ListItem li in drpEndMonth.Items)
+            {
+                if (int.Parse(li.Value) > currentMonth)
+                {
+                    li.Enabled = false;
+                }
+                else
+                {
+                    li.Enabled = true;
+                }
+            }
+
+        }
     }
 }
  

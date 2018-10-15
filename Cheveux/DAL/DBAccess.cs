@@ -1611,7 +1611,7 @@ namespace DAL
                                 typeID = row["TypeID"].ToString(),
                                 name = row["Name"].ToString(),
                                 ProductOrService = row["Product/Service"].ToString()[0],
-                                PrimaryService = Convert.ToBoolean(row["PrimaryService"])
+                                //PrimaryService = Convert.ToBoolean(row["PrimaryService"])
                             };
                             productTypes.Add(productType);
                         }
@@ -3676,6 +3676,110 @@ namespace DAL
             }
             return list;
         }
+
+        public List<SP_TotalBksMissedByCustomers> returnTotalbksMissedbyCustomers(DateTime startDate, DateTime endDate)
+        {
+            List<SP_TotalBksMissedByCustomers> list = new List<SP_TotalBksMissedByCustomers>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_TotalBksMissedByCustomers",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_TotalBksMissedByCustomers cust = new SP_TotalBksMissedByCustomers()
+                            {
+                                customerID = row["CustomerID"].ToString(),
+                                customerName = row["CustomerName"].ToString(),
+                                missed =Convert.ToInt32(row["BookingsMissed"])
+                            };
+                            list.Add(cust);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+        public List<SP_GetReviews> mostPopularStylist(DateTime startDate, DateTime endDate)
+        {
+            List<SP_GetReviews> list = new List<SP_GetReviews>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_MostPopularStylist",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetReviews rev = new SP_GetReviews()
+                            {
+                                EmployeeID = row["EmployeeID"].ToString(),
+                                StylistName = row["EmployeeName"].ToString(),
+                                Rating = Convert.ToInt32(row["Rating"])
+                            };
+                            list.Add(rev);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+        public List<SP_GetReviews> customerSatistfaction(DateTime startDate, DateTime endDate)
+        {
+            List<SP_GetReviews> list = new List<SP_GetReviews>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@startDate", startDate),
+                new SqlParameter("@endDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerSatisfaction",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            SP_GetReviews rev = new SP_GetReviews()
+                            {
+                                CustomerID = row["CustomerID"].ToString(),
+                                CustomerName = row["CustomerName"].ToString(),
+                                Rating = Convert.ToInt32(row["Rating"]),
+                                noOfReviews = Convert.ToInt32(row["NoOfReviews"])
+                            };
+                            list.Add(rev);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
         #endregion
 
         public List<SP_GetServices> GetAllServices()
@@ -5217,7 +5321,7 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        public SP_ReturnBooking returnNextBooking(DateTime startTime, string bookingID, string stylistID, DateTime date)
+        public SP_ReturnBooking returnNextBooking(string startTime, string bookingID, string stylistID, DateTime date)
         {
             SP_ReturnBooking rb = null;
             SqlParameter[] pars = new SqlParameter[]
@@ -5239,7 +5343,7 @@ namespace DAL
                         {
                             bookingID = row["BookingID"].ToString(),
                             slotNo = row["SlotNo"].ToString(),
-                            startTime = Convert.ToDateTime(row["StartTime"].ToString())
+                            startTime = row["StartTime"].ToString()
                         };
                     }
                     return rb;
@@ -5274,7 +5378,7 @@ namespace DAL
                             customerID = row["CustomerID"].ToString(),
                             stylistID = row["StylistID"].ToString(),
                             slotNo = row["SlotNo"].ToString(),
-                            startTime = Convert.ToDateTime(row["StartTime"].ToString()),
+                            startTime = row["StartTime"].ToString(),
                             date = Convert.ToDateTime(row["Date"].ToString())
                         };
                     }

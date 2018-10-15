@@ -797,6 +797,7 @@ namespace Cheveux.Cheveux
             }
             catch (Exception Err)
             {
+                function.logAnError(Err.ToString());
                 Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An Error Occured Communicating With The Data Base, Try Again Later");
             }
 

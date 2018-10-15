@@ -41,5 +41,7 @@ BEGIN
 
 	FROM REVIEW r
 	WHERE r.primaryBookingID is null
+	order by r.[Date] desc
+	
 END
 GO

@@ -164,6 +164,9 @@ namespace BLL
         List<productSalesReport> getProductSalesValueCredit(DateTime startDate, DateTime endDate);
         List<productSalesReport> getProductSalesValueCash(DateTime startDate, DateTime endDate);
         List<productSalesReport> getProductSalesValueAll(DateTime startDate, DateTime endDate);
+        List<SP_TotalBksMissedByCustomers> returnTotalbksMissedbyCustomers(DateTime startDate, DateTime endDate);
+        List<SP_GetReviews> mostPopularStylist(DateTime startDate, DateTime endDate);
+        List<SP_GetReviews> customerSatistfaction(DateTime startDate, DateTime endDate);
         #endregion
 
         USER getManagerContact();
@@ -248,7 +251,7 @@ namespace BLL
         List<SP_GetLeaveServices> BLL_GetLeaveServices();
         bool BLL_UpdateOrder(string orderID, DateTime dateReceived, bool received);
         bool BLL_UpdateQtyOnHand(string prodID, int qty);
-        SP_ReturnBooking returnNextBooking(DateTime startTime, string bookingID, string stylistID, DateTime date);
+        SP_ReturnBooking returnNextBooking(string startTime, string bookingID, string stylistID, DateTime date);
         SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date);
         List<SP_ReturnAvailServices> returnAvailServices(int num);
     }

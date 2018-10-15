@@ -76,6 +76,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.DropDownList drpPaymentType;
         
         /// <summary>
+        /// lError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lError;
+        
+        /// <summary>
         /// reportDateRangeContainer control.
         /// </summary>
         /// <remarks>
@@ -85,13 +94,31 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportDateRangeContainer;
         
         /// <summary>
-        /// CalendarDateStrart control.
+        /// drpStartMonth control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar CalendarDateStrart;
+        protected global::System.Web.UI.WebControls.DropDownList drpStartMonth;
+        
+        /// <summary>
+        /// CalendarDateStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar CalendarDateStart;
+        
+        /// <summary>
+        /// drpEndMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpEndMonth;
         
         /// <summary>
         /// CalendarDateEnd control.
@@ -101,15 +128,6 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Calendar CalendarDateEnd;
-        
-        /// <summary>
-        /// lError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lError;
         
         /// <summary>
         /// btnControlls control.

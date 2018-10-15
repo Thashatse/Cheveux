@@ -16,20 +16,19 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_ReturnAvailServices
-	@slots int
+CREATE PROCEDURE SP_MostPopularStylist
+	@startDate datetime = null,
+	@endDate datetime =null
 AS
 BEGIN
-
 	SET NOCOUNT ON;
-
-	SELECT  s.ServiceID, p.[Name],p.ProductDescription,p.Price,
-			s.NoOfSlots,s.[Type(A/N/B)]
-	FROM [SERVICE] s, PRODUCT p
-	WHERE s.ServiceID=p.ProductID
-	and p.Active ='Y'
-	and s.NoOfSlots <= @slots
-	and s.[Type(A/N/B)]<>'U'
-
+	SELECT Distinct(r.EmployeeID),(u.FirstName + ' ' + u.LastName)as[EmployeeName],
+		   AVG(Rating)as Rating
+	FROM REVIEW r, [USER] u
+	where r.EmployeeID=u.UserID
+	and   r.[Date] between @startDate and @endDate
+	and   r.primaryBookingID is null
+	GROUP BY r.EmployeeID,u.FirstName,u.LastName
+	ORDER BY Rating desc
 END
 GO

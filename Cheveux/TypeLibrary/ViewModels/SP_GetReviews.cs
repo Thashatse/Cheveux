@@ -20,5 +20,6 @@ namespace TypeLibrary.ViewModels
         public string StylistName { get; set; }
         public string CustomerImage { get; set; }
         public string CustomerName { get; set; }
+        public int noOfReviews { get; set; }
     }
 }

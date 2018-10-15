@@ -449,8 +449,20 @@ namespace BLL
         {
             return db.getProductSalesValueAll(startDate, endDate);
         }
+        public List<SP_TotalBksMissedByCustomers> returnTotalbksMissedbyCustomers(DateTime startDate, DateTime endDate)
+        {
+            return db.returnTotalbksMissedbyCustomers(startDate, endDate);
+        }
+        public List<SP_GetReviews> mostPopularStylist(DateTime startDate, DateTime endDate)
+        {
+            return db.mostPopularStylist(startDate, endDate);
+        }
+        public List<SP_GetReviews> customerSatistfaction(DateTime startDate, DateTime endDate)
+        {
+            return db.customerSatistfaction(startDate, endDate);
+        }
         #endregion
-        
+
         public USER getManagerContact()
         {
             return db.getManagerContact();
@@ -832,7 +844,7 @@ namespace BLL
         {
             return db.UpdateQtyOnHand(prodID, qty);
         }
-        public SP_ReturnBooking returnNextBooking(DateTime startTime, string bookingID, string stylistID, DateTime date)
+        public SP_ReturnBooking returnNextBooking(string startTime, string bookingID, string stylistID, DateTime date)
         {
             return db.returnNextBooking(startTime, bookingID, stylistID, date);
         }
