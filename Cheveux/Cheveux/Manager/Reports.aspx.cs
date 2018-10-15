@@ -39,26 +39,25 @@ namespace Cheveux.Manager
             else if (cookie["UT"] == "M")
             {
                 //if the user is loged in as a manager display Bussines setting
-                drpReport_SelectedIndexChanged1(sender, e);
                 filterMonths();
-                LogedIn.Visible = true;
+                hideAll();
                 LogedOut.Visible = false;
+                LogedIn.Visible = true;
+                drpReport_SelectedIndexChanged1(sender, e);
             }
         }
         
         protected void drpReport_SelectedIndexChanged1(object sender, EventArgs e)
         {
-            lError.Visible = false;
-            if (drpReport.SelectedIndex == 0)
+            hideAll();
+
+            if (drpReport.SelectedValue == "0")
             {
                 reportByContainer.Visible = true;
                 if (ddlReportFor.SelectedIndex == -1
                     || (ddlReportFor.SelectedItem.Text == "Value" ||
                         ddlReportFor.SelectedItem.Text == "Volume"))
                 {
-                    divReport.Visible = false;
-                    divReportHeader.Visible = false;
-                    divGraph.Visible = false;
                     try
                     {
                         ddlReportFor.Items.Clear();
@@ -90,7 +89,6 @@ namespace Cheveux.Manager
                     && CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
-                    reportByContainer.Visible = true;
                     reportDateRangeContainer.Visible = true;
                     salesPaymentType.Visible = true;
                     //display the sales report
@@ -101,20 +99,18 @@ namespace Cheveux.Manager
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
                     reportDateRangeContainer.Visible = true;
-                    reportByContainer.Visible = true;
                     salesPaymentType.Visible = true;
                     //display the sales report
                     getSalesReport(sender, e, false);
                 }
 
             }
-            else if (drpReport.SelectedIndex == 1)
+            else if (drpReport.SelectedValue == "1")
             {
                 Response.Redirect("../Receptionist/Appointments.aspx?Action=ViewAllSchedules");
             }
-            else if (drpReport.SelectedIndex == 2)
+            else if (drpReport.SelectedValue == "2")
             {
-                reportByContainer.Visible = false;
                 reportDateRangeContainer.Visible = true;
                 if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
@@ -130,21 +126,20 @@ namespace Cheveux.Manager
                 }
 
             }
-            else if (drpReport.SelectedIndex == 3)
+            else if (drpReport.SelectedValue == "3")
             {
-                reportByContainer.Visible = true;
                 if (ddlReportFor.SelectedIndex == -1 ||
                     (ddlReportFor.SelectedItem.Text != "Value" &&
                     ddlReportFor.SelectedItem.Text != "Volume"))
                 {
-                    salesPaymentType.Visible = false;
-                    divReport.Visible = false;
-                    divReportHeader.Visible = false;
-                    divGraph.Visible = false;
                     ddlReportFor.Items.Clear();
                     ddlReportFor.Items.Add("Value");
                     ddlReportFor.Items.Add("Volume");
                 }
+                
+                reportByContainer.Visible = true;
+                salesPaymentType.Visible = true;
+                reportDateRangeContainer.Visible = true;
 
                 if (ddlReportFor.SelectedValue != "-1"
                     && (ddlReportFor.SelectedItem.Text == "Value" ||
@@ -152,7 +147,6 @@ namespace Cheveux.Manager
                     && CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
-                    salesPaymentType.Visible = true;
                     //display the sales report
                     getProductSalesReport(sender, e, true);
                 }
@@ -162,27 +156,24 @@ namespace Cheveux.Manager
                     && CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
-                    salesPaymentType.Visible = true;
                     //display the sales report
                     getProductSalesReport(sender, e, false);
                 }
-
             }
-            else if (drpReport.SelectedIndex == 4)
+            else if (drpReport.SelectedValue == "4")
             {
-                reportByContainer.Visible = true;
                 if (ddlReportFor.SelectedIndex == -1 ||
                     (ddlReportFor.SelectedItem.Text != "Value" &&
                     ddlReportFor.SelectedItem.Text != "Count"))
                 {
-                    salesPaymentType.Visible = false;
-                    divReport.Visible = false;
-                    divReportHeader.Visible = false;
-                    divGraph.Visible = false;
                     ddlReportFor.Items.Clear();
                     ddlReportFor.Items.Add("Value");
                     ddlReportFor.Items.Add("Count");
                 }
+
+                reportByContainer.Visible = true;
+                salesPaymentType.Visible = true;
+                reportDateRangeContainer.Visible = true;
 
                 if (ddlReportFor.SelectedValue != "-1"
                     && (ddlReportFor.SelectedItem.Text == "Value" ||
@@ -190,8 +181,6 @@ namespace Cheveux.Manager
                     && CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
-                    salesPaymentType.Visible = true;
-                    reportDateRangeContainer.Visible = true;
                     //display the sales report
                     getServiceSalesReport(sender, e, true);
                 }
@@ -201,17 +190,13 @@ namespace Cheveux.Manager
                     && CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
                     && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
                 {
-                    salesPaymentType.Visible = true;
-                    reportDateRangeContainer.Visible = true;
                     //display the sales report
                     getServiceSalesReport(sender, e, false);
                 }
 
             }
-            else if (drpReport.SelectedIndex == 5)
+            else if (drpReport.SelectedValue == "5")
             {
-                reportByContainer.Visible = false;
-                salesPaymentType.Visible = false;
                 reportDateRangeContainer.Visible = true;
 
                 if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
@@ -227,14 +212,10 @@ namespace Cheveux.Manager
                     getMissedBookingsReport(sender, e, false);
                 }
             }
-            else if (drpReport.SelectedIndex == 6)
+            else if (drpReport.SelectedValue == "6")
             {
-                reportByContainer.Visible = false;
-                salesPaymentType.Visible = false;
                 reportDateRangeContainer.Visible = true;
             
-        
-        
                 if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
                      && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
                 {
@@ -246,10 +227,8 @@ namespace Cheveux.Manager
                     getStylistRatings(sender, e, false);
                 }
             }
-            else if (drpReport.SelectedIndex == 7)
+            else if (drpReport.SelectedValue == "7")
             {
-                reportByContainer.Visible = false;
-                salesPaymentType.Visible = false;
                 reportDateRangeContainer.Visible = true;
 
                 if (CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
@@ -264,7 +243,71 @@ namespace Cheveux.Manager
                 }
             }
         }
-#region BTN Functions
+
+        #region View
+        private void hideAll()
+        {
+            lError.Visible = false;
+            LogedOut.Visible = false;
+            divGraph.Visible = false;
+            divReport.Visible = false;
+            divReportHeader.Visible = false;
+            divPrintHeader.Visible = false;
+            btnControlls.Visible = false;
+            reportDateRangeContainer.Visible = false;
+            salesPaymentType.Visible = false;
+            reportByContainer.Visible = false;
+            hideFilters.Visible = false;
+            drpReport.Visible = true;
+            LogedIn.Visible = true;
+            SelectReport.Visible = true;
+        }
+
+        private void showReport()
+        {
+            btnControlls.Visible = true;
+            divReportHeader.Visible = true;
+            divPrintHeader.Visible = false;
+            hideFilters.Visible = true;
+
+            if (graphBar.Visible == true)
+            {
+                graphBar.Visible = true;
+                graphPie.Visible = false;
+            }
+            else
+            {
+                graphBar.Visible = false;
+                graphPie.Visible = true;
+            }
+
+            if (divReport.Visible == true)
+            {
+                divReport.Visible = true;
+                divGraph.Visible = false;
+            }
+            else
+            {
+                divReport.Visible = false;
+                divGraph.Visible = true;
+            }
+
+            if (btnHideFilters.Text == "Hide Filters")
+            {
+                reportDateRangeContainer.Visible = true;
+                SelectReport.Visible = true;
+                btnHideFilters.Text = "Hide Filters";
+            }
+            else
+            {
+                reportDateRangeContainer.Visible = false;
+                SelectReport.Visible = false;
+                btnHideFilters.Text = "Show Filters";
+            }
+        }
+        #endregion
+
+        #region BTN Functions
         protected void btnRefresh_Click(object sender, EventArgs e)
         {
             drpReport_SelectedIndexChanged1(sender, e);
@@ -346,7 +389,81 @@ namespace Cheveux.Manager
             btnShowBarGraph.CssClass = "btn btn-primary";
             btnShowPieGraph.CssClass = "btn btn-light";
         }
+        
+        protected void btnHideFilters_Click(object sender, EventArgs e)
+        {
+            if (btnHideFilters.Text == "Hide Filters")
+            {
+                reportDateRangeContainer.Visible = false;
+                SelectReport.Visible = false;
+                btnHideFilters.Text = "Show Filters"; 
+            }
+            else
+            {
+                reportDateRangeContainer.Visible = true;
+                SelectReport.Visible = true;
+                btnHideFilters.Text = "Hide Filters";
+            }
+        }
         #endregion
+
+        #region Cal Functions
+        protected void CalendarDateStart_DayRender(object sender, DayRenderEventArgs e)
+        {
+            if (e.Day.Date > DateTime.Today)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.BackColor = System.Drawing.Color.LightGray;
+            }
+        }
+
+        protected void drpStartMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int month = Convert.ToInt16(drpStartMonth.SelectedValue);
+            CalendarDateStart.VisibleDate = new DateTime(2018,
+                                    month,
+                                    1);
+        }
+
+        protected void drpEndMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int month = Convert.ToInt16(drpEndMonth.SelectedValue);
+            CalendarDateEnd.VisibleDate = new DateTime(2018,
+                                    month,
+                                   1);
+        }
+
+        public void filterMonths()
+        {
+            DateTime now = DateTime.Now;
+            int currentMonth = now.Month;
+
+            foreach (ListItem li in drpStartMonth.Items)
+            {
+                if (int.Parse(li.Value) > currentMonth)
+                {
+                    li.Enabled = false;
+                }
+                else
+                {
+                    li.Enabled = true;
+                }
+            }
+
+            foreach (ListItem li in drpEndMonth.Items)
+            {
+                if (int.Parse(li.Value) > currentMonth)
+                {
+                    li.Enabled = false;
+                }
+                else
+                {
+                    li.Enabled = true;
+                }
+            }
+
+        }
+        #endregion'
 
         #region Load Reports
         private void getSalesReport(object sender, EventArgs e, bool defaultDateRange)
@@ -358,7 +475,7 @@ namespace Cheveux.Manager
             //clear the table
             tblReport.Rows.Clear();
 
-            reportLable.Text = "Sales Report";
+            reportLable.Text = "Bookings Gross Report";
             reportByLable.Text = "For: " + ddlReportFor.SelectedItem.Text.ToString();
             reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
             try
@@ -488,13 +605,11 @@ namespace Cheveux.Manager
                     #endregion
                 }
 
-                if (divGraph.Visible != true && divReport.Visible != true)
+                if (!Page.IsPostBack)
                 {
-                    btnControlls.Visible = true;
-                    divReportHeader.Visible = true;
                     divReport.Visible = true;
-                    btnViewText_Click(sender, e);
                 }
+                showReport();
             }
             catch (Exception Err)
             {
@@ -504,6 +619,7 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
+
         private void getServiceSalesReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
@@ -794,14 +910,11 @@ namespace Cheveux.Manager
                     graphPie.Text = pieChart.Render();
                     #endregion
                 }
-
-                if (divGraph.Visible != true && divReport.Visible != true)
+                if (!Page.IsPostBack)
                 {
-                    btnControlls.Visible = true;
-                    divReportHeader.Visible = true;
                     divReport.Visible = true;
-                    btnViewText_Click(sender, e);
                 }
+                showReport();
             }
             catch (Exception Err)
             {
@@ -938,14 +1051,11 @@ namespace Cheveux.Manager
                     graphPie.Text = pieChart.Render();
                     #endregion
                 }
-
-                if (divGraph.Visible != true && divReport.Visible != true)
+                if (!Page.IsPostBack)
                 {
-                    btnControlls.Visible = true;
-                    divReportHeader.Visible = true;
                     divReport.Visible = true;
-                    btnViewText_Click(sender, e);
                 }
+                showReport();
             }
             catch (Exception Err)
             {
@@ -1246,14 +1356,11 @@ namespace Cheveux.Manager
                     graphPie.Text = pieChart.Render();
                     #endregion
                 }
-
-                if (divGraph.Visible != true && divReport.Visible != true)
+                if (!Page.IsPostBack)
                 {
-                    btnControlls.Visible = true;
-                    divReportHeader.Visible = true;
                     divReport.Visible = true;
-                    btnViewText_Click(sender, e);
                 }
+                showReport();
             }
             catch (Exception Err)
             {
@@ -1264,6 +1371,7 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
+
         private void getMissedBookingsReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
@@ -1370,14 +1478,11 @@ namespace Cheveux.Manager
 
                     #endregion
                 }
-
-                if (divGraph.Visible != true && divReport.Visible != true)
+                if (!Page.IsPostBack)
                 {
-                    btnControlls.Visible = true;
-                    divReportHeader.Visible = true;
                     divReport.Visible = true;
-                    btnViewText_Click(sender, e);
                 }
+                showReport();
             }
             catch (Exception err)
             {
@@ -1392,6 +1497,7 @@ namespace Cheveux.Manager
                 function.logAnError("Error getting most bookings missed. Error:" + err.ToString());
             }
         }
+
         private void getStylistRatings(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
@@ -1498,14 +1604,11 @@ namespace Cheveux.Manager
 
                     #endregion
                 }
-
-                if (divGraph.Visible != true && divReport.Visible != true)
+                if (!Page.IsPostBack)
                 {
-                    btnControlls.Visible = true;
-                    divReportHeader.Visible = true;
                     divReport.Visible = true;
-                    btnViewText_Click(sender, e);
                 }
+                showReport();
             }
             catch (Exception err)
             {
@@ -1521,7 +1624,8 @@ namespace Cheveux.Manager
                 function.logAnError("Error getting stylist popularity. Error:" + err.ToString());
             }
         }
-        public void getCustomerSatisfaction(object sender, EventArgs e, bool defaultDateRange)
+
+        private void getCustomerSatisfaction(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
             var dataValuePair = new List<KeyValuePair<string, double>>();
@@ -1639,13 +1743,11 @@ namespace Cheveux.Manager
                     #endregion
                 }
 
-                if (divGraph.Visible != true && divReport.Visible != true)
+                if (!Page.IsPostBack)
                 {
-                    btnControlls.Visible = true;
-                    divReportHeader.Visible = true;
                     divReport.Visible = true;
-                    btnViewText_Click(sender, e);
                 }
+                showReport();
             }
             catch (Exception err)
             {
@@ -1663,58 +1765,6 @@ namespace Cheveux.Manager
         }
         #endregion
 
-        protected void CalendarDateStart_DayRender(object sender, DayRenderEventArgs e)
-        {
-            if (e.Day.Date > DateTime.Today)
-            {
-                e.Day.IsSelectable = false;
-                e.Cell.BackColor = System.Drawing.Color.LightGray;
-            }
-        }
-        protected void drpStartMonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int month = Convert.ToInt16(drpStartMonth.SelectedValue);
-            CalendarDateStart.VisibleDate = new DateTime(2018,
-                                    month,
-                                    1);
-        }
-        protected void drpEndMonth_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int month = Convert.ToInt16(drpEndMonth.SelectedValue);
-            CalendarDateEnd.VisibleDate = new DateTime(2018,
-                                    month,
-                                   1);
-        }
-        public void filterMonths()
-        {
-            DateTime now = DateTime.Now;
-            int currentMonth = now.Month;
-
-            foreach (ListItem li in drpStartMonth.Items)
-            {
-                if (int.Parse(li.Value) > currentMonth)
-                {
-                    li.Enabled = false;
-                }
-                else
-                {
-                    li.Enabled = true;
-                }
-            }
-
-            foreach (ListItem li in drpEndMonth.Items)
-            {
-                if (int.Parse(li.Value) > currentMonth)
-                {
-                    li.Enabled = false;
-                }
-                else
-                {
-                    li.Enabled = true;
-                }
-            }
-
-        }
     }
 }
  

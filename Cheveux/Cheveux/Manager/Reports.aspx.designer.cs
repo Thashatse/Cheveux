@@ -31,6 +31,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ReportsPage;
         
         /// <summary>
+        /// SelectReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl SelectReport;
+        
+        /// <summary>
         /// drpReport control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,24 @@ namespace Cheveux.Manager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpPaymentType;
+        
+        /// <summary>
+        /// hideFilters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hideFilters;
+        
+        /// <summary>
+        /// btnHideFilters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnHideFilters;
         
         /// <summary>
         /// lError control.

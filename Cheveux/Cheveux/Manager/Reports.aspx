@@ -28,8 +28,9 @@
                         <div class="jumbotron bg-dark text-white">
                             <h1>Reports</h1>
 
-
-                            <div id="SelectReport">
+                            
+                                <div class="row">
+                            <div runat="server" id="SelectReport" class="col-9">
                                 <div class="row">
                                     <div class="col-3">
                                         <!-- Report Selector -->
@@ -37,11 +38,11 @@
                                         <asp:DropDownList ID="drpReport" runat="server" AutoPostBack="True" class="dropdown"
                                             CssClass="btn btn-primary dropdown-toggle" OnSelectedIndexChanged="drpReport_SelectedIndexChanged1"
                                             OnTextChanged="drpReport_SelectedIndexChanged1">
-                                            <asp:ListItem Text="Sales" Value="0" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Text="Bookings" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Top Services" Value="4" Selected="True"></asp:ListItem>
                                             <asp:ListItem Text="Top Products" Value="3"></asp:ListItem>
-                                            <asp:ListItem Text="Top Services" Value="4"></asp:ListItem>
+                                            <asp:ListItem Text="Top Customer" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Bookings" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="Bookings Gross" Value="0"></asp:ListItem>
                                             <asp:ListItem Text="Bookings Missed" Value="5"></asp:ListItem>
                                             <asp:ListItem Text="Stylist Popularity" Value="6"></asp:ListItem>
                                             <asp:ListItem Text="Customer Satisfaction" Value="7"></asp:ListItem>
@@ -65,6 +66,13 @@
 
                                 </div>
                             </div>
+                                    
+
+                                    <div class="col-3" runat="server" id="hideFilters" visible="false">
+                                        <asp:Button ID="btnHideFilters" runat="server" Text="Hide Filters" OnClick="btnHideFilters_Click" CssClass="btn btn-secondary" />
+                                    </div>
+
+                                </div>
 
                             <!-- line Break  -->
                             <br />
