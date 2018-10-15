@@ -182,50 +182,6 @@ namespace Cheveux
                 //Check if the user is logged 
                 try
                 {
-                    if (cookie != null)
-                    {
-
-                        if (cookie["UT"] == "M")
-                        {
-                            lblGoService.Text = "Leave Reason";
-                            divApplication.Visible = false;
-                            divBraids.Visible = false;
-                            divNatural.Visible = false;
-                            
-                            lblHeading.Text = "Leave Request";
-                            lblChoose.Text = "Leave Request Summary...";
-
-                            divSickLeave.Visible = true;
-                            rblSickLeave.DataSource = leaveList;
-                            rblSickLeave.DataTextField = "Name";
-                            rblSickLeave.DataValueField = "ProductID";
-                            rblSickLeave.DataBind();
-                        }
-                        else
-                        {
-                            lblChoose.Text = "Booking Summary...";
-                        }
-                    }
-                    else
-                    {
-                        lblChoose.Text = "Booking Summary...";
-                    }
-                }
-                catch (Exception err)
-                {
-                    function.logAnError("unable to comunicate with the database on Make A Booking page: " +
-                        err);
-                    lblErrorSummary.Text = "Database connection failed. Please try again later";
-                    divServices.Visible = false;
-
-
-                }
-
-
-                try
-                {
-
-                    divOther.Visible = true;
                     ListItem deselect = new ListItem("None", "0");
                     deselect.Selected = true;
                     rblPickAServiceA.Items.Add(deselect);
@@ -263,7 +219,7 @@ namespace Cheveux
                             item = new ListItem(services.Name + " - R" + string.Format("{0:#.00}", services.Price).ToString(), services.ServiceID);
                             rblPickAServiceB.Items.Add(item);
                         }
-                        else if(services.ServiceType != 'N' && services.ServiceType != 'A' && services.ServiceType != 'B' && services.ServiceType != 'U')
+                        else if (services.ServiceType != 'N' && services.ServiceType != 'A' && services.ServiceType != 'B' && services.ServiceType != 'U')
                         {
                             ListItem item;
                             item = new ListItem(services.Name + " - R" + string.Format("{0:#.00}", services.Price).ToString(), services.ServiceID);
@@ -274,11 +230,50 @@ namespace Cheveux
                     }
                     if (addOther == true)
                     {
+                        divOther.Visible = true;
                         serviceLabel += " <a href='#Other'>" + "Other" + "</a>     ";
                     }
                     lblServices.Text = serviceLabel;
+                    
+                    //check cookie
+                    if (cookie != null)
+                    {
 
+                        if (cookie["UT"] == "M")
+                        {
+                            lblGoService.Text = "Leave Reason";
+                            divApplication.Visible = false;
+                            divBraids.Visible = false;
+                            divNatural.Visible = false;
+                            divOther.Visible = false;
+
+                            lblHeading.Text = "Leave Request";
+                            lblChoose.Text = "Leave Request Summary...";
+
+                            divSickLeave.Visible = true;
+                            rblSickLeave.DataSource = leaveList;
+                            rblSickLeave.DataTextField = "Name";
+                            rblSickLeave.DataValueField = "ProductID";
+                            rblSickLeave.DataBind();
+                        }
+                        else
+                        {
+                            lblChoose.Text = "Booking Summary...";
+                            divApplication.Visible = true;
+                            divBraids.Visible = true;
+                            divNatural.Visible = true;
+
+                        }
+                    }
+                    else
+                    {
+                        lblChoose.Text = "Booking Summary...";
+                        divApplication.Visible = true;
+                        divBraids.Visible = true;
+                        divNatural.Visible = true;
+                    }
                 }
+
                 catch (Exception err)
                 {
                     function.logAnError(err.ToString());
@@ -1844,10 +1839,10 @@ namespace Cheveux
             int slotLength = 0;
             service = new SERVICE();
 
-            /**if (pickedServiceID != null)
+            if (pickedServiceID != null)
             {
                 pickedServiceID.Clear();
-            }**/
+            }
 
             if (cookie != null)
             {
@@ -1866,6 +1861,7 @@ namespace Cheveux
                     rblPickAServiceA_SelectedIndexChanged(sender, e);
                     rblPickAServiceB_SelectedIndexChanged(sender, e);
                     cblPickAServiceN_SelectedIndexChanged(sender, e);
+                    rblPickOtherService_SelectedIndexChanged(sender, e);
 
                     foreach (string id in pickedServiceID)
                     {
@@ -1879,6 +1875,7 @@ namespace Cheveux
                 rblPickAServiceA_SelectedIndexChanged(sender, e);
                 rblPickAServiceB_SelectedIndexChanged(sender, e);
                 cblPickAServiceN_SelectedIndexChanged(sender, e);
+                rblPickOtherService_SelectedIndexChanged(sender, e);
 
                 foreach (string id in pickedServiceID)
                 {
@@ -2763,6 +2760,7 @@ namespace Cheveux
             rblPickAServiceA_SelectedIndexChanged(sender, e);
             rblSickLeave_SelectedIndexChanged(sender, e);
             cblPickAServiceN_SelectedIndexChanged(sender, e);
+            rblPickOtherService_SelectedIndexChanged(sender, e);
 
             FillSummary(sender, e);
         }
