@@ -420,6 +420,7 @@ namespace BLL
         #endregion
 
         #region Report
+        #region Top Customer
         public List<productSalesReport> getCustomerSalesVolumeAll(DateTime startDate, DateTime endDate)
         {
             return db.getCustomerSalesVolumeAll(startDate, endDate);
@@ -449,7 +450,73 @@ namespace BLL
         {
             return db.getCustomerSalesValueAll(startDate, endDate);
         }
+        #endregion
 
+        #region Top Customer Product
+        public List<productSalesReport> getCustomerProductSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerProductSalesVolumeAll(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerProductSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerProductSalesVolumeCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerProductSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerProductSalesVolumeCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerProductSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerProductSalesValueCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerProductSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerProductSalesValueCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerProductSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerProductSalesValueAll(startDate, endDate);
+        }
+        #endregion
+
+        #region Top Customer Service
+        public List<productSalesReport> getCustomerServiceSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerServiceSalesVolumeAll(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerServiceSalesVolumeCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerServiceSalesVolumeCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerServiceSalesValueCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerServiceSalesValueCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerServiceSalesValueAll(startDate, endDate);
+        }
+        #endregion
+
+        #region Top Products
         public List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate)
         {
             return db.getProductSalesVolumeAll(startDate, endDate);
@@ -479,7 +546,9 @@ namespace BLL
         {
             return db.getProductSalesValueAll(startDate, endDate);
         }
+        #endregion
 
+        #region Top Service
         public List<productSalesReport> getServiceSalesVolumeAll(DateTime startDate, DateTime endDate)
         {
             return db.getServiceSalesVolumeAll(startDate, endDate);
@@ -509,6 +578,7 @@ namespace BLL
         {
             return db.getServiceSalesValueAll(startDate, endDate);
         }
+        #endregion
 
         public List<productSalesReport> getSalesGauge(string ProductID)
         {
