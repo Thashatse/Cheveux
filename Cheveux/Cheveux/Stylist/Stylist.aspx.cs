@@ -312,7 +312,7 @@ namespace Cheveux
                 bServices = handler.getBookingServices(a.BookingID.ToString());
                 if (bServices.Count == 1)
                 {
-                    services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    services.Text = "<a href='../cheveux/services.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
                     + bServices[0].ServiceName.ToString() + "</a>";
                 }
                 else if (bServices.Count > 1)

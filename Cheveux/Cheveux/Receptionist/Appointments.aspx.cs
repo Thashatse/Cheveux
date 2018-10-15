@@ -2179,34 +2179,32 @@ namespace Cheveux
                 bServices = handler.getBookingServices(a.BookingID.ToString());
                 if (bServices.Count == 1)
                 {
-                    services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    services.Text = "<a href='../cheveux/services.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
                     + bServices[0].ServiceName.ToString() + "</a>";
                 }
-                else if (bServices.Count == 2)
+                else if (bServices.Count > 1)
                 {
-                    services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                        "'>" + bServices[0].ServiceName.ToString() +
-                        ", " + bServices[1].ServiceName.ToString() + "</a>";
-                }
-                else if (bServices.Count > 2)
-                {
-                    string toolTip = "";
-                    int toolTipCount = 0;
-                    foreach (SP_GetBookingServices toolTipDTL in bServices)
+                    string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                        "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                    if (bServices.Count == 2)
                     {
-                        if (toolTipCount == 0)
-                        {
-                            toolTip = toolTipDTL.ServiceName;
-                            toolTipCount++;
-                        }
-                        else
-                        {
-                            toolTip += ", " + toolTipDTL.ServiceName;
-                        }
+                        dropDown += bServices[0].ServiceName.ToString() +
+                        ", " + bServices[1].ServiceName.ToString();
                     }
-                    services.Text = "<a title='" + toolTip + "'" +
-                        "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                        "'> Multiple Services </a>";
+                    else if (bServices.Count > 2)
+                    {
+                        dropDown += " Multiple ";
+                    }
+                    dropDown += "<span class='caret'></span></a>" +
+                                    "<ul class='dropdown-menu bg-dark text-white'>";
+                    foreach (SP_GetBookingServices service in bServices)
+                    {
+                        dropDown += "<li>&nbsp;<a href='../cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
+                            " " + service.ServiceName.ToString() + " </a>&nbsp;</li>";
+                    }
+                    dropDown += "</ul></li>";
+
+                    services.Text = dropDown;
                 }
                 tblSchedule.Rows[i].Cells.Add(services);
                 btnPrint.Visible = true;
