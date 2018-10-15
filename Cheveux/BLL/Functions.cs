@@ -742,12 +742,12 @@ namespace BLL
                 }
 
                 logAnError("Unknown Product Type given to GetFullProductTypeText method in functions");
-                return "error";
+                return "Error";
             }
             catch (Exception Err)
             {
                 logAnError("error ing GetFullProductTypeText method in functions | " + Err.ToString());
-                return "error";
+                return "Error";
             }
         }
 

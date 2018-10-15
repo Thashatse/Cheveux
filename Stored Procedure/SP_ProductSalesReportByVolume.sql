@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Get the product sales order by Volume
 -- =============================================
-CREATE PROCEDURE SP_ProductSalesReportByVolume 
+alter PROCEDURE SP_ProductSalesReportByVolume 
 	@StartDate DateTime,
 	@EndDate DateTime
 AS

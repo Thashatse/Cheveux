@@ -4,6 +4,8 @@
     Services - Cheveux
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="head" runat="server">
+        <script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+    <script type="text/javascript" src=" http://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server" id="ViewService">
@@ -109,7 +111,7 @@
                             </asp:TableRow>
                         </asp:Table>
                     </div>
-
+                    <asp:Literal ID="Literal1" runat="server"></asp:Literal>
                 </div>
             </div>
             <div class="col-1"></div>

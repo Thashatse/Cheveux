@@ -449,6 +449,41 @@ namespace BLL
         {
             return db.getProductSalesValueAll(startDate, endDate);
         }
+
+        public List<productSalesReport> getServiceSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getServiceSalesVolumeAll(startDate, endDate);
+        }
+
+        public List<productSalesReport> getServiceSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getServiceSalesVolumeCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getServiceSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getServiceSalesVolumeCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getServiceSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getServiceSalesValueCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getServiceSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getServiceSalesValueCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getServiceSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getServiceSalesValueAll(startDate, endDate);
+        }
+
+        public List<productSalesReport> getSalesGauge(string ProductID)
+        {
+            return db.getSalesGauge(ProductID);
+        }
         public List<SP_TotalBksMissedByCustomers> returnTotalbksMissedbyCustomers(DateTime startDate, DateTime endDate)
         {
             return db.returnTotalbksMissedbyCustomers(startDate, endDate);

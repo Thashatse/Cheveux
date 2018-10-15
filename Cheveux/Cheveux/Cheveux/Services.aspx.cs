@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using BLL;
 using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
+using System.Text;
+using FusionCharts.Charts;
 
 namespace Cheveux.Cheveux
 {
@@ -128,6 +130,84 @@ namespace Cheveux.Cheveux
                         tblDesc.Rows[1].Cells.Add(newCell);
                     }
                 }
+
+
+                #region Gauge
+                        #region Value
+                if (cookie != null)
+                {
+                    if (cookie["UT"] == "M" || cookie["UT"] == "R")
+                    {
+                        List<productSalesReport> salesGaugeData = handler.getSalesGauge(serviceID);
+                        if (salesGaugeData.Count == 2)
+                        {
+                            int lowStockTier = (Convert.ToInt16((salesGaugeData[1].value / 2) / 2));
+                            int middelTier = Convert.ToInt16((salesGaugeData[1].value / 2));
+                            int UpperlTier = Convert.ToInt16(salesGaugeData[1].value);
+
+                            Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                            chartConfig.Add("caption", "Value (Past 30 Days)");
+                            chartConfig.Add("lowerLimit", "0");
+                            chartConfig.Add("upperLimit", UpperlTier.ToString());
+                            chartConfig.Add("showValue", "1");
+                            chartConfig.Add("numberSuffix", "ZAR");
+                            chartConfig.Add("theme", "fusion");
+                            chartConfig.Add("showToolTip", "0");
+
+                            List<ColorRange> color = new List<ColorRange>();
+                            color.Add(new ColorRange(0, lowStockTier, "#F2726F"));
+                            color.Add(new ColorRange(lowStockTier, middelTier, "#FFC533"));
+                            color.Add(new ColorRange(middelTier, UpperlTier, "#62B58F"));
+
+                            //store dial configuration
+
+                            List<KeyValuePair<string, string>> dial = new List<KeyValuePair<string, string>>();
+                            dial.Add(new KeyValuePair<string, string>("value", salesGaugeData[0].value.ToString()));
+
+                            // json data to use as chart data source
+                            StringBuilder jsonData = new StringBuilder();
+                            //build chart config object
+                            jsonData.Append("{'chart':{");
+                            foreach (var config in chartConfig)
+                            {
+                                jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                            }
+                            jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                            StringBuilder range = new StringBuilder();
+                            //build colorRange object
+                            range.Append("'colorRange':{");
+                            range.Append("'color':[");
+                            foreach (ColorRange clr in color)
+                            {
+                                range.AppendFormat("{{'minValue':'{0}','maxValue':'{1}','code':'{2}'}},", clr.Min, clr.Max, clr.ColorCode);
+                            }
+                            range.Replace(",", "]},", range.Length - 1, 1);
+                            //build dials object
+                            StringBuilder dials = new StringBuilder();
+                            dials.Append("'dials':{");
+                            dials.Append("'dial':[");
+                            foreach (var dialCnf in dial)
+                            {
+                                dials.AppendFormat("{{'{0}':'{1}'}},", dialCnf.Key, dialCnf.Value);
+                            }
+                            dials.Replace(",", "]}", dials.Length - 1, 1);
+
+                            jsonData.Append(range.ToString());
+                            jsonData.Append(dials.ToString());
+                            jsonData.Append("}");
+
+                            //Create gauge instance
+                            // charttype, chartID, width, height, data format, data
+
+                            Chart My2ndGauge = new Chart("angulargauge", "first_gauge", "400", "250", "json", jsonData.ToString());
+                            //render gauge
+                            Literal1.Text = My2ndGauge.Render();
+                        }
+                    }
+                }
+                #endregion
+                        #endregion
             }
             else
             {
@@ -237,5 +317,33 @@ namespace Cheveux.Cheveux
         {
             Response.Redirect("../Manager/Service.aspx");
         }
+
+        #region Gauge
+        class ColorRange
+        {
+            public int Min
+            {
+                get;
+                set;
+            }
+            public int Max
+            {
+                get;
+                set;
+            }
+            public string ColorCode
+            {
+                get;
+                set;
+            }
+
+            public ColorRange(int min, int max, string code)
+            {
+                Min = min;
+                Max = max;
+                ColorCode = code;
+            }
+        }
+        #endregion
     }
 }
