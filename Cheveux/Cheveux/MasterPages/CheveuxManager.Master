@@ -84,6 +84,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="../Manager/Employee.aspx">Employees</a>
                             <a class="dropdown-item" href="../MakeABooking.aspx">Stylist Leave</a>
+                            <a class="dropdown-item" href="../Receptionist/Appointments.aspx?Action=LeaveSchedule">Leave Schedule</a>
                         </div>
                     </li>
 
