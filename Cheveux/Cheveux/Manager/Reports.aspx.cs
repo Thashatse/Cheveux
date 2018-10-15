@@ -812,7 +812,6 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
-
         private void getTopCustomerReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
@@ -955,7 +954,6 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
-
         private void getProductSalesReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph

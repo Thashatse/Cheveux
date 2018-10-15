@@ -244,46 +244,46 @@ namespace Cheveux
             try
             {
                 bServices = handler.getBookingServices(a.BookingID.ToString());
+                if (bServices.Count == 1)
+                {
+                    services.Text = "<a href='../cheveux/services.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                    + bServices[0].ServiceName.ToString() + "</a>";
+                }
+                else if (bServices.Count > 1)
+                {
+                    string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                        "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                    if (bServices.Count == 2)
+                    {
+                        dropDown += bServices[0].ServiceName.ToString() +
+                        ", " + bServices[1].ServiceName.ToString();
+                    }
+                    else if (bServices.Count > 2)
+                    {
+                        dropDown += " Multiple ";
+                    }
+                    dropDown += "<span class='caret'></span></a>" +
+                                    "<ul class='dropdown-menu bg-dark text-white'>";
+                    foreach (SP_GetBookingServices service in bServices)
+                    {
+                        dropDown += "<li>&nbsp;<a href='../cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
+                            " " + service.ServiceName.ToString() + " </a>&nbsp;</li>";
+                    }
+                    dropDown += "</ul></li>";
+
+                    services.Text = dropDown;
+                }
+                allBookingTable.Rows[rCnt].Cells.Add(services);
+                rCnt++;
             }
             catch (Exception Err)
             {
-                services.Text = "Unable to retreive service";
-                function.logAnError("Couldn't get the services [customervisit.aspx-getT&C&S method] error:" + Err.ToString());
+                //if theres an error or cant retrieve the services from the database 
+                services.Text = "Unable to retreive services";
+                allBookingTable.Rows[rCnt].Cells.Add(services);
+                rCnt++;
+                function.logAnError("Couldn't get the services [stylist.aspx {getTimeCustomerServices?getServices} ] error:" + Err.ToString());
             }
-
-            if (bServices.Count == 1)
-            {
-                services.Text = "<a href='ViewProduct.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                + bServices[0].ServiceName.ToString() + "</a>";
-            }
-            else if (bServices.Count == 2)
-            {
-                services.Text = "<a href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>" + bServices[0].ServiceName.ToString() +
-                    ", " + bServices[1].ServiceName.ToString() + "</a>";
-            }
-            else if (bServices.Count > 2)
-            {
-                string toolTip = "";
-                int toolTipCount = 0;
-                foreach (SP_GetBookingServices toolTipDTL in bServices)
-                {
-                    if (toolTipCount == 0)
-                    {
-                        toolTip = toolTipDTL.ServiceName;
-                        toolTipCount++;
-                    }
-                    else
-                    {
-                        toolTip += ", " + toolTipDTL.ServiceName;
-                    }
-                }
-                services.Text = "<a title='" + toolTip + "'" +
-                    "href='../ViewBooking.aspx?BookingID=" + a.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'> Multiple Services </a>";
-            }
-            allBookingTable.Rows[rCnt].Cells.Add(services);
-            rCnt++;
             #endregion
             #region Time
 
