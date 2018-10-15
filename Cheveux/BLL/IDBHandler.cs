@@ -172,6 +172,13 @@ namespace BLL
         List<productSalesReport> getServiceSalesValueCash(DateTime startDate, DateTime endDate);
         List<productSalesReport> getServiceSalesValueAll(DateTime startDate, DateTime endDate);
 
+        List<productSalesReport> getCustomerSalesVolumeAll(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerSalesVolumeCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerSalesVolumeCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerSalesValueCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerSalesValueCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerSalesValueAll(DateTime startDate, DateTime endDate);
+
         List<productSalesReport> getSalesGauge(string ProductID);
         List<SP_TotalBksMissedByCustomers> returnTotalbksMissedbyCustomers(DateTime startDate, DateTime endDate);
         List<SP_GetReviews> mostPopularStylist(DateTime startDate, DateTime endDate);

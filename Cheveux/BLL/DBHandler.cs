@@ -420,6 +420,36 @@ namespace BLL
         #endregion
 
         #region Report
+        public List<productSalesReport> getCustomerSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerSalesVolumeAll(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerSalesVolumeCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerSalesVolumeCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerSalesValueCredit(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerSalesValueCash(startDate, endDate);
+        }
+
+        public List<productSalesReport> getCustomerSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            return db.getCustomerSalesValueAll(startDate, endDate);
+        }
+
         public List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate)
         {
             return db.getProductSalesVolumeAll(startDate, endDate);
