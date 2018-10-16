@@ -1590,6 +1590,49 @@ namespace DAL
             }
 
         }
+
+        public bool updateAccessories(ACCESSORY a, PRODUCT p)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+                     new SqlParameter("@productID", a.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@SupplierID", a.supplierID.ToString())
+                    };
+                return DBHelper.NonQuery("SP_UpdateTreatment", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+
+        //addTreatments
+        public bool updateTreatments(TREATMENT t, PRODUCT p)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+                    new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@SupplierID", t.supplierID.ToString())
+                    };
+                return DBHelper.NonQuery("SP_UpdateTreatment", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
         #endregion
 
         #region ProductTypes

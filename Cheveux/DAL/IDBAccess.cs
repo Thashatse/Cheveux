@@ -104,6 +104,10 @@ namespace DAL
         bool addProduct(PRODUCT addProduct);
         bool addAccessories(ACCESSORY a, PRODUCT p);
         bool addTreatments(TREATMENT t, PRODUCT p);
+
+        bool updateAccessories(ACCESSORY a, PRODUCT p);
+
+        bool updateTreatments(TREATMENT t, PRODUCT p);
         #endregion
 
         #region ProductTypes
