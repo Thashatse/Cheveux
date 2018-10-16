@@ -2,7 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-create PROCEDURE SP_CustomerProductSalesReportByVolume 
+alter PROCEDURE SP_CustomerProductSalesReportByVolume 
 	@StartDate DateTime,
 	@EndDate DateTime
 AS

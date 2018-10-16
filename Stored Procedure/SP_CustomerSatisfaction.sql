@@ -9,14 +9,14 @@
 -- This block of comments will not be included in
 -- the definition of the procedure.
 -- ================================================
-SET ANSI_NULLS ON
+SET ANSI_NULLS ON 
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_CustomerSatisfaction 
+alter PROCEDURE SP_CustomerSatisfaction 
 	@startDate datetime = null,
 	@endDate datetime =null
 AS

@@ -16,7 +16,7 @@ GO
 -- =============================================
 -- Author:		S.MAQABANGQA
 -- =============================================
-CREATE PROCEDURE SP_ReturnAvailServices
+alter PROCEDURE SP_ReturnAvailServices
 	@slots int
 AS
 BEGIN
