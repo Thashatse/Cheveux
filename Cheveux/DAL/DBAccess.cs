@@ -6324,5 +6324,41 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
+        public SP_GetBookingServices getLeaveReason(string BookingID)
+        {
+            SP_GetBookingServices bookingServices = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServices",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+
+                        bookingServices = new SP_GetBookingServices
+                        {
+                            BookingID = row["BookingID"].ToString(),
+                            ServiceID = row["ServiceID"].ToString(),
+                            ServiceName = row["Name"].ToString(),
+                            serviceDescripion = row["ProductDescription"].ToString(),
+                            Price = Convert.ToDouble(row["Price"]),
+                            type = row["ProductType(T/A/S)"].ToString()
+                        };
+                        
+                    }
+                    return bookingServices;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
     }
 }                  
