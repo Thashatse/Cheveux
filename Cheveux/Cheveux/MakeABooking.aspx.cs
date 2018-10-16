@@ -1008,6 +1008,8 @@ namespace Cheveux
                             btnAfternoon11.Text = slotList[10].Time.ToString("HH:mm");
                             availableTimes[11, 0] = slotList[10].SlotNo;
                             availableTimes[11, 1] = slotList[10].Time.ToString("HH:mm");
+                            noMorning = false;
+                            noAfter = false;
                         }
                         else if (rblSickLeave.SelectedItem.Text.Contains("Full Day") && bookedList.Count == 0)
                         {
@@ -1016,11 +1018,14 @@ namespace Cheveux
                             btnMorning1.Text = slotList[0].Time.ToString("HH:mm");
                             availableTimes[1, 0] = slotList[0].SlotNo;
                             availableTimes[1, 1] = slotList[0].Time.ToString("HH:mm");
+                            noMorning = false;
+                            noAfter = false;
                         }
                         else if (bookedList.Count > 0)
                         {
-                            //Tell them booked
-                            //Redirect View schedule
+                            noMorning = true;
+                            noAfter = false;
+                            lblMorningUnavailable.Text = "Stylist Booked";
                         }
                     }
                     else
@@ -1568,8 +1573,6 @@ namespace Cheveux
                         }
                         else
                         {
-                            noAfter = false;
-                            noMorning = false;
 
                             int checkslotIndex = slotIndex;
                             bool add = true;
@@ -1591,6 +1594,7 @@ namespace Cheveux
                             {
                                 if (times.Time > Convert.ToDateTime("12:00"))
                                 {
+                                    noAfter = false;
                                     if (afternoonButtonCount == 11)
                                     {
                                         btnAfternoon11.Visible = true;
@@ -1665,6 +1669,7 @@ namespace Cheveux
                                 }
                                 else
                                 {
+                                    noMorning = false;
                                     if (morningButtonCount == 1)
                                     {
                                         btnMorning1.Visible = true;
@@ -1743,27 +1748,30 @@ namespace Cheveux
                     }
 
                 }
-                if (noMorning == true)
-                {
-                    lblMorningUnavailable.Visible = true;
-                    lblMorningUnavailable.Font.Size = 18;
-                    lblMorningUnavailable.ForeColor = Color.Gray;
-                }
-                else
-                {
-                    lblMorningUnavailable.Visible = false;
-                }
 
-                if (noAfter == true)
-                {
-                    lblAfternoonUnavailable.Visible = true;
-                    lblAfternoonUnavailable.Font.Size = 18;
-                    lblAfternoonUnavailable.ForeColor = Color.Gray;
-                }
-                else
-                {
-                    lblAfternoonUnavailable.Visible = false;
-                }
+                
+                    if (noMorning == true)
+                    {
+                        lblMorningUnavailable.Visible = true;
+                        lblMorningUnavailable.Font.Size = 18;
+                        lblMorningUnavailable.ForeColor = Color.Gray;
+                    }
+                    else
+                    {
+                        lblMorningUnavailable.Visible = false;
+                    }
+
+                    if (noAfter == true)
+                    {
+                        lblAfternoonUnavailable.Visible = true;
+                        lblAfternoonUnavailable.Font.Size = 18;
+                        lblAfternoonUnavailable.ForeColor = Color.Gray;
+                    }
+                    else
+                    {
+                        lblAfternoonUnavailable.Visible = false;
+                    }
+                        
             }
             catch (Exception err)
             {
