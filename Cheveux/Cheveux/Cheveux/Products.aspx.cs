@@ -189,11 +189,18 @@ namespace Cheveux.Cheveux
                         txtName.Text = Accessory.Name.ToString();
                         txtProductDescription.Text = Accessory.ProductDescription.ToString();
                         txtPrice.Text= Accessory.Price.ToString();
-                        drpProductType.SelectedIndex = 0;
-                        drpProductType_Change(sender, e);
+
+                            drpProductType.SelectedIndex = 0;
+                            drpProductType.Visible = false;
+                            lbleditProdType.Text = "Accessory";
                         drpBrandList.SelectedValue = Accessory.BrandID;
+                            drpBrandList.Visible = false;
+                            lblEditProdBrand.Text = drpBrandList.SelectedItem.Text;
                         drpListSupplier.SelectedValue= Accessory.supplierID;
-                        txtcolour.Text = Accessory.Colour.ToString();
+                            drpListSupplier.Visible = false;
+                            lbleditProdSupp.Text = drpListSupplier.SelectedItem.Text;
+                            txtcolour.Visible = false;
+                            lblEditProdCol.Text = Accessory.Colour.ToString();
                         }
                     //display accessories
                     else if (Treatment != null)
@@ -201,11 +208,19 @@ namespace Cheveux.Cheveux
                         txtName.Text = Treatment.Name.ToString();
                         txtProductDescription.Text = Treatment.ProductDescription.ToString();
                         txtPrice.Text = Treatment.Price.ToString();
-                        drpProductType.SelectedIndex = 1;
-                        drpProductType_Change(sender, e);
+                            drpProductType.Visible = false;
+                            drpProductType.SelectedIndex = 1;
+                            lbleditProdType.Text = "Treatment";
+                            drpProductType_Change(sender, e);
                         drpBrandList.SelectedValue = Treatment.BrandID;
-                        drpListSupplier.SelectedValue = Treatment.supplierID;
-                        txtcolour.Text = Treatment.TreatmentType;
+                            drpBrandList.Visible = false;
+                            lblEditProdBrand.Text = drpBrandList.SelectedItem.Text;
+                            drpListSupplier.SelectedValue = Treatment.supplierID;
+                            drpListSupplier.SelectedValue = Treatment.supplierID;
+                            drpListSupplier.Visible = false;
+                            lbleditProdSupp.Text = drpListSupplier.SelectedItem.Text;
+                            txtcolour.Visible = false;
+                            lblEditProdCol.Text = Treatment.TreatmentType;
                         }
 
                     }
@@ -754,11 +769,12 @@ namespace Cheveux.Cheveux
                     if (btnAddProduct.Text != "Save")
                     {
                         result = handler.addAccessories(a, p);
+                        productID = newProduct.ProductID;
                     }
                     else if (btnAddProduct.Text == "Save")
                     {
                         //run updated product BLL method for accessory
-                        //result = handler.updateAccessories(a, p);
+                        result = handler.updateAccessories(a, p);
                     }
                 }
                 else if (drpProductType.SelectedIndex == 1)
@@ -787,14 +803,14 @@ namespace Cheveux.Cheveux
                     if (btnAddProduct.Text != "Save")
                     {
                         result = handler.addTreatments(t, p);
+                        productID = newProduct.ProductID;
                     }
                     else if (btnAddProduct.Text == "Save")
                     {
                         //run updated product BLL method fot treatment
-                        //result = handler.updateTreatment(t, p);
+                        result = handler.updateTreatments(t, p);
                     }
                 }
-                productID = newProduct.ProductID;
             }
             catch (Exception Err)
             {
