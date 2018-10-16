@@ -1,12 +1,8 @@
 alter PROCEDURE SP_UpdateAccessory
     @accessoryID nchar(10),
-    @colour varchar(50),
-	@qty int,
-	@BrandID nchar(10) ,
 	@name varchar(max),
 	@productDescription varchar(max),
 	@price money,
-	@productType char(1),
 	@SupplierID nchar(10)
 	
 AS
@@ -15,17 +11,13 @@ BEGIN
 		BEGIN TRANSACTION
 
 			UPDATE ACCESSORY
-			SET    Colour=@colour,
-				   Qty=@qty,
-				   BrandID=@BrandID,
-				SupplierID = @SupplierID
+			SET    SupplierID = @SupplierID
 			where AccessoryID = @accessoryID
 				   
 			UPDATE PRODUCT
 			SET [Name] = @name,
 				ProductDescription = @productDescription,
-				Price = @price,
-				[ProductType(T/A/S)] =@productType 
+				Price = @price
 			Where ProductID = @accessoryID
 
 		COMMIT TRANSACTION 
