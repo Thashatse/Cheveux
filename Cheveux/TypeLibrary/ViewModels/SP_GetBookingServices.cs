@@ -17,5 +17,6 @@ namespace TypeLibrary.ViewModels
         public double Price { get; set; }
 
         public string serviceDescripion { get; set; }
+        public string type { get; set; }
     }
 }
