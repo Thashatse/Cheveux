@@ -144,6 +144,16 @@ namespace BLL
         {
             return db.addProduct(addProduct);
         }
+
+        public bool updateAccessories(ACCESSORY a, PRODUCT p)
+        {
+            return db.updateAccessories(a, p);
+        }
+
+        public bool updateTreatments(TREATMENT t, PRODUCT p)
+        {
+            return db.updateTreatments(t, p);
+        }
         #endregion
 
         #region ProductTypes
