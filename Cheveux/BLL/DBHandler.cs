@@ -1001,5 +1001,9 @@ namespace BLL
         {
             return db.returnAvailServices(num);
         }
+        public SP_GetBookingServices getLeaveReason(string BookingID)
+        {
+            return db.getLeaveReason(BookingID);
+        }
     }
 }
