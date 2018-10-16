@@ -20,6 +20,7 @@ namespace Cheveux
         List<SP_GetEmpNames> list = null;
         SP_ViewEmployee viewEmp = null;
         List<SP_GetBookingServices> bServices = null;
+        SP_GetBookingServices leaveServices = null;
         SP_GetMultipleServicesTime time = null;
         string today = DateTime.Now.ToString("yyyy-MM-dd");
         
@@ -94,6 +95,7 @@ namespace Cheveux
             }
             else if (cookie["UT"] == "R")
             {
+                Header.Text = "View Schedules";
                 phLogin.Visible = false;
                 phMain.Visible = true;
                 if (!IsPostBack)
@@ -120,6 +122,8 @@ namespace Cheveux
             }
             else if (cookie["UT"] == "S")
             {
+                Header.Text = "View Schedule";
+
                 phLogin.Visible = false;
                 phMain.Visible = true;
 
@@ -166,6 +170,7 @@ namespace Cheveux
                 }
                 else if(action == "ViewAllSchedules")
                 {
+                    Header.Text = "View Schedules";
                     if (!IsPostBack)
                     {
                         //load stylists names into 'names' dropdownlist
@@ -186,6 +191,39 @@ namespace Cheveux
                            function.logAnError(Err.ToString());
                         }
                     }
+                    DropDownChanges(cookie["UT"].ToString());
+                }
+                else if (action == "LeaveSchedule")
+                {
+                    Header.Text = "Leave Schedule";
+                    if (!IsPostBack)
+                    {
+                        //load stylists names into 'names' dropdownlist
+                        try
+                        {
+                            list = handler.BLL_GetEmpNames();
+                            foreach (SP_GetEmpNames emps in list)
+                            {
+                                drpStylistNames.DataSource = list;
+                                drpStylistNames.DataTextField = "Name";
+                                drpStylistNames.DataValueField = "EmployeeID";
+                                drpStylistNames.DataBind();
+                            }
+                        }
+                        catch (Exception Err)
+                        {
+                            drpStylistNames.Items.Add("Stylist names unavailable");
+                            function.logAnError(Err.ToString());
+                        }
+                    }
+
+                    if (!IsPostBack)
+                    {
+                        drpViewAppt.Items.Clear();
+                        drpViewAppt.Items.Add(new ListItem("Upcoming Leave", "0"));
+                        drpViewAppt.Items.Add(new ListItem("Past Leave", "1"));
+                    }
+
                     DropDownChanges(cookie["UT"].ToString());
                 }
             }
@@ -260,7 +298,7 @@ namespace Cheveux
         {
             string action = Request.QueryString["Action"];
 
-            if (userType == "R" || (userType =="M" && action== "ViewAllSchedules"))
+            if (userType == "R" || (userType =="M" && (action== "ViewAllSchedules" || action== "LeaveSchedule")))
             {
                 if (drpViewAppt.SelectedValue == "0")
                 {
@@ -771,7 +809,7 @@ namespace Cheveux
                     }
                 }
             }
-            else if(userType == "M" && action == "ViewStylistSchedule")
+            else if(userType == "M" && (action == "ViewStylistSchedule"||action == "LeaveSchedule"))
             {
                 string stylistID = Request.QueryString["empID"];
                 
@@ -961,1130 +999,2136 @@ namespace Cheveux
         }
 
         #region Stylists bookings
-
         #region Past
         public void getStylistPastBookings(string empID, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
-                bList = handler.getStylistPastBookings(empID,sortBy,sortDir);
-
-                ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getStylistPastBookings(empID, sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    ////phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
-                    rowCount++;
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&BookingType=Past" +
+                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting past bookings for stylist.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database."
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting past bookings for stylist.";
-                errorMessage.Text = "It seems there is a problem communicating with the database."
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getStylistPastBookings(empID, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Stylist Leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule." + err.ToString());
+                }
             }
+
         }
         public void getStylistPastBookingsDateRange(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
-                bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate,sortBy,sortDir);
-
-                ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate, sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    ////phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
-                    rowCount++;
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&BookingType=Past" +
+                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                        rowCount++;
+                    }
+                }
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting past bookings within required date range for stylist.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
                 }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting past bookings within required date range for stylist.";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Stylist Leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule." + err.ToString());
+                }
             }
-            btnPrint.Visible = true;
+
         }
         public void getStylistPastBksForDate(string empID, DateTime day, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
-                bList = handler.getStylistPastBksForDate(empID, day,sortBy,sortDir);
-
-                ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getStylistPastBksForDate(empID, day, sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    ////phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
 
-                    rowCount++;
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&BookingType=Past" +
+                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting past bookings for stylist for required day.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database."
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting past bookings for stylist for required day.";
-                errorMessage.Text = "It seems there is a problem communicating with the database."
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getStylistPastBksForDate(empID, day, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Stylist Leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule." + err.ToString());
+                }
             }
+
         }
         #endregion
 
         #region Upcoming
         public void getStylistUpcomingBookings(string empID, string sortBy, string sortDir)
         {
-            cookie = Request.Cookies["CheveuxUserID"];
-
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+
+            if(cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
-                ////phTable.Visible=true;
-
-                bList = handler.getStylistUpcomingBookings(empID,sortBy,sortDir);
-
-                tblSchedule.Visible = true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                if (cookie["UT"] != "S")
+                try
                 {
-                    TableCell edit = new TableCell();
-                    edit.Width = 200;
-                    tblSchedule.Rows[0].Cells.Add(edit);
-                }
+                    ////phTable.Visible=true;
 
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
+                    bList = handler.getStylistUpcomingBookings(empID, sortBy, sortDir);
 
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
-                {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    tblSchedule.Visible = true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
 
                     if (cookie["UT"] != "S")
                     {
-                        //edit
-                        TableCell editButton = new TableCell();
-                        editButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                        "&Action=Edit'>Edit Booking</a></button>";
-                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                        TableCell edit = new TableCell();
+                        edit.Width = 200;
+                        tblSchedule.Rows[0].Cells.Add(edit);
                     }
 
-                    //view booking
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
-                    
-                    rowCount++;
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        if (cookie["UT"] != "S")
+                        {
+                            //edit
+                            TableCell editButton = new TableCell();
+                            editButton.Text =
+                                "<button type = 'button' class='btn btn-default'>" +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                            "&Action=Edit'>Edit Booking</a></button>";
+                            tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                        }
+
+                        //view booking
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting upcoming bookings for stylist.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting upcoming bookings for stylist.";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getStylistUpcomingBookings(empID, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30 ;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch(Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+                        
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch(Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Stylist Leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule."+err.ToString());
+                }
             }
+            
         }
 
         public void getStylistUpcomingBksForDate(string id, DateTime bookingDate, string sortBy, string sortDir)
         {
-            cookie = Request.Cookies["CheveuxUserID"];
-
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
-                bList = handler.getStylistUpcomingBkForDate(id, bookingDate,sortBy,sortDir);
-
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                //create row for the table 
-                TableRow row = new TableRow();
-                row.Height = 50;
-
-                //add row to the table
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                if (cookie["UT"] != "S")
+                try
                 {
-                    TableCell edit = new TableCell();
-                    edit.Width = 200;
-                    tblSchedule.Rows[0].Cells.Add(edit);
-                }
+                    bList = handler.getStylistUpcomingBkForDate(id, bookingDate, sortBy, sortDir);
 
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
-                {
+                    //create row for the table 
+                    TableRow row = new TableRow();
+                    row.Height = 50;
 
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    //add row to the table
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
 
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
 
                     if (cookie["UT"] != "S")
                     {
-                        //edit
-                        TableCell editButton = new TableCell();
-                        editButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                        "&Action=Edit'>Edit Booking</a></button>";
-                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                        TableCell edit = new TableCell();
+                        edit.Width = 200;
+                        tblSchedule.Rows[0].Cells.Add(edit);
                     }
 
-                    //view booking
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
 
-                    rowCount++;
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+
+                        if (cookie["UT"] != "S")
+                        {
+                            //edit
+                            TableCell editButton = new TableCell();
+                            editButton.Text =
+                                "<button type = 'button' class='btn btn-default'>" +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                            "&Action=Edit'>Edit Booking</a></button>";
+                            tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                        }
+
+                        //view booking
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception E)
+                {
+                    //Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting stylists upcoming bookings for day.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database."
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(E.ToString());
+                }
             }
-            catch (Exception E)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                //Response.Write("<script>alert('Trouble communicating with the database.Report to admin and try again later.');location.reload();</script>");
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting stylists upcoming bookings for day.";
-                errorMessage.Text = "It seems there is a problem communicating with the database."
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(E.ToString());
+                try
+                {
+                    bList = handler.getStylistUpcomingBkForDate(id, bookingDate, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Upcoming stylist leave for selected date currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule.(allUpcomingBookingsFrDate) Error:" + err.ToString());
+                }
             }
+ 
         }
 
         public void getStylistUpcomingBookingsDR(string empID, DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
-            cookie = Request.Cookies["CheveuxUserID"];
-
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
-                bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate,sortBy,sortDir);
-
-                ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-
-                if (cookie["UT"] != "S")
+                try
                 {
-                    TableCell edit = new TableCell();
-                    edit.Width = 200;
-                    tblSchedule.Rows[0].Cells.Add(edit);
-                }
+                    bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate, sortBy, sortDir);
 
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
+                    ////phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
-                {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
 
                     if (cookie["UT"] != "S")
                     {
-                        //edit
-                        TableCell editButton = new TableCell();
-                        editButton.Text =
-                            "<button type = 'button' class='btn btn-default'>" +
-                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                        "&Action=Edit'>Edit Booking</a></button>";
-                        tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                        TableCell edit = new TableCell();
+                        edit.Width = 200;
+                        tblSchedule.Rows[0].Cells.Add(edit);
                     }
 
-                    //view booking
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
 
-                    rowCount++;
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        if (cookie["UT"] != "S")
+                        {
+                            //edit
+                            TableCell editButton = new TableCell();
+                            editButton.Text =
+                                "<button type = 'button' class='btn btn-default'>" +
+                            "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                            "&Action=Edit'>Edit Booking</a></button>";
+                            tblSchedule.Rows[rowCount].Cells.Add(editButton);
+                        }
+
+                        //view booking
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting upcoming bookings for stylist for required date range.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting upcoming bookings for stylist for required date range.";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                
+                try
+                {
+                    bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Upcoming stylist leave for selected date currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule.(allUpcomingBookingsFrDate) Error:" + err.ToString());
+                }
             }
+
         }
         #endregion
 
         #endregion
 
-        
+
         #region All Stylists Bookings 
 
+        //done
         #region Upcoming
         public void getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
-                bList = handler.getAllStylistsUpcomingBksForDate(bookingDate,sortBy,sortDir);
-
-                ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Width = 280;
-                emp.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(emp);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getAllStylistsUpcomingBksForDate(bookingDate, sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    ////phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell emp = new TableCell();
+                    emp.Text = "Employee";
+                    emp.Width = 280;
+                    emp.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(emp);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        //edit
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        //view booking
+                        buttonCell = new TableCell();
+                        buttonCell.Text =
                         "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
 
-                    //view booking
-                    buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
-
-                    rowCount++;
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting upcoming bookings for required day.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if(cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting upcoming bookings for required day.";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getAllStylistsUpcomingBksForDate(bookingDate, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Upcoming stylist leave for selected date currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule.(allUpcomingBookingsFrDate) Error:" + err.ToString());
+                }
             }
+            
         }
 
         public void getAllStylistsUpcomingBksDR(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
-                bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate, sortBy, sortDir);
-
-                ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Width = 280;
-                emp.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(emp);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate, sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    ////phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell emp = new TableCell();
+                    emp.Text = "Employee";
+                    emp.Width = 280;
+                    emp.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(emp);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        //edit
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                            "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        //view booking
+                        buttonCell = new TableCell();
+                        buttonCell.Text =
                         "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
-
-                    //view booking
-                    buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
-                    rowCount++;
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting all stylists upcoming bookings for date range.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting all stylists upcoming bookings for date range.";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Upcoming stylist leave for date range currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule.(allUpcomingBookingsFrDR) Error:" + err.ToString());
+                }
             }
+            
         }
 
         public void getAllStylistsUpcomingBookings(string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
-                bList = handler.getAllStylistsUpcomingBookings(sortBy, sortDir);
-
-                ////phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y)";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Width = 280;
-                emp.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(emp);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getAllStylistsUpcomingBookings(sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    ////phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    //edit
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                        "<button type='button' class='btn btn-default'>" +
-                    "<a href='../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&Action=Edit'>Edit Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
 
-                    //view booking
-                    buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
 
-                    rowCount++;
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell emp = new TableCell();
+                    emp.Text = "Employee";
+                    emp.Width = 280;
+                    emp.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(emp);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        //edit
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                            "<button type='button' class='btn btn-default'>" +
+                        "<a href='../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&Action=Edit'>Edit Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        //view booking
+                        buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting all stylists upcoming bookings.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting all stylists upcoming bookings.";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getAllStylistsUpcomingBookings(sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+                        
+                    }
+                    btnPrint.Visible = true;
+
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "All upcoming stylist leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule.(allUpcomingBookings) Error:" + err.ToString());
+                }
             }
+            
         }
         #endregion
+
 
         #region Past
         public void getAllStylistsPastBookings(string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
-                bList = handler.getAllStylistsPastBookings(sortBy,sortDir);
-
-                //phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell date = new TableCell();
-                date.Text = "Date<br/>(d/M/Y) ";
-                date.Width = 300;
-                date.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(date);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Width = 280;
-                emp.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(emp);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getAllStylistsPastBookings(sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    //phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
-                    rowCount++;
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y) ";
+                    date.Width = 300;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell emp = new TableCell();
+                    emp.Text = "Employee";
+                    emp.Width = 280;
+                    emp.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(emp);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&BookingType=Past" +
+                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting all stylists past bookings";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting all stylists past bookings";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getAllStylistsPastBookings(sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Stylist Leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule." + err.ToString());
+                }
             }
+
         }
-        public void getAllStylistsPastBksForDate(DateTime date, string sortBy, string sortDir)
+        public void getAllStylistsPastBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
-                bList = handler.getAllStylistsPastBksForDate(date, sortBy, sortDir);
-
-                //phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell dateC = new TableCell();
-                dateC.Text = "Date<br/>(d/M/Y)";
-                dateC.Width = 240;
-                dateC.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(dateC);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Width = 280;
-                emp.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(emp);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getAllStylistsPastBksForDate(bookingDate, sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    //phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    TableCell dateC = new TableCell();
+                    dateC.Text = "Date<br/>(d/M/Y)";
+                    dateC.Width = 240;
+                    dateC.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(dateC);
 
-                    rowCount++;
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell emp = new TableCell();
+                    emp.Text = "Employee";
+                    emp.Width = 280;
+                    emp.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(emp);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&BookingType=Past" +
+                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting all past bookings for required day.";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting all past bookings for required day.";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getAllStylistsPastBksForDate(bookingDate, sortBy, sortDir);
+
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Stylist Leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule." + err.ToString());
+                }
             }
+
         }
         public void getAllStylistsPastBookingsDateRange(DateTime startDate, DateTime endDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
-            try
+            cookie = Request.Cookies["CheveuxUserID"];
+            string action = Request.QueryString["Action"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
-                bList = handler.getAllStylistsPastBookingsDateRange(startDate,endDate, sortBy, sortDir);
-
-                //phTable.Visible=true;
-                tblSchedule.CssClass = "table table-light table-hover";
-
-                TableRow row = new TableRow();
-                tblSchedule.Rows.Add(row);
-
-                TableCell dateC = new TableCell();
-                dateC.Text = "Date<br/>(d/M/Y)";
-                dateC.Width = 240;
-                dateC.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(dateC);
-
-                TableCell time = new TableCell();
-                time.Text = "Start Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                time = new TableCell();
-                time.Text = "End Time";
-                time.Width = 90;
-                time.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(time);
-
-                TableCell emp = new TableCell();
-                emp.Text = "Employee";
-                emp.Width = 280;
-                emp.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(emp);
-
-                TableCell customer = new TableCell();
-                customer.Text = "Customer";
-                customer.Width = 300;
-                customer.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(customer);
-
-                TableCell svName = new TableCell();
-                svName.Text = "Service";
-                svName.Width = 300;
-                svName.Font.Bold = true;
-                tblSchedule.Rows[0].Cells.Add(svName);
-
-                TableCell empty = new TableCell();
-                empty.Width = 150;
-                tblSchedule.Rows[0].Cells.Add(empty);
-
-                int rowCount = 1;
-                foreach (SP_GetStylistBookings b in bList)
+                try
                 {
-                    TableRow r = new TableRow();
-                    r.Height = 50;
-                    tblSchedule.Rows.Add(r);
+                    bList = handler.getAllStylistsPastBookingsDateRange(startDate, endDate, sortBy, sortDir);
 
-                    TableCell dateCell = new TableCell();
-                    dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
-                    tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+                    //phTable.Visible=true;
+                    tblSchedule.CssClass = "table table-light table-hover";
 
-                    getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+                    TableRow row = new TableRow();
+                    tblSchedule.Rows.Add(row);
 
-                    TableCell buttonCell = new TableCell();
-                    buttonCell.Text =
-                    "<button type = 'button' class='btn btn-default'>" +
-                    "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
-                    "&BookingType=Past" +
-                    "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
-                    tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+                    TableCell dateC = new TableCell();
+                    dateC.Text = "Date<br/>(d/M/Y)";
+                    dateC.Width = 240;
+                    dateC.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(dateC);
 
-                    rowCount++;
+                    TableCell time = new TableCell();
+                    time.Text = "Start Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    time = new TableCell();
+                    time.Text = "End Time";
+                    time.Width = 90;
+                    time.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(time);
+
+                    TableCell emp = new TableCell();
+                    emp.Text = "Employee";
+                    emp.Width = 280;
+                    emp.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(emp);
+
+                    TableCell customer = new TableCell();
+                    customer.Text = "Customer";
+                    customer.Width = 300;
+                    customer.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(customer);
+
+                    TableCell svName = new TableCell();
+                    svName.Text = "Service";
+                    svName.Width = 300;
+                    svName.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(svName);
+
+                    TableCell empty = new TableCell();
+                    empty.Width = 150;
+                    tblSchedule.Rows[0].Cells.Add(empty);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 50;
+                        tblSchedule.Rows.Add(r);
+
+                        TableCell dateCell = new TableCell();
+                        dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                        tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                        getTimeCustomerServices(b.BookingID, b.PrimaryID, rowCount, b);
+
+                        TableCell buttonCell = new TableCell();
+                        buttonCell.Text =
+                        "<button type = 'button' class='btn btn-default'>" +
+                        "<a href = '../ViewBooking.aspx?BookingID=" + b.BookingID.ToString().Replace(" ", string.Empty) +
+                        "&BookingType=Past" +
+                        "&PreviousPage=Bookings.aspx'>View Booking</a></button>";
+                        tblSchedule.Rows[rowCount].Cells.Add(buttonCell);
+
+                        rowCount++;
+                    }
+                    btnPrint.Visible = true;
                 }
-                btnPrint.Visible = true;
+                catch (Exception Err)
+                {
+                    phScheduleErr.Visible = true;
+                    errorHeader.Text = "Error getting all past bookings for date range";
+                    errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
+                                        + "Please report problem to admin or try again later.";
+                    function.logAnError(Err.ToString());
+                }
             }
-            catch (Exception Err)
+            else if (cookie["UT"] == "M" && action == "LeaveSchedule")
             {
-                phScheduleErr.Visible = true;
-                errorHeader.Text = "Error getting all past bookings for date range";
-                errorMessage.Text = "It seems there is a problem communicating with the database.<br/>"
-                                    + "Please report problem to admin or try again later.";
-                function.logAnError(Err.ToString());
+                try
+                {
+                    bList = handler.getAllStylistsPastBookingsDateRange(startDate, endDate, sortBy, sortDir);
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+
+                    TableCell date = new TableCell();
+                    date.Text = "Date<br/>(d/M/Y)";
+                    date.Width = 200;
+                    date.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(date);
+
+                    TableCell reason = new TableCell();
+                    reason.Text = "Reason";
+                    reason.Width = 200;
+                    reason.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(reason);
+
+                    TableCell desc = new TableCell();
+                    desc.Text = "Description";
+                    desc.Width = 200;
+                    desc.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(desc);
+
+                    int rowCount = 1;
+                    foreach (SP_GetStylistBookings b in bList)
+                    {
+                        TableRow r = new TableRow();
+                        r.Height = 30;
+                        tblSchedule.Rows.Add(r);
+
+                        try
+                        {
+                            leaveServices = handler.getLeaveReason(b.BookingID.ToString());
+
+                            if (leaveServices.type == "U")
+                            {
+                                TableCell dateCell = new TableCell();
+                                dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
+                                tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell servicesCell = new TableCell();
+                                servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
+                                                        + leaveServices.ServiceName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+
+                                servicesCell = new TableCell();
+                                servicesCell.Text = leaveServices.serviceDescripion.ToString();
+                                tblSchedule.Rows[rowCount].Cells.Add(servicesCell);
+                                rowCount++;
+                            }
+                            else
+                            {
+                                tblSchedule.Rows.RemoveAt(rowCount);
+                            }
+                        }
+                        catch (Exception err)
+                        {
+                            function.logAnError("Couldn't get the leave reason and description. Error: " + err.ToString());
+                        }
+
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception err)
+                {
+                    tblSchedule.Rows.Clear();
+                    TableRow newRow = new TableRow();
+                    tblSchedule.Rows.Add(newRow);
+                    TableCell newCell = new TableCell();
+                    newCell.Text = "Stylist Leave currently unavailable.Please try again later.";
+                    tblSchedule.Rows[0].Cells.Add(newCell);
+                    function.logAnError("Error retreiving leave schedule." + err.ToString());
+                }
             }
+
         }
         #endregion
 
@@ -2092,134 +3136,139 @@ namespace Cheveux
 
         public void getTimeCustomerServices(string aBookingID, string primaryBookingID, int i, SP_GetStylistBookings a)
         {
-            #region Time
-
-            TableCell start = new TableCell();
-            start.Width = 200;
-            TableCell end = new TableCell();
-            end.Width = 200;
-
-            try
+            string action = Request.QueryString["Action"];
+            cookie = Request.Cookies["CheveuxUserID"];
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
+                #region Time
+
+                TableCell start = new TableCell();
+                start.Width = 200;
+                TableCell end = new TableCell();
+                end.Width = 200;
+
+                try
+                {
+                    try
+                    {
+                        bServices = handler.getBookingServices(a.BookingID.ToString());
+                    }
+                    catch (Exception serviceErr)
+                    {
+                        function.logAnError("Error getting services [appointments.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
+                    }
+
+                    if (bServices.Count > 0)
+                    {
+                        time = handler.getMultipleServicesTime(primaryBookingID);
+
+                        start.Text = time.StartTime.ToString("HH:mm");
+                        tblSchedule.Rows[i].Cells.Add(start);
+
+                        end.Text = time.EndTime.ToString("HH:mm");
+                        tblSchedule.Rows[i].Cells.Add(end);
+                    }
+                    btnPrint.Visible = true;
+                }
+                catch (Exception Err)
+                {
+                    //If time isn't retrieved (Error)
+                    start.Text = "---";
+                    tblSchedule.Rows[i].Cells.Add(start);
+                    end.Text = "---";
+                    tblSchedule.Rows[i].Cells.Add(end);
+                    function.logAnError("Couldn't get the time (check db for 2nd bkID) [appointments.aspx "
+                        + "{getTimeCustomerServices?getTime}] error:"
+                                                + Err.ToString());
+                }
+                #endregion
+                #region Stylist
+                if (empSelectionType.SelectedValue == "0")
+                {
+                    TableCell empCell = new TableCell();
+                    try
+                    {
+                        empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + a.StylistName.ToString() + "</a>";
+                        tblSchedule.Rows[i].Cells.Add(empCell);
+                    }
+                    catch (Exception Err)
+                    {
+                        empCell.Text = "-------";
+                        tblSchedule.Rows[i].Cells.Add(empCell);
+                        function.logAnError("Couldnt get stylist name[appointments.aspx {getT/c/s method}]err:" + Err.ToString());
+                    }
+                }
+                #endregion
+                #region Customer
+                TableCell c = new TableCell();
+                try
+                {
+                    c.Width = 300;
+                    c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.CustomerID.ToString().Replace(" ", string.Empty) +
+                                    "'>" + a.FullName.ToString() + "</a>";
+                    tblSchedule.Rows[i].Cells.Add(c);
+                }
+                catch (Exception Err)
+                {
+                    c.Width = 300;
+                    c.Text = "----------";
+                    tblSchedule.Rows[i].Cells.Add(c);
+                    function.logAnError("Couldnt get customer name[appointments.aspx {getT/c/s method}]err:" + Err.ToString());
+                }
+                #endregion
+                #region Services
+
+                TableCell services = new TableCell();
+                services.Width = 300;
+
                 try
                 {
                     bServices = handler.getBookingServices(a.BookingID.ToString());
-                }
-                catch (Exception serviceErr)
-                {
-                    function.logAnError("Error getting services [appointments.aspx {tryCatch within getTime  method }]err:" + serviceErr.ToString());
-                }
-
-                if (bServices.Count > 0)
-                {
-                    time = handler.getMultipleServicesTime(primaryBookingID);
-
-                    start.Text = time.StartTime.ToString("HH:mm");
-                    tblSchedule.Rows[i].Cells.Add(start);
-
-                    end.Text = time.EndTime.ToString("HH:mm");
-                    tblSchedule.Rows[i].Cells.Add(end);
-                }
-                btnPrint.Visible = true;
-            }
-            catch (Exception Err)
-            {
-                //If time isn't retrieved (Error)
-                start.Text = "---";
-                tblSchedule.Rows[i].Cells.Add(start);
-                end.Text = "---";
-                tblSchedule.Rows[i].Cells.Add(end);
-                function.logAnError("Couldn't get the time (check db for 2nd bkID) [appointments.aspx "
-                    +"{getTimeCustomerServices?getTime}] error:"
-                                            + Err.ToString());
-            }
-            #endregion
-            #region Stylist
-            if (empSelectionType.SelectedValue == "0")
-            {
-                TableCell empCell = new TableCell();
-                try
-                {
-                    empCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.StylistID.ToString().Replace(" ", string.Empty) +
-                                    "'>" + a.StylistName.ToString() + "</a>";
-                    tblSchedule.Rows[i].Cells.Add(empCell);
-                }
-                catch(Exception Err)
-                {
-                    empCell.Text = "-------";
-                    tblSchedule.Rows[i].Cells.Add(empCell);
-                    function.logAnError("Couldnt get stylist name[appointments.aspx {getT/c/s method}]err:"+Err.ToString());
-                }
-            }
-            #endregion
-            #region Customer
-            TableCell c = new TableCell();
-            try
-            {
-                c.Width = 300;
-                c.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + a.CustomerID.ToString().Replace(" ", string.Empty) +
-                                "'>" + a.FullName.ToString() + "</a>";
-                tblSchedule.Rows[i].Cells.Add(c);
-            }
-            catch(Exception Err)
-            {
-                c.Width = 300;
-                c.Text = "----------";
-                tblSchedule.Rows[i].Cells.Add(c);
-                function.logAnError("Couldnt get customer name[appointments.aspx {getT/c/s method}]err:" + Err.ToString());
-            }
-            #endregion
-            #region Services
-
-            TableCell services = new TableCell();
-            services.Width = 300;
-
-            try
-            {
-                bServices = handler.getBookingServices(a.BookingID.ToString());
-                if (bServices.Count == 1)
-                {
-                    services.Text = "<a href='../cheveux/services.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
-                    + bServices[0].ServiceName.ToString() + "</a>";
-                }
-                else if (bServices.Count > 1)
-                {
-                    string dropDown = "<li style='list-style: none;' class='dropdown'>" +
-                        "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
-                    if (bServices.Count == 2)
+                    if (bServices.Count == 1)
                     {
-                        dropDown += bServices[0].ServiceName.ToString() +
-                        ", " + bServices[1].ServiceName.ToString();
+                        services.Text = "<a href='../cheveux/services.aspx?ProductID=" + bServices[0].ServiceID.Replace(" ", string.Empty) + "'>"
+                        + bServices[0].ServiceName.ToString() + "</a>";
                     }
-                    else if (bServices.Count > 2)
+                    else if (bServices.Count > 1)
                     {
-                        dropDown += " Multiple ";
-                    }
-                    dropDown += "<span class='caret'></span></a>" +
-                                    "<ul class='dropdown-menu bg-dark text-white'>";
-                    foreach (SP_GetBookingServices service in bServices)
-                    {
-                        dropDown += "<li>&nbsp;<a href='../cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
-                            " " + service.ServiceName.ToString() + " </a>&nbsp;</li>";
-                    }
-                    dropDown += "</ul></li>";
+                        string dropDown = "<li style='list-style: none;' class='dropdown'>" +
+                            "<a class='dropdown-toggle' data-toggle='dropdown' href='#'>";
+                        if (bServices.Count == 2)
+                        {
+                            dropDown += bServices[0].ServiceName.ToString() +
+                            ", " + bServices[1].ServiceName.ToString();
+                        }
+                        else if (bServices.Count > 2)
+                        {
+                            dropDown += " Multiple ";
+                        }
+                        dropDown += "<span class='caret'></span></a>" +
+                                        "<ul class='dropdown-menu bg-dark text-white'>";
+                        foreach (SP_GetBookingServices service in bServices)
+                        {
+                            dropDown += "<li>&nbsp;<a href='../cheveux/services.aspx?ProductID=" + service.ServiceID.Replace(" ", string.Empty) + "'>" +
+                                " " + service.ServiceName.ToString() + " </a>&nbsp;</li>";
+                        }
+                        dropDown += "</ul></li>";
 
-                    services.Text = dropDown;
+                        services.Text = dropDown;
+                    }
+                    tblSchedule.Rows[i].Cells.Add(services);
+                    btnPrint.Visible = true;
                 }
-                tblSchedule.Rows[i].Cells.Add(services);
-                btnPrint.Visible = true;
-            }
-            catch (Exception Err)
-            {
-                //if theres an error or cant retrieve the services from the database 
-                services.Text = "Unable to retreive services";
-                tblSchedule.Rows[i].Cells.Add(services);
-                function.logAnError("Couldn't get the services [appointments.aspx "
-                    +"{getTimeCustomerServices?getServices} ] error:" + Err.ToString());
-            }
+                catch (Exception Err)
+                {
+                    //if theres an error or cant retrieve the services from the database 
+                    services.Text = "Unable to retreive services";
+                    tblSchedule.Rows[i].Cells.Add(services);
+                    function.logAnError("Couldn't get the services [appointments.aspx "
+                        + "{getTimeCustomerServices?getServices} ] error:" + Err.ToString());
+                }
 
 
-            #endregion
+                #endregion
+            }
         }
 
         #region Calendars

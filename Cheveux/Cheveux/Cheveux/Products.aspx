@@ -74,14 +74,18 @@
                                             <asp:TableCell Text="Supplier:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                             <asp:TableCell>
                                              <asp:DropDownList runat="server" ID="drpListSupplier" CssClass="btn btn-primary dropdown-toggle" AutoPostBack="true">
+                                                 
                                                 </asp:DropDownList>
+                                                <asp:Label runat="server" id="lbleditProdSupp"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
                                             <asp:TableCell Text="Product Type:" Width="150px" VerticalAlign="Top"></asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:DropDownList runat="server" ID="drpProductType" CssClass="btn btn-primary dropdown-toggle" AutoPostBack="true" OnSelectedIndexChanged="drpProductType_Change">
+                                                 
                                                 </asp:DropDownList>
+                                                <asp:Label runat="server" id="lbleditProdType"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
@@ -134,12 +138,14 @@
                                             <asp:TableCell>
                                                 <asp:DropDownList runat="server" CssClass="btn btn-primary dropdown-toggle" ID="drpBrandList" AutoPostBack="true">
                                                 </asp:DropDownList>
+                                                <asp:Label runat="server" id="lblEditProdBrand"></asp:Label>
                                             </asp:TableCell>
                                         </asp:TableRow>
                                         <asp:TableRow>
                                             <asp:TableCell Width="150px" runat="server" ID="productLabel" Text="Colour"></asp:TableCell>
                                             <asp:TableCell>
                                                 <asp:TextBox runat="server" ID="txtcolour"></asp:TextBox>
+                                                <asp:Label runat="server" ID="lblEditProdCol"></asp:Label>
                                             </asp:TableCell>
 </asp:TableRow>
 

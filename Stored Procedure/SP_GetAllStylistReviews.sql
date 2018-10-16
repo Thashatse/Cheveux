@@ -39,7 +39,7 @@ BEGIN
 		   where customer.UserID=r.CustomerID and customer.UserID=r.CustomerID)as[CustomerName]
 
 
-	FROM REVIEW r
+	FROM [CHEVEUX].[dbo].REVIEW r
 	WHERE r.primaryBookingID is null
 	order by r.[Date] desc
 	

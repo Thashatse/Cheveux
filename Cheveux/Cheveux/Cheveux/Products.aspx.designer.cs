@@ -139,6 +139,15 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.DropDownList drpListSupplier;
         
         /// <summary>
+        /// lbleditProdSupp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbleditProdSupp;
+        
+        /// <summary>
         /// drpProductType control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList drpProductType;
+        
+        /// <summary>
+        /// lbleditProdType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbleditProdType;
         
         /// <summary>
         /// txtName control.
@@ -211,6 +229,15 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.DropDownList drpBrandList;
         
         /// <summary>
+        /// lblEditProdBrand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEditProdBrand;
+        
+        /// <summary>
         /// productLabel control.
         /// </summary>
         /// <remarks>
@@ -227,6 +254,15 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtcolour;
+        
+        /// <summary>
+        /// lblEditProdCol control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEditProdCol;
         
         /// <summary>
         /// RequiredFieldValidatortxtcolour control.

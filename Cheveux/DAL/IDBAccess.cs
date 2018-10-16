@@ -104,6 +104,10 @@ namespace DAL
         bool addProduct(PRODUCT addProduct);
         bool addAccessories(ACCESSORY a, PRODUCT p);
         bool addTreatments(TREATMENT t, PRODUCT p);
+
+        bool updateAccessories(ACCESSORY a, PRODUCT p);
+
+        bool updateTreatments(TREATMENT t, PRODUCT p);
         #endregion
 
         #region ProductTypes
@@ -219,7 +223,22 @@ namespace DAL
         List<productSalesReport> getCustomerSalesValueCash(DateTime startDate, DateTime endDate);
         List<productSalesReport> getCustomerSalesValueAll(DateTime startDate, DateTime endDate);
 
+        List<productSalesReport> getCustomerProductSalesVolumeAll(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerProductSalesVolumeCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerProductSalesVolumeCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerProductSalesValueCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerProductSalesValueCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerProductSalesValueAll(DateTime startDate, DateTime endDate);
+
+        List<productSalesReport> getCustomerServiceSalesVolumeAll(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerServiceSalesVolumeCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerServiceSalesVolumeCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerServiceSalesValueCredit(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerServiceSalesValueCash(DateTime startDate, DateTime endDate);
+        List<productSalesReport> getCustomerServiceSalesValueAll(DateTime startDate, DateTime endDate);
+
         List<productSalesReport> getSalesGauge(string ProductID);
+
         List<SP_TotalBksMissedByCustomers> returnTotalbksMissedbyCustomers(DateTime startDate, DateTime endDate);
         List<SP_GetReviews> mostPopularStylist(DateTime startDate, DateTime endDate);
         List<SP_GetReviews> customerSatistfaction(DateTime startDate, DateTime endDate);
@@ -275,5 +294,6 @@ namespace DAL
         SP_ReturnBooking returnNextBooking(string startTime,string bookingID,string stylistID,DateTime date);
         SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date);
         List<SP_ReturnAvailServices> returnAvailServices(int num);
+        SP_GetBookingServices getLeaveReason(string BookingID);
     }
 }

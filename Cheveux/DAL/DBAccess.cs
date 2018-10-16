@@ -1590,6 +1590,49 @@ namespace DAL
             }
 
         }
+
+        public bool updateAccessories(ACCESSORY a, PRODUCT p)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+                     new SqlParameter("@productID", a.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@SupplierID", a.supplierID.ToString())
+                    };
+                return DBHelper.NonQuery("SP_UpdateTreatment", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
+
+        //addTreatments
+        public bool updateTreatments(TREATMENT t, PRODUCT p)
+        {
+            try
+            {
+                SqlParameter[] pars = new SqlParameter[]
+                    {
+                    new SqlParameter("@treatmentID",t.TreatmentID.ToString()),
+                    new SqlParameter("@name",p.Name.ToString()),
+                    new SqlParameter("@productDescription",p.ProductDescription.ToString()),
+                    new SqlParameter("@price", p.Price.ToString()),
+                    new SqlParameter("@SupplierID", t.supplierID.ToString())
+                    };
+                return DBHelper.NonQuery("SP_UpdateTreatment", CommandType.StoredProcedure, pars.ToArray());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+
+        }
         #endregion
 
         #region ProductTypes
@@ -3477,7 +3520,8 @@ namespace DAL
                 throw new ApplicationException(e.ToString());
             }
         }
-        
+
+        #region Top Product
         public List<productSalesReport> getProductSalesVolumeAll(DateTime startDate, DateTime endDate)
         {
             List<productSalesReport> list = new List<productSalesReport>();
@@ -3676,7 +3720,9 @@ namespace DAL
             }
             return list;
         }
+        #endregion
 
+        #region Top Service
         public List<productSalesReport> getServiceSalesVolumeAll(DateTime startDate, DateTime endDate)
         {
             List<productSalesReport> list = new List<productSalesReport>();
@@ -3875,8 +3921,9 @@ namespace DAL
             }
             return list;
         }
+        #endregion
 
-
+        #region Top Customer
         public List<productSalesReport> getCustomerSalesVolumeAll(DateTime startDate, DateTime endDate)
         {
             List<productSalesReport> list = new List<productSalesReport>();
@@ -4075,6 +4122,409 @@ namespace DAL
             }
             return list;
         }
+        #endregion
+
+        #region Top Customer Service
+        public List<productSalesReport> getCustomerServiceSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerServiceSalesReportByVolume",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerServiceSalesReportByVolumeCredit",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerServiceSalesReportByVolumeCash",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerServiceSalesReportByValueCredit",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerServiceSalesReportByValueCash",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerServiceSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerServiceSalesReportByValue",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+        #endregion
+
+        #region Top Customer Product
+        public List<productSalesReport> getCustomerProductSalesVolumeAll(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerProductSalesReportByVolume",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerProductSalesVolumeCredit(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerProductSalesReportByVolumeCredit",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerProductSalesVolumeCash(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerProductSalesReportByVolumeCash",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerProductSalesValueCredit(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerProductSalesReportByValueCredit",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerProductSalesValueCash(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerProductSalesReportByValueCash",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+
+        public List<productSalesReport> getCustomerProductSalesValueAll(DateTime startDate, DateTime endDate)
+        {
+            List<productSalesReport> list = new List<productSalesReport>();
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@StartDate", startDate),
+                new SqlParameter("@EndDate", endDate)
+            };
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_CustomerProductSalesReportByValue",
+                    CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count > 0)
+                    {
+                        foreach (DataRow row in table.Rows)
+                        {
+                            productSalesReport prod = new productSalesReport();
+                            prod.product = row["Customer"].ToString();
+                            prod.volume = int.Parse(row["Volume"].ToString());
+                            prod.value = Convert.ToDouble(row["Value"].ToString());
+                            list.Add(prod);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+            return list;
+        }
+        #endregion
 
         public List<productSalesReport> getSalesGauge(string ProductID)
         {
@@ -4158,6 +4608,7 @@ namespace DAL
             }
             return list;
         }
+
         public List<SP_GetReviews> mostPopularStylist(DateTime startDate, DateTime endDate)
         {
             List<SP_GetReviews> list = new List<SP_GetReviews>();
@@ -4192,6 +4643,7 @@ namespace DAL
             }
             return list;
         }
+
         public List<SP_GetReviews> customerSatistfaction(DateTime startDate, DateTime endDate)
         {
             List<SP_GetReviews> list = new List<SP_GetReviews>();
@@ -5865,6 +6317,42 @@ namespace DAL
                         }
                     }
                     return list;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.ToString());
+            }
+        }
+        public SP_GetBookingServices getLeaveReason(string BookingID)
+        {
+            SP_GetBookingServices bookingServices = null;
+            SqlParameter[] pars = new SqlParameter[]
+            {
+                new SqlParameter("@BookingID", BookingID)
+            };
+
+            try
+            {
+                using (DataTable table = DBHelper.ParamSelect("SP_GetBookingServices",
+            CommandType.StoredProcedure, pars))
+                {
+                    if (table.Rows.Count == 1)
+                    {
+                        DataRow row = table.Rows[0];
+
+                        bookingServices = new SP_GetBookingServices
+                        {
+                            BookingID = row["BookingID"].ToString(),
+                            ServiceID = row["ServiceID"].ToString(),
+                            ServiceName = row["Name"].ToString(),
+                            serviceDescripion = row["ProductDescription"].ToString(),
+                            Price = Convert.ToDouble(row["Price"]),
+                            type = row["ProductType(T/A/S)"].ToString()
+                        };
+                        
+                    }
+                    return bookingServices;
                 }
             }
             catch (Exception e)

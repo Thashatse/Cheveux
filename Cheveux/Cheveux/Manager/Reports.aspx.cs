@@ -258,6 +258,74 @@ namespace Cheveux.Manager
                     getCustomerSatisfaction(sender, e, false);
                 }
             }
+            else if (drpReport.SelectedValue == "8")
+            {
+                if (ddlReportFor.SelectedIndex == -1 ||
+                    (ddlReportFor.SelectedItem.Text != "Value" &&
+                    ddlReportFor.SelectedItem.Text != "Count"))
+                {
+                    ddlReportFor.Items.Clear();
+                    ddlReportFor.Items.Add("Value");
+                    ddlReportFor.Items.Add("Count");
+                }
+
+                reportByContainer.Visible = true;
+                salesPaymentType.Visible = true;
+                reportDateRangeContainer.Visible = true;
+
+                if (ddlReportFor.SelectedValue != "-1"
+                    && (ddlReportFor.SelectedItem.Text == "Value" ||
+                        ddlReportFor.SelectedItem.Text == "Count")
+                    && CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                {
+                    //display the sales report
+                    getTopCustomerServiceReport(sender, e, true);
+                }
+                else if (ddlReportFor.SelectedValue != "-1"
+                    && (ddlReportFor.SelectedItem.Text == "Value" ||
+                        ddlReportFor.SelectedItem.Text == "Count")
+                    && CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
+                {
+                    //display the sales report
+                    getTopCustomerServiceReport(sender, e, false);
+                }
+            }
+            else if (drpReport.SelectedValue == "9")
+            {
+                if (ddlReportFor.SelectedIndex == -1 ||
+                    (ddlReportFor.SelectedItem.Text != "Value" &&
+                    ddlReportFor.SelectedItem.Text != "Count"))
+                {
+                    ddlReportFor.Items.Clear();
+                    ddlReportFor.Items.Add("Value");
+                    ddlReportFor.Items.Add("Count");
+                }
+
+                reportByContainer.Visible = true;
+                salesPaymentType.Visible = true;
+                reportDateRangeContainer.Visible = true;
+
+                if (ddlReportFor.SelectedValue != "-1"
+                    && (ddlReportFor.SelectedItem.Text == "Value" ||
+                        ddlReportFor.SelectedItem.Text == "Count")
+                    && CalendarDateStart.SelectedDate.ToString() == "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() == "0001/01/01 00:00:00")
+                {
+                    //display the sales report
+                    getTopCustomerProductReport(sender, e, true);
+                }
+                else if (ddlReportFor.SelectedValue != "-1"
+                    && (ddlReportFor.SelectedItem.Text == "Value" ||
+                        ddlReportFor.SelectedItem.Text == "Count")
+                    && CalendarDateStart.SelectedDate.ToString() != "0001/01/01 00:00:00"
+                    && CalendarDateEnd.SelectedDate.ToString() != "0001/01/01 00:00:00")
+                {
+                    //display the sales report
+                    getTopCustomerProductReport(sender, e, false);
+                }
+            }
         }
 
         #region View
@@ -265,8 +333,13 @@ namespace Cheveux.Manager
         {
             lError.Visible = false;
             LogedOut.Visible = false;
-            divGraph.Visible = false;
-            divReport.Visible = false;
+            if (!Page.IsPostBack)
+            {
+                divGraph.Visible = false;
+                divReport.Visible = false;
+                graphPie.Visible = false;
+                graphBar.Visible = false;
+            }
             divReportHeader.Visible = false;
             divPrintHeader.Visible = false;
             btnControlls.Visible = false;
@@ -284,28 +357,54 @@ namespace Cheveux.Manager
             btnControlls.Visible = true;
             divReportHeader.Visible = true;
             divPrintHeader.Visible = false;
+            divGraphType.Visible = false;
             hideFilters.Visible = true;
 
             if (graphBar.Visible == true)
             {
                 graphBar.Visible = true;
                 graphPie.Visible = false;
+                btnShowBarGraph.CssClass = "btn btn-primary";
+                btnShowPieGraph.CssClass = "btn btn-light";
             }
-            else
+            else if (graphPie.Visible == true)
             {
                 graphBar.Visible = false;
                 graphPie.Visible = true;
+                btnShowBarGraph.CssClass = "btn btn-light";
+                btnShowPieGraph.CssClass = "btn btn-primary";
+            }
+            else
+            {
+                graphBar.Visible = true;
+                graphPie.Visible = false;
+                btnShowBarGraph.CssClass = "btn btn-primary";
+                btnShowPieGraph.CssClass = "btn btn-light";
             }
 
             if (divReport.Visible == true)
             {
                 divReport.Visible = true;
                 divGraph.Visible = false;
+                divGraphType.Visible = false;
+                btnViewText.CssClass = "btn btn-primary";
+                btnViewGraph.CssClass = "btn btn-light";
             }
-            else
+            else if (divGraph.Visible == true)
             {
                 divReport.Visible = false;
                 divGraph.Visible = true;
+                divGraphType.Visible = true;
+                btnViewText.CssClass = "btn btn-light";
+                btnViewGraph.CssClass = "btn btn-primary";
+            }
+            else
+            {
+                divReport.Visible = true;
+                divGraph.Visible = false;
+                divGraphType.Visible = false;
+                btnViewText.CssClass = "btn btn-primary";
+                btnViewGraph.CssClass = "btn btn-light";
             }
 
             if (btnHideFilters.Text == "Hide Filters")
@@ -479,7 +578,7 @@ namespace Cheveux.Manager
             }
 
         }
-        #endregion'
+        #endregion
 
         #region Load Reports
         private void getSalesReport(object sender, EventArgs e, bool defaultDateRange)
@@ -941,6 +1040,7 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
+
         private void getTopCustomerReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph
@@ -1246,6 +1346,619 @@ namespace Cheveux.Manager
                 lError.Text = "An error occurred generating the report, Try Again Later";
             }
         }
+
+        private void getTopCustomerServiceReport(object sender, EventArgs e, bool defaultDateRange)
+        {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion
+
+            //clear the table
+            tblReport.Rows.Clear();
+            reportLable.Text = "Customer Service Sales Report";
+            reportByLable.Text = "By: " + ddlReportFor.SelectedItem.Text.ToString() +
+                " For " + drpPaymentType.SelectedItem.Text + " Payment Types";
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
+
+            try
+            {
+                List<productSalesReport> report = null;
+
+                if (defaultDateRange == true)
+                {
+                    reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
+                        DateTime.Today.ToString("dd MMM yyyy");
+
+                    #region get the report from the db
+                    if (drpPaymentType.SelectedItem.Text == "All")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerServiceSalesValueAll(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerServiceSalesVolumeAll(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Cash")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerServiceSalesValueCash(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerServiceSalesVolumeCash(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Credit")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerServiceSalesValueCredit(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerServiceSalesVolumeCredit(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    #endregion
+                }
+                else if (defaultDateRange == false)
+                {
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                        CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
+
+                    #region get the report from the db
+                    if (drpPaymentType.SelectedItem.Text == "All")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerServiceSalesValueAll(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerServiceSalesVolumeAll(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Cash")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerServiceSalesValueCash(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerServiceSalesVolumeCash(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Credit")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerServiceSalesValueCredit(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerServiceSalesVolumeCredit(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    #endregion
+                }
+
+                //get the invoice dt lines
+                if (report.Count != 0)
+                {
+                    //counter to keep track of rows in report
+                    int reportRowCount = 0;
+                    int totalUnitCount = 0;
+                    double totalValueCount = 0;
+
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+
+                    #region Header
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Customer";
+                    newHeaderCell.Width = 1000;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newHeaderCell.Text = "Value";
+                    }
+                    else
+                    {
+                        newHeaderCell.Text = "No. of Service's";
+                    }
+                    newHeaderCell.Width = 200;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //empty cell
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 200;
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newHeaderCell.Text = "No. of Service's";
+                    }
+                    else
+                    {
+                        newHeaderCell.Text = "Value";
+                    }
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+                    #endregion
+
+                    //display each record
+                    foreach (productSalesReport prod in report)
+                    {
+                        // create a new row in the results table and set the height
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+
+                        //fill the row with the data from the product results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = prod.product;
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        newCell = new TableCell();
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
+                        }
+                        else
+                        {
+                            newCell.Text = prod.volume.ToString();
+                        }
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        //fill in total
+                        newCell = new TableCell();
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            newCell.Text = prod.volume.ToString();
+                        }
+                        else
+                        {
+                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
+                        }
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        reportRowCount++;
+
+                        totalUnitCount += prod.volume;
+                        totalValueCount += prod.value;
+
+                        #region Graph
+                        if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            dataValuePair.Add(new KeyValuePair<string, double>(prod.product, prod.volume));
+                        }
+                        else
+                        {
+                            dataValuePair.Add(new KeyValuePair<string, double>(prod.product, prod.value));
+                        }
+                        #endregion
+                    }
+
+                    #region Totals
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //fill the row with the data from the product results object
+                    TableCell newCell2 = new TableCell();
+                    newCell2.Text = "Total:";
+                    newCell2.Font.Bold = true;
+                    tblReport.Rows[reportRowCount].Cells.Add(newCell2);
+
+                    newCell2 = new TableCell();
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newCell2.Text = "R " + string.Format("{0:#.00}", totalValueCount).ToString();
+                    }
+                    else
+                    {
+                        newCell2.Text = totalUnitCount.ToString();
+                    }
+                    newCell2.Font.Bold = true;
+                    tblReport.Rows[reportRowCount].Cells.Add(newCell2);
+
+                    //fill in total
+                    newCell2 = new TableCell();
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newCell2.Text = totalUnitCount.ToString();
+                    }
+                    else
+                    {
+                        newCell2.Text = "R " + string.Format("{0:#.00}", totalValueCount).ToString();
+                    }
+                    newCell2.Font.Bold = true;
+                    tblReport.Rows[reportRowCount].Cells.Add(newCell2);
+                    reportRowCount++;
+                    #endregion
+
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("xAxisName", "Customer");
+                    if (ddlReportFor.SelectedIndex == 1)
+                    {
+                        chartConfig.Add("numberSuffix", "Service");
+                        chartConfig.Add("yAxisName", "No.");
+                    }
+                    else
+                    {
+                        chartConfig.Add("yAxisName", "Value");
+                        chartConfig.Add("numberSuffix", "ZAR");
+                    }
+                    chartConfig.Add("theme", "fusion");
+
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("column2d", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    // render chart
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
+                    #endregion
+                }
+                if (!Page.IsPostBack)
+                {
+                    divReport.Visible = true;
+                }
+                showReport();
+            }
+            catch (Exception Err)
+            {
+                function.logAnError("Error getting customer Service Sales Report " + Err.ToString());
+                divReport.Visible = false;
+                divReportHeader.Visible = false;
+                lError.Visible = true;
+                lError.Text = "An error occurred generating the report, Try Again Later";
+            }
+        }
+
+        private void getTopCustomerProductReport(object sender, EventArgs e, bool defaultDateRange)
+        {
+            #region Graph
+            var dataValuePair = new List<KeyValuePair<string, double>>();
+            #endregion
+
+            //clear the table
+            tblReport.Rows.Clear();
+            reportLable.Text = "Customer Product Sales Report";
+            reportByLable.Text = "By: " + ddlReportFor.SelectedItem.Text.ToString() +
+                " For " + drpPaymentType.SelectedItem.Text + " Payment Types";
+            reportGenerateDateLable.Text = "Generated: " + DateTime.Now.ToString("HH:mm dd MMM yyyy");
+
+            try
+            {
+                List<productSalesReport> report = null;
+
+                if (defaultDateRange == true)
+                {
+                    reportDateRangeLable.Text = new DateTime(DateTime.Now.Year, 1, 1).ToString("dd MMM yyyy") + " - " +
+                        DateTime.Today.ToString("dd MMM yyyy");
+
+                    #region get the report from the db
+                    if (drpPaymentType.SelectedItem.Text == "All")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerProductSalesValueAll(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerProductSalesVolumeAll(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Cash")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerProductSalesValueCash(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerProductSalesVolumeCash(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Credit")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerProductSalesValueCredit(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerProductSalesVolumeCredit(new DateTime(DateTime.Now.Year, 1, 1),
+                                 DateTime.Today);
+                        }
+                    }
+                    #endregion
+                }
+                else if (defaultDateRange == false)
+                {
+                    reportDateRangeLable.Text = CalendarDateStart.SelectedDate.ToString("dd MMM yyyy") + " - " +
+                        CalendarDateEnd.SelectedDate.ToString("dd MMM yyyy");
+
+                    #region get the report from the db
+                    if (drpPaymentType.SelectedItem.Text == "All")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerProductSalesValueAll(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerProductSalesVolumeAll(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Cash")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerProductSalesValueCash(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerProductSalesVolumeCash(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    else if (drpPaymentType.SelectedItem.Text == "Credit")
+                    {
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            report = handler.getCustomerProductSalesValueCredit(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                        else if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            report = handler.getCustomerProductSalesVolumeCredit(CalendarDateStart.SelectedDate,
+                                 CalendarDateEnd.SelectedDate);
+                        }
+                    }
+                    #endregion
+                }
+
+                //get the invoice dt lines
+                if (report.Count != 0)
+                {
+                    //counter to keep track of rows in report
+                    int reportRowCount = 0;
+                    int totalUnitCount = 0;
+                    double totalValueCount = 0;
+
+                    TableRow newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+
+                    #region Header
+                    //set the report headers
+                    TableHeaderCell newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Text = "Customer";
+                    newHeaderCell.Width = 1000;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    newHeaderCell = new TableHeaderCell();
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newHeaderCell.Text = "Value";
+                    }
+                    else
+                    {
+                        newHeaderCell.Text = "Units";
+                    }
+                    newHeaderCell.Width = 200;
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    //empty cell
+                    newHeaderCell = new TableHeaderCell();
+                    newHeaderCell.Width = 200;
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newHeaderCell.Text = "Units";
+                    }
+                    else
+                    {
+                        newHeaderCell.Text = "Value";
+                    }
+                    tblReport.Rows[reportRowCount].Cells.Add(newHeaderCell);
+                    reportRowCount++;
+                    #endregion
+
+                    //display each record
+                    foreach (productSalesReport prod in report)
+                    {
+                        // create a new row in the results table and set the height
+                        newRow = new TableRow();
+                        newRow.Height = 50;
+                        tblReport.Rows.Add(newRow);
+
+                        //fill the row with the data from the product results object
+                        TableCell newCell = new TableCell();
+                        newCell.Text = prod.product;
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        newCell = new TableCell();
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
+                        }
+                        else
+                        {
+                            newCell.Text = prod.volume.ToString();
+                        }
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+
+                        //fill in total
+                        newCell = new TableCell();
+                        if (ddlReportFor.SelectedIndex == 0)
+                        {
+                            newCell.Text = prod.volume.ToString();
+                        }
+                        else
+                        {
+                            newCell.Text = "R " + string.Format("{0:#.00}", prod.value).ToString();
+                        }
+                        tblReport.Rows[reportRowCount].Cells.Add(newCell);
+                        reportRowCount++;
+
+                        totalUnitCount += prod.volume;
+                        totalValueCount += prod.value;
+
+                        #region Graph
+                        if (ddlReportFor.SelectedIndex == 1)
+                        {
+                            dataValuePair.Add(new KeyValuePair<string, double>(prod.product, prod.volume));
+                        }
+                        else
+                        {
+                            dataValuePair.Add(new KeyValuePair<string, double>(prod.product, prod.value));
+                        }
+                        #endregion
+                    }
+
+                    #region Totals
+                    newRow = new TableRow();
+                    newRow.Height = 50;
+                    tblReport.Rows.Add(newRow);
+                    //fill the row with the data from the product results object
+                    TableCell newCell2 = new TableCell();
+                    newCell2.Text = "Total:";
+                    newCell2.Font.Bold = true;
+                    tblReport.Rows[reportRowCount].Cells.Add(newCell2);
+
+                    newCell2 = new TableCell();
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newCell2.Text = "R " + string.Format("{0:#.00}", totalValueCount).ToString();
+                    }
+                    else
+                    {
+                        newCell2.Text = totalUnitCount.ToString();
+                    }
+                    newCell2.Font.Bold = true;
+                    tblReport.Rows[reportRowCount].Cells.Add(newCell2);
+
+                    //fill in total
+                    newCell2 = new TableCell();
+                    if (ddlReportFor.SelectedIndex == 0)
+                    {
+                        newCell2.Text = totalUnitCount.ToString();
+                    }
+                    else
+                    {
+                        newCell2.Text = "R " + string.Format("{0:#.00}", totalValueCount).ToString();
+                    }
+                    newCell2.Font.Bold = true;
+                    tblReport.Rows[reportRowCount].Cells.Add(newCell2);
+                    reportRowCount++;
+                    #endregion
+
+                    #region Graph
+                    //store chart config name - config value pair
+                    Dictionary<string, string> chartConfig = new Dictionary<string, string>();
+                    chartConfig.Add("xAxisName", "Customer");
+                    if (ddlReportFor.SelectedIndex == 1)
+                    {
+                        chartConfig.Add("numberSuffix", "Units");
+                        chartConfig.Add("yAxisName", "No.");
+                    }
+                    else
+                    {
+                        chartConfig.Add("yAxisName", "Value");
+                        chartConfig.Add("numberSuffix", "ZAR");
+                    }
+                    chartConfig.Add("theme", "fusion");
+
+                    // json data to use as chart data source
+                    jsonData.Append("{'chart':{");
+                    foreach (var config in chartConfig)
+                    {
+                        jsonData.AppendFormat("'{0}':'{1}',", config.Key, config.Value);
+                    }
+                    jsonData.Replace(",", "},", jsonData.Length - 1, 1);
+
+                    // build  data object from label-value pair
+                    data.Append("'data':[");
+
+                    foreach (KeyValuePair<string, double> pair in dataValuePair)
+                    {
+                        data.AppendFormat("{{'label':'{0}','value':'{1}'}},", pair.Key, pair.Value);
+                    }
+                    data.Replace(",", "]", data.Length - 1, 1);
+
+                    jsonData.Append(data.ToString());
+                    jsonData.Append("}");
+                    //Create chart instance
+                    // charttype, chartID, width, height, data format, data
+
+                    Chart pieChart = new Chart("pie2D", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    Chart barChart = new Chart("column2d", "first_chart", "1700", "750", "json", jsonData.ToString());
+                    // render chart
+                    graphBar.Text = barChart.Render();
+                    graphPie.Text = pieChart.Render();
+                    #endregion
+                }
+                if (!Page.IsPostBack)
+                {
+                    divReport.Visible = true;
+                }
+                showReport();
+            }
+            catch (Exception Err)
+            {
+                function.logAnError("Error getting customer Product Sales Report " + Err.ToString());
+                divReport.Visible = false;
+                divReportHeader.Visible = false;
+                lError.Visible = true;
+                lError.Text = "An error occurred generating the report, Try Again Later";
+            }
+        }
+
         private void getProductSalesReport(object sender, EventArgs e, bool defaultDateRange)
         {
             #region Graph

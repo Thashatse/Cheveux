@@ -24,7 +24,7 @@ BEGIN
 	SET NOCOUNT ON;
 	SELECT Distinct(r.EmployeeID),(u.FirstName + ' ' + u.LastName)as[EmployeeName],
 		   AVG(Rating)as Rating
-	FROM REVIEW r, [USER] u
+	FROM [CHEVEUX].[dbo].REVIEW r, [USER] u
 	where r.EmployeeID=u.UserID
 	and   r.[Date] between @startDate and @endDate
 	and   r.primaryBookingID is null

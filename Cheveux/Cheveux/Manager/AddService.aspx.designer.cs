@@ -211,6 +211,15 @@ namespace Cheveux.Manager {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtDescription;
         
         /// <summary>
+        /// flUploadServiceimg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload flUploadServiceimg;
+        
+        /// <summary>
         /// btnCancel control.
         /// </summary>
         /// <remarks>

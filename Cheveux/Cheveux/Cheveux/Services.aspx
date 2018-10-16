@@ -55,7 +55,9 @@
                     <div class="jumbotron  bg-dark text-white">
                         <asp:Label ID="lblViewService" runat="server" Text="View Service" Font-Size="XX-Large"></asp:Label>
                     </div>
-                    <div runat="server" id="divServiceTable">
+
+                    <div runat="server" id="divServiceTable" class="row">
+                        <div class="col-lg-6 col-md-12">
                         <asp:Table runat="server" ID="tblServiceDetails2" Visible="true" VerticalAlign="Top">
                             <asp:TableRow>
                             </asp:TableRow>
@@ -74,7 +76,9 @@
                                 </asp:TableCell>
                             </asp:TableRow>
                         </asp:Table>
-                    </div>
+                       
+
+                    
                     <div runat="server" id="divBraidDetails" visible="false">
                         <asp:Table runat="server" ID="tblServiceDetails">
                             <asp:TableRow>
@@ -110,8 +114,21 @@
                                 </asp:TableCell>
                             </asp:TableRow>
                         </asp:Table>
-                    </div>
+                        </div>
+                     <br />       
                     <asp:Literal ID="Literal1" runat="server"></asp:Literal>
+                        </div>
+                                                <div class="col-lg-6 col-md-12">
+                            <asp:PlaceHolder runat="server" ID="phProductImage"></asp:PlaceHolder>
+                        </div></div>
+                    <div class="row">
+                                <div class="col-sm-12 col-md-4">
+                                    <asp:Button ID="btnCancel" CssClass="btn btn-secondary" runat="server" Text="Cancel" OnClick="btnCancel_Click" Visible="false" />
+                                </div>
+                                <div class="col-sm-12 col-md-4">
+                                    <asp:Button ID="btnUpdate" CssClass="btn btn-primary" runat="server" Text="Edit Service" OnClick="btnUpdate_Click" Visible="false" />
+                                </div>
+                            </div>
                 </div>
             </div>
             <div class="col-1"></div>

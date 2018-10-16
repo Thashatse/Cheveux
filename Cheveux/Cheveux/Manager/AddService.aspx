@@ -145,9 +145,16 @@
                                             ForeColor="Red"></asp:RequiredFieldValidator>
                                     </asp:TableCell>
                                 </asp:TableRow>
+                                <asp:TableRow>
+                                      <asp:TableCell Text="Image: " Width="150px"></asp:TableCell>
+                                      <asp:TableCell>
+                                                              <asp:FileUpload ID="flUploadServiceimg" runat="server" CssClass="btn-primary"/><br />
+                                      </asp:TableCell>
+                                </asp:TableRow>
                             </asp:Table>
                         </div>
                     </div>
+
                     <div class="col-sm-12 col-md-2 col-lg-2">
                         <asp:Button class='btn btn-basic' runat="server" ID="btnCancel" Visible="true" Text="Cancel" OnClick="btnCancel_Click" />
                     </div>

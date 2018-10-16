@@ -38,7 +38,7 @@
                     <div runat="server" id="dontPrint">
                         <!--jumbotron page heading-->
                         <div class="jumbotron bg-dark text-white" runat="server" id="LoggedIn">
-                            <asp:Label ID="Header" runat="server" Text="View Schedule" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
+                            <asp:Label ID="Header" runat="server" Font-Bold="true" Font-Size="XX-Large"></asp:Label>
 
                             <!--Placeholder: Manager View Emps Schedule -->
                             <asp:PlaceHolder ID="managerview" runat="server" Visible="false">
@@ -218,19 +218,20 @@
                         <asp:PlaceHolder ID="phSorting" runat="server">
                             <div class="row">
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    Direction : 
-                                <asp:DropDownList ID="drpSortDir" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
-                                    <asp:ListItem Text="Descending" Value="0"></asp:ListItem>
-                                    <asp:ListItem Text="Ascending" Value="1"></asp:ListItem>
-                                </asp:DropDownList>
-                                </div>
-                                <div class="col-xs-12 col-md-4 col-lg-4">
                                     Sort By : 
                                 <asp:DropDownList ID="drpSortBy" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
                                     <asp:ListItem Text="Date" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Stylist" Value="1"></asp:ListItem>
                                 </asp:DropDownList>
                                 </div>
+                                <div class="col-xs-12 col-md-4 col-lg-4">
+                                    Direction : 
+                                <asp:DropDownList ID="drpSortDir" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
+                                    <asp:ListItem Text="Descending" Value="0"></asp:ListItem>
+                                    <asp:ListItem Text="Ascending" Value="1"></asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+
                                 <div class="col-xs-12 col-md-4 col-lg-4">
                                     <asp:Button ID="btnPrint" runat="server" Text="Print Friendly Version" OnClick="btnPrint_Click" Visible="false" CssClass="btn btn-secondary" />
                                 </div>

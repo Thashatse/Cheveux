@@ -5,7 +5,7 @@ GO
 -- =============================================
 -- Description:	Get the product sales order by Volume for cash sales
 -- =============================================
-CREATE PROCEDURE SP_ProductSalesReportByVolumeCash 
+alter PROCEDURE SP_ProductSalesReportByVolumeCash 
 	@StartDate DateTime,
 	@EndDate DateTime
 AS
