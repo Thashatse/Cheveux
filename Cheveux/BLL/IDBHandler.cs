@@ -289,6 +289,7 @@ namespace BLL
         SP_ReturnBooking returnNextBooking(string startTime, string bookingID, string stylistID, DateTime date);
         SP_ReturnBooking returnBooking(string bookingID, string customerID, string stylistID, DateTime date);
         List<SP_ReturnAvailServices> returnAvailServices(int num);
+        SP_GetBookingServices getLeaveReason(string BookingID);
     }
 }
 
