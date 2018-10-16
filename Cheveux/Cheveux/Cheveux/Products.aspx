@@ -19,13 +19,13 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
-            <div runat="server" id="divViewAll">
                 <div class="jumbotron bg-dark text-white">
                     <!-- VIEW ALL PRODUCTS TABLE -->
                     <header class="text-left">
                         <h1><asp:Label runat="server" Text="Add Products" id="lblHeadera"></asp:Label></h1>
                     </header>
                 </div>
+
                 <asp:PlaceHolder runat="server" ID="phProducts">
                     <div class="row">
                         <div class="col-md-12">
@@ -38,18 +38,16 @@
 
                     </div>
                 </asp:PlaceHolder>
-            </div>
 
             <!--View specific product-->
             <div runat="server" id="DisplayProduct" visible="false">
                 <asp:PlaceHolder ID="phSpecProduct" runat="server">
 
                     <div class="row">
-                        <div class="col-sm-auto col-md-auto col-lg-auto">
-
+                                    <div class="col-lg-6 col-md-12">
                             <asp:Table ID="tblProducts" runat="server"></asp:Table>
-
-                            <div id="diveViewProductr" runat="server" visible="false">
+                            
+                            <div class="row">
                                 <div class="row">
                                     <div class="col-5"></div>
                                     <div class="col-6">
@@ -58,10 +56,13 @@
                             <br />
                             <asp:Label runat="server" id="EditProductBtn" style="float: right"></asp:Label>
                                     </div>
-                                </div>
+                                    </div>
                             </div>
+                                        </div>
+                                    <div class="col-lg-6 col-md-12">
+                            <asp:PlaceHolder runat="server" ID="phProductImage"></asp:PlaceHolder>
                         </div>
-                    </div>
+                        </div>
                 </asp:PlaceHolder>
             </div>
            
@@ -156,6 +157,13 @@
                                             ForeColor="Red"></asp:RequiredFieldValidator>
                                             </asp:TableCell>
                                         </asp:TableRow>
+                                        
+                                <asp:TableRow>
+                                      <asp:TableCell Text="Image: " Width="150px"></asp:TableCell>
+                                      <asp:TableCell>
+                                                              <asp:FileUpload ID="flUploadServiceimg" runat="server"/><br />
+                                      </asp:TableCell>
+                                </asp:TableRow>
                                     </asp:Table>
 
 

@@ -8,6 +8,7 @@ using BLL;
 using TypeLibrary.Models;
 using TypeLibrary.ViewModels;
 using System.Drawing;
+using System.IO;
 
 namespace Cheveux.Manager
 {
@@ -116,7 +117,10 @@ namespace Cheveux.Manager
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            product = new PRODUCT();
+            string prodID = "";
+            try
+            {
+                product = new PRODUCT();
             service = new SERVICE();
             bservice = new BRAID_SERVICE();
 
@@ -148,9 +152,43 @@ namespace Cheveux.Manager
                 handler.BLL_AddService(product, service);
             }
 
-                //redirect to previous page
-                Response.Redirect("Service.aspx");
+                Boolean fileOK = false;
+                string path = Server.MapPath("~/Theam/img/");
+                if (flUploadServiceimg.HasFile)
+                {
+                    String fileExtension =
+                        System.IO.Path.GetExtension(flUploadServiceimg.FileName).ToLower();
+                    String[] allowedExtensions =
+                        {".gif", ".png", ".jpeg", ".jpg"};
+                    for (int i = 0; i < allowedExtensions.Length; i++)
+                    {
+                        if (fileExtension == allowedExtensions[i])
+                        {
+                            fileOK = true;
+                        }
+                    }
+                }
 
+                if (File.Exists(path + product.ProductID + ".jpg"))
+                {
+                    File.Delete(path + product.ProductID + ".jpg");
+                }
+
+                if (fileOK)
+                {
+                    flUploadServiceimg.PostedFile.SaveAs(path + product.ProductID+".jpg");
+                }
+
+                prodID = product.ProductID;
+            }
+            catch (Exception Err)
+            {
+                function.logAnError(Err.ToString());
+                Response.Redirect("http://sict-iis.nmmu.ac.za/beauxdebut/error.aspx?Error=An Error Occured Communicating With The Data Base, Try Again Later");
+            }
+            
+            //redirect to previous page
+            Response.Redirect("../Cheveux/Service.aspx?ProductID="+prodID);
         }
     }
 }

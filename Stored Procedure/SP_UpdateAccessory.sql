@@ -1,3 +1,9 @@
+USE [CHEVEUX]
+GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 alter PROCEDURE SP_UpdateAccessory
     @accessoryID nchar(10),
 	@name varchar(max),

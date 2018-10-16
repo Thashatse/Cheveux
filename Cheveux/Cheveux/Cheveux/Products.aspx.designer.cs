@@ -13,15 +13,6 @@ namespace Cheveux.Cheveux {
     public partial class Products {
         
         /// <summary>
-        /// divViewAll control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divViewAll;
-        
-        /// <summary>
         /// lblHeadera control.
         /// </summary>
         /// <remarks>
@@ -85,15 +76,6 @@ namespace Cheveux.Cheveux {
         protected global::System.Web.UI.WebControls.Table tblProducts;
         
         /// <summary>
-        /// diveViewProductr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl diveViewProductr;
-        
-        /// <summary>
         /// Literal1 control.
         /// </summary>
         /// <remarks>
@@ -110,6 +92,15 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label EditProductBtn;
+        
+        /// <summary>
+        /// phProductImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phProductImage;
         
         /// <summary>
         /// addandedit control.
@@ -272,6 +263,15 @@ namespace Cheveux.Cheveux {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidatortxtcolour;
+        
+        /// <summary>
+        /// flUploadServiceimg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload flUploadServiceimg;
         
         /// <summary>
         /// btnCancel control.
