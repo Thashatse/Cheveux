@@ -106,28 +106,16 @@ namespace Cheveux.Cheveux
                 lblNoOfSlots.Text = Convert.ToString(service.NoOfSlots*30)+" Mins";
                 lblPrice.Text = "R " + string.Format("{0:#.00}", service.Price).ToString();
                 lblDescription.Text = service.Description;
+                phProductImage.Controls.Add(new LiteralControl
+                    ("<img width='400' height='400' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/portfolio/thumbnails/fullsize/"+serviceID+".jpg'/>"));
                 //check if the user is logged in
                 cookie = Request.Cookies["CheveuxUserID"];
                 if (cookie != null)
                 {
                     if (cookie["UT"] == "M")
                     {
-                        //add a new row
-                        TableRow newRow = new TableRow();
-                        newRow.Height = 50;
-                        tblDesc.Rows.Add(newRow);
-                        //Address
-                        TableCell newCell = new TableCell();
-                        newCell.Font.Bold = true;
-                        newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
-                                    "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
-                                    "' >Cancel</a>";
-                        tblDesc.Rows[1].Cells.Add(newCell);
-                        newCell = new TableCell();
-                        newCell.Text = "<a class= 'btn btn-primary' href = '/Manager/UpdateService.aspx?" +
-                                    "ServiceID=" + serviceID.ToString().Replace(" ", string.Empty) +
-                                    "' >Edit Service</a>";
-                        tblDesc.Rows[1].Cells.Add(newCell);
+                        btnCancel.Visible = true;
+                        btnUpdate.Visible = true;
                     }
                 }
 
@@ -146,7 +134,8 @@ namespace Cheveux.Cheveux
                             int UpperlTier = Convert.ToInt16(salesGaugeData[1].value);
 
                             Dictionary<string, string> chartConfig = new Dictionary<string, string>();
-                            chartConfig.Add("caption", "Value (Past 30 Days)");
+                            chartConfig.Add("caption", "Gross (Past 30 Days)");
+                            chartConfig.Add("subCaption", "Compared to best grossing service");
                             chartConfig.Add("lowerLimit", "0");
                             chartConfig.Add("upperLimit", UpperlTier.ToString());
                             chartConfig.Add("showValue", "1");
@@ -222,6 +211,7 @@ namespace Cheveux.Cheveux
                 tblServicesTable.Rows.Clear();
                 //load a list of all products
                 allservices = handler.BLL_GetAllServices();
+                allservices = allservices.OrderBy(o => o.Name).ToList();
                 //track row count & number of products cound
                 int count = 0;
 
