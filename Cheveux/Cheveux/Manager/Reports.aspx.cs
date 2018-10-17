@@ -44,6 +44,14 @@ namespace Cheveux.Manager
                 LogedOut.Visible = false;
                 LogedIn.Visible = true;
                 drpReport_SelectedIndexChanged1(sender, e);
+                if (!IsPostBack)
+                {
+                    int val = DateTime.Now.Month;
+                    
+                    CalendarDateStart.VisibleDate = new DateTime(CalendarDateStart.TodaysDate.Year,
+                                                    1,1);
+                    drpEndMonth.SelectedValue = val.ToString();
+                }
             }
         }
         

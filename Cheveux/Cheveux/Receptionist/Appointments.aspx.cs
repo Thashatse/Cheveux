@@ -370,7 +370,7 @@ namespace Cheveux
                             drpEndMonth.Visible = true;
                             drpStartMonth.Visible = true;
                             lblStartM.Visible = true;
-                            lblEnd.Visible = true;
+                            lblEndM.Visible = true;
 
                             if (lblStart.Text == string.Empty || lblEnd.Text == string.Empty)
                             {
@@ -1005,14 +1005,12 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
                 try
                 {
                     bList = handler.getStylistPastBookings(empID, sortBy, sortDir);
-
-                    ////phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -1169,14 +1167,12 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
                 try
                 {
                     bList = handler.getStylistPastBookingsDateRange(empID, startDate, endDate, sortBy, sortDir);
-
-                    ////phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -1332,14 +1328,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
                 try
                 {
                     bList = handler.getStylistPastBksForDate(empID, day, sortBy, sortDir);
-
-                    ////phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -1500,8 +1495,8 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
-
-            if(cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
+            tblSchedule.CssClass = "table table-light table-hover";
+            if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
                 try
                 {
@@ -1510,7 +1505,6 @@ namespace Cheveux
                     bList = handler.getStylistUpcomingBookings(empID, sortBy, sortDir);
 
                     tblSchedule.Visible = true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -1687,13 +1681,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
                 try
                 {
                     bList = handler.getStylistUpcomingBkForDate(id, bookingDate, sortBy, sortDir);
-
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     //create row for the table 
                     TableRow row = new TableRow();
@@ -1877,14 +1871,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule" || cookie["UT"] == "S")
             {
                 try
                 {
                     bList = handler.getStylistUpcomingBookingsDR(empID, startDate, endDate, sortBy, sortDir);
-
-                    ////phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -2064,21 +2057,19 @@ namespace Cheveux
 
         #region All Stylists Bookings 
 
-        //done
         #region Upcoming
         public void getAllStylistsUpcomingBksForDate(DateTime bookingDate, string sortBy, string sortDir)
         {
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
                 try
                 {
                     bList = handler.getAllStylistsUpcomingBksForDate(bookingDate, sortBy, sortDir);
-
-                    ////phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -2184,6 +2175,12 @@ namespace Cheveux
                     date.Font.Bold = true;
                     tblSchedule.Rows[0].Cells.Add(date);
 
+                    TableCell stylist = new TableCell();
+                    stylist.Text = "Employee";
+                    stylist.Width = 200;
+                    stylist.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(stylist);
+
                     TableCell reason = new TableCell();
                     reason.Text = "Reason";
                     reason.Width = 200;
@@ -2212,6 +2209,11 @@ namespace Cheveux
                                 TableCell dateCell = new TableCell();
                                 dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                                 tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell stylistCell = new TableCell();
+                                stylistCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + b.StylistName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(stylistCell);
 
                                 TableCell servicesCell = new TableCell();
                                 servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
@@ -2256,14 +2258,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
                 try
                 {
                     bList = handler.getAllStylistsUpcomingBksDR(startDate, endDate, sortBy, sortDir);
-
-                    ////phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -2364,6 +2365,12 @@ namespace Cheveux
                     date.Font.Bold = true;
                     tblSchedule.Rows[0].Cells.Add(date);
 
+                    TableCell stylistCell = new TableCell();
+                    stylistCell.Text = "Employee";
+                    stylistCell.Width = 200;
+                    stylistCell.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(stylistCell);
+
                     TableCell reason = new TableCell();
                     reason.Text = "Reason";
                     reason.Width = 200;
@@ -2392,6 +2399,11 @@ namespace Cheveux
                                 TableCell dateCell = new TableCell();
                                 dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                                 tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell stylist = new TableCell();
+                                stylist.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + b.StylistName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(stylist);
 
                                 TableCell servicesCell = new TableCell();
                                 servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
@@ -2436,14 +2448,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
                 try
                 {
                     bList = handler.getAllStylistsUpcomingBookings(sortBy, sortDir);
-
-                    ////phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -2549,6 +2560,12 @@ namespace Cheveux
                     date.Font.Bold = true;
                     tblSchedule.Rows[0].Cells.Add(date);
 
+                    TableCell stylist = new TableCell();
+                    stylist.Text = "Employee";
+                    stylist.Width = 200;
+                    stylist.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(stylist);
+
                     TableCell reason = new TableCell();
                     reason.Text = "Reason";
                     reason.Width = 200;
@@ -2577,6 +2594,11 @@ namespace Cheveux
                                 TableCell dateCell = new TableCell();
                                 dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                                 tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell stylistCell = new TableCell();
+                                stylistCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + b.StylistName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(stylistCell);
 
                                 TableCell servicesCell = new TableCell();
                                 servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
@@ -2624,14 +2646,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
                 try
                 {
                     bList = handler.getAllStylistsPastBookings(sortBy, sortDir);
-
-                    //phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -2724,6 +2745,12 @@ namespace Cheveux
                     date.Font.Bold = true;
                     tblSchedule.Rows[0].Cells.Add(date);
 
+                    TableCell stylist = new TableCell();
+                    stylist.Text = "Employee";
+                    stylist.Width = 200;
+                    stylist.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(stylist);
+
                     TableCell reason = new TableCell();
                     reason.Text = "Reason";
                     reason.Width = 200;
@@ -2752,6 +2779,11 @@ namespace Cheveux
                                 TableCell dateCell = new TableCell();
                                 dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                                 tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell stylistCell = new TableCell();
+                                stylistCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + b.StylistName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(stylistCell);
 
                                 TableCell servicesCell = new TableCell();
                                 servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
@@ -2794,14 +2826,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
                 try
                 {
                     bList = handler.getAllStylistsPastBksForDate(bookingDate, sortBy, sortDir);
-
-                    //phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -2895,6 +2926,12 @@ namespace Cheveux
                     date.Font.Bold = true;
                     tblSchedule.Rows[0].Cells.Add(date);
 
+                    TableCell stylist = new TableCell();
+                    stylist.Text = "Employee";
+                    stylist.Width = 200;
+                    stylist.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(stylist);
+
                     TableCell reason = new TableCell();
                     reason.Text = "Reason";
                     reason.Width = 200;
@@ -2923,6 +2960,11 @@ namespace Cheveux
                                 TableCell dateCell = new TableCell();
                                 dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                                 tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell stylistCell = new TableCell();
+                                stylistCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + b.StylistName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(stylistCell);
 
                                 TableCell servicesCell = new TableCell();
                                 servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"
@@ -2965,14 +3007,13 @@ namespace Cheveux
             tblSchedule.Rows.Clear();
             cookie = Request.Cookies["CheveuxUserID"];
             string action = Request.QueryString["Action"];
+            tblSchedule.CssClass = "table table-light table-hover";
+
             if (cookie["UT"] == "R" || action == "ViewAllSchedules" || action == "ViewStylistSchedule")
             {
                 try
                 {
                     bList = handler.getAllStylistsPastBookingsDateRange(startDate, endDate, sortBy, sortDir);
-
-                    //phTable.Visible=true;
-                    tblSchedule.CssClass = "table table-light table-hover";
 
                     TableRow row = new TableRow();
                     tblSchedule.Rows.Add(row);
@@ -3065,6 +3106,12 @@ namespace Cheveux
                     date.Font.Bold = true;
                     tblSchedule.Rows[0].Cells.Add(date);
 
+                    TableCell stylist = new TableCell();
+                    stylist.Text = "Employee";
+                    stylist.Width = 200;
+                    stylist.Font.Bold = true;
+                    tblSchedule.Rows[0].Cells.Add(stylist);
+
                     TableCell reason = new TableCell();
                     reason.Text = "Reason";
                     reason.Width = 200;
@@ -3093,6 +3140,11 @@ namespace Cheveux
                                 TableCell dateCell = new TableCell();
                                 dateCell.Text = b.BookingDate.ToString("dd-MM-yyyy");
                                 tblSchedule.Rows[rowCount].Cells.Add(dateCell);
+
+                                TableCell stylistCell = new TableCell();
+                                stylistCell.Text = "<a href = '../Profile.aspx?Action=View&UserID=" + b.StylistID.ToString().Replace(" ", string.Empty) +
+                                        "'>" + b.StylistName.ToString() + "</a>";
+                                tblSchedule.Rows[rowCount].Cells.Add(stylistCell);
 
                                 TableCell servicesCell = new TableCell();
                                 servicesCell.Text = "<a href='../cheveux/services.aspx?ProductID=" + leaveServices.ServiceID.Replace(" ", string.Empty) + "'>"

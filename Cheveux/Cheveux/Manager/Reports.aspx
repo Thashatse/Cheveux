@@ -32,7 +32,7 @@
                                 <div class="row">
                             <div runat="server" id="SelectReport" class="col-9">
                                 <div class="row">
-                                    <div class="col-3">
+                                    <div class="col-4">
                                         <!-- Report Selector -->
                                         <p>Select A Report: </p>
                                         <asp:DropDownList ID="drpReport" runat="server" AutoPostBack="True" class="dropdown"

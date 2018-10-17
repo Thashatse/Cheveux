@@ -183,19 +183,15 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-4 col-lg-4">
                                         <asp:Label ID="lblStartDate" runat="server" Text="Start Date" Visible="true"></asp:Label>
-                                    </div>
-                                    <div class="col-xs-12 col-md-4 col-lg-4">
-                                        <asp:Label ID="lblEndDate" runat="server" Text="End Date" Visible="true"></asp:Label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-4 col-lg-4">
                                         <asp:Calendar ID="calStart" runat="server" Height="100" Width="200" OnSelectionChanged="calStart_SelectionChanged" OnDayRender="scheduleCalender_DayRender"></asp:Calendar>
                                     </div>
+                                    
                                     <div class="col-xs-12 col-md-4 col-lg-4">
+                                        <asp:Label ID="lblEndDate" runat="server" Text="End Date" Visible="true"></asp:Label>
                                         <asp:Calendar ID="calEnd" runat="server" Height="100" Width="200" OnSelectionChanged="calEnd_SelectionChanged" OnDayRender="scheduleCalender_DayRender"></asp:Calendar>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col-xs-12 col-md-4 col-lg-4">
                                         <asp:Label ID="lblStart" runat="server" Text="" Visible="false"></asp:Label>
@@ -225,7 +221,7 @@
                                 </asp:DropDownList>
                                 </div>
                                 <div class="col-xs-12 col-md-4 col-lg-4">
-                                    Direction : 
+                                    Order : 
                                 <asp:DropDownList ID="drpSortDir" runat="server" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle">
                                     <asp:ListItem Text="Descending" Value="0"></asp:ListItem>
                                     <asp:ListItem Text="Ascending" Value="1"></asp:ListItem>
