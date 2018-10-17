@@ -1597,13 +1597,13 @@ namespace DAL
             {
                 SqlParameter[] pars = new SqlParameter[]
                     {
-                     new SqlParameter("@productID", a.TreatmentID.ToString()),
+                     new SqlParameter("@accessoryID", a.TreatmentID.ToString()),
                     new SqlParameter("@name",p.Name.ToString()),
                     new SqlParameter("@productDescription",p.ProductDescription.ToString()),
                     new SqlParameter("@price", p.Price.ToString()),
                     new SqlParameter("@SupplierID", a.supplierID.ToString())
                     };
-                return DBHelper.NonQuery("SP_UpdateTreatment", CommandType.StoredProcedure, pars.ToArray());
+                return DBHelper.NonQuery("SP_UpdateAccessory", CommandType.StoredProcedure, pars.ToArray());
             }
             catch (Exception e)
             {

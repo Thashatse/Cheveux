@@ -1,5 +1,5 @@
 alter PROCEDURE SP_UpdateTreatment
-	@treatmentID nchar(10),
+	@treatmentID nchar(10), 
 	@name varchar(max),
 	@productDescription varchar(max),
 	@price money,

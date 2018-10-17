@@ -285,19 +285,19 @@ namespace Cheveux
             try
             {
                 phProductImage1.Controls.Add(new LiteralControl
-                    ("<img width='650' height='650' src=" + features[0].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/" + features[0].ItemID + ".jpg'/>"));
                 lProductHeader1.Text = features[0].Name.ToString();
                 LProductDescription1.Text = features[0].description.ToString()
                 + " from R" + features[0].price.ToString();
 
                 phProductImage2.Controls.Add(new LiteralControl
-                    ("<img width='650' height='650' src=" + features[1].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/" + features[1].ItemID + ".jpg'/>"));
                 lProductHeader2.Text = features[1].Name.ToString();
                 LProductDescription2.Text = features[1].description.ToString()
                 + " from R" + features[1].price.ToString();
 
                 phProductImage3.Controls.Add(new LiteralControl
-                    ("<img width='650' height='650' src=" + features[2].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/" + features[2].ItemID + ".jpg'/>"));
                 lProductHeader3.Text = features[2].Name.ToString();
                 LProductDescription3.Text = features[2].description.ToString()
                 + " from R" + features[2].price.ToString();
@@ -314,19 +314,19 @@ namespace Cheveux
             try
             {
                 phStylistImage1.Controls.Add(new LiteralControl
-                    ("<img width='650' height='650' src=" + features[7].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/" + features[4].ItemID + ".jpg'/>"));
                 lStylistHeader1.Text = features[7].firstName.ToString();
                 lStylistDescription1.Text = "Specializes in "
                     + handler.viewStylistSpecialisationAndBio(features[7].ItemID.ToString()).serviceName;
 
                 phStylistImage2.Controls.Add(new LiteralControl
-                    ("<img width='650' height='650' src=" + features[8].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/" + features[8].ItemID + ".jpg'/>"));
                 lStylistHeader2.Text = features[8].firstName.ToString();
                 lStylistDescription2.Text = "Specializes in "
                     + handler.viewStylistSpecialisationAndBio(features[8].ItemID.ToString()).serviceName;
 
                 phStylistImage3.Controls.Add(new LiteralControl
-                    ("<img width='650' height='650' src=" + features[9].ImageURL.ToString() + "/>"));
+                    ("<img width='650' height='650' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/" + features[9].ItemID + ".jpg'/>"));
                 lStylistHeader3.Text = features[9].firstName.ToString();
                 lStylistDescription3.Text = "Specializes in "
                     + handler.viewStylistSpecialisationAndBio(features[9].ItemID.ToString()).serviceName;

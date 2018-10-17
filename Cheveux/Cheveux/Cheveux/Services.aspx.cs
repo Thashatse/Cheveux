@@ -107,7 +107,7 @@ namespace Cheveux.Cheveux
                 lblPrice.Text = "R " + string.Format("{0:#.00}", service.Price).ToString();
                 lblDescription.Text = service.Description;
                 phProductImage.Controls.Add(new LiteralControl
-                    ("<img width='400' height='400' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/portfolio/thumbnails/fullsize/"+serviceID+".jpg'/>"));
+                    ("<img width='400' height='400' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/"+serviceID+".jpg'/>"));
                 //check if the user is logged in
                 cookie = Request.Cookies["CheveuxUserID"];
                 if (cookie != null)

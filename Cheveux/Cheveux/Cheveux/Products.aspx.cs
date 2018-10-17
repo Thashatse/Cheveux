@@ -9,6 +9,7 @@ using TypeLibrary.ViewModels;
 using TypeLibrary.Models;
 using System.Text;
 using FusionCharts.Charts;
+using System.IO;
 
 namespace Cheveux.Cheveux
 {
@@ -509,6 +510,9 @@ namespace Cheveux.Cheveux
                 //track row count & number of products count
                 if (Accessory != null)
                 {
+                    phProductImage.Controls.Add(new LiteralControl
+                    ("<img width='400' height='400' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/" + productID + ".jpg'/>"));
+
                     count = 0;
                     lblHeadera.Text = Accessory.Name.ToString();
 
@@ -544,13 +548,15 @@ namespace Cheveux.Cheveux
                             EditProductBtn.Text = "<a class= 'btn btn-primary' href = '?Action=EditProd&" +
                                         "ProductID=" + productID.ToString().Replace(" ", string.Empty) +
                                         "' >Edit Product</a>";
-
-                            diveViewProductr.Visible = true;
+                            
                         }
                     }
                 }
                 else if (Treatment != null)
                 {
+                    phProductImage.Controls.Add(new LiteralControl
+                    ("<img width='400' height='400' src='http://sict-iis.nmmu.ac.za/beauxdebut/Theam/img/portfolio/thumbnails/fullsize/" + productID + ".jpg'/>"));
+
                     count = 0;
                     lblHeadera.Text = Treatment.Name.ToString();
 
@@ -581,8 +587,7 @@ namespace Cheveux.Cheveux
                             EditProductBtn.Text = "<a class= 'btn btn-primary' href = '?Action=EditProd&" +
                                         "ProductID=" + productID.ToString().Replace(" ", string.Empty) +
                                         "' >Edit Product</a>";
-
-                            diveViewProductr.Visible = true;
+                            
                         }
                     }
                 }
@@ -810,6 +815,33 @@ namespace Cheveux.Cheveux
                         //run updated product BLL method fot treatment
                         result = handler.updateTreatments(t, p);
                     }
+                }
+
+                Boolean fileOK = false;
+                string path = Server.MapPath("~/Theam/img/");
+                if (flUploadServiceimg.HasFile)
+                {
+                    String fileExtension =
+                        System.IO.Path.GetExtension(flUploadServiceimg.FileName).ToLower();
+                    String[] allowedExtensions =
+                        {".gif", ".png", ".jpeg", ".jpg"};
+                    for (int i = 0; i < allowedExtensions.Length; i++)
+                    {
+                        if (fileExtension == allowedExtensions[i])
+                        {
+                            fileOK = true;
+                        }
+                    }
+                }
+
+                if (File.Exists(path + productID + ".jpg"))
+                {
+                    File.Delete(path + productID + ".jpg");
+                }
+
+                if (fileOK)
+                {
+                    flUploadServiceimg.PostedFile.SaveAs(path + productID + ".jpg");
                 }
             }
             catch (Exception Err)

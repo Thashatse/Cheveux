@@ -148,7 +148,7 @@
                                 <asp:TableRow>
                                       <asp:TableCell Text="Image: " Width="150px"></asp:TableCell>
                                       <asp:TableCell>
-                                                              <asp:FileUpload ID="flUploadServiceimg" runat="server" CssClass="btn-primary"/><br />
+                                                              <asp:FileUpload ID="flUploadServiceimg" runat="server"/><br />
                                       </asp:TableCell>
                                 </asp:TableRow>
                             </asp:Table>
